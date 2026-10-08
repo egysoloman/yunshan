@@ -1,0 +1,2250 @@
+{
+  "baseCommit": "56667cc29cd5d17391812b5daa65ea119a41a302",
+  "scope": "Standalone final source snapshot with 429 verified functional inputs and current documentation. Unzip, cd yunshan, npm ci, npm run dev. Raw validation ZIPs are separate in EVIDENCE-INDEX.json. No dependencies, Git history or external credentials included.",
+  "file": "Yunshan-ROOT27-source.zip",
+  "bytes": 14801477,
+  "sha256": "4720fcf4ac512fda1cfeb63b599cab2a849c29c976b73784eb383bf276feca0f",
+  "functionalInputCount": 429,
+  "members": [
+    {
+      "path": "yunshan/.gitignore",
+      "bytes": 70,
+      "sha256": "476f9f8b2b6f8c7f151f6506d77d68da621875d715373a76ca78ccdd5522fb16"
+    },
+    {
+      "path": "yunshan/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "yunshan/README.md",
+      "bytes": 9088,
+      "sha256": "3c57f6a4055fe7fa95c5800a67dc4212115932a8fdc3bf363fd0fec6a9b8ac48"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/README.md",
+      "bytes": 10002,
+      "sha256": "c66fc77ed322285bc6ee935a0419911ea1b1db264202717b7297707dc1720575"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/WORKER-README.md",
+      "bytes": 9055,
+      "sha256": "b63d503aef27c2780c370f252911c09f8062cb9441766ec0ed44699180b730c7"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/bridge.test.ts",
+      "bytes": 20342,
+      "sha256": "08e8f1300930f5ec988312b59404c56d0e7b871ea846dfce3bc63d5ed29bcef0"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/bridge.ts",
+      "bytes": 15833,
+      "sha256": "3e6bae1f73509014660c4d7edb593c954fa7d46ea8e79b60ec9ffe148b2d1ff8"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/browser/YunshanCore.js",
+      "bytes": 1107024,
+      "sha256": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/browser/build-receipt.json",
+      "bytes": 774,
+      "sha256": "da3c1e91f10998319d1eb6d1309f697ef6cc6c0b1f083cffd3681662edf8c866"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/browser/bundle-metafile.json",
+      "bytes": 24120,
+      "sha256": "d10d180202b93da0a5ba966d3533df8bcafb86e9c48c1b1c5cc148fe8aba5c92"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/browser/contract.json",
+      "bytes": 3869,
+      "sha256": "8a2f04942d8deda00eb2a2f5bdf185ed035d94825aeedabd93e9e449da478310"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/browser/initial-core.save.json",
+      "bytes": 695178,
+      "sha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/browser/world-current-v4.json",
+      "bytes": 1730848,
+      "sha256": "a054d6592de8383222caa5174a726cdbce25fbef36fbb2456ee3bb84c667d1e8"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/build.mjs",
+      "bytes": 4294,
+      "sha256": "99aa10e3f8fd167091a716b3a95d6f96da7de114d406e33f835d2a523a38f2d6"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/client.js",
+      "bytes": 10864,
+      "sha256": "82ecf431da4e7ef95af36ea200e7f6503228501f62e96a433a0618ce0806415c"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/core-source-manifest.json",
+      "bytes": 4995,
+      "sha256": "d6adb60fa49c33011b4de7d0f8b812aa16a6d149d37c533a2c56f8babcfb3aad"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/headless-walker.ts",
+      "bytes": 18809,
+      "sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/tsconfig.json",
+      "bytes": 118,
+      "sha256": "05b7e0178d7ba7fe52e91ccea11a7249753bbaf249391609581cccd4b1d90fa8"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/walker-provenance.md",
+      "bytes": 7382,
+      "sha256": "5520b08e64d9f0cc2c12a4a823ad90d18d12c6f585c6c8ddd249d03dded7cd44"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/walker.test.ts",
+      "bytes": 24008,
+      "sha256": "deb9abf7704fc32a7c516ba99eef736ddcd7f37563bdec127cb77ffcd7465fbb"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/worker-entry.js",
+      "bytes": 6554,
+      "sha256": "6ce867661761b0bc6dd1812abb2e44c85d9f25c44d616630d47e824a904a80b1"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/worker-protocol.test.mjs",
+      "bytes": 16253,
+      "sha256": "4cd6353646a79b007c6fc6b802ed8640a58431e5205448fd5f2b172b766536ed"
+    },
+    {
+      "path": "yunshan/adapters/rpg-maker/worker-thread-host.mjs",
+      "bytes": 1700,
+      "sha256": "4b0d4798a1b8766cce0f33db6ace763429830e938357788873a377dd669c09f3"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/ACTUAL-COUNTER.png",
+      "bytes": 633283,
+      "sha256": "81d0dd3143de4ba90111c831308e0a61a6a2bc8d41fa46e0ed24b4877310168e"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/ART-REVIEW.json",
+      "bytes": 975,
+      "sha256": "e5c123538d3259d5629df695cc2800fd5e276f33676f97846bdf000c707c885d"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/BIRTH-BEFORE-ROOF-FINISH.png",
+      "bytes": 821331,
+      "sha256": "6333287c7f3127b735db273d83d7392939bea2d2eee519986fa8715959df76c1"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/BIRTH-COMPARISON.json",
+      "bytes": 966,
+      "sha256": "c119224dafe022b6d09919316ac04f51b68b999d1bbb291d30fae363f94293bb"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/CURRENT-BIRTH.png",
+      "bytes": 856151,
+      "sha256": "a838904872f599f72370997f36ac72e0d9a47bd97b8fd3880faf8e2b37505c55"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/EVIDENCE-INDEX.json",
+      "bytes": 182550,
+      "sha256": "395833ce806ee77244a0e365c10f7e9effc87ce720186793cd0137fd08af49c3"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/EVIDENCE-RECOVERY.md",
+      "bytes": 524,
+      "sha256": "9ea0a1e8cd9b998030c0906ac560788fd766da1dd49639ee5714b3a36fdb9692"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/MATRIX-PRESERVATION.json",
+      "bytes": 1005,
+      "sha256": "204555fbc719cdc4cd267af221da09e199eb232f8e64e73457cea402cc2ae4bb"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/NATIVE05-06-READBACK.json",
+      "bytes": 975941,
+      "sha256": "03c14b88f5676c5cae0c4f8cb52cb974308928de9495515d06bca91d5dbd711a"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/NATIVE06-SALE-AND-JOBS.json",
+      "bytes": 34089,
+      "sha256": "11b2f5e82282d3649bc1423889a89713785af1586f6ebd8709b2800c09d76aaf"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/REPORT.md",
+      "bytes": 7988,
+      "sha256": "48eec010ab0817265cd96e1f514aec52ae620d4f02bad98f44ed7bcac37cb086"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/REQUIREMENTS-38.csv",
+      "bytes": 334056,
+      "sha256": "bd330d4181e211ae144d3c2ac663696b1efcaf6d373cea5da71e16023a4b3311"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/RUNS.json",
+      "bytes": 55734,
+      "sha256": "5a9c57240421c93b3d75313c91eb1430f140bc5f8b18e181c5d322c9083157d8"
+    },
+    {
+      "path": "yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/SUBSYSTEM-GAPS.md",
+      "bytes": 22699,
+      "sha256": "3696760ed90cef1a26378c1798480b41d91d671d2731a56c0877f64efa7aaad7"
+    },
+    {
+      "path": "yunshan/index.html",
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4"
+    },
+    {
+      "path": "yunshan/package-lock.json",
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5"
+    },
+    {
+      "path": "yunshan/package.json",
+      "bytes": 879,
+      "sha256": "5c354ed4cc632ced189e9dd93f40e29c03a7725c136d955d31a27c50fafc5c57"
+    },
+    {
+      "path": "yunshan/public/favicon.svg",
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6"
+    },
+    {
+      "path": "yunshan/scripts/benchmark.ts",
+      "bytes": 5304,
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c"
+    },
+    {
+      "path": "yunshan/scripts/browser-test.mjs",
+      "bytes": 32618,
+      "sha256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082"
+    },
+    {
+      "path": "yunshan/scripts/budget-services-actual.ts",
+      "bytes": 13231,
+      "sha256": "c83dff603e8f3e3f5647e7dd89438f90808031fb88c647fd751476bad29b2cc8"
+    },
+    {
+      "path": "yunshan/scripts/economy-audit.ts",
+      "bytes": 34835,
+      "sha256": "62a22947659542eacd53c66a51b133bf1b681f30d368466a11c07dfd0a82a283"
+    },
+    {
+      "path": "yunshan/scripts/economy-observations.ts",
+      "bytes": 7652,
+      "sha256": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026"
+    },
+    {
+      "path": "yunshan/scripts/economy-resume-actual.ts",
+      "bytes": 54529,
+      "sha256": "a106d698ee8b277e9a6f89e1bb37044ee94be142cbf13491ab40eac58fe803c8"
+    },
+    {
+      "path": "yunshan/scripts/economy-resume-custody.ts",
+      "bytes": 34597,
+      "sha256": "ca6f04a2689910eb17dc920cbf9d9985de6bc68c29b52a96c7af9a39119dbb28"
+    },
+    {
+      "path": "yunshan/scripts/food-access-audit.ts",
+      "bytes": 6916,
+      "sha256": "3e4a18a8d3ef4a7c16156509c157e6c45018e9526599f9599ea67c9d1af65a28"
+    },
+    {
+      "path": "yunshan/scripts/food-access-recheck.ts",
+      "bytes": 13383,
+      "sha256": "a021c853ea5e8b391982a66cf645e4f136db82d452c61255ec9be1baf0017393"
+    },
+    {
+      "path": "yunshan/scripts/hydro-dispatch-history-actual.ts",
+      "bytes": 30698,
+      "sha256": "1e999451547917d1df2a73092e033746572ec13cdb6c97ad9ba1c366fa6cf150"
+    },
+    {
+      "path": "yunshan/scripts/hydro-maintenance-actual.ts",
+      "bytes": 37345,
+      "sha256": "5a64af692783f572899792302d992858425e20f4cbb6f94c5d9d003e454be2ab"
+    },
+    {
+      "path": "yunshan/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680"
+    },
+    {
+      "path": "yunshan/scripts/player-journey.mjs",
+      "bytes": 46766,
+      "sha256": "8d5c74a5b6188e293e1a2df607b39969c0c92e3841d9b5f965469191f275a861"
+    },
+    {
+      "path": "yunshan/scripts/power-grid-hydro-actual.ts",
+      "bytes": 32756,
+      "sha256": "62a5d72c990fd315c349dc94741496f938d72dc063fa1369a0b65849693d4609"
+    },
+    {
+      "path": "yunshan/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f"
+    },
+    {
+      "path": "yunshan/scripts/ui-test.mjs",
+      "bytes": 74303,
+      "sha256": "e25028728825e9cd76a284772ef55d268858df5b525dde03bd33bb50f1bac183"
+    },
+    {
+      "path": "yunshan/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f"
+    },
+    {
+      "path": "yunshan/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "yunshan/src/architecture-floor-plan.ts",
+      "bytes": 62754,
+      "sha256": "48d0cdfe2a252daeec36033ea68c446d742a3202c3b9eb90dd8280dfd132610e"
+    },
+    {
+      "path": "yunshan/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    {
+      "path": "yunshan/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    {
+      "path": "yunshan/src/commercial-district.ts",
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    {
+      "path": "yunshan/src/controller.ts",
+      "bytes": 29739,
+      "sha256": "eb5d1638f1f16526c4128a94c48563239502d290a5820de7e3dd5ef4555924ba"
+    },
+    {
+      "path": "yunshan/src/geometry/public-street-birth-check.ts",
+      "bytes": 22432,
+      "sha256": "a259cd6e6fca1690764630c67df9beca8d41ee24effa11bb5f12fd438223681c"
+    },
+    {
+      "path": "yunshan/src/geometry/public-street-birth.ts",
+      "bytes": 19066,
+      "sha256": "5b0982831db30df27335e4211f19a0cee6366c2c83fdfd19dc4e5d62cb50d92d"
+    },
+    {
+      "path": "yunshan/src/geometry/reference-street-exit.ts",
+      "bytes": 3158,
+      "sha256": "bebe68c672394012e37716152b984d7be0553431cd17041d744e3fd76d8cea9c"
+    },
+    {
+      "path": "yunshan/src/geometry/roof-profile-mesh.ts",
+      "bytes": 3615,
+      "sha256": "86f83a536273c437901360097ad974c9f3182962871c5fe972d6fa901d64d6d5"
+    },
+    {
+      "path": "yunshan/src/geometry/roof-profile.ts",
+      "bytes": 14421,
+      "sha256": "24c999634c4bd1b091115cff78b901d10acb74fc1660da7536eb3dffa9a0ecc0"
+    },
+    {
+      "path": "yunshan/src/geometry/upright-cylinder-sweep.ts",
+      "bytes": 4527,
+      "sha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f"
+    },
+    {
+      "path": "yunshan/src/host/upgrade-city-ruleset.ts",
+      "bytes": 2808,
+      "sha256": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d"
+    },
+    {
+      "path": "yunshan/src/host/upgrade-civic-history-format.ts",
+      "bytes": 3204,
+      "sha256": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e"
+    },
+    {
+      "path": "yunshan/src/host/upgrade-freight-delivery.ts",
+      "bytes": 2095,
+      "sha256": "bdfd71ac60110a1205cd1fef31a1161cb1f21e704cde7897a39241a54235aaa0"
+    },
+    {
+      "path": "yunshan/src/host/upgrade-freight-pickup.ts",
+      "bytes": 1972,
+      "sha256": "5ec10f4e501b408f203518a1340094a45b0ce6f97c1b36e5ceb82189de570316"
+    },
+    {
+      "path": "yunshan/src/host/upgrade-meal-route.ts",
+      "bytes": 1946,
+      "sha256": "5dce8a556e89325a69e9d6bb9544562e0ffca18389f215bc376f77e265c4e4a9"
+    },
+    {
+      "path": "yunshan/src/host/upgrade-reference-collision.ts",
+      "bytes": 2042,
+      "sha256": "8e29ecf6eb506d6c17ebf417262d2ad32a6f6cca339be24a613920956148fd7e"
+    },
+    {
+      "path": "yunshan/src/host/upgrade-resident-tuition.ts",
+      "bytes": 1830,
+      "sha256": "78a865d3890a62267536f781b3083b2e3ceefdea55122094fb2b392950ba6aa6"
+    },
+    {
+      "path": "yunshan/src/host/upgrade-service-material-scheduling.ts",
+      "bytes": 2192,
+      "sha256": "ef2da4d9bbfe7970ebb068a0a2503d696326767f9708367b8e0ff5e88c134153"
+    },
+    {
+      "path": "yunshan/src/host/world-generation-binding.ts",
+      "bytes": 2101,
+      "sha256": "1eb0cff17d4e28aa795bdc0fd68300f255dcab8ec08de75d21049d9fe0793ec4"
+    },
+    {
+      "path": "yunshan/src/host/world-generation.ts",
+      "bytes": 17138,
+      "sha256": "4ecca9893aa5aa1446a63a0574d3688b253c2b355338e602aa0fcba33c70d981"
+    },
+    {
+      "path": "yunshan/src/hygiene-ui.ts",
+      "bytes": 8278,
+      "sha256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047"
+    },
+    {
+      "path": "yunshan/src/journey.ts",
+      "bytes": 23037,
+      "sha256": "707869e8756fed75bcc814fcd1a16d00ca884fa20ac5f8ffc12ed2b7cf1867a8"
+    },
+    {
+      "path": "yunshan/src/main.ts",
+      "bytes": 25139,
+      "sha256": "6f861cdb075361908e2c9dfa1fbf410b1d76bba8d4a04f93a2156b9965f90ef5"
+    },
+    {
+      "path": "yunshan/src/market-station-apron.ts",
+      "bytes": 5802,
+      "sha256": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046"
+    },
+    {
+      "path": "yunshan/src/persistence.ts",
+      "bytes": 24112,
+      "sha256": "09cb7f5f89bf087efee1be3376f59e516ddce36cf2ce2a8786d9ebc215a96202"
+    },
+    {
+      "path": "yunshan/src/persistence/partition.ts",
+      "bytes": 21578,
+      "sha256": "aadacf7184fe7bcea89c95f0d79bc5addac5f112dee920e87b07df86c8b6e804"
+    },
+    {
+      "path": "yunshan/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    {
+      "path": "yunshan/src/persistence/save-resource.ts",
+      "bytes": 1490,
+      "sha256": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18"
+    },
+    {
+      "path": "yunshan/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    {
+      "path": "yunshan/src/persistence/world-layout.ts",
+      "bytes": 9052,
+      "sha256": "a3045a40474feb62301bbb2db579974708be20ace6202e511be511ae616b8a99"
+    },
+    {
+      "path": "yunshan/src/product-city.ts",
+      "bytes": 4989,
+      "sha256": "9538e4c97692be3d53e9589328d00c73b47b6f629ba3ba82b9611f55e7711cc5"
+    },
+    {
+      "path": "yunshan/src/reference-roof-recipe.ts",
+      "bytes": 1100,
+      "sha256": "63214d7cb68369e4956ce0e50b45075e1f0d64b464cb8f8dc78094c344c46ca3"
+    },
+    {
+      "path": "yunshan/src/renderer.ts",
+      "bytes": 98950,
+      "sha256": "618d3c53f312692e2f2357283ed3efc7160da41d47d4caaaad3560af292e7c41"
+    },
+    {
+      "path": "yunshan/src/rendering/architectural-finishes.ts",
+      "bytes": 10402,
+      "sha256": "a782db8029e6f3596dedc85bc2f1feddabc7122b4dcaf4aa47dd9a0678802405"
+    },
+    {
+      "path": "yunshan/src/rendering/architecture-bodies.ts",
+      "bytes": 19283,
+      "sha256": "e158d0d0f2f702ab2499af7028eddf214d8db3cdce938b4c225a6527f24a6fd2"
+    },
+    {
+      "path": "yunshan/src/rendering/architecture-detail.ts",
+      "bytes": 47156,
+      "sha256": "0b4e5e63ee0b1fac001451c61650afed87e8e83d3dedcd2261a6eded4dcbc026"
+    },
+    {
+      "path": "yunshan/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    {
+      "path": "yunshan/src/rendering/building-light-supply.ts",
+      "bytes": 2033,
+      "sha256": "a3b3a201e2d68029a8b1226316329de2863fc275c4bac3ece4d11027bccaa633"
+    },
+    {
+      "path": "yunshan/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    {
+      "path": "yunshan/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    {
+      "path": "yunshan/src/rendering/city-lighting-profile.ts",
+      "bytes": 697,
+      "sha256": "a359d1b5dec9daa32459d35e48299da29d20064797cbc18dab33d0f6d9b071eb"
+    },
+    {
+      "path": "yunshan/src/rendering/detail-surface-finishes.ts",
+      "bytes": 3884,
+      "sha256": "370baa3d99d37a73fa93dd90a6a622b68ce1ee89cc99a6772447512f6b9c64ba"
+    },
+    {
+      "path": "yunshan/src/rendering/interior-lighting.ts",
+      "bytes": 5980,
+      "sha256": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f"
+    },
+    {
+      "path": "yunshan/src/rendering/interior-props.ts",
+      "bytes": 10997,
+      "sha256": "f1ba7fb8438c235721e48172f923aa1029c61336343fb9f48d7d03eb2e6d3c85"
+    },
+    {
+      "path": "yunshan/src/rendering/market-goods.ts",
+      "bytes": 5825,
+      "sha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768"
+    },
+    {
+      "path": "yunshan/src/rendering/market-shopfront.ts",
+      "bytes": 11900,
+      "sha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454"
+    },
+    {
+      "path": "yunshan/src/rendering/road-closures.ts",
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    {
+      "path": "yunshan/src/rendering/roof-end-finish.ts",
+      "bytes": 4494,
+      "sha256": "198c4c8738167efd33b6ed362ecdeb68239c3c855394a3e2a4a82b87f7fe538c"
+    },
+    {
+      "path": "yunshan/src/rendering/station-wayfinding.ts",
+      "bytes": 8150,
+      "sha256": "a6c938d4643f1dead867195e96bcf6187016f86f0b5cb1683a0841600d0b5b28"
+    },
+    {
+      "path": "yunshan/src/rendering/terrain.ts",
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    {
+      "path": "yunshan/src/roads.ts",
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    {
+      "path": "yunshan/src/simulation.ts",
+      "bytes": 325681,
+      "sha256": "85d44791b993376c804299816f6d4deff395772797f6d0379ae5fa8b052026a8"
+    },
+    {
+      "path": "yunshan/src/simulation/activity-capacity.ts",
+      "bytes": 5598,
+      "sha256": "9f21989f2cacc9174b3c6741bd6c6c1c4884168cd83ebe300edc889746648ec9"
+    },
+    {
+      "path": "yunshan/src/simulation/activity-minutes.ts",
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    {
+      "path": "yunshan/src/simulation/banking.ts",
+      "bytes": 22501,
+      "sha256": "52a601b5c0c24e884ac4700583f0d6e9d3cad35965ad817c9ca5ed700efaf0e0"
+    },
+    {
+      "path": "yunshan/src/simulation/budget-authority.ts",
+      "bytes": 23599,
+      "sha256": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef"
+    },
+    {
+      "path": "yunshan/src/simulation/building-alteration.ts",
+      "bytes": 26016,
+      "sha256": "cd81f9ccb6c2e30bff4ab5e6942360b2c322cbcaa5704ee064e043abdaffdc48"
+    },
+    {
+      "path": "yunshan/src/simulation/city-ruleset.ts",
+      "bytes": 13274,
+      "sha256": "bba993990d9a7a304e02efd442bd2292fd59c977ae42d5d4a75d432a4a7e0d00"
+    },
+    {
+      "path": "yunshan/src/simulation/civic-history.ts",
+      "bytes": 32374,
+      "sha256": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d"
+    },
+    {
+      "path": "yunshan/src/simulation/civic-staffing.ts",
+      "bytes": 74161,
+      "sha256": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5"
+    },
+    {
+      "path": "yunshan/src/simulation/clinical-paid-triage.ts",
+      "bytes": 3297,
+      "sha256": "557a0c5a9b1527d0934b2f59ca576dee9336d688ebcae931e85dfad6981ca38b"
+    },
+    {
+      "path": "yunshan/src/simulation/clinical.ts",
+      "bytes": 48756,
+      "sha256": "8f434fc62de377915200d730ca7a8fda9c4c06878b3527361845c699ff3c34e8"
+    },
+    {
+      "path": "yunshan/src/simulation/culture.ts",
+      "bytes": 67854,
+      "sha256": "2ea4f94b5876a06826bdb0f4249c31dfd4c35290ed1702c0d3191862f37ca831"
+    },
+    {
+      "path": "yunshan/src/simulation/education.ts",
+      "bytes": 48446,
+      "sha256": "dd647c997d1697bff1cc99f63ee097aa08da5d68b971ff5834b5c174ae670d97"
+    },
+    {
+      "path": "yunshan/src/simulation/extensions.ts",
+      "bytes": 92838,
+      "sha256": "0890b274c17abbe2b5e50bb24c151ec13928f3cb3c8bd4bfb4a632478a845bc0"
+    },
+    {
+      "path": "yunshan/src/simulation/family-education.ts",
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    {
+      "path": "yunshan/src/simulation/family.ts",
+      "bytes": 80525,
+      "sha256": "c3af107f15d4bdafd3e61afa249f0fe68db0e384e5e4ffdb9cafb57e132546fd"
+    },
+    {
+      "path": "yunshan/src/simulation/food-access-observations.ts",
+      "bytes": 15560,
+      "sha256": "8959704964fa0f30715516c7927b7306426b291b6fae6b78436b0a8de41b1bd0"
+    },
+    {
+      "path": "yunshan/src/simulation/freight-access.ts",
+      "bytes": 5452,
+      "sha256": "be1d9bd79c9ff6b77c013c985d6d5f59d020cf8bf9738316c9bfd09fee7e547b"
+    },
+    {
+      "path": "yunshan/src/simulation/freight-delivery.ts",
+      "bytes": 12490,
+      "sha256": "d3b309d14e610ae9a41e385d077ca94ca7d868ec65323d0f773c847512e81831"
+    },
+    {
+      "path": "yunshan/src/simulation/funded-work.ts",
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    {
+      "path": "yunshan/src/simulation/gift-contact-legacy.ts",
+      "bytes": 9103,
+      "sha256": "6badb6b9cc24194e50ac56ff8dafe58c0939ea9dc33ea19e2b0fee70aefcd7bb"
+    },
+    {
+      "path": "yunshan/src/simulation/gift-contact.ts",
+      "bytes": 12403,
+      "sha256": "33c7a50100d352fdf9a3a36cda58f25dc8c3f5cd38218c59f8beab2713a8a48e"
+    },
+    {
+      "path": "yunshan/src/simulation/governance.ts",
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    {
+      "path": "yunshan/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    {
+      "path": "yunshan/src/simulation/hydro-dispatch-history.ts",
+      "bytes": 16544,
+      "sha256": "dbeb71076eac405e5949a36a2f2c74b0d5c626c82d30131fa433eac70e23d771"
+    },
+    {
+      "path": "yunshan/src/simulation/hydro-grid-budget.ts",
+      "bytes": 4415,
+      "sha256": "f1b14af66e15f6da09814e4a6764e7f00da99c7555b3f527be723ec57d6ea8cd"
+    },
+    {
+      "path": "yunshan/src/simulation/hydro-maintenance.ts",
+      "bytes": 38278,
+      "sha256": "7b3b59e835deeb3d82fce9c473b4d0eb2539f640236280cdb17d8a77d534023d"
+    },
+    {
+      "path": "yunshan/src/simulation/hygiene-public.ts",
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    {
+      "path": "yunshan/src/simulation/hygiene-transfer.ts",
+      "bytes": 28130,
+      "sha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a"
+    },
+    {
+      "path": "yunshan/src/simulation/hygiene.ts",
+      "bytes": 50777,
+      "sha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106"
+    },
+    {
+      "path": "yunshan/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    {
+      "path": "yunshan/src/simulation/meal-route.ts",
+      "bytes": 3092,
+      "sha256": "6ce962358934386151adcd4fc7d2dac10d27e38c946b7525cb77d73377ccf2a4"
+    },
+    {
+      "path": "yunshan/src/simulation/night-retail.ts",
+      "bytes": 24665,
+      "sha256": "35439f407492c8ba5072bccbe18326cbb166c3cbd7898a6b0e86de3600fb10b2"
+    },
+    {
+      "path": "yunshan/src/simulation/npc-stair-motion.ts",
+      "bytes": 26937,
+      "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+    },
+    {
+      "path": "yunshan/src/simulation/pathology.ts",
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    {
+      "path": "yunshan/src/simulation/player-labor.ts",
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    {
+      "path": "yunshan/src/simulation/police-supplies.ts",
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    {
+      "path": "yunshan/src/simulation/power-grid-hydro.ts",
+      "bytes": 47975,
+      "sha256": "8ce12744b54aba7ff70231c675267428f960df3f38dc189bf29e959f0b00bb24"
+    },
+    {
+      "path": "yunshan/src/simulation/power-grid.ts",
+      "bytes": 37908,
+      "sha256": "c40f5b15842aca5fc7a4c3cb20f6bb6bec5f9ccd10e990777a2ad8c86099982c"
+    },
+    {
+      "path": "yunshan/src/simulation/power-hydro-runtime.ts",
+      "bytes": 22899,
+      "sha256": "1699090066685ff4aec46fe56baae81f745352cf03ef489bcfeb300784434c29"
+    },
+    {
+      "path": "yunshan/src/simulation/power-hydro.ts",
+      "bytes": 14582,
+      "sha256": "3bdda003a29d0250f8dbdcf76a792d7689d022d05ca2b3e626a36ad92ab514a0"
+    },
+    {
+      "path": "yunshan/src/simulation/power-network-flow.ts",
+      "bytes": 1826,
+      "sha256": "71dffaff43db3475474afa1d84c3d3d79a6a6f014c5b88efe8a88d7a4560cf11"
+    },
+    {
+      "path": "yunshan/src/simulation/power.ts",
+      "bytes": 60297,
+      "sha256": "1863c2d9b6c2e06a0843b8ad9e46dd8face5774f9c1c4922f600f62d2c3fe1a5"
+    },
+    {
+      "path": "yunshan/src/simulation/public-employment.ts",
+      "bytes": 19062,
+      "sha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef"
+    },
+    {
+      "path": "yunshan/src/simulation/reference-collision.ts",
+      "bytes": 1062,
+      "sha256": "285c43bf6cebbe22ae2af26b2bc1bd896c96bfdb2cf14a42c327a98110e720fa"
+    },
+    {
+      "path": "yunshan/src/simulation/resident-education.ts",
+      "bytes": 35688,
+      "sha256": "643acfb3de2779e5d2c714fd8565bf99743b8d6e63107c553db4d8a1e2c5847c"
+    },
+    {
+      "path": "yunshan/src/simulation/resident-formal-learning.ts",
+      "bytes": 7765,
+      "sha256": "0d3d345281d278fbe39f413a3450207d8c7e573d016e60c5b757625c21e497ed"
+    },
+    {
+      "path": "yunshan/src/simulation/road-demands.ts",
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    {
+      "path": "yunshan/src/simulation/roadworks.ts",
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    {
+      "path": "yunshan/src/simulation/service-material-scheduling.ts",
+      "bytes": 7677,
+      "sha256": "2237942b51c46f8fd05d51898d4678a8b553cf12107956b6c6f393e700b6b1c3"
+    },
+    {
+      "path": "yunshan/src/simulation/shop_lifecycle.ts",
+      "bytes": 71169,
+      "sha256": "71d5868ca3594be6886fe85d84eb51f53ce1d3ca949abe7cbb334bea57855512"
+    },
+    {
+      "path": "yunshan/src/simulation/supplemental-budget.ts",
+      "bytes": 21826,
+      "sha256": "4c51e6f3b4808260e8337fe19bb6ec634b4f0d64390ac5076c26251d92feecfb"
+    },
+    {
+      "path": "yunshan/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    {
+      "path": "yunshan/src/simulation/voxel-movement.ts",
+      "bytes": 7425,
+      "sha256": "1b333416ff0f209d31af29c6d4184849c49ee8b5d6846186cb5622c5ccdc303e"
+    },
+    {
+      "path": "yunshan/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "yunshan/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    {
+      "path": "yunshan/src/transport-geometry.ts",
+      "bytes": 10440,
+      "sha256": "33242b2817676b19f50e998c1ea642923ec87cc9c9f7261cae2d2aa7022c01ea"
+    },
+    {
+      "path": "yunshan/src/types.ts",
+      "bytes": 16033,
+      "sha256": "5aa1fec552ab1677ecfd4ca31903df3b0bd386daba0af98ac9fe3537a8344cac"
+    },
+    {
+      "path": "yunshan/src/ui.ts",
+      "bytes": 202000,
+      "sha256": "b7ffdc4c5c41255ee380a1f1624259abacee8bdd06d46e9eb6f5c9eea1561a4b"
+    },
+    {
+      "path": "yunshan/src/world.ts",
+      "bytes": 56916,
+      "sha256": "86fa141189d7467501871f5c3940567df3fc841eb68e84ad805d6bfb3d69bfc3"
+    },
+    {
+      "path": "yunshan/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5"
+    },
+    {
+      "path": "yunshan/tests/appointment-funds.test.ts",
+      "bytes": 12237,
+      "sha256": "0adfe5c71e3a10782e72d76e783ecb45b6721c2a68dfcd168a6f75a7241973fc"
+    },
+    {
+      "path": "yunshan/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d"
+    },
+    {
+      "path": "yunshan/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c"
+    },
+    {
+      "path": "yunshan/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a"
+    },
+    {
+      "path": "yunshan/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6"
+    },
+    {
+      "path": "yunshan/tests/architecture-wall-finish.test.ts",
+      "bytes": 8037,
+      "sha256": "c79de8740057ff13f9ed2947c2bc110e1a81ac7ae9a718ae1a8dcb1e8abd7fc2"
+    },
+    {
+      "path": "yunshan/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b"
+    },
+    {
+      "path": "yunshan/tests/banking.test.ts",
+      "bytes": 21022,
+      "sha256": "46ad59024417534be4e2062ac58aef3d7c8cae77155bd1356b758bd72231d4dd"
+    },
+    {
+      "path": "yunshan/tests/budget-authority-contract.test.ts",
+      "bytes": 6462,
+      "sha256": "a502a78421ea416cdb6269c9ce374707d3a04c7a05870daab111256fa7a89e42"
+    },
+    {
+      "path": "yunshan/tests/budget-authority-fixture.ts",
+      "bytes": 2623,
+      "sha256": "d0bac2f99e2718ac1159aca3396e4fed3f269a694b3cf71d2c6cafbfecd607e0"
+    },
+    {
+      "path": "yunshan/tests/budget-authority-hash.test.ts",
+      "bytes": 2229,
+      "sha256": "4ed378aa546751038d6d617c3510111ef9e1cadc406fc2a00423f040b6ff207a"
+    },
+    {
+      "path": "yunshan/tests/budget-authority-source.test.ts",
+      "bytes": 6753,
+      "sha256": "f89b7a2e0e63c227306de3470d96602bf1171740919b35179bc70883150d4919"
+    },
+    {
+      "path": "yunshan/tests/building-alteration.test.ts",
+      "bytes": 19730,
+      "sha256": "ba4b4d97961084f086166cf486b092c41e2dc30c7be21eb3bad9ebc4c8b5fa31"
+    },
+    {
+      "path": "yunshan/tests/building-light-supply.test.ts",
+      "bytes": 4578,
+      "sha256": "e3328fc770af99f81ba54a1cf0be0e6e567d9d8f53ed179bc31cf557e509f6c2"
+    },
+    {
+      "path": "yunshan/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0"
+    },
+    {
+      "path": "yunshan/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68"
+    },
+    {
+      "path": "yunshan/tests/city-life-freight-product.test.ts",
+      "bytes": 2295,
+      "sha256": "3415da4584b3a8967e47f483b87989228778c399af9abe1719c22f963dcce361"
+    },
+    {
+      "path": "yunshan/tests/city-life-product.test.ts",
+      "bytes": 2717,
+      "sha256": "9e8cceaac2c65c7dcc8a28148ad496ac7ef87c97de22bec84b328ad8cf4f22b7"
+    },
+    {
+      "path": "yunshan/tests/city-ruleset.test.ts",
+      "bytes": 16147,
+      "sha256": "4dd577f55a598bbeab22f25764acadf196c17b4c2d8a0a13d35c09e1e1244ad5"
+    },
+    {
+      "path": "yunshan/tests/civic-history-codec.test.ts",
+      "bytes": 4848,
+      "sha256": "738e0364919ac8cffd8fb3f66f7d8e0e0691cb0c785c31c8299a0d34d05cdd6c"
+    },
+    {
+      "path": "yunshan/tests/civic-history-contract.test.ts",
+      "bytes": 13337,
+      "sha256": "ef38ec359dd1c7aa8ddf395abb15e20f1f7eb4c9fc4e6dbf15773537c147ca7c"
+    },
+    {
+      "path": "yunshan/tests/civic-history-paid-source.test.ts",
+      "bytes": 7609,
+      "sha256": "e11dcae7ed50af1fa3cf70ad22c583f4f69cca15160305bc3c9c813179380fce"
+    },
+    {
+      "path": "yunshan/tests/civic-staffing-fixture.ts",
+      "bytes": 6347,
+      "sha256": "f072f6e97645abf4423d50dab4b4891b4a2de41b51fb23b7a8815eca24ebb6fd"
+    },
+    {
+      "path": "yunshan/tests/civic-staffing-two-terms.test.ts",
+      "bytes": 4586,
+      "sha256": "2182fefe3265ed11eb6bb876d92fefccb7f03b9e4adcbb4a233fb69a13242d16"
+    },
+    {
+      "path": "yunshan/tests/civic-staffing.test.ts",
+      "bytes": 14623,
+      "sha256": "f2b441073c37eb6798dd45d3179edf6e4e20955995f7a993e197765f7fa6e420"
+    },
+    {
+      "path": "yunshan/tests/clinical-arrival-contract.test.ts",
+      "bytes": 9351,
+      "sha256": "0f58c14316248d9b7dd40b76374f951da1406f2b7150a648fe8e8d0670b7bf65"
+    },
+    {
+      "path": "yunshan/tests/clinical-arrival-doctor.test.ts",
+      "bytes": 2806,
+      "sha256": "7f092502054f83a89017ac2bdd70e00e28a5564fef48d35d23907afd755e71de"
+    },
+    {
+      "path": "yunshan/tests/clinical-arrival-fixture.ts",
+      "bytes": 8448,
+      "sha256": "770793d29c2e62d280abfbfac0e1630c0252ad4b40235d0ef03d64dd7e0f9f5b"
+    },
+    {
+      "path": "yunshan/tests/clinical-arrival-front-contract.test.ts",
+      "bytes": 643,
+      "sha256": "5e8d88ae862fdd74b651a8df548ab33c3fc49f676742e01672e7970b42516603"
+    },
+    {
+      "path": "yunshan/tests/clinical-arrival-patient.test.ts",
+      "bytes": 2962,
+      "sha256": "8e65a7cf5342e592d6655ccf3b7eac798619d959887ddeaf35050fcb770594a6"
+    },
+    {
+      "path": "yunshan/tests/clinical-arrival-window-contract.ts",
+      "bytes": 317,
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3"
+    },
+    {
+      "path": "yunshan/tests/clinical-closing-functional.test.ts",
+      "bytes": 7270,
+      "sha256": "0914e33ee592d5f50fa39ea7550e5b59f3f8cdf82023b23856f1fe92740fdfe1"
+    },
+    {
+      "path": "yunshan/tests/clinical-grid-native-start-functional.test.ts",
+      "bytes": 8711,
+      "sha256": "e5296e03aa81a81bb5c265696ac030bb5c114627d0e662fcc0652880fd5a336e"
+    },
+    {
+      "path": "yunshan/tests/clinical-grid-power-pure.test.ts",
+      "bytes": 3770,
+      "sha256": "86a9317322369778b1c0de6a833f0be4b0db144677b1920d33f7713b4e1b7526"
+    },
+    {
+      "path": "yunshan/tests/clinical-native-authority.test.ts",
+      "bytes": 9557,
+      "sha256": "92382f00282106ae404dba6470b1068484992bc3a38ebcde00801555e3dfd622"
+    },
+    {
+      "path": "yunshan/tests/clinical-open-minutes.test.ts",
+      "bytes": 2379,
+      "sha256": "83165a626cac74d5f7d2cfa3ba04b6fa88ffbe2d2a8c279453e661aac9727e88"
+    },
+    {
+      "path": "yunshan/tests/clinical-paid-triage.test.ts",
+      "bytes": 10468,
+      "sha256": "99222159456c655ad8cdcf0e898e8d3e4437118e5bfdc76093975ca687440b3e"
+    },
+    {
+      "path": "yunshan/tests/clinical-presence-contract.test.ts",
+      "bytes": 13936,
+      "sha256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1"
+    },
+    {
+      "path": "yunshan/tests/clinical-presence-fixture.ts",
+      "bytes": 11041,
+      "sha256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526"
+    },
+    {
+      "path": "yunshan/tests/clinical-presence-regression.test.ts",
+      "bytes": 8248,
+      "sha256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717"
+    },
+    {
+      "path": "yunshan/tests/clinical-procurement-power-reason.test.ts",
+      "bytes": 3450,
+      "sha256": "99cb637abccdea3387903b9d050e5247e6807a7a0552b1e1a26e44bb2780e65b"
+    },
+    {
+      "path": "yunshan/tests/clinical.test.ts",
+      "bytes": 30100,
+      "sha256": "f15b8be3d0010b79dd4be9db7fdf4df1bf6541699d9c100226beebb2434159cc"
+    },
+    {
+      "path": "yunshan/tests/controller-input-time.test.ts",
+      "bytes": 15536,
+      "sha256": "0bede9235981e4f32b140b19fb5c2060083a85de754ff86514c5b3974ef8384f"
+    },
+    {
+      "path": "yunshan/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09"
+    },
+    {
+      "path": "yunshan/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45"
+    },
+    {
+      "path": "yunshan/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3"
+    },
+    {
+      "path": "yunshan/tests/economy-observations.test.ts",
+      "bytes": 6786,
+      "sha256": "d2dcadb6509ad13192d49895c2409dc0776d2682ccd7bb4519d43730c3283df0"
+    },
+    {
+      "path": "yunshan/tests/economy-resume-custody.test.ts",
+      "bytes": 12099,
+      "sha256": "aaca301b18e8721a11700d745cb35bd26c5349f485de70cc352e1ea97072131b"
+    },
+    {
+      "path": "yunshan/tests/economy-resume-earned-observation.test.ts",
+      "bytes": 6848,
+      "sha256": "7e4af5309607648b91cbb902201acbf436fe74142a4fcf03840d4a23381bfacc"
+    },
+    {
+      "path": "yunshan/tests/economy.test.ts",
+      "bytes": 51687,
+      "sha256": "10028da30ea2cb54f0ea5ffba7490d7849235469ec1b1a1616387cf8318877f2"
+    },
+    {
+      "path": "yunshan/tests/education-boundary.test.ts",
+      "bytes": 25936,
+      "sha256": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd"
+    },
+    {
+      "path": "yunshan/tests/education-course.test.ts",
+      "bytes": 37708,
+      "sha256": "27db5dc919aae8a849b5d0cf22c561a95b2098e4e8bcb6adb322e42294fe5967"
+    },
+    {
+      "path": "yunshan/tests/education-fixture.ts",
+      "bytes": 18591,
+      "sha256": "5b1909683d6a43d7cf87c9e5687ec106008fba4a42eb8aec3efb360817d47e5a"
+    },
+    {
+      "path": "yunshan/tests/education-legacy-regression.test.ts",
+      "bytes": 4572,
+      "sha256": "a7ccc1100a34714ef4a2244769db752ebbe4433c543a6aa825ab40e3527bfda3"
+    },
+    {
+      "path": "yunshan/tests/education-saved-time.test.ts",
+      "bytes": 9383,
+      "sha256": "b3a06d177d31d6021065ad49d39ea5886789ca3031ded7fcdd78551aeb12622e"
+    },
+    {
+      "path": "yunshan/tests/extensions.test.ts",
+      "bytes": 108044,
+      "sha256": "93d3f77a390a820114011e8be994c15bfde438aa4c93b4a8fbacaaa88fde764f"
+    },
+    {
+      "path": "yunshan/tests/family-estate-escrow.test.ts",
+      "bytes": 13002,
+      "sha256": "9c258177766bef25c262c04e9d748308ba1d320ebd3a0f55520709f32a0b7b9a"
+    },
+    {
+      "path": "yunshan/tests/family-fee-education-fixture.ts",
+      "bytes": 12332,
+      "sha256": "9fd74ef3ece793d6f9e42b82eff44848b3a2b29eef2095e5eb3073d22aeeb6b4"
+    },
+    {
+      "path": "yunshan/tests/family-fee-education.test.ts",
+      "bytes": 39537,
+      "sha256": "1579243d5dd7691f905142454ec9bd8bd3fa19d19bbf61ed74263db3563851e0"
+    },
+    {
+      "path": "yunshan/tests/family-fee-legacy-qualification.test.ts",
+      "bytes": 6956,
+      "sha256": "1efe71ae0c959e120b4635104fe6b760c62ccb4b4ab9261a797aa637044be179"
+    },
+    {
+      "path": "yunshan/tests/family.test.ts",
+      "bytes": 50830,
+      "sha256": "6abb29d7454e36933781c9052bdacf2d0b19a1f3c23bed32435d82ded3f7590e"
+    },
+    {
+      "path": "yunshan/tests/farm-stock-buffer.test.ts",
+      "bytes": 11641,
+      "sha256": "3c66a1131dceb418b42a8234bda8dcbc821154cbb09dbcfd746ac88b4461ac42"
+    },
+    {
+      "path": "yunshan/tests/fixtures/appointment-old21-after.json",
+      "bytes": 695441,
+      "sha256": "ccd21438c49f6dd6e76007c9b8f6c0ff4a218492c1082e099b349d3cbc1c91d2"
+    },
+    {
+      "path": "yunshan/tests/fixtures/budget-authority/canonical-pair.save.json.gz",
+      "bytes": 277219,
+      "sha256": "7687e37e5d2959be90e97912482a5f13f909bd94b7bf22682f2459f884318752"
+    },
+    {
+      "path": "yunshan/tests/fixtures/budget-authority/original-authorizer-provenance.json",
+      "bytes": 531,
+      "sha256": "63d4bf415c3c97807bf1189017dbf28cb5f0b881742cf50ee7cfec1e8c48212f"
+    },
+    {
+      "path": "yunshan/tests/fixtures/budget-authority/original-authorizer.ts",
+      "bytes": 3254,
+      "sha256": "fb2123e81aaac21232fbe4acdf35c2073a2b2d4607be6d68f445b95ef8cac9b1"
+    },
+    {
+      "path": "yunshan/tests/fixtures/budget-authority/paid-signatures.json",
+      "bytes": 3106,
+      "sha256": "7e09ab552a48fe6f36699e1c3420c70674645f4b471fad1d5af7fe74cee675cc"
+    },
+    {
+      "path": "yunshan/tests/fixtures/budget-authority/provenance.json",
+      "bytes": 1304,
+      "sha256": "07656752e235983ab0f5499d49da9c01e4edee7735146830a02582deee0a6a57"
+    },
+    {
+      "path": "yunshan/tests/fixtures/budget-authority/world.json",
+      "bytes": 71349,
+      "sha256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1"
+    },
+    {
+      "path": "yunshan/tests/fixtures/civic-history/root13-four-day-after-24.save.json",
+      "bytes": 3035686,
+      "sha256": "7d7197eb461109d20e63461ec84314f6a7d8efb83e141c8b43a8811bbb741297"
+    },
+    {
+      "path": "yunshan/tests/fixtures/civic-history/root13-four-day.save.json",
+      "bytes": 3015592,
+      "sha256": "3640274b3e2234b793925a574f825615a89d9c168539d10960510f39f1e1c2c3"
+    },
+    {
+      "path": "yunshan/tests/fixtures/civic-history/root13-four-day.world.json",
+      "bytes": 64700,
+      "sha256": "78a9b469fb18e4f377151fd679045fdb25b9160d456f25ba8a0027b2b15a0bbe"
+    },
+    {
+      "path": "yunshan/tests/fixtures/clinical-arrival-old-D1-measurement-after-step.json",
+      "bytes": 408224,
+      "sha256": "26ecbed06893a5bffc2f5d73d822b25427dc8f329489dc912a5f093635e7b91e"
+    },
+    {
+      "path": "yunshan/tests/fixtures/clinical-arrival-old-D1-measurement-before-step.json",
+      "bytes": 406423,
+      "sha256": "67c3934829383b8b8d4910fde4135d0b74aeed650ad8bae12508a6ae7973a11e"
+    },
+    {
+      "path": "yunshan/tests/fixtures/clinical-arrival-old-D2-measurement-after-step.json",
+      "bytes": 408483,
+      "sha256": "db7a54f6b5daf45141139d60013450f68c029117ec856a8f23daf2c7d7ef52fa"
+    },
+    {
+      "path": "yunshan/tests/fixtures/clinical-arrival-old-D2-measurement-before-step.json",
+      "bytes": 406853,
+      "sha256": "0353880d31abb82a67d62ba784e36b119bbdc3087852435b32e0a85658011555"
+    },
+    {
+      "path": "yunshan/tests/fixtures/clinical-arrival-old-provenance.json",
+      "bytes": 2453,
+      "sha256": "f43dd80ad53822ffda51fce2332371fde97aa2701926e5e7460ed58347b11a83"
+    },
+    {
+      "path": "yunshan/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e"
+    },
+    {
+      "path": "yunshan/tests/fixtures/economy-original14-final.save.json.gz",
+      "bytes": 297493,
+      "sha256": "3485b80b9f7414dd6d56bbd7a08b1582e0fa85ad30a7896755eaa09b05fe3e39"
+    },
+    {
+      "path": "yunshan/tests/fixtures/education-different-start.save.json",
+      "bytes": 497118,
+      "sha256": "5e7bfcae17a5a9eeba08eea1092d4ae23afddd223956010a413a4f5c4dc9bcb5"
+    },
+    {
+      "path": "yunshan/tests/fixtures/education-same-start.save.json",
+      "bytes": 497437,
+      "sha256": "83d1cd18dc8450149fa461bd283dd12f07e27623c9e62c64c2ff577b4ae40735"
+    },
+    {
+      "path": "yunshan/tests/fixtures/education-saved-time-provenance.md",
+      "bytes": 3089,
+      "sha256": "6548ac00106197b8d559ef2a3c6674943742f118ba550608e84c8439252fd978"
+    },
+    {
+      "path": "yunshan/tests/fixtures/family-fee-v1/metadata.json",
+      "bytes": 1397,
+      "sha256": "b1949aa12c1f838d6866fcd342c1b931c2e0c2a4b22b62b10260fe13be29b6ae"
+    },
+    {
+      "path": "yunshan/tests/fixtures/family-fee-v1/oracle-old-v1-held-18.5.save.json.gz",
+      "bytes": 34832,
+      "sha256": "7fa49ae480d158fe2f20e6e30ae14852b356dd13b78200fc3df95e09f8d94624"
+    },
+    {
+      "path": "yunshan/tests/fixtures/family-fee-v1/oracle-old-v1-held-19.5.save.json.gz",
+      "bytes": 34832,
+      "sha256": "699009cacc72906142963d9b8de901a9c8b4bae10eb7b2027ab2fd63dadb7c89"
+    },
+    {
+      "path": "yunshan/tests/fixtures/family-fee-v1/oracle-old-v1-held-both.save.json.gz",
+      "bytes": 34853,
+      "sha256": "1d515ee86464651c1929a44ed505dabce068d17c2993ea43eb0f01df03724186"
+    },
+    {
+      "path": "yunshan/tests/fixtures/family-fee/after24.save.json",
+      "bytes": 384816,
+      "sha256": "60068fdf834ac124cbda128e4793155dfd17e8239852fd2ed08ff9ceb4b9d1ea"
+    },
+    {
+      "path": "yunshan/tests/fixtures/family-fee/before.save.json",
+      "bytes": 378902,
+      "sha256": "81ccbfe6d4215fb082710532f61f7850a7e58b7ae45195e65b9e546801fd755f"
+    },
+    {
+      "path": "yunshan/tests/fixtures/family-fee/metadata.json",
+      "bytes": 805,
+      "sha256": "0b89e6a7f98af316605d443d03fa6eb2aa05db7995c708687832c923827cb158"
+    },
+    {
+      "path": "yunshan/tests/fixtures/freight-native-compact-world.PROVENANCE.md",
+      "bytes": 546,
+      "sha256": "b6129352fad867e1acaa4d1e662f2ae02ec5d116cc0987540e3131cb2b128ab5"
+    },
+    {
+      "path": "yunshan/tests/fixtures/freight-native-compact-world.json",
+      "bytes": 4345,
+      "sha256": "84f460cfb87372574eabd721198559e26a52245fef8e9035c81f33abf849d63e"
+    },
+    {
+      "path": "yunshan/tests/fixtures/freight-road-door-parameters.json",
+      "bytes": 55795,
+      "sha256": "509e025d94de003afc8b26e06ff8e906907293242d51b144cc2c93832c40c27a"
+    },
+    {
+      "path": "yunshan/tests/fixtures/governance-old18/campaign.json",
+      "bytes": 398358,
+      "sha256": "ff6b23b4bca1e3ef7d4e5126b4d7968c551fe26b5d9c59f780affdfe0bc430bf"
+    },
+    {
+      "path": "yunshan/tests/fixtures/governance-old18/cold.json",
+      "bytes": 396696,
+      "sha256": "ad971fea1c44a21d0286a3b3d8feecf37d17185943fe84d4f9f3b2c1cb86637e"
+    },
+    {
+      "path": "yunshan/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a"
+    },
+    {
+      "path": "yunshan/tests/fixtures/market-company-current-lease.json",
+      "bytes": 456997,
+      "sha256": "c317858741c6a5d76b43aef99209b48f572da621b6313f4e8906177768125332"
+    },
+    {
+      "path": "yunshan/tests/fixtures/market-company-current-sale.json",
+      "bytes": 531322,
+      "sha256": "10dce6b2323e172d1fe1ea04ebdecf7ea7565ba59f6b3cc637499db1a0081f80"
+    },
+    {
+      "path": "yunshan/tests/fixtures/market-company-old-lease.json",
+      "bytes": 530776,
+      "sha256": "f768bb8b8b8ede1f54d6adffba08c7602c358646ca269e576c9b7e452be1f54d"
+    },
+    {
+      "path": "yunshan/tests/fixtures/market-company-old-sale.json",
+      "bytes": 530302,
+      "sha256": "8341af92cb3f88c39934c7f02a10cf4d9aa93e72862dc99efbcdee4891846be3"
+    },
+    {
+      "path": "yunshan/tests/fixtures/native-day-writer/actual-day-writer.save.json.gz",
+      "bytes": 494996,
+      "sha256": "4f7b9a5143af2fc110582fa310bb941a73116418dab8236ff873bf50898a4239"
+    },
+    {
+      "path": "yunshan/tests/fixtures/native-day-writer/provenance.json",
+      "bytes": 566,
+      "sha256": "4310dfbf2f90fa309284d915c6db943bbb9614ce50c27a6b247ac3ecbcf55b76"
+    },
+    {
+      "path": "yunshan/tests/fixtures/native-live-reader/actual-browser-writer.save.json.gz",
+      "bytes": 294580,
+      "sha256": "cbfcc4b27b55073e585f967a2ca4ce607c8263b4781ba9131695242fdb691db2"
+    },
+    {
+      "path": "yunshan/tests/fixtures/native-live-reader/provenance.json",
+      "bytes": 994,
+      "sha256": "2fc9005a7e2ac69cb350d2d2c224e077b86df3483516049fac019158272cd0a0"
+    },
+    {
+      "path": "yunshan/tests/fixtures/npc-rest-offer-native.json",
+      "bytes": 8688,
+      "sha256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071"
+    },
+    {
+      "path": "yunshan/tests/fixtures/police-legacy-response-3ca77b8.json",
+      "bytes": 341730,
+      "sha256": "0cfabc62e20d2e245cd1aa90e99ed823c0ecc517bd1b71c09a33d56ffbdd61aa"
+    },
+    {
+      "path": "yunshan/tests/fixtures/power-grid-legacy/hashes.json",
+      "bytes": 1259,
+      "sha256": "38c1c07cc4a34e40ad61bae45c1ca9895a7c696771e9f91c7232896e65b0d62c"
+    },
+    {
+      "path": "yunshan/tests/fixtures/power-native-old-energy-paid-v1.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "yunshan/tests/fixtures/public-disinfection-old-public-care-a1.json.gz",
+      "bytes": 31538,
+      "sha256": "07fbe3390daa4470cfadb2a660d56f5c70a179e40ea79ecbba3a16af479e1de3"
+    },
+    {
+      "path": "yunshan/tests/fixtures/reference-collision/root14-fourteen-legs.json",
+      "bytes": 68197,
+      "sha256": "6e5956b5f907f95c0e2f016f2909fe14885527206192dfd3ac711e4842034413"
+    },
+    {
+      "path": "yunshan/tests/fixtures/research-city.ts",
+      "bytes": 6833,
+      "sha256": "1abfa5ee6e7c1665cf79d974991c0ad7fba0ca1c4f7a9e8def5d070202f6ed1c"
+    },
+    {
+      "path": "yunshan/tests/fixtures/resident-public-rest-world291.json",
+      "bytes": 12047,
+      "sha256": "d0edf2e5103214d07f8e831243e5216ccb705ee73c3d14946fe154447c384754"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roads-old22/cold.json",
+      "bytes": 695178,
+      "sha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roads-old22/continuation-sha.json",
+      "bytes": 4194,
+      "sha256": "bbd7b1d564cde8ecc5e02e7ecbb635cb0490547082294d08bfc7b4e652e7eb49"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roads-old22/provenance.json",
+      "bytes": 629,
+      "sha256": "002f64a92c9ec5b6a85dc7f93e77f8422b34cb66f05a7ac7d23325c5e24ba3ff"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roadwork-replacement-native-v1/actual-continuation.json",
+      "bytes": 7844,
+      "sha256": "e8f2bfef914cb217622d921159f89461538cd8cbc7a33952f72261011fe9f4e3"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roadwork-replacement-native-v1/carry-after24.save.json",
+      "bytes": 441296,
+      "sha256": "1cb4606faf1efa1a7c3f47e531b5ad2b1110b272d9ee49f1bed61517a2331dc2"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roadwork-replacement-native-v1/carry.save.json",
+      "bytes": 418637,
+      "sha256": "9cdfc34fc36410e683b76870979fea63e6597cd0db86716e2ae4905be47866f1"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roadwork-replacement-native-v1/death-cancelled-after24.save.json",
+      "bytes": 439317,
+      "sha256": "d8571cff849cff10b78cb34926abd98907b5356259494275f66c88102b4ac78d"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roadwork-replacement-native-v1/death-cancelled.save.json",
+      "bytes": 419778,
+      "sha256": "465b92861b758222fe0925c15282004182be4c603040879333c746dc3df4b523"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roadwork-replacement-native-v1/provenance.json",
+      "bytes": 1822,
+      "sha256": "4f55d77f05e81c19becbd2ebe6fa129bb56e1846ed6878921d976869b0925fa4"
+    },
+    {
+      "path": "yunshan/tests/fixtures/roadwork-replacement-native-v1/world.json",
+      "bytes": 6923,
+      "sha256": "ee1fc84bb3cb503cc295749bd828ec63983080477e967a6070319ffb7c6e23b1"
+    },
+    {
+      "path": "yunshan/tests/fixtures/room-route-starport-b0.json",
+      "bytes": 5658,
+      "sha256": "ca8c37491dc03549c8804aaa77fe72c730e5749085068af0b81a427151196cea"
+    },
+    {
+      "path": "yunshan/tests/fixtures/ruleset-core/compat-native-cold.save.json.gz",
+      "bytes": 42114,
+      "sha256": "432497dea2b6b0a7c1bf4d5fc716d98d79659630f59a0948316799e48e2e35bc"
+    },
+    {
+      "path": "yunshan/tests/fixtures/ruleset-core/compat-native-provenance.json",
+      "bytes": 3640,
+      "sha256": "0d3459799ff7aaaa9bf62809e77b4e3b306253ba6bb6c589aeee9666b2d51862"
+    },
+    {
+      "path": "yunshan/tests/fixtures/shop-native-repair/PROVENANCE.json",
+      "bytes": 676,
+      "sha256": "18dcaf8609800b999b1fa06e37d41fcb39b4775d70362ca9ca836a7533afdc2b"
+    },
+    {
+      "path": "yunshan/tests/fixtures/shop-native-repair/controlled-reopening.save.json",
+      "bytes": 569397,
+      "sha256": "63670a12ece4f11c5d53d93f46fa48755bb2388522dd5b070867275823c801a2"
+    },
+    {
+      "path": "yunshan/tests/fixtures/stair-escape-root07-final.save.json.gz",
+      "bytes": 570848,
+      "sha256": "51f2b62b3544adb1e1124ba7615e73051dca2fe31af1180f2a39dbcb66484547"
+    },
+    {
+      "path": "yunshan/tests/fixtures/stair-escape-root07.json",
+      "bytes": 6392,
+      "sha256": "da48eead9c4a1ddfa21073edd0478f53aee784acf3ec1680b92c4b0ea82142fb"
+    },
+    {
+      "path": "yunshan/tests/fixtures/supplemental-budget/old-three-workshop-partial.save.json",
+      "bytes": 509382,
+      "sha256": "f82bb76520c70a88034d833c961b5c07909622970dd0fda414a3cd89194943cd"
+    },
+    {
+      "path": "yunshan/tests/fixtures/supplemental-budget/provenance.json",
+      "bytes": 665,
+      "sha256": "55efcb3262710a57cb1823439b52cad05f514134fd321713ae7cafc4cd4db58f"
+    },
+    {
+      "path": "yunshan/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/commercial-parent-v5-3ca.json",
+      "bytes": 3418,
+      "sha256": "9128685c0f29d0d20ec4f6acf63a28ad3a88cae374771dd0f90ed928dbfbc14f"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/continuous-stairs-parent-3ca77b8.json",
+      "bytes": 4007,
+      "sha256": "4757c9df5bf3f498639156f37e9a8323316ad5cf7e737a3c29e8b74b64ba8673"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880"
+    },
+    {
+      "path": "yunshan/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b"
+    },
+    {
+      "path": "yunshan/tests/floor-plan-derived-cache.test.ts",
+      "bytes": 7161,
+      "sha256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963"
+    },
+    {
+      "path": "yunshan/tests/floor-plan-empty-support.test.ts",
+      "bytes": 4848,
+      "sha256": "73014d9041182bffbedd094db03a9713db3a8a6818a36e0a1907a4492448ecc8"
+    },
+    {
+      "path": "yunshan/tests/floor-plan-selection.test.ts",
+      "bytes": 2914,
+      "sha256": "e6fecfaacbcef754fe76200b9d49338e16f967176adfcfad6745bee54ed9f762"
+    },
+    {
+      "path": "yunshan/tests/floor-plan-self-collision.test.ts",
+      "bytes": 8493,
+      "sha256": "77b10ed923354af7d57a9ae5c89670345e162893741bedf3dfdaa9400c31a3f1"
+    },
+    {
+      "path": "yunshan/tests/floor-plan-support-broadphase.test.ts",
+      "bytes": 3227,
+      "sha256": "5c1e255c89b2961fb3353132707a3215bf9dfc6563bd2c22862436f2ad3e1270"
+    },
+    {
+      "path": "yunshan/tests/food-access-observations.test.ts",
+      "bytes": 12709,
+      "sha256": "6983f1df8aa587b33d20ce4472a5ef59f8d589b139bcb98b09605e8e3be6698c"
+    },
+    {
+      "path": "yunshan/tests/food-hiring-fixture.ts",
+      "bytes": 8276,
+      "sha256": "d84727664580caa90d40835890c123ed624a46f3033d66ddc41e07fa984b45ac"
+    },
+    {
+      "path": "yunshan/tests/food-hiring.test.ts",
+      "bytes": 20295,
+      "sha256": "2222298dc0a03954ba082038ebedb2b93e672037b9be31c943e1d97c524bf95a"
+    },
+    {
+      "path": "yunshan/tests/freight-access.test.ts",
+      "bytes": 11999,
+      "sha256": "57a9e68536352d3a2ebedfb8a9c544fc5c31996c9f48027b216ed51378c7df4d"
+    },
+    {
+      "path": "yunshan/tests/freight-delivery-pure.test.ts",
+      "bytes": 14652,
+      "sha256": "4276d519df89470dd3d90d5abab15d7cfa406cb6f487b258c61e76e88562f8aa"
+    },
+    {
+      "path": "yunshan/tests/freight-delivery-upgrade-pure.test.ts",
+      "bytes": 8299,
+      "sha256": "ca01dc40bb0a4642929a91f50306e4288c284d221df0c704ef2a6aac07fb5253"
+    },
+    {
+      "path": "yunshan/tests/freight-native-pickup.test.ts",
+      "bytes": 9553,
+      "sha256": "3128edcdeab9976ae2eb5c034b01130b0c4c9476eb730b90e8d7093a08d98e87"
+    },
+    {
+      "path": "yunshan/tests/freight-pickup-policy-pure.test.ts",
+      "bytes": 3803,
+      "sha256": "e2bd6a0331e4a4c502715ad2f10b0db529609483d94fcde68276fdf1a1defeaf"
+    },
+    {
+      "path": "yunshan/tests/gift-contact-command.test.ts",
+      "bytes": 27709,
+      "sha256": "0817b69a5b99429dda70b9a9c366f7fac0e8fa79de86ea8900a61af954ee4e45"
+    },
+    {
+      "path": "yunshan/tests/gift-contact-geometry.test.ts",
+      "bytes": 22767,
+      "sha256": "91eb78a1054b6193d0c7e974718019ab1245fbf089843669f70797bd12a8cdbc"
+    },
+    {
+      "path": "yunshan/tests/governance-fixture.ts",
+      "bytes": 754,
+      "sha256": "eb36fbcfdecedc02614417826a67a50053bc91eea994fe75023cfe8e58080463"
+    },
+    {
+      "path": "yunshan/tests/governance.test.ts",
+      "bytes": 10904,
+      "sha256": "1c5543453c11561e32d5af7bdbeacf1ad676b64abf7ddc736ebd8e412a3c006a"
+    },
+    {
+      "path": "yunshan/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92"
+    },
+    {
+      "path": "yunshan/tests/hydro-dispatch-history-fixture.ts",
+      "bytes": 4831,
+      "sha256": "89a8eb8db11d6096dd7db06e3c579a96fd8b94322eb4d6a3c4c5cf43a763fb54"
+    },
+    {
+      "path": "yunshan/tests/hydro-dispatch-history-grid.test.ts",
+      "bytes": 8975,
+      "sha256": "d7f3490e6e339c44e43c47cea2e144e92b6be4db763c46f13e1f8debb38f3052"
+    },
+    {
+      "path": "yunshan/tests/hydro-dispatch-history.test.ts",
+      "bytes": 16829,
+      "sha256": "39e5c79c7ee7080a7ad18581b5eede9c46bb4e9c47c662c699ae897161adb568"
+    },
+    {
+      "path": "yunshan/tests/hydro-grid-budget.test.ts",
+      "bytes": 4491,
+      "sha256": "75196a2d859024a77b5f52249c0f631ef4a329e8fafda511ac0bd73aabaa5a14"
+    },
+    {
+      "path": "yunshan/tests/hydro-maintenance-fixture.ts",
+      "bytes": 3530,
+      "sha256": "bb06e9a04215ee0419e3f1047d1096c93207614f3b6b2c44b667a836badac344"
+    },
+    {
+      "path": "yunshan/tests/hydro-maintenance-integration.test.ts",
+      "bytes": 1552,
+      "sha256": "857763d61c91a072ba3d396e3acb3671ae864abb32fd2044b4e98d3514722b04"
+    },
+    {
+      "path": "yunshan/tests/hydro-maintenance.test.ts",
+      "bytes": 25877,
+      "sha256": "47c4d702215a50cf912f568947b5f465c00215da2e1f69ebcaad86f85872ae3c"
+    },
+    {
+      "path": "yunshan/tests/hygiene-transfer.test.ts",
+      "bytes": 24931,
+      "sha256": "e67b2d862538e673a407a3b9f8b89e9e5176837c944ddf329f438f809b187da2"
+    },
+    {
+      "path": "yunshan/tests/hygiene.test.ts",
+      "bytes": 33023,
+      "sha256": "fb29a68b58447076e06ade659b7e59cb772064e78ad7a09aa1cced0bbce0a352"
+    },
+    {
+      "path": "yunshan/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9"
+    },
+    {
+      "path": "yunshan/tests/interior-lighting.test.ts",
+      "bytes": 6728,
+      "sha256": "87515bf8087044e3149ce3a71167baf2577e9b34aba753ab3c15e95e9bb255de"
+    },
+    {
+      "path": "yunshan/tests/interior-props.test.ts",
+      "bytes": 13187,
+      "sha256": "a6666ffdba24040d34fb33c3a6256613ce73318565bd47d70319c9c7c826734c"
+    },
+    {
+      "path": "yunshan/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08"
+    },
+    {
+      "path": "yunshan/tests/market-company-return.test.ts",
+      "bytes": 18387,
+      "sha256": "8bf389b17e1c4642af483ff1d5417d7c7b33d328d808baa048aa0531e4f9bd22"
+    },
+    {
+      "path": "yunshan/tests/market-company-rights.test.ts",
+      "bytes": 20501,
+      "sha256": "6627c800c0749519b2f75e4dce8c517950ee13ea986434479f53b5069e7759cf"
+    },
+    {
+      "path": "yunshan/tests/market-shopfront.test.ts",
+      "bytes": 13469,
+      "sha256": "f9ed8f508c3c35732fbb1082fd2c572e9dc1a58e374828b501d5c23122be5990"
+    },
+    {
+      "path": "yunshan/tests/meal-route-policy.test.ts",
+      "bytes": 3482,
+      "sha256": "7990743b4b39eaf24021a4dd2e172a0ec01483687fbf1ab054ad30c88dee3973"
+    },
+    {
+      "path": "yunshan/tests/native-day-writer.test.ts",
+      "bytes": 11597,
+      "sha256": "6bbdae09db0ab3209a9de3702afade6e0da3219805072649e7b40c14b1299dd1"
+    },
+    {
+      "path": "yunshan/tests/native-door-routes.test.ts",
+      "bytes": 10208,
+      "sha256": "d3e5fbdb0559d067286580fe0f54db1f3f3746ad33c2c89fb787800f514610dd"
+    },
+    {
+      "path": "yunshan/tests/native-live-reader.test.ts",
+      "bytes": 11917,
+      "sha256": "02a7a1262510dc8974f84f0f1fdcd2a98ad6de03a0beda51d8cf2d3fd4586f9f"
+    },
+    {
+      "path": "yunshan/tests/night-food-observations.test.ts",
+      "bytes": 2287,
+      "sha256": "380f331a87e53a446ab77d523a5f6d355980fdb410e099da8cd8175192433ab2"
+    },
+    {
+      "path": "yunshan/tests/night-retail-bootstrap.test.ts",
+      "bytes": 10905,
+      "sha256": "dfb705a5051b3ebea82748137de33aa8873e75fdc185b729addd5b06e4e09b4e"
+    },
+    {
+      "path": "yunshan/tests/night-retail-power.test.ts",
+      "bytes": 15080,
+      "sha256": "b99c586f2e6cb43508de9f1c805b3ff72150d3184ba852761f66684b2fe582a9"
+    },
+    {
+      "path": "yunshan/tests/night-retail.test.ts",
+      "bytes": 17363,
+      "sha256": "5bb721a191a04139d596c1b55faae81b3f90f7dee2630f332d2b6d1e6512ff4f"
+    },
+    {
+      "path": "yunshan/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec"
+    },
+    {
+      "path": "yunshan/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479"
+    },
+    {
+      "path": "yunshan/tests/npc-public-rest.test.ts",
+      "bytes": 9310,
+      "sha256": "0f2d1e4d86a479846cd9b759ec8b48af1315b491556255a255d083197167a516"
+    },
+    {
+      "path": "yunshan/tests/npc-stair-native-activity.test.ts",
+      "bytes": 13379,
+      "sha256": "6cd649e1f8c23ba52b5e4e134eeee4f952ef6b3fa86c2796df2d24e5121c42a1"
+    },
+    {
+      "path": "yunshan/tests/npc-stair-native.test.ts",
+      "bytes": 11171,
+      "sha256": "596f1bda23e0c39bf0bba0383b400770e3463dab75c01708a4b9c231a7adbe7b"
+    },
+    {
+      "path": "yunshan/tests/partition-field-order.test.ts",
+      "bytes": 2183,
+      "sha256": "36d40e1dc6a363396adc43c55b5b39a07183d97b8d679558ce4d5c8c88f04b95"
+    },
+    {
+      "path": "yunshan/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1"
+    },
+    {
+      "path": "yunshan/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c"
+    },
+    {
+      "path": "yunshan/tests/police-fulfillment.test.ts",
+      "bytes": 27808,
+      "sha256": "8c4ccae0bccca5359f447756cfc3b5e0ac2d34929b50fb1d104ddc09b9db91f3"
+    },
+    {
+      "path": "yunshan/tests/power-current-wage-source.test.ts",
+      "bytes": 9436,
+      "sha256": "c7e5f9322a9f6b23e69a626e92cc2c584f5c02937a78a3980e5fcffd82419aa5"
+    },
+    {
+      "path": "yunshan/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "yunshan/tests/power-grid-fixture.ts",
+      "bytes": 2915,
+      "sha256": "63fd7b28190a3018c8a77870412b0488693710cecf5506e71e6a5bceed526ee0"
+    },
+    {
+      "path": "yunshan/tests/power-grid-hydro-fixture.ts",
+      "bytes": 6413,
+      "sha256": "e7c4c3c05392812727e44ed2ec4bf483b1543e8917cb2c62029f559e9a298d4b"
+    },
+    {
+      "path": "yunshan/tests/power-grid-hydro-integration.test.ts",
+      "bytes": 1161,
+      "sha256": "e550a62c63373d860c08cbc23537a1068f07571624f957f7508078c01b98d99d"
+    },
+    {
+      "path": "yunshan/tests/power-grid-hydro.test.ts",
+      "bytes": 14247,
+      "sha256": "819dd4a2bc9769ecc3f953cf93065ac2e1092af5ad293135bdc3739906058645"
+    },
+    {
+      "path": "yunshan/tests/power-grid-integration.test.ts",
+      "bytes": 8920,
+      "sha256": "4536cb209b1e0a9a0aa94f9a9c6cf98ea5eab4831c4c094748e1bcccef46b67d"
+    },
+    {
+      "path": "yunshan/tests/power-grid.test.ts",
+      "bytes": 13775,
+      "sha256": "28a8eefc4ad2d184145466bbd0cab76a729868b96e0adf0b2db5428dbbf56bed"
+    },
+    {
+      "path": "yunshan/tests/power-hydro-runtime.test.ts",
+      "bytes": 21623,
+      "sha256": "bfd90657468a00f8c4df30ddeef64854fddfd349258531f4609cc42de55e9725"
+    },
+    {
+      "path": "yunshan/tests/power-hydro.test.ts",
+      "bytes": 17574,
+      "sha256": "309108d14682f6b490510067e9bbfd9e0e778150b66b5c80e7b705f5a0f4b75f"
+    },
+    {
+      "path": "yunshan/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "yunshan/tests/public-budget-standing.test.ts",
+      "bytes": 16239,
+      "sha256": "ff8345699ced1312449d58e2b836369f10ad772c2f16d4928e0c3b76a60ddf73"
+    },
+    {
+      "path": "yunshan/tests/public-disinfection.test.ts",
+      "bytes": 24791,
+      "sha256": "ce9d5928ab997b71f8c5dce4bd8bd9e37b593aa7c833ab40adfbb5a2f674b555"
+    },
+    {
+      "path": "yunshan/tests/public-employment-fixture.ts",
+      "bytes": 8522,
+      "sha256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7"
+    },
+    {
+      "path": "yunshan/tests/public-employment-transfer.test.ts",
+      "bytes": 12892,
+      "sha256": "4c2480a07eda774cd798d42e17f127bbe96fbe1715344b8d5540b6d907e551a1"
+    },
+    {
+      "path": "yunshan/tests/public-health-hygiene.test.ts",
+      "bytes": 21032,
+      "sha256": "cbd6cfdc965e8e54df3f809b9845d0643addfe84b6cf5fd6423b1402b3687bb8"
+    },
+    {
+      "path": "yunshan/tests/public-school-arrival.test.ts",
+      "bytes": 9536,
+      "sha256": "82c24b4996c797696db7608bce02870e194adaae1d955fc3beebf8644f1eb95c"
+    },
+    {
+      "path": "yunshan/tests/public-service-budget-quote-wake.test.ts",
+      "bytes": 4390,
+      "sha256": "96e20a85364b1fc35f1af4b7c450d8e69df7fb9bdcefcf8466ce8ee54a909015"
+    },
+    {
+      "path": "yunshan/tests/public-street-birth.test.ts",
+      "bytes": 18500,
+      "sha256": "4fd294fa034ee4b9a2f350ef2249aec1d61f32051f8af7c2b3a700e2f7d06eeb"
+    },
+    {
+      "path": "yunshan/tests/reference-city-finishes.test.ts",
+      "bytes": 11639,
+      "sha256": "6507e753f55c277a3fcb7214206a9c4fdb8fbbab31656c783e841089f9293a85"
+    },
+    {
+      "path": "yunshan/tests/reference-collision.test.ts",
+      "bytes": 5866,
+      "sha256": "f24e71e31533e52e2d7b7b1286ee1e760692cf40979efc13aa68dd451211413b"
+    },
+    {
+      "path": "yunshan/tests/reference-roof-profile.test.ts",
+      "bytes": 7952,
+      "sha256": "6c6990eb698cdf8435d269baf1d3cd00a6e320214198bdee90fed9a4fc2e9524"
+    },
+    {
+      "path": "yunshan/tests/reference-street-exit.test.ts",
+      "bytes": 8696,
+      "sha256": "ae2a92e84245a3c9d4c0a074d08a8b6c547df5547aabea707a71f67b493bbc5c"
+    },
+    {
+      "path": "yunshan/tests/rendering-city-readability.test.ts",
+      "bytes": 10546,
+      "sha256": "4acf0792b0d89c40a48384b13564e9024706c293481da293c2c826fa8d202f1d"
+    },
+    {
+      "path": "yunshan/tests/rendering-street-life.test.ts",
+      "bytes": 10853,
+      "sha256": "3c506ae34ebec8aa11485f0ff3f2edd4aa3225a892279d8f588f4d417621265d"
+    },
+    {
+      "path": "yunshan/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566"
+    },
+    {
+      "path": "yunshan/tests/research-labor.test.ts",
+      "bytes": 21683,
+      "sha256": "f26b7a4624f0fb110959c0f5609927dab5fedd383ecc94da87f483f75f9a69da"
+    },
+    {
+      "path": "yunshan/tests/research-offsite-causal.test.ts",
+      "bytes": 2595,
+      "sha256": "2a0249874330e2bafde7aef5339b0e23ed3fef8a2ed2548517fdabf2ad8df9fc"
+    },
+    {
+      "path": "yunshan/tests/research-task-budget.test.ts",
+      "bytes": 9543,
+      "sha256": "41efa257baaa5ad72cc0c82cb935ea48c78c7ae934237e54e2f810ff14b8518c"
+    },
+    {
+      "path": "yunshan/tests/resident-formal-education.test.ts",
+      "bytes": 34493,
+      "sha256": "0197e93cd9976840c0db2ecbbe77a47c6b46b9a95b5bfb74dabb8ef2360388fe"
+    },
+    {
+      "path": "yunshan/tests/resident-formal-fixture.ts",
+      "bytes": 3171,
+      "sha256": "b4b76fd2e3c75d1d22baea5e4a3b82e1885adfdcda21e5d9adcf2dccdd6c68b0"
+    },
+    {
+      "path": "yunshan/tests/resident-petitions.test.ts",
+      "bytes": 12798,
+      "sha256": "56fa27ad2dcfb26845fe014618c5a8c8ec3ef9d8c35f8317d0d07abde68fef8e"
+    },
+    {
+      "path": "yunshan/tests/resident-public-rest-routing.test.ts",
+      "bytes": 9396,
+      "sha256": "5b12555612101e001b94bd9b3e90a0277947907d2b9a3ec252b2410956c1266f"
+    },
+    {
+      "path": "yunshan/tests/resident-tuition-capacity-pure.test.ts",
+      "bytes": 2123,
+      "sha256": "874be63e92fe1b6fa7f6850a67101513e4ad529052015198a94b841e7e54c354"
+    },
+    {
+      "path": "yunshan/tests/resident-tuition-fixture.ts",
+      "bytes": 4079,
+      "sha256": "901c699eab90e6a93f680014b64d81ca1397a7931dc2b809762c71bc903744dd"
+    },
+    {
+      "path": "yunshan/tests/resident-tuition-product.test.ts",
+      "bytes": 3785,
+      "sha256": "c18ee0ae70f3b907625330106f1d1bde0bebf8fbb7741f78b5d6c3299a200a6b"
+    },
+    {
+      "path": "yunshan/tests/resident-tuition-upgrade-pure.test.ts",
+      "bytes": 7966,
+      "sha256": "58837a97174e70e0bdea1d6656f3f417d02a8b6a4357e7c82ec2850ab8f94574"
+    },
+    {
+      "path": "yunshan/tests/resident-tuition.test.ts",
+      "bytes": 12522,
+      "sha256": "6dbce2eddc89f4255771a25b52178faa5a60b2a1ee15097e10ae3604ac3dd771"
+    },
+    {
+      "path": "yunshan/tests/retail-period.test.ts",
+      "bytes": 15295,
+      "sha256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57"
+    },
+    {
+      "path": "yunshan/tests/road-capacity.test.ts",
+      "bytes": 6396,
+      "sha256": "226c28029e68a2debad1c2c8600d5475699c3037a508a47867422acd580ac74b"
+    },
+    {
+      "path": "yunshan/tests/road-demands.test.ts",
+      "bytes": 15281,
+      "sha256": "043a8659350d6b7bed23ad24b1bf959b8fe0f7571d829f6e3a3e8c91e5be0cc6"
+    },
+    {
+      "path": "yunshan/tests/road-estate.test.ts",
+      "bytes": 5344,
+      "sha256": "86154c2321d24a1e336d3e89877f52615c94a9dca2f0eba63192c66bee995ecf"
+    },
+    {
+      "path": "yunshan/tests/road-navigation.test.ts",
+      "bytes": 14556,
+      "sha256": "3db47bfd96e00c1e001f8072571ededd8656d27c37e5655b3841662f6024211a"
+    },
+    {
+      "path": "yunshan/tests/road-routing.test.ts",
+      "bytes": 28802,
+      "sha256": "41e84afeec4e02d8f078327da6df1cb8a399929be360c824e43509cac872c232"
+    },
+    {
+      "path": "yunshan/tests/roads-old22.test.ts",
+      "bytes": 1237,
+      "sha256": "3194671218396291fd21f0f463dc048eb511a18aa141cb6bf3e87b4fea2fe1a4"
+    },
+    {
+      "path": "yunshan/tests/roads.test.ts",
+      "bytes": 18457,
+      "sha256": "2faff70355c0d73db5bd6297fed1fcd509931069188cf8fc15cf918416aec3bd"
+    },
+    {
+      "path": "yunshan/tests/roadwork-replacement.test.ts",
+      "bytes": 23253,
+      "sha256": "6cb50c0c282dd3e0c39c66718492a6b806d1d9565b64e5bf3f474dacc967dc44"
+    },
+    {
+      "path": "yunshan/tests/roadworks-fixture.ts",
+      "bytes": 9543,
+      "sha256": "4ad68bd48cb3d32703595480a11927d337682eb741c7b5127f54ff4b400a5bc3"
+    },
+    {
+      "path": "yunshan/tests/roadworks.test.ts",
+      "bytes": 20738,
+      "sha256": "ead29aa0edca7df474fae6feb77a8e0d4493bcabf9d13657ca4743391e35e1dd"
+    },
+    {
+      "path": "yunshan/tests/room-route-support.test.ts",
+      "bytes": 4229,
+      "sha256": "74d5ea94b3fd9b31d09fbb88f585b0693c2b0585398242547de5187c2fc80b5a"
+    },
+    {
+      "path": "yunshan/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4"
+    },
+    {
+      "path": "yunshan/tests/service-material-scheduling.test.ts",
+      "bytes": 16195,
+      "sha256": "4529fdc41ac71e65e9e3bed6e361aee6d7b526634634b0278287460dc8a930de"
+    },
+    {
+      "path": "yunshan/tests/shop-lifecycle.test.ts",
+      "bytes": 25874,
+      "sha256": "1732f183dbb8caeb951636a2102278fb0d243e6e4595df0481500754398eae33"
+    },
+    {
+      "path": "yunshan/tests/shop-native-repair.test.ts",
+      "bytes": 8006,
+      "sha256": "2ce80214b406a15de6334d465ddcd131d6f3fac7d27f243609a007a6b10e5975"
+    },
+    {
+      "path": "yunshan/tests/shop-repeat-distress.test.ts",
+      "bytes": 41647,
+      "sha256": "61fc3ccd19ce5ba8e46b12c0e70e346299cc3b4149834956ae468a9c4ca8b840"
+    },
+    {
+      "path": "yunshan/tests/shop-self-funding.test.ts",
+      "bytes": 18454,
+      "sha256": "00fbc6b26b85fbbbd24106dbca06639ebae66850b275e4df619962e9ad8cfc97"
+    },
+    {
+      "path": "yunshan/tests/simulation.test.ts",
+      "bytes": 66862,
+      "sha256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5"
+    },
+    {
+      "path": "yunshan/tests/site-fixtures.test.ts",
+      "bytes": 10119,
+      "sha256": "c1dde7e3d7c1286d07eeac4f7492ca48ed7852acc266708dd55045746cf0f5be"
+    },
+    {
+      "path": "yunshan/tests/stair-continuity.test.ts",
+      "bytes": 10300,
+      "sha256": "3136a1cecc48b81dd0368f5e81935790455fa362ba9b4ff50ccb077dd7643a44"
+    },
+    {
+      "path": "yunshan/tests/stair-escape-origin.test.ts",
+      "bytes": 18644,
+      "sha256": "b9db5baa19c7edd4b4945ecfd0110973fd2c7f9032ccadc97846c31243c4b2ec"
+    },
+    {
+      "path": "yunshan/tests/supplemental-budget.test.ts",
+      "bytes": 17170,
+      "sha256": "9ce07e587e7f02fe89ca8a31f6ef191b4d5644ddf38cd62970e1f39d0d09ceea"
+    },
+    {
+      "path": "yunshan/tests/trade.test.ts",
+      "bytes": 46212,
+      "sha256": "5f06ffdd905af5a8b698a0e9a3165a153e65467ef7d51e459a93df3f8e47146b"
+    },
+    {
+      "path": "yunshan/tests/tree-crowns.test.ts",
+      "bytes": 2175,
+      "sha256": "4af33874de1d8df12cd4e4a3d8593a0988d30afd6683e72a2bfa5121d4f0f6f1"
+    },
+    {
+      "path": "yunshan/tests/urgent-meal-processing.test.ts",
+      "bytes": 19744,
+      "sha256": "5900101b98e88636715012d7fd76328d13675f149ba8eef8646b9655325cd855"
+    },
+    {
+      "path": "yunshan/tests/v4-extensions.test.ts",
+      "bytes": 16985,
+      "sha256": "0834ab99a952c506baa6d959a41c43fd00fff77b920d4ce193c608d529e591ea"
+    },
+    {
+      "path": "yunshan/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683"
+    },
+    {
+      "path": "yunshan/tests/v4-simulation.test.ts",
+      "bytes": 16108,
+      "sha256": "b7088b4ad34c9452dafc9736ac0e018092f22006eb26aba20e37ff80fc79e059"
+    },
+    {
+      "path": "yunshan/tests/voxel-movement.test.ts",
+      "bytes": 9987,
+      "sha256": "11b0cf1895d57b15742f9da281d581d4ef02343c4e5c4d3ff0f1f0a91e851fcc"
+    },
+    {
+      "path": "yunshan/tests/world-generation-native.test.ts",
+      "bytes": 20152,
+      "sha256": "00ed5cbbdf5220029640e94c89d813b9401869b06ff19a481e3d0a8b129cc462"
+    },
+    {
+      "path": "yunshan/tests/world-generation-pure.test.ts",
+      "bytes": 6641,
+      "sha256": "00ce1f0627c48b33a4e69f14e2c87276021ac0bf42099b206943ebc020c65f9f"
+    },
+    {
+      "path": "yunshan/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "8bd848ddfd1866d03078a311f1de3a34df671146a1fccf3241cb53b30f179e67"
+    },
+    {
+      "path": "yunshan/tests/world-v4.test.ts",
+      "bytes": 15373,
+      "sha256": "d7e54d399322213b1a2fd429b8f27f42fcff114679ad1dc631a4b7ff704dfbe7"
+    },
+    {
+      "path": "yunshan/tests/world-v5.test.ts",
+      "bytes": 4455,
+      "sha256": "af70461ff3dc804138ed8fa70fda78bce90d39d302acbf1fbab431aa683f5d61"
+    },
+    {
+      "path": "yunshan/tests/world-v6-commercial-routes.test.ts",
+      "bytes": 9788,
+      "sha256": "eccd0446f775759b8f1a733134abec59894013ad2fb50b13e356f759b29c4dae"
+    },
+    {
+      "path": "yunshan/tests/world-v6-commercial.test.ts",
+      "bytes": 11801,
+      "sha256": "ceb9706bd82a041c7542bf91e27f4b51f975af9c22e3e7243659be9a855c72b1"
+    },
+    {
+      "path": "yunshan/tests/world-v6-office.test.ts",
+      "bytes": 4345,
+      "sha256": "c53b821fb1d74eaaaff69c2c0a443ca6ec904988948470b5366e928e71c59a82"
+    },
+    {
+      "path": "yunshan/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6"
+    },
+    {
+      "path": "yunshan/tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9"
+    },
+    {
+      "path": "yunshan/vite.config.ts",
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f"
+    },
+    {
+      "path": "yunshan/开发备忘录.md",
+      "bytes": 643364,
+      "sha256": "84c2bafb96f05402fc1fa723016284f9a6c7ff314197aca57c31a7251a1d1247"
+    },
+    {
+      "path": "yunshan/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    }
+  ]
+}

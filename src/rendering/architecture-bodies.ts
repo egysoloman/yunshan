@@ -231,7 +231,7 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
           // contract. Its wood material draws shallow drawer seams and pulls;
           // this is a procedural surface, not extra inventory or an openable door.
           furniture('wood', r.x0, r.x1, bottom, top - .2, r.z0, r.z1, '#806146', [width, height - .2, depth, 1]);
-          furniture('wood', r.x0, r.x1, top - .2, top, r.z0, r.z1, '#ab8a62');
+          furniture('wood', r.x0, r.x1, top - .2, top, r.z0, r.z1, '#ab8a62', [width, .2, depth, 2]);
         } else if (fixture.kind === 'bed' && height >= .6 - 1e-7 && width >= 1.2 && depth >= .8) {
           furniture('wood', r.x0, r.x1, bottom, top - .4, r.z0, r.z1, '#6c513d');
           furniture('fabric', r.x0 + .2, r.x1 - .2, top - .4, top - .2, r.z0 + .2, r.z1 - .2, '#d7d0b9');

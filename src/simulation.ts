@@ -1,7 +1,8 @@
 import type { PowerGridDefinition, StoragePowerGridDefinition, StoragePowerGridState } from './simulation/power-grid';
 import type { HydroPowerGridState } from './simulation/power-grid-hydro';
+import { beginNightRetail, installNightRetail, nightRetailNeedsContinuousPeople, nightRetailOpportunities, nightRetailTask, shopScheduledOpen, validateNightRetailFunding, validateNightRetailMarker } from './simulation/night-retail';
 import { installHydroMaintenance, hydroMaintenanceTaskActorIds, hydroMaintenanceTaskPoint } from './simulation/hydro-maintenance';
-import { installPowerGrid, gridBuildingSupplyRatio, gridVehicleSupplyRatio, gridPoweredWorkMinutes, validatePowerGridDefinition } from './simulation/power-grid';
+import { installPowerGrid, gridBuildingCanRequestInitialLoad, gridBuildingSupplyRatio, gridVehicleSupplyRatio, gridPoweredWorkMinutes, validatePowerGridDefinition } from './simulation/power-grid';
 import { runScheduledServiceProcurement } from './simulation/service-material-scheduling';
 import { giftContactReason } from './simulation/gift-contact';
 import { createBudgetAuthorityState, installBudgetAuthority, isSupplementalPurpose, authorizeCivicSupplementalBudget as authorizeNaturalSupplementalBudget, validateBudgetAuthority, type BudgetAuthorization, type LegacyBudgetAuthorization } from './simulation/budget-authority';
@@ -50,7 +51,7 @@ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relat
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority', 'civicHistory', 'serviceMaterialScheduling', 'powerGrid', 'residentEducation', 'hydroMaintenance'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority', 'civicHistory', 'serviceMaterialScheduling', 'powerGrid', 'residentEducation', 'hydroMaintenance', 'nightRetail'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -159,6 +160,7 @@ interface Runtime {
   impressions: Record<string, { affection: number; trust: number }>; districtRelationMeans: Record<string, number>;
   decisionAt: Record<string, number>; activities: Record<string, string>;
   peopleElapsed?: Record<string, number>;
+  nightRetailVersion?: 1;
   npcMotionVersion?: 2;
   referenceCollisionPolicyId?: ReferenceCollisionPolicy;
   mealRoutePolicyId?: MealRoutePolicy;
@@ -308,6 +310,22 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     installPower(this, { activate: () => { this.runtime.powerVersion = 1; }, legacy: () => this.legacyEnergyContract(), publicSupply: () => this.runtime.publicSupply ?? 1, isCanonicalDisaster, isCanonicalResearchCompletion });
     installPowerGrid(this);
     installShopLifecycle(this);
+    installNightRetail(this, {
+      activate: () => { this.runtime.nightRetailVersion = 1; },
+      allowance: (_state, citizen, shop) => {
+        const plan = this.runtime.privateLabor?.shifts[shop.id], item = this.privateShiftAssignment(citizen, shop);
+        return plan && item ? { day: plan.day, assignmentKey: `${plan.day}:${shop.id}:${citizen.id}`,
+          ratePerMinute: item.ratePerMinute, approvedMinutes: item.minutesCap, workedMinutes: item.workedMinutes,
+          attendanceMinutes: this.runtime.attendance[citizen.id] ?? 0, funds: this.shopFunds(shop), protectedFunds: this.shopProtectedFunds(shop) } : null;
+      },
+      atWork: (citizen, site) => this.nightRetailAtWork(citizen, site),
+      demandIds: (shop, endsAt) => this.nightRetailDemandIds(shop, endsAt),
+      actorBusy: citizen => this.nightRetailActorBusy(citizen),
+      canRequestInitialPower: (state, site) => gridBuildingCanRequestInitialLoad(state, site.id),
+      powerAvailable: (state, site) => state.powerGrid ? gridBuildingSupplyRatio(state, site.id) > .25 : (state.districts.find(d => d.id === site.districtId)?.energy ?? 0) > 25,
+      isCanonicalWage: event => isCanonicalNpcWage(event, this),
+      serving: (id, jobId) => this.runtime.activities[id] === 'nightRetail' && this.state.nightRetail?.jobs.some(job => job.id === jobId && job.operatorId === id) === true,
+    });
     installGovernance(this, { activate: () => { this.runtime.governanceVersion = 1; }, legacyCampaignPending: () => !!this.runtime.campaign,
       chargeRegistration: site => this.receivePublicFee(120, '具名居民选举登记费', site.districtId) });
     installPathology(this);
@@ -1451,6 +1469,38 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     const route = [...outside, ...(site.floorPlanProfile === FLOOR_PLAN_PROFILE ? interior.slice(1) : interior)];
     return this.roadPrefixAllowed(citizen, route) ? route.slice(1).reduce((sum, point, i) => sum + distance(route[i], point), 0) : Infinity;
   }
+  private nightRetailActorBusy(citizen: Citizen): boolean {
+    return !!this.runtime.dispatches[citizen.id] || !!this.runtime.riders[citizen.id]
+      || clinicalTaskActorIds(this.state).has(citizen.id) || researchTaskActorIds(this.state).has(citizen.id)
+      || powerTaskActorIds(this.state).has(citizen.id) || hydroMaintenanceTaskActorIds(this.state).has(citizen.id)
+      || !!(this.state.roadworks && roadworkTask(this, citizen.id))
+      || ['heal', 'service', 'civicRegister', 'civicVote'].includes(this.runtime.activities[citizen.id]);
+  }
+  private nightRetailAtWork(citizen: Citizen, site: Building): boolean {
+    const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
+    if (!this.isAtBuildingFunctionPoint(site, citizen.position, 'work', person)
+      || homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)) return false;
+    if (site.floorPlanProfile !== FLOOR_PLAN_PROFILE) return true;
+    const presence = this.floorPlanPresence(site, citizen.position);
+    if (!presence) return false;
+    const support = floorPlanSupport(site, presence.floor, citizen.position, .35);
+    return !!support && ['room', 'stairs'].includes(support.kind) && Math.abs(support.y - citizen.position.y) <= .26
+      && !blocksFloorPlanMovement(site, presence.floor, citizen.position, citizen.position, .35, 1.72);
+  }
+  private nightRetailDemandIds(shop: Shop, endsAt: number): string[] {
+    const site = this.buildings.get(shop.buildingId)!, at = this.state.extension?.lastUpdate ?? this.now;
+    const walkingSpeed = this.state.weather === '雨' ? 3.1 : 4.2, result: string[] = [];
+    for (const buyer of this.state.citizens) {
+      const profile = this.state.extension?.actorProfiles[buyer.id], relation = this.state.relationships.find(r => r.npcId === buyer.id);
+      if (!profile?.alive || profile.age < 6 || buyer.needs.hunger >= 30 || (buyer.food ?? 0) >= 1 || buyer.money < shop.price
+        || this.nightRetailActorBusy(buyer) || relation && this.hostilityRank(relation) >= 2 && this.playerOwnsShop(shop)
+        || distance(buyer.position, site.position) > (endsAt - at) * walkingSpeed + Math.max(site.width, site.depth)) continue;
+      const travel = this.foodHiringSaleDistance(buyer, site);
+      if (finite(travel) && at + travel / walkingSpeed < endsAt) result.push(buyer.id);
+      if (result.length >= 128) break;
+    }
+    return result;
+  }
   private foodHiringSaleDistance(citizen: Citizen, site: Building): number {
     const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
     const points: BuildingFunctionPoint[] = site.floorPlanProfile === FLOOR_PLAN_PROFILE
@@ -1598,6 +1648,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     for (const opportunity of shopLifecycleOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
     for (const opportunity of familyEducationOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
     for (const opportunity of civicStaffingOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
+    for (const opportunity of nightRetailOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
     if (homeBedAvailable) add(home, 'rest', (100 - citizen.needs.fatigue) * .8 + (night ? 140 : !shift ? 18 : 0) + (citizen.needs.fatigue < 25 ? 110 : 0));
     if (shift && citizen.needs.hunger >= 40 && citizen.needs.fatigue >= 35) {
       for (const shop of this.state.shops) if (this.shopOwnerId(shop) === citizen.id && this.privateWorkAllowance(citizen, shop) <= 0) add(this.buildings.get(shop.buildingId)!, 'businessReview', 70);
@@ -1838,7 +1889,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       const elapsed = (pendingMinutes[citizen.id] ?? 0) + this.minutes;
       const urgentMeal = mealNeedsContinuousPeople(this.runtime.mealRoutePolicyId, citizen, elapsed, this.state.extension?.actorProfiles[citizen.id]?.age ?? 20,
         this.runtime.activities[citizen.id], this.runtime.riders[citizen.id]?.arrived === true, this.state.weather === '雨' ? 3.1 : 4.2);
-      const frequency = urgentMeal || researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || residentEducationNeedsContinuousPeople(this.state, citizen) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+      const frequency = urgentMeal || researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || residentEducationNeedsContinuousPeople(this.state, citizen) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) || nightRetailNeedsContinuousPeople(this, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
       // Accumulate actual ticks while a tier defers this actor. Multiplying by
       // the actor's current tier would lose or duplicate time after a tier or
@@ -1907,10 +1958,12 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       if (committedTreatment) this.runtime.activities[citizen.id] = 'heal';
       const reconsiderCivic = this.effectiveRuleset === 'civic-local-v1' && previousActivity === 'work' && civicStaffingOpportunities(this, citizen).length > 0;
       const reconsiderMeal = this.runtime.mealRoutePolicyId === NEARBY_MEAL_ROUTE_POLICY && previousActivity === 'eat' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
-      const committedNeed = !!citizen.destinationId && (citizen.state === 'roadWaiting' || !reconsiderMeal && previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || !reconsiderCivic && previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
+      const committedNeed = !!citizen.destinationId && (citizen.state === 'roadWaiting' || previousActivity === 'nightRetail' && !!nightRetailTask(this, citizen) || !reconsiderMeal && previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || !reconsiderCivic && previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
       if (committedTreatment) destination = this.buildings.get(treatment.siteId)!;
       else if (!committedNeed && (reconsiderCivic || !citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
-        const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
+        const choice = this.chooseFacility(citizen); destination = choice.destination;
+        if (choice.activity === 'nightRetail' && !beginNightRetail(this, citizen.id).ok) { destination = home; choice.activity = 'rest'; }
+        this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
       } else destination = this.buildings.get(citizen.destinationId!)!;
       this.setDestination(citizen, destination);
       if (citizen.state === 'roadWaiting') continue;
@@ -1950,6 +2003,13 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       }
       if (destination.id === home.id || activity === 'rest') {
         citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .08);
+      } else if (activity === 'nightRetail') {
+        const job = nightRetailTask(this, citizen), at = this.state.extension?.lastUpdate ?? this.now;
+        if (!job || job.buildingId !== destination.id || !this.nightRetailAtWork(citizen, destination)) { citizen.state = 'offDuty'; citizen.destinationId = null; continue; }
+        citizen.state = 'working';
+        // The new commitment starts now. Deferred day minutes remain consumed
+        // by needs above, but cannot become retrospective night labor.
+        this.registerAttendance(citizen, Math.min(arrivedElapsed, this.minutes, Math.max(0, at - job.startedAt), Math.max(0, job.endsAt - (at - this.minutes))));
       } else if (activity === 'work') {
         if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor && publicEmploymentSite(this.runtime.publicLabor,citizen.id) || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; continue; }
         if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
@@ -2005,7 +2065,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
   }
   private retailOpenAtPhase(shop: Shop, building: Building): boolean {
     const district = this.state.districts.find(d => d.id === shop.districtId)!;
-    return this.state.hour >= 6 && this.state.hour < (building.kind === 'market' ? 22 : 20)
+    return shopScheduledOpen(this.state, building, shop.id)
       && (this.state.powerGrid ? gridBuildingSupplyRatio(this.state, building.id) > .25 : district.energy > 25) && !this.shopInsolvent(shop) && shopLifecycleAllowsOperation(this.state, shop.id);
   }
   private settleRetailCustomers(shop: Shop, building: Building, betweenBatches: boolean): void {
@@ -2044,6 +2104,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
   }
   private commerce() {
     if (this.now < this.runtime.commerceAt) {
+      for (const shop of this.state.shops) if (shop.nightRetailVersion === 1) shop.open = this.retailOpenAtPhase(shop, this.buildings.get(shop.buildingId)!);
       // Arrival requests settle in their actual opening period. Production,
       // freight, utilities, employment, pricing and feedback stay on the batch.
       for (const id of new Set(Object.values(this.runtime.customers))) {
@@ -2056,7 +2117,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     const commercialFeedback = new Map<string, { sum: number; count: number }>();
     for (const shop of this.state.shops) {
       const building = this.buildings.get(shop.buildingId)!; const district = this.state.districts.find(d => d.id === shop.districtId)!;
-      const scheduledOpen = this.state.hour >= 6 && this.state.hour < (building.kind === 'market' ? 22 : 20);
+      const scheduledOpen = shopScheduledOpen(this.state, building, shop.id);
       const siteEnergy = this.state.powerGrid ? gridBuildingSupplyRatio(this.state, building.id) : district.energy / 100;
       const serviceFailure = siteEnergy <= .25 || this.shopInsolvent(shop);
       // A restricted firm may clear existing finite stock. Historical losses
@@ -2347,7 +2408,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     return building.functionPoints ?? Array.from({ length: building.floors }, (_, floor) => getBuildingUsePoints(building, floor)).flat();
   }
   private activityPointPurpose(activity: string | undefined): BuildingFunctionPoint['purpose'] {
-    return activity === 'eat' ? 'sale' : ['work', 'businessReview', 'budgetReview', 'shopLifecycle'].includes(activity ?? '') ? 'work' : 'service';
+    return activity === 'eat' ? 'sale' : ['work', 'nightRetail', 'businessReview', 'budgetReview', 'shopLifecycle'].includes(activity ?? '') ? 'work' : 'service';
   }
   /** A v4 facility is used at its real point on a legally accessible floor.
    * Unmarked recipes retain their existing proximity/permission contract. */
@@ -2448,7 +2509,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock'], 'sale'); if (!building) return fail('请到商铺入口附近购物。');
       const shop = this.state.shops.find(s => s.buildingId === building.id); if (!shop) return fail('这是公共科研或政务设施，不经营零售商品。');
       const quantity = command.value ?? 1; if (!Number.isInteger(quantity) || quantity < 1 || quantity > 30) return fail('购买数量须为1至30的整数。');
-      if (!shop.open || !shopLifecycleAllowsOperation(this.state, shop.id) || shop.inventory < quantity) return fail('商铺休业或库存不足。');
+      if (!shop.open || shop.nightRetailVersion === 1 && !this.retailOpenAtPhase(shop, building) || !shopLifecycleAllowsOperation(this.state, shop.id) || shop.inventory < quantity) return fail('商铺休业、没有当前合法到岗服务或库存不足。');
       const cost = shop.price * quantity; if (p.money < cost) return fail('现金不足。');
       const beforeInventory = shop.inventory, net = cost * (1 - this.state.taxRate); let supplierGross: number, inventoryCost: number;
       try { const quote = this.quoteConsignmentSale(shop.id, quantity, beforeInventory); supplierGross = quote.supplierGross; inventoryCost = quote.inventoryCost; } catch { return fail('寄售货主账户暂不能结算。'); }
@@ -2647,6 +2708,8 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       if (motionVersion === 2) ensure(r.npcMotionVersion === 2 && r.npcStairCursors && typeof r.npcStairCursors === 'object' && !Array.isArray(r.npcStairCursors) && Object.keys(r.npcStairCursors).length <= 1024, 'native motion body and version');
       else ensure(r.npcMotionVersion === undefined && r.npcStairCursors === undefined, 'legacy motion body and version');
       if (s.shopLifecycle !== undefined || r.shopLifecycleVersion !== undefined) ensure(r.persistedModules !== undefined && s.shopLifecycle && r.shopLifecycleVersion === 1, 'shop lifecycle custody manifest');
+      validateNightRetailMarker(s as SimState, r.nightRetailVersion);
+      if (s.nightRetail !== undefined) ensure(r.persistedModules !== undefined, 'night retail custody manifest');
       if (s.education !== undefined && s.education !== null || r.educationVersion !== undefined) ensure(r.persistedModules !== undefined, 'education persisted manifest');
       if (s.residentEducation !== undefined || r.residentEducationVersion !== undefined) ensure(r.persistedModules !== undefined && s.residentEducation && r.residentEducationVersion === 1, 'resident education custody manifest');
       if (s.familyEducation !== undefined || r.familyEducationVersion !== undefined) ensure(r.persistedModules !== undefined && s.familyEducation && r.familyEducationVersion === 1, 'family education custody manifest');
@@ -2865,7 +2928,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       ensure(r.impressions && typeof r.impressions === 'object' && !Array.isArray(r.impressions), 'social impressions'); for (const [id, impression] of Object.entries(r.impressions) as [string, any][]) { ensure(expectedCitizenIds.has(id), 'impression identity'); number(impression.affection, -100, 100, 'impression affection'); number(impression.trust, -100, 100, 'impression trust'); }
       ensure(r.districtRelationMeans && typeof r.districtRelationMeans === 'object', 'district relationship means'); for (const [id, mean] of Object.entries(r.districtRelationMeans)) { ensure(districtIds.has(id), 'district relationship identity'); number(mean, -100, 100, 'district relationship mean'); }
       ensure(r.decisionAt && typeof r.decisionAt === 'object' && !Array.isArray(r.decisionAt), 'decision timers'); for (const [id, at] of Object.entries(r.decisionAt)) { ensure(expectedCitizenIds.has(id), 'decision citizen'); number(at, 0, 1e12, 'decision time'); }
-      ensure(r.activities && typeof r.activities === 'object' && !Array.isArray(r.activities), 'activities'); for (const [id, activity] of Object.entries(r.activities)) ensure(expectedCitizenIds.has(id) && ['rest', 'work', 'study', 'social', 'eat', 'heal', 'service', 'budgetReview', 'businessReview', 'shopLifecycle', ...(data.version === 3 || data.version === 4 ? ['civicRegister', 'civicVote'] : [])].includes(activity as string), 'activity');
+      ensure(r.activities && typeof r.activities === 'object' && !Array.isArray(r.activities), 'activities'); for (const [id, activity] of Object.entries(r.activities)) ensure(expectedCitizenIds.has(id) && ['rest', 'work', 'study', 'social', 'eat', 'heal', 'service', 'budgetReview', 'businessReview', 'shopLifecycle', ...(s.nightRetail ? ['nightRetail'] : []), ...(data.version === 3 || data.version === 4 ? ['civicRegister', 'civicVote'] : [])].includes(activity as string), 'activity');
       ensure(r.attendance && typeof r.attendance === 'object' && !Array.isArray(r.attendance), 'attendance'); for (const [id, minutes] of Object.entries(r.attendance)) { ensure(expectedCitizenIds.has(id), 'attendance citizen'); number(minutes, 0, 100000, 'attendance minutes'); }
       ensure(r.customers && typeof r.customers === 'object' && !Array.isArray(r.customers), 'customers'); for (const [id, shopId] of Object.entries(r.customers)) ensure(expectedCitizenIds.has(id) && shopIds.has(shopId as string), 'customer reference');
       ensure(r.driving && typeof r.driving === 'object' && (r.driving.vehicleId === null || expectedVehicleIds.has(r.driving.vehicleId) && r.driving.vehicleId === p.vehicleId), 'driving vehicle'); number(r.driving.throttle, -1, 1, 'driving throttle'); number(r.driving.turn, -1, 1, 'driving turn'); ensure(typeof r.driving.brake === 'boolean', 'driving brake'); number(r.driving.speed, 0, 200, 'driving speed');
@@ -2879,6 +2942,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       // Validation finishes before either live object is replaced: rejected saves are atomic.
       if (data.version === 3 || data.version === 4) validateCivicOriginalOfficials(s as SimState, r.publicLabor, this.world, this.initialCivicProfessions);
       for (const validator of this.saveValidators) validator(s as SimState);
+      validateNightRetailFunding(s as SimState, r.privateLabor, r.attendance);
       validateBudgetAuthority(s as SimState, this.world, r);
       if (motionVersion === 2) {
         const cursorCitizens = new Map<string, Citizen>(s.citizens.map((c: Citizen) => [c.id, c]));

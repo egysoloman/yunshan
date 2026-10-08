@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import './style.css';
 import { Simulation } from './simulation';
-import { createLearningCityLifeProductCity, PRODUCT_CITY_LAYOUT } from './product-city';
+import { createLearningCityLifeProductCity, createTriagedCityLifeProductCity, PRODUCT_CITY_LAYOUT } from './product-city';
 import { CityRenderer } from './renderer';
 import { CityUI } from './ui';
 import { PlayerController } from './controller';
@@ -35,7 +35,9 @@ const freshLayout = 'current-v8' as const;
 try { selection = selectSavedWorld(previousSave, freshLayout); } catch (error) { startupLayoutError = error instanceof Error ? error.message : '未知城市布局'; selection = selectSavedWorld(undefined, PRODUCT_CITY_LAYOUT); }
 let autosaveAllowed = !startupReadFailed && !startupLayoutError;
 const world = selection.world;
-const simulation = await createLearningCityLifeProductCity(world);
+const simulation = previousSave
+  ? await createLearningCityLifeProductCity(world)
+  : await createTriagedCityLifeProductCity(world);
 let city: CityRenderer;
 try {
   city = new CityRenderer(stage, world);

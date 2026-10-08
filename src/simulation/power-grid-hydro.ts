@@ -1,3 +1,4 @@
+import { nightRetailPlannedOpen } from './night-retail';
 import type { SimState, Vec3, WorldDefinition } from '../types';
 import { shopLifecycleAllowsOperation } from './shop_lifecycle';
 import { validateHydroMaintenanceDefinition, validateHydroMaintenanceState, hydroMaintenanceReadyAt, isCanonicalHydroMaintenanceReady, isCanonicalHydroMaintenanceState } from './hydro-maintenance';
@@ -40,7 +41,8 @@ export interface HydroPowerGridDefinition {
 export interface HydroGridMeter { nodeId: string | null; demandKW: number; servedKW: number; unservedKW: number }
 export interface HydroGridVehicleMeter extends HydroGridMeter { edgeId: string }
 export interface HydroGridSourceMeter { availableKW: number; suppliedKW: number; transferredM3: number; generatedKWh: number }
-export interface HydroShopLoadSource { id: string; buildingId: string; allowsOperation: boolean }
+export interface HydroNightRetailLoadPlan { jobId: string; operatorId: string; startsAt: number; endsAt: number }
+export interface HydroShopLoadSource { id: string; buildingId: string; allowsOperation: boolean; nightRetailPlan?: HydroNightRetailLoadPlan }
 export interface HydroPowerGridDispatch {
   tick: number; beforeAt: number; at: number; nativeMinutes: number; minutes: number;
   availableKW: number; demandKW: number; servedKW: number; unservedKW: number; curtailedKW: number;
@@ -242,7 +244,11 @@ export function isCanonicalHydroDispatch(state: SimState): boolean {
 interface Load { key: string; kind: 'building' | 'vehicle'; id: string; nodeId: string | null; demandKW: number; edgeId?: string }
 interface LoadSources { shops: HydroShopLoadSource[]; vehicles: { id: string; edgeId: string }[]; equipmentAvailable?: boolean }
 function observedSources(state: SimState, world: WorldDefinition, at: number): LoadSources {
-  const result: LoadSources = { shops: sorted(state.shops).map(shop => ({ id: shop.id, buildingId: shop.buildingId, allowsOperation: shopLifecycleAllowsOperation(state, shop.id) })), vehicles: sorted(state.vehicles).map(vehicle => ({ id: vehicle.id, edgeId: vehicle.edgeId })) };
+  const result: LoadSources = { shops: sorted(state.shops).map(shop => {
+    const job = nightRetailPlannedOpen(state, shop.id, at) ? state.nightRetail?.jobs.find(job => job.shopId === shop.id && ['active', 'paused'].includes(job.status) && at > job.startedAt && at <= job.endsAt) : undefined;
+    return { id: shop.id, buildingId: shop.buildingId, allowsOperation: shopLifecycleAllowsOperation(state, shop.id),
+      ...(job ? { nightRetailPlan: { jobId: job.id, operatorId: job.operatorId, startsAt: job.startedAt, endsAt: job.endsAt } } : {}) };
+  }), vehicles: sorted(state.vehicles).map(vehicle => ({ id: vehicle.id, edgeId: vehicle.edgeId })) };
   if (world.hydroMaintenance !== undefined) result.equipmentAvailable = isCanonicalHydroMaintenanceReady(state, at, state.tick);
   return result;
 }
@@ -256,7 +262,7 @@ function solveWindow(world: WorldDefinition, grid: HydroPowerGridDefinition, req
   const hour = (request.at % 1440) / 60, night = hour < 6 || hour >= 19, loads: Load[] = [];
   for (const item of [...grid.buildings].sort((a, b) => a.buildingId.localeCompare(b.buildingId))) {
     const site = world.buildings.find(building => building.id === item.buildingId)!;
-    const shopCount = observations.shops.filter(shop => shop.buildingId === item.buildingId && shop.allowsOperation && hour >= 6 && hour < (site.kind === 'market' ? 22 : 20)).length;
+    const shopCount = observations.shops.filter(shop => shop.buildingId === item.buildingId && shop.allowsOperation && (hour >= 6 && hour < (site.kind === 'market' ? 22 : 20) || site.kind === 'market' && !!shop.nightRetailPlan && request.at > shop.nightRetailPlan.startsAt && request.at <= shop.nightRetailPlan.endsAt)).length;
     loads.push({ key: 'building:' + item.buildingId, kind: 'building', id: item.buildingId, nodeId: item.nodeId, demandKW: item.baseKW + (night ? item.nightKW : 0) + item.shopKW * shopCount });
   }
   for (const vehicle of observations.vehicles) { const connection = grid.transport.find(item => item.edgeId === vehicle.edgeId); loads.push({ key: 'vehicle:' + vehicle.id, kind: 'vehicle', id: vehicle.id, edgeId: vehicle.edgeId, nodeId: connection?.nodeId ?? null, demandKW: connection?.vehicleKW ?? .08 }); }
@@ -310,7 +316,7 @@ export function dispatchHydroGrid(world: WorldDefinition, state: SimState, nativ
   const request = capability.pending; need(request && request.tick === state.tick && request.at === hydroGridClock(state) && request.nativeMinutes === nativeMinutes, '只能消费原time推进前预检的当前相位');
   const physicalOfferKW = offerPagedHydro(capability.runtime!, state, body.hydro, request), observations = observedSources(state, world, request.at);
   const availableKW = world.hydroMaintenance !== undefined && !observations.equipmentAvailable ? 0 : physicalOfferKW;
-  validateObservations(world, state, observations);
+  validateObservations(world, state, observations, request.at);
   const window = solveWindow(world, grid, request, availableKW, body.hydro.upstreamM3 <= EPS, observations), prepared = preparePagedHydro(capability.runtime!, state, body.hydro, request, window.servedKW);
   window.sources[grid.sources[0].id].transferredM3 = prepared.window.transferredM3;
   near(prepared.window.suppliedKW, window.servedKW); near(prepared.window.generatedKWh, window.sources[grid.sources[0].id].generatedKWh); verifyConservation(grid, window);
@@ -332,16 +338,31 @@ export function dispatchHydroGrid(world: WorldDefinition, state: SimState, nativ
   caps.set(next, { ...capability, pending: null, ...(shared ? { ledgerCharacters } : {}) }); caps.delete(body); return next;
 }
 
-function validateObservations(world: WorldDefinition, state: SimState, observations: LoadSources): void {
+function validateObservations(world: WorldDefinition, state: SimState, observations: LoadSources, at: number): void {
   dataArray<HydroShopLoadSource>(observations.shops, state.shops.length); dataArray<{ id: string; edgeId: string }>(observations.vehicles, state.vehicles.length);
   need(observations.shops.length === state.shops.length && observations.vehicles.length === state.vehicles.length, '每窗真实商店与车辆来源不得丢项');
   const shops = sorted(state.shops), vehicles = sorted(state.vehicles);
   need(new Set(shops.map(shop => shop.id)).size === shops.length && new Set(vehicles.map(vehicle => vehicle.id)).size === vehicles.length, '完整具名负荷身份不能重复');
-  for (let index = 0; index < shops.length; index++) { const row = observations.shops[index]; dataObject(row, ['id', 'buildingId', 'allowsOperation']); identity(row.id); need(row.id === shops[index].id && row.buildingId === shops[index].buildingId && typeof row.allowsOperation === 'boolean' && world.buildings.some(site => site.id === row.buildingId), '商店需求来源引用');
+  for (let index = 0; index < shops.length; index++) { const row = observations.shops[index]; dataObject(row, row.nightRetailPlan === undefined ? ['id', 'buildingId', 'allowsOperation'] : ['id', 'buildingId', 'allowsOperation', 'nightRetailPlan']); identity(row.id); need(row.id === shops[index].id && row.buildingId === shops[index].buildingId && typeof row.allowsOperation === 'boolean' && world.buildings.some(site => site.id === row.buildingId), '商店需求来源引用');
     // Existing lifecycle titles and leases persist when their status changes.
     // A shop that has never had either follows the native always-permitted
     // legacy path; a fabricated false snapshot cannot erase that past load.
     if (!state.shopLifecycle?.titles[row.id] && !state.shopLifecycle?.leases.some(lease => lease.shopId === row.id)) need(row.allowsOperation, '无历史生命周期许可的商店不能伪造停业需求');
+    if (row.nightRetailPlan !== undefined) {
+      const plan = row.nightRetailPlan; dataObject(plan, ['jobId', 'operatorId', 'startsAt', 'endsAt']); identity(plan.jobId); identity(plan.operatorId);
+      need(/^night-retail-[1-9][0-9]*$/.test(plan.jobId) && shops[index].nightRetailVersion === 1 && !!state.nightRetail
+        && state.nightRetail.shopIds.includes(row.id) && Number(plan.jobId.slice(13)) < state.nightRetail.nextId
+        && state.citizens.some(actor => actor.id === plan.operatorId) && world.buildings.some(site => site.id === row.buildingId && site.kind === 'market' && !site.facility), '夜间计划来自有标记的原市集与具名经营者');
+      quantity(plan.startsAt); quantity(plan.endsAt); const startHour = plan.startsAt % 1440, dayEnd = (Math.floor(plan.startsAt / 1440) + 1) * 1440;
+      need(plan.endsAt > plan.startsAt && plan.endsAt - plan.startsAt <= 120 + EPS && plan.endsAt <= dayEnd + EPS
+        && (startHour >= 1320 || startHour < 360 && plan.endsAt <= dayEnd - 1080 + EPS)
+        && at > plan.startsAt && at <= plan.endsAt + EPS, '有限原夜间计划负荷窗口');
+      // Terminal jobs may be pruned from the bounded 128-record history. This
+      // frozen source preserves the declaration; retained jobs must match
+      // without using their later status to rewrite a historical energy load.
+      const known = state.nightRetail.jobs.find(job => job.id === plan.jobId);
+      if (known) need(known.shopId === row.id && known.operatorId === plan.operatorId && known.startedAt === plan.startsAt && known.endsAt === plan.endsAt, '历史夜计划与保留声明一致');
+    }
   }
   for (let index = 0; index < vehicles.length; index++) { const row = observations.vehicles[index]; dataObject(row, ['id', 'edgeId']); identity(row.id); identity(row.edgeId); need(row.id === vehicles[index].id && world.edges.some(edge => edge.id === row.edgeId), '真实车辆来源及能源相位交通边'); }
 }
@@ -369,6 +390,9 @@ export function validateHydroGridState(state: SimState, world: WorldDefinition):
   if (!shared) checkHistoryBudget(world, state, body.history.count);
   dataObject(body.totals, ['demandedKWh', 'servedKWh', 'unservedKWh']); for (const value of Object.values(body.totals)) quantity(value, 1e15);
   const totals = { demandedKWh: 0, servedKWh: 0, unservedKWh: 0 }, water = pagedHydroWindows(body.hydro)[Symbol.iterator](); let at = 480, tick = 0, latest: HydroPowerGridDispatch | null = null;
+  // A bounded job may have left the live archive, but its declaration keeps
+  // one identity across every retained energy window.
+  const nightDeclarations = new Map<string, { shopId: string; buildingId: string; operatorId: string; startsAt: number; endsAt: number }>();
   for (const window of hydroGridWindows(body)) {
     dataObject(window, DISPATCH_KEYS); need(window.tick === tick + 1 && window.beforeAt === at, '每实际tick连续保留当前和过去分表');
     dataObject(window.loadSources, world.hydroMaintenance !== undefined ? ['shops', 'equipmentAvailable'] : ['shops']); dataObject(window.vehicles, state.vehicles.map(vehicle => vehicle.id));
@@ -378,7 +402,14 @@ export function validateHydroGridState(state: SimState, world: WorldDefinition):
       observations.equipmentAvailable = hydroMaintenanceReadyAt(state, window.at, window.tick);
       need(window.loadSources.equipmentAvailable === observations.equipmentAvailable, '历史设备许可须从完整已付款维修账重建');
     }
-    validateObservations(world, state, observations);
+    validateObservations(world, state, observations, window.at);
+    for (const shop of observations.shops) {
+      const plan = shop.nightRetailPlan; if (!plan) continue;
+      const declaration = { shopId: shop.id, buildingId: shop.buildingId, operatorId: plan.operatorId, startsAt: plan.startsAt, endsAt: plan.endsAt };
+      const previous = nightDeclarations.get(plan.jobId);
+      if (previous) exactData(declaration, previous);
+      else nightDeclarations.set(plan.jobId, declaration);
+    }
     const result = water.next(); need(!result.done, '电网窗不能缺真实转水账'); const hydraulic = result.value;
     need(hydraulic.tick === window.tick && hydraulic.beforeAt === window.beforeAt && hydraulic.at === window.at && hydraulic.nativeMinutes === window.nativeMinutes, '双账时间窗必须相同');
     const request: PagedHydroClockRequest = { tick: window.tick, beforeAt: window.beforeAt, at: window.at, nativeMinutes: window.nativeMinutes, intakeOpen: grid.sources[0].intake.open, outfallOpen: grid.sources[0].outfall.open };

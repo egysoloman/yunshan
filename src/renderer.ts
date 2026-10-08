@@ -13,6 +13,7 @@ import { MarketGoodsPool } from './rendering/market-goods';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
+import { architectureRoofSurface, ROOF_END_VERTEX, ROOF_END_FRAGMENT } from './rendering/roof-end-finish';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
 import { cityShadowProfile } from './rendering/city-lighting-profile';
 import { buildingLightSupplyRatio } from './rendering/building-light-supply';
@@ -74,10 +75,10 @@ class BoxBatch {
       // the original bedding finish, while transport retains its zero flag.
       if (key === 'wall' || key === 'wood' || key === 'stone' || key === 'fabric' || key === 'metal') mesh.geometry.setAttribute('instanceBuildingFinish', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? key === 'fabric' && part.clothSurface ? 2 : 1 : 0)), 1));
       // The same material also paints transport and old furniture. Only the
-      // authoritative roof tag enables tile relief. 2 denotes architecture,
-      // 1 retains the existing station-canopy response, and 0 is transport.
+      // authoritative roof tag enables tile relief. 3/4 identify exact curved
+      // x/z profiles; 2 is other architecture, 1 station canopies, 0 transport.
       // The same scalar lifetime introduces no extra attribute or tile instances.
-      if (key === 'roof') mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.roof ? part.building ? 2 : 1 : 0)), 1));
+      if (key === 'roof') mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.roof ? part.building ? architectureRoofSurface(part.template?.key) : 1 : 0)), 1));
       // Only existing building panes receive lattice/illumination. Transport
       // windscreens share the glass material but carry a zero surface flag.
       if (key === 'glass') mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? part.windowStyle ?? 1 : 0)), 1));
@@ -330,19 +331,22 @@ export class CityRenderer implements CityRendererAPI {
       shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=windowPane*windowWarmth*facadeNight*vec3(.48,.27,.095);');
       shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nif(vWindowSurface>.5)roughnessFactor=windowRoughness;');
     };
-    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v5';
+    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v6-end-joinery';
     this.materials.roof.onBeforeCompile = shader => {
-      shader.vertexShader = 'attribute float instanceRoofSurface;varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.vertexShader;
+      shader.vertexShader = 'attribute float instanceRoofSurface;varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;varying vec3 vRoofEndMetric;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
         vec3 roofScale=vec3(1.0);
         #ifdef USE_INSTANCING
         roofScale=vec3(length(instanceMatrix[0].xyz),length(instanceMatrix[1].xyz),length(instanceMatrix[2].xyz));
         #endif
-        vRoofMetric=position*roofScale;vRoofNormal=normalize(normal/max(roofScale,vec3(.001)));vRoofSurface=instanceRoofSurface;`);
-      shader.fragmentShader = 'varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.fragmentShader;
+        vRoofMetric=position*roofScale;vRoofNormal=normalize(normal/max(roofScale,vec3(.001)));vRoofSurface=instanceRoofSurface;
+        ${ROOF_END_VERTEX}`);
+      shader.fragmentShader = 'varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;varying vec3 vRoofEndMetric;\n' + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
         float roofRelief=0.0,roofRoughness=roughness;
-        if(vRoofSurface>.5 && vRoofNormal.y<-.18){
+        if(vRoofSurface>2.5 && abs(vRoofNormal.y)<.001){
+          ${ROOF_END_FRAGMENT}
+        }else if(vRoofSurface>.5 && vRoofNormal.y<-.18){
           // Roof undersides remain opaque and keep the same solid silhouette.
           // Timber albedo and shallow beam joints receive the real hemisphere
           // bounce instead of turning a near eave into a black screen block.
@@ -978,7 +982,7 @@ export class CityRenderer implements CityRendererAPI {
     this.skyMaterial.uniforms.daylight.value = daylight;
     const mistMaterial = this.mist.material as THREE.PointsMaterial; mistMaterial.color.copy(horizon).lerp(new THREE.Color('#e0e8df'), .25 + daylight * .35); mistMaterial.opacity = .13 + (1 - state.visibility) * .13; this.mist.position.x = Math.sin(elapsed * .015) * 24;
     const sprayMaterial = this.spray.material as THREE.PointsMaterial; sprayMaterial.color.copy(horizon).lerp(new THREE.Color('#eef6ed'), .8); sprayMaterial.opacity = .13 + daylight * .12; this.spray.position.x = Math.sin(elapsed * .24) * 2.8;
-    this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.copy(horizon); fog.density = (.00022 + (1 - state.visibility) * .0002) * (6500 / this.distance);
+    this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.copy(horizon); fog.density = (.00018 + (1 - state.visibility) * .0002) * (6500 / this.distance);
     this.sky.position.copy(this.camera.position); this.stars.position.copy(this.camera.position); (this.stars.material as THREE.PointsMaterial).opacity = (1 - daylight) * .8;
     this.sunOrb.position.copy(this.sun.position).multiplyScalar(3.6).add(this.camera.position); this.sunOrb.visible = altitude > -.08;
     this.moonOrb.position.copy(this.moon.position).multiplyScalar(3.6).add(this.camera.position); this.moonOrb.visible = altitude < .08;

@@ -30,10 +30,10 @@ export interface WageDebtSnapshot {
 
 type Data = Record<string, unknown>;
 const keys = (text: string) => new Set(text.split(' '));
-const STATE_KEYS = keys('hydroMaintenance powerGrid serviceMaterialScheduling civicHistory budgetAuthority civicStaffing familyEducation residentEducation roadDemands roadNetwork roadworks hygiene pathology governance shopLifecycle power education homeRest clinical playerLabor trade journey banking culture family aviation extension signals voxels version seed tick day hour paused speed weather visibility energy treasury taxRate policeBudget support bankBalance loan gdp lastSystemOrder districts citizens vehicles shops player relationships crimes events policyPending metrics');
-const RUNTIME_KEYS = keys('rng accumulator weatherAt crimeAt payrollAt commerceAt financeAt socialAt eventId crimeId focus mode detail workAt studyAt wages persistedModules civicStaffingVersion civicHistoryVersion budgetAuthorityVersion roadNetworkVersion roadworksVersion roadDemandsVersion governanceVersion hygieneVersion hygieneTransferVersion pathologyVersion powerVersion legacyEnergyContractVersion legacyEnergyContract educationVersion familyEducationVersion residentEducationVersion playerLaborVersion accountingVersion wageAccruals publicLabor publicLaborReviewAt privateLabor publicBudgets wageArrears taxes freight playerBusinesses investment freightLots cargoSources campaign signalOverrides constructionId energyBoostUntil operatingCost restAt relationshipAt lastInvestmentAt publicSupply operationUnitPrice riders links impressions districtRelationMeans decisionAt activities peopleElapsed npcMotionVersion referenceCollisionPolicyId mealRoutePolicyId freightPickupPolicyId freightDeliveryPolicyId residentTuitionPolicyId serviceMaterialSchedulingVersion npcStairCursors attendance shopLabor poweredShopLabor retailSalesSinceBatch customers driving policeSuppliesVersion policeSupplies dispatches relationshipClock hostileAt');
+const STATE_KEYS = keys('nightRetail hydroMaintenance powerGrid serviceMaterialScheduling civicHistory budgetAuthority civicStaffing familyEducation residentEducation roadDemands roadNetwork roadworks hygiene pathology governance shopLifecycle power education homeRest clinical playerLabor trade journey banking culture family aviation extension signals voxels version seed tick day hour paused speed weather visibility energy treasury taxRate policeBudget support bankBalance loan gdp lastSystemOrder districts citizens vehicles shops player relationships crimes events policyPending metrics');
+const RUNTIME_KEYS = keys('nightRetailVersion rng accumulator weatherAt crimeAt payrollAt commerceAt financeAt socialAt eventId crimeId focus mode detail workAt studyAt wages persistedModules civicStaffingVersion civicHistoryVersion budgetAuthorityVersion roadNetworkVersion roadworksVersion roadDemandsVersion governanceVersion hygieneVersion hygieneTransferVersion pathologyVersion powerVersion legacyEnergyContractVersion legacyEnergyContract educationVersion familyEducationVersion residentEducationVersion playerLaborVersion accountingVersion wageAccruals publicLabor publicLaborReviewAt privateLabor publicBudgets wageArrears taxes freight playerBusinesses investment freightLots cargoSources campaign signalOverrides constructionId energyBoostUntil operatingCost restAt relationshipAt lastInvestmentAt publicSupply operationUnitPrice riders links impressions districtRelationMeans decisionAt activities peopleElapsed npcMotionVersion referenceCollisionPolicyId mealRoutePolicyId freightPickupPolicyId freightDeliveryPolicyId residentTuitionPolicyId serviceMaterialSchedulingVersion npcStairCursors attendance shopLabor poweredShopLabor retailSalesSinceBatch customers driving policeSuppliesVersion policeSupplies dispatches relationshipClock hostileAt');
 const CITIZEN_KEYS = keys('food skills socialIdentities historyTags education id name districtId homeId workId role position state destinationId money needs tier route routeIndex partnerId');
-const SHOP_KEYS = keys('lifecycleVersion cash ownerId id buildingId districtId inventory price revenue profit customers open employees');
+const SHOP_KEYS = keys('nightRetailVersion lifecycleVersion cash ownerId id buildingId districtId inventory price revenue profit customers open employees');
 const COMPANY_KEYS = keys('shopBindingId shopBindingReleasedAt id name ownerId buildingId districtId capital shares sharePrice listed employees inventory revenue profit level marketShare shareholders foundedAt parentId');
 const PLAYER_KEYS = keys('identities position role money reputation needs inventory homeId education experience partnerId vehicleId');
 const VEHICLE_KEYS = keys('id kind position edgeId progress direction speed state passengers cargo nextDeparture');
@@ -41,13 +41,14 @@ const EXTENSION_KEYS = keys('version companies technologies audits actorProfiles
 const EXTENSION_RUNTIME_KEYS = keys('version nextCompanyAt nextCorruptionAt nextLedgerAt lastTreasury cooldowns researchJobs researchLaborVersion legacyResearchSectors companyCursors deprivation diversions constructionJobs');
 const BANK_KEYS = keys('version cash legacyInvestmentCash legacyInvestmentPrincipal nextInterestAt nextReceiptId profitAvailable accounts nextVisitAt receipts stats');
 const MODULE_KEYS: Record<string, Set<string>> = {
+  nightRetail: keys('version nextId shopIds jobs'),
   playerLabor: keys('version nextId nextAvailableAt lastObservedAt job history stats'),
   roadworks: keys('replacementVersion replacementActivatedAt replacementFirstJobId version activatedAt nextId jobs stock capacityHistory'),
   education: keys('version nextId lastObservedAt course history stock stats archived'),
   familyEducation: keys('version nextId lastObservedAt active pages stock totals'),
   residentEducation: keys('version nextId lastObservedAt active pages stock totals ageClocks'),
   power: keys('version activatedAt sourceSiteId operatorSiteId networkKind faults lossP nextRepairId repairs stock dispatch buildingMeters vehicleMeters totals capacityHistory capacityArchive researchBaseline unobservedResearchCompletions nextPublicReviewAt'),
-  clinical: keys('version nextOrderId orders stock nextVisitAt stats archived'),
+  clinical: keys('version paidTriage nextOrderId orders stock nextVisitAt stats archived'),
   hygiene: keys('transfers publicVersion nextDemandId publicDemands version rulesetId nextBatchId nextJobId activatedAt lastObservedAt clinicalBaseline batches jobs stock stats archived capacityHistory'),
   family: keys('version lastUpdate nextResidentId nextPregnancyId pregnancies children studentGuardians nextSupportAt nextPlanAt estates bonds movePlans households ceremonies nextHouseholdId nextCeremonyId nextBondAt careGuardians estateSales nextEstateSaleId formalLearningVersion formalLearning'),
   shopLifecycle: keys('version nextListingId nextLeaseId nextReceiptId titles listings leases receipts'),
@@ -116,6 +117,13 @@ function context(host: object, world: WorldDefinition) {
   const citizens = entities(state.citizens, 'state.citizens', CITIZEN_KEYS);
   if (citizens.some(citizen => citizen.id === 'player')) fail('IDENTITY', 'state.citizens', 'player is a separate wallet');
   const shops = entities(state.shops, 'state.shops', SHOP_KEYS);
+  classifyNightRetailMetadata(state, runtime, shops, citizens);
+  const clinical = module(state, 'clinical');
+  if (clinical?.version === 2) {
+    const selection = object(clinical.paidTriage, 'clinical.paidTriage', keys('policyId siteId'));
+    if (selection.policyId !== 'paid-clinical-severity-wait-v1' || buildings.get(id(selection.siteId, 'clinical.paidTriage.siteId'))?.kind !== 'clinic')
+      fail('SOURCE', 'clinical.paidTriage', 'declared paid queue requires a real clinic');
+  } else if (clinical?.paidTriage !== undefined) fail('SOURCE', 'clinical.paidTriage', 'legacy clinical domain has no triage declaration');
   const companies = extension ? entities(extension.companies, 'state.extension.companies', COMPANY_KEYS) : [];
   const player = object(state.player, 'state.player', PLAYER_KEYS);
   for (const company of companies) {
@@ -132,6 +140,35 @@ function context(host: object, world: WorldDefinition) {
 }
 function module(state: Data, name: string): Data | undefined {
   return state[name] === undefined ? undefined : object(state[name], `state.${name}`, MODULE_KEYS[name]);
+}
+/** The night contract never owns cash or food. Its funding fields are bounded
+ * observations of the original shop/assignment at declaration; custody stays
+ * in those original accounts and wage queues. Every nested field is classified
+ * explicitly so a new hidden wallet cannot masquerade as this history. */
+function classifyNightRetailMetadata(state: Data, runtime: Data, shops: Data[], citizens: Data[]): void {
+  const body = module(state, 'nightRetail'), marked = shops.filter(shop => shop.nightRetailVersion !== undefined);
+  if (!body) {
+    if (marked.length || runtime.nightRetailVersion !== undefined) fail('SOURCE', 'nightRetail', 'missing marked contract history');
+    return;
+  }
+  if (body.version !== 1 || runtime.nightRetailVersion !== 1) fail('SOURCE', 'nightRetail', 'unsupported contract marker');
+  const shopIds = array(body.shopIds, 'nightRetail.shopIds'), jobs = array(body.jobs, 'nightRetail.jobs');
+  if (jobs.length > 128 || shopIds.length !== marked.length || new Set(shopIds).size !== shopIds.length
+    || shopIds.some(shopId => !marked.some(shop => shop.id === shopId && shop.nightRetailVersion === 1))) fail('SOURCE', 'nightRetail.shopIds', 'bidirectional shop markers');
+  const jobFields = keys('id shopId buildingId operatorId startedAt endsAt lastServedAt lastObservedTick lastObservedAt servedMinutes status pauseReason endedAt demandIds funding');
+  const fundingFields = keys('kind day assignmentKey ratePerMinute approvedMinutes workedMinutesAtStart attendanceMinutesAtStart fundsAtStart protectedFundsAtStart');
+  for (const [index, raw] of jobs.entries()) {
+    const path = `nightRetail.jobs[${index}]`, job = object(raw, path, jobFields);
+    if (!shopIds.includes(job.shopId) || !shops.some(shop => shop.id === job.shopId && shop.buildingId === job.buildingId)
+      || !citizens.some(citizen => citizen.id === job.operatorId)) fail('SOURCE', path, 'named original employer/operator');
+    for (const field of ['startedAt', 'endsAt', 'servedMinutes']) amount(job[field], `${path}.${field}`);
+    for (const field of ['lastServedAt', 'lastObservedAt', 'lastObservedTick', 'endedAt']) if (job[field] !== null) amount(job[field], `${path}.${field}`);
+    array(job.demandIds, `${path}.demandIds`);
+    const proof = object(job.funding, `${path}.funding`, fundingFields);
+    if (proof.kind !== 'existing-private-assignment') fail('SOURCE', `${path}.funding`, 'original private labor observation required');
+    id(proof.assignmentKey, `${path}.funding.assignmentKey`);
+    for (const field of ['day', 'ratePerMinute', 'approvedMinutes', 'workedMinutesAtStart', 'attendanceMinutesAtStart', 'fundsAtStart', 'protectedFundsAtStart']) amount(proof[field], `${path}.funding.${field}`);
+  }
 }
 // Account-row metadata can contain historical payment totals. Reject additional
 // cash-like fields; they cannot silently become an uncounted new custody bag.

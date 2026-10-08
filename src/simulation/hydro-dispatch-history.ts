@@ -89,7 +89,15 @@ function validateSnapshot(value: SharedHydroSnapshot, fullSource = false): strin
   object(value.loadSources, equipment ? ['shops', 'equipmentAvailable'] : ['shops']);
   if (equipment) need(typeof value.loadSources.equipmentAvailable === 'boolean', '设备可用性数据');
   array(value.loadSources.shops);
-  for (const shop of value.loadSources.shops) { object(shop, ['id', 'buildingId', 'allowsOperation']); identity(shop.id); identity(shop.buildingId); need(typeof shop.allowsOperation === 'boolean', '商店许可数据'); }
+  for (const shop of value.loadSources.shops) {
+    object(shop, shop.nightRetailPlan === undefined ? ['id', 'buildingId', 'allowsOperation'] : ['id', 'buildingId', 'allowsOperation', 'nightRetailPlan']);
+    identity(shop.id); identity(shop.buildingId); need(typeof shop.allowsOperation === 'boolean', '商店许可数据');
+    if (shop.nightRetailPlan !== undefined) {
+      const plan = shop.nightRetailPlan; object(plan, ['jobId', 'operatorId', 'startsAt', 'endsAt']);
+      identity(plan.jobId); identity(plan.operatorId); number(plan.startsAt); number(plan.endsAt);
+      need(plan.startsAt >= 0 && plan.endsAt > plan.startsAt && plan.endsAt - plan.startsAt <= 120 + 1e-8, '有限夜间计划数据');
+    }
+  }
   object(value.diagnostics, DIAGNOSTIC_KEYS);
   for (const rows of Object.values(value.diagnostics)) { array(rows); for (const id of rows) identity(id); }
   return sourceIds[0];

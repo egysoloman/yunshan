@@ -1,0 +1,198 @@
+{
+  "status": "NOT_CONFIRMED_NETWORK_FAILURE",
+  "confirmedNewLibraryIDs": [],
+  "memoReplacementConfirmed": false,
+  "fileCount": 27,
+  "message": "The single ordered Library save attempt failed with a connection error and no returned result. No Library delivery is confirmed. The batch was not retried or switched to another write route. All listed files are retained in the GitHub development-branch delivery.",
+  "items": [
+    {
+      "fileName": "REPORT.md",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "48eec010ab0817265cd96e1f514aec52ae620d4f02bad98f44ed7bcac37cb086"
+    },
+    {
+      "fileName": "CURRENT-BIRTH.png",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "a838904872f599f72370997f36ac72e0d9a47bd97b8fd3880faf8e2b37505c55"
+    },
+    {
+      "fileName": "BIRTH-BEFORE-ROOF-FINISH.png",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "6333287c7f3127b735db273d83d7392939bea2d2eee519986fa8715959df76c1"
+    },
+    {
+      "fileName": "ACTUAL-COUNTER.png",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "81d0dd3143de4ba90111c831308e0a61a6a2bc8d41fa46e0ed24b4877310168e"
+    },
+    {
+      "fileName": "REQUIREMENTS-38.csv",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "bd330d4181e211ae144d3c2ac663696b1efcaf6d373cea5da71e16023a4b3311"
+    },
+    {
+      "fileName": "RUNS.json",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "5a9c57240421c93b3d75313c91eb1430f140bc5f8b18e181c5d322c9083157d8"
+    },
+    {
+      "fileName": "Yunshan-ROOT27-source.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "4720fcf4ac512fda1cfeb63b599cab2a849c29c976b73784eb383bf276feca0f"
+    },
+    {
+      "fileName": "ART-REVIEW.json",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "e5c123538d3259d5629df695cc2800fd5e276f33676f97846bdf000c707c885d"
+    },
+    {
+      "fileName": "BIRTH-COMPARISON.json",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "c119224dafe022b6d09919316ac04f51b68b999d1bbb291d30fae363f94293bb"
+    },
+    {
+      "fileName": "EVIDENCE-INDEX.json",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "395833ce806ee77244a0e365c10f7e9effc87ce720186793cd0137fd08af49c3"
+    },
+    {
+      "fileName": "EVIDENCE-RECOVERY.md",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "9ea0a1e8cd9b998030c0906ac560788fd766da1dd49639ee5714b3a36fdb9692"
+    },
+    {
+      "fileName": "MATRIX-PRESERVATION.json",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "204555fbc719cdc4cd267af221da09e199eb232f8e64e73457cea402cc2ae4bb"
+    },
+    {
+      "fileName": "NATIVE05-06-READBACK.json",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "03c14b88f5676c5cae0c4f8cb52cb974308928de9495515d06bca91d5dbd711a"
+    },
+    {
+      "fileName": "NATIVE06-SALE-AND-JOBS.json",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "11b2f5e82282d3649bc1423889a89713785af1586f6ebd8709b2800c09d76aaf"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-001.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "0caac5e2496dcea86a7869559f720043d670e267e4550de5ae164abe01ae35aa"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-002.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "44e1fdc89f913fd2bc6eccd0f687b9d5308aafeca51caca45c3ee09752e18c71"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-003.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "93afd085e4fc91f5da12a2650fba0ab22bfd82d58cc54d662bfdfb1305e6300b"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-004.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "fabbc80f0ace7144429c1d3909385719d330272fd2b9a7b6fb24c4ffb0ef5038"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-005.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "c2dba9b0f426fb0b80fd2abf90f14a96b8f7f043d0f0405462d2d1071f5c30be"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-006.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "306cf950caf4e3ae0a311f2fb4ce5bf48616e229c30ae168e5817d17de30ed7c"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-007.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "d69c959a34bc9762d2b6383849f79aca925de8025548bbfbc19d2979f43e8ffe"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-008.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "dcb6a14f132c74c515e8ab9d567586a39ba8c4f8808431207f462790fe68713b"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-009.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "7a1c11ea13278fb93c06fe7e5fe6085d3d381410559ac4c789a891be1d3a0565"
+    },
+    {
+      "fileName": "ROOT27-EVIDENCE-010.zip",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "29fd2736a9f46483cab5556be37f78ac198383d9c4c62425e68526e10359f244"
+    },
+    {
+      "fileName": "SOURCE-INDEX.json",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "c9b2d2ee6f765dcc3370bbd32aab9556b4f7c4bd7deeecf8addf8b79b362b71a"
+    },
+    {
+      "fileName": "SUBSYSTEM-GAPS.md",
+      "operation": "create_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "3696760ed90cef1a26378c1798480b41d91d671d2731a56c0877f64efa7aaad7"
+    },
+    {
+      "fileName": "开发备忘录.md",
+      "operation": "replace_library_file",
+      "status": "NOT_CONFIRMED",
+      "libraryID": null,
+      "sha256": "84c2bafb96f05402fc1fa723016284f9a6c7ff314197aca57c31a7251a1d1247"
+    }
+  ]
+}

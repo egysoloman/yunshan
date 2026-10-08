@@ -1,0 +1,942 @@
+{
+  "schema": "root27-native06-sale-jobs-v1",
+  "auditedAt": "2026-10-08T06:18:09.045030+00:00",
+  "status": "PASS",
+  "epoch": "recovery native06 under429 source; historical native04 sale is not substituted",
+  "resultSource": {
+    "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/RESULT.json",
+    "bytes": 1626,
+    "sha256": "93437aa8ca6dc8eda7c4c606720aadbf919d814c4a9711d80774944e7a82d988"
+  },
+  "sourceBinding": "946c26eb30341c1fa5897bb918cb9f3026c2918e41e977d64ded88c1d434800d",
+  "newSimulationExecution": false,
+  "sale": {
+    "event": {
+      "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0008-ordinary-008/all-bus.json.gz",
+      "rowIndex": 43,
+      "sequence": 380,
+      "phase": "commerce",
+      "tick": 2161,
+      "clock": 5704,
+      "extensionClock": 5704,
+      "event": {
+        "type": "sale",
+        "amount": 31.791896093653936,
+        "citizenId": "citizen-367",
+        "shopId": "shop-west-b54",
+        "districtId": "west",
+        "quantity": 2
+      },
+      "taxRate": 0.08,
+      "taxQueueBeforeForward": 0,
+      "treasuryBeforeForward": 59375.88544662843,
+      "canonicalNpcWage": false,
+      "fullSettlement": null,
+      "originalEmitReturned": true,
+      "nativeTaxHandler": {
+        "before": 0,
+        "after": 2.543351687492315,
+        "expected": 2.543351687492315
+      }
+    },
+    "busSource": {
+      "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0008-ordinary-008/all-bus.json.gz",
+      "bytes": 14897,
+      "sha256": "7f30212b3aaa387eb699d0fb1750cf21ae240b9743fd64d1d273befca652a37e"
+    },
+    "commerceSource": {
+      "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0008-ordinary-008/stable-phase-custody.json.gz",
+      "bytes": 1245703,
+      "sha256": "a0966fcd1907122bfcad882b5b406d48f9e9afba469a47ddbc198ed8f1c6bccf"
+    },
+    "commercePhaseIndex": 5,
+    "beforeActor": {
+      "id": "citizen-367",
+      "name": "顾竹2",
+      "workId": "academy-b7",
+      "homeId": "academy-b11",
+      "role": "学生",
+      "state": "shopping",
+      "destinationId": "west-b54",
+      "position": {
+        "x": -1082.4,
+        "y": 280.6,
+        "z": -705.4000000000001
+      },
+      "needs": {
+        "hunger": 0,
+        "fatigue": 66.95999999999991,
+        "social": 4.839463747939606,
+        "fun": 81.12000000000029
+      },
+      "money": 352.1671782093785,
+      "food": 0,
+      "education": 3,
+      "profile": {
+        "alive": true,
+        "age": 27.00993911719739,
+        "health": 90.72016012289761,
+        "skill": 33.68199999999902,
+        "stress": 4.382797986073936,
+        "mood": 41.67213204276493
+      }
+    },
+    "afterActor": {
+      "id": "citizen-367",
+      "name": "顾竹2",
+      "workId": "academy-b7",
+      "homeId": "academy-b11",
+      "role": "学生",
+      "state": "shopping",
+      "destinationId": "west-b54",
+      "position": {
+        "x": -1082.4,
+        "y": 280.6,
+        "z": -705.4000000000001
+      },
+      "needs": {
+        "hunger": 52,
+        "fatigue": 66.95999999999991,
+        "social": 4.839463747939606,
+        "fun": 89.12000000000029
+      },
+      "money": 320.3752821157246,
+      "food": 1,
+      "education": 3,
+      "profile": {
+        "alive": true,
+        "age": 27.00993911719739,
+        "health": 90.72016012289761,
+        "skill": 33.68199999999902,
+        "stress": 4.382797986073936,
+        "mood": 41.67213204276493
+      }
+    },
+    "beforeShop": {
+      "id": "shop-west-b54",
+      "buildingId": "west-b54",
+      "districtId": "west",
+      "inventory": 24,
+      "price": 15.895948046826968,
+      "revenue": 1370.9881063617865,
+      "profit": 679.5490779712428,
+      "customers": 0,
+      "open": true,
+      "employees": 4,
+      "ownerId": "citizen-300",
+      "cash": 1052.9901205407987,
+      "nightRetailVersion": 1,
+      "funds": 1052.9901205407987,
+      "debt": 53.13958214432644,
+      "committed": 116.96443469777772,
+      "protected": 170.10401684210416,
+      "labor": 4,
+      "poweredLabor": null,
+      "buildingKind": "market"
+    },
+    "afterShop": {
+      "id": "shop-west-b54",
+      "buildingId": "west-b54",
+      "districtId": "west",
+      "inventory": 22,
+      "price": 15.895948046826968,
+      "revenue": 1402.7800024554406,
+      "profit": 700.7976223774044,
+      "customers": 0,
+      "open": true,
+      "employees": 4,
+      "ownerId": "citizen-300",
+      "cash": 1082.2386649469604,
+      "nightRetailVersion": 1,
+      "funds": 1082.2386649469604,
+      "debt": 53.13958214432644,
+      "committed": 116.96443469777772,
+      "protected": 170.10401684210416,
+      "labor": 4,
+      "poweredLabor": null,
+      "buildingKind": "market"
+    },
+    "taxQueue": {
+      "before": 0,
+      "after": 2.543351687492315,
+      "expected": 2.543351687492315
+    },
+    "commerceResidual": {
+      "cash": 1.1641532182693481e-10,
+      "food": 0,
+      "debt": 4.547473508864641e-13,
+      "fiscal": -2.3508306412622915e-11
+    },
+    "checks": {
+      "walletDeltaMatchesCost": true,
+      "stockDeltaMatchesQuantity": true,
+      "oneMealConsumedOneCarried": true,
+      "taxMatchesRate": true,
+      "commercePhaseReturned": true,
+      "allFiniteJobsEndedAtOwnDeadline": true
+    }
+  },
+  "jobs": [
+    {
+      "terminalJob": {
+        "id": "night-retail-1",
+        "shopId": "shop-west-b54",
+        "buildingId": "west-b54",
+        "operatorId": "citizen-300",
+        "startedAt": 5640,
+        "endsAt": 5760,
+        "lastServedAt": 5704,
+        "lastObservedTick": 2161,
+        "lastObservedAt": 5704,
+        "servedMinutes": 64,
+        "status": "completed",
+        "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。",
+        "endedAt": 5760,
+        "demandIds": [
+          "citizen-367",
+          "citizen-543"
+        ],
+        "funding": {
+          "kind": "existing-private-assignment",
+          "day": 3,
+          "assignmentKey": "3:shop-west-b54:citizen-300",
+          "ratePerMinute": 0.0919831578947365,
+          "approvedMinutes": 480,
+          "workedMinutesAtStart": 192,
+          "attendanceMinutesAtStart": 128,
+          "fundsAtStart": 1053.8234538741324,
+          "protectedFundsAtStart": 170.10401684210416
+        }
+      },
+      "timeline": [
+        {
+          "clock": 5672,
+          "tick": 2153,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0000-imported/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 32,
+          "lastServedAt": 5672,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5676,
+          "tick": 2154,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0001-ordinary-001/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5680,
+          "tick": 2155,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0002-ordinary-002/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 40,
+          "lastServedAt": 5680,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5684,
+          "tick": 2156,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0003-ordinary-003/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 44,
+          "lastServedAt": 5684,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5688,
+          "tick": 2157,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0004-ordinary-004/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 48,
+          "lastServedAt": 5688,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5692,
+          "tick": 2158,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0005-ordinary-005/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 52,
+          "lastServedAt": 5692,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5696,
+          "tick": 2159,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0006-ordinary-006/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 56,
+          "lastServedAt": 5696,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5700,
+          "tick": 2160,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0007-ordinary-007/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 60,
+          "lastServedAt": 5700,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5704,
+          "tick": 2161,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0008-ordinary-008/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5708,
+          "tick": 2162,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0009-ordinary-009/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5712,
+          "tick": 2163,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0010-ordinary-010/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5716,
+          "tick": 2164,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0011-ordinary-011/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5720,
+          "tick": 2165,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0012-ordinary-012/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5724,
+          "tick": 2166,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0013-ordinary-013/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5728,
+          "tick": 2167,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0014-ordinary-014/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5732,
+          "tick": 2168,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0015-ordinary-015/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5736,
+          "tick": 2169,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0016-ordinary-016/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5740,
+          "tick": 2170,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0017-ordinary-017/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5744,
+          "tick": 2171,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0018-ordinary-018/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5748,
+          "tick": 2172,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0019-ordinary-019/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5752,
+          "tick": 2173,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0020-ordinary-020/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5756,
+          "tick": 2174,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0021-ordinary-021/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5760,
+          "tick": 2175,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0022-ordinary-022/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": 5760,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5764,
+          "tick": 2176,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0023-ordinary-023/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": 5760,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5768,
+          "tick": 2177,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0024-ordinary-024/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 64,
+          "lastServedAt": 5704,
+          "endsAt": 5760,
+          "endedAt": 5760,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        }
+      ],
+      "endedAtDeclaredDeadline": true,
+      "serviceMinutesWithinFiniteDeadline": true
+    },
+    {
+      "terminalJob": {
+        "id": "night-retail-2",
+        "shopId": "shop-west-b41",
+        "buildingId": "west-b41",
+        "operatorId": "citizen-531",
+        "startedAt": 5640,
+        "endsAt": 5736,
+        "lastServedAt": 5676,
+        "lastObservedTick": 2154,
+        "lastObservedAt": 5676,
+        "servedMinutes": 36,
+        "status": "completed",
+        "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。",
+        "endedAt": 5736,
+        "demandIds": [
+          "citizen-367"
+        ],
+        "funding": {
+          "kind": "existing-private-assignment",
+          "day": 3,
+          "assignmentKey": "3:shop-west-b41:citizen-531",
+          "ratePerMinute": 0.09154378947368354,
+          "approvedMinutes": 480,
+          "workedMinutesAtStart": 384,
+          "attendanceMinutesAtStart": 64,
+          "fundsAtStart": 2871.9645757907874,
+          "protectedFundsAtStart": 14.647006315789366
+        }
+      },
+      "timeline": [
+        {
+          "clock": 5672,
+          "tick": 2153,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0000-imported/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 32,
+          "lastServedAt": 5672,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5676,
+          "tick": 2154,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0001-ordinary-001/whole-save.json.gz",
+          "status": "active",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": ""
+        },
+        {
+          "clock": 5680,
+          "tick": 2155,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0002-ordinary-002/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5684,
+          "tick": 2156,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0003-ordinary-003/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5688,
+          "tick": 2157,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0004-ordinary-004/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5692,
+          "tick": 2158,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0005-ordinary-005/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5696,
+          "tick": 2159,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0006-ordinary-006/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5700,
+          "tick": 2160,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0007-ordinary-007/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5704,
+          "tick": 2161,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0008-ordinary-008/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5708,
+          "tick": 2162,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0009-ordinary-009/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5712,
+          "tick": 2163,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0010-ordinary-010/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5716,
+          "tick": 2164,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0011-ordinary-011/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5720,
+          "tick": 2165,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0012-ordinary-012/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5724,
+          "tick": 2166,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0013-ordinary-013/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5728,
+          "tick": 2167,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0014-ordinary-014/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5732,
+          "tick": 2168,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0015-ordinary-015/whole-save.json.gz",
+          "status": "paused",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": null,
+          "pauseReason": "没有当前真实到场资助工资，柜台暂停。"
+        },
+        {
+          "clock": 5736,
+          "tick": 2169,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0016-ordinary-016/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5740,
+          "tick": 2170,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0017-ordinary-017/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5744,
+          "tick": 2171,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0018-ordinary-018/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5748,
+          "tick": 2172,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0019-ordinary-019/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5752,
+          "tick": 2173,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0020-ordinary-020/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5756,
+          "tick": 2174,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0021-ordinary-021/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5760,
+          "tick": 2175,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0022-ordinary-022/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5764,
+          "tick": 2176,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0023-ordinary-023/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        },
+        {
+          "clock": 5768,
+          "tick": 2177,
+          "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0024-ordinary-024/whole-save.json.gz",
+          "status": "completed",
+          "servedMinutes": 36,
+          "lastServedAt": 5676,
+          "endsAt": 5736,
+          "endedAt": 5736,
+          "pauseReason": "原有限夜班到期，未修改日班额度或旧工资债。"
+        }
+      ],
+      "endedAtDeclaredDeadline": true,
+      "serviceMinutesWithinFiniteDeadline": true
+    }
+  ],
+  "terminal": {
+    "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0024-ordinary-024/whole-save.json.gz",
+    "clock": 5768,
+    "tick": 2177,
+    "complete": true,
+    "decodedSha256": "37d5264f0f376d42b012735a3b20c6956ad4b5bfba57e00e1469b46778933660",
+    "citizenCount": 616,
+    "aliveCount": 616,
+    "lowHungerCount": 21,
+    "lowHungerWithoutCarriedFoodCount": 21,
+    "hasDeclaredPowerGridState": false,
+    "clinicalVersion": 1
+  },
+  "terminalSave": {
+    "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0024-ordinary-024/whole-save.json.gz",
+    "file": "frames/0024-ordinary-024/whole-save.json.gz",
+    "rawBytes": 3588960,
+    "rawSHA256": "37d5264f0f376d42b012735a3b20c6956ad4b5bfba57e00e1469b46778933660",
+    "encodedBytes": 562500,
+    "encodedSHA256": "e7c1897633d48edbb1df12ee7d7442a88128bae103b1d78b1f449a936d35094f",
+    "decodedSha256": "37d5264f0f376d42b012735a3b20c6956ad4b5bfba57e00e1469b46778933660"
+  },
+  "terminalObservationSource": {
+    "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/TERMINAL-FOOD-OBSERVATION.json",
+    "bytes": 1848537,
+    "sha256": "8b8be0f4cffbcd83872261acccb03b48e41113d3d474d212ce3e2b564de10bfb"
+  },
+  "lowHungerCriterion": "actorProfiles[id].alive === true and citizen.needs.hunger <30; carried food is not part of the original hungryCount criterion",
+  "native06Counts": {
+    "foodProduced": 0,
+    "materialProduced": 0,
+    "storedMeals": 3,
+    "counterMeals": 1,
+    "playerMeals": 0,
+    "npcEarned": 194.66963621052642,
+    "npcPaid": 0,
+    "publicNpcPaid": 0,
+    "privateNpcPaid": 0,
+    "npcPaymentCount": 0,
+    "canonicalEarnedCount": 59,
+    "fullSettlementCount": 0,
+    "fiscalEvents": -79.865693645841,
+    "fiscalLedger": 0,
+    "fiscalLifecycle": 0
+  },
+  "mealEvents": [
+    {
+      "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0001-ordinary-001/all-bus.json.gz",
+      "rowIndex": 46,
+      "sequence": 46,
+      "phase": "people",
+      "tick": 2154,
+      "clock": 5676,
+      "extensionClock": 5676,
+      "event": {
+        "type": "stored-meal",
+        "citizenId": "citizen-582",
+        "amount": 1
+      },
+      "taxRate": 0.08,
+      "taxQueueBeforeForward": 0,
+      "treasuryBeforeForward": 59396.20809196179,
+      "canonicalNpcWage": false,
+      "fullSettlement": null,
+      "originalEmitReturned": true
+    },
+    {
+      "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0008-ordinary-008/all-bus.json.gz",
+      "rowIndex": 43,
+      "sequence": 380,
+      "phase": "commerce",
+      "tick": 2161,
+      "clock": 5704,
+      "extensionClock": 5704,
+      "event": {
+        "type": "sale",
+        "amount": 31.791896093653936,
+        "citizenId": "citizen-367",
+        "shopId": "shop-west-b54",
+        "districtId": "west",
+        "quantity": 2
+      },
+      "taxRate": 0.08,
+      "taxQueueBeforeForward": 0,
+      "treasuryBeforeForward": 59375.88544662843,
+      "canonicalNpcWage": false,
+      "fullSettlement": null,
+      "originalEmitReturned": true,
+      "nativeTaxHandler": {
+        "before": 0,
+        "after": 2.543351687492315,
+        "expected": 2.543351687492315
+      }
+    },
+    {
+      "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0012-ordinary-012/all-bus.json.gz",
+      "rowIndex": 43,
+      "sequence": 599,
+      "phase": "people",
+      "tick": 2165,
+      "clock": 5720,
+      "extensionClock": 5720,
+      "event": {
+        "type": "stored-meal",
+        "citizenId": "citizen-219",
+        "amount": 1
+      },
+      "taxRate": 0.08,
+      "taxQueueBeforeForward": 0,
+      "treasuryBeforeForward": 59365.23199831592,
+      "canonicalNpcWage": false,
+      "fullSettlement": null,
+      "originalEmitReturned": true
+    },
+    {
+      "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0019-ordinary-019/all-bus.json.gz",
+      "rowIndex": 37,
+      "sequence": 954,
+      "phase": "people",
+      "tick": 2172,
+      "clock": 5748,
+      "extensionClock": 5748,
+      "event": {
+        "type": "stored-meal",
+        "citizenId": "citizen-468",
+        "amount": 1
+      },
+      "taxRate": 0.08,
+      "taxQueueBeforeForward": 0,
+      "treasuryBeforeForward": 59348.13759831591,
+      "canonicalNpcWage": false,
+      "fullSettlement": null,
+      "originalEmitReturned": true
+    }
+  ],
+  "limits": [
+    "Terminal616 alive and low-hunger count do not establish steady-state health or nutrition.",
+    "Clock5768 is before payrollAt6780; npcPaid remains0.",
+    "World291 retains legacy energy/no finite grid and clinical.version1; these are not bootstrap/clinicalv2 validation."
+  ]
+}

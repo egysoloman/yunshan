@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-10-08T06:18:36.774401+00:00",
+  "status": "PASS",
+  "mode": "Python CSV/byte preservation check only; no application test or Simulation",
+  "sourcePath": "/workspace/yunshan/docs/validation/2026-10-07-city-life-root26-food-access/REQUIREMENTS-38.csv",
+  "sourceSHA256": "9253df699bd3d69a13a3c3d346cb836eed39cf7bdcb429bf67d06da874cdbe0b",
+  "outputPath": "/workspace/yunshan-work/ROOT27-delivery-draft-20261008-03/REQUIREMENTS-38.csv",
+  "outputSHA256": "bd330d4181e211ae144d3c2ac663696b1efcaf6d373cea5da71e16023a4b3311",
+  "sourceRows": 38,
+  "sourceColumns": 52,
+  "outputRows": 38,
+  "outputColumns": 57,
+  "appendedColumns": [
+    "ROOT27计划",
+    "ROOT27实现",
+    "ROOT27运行",
+    "ROOT27验证",
+    "ROOT27剩余"
+  ],
+  "allOriginalCellsEqual": true,
+  "originalHeaderAndRowBytePrefixesPreserved": true,
+  "originalRowOrderPreserved": true,
+  "originalLineEndingsPreserved": true,
+  "all38Root27ValidationCellsStartPartial": true,
+  "priorDraftUnmodified": true
+}

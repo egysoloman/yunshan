@@ -1,0 +1,16 @@
+{
+  "status": "ART_FAIL",
+  "reviewedOriginals": [
+    "BIRTH-BEFORE-ROOF-FINISH.png",
+    "ACTUAL-COUNTER.png",
+    "CURRENT-BIRTH.png"
+  ],
+  "observations": [
+    "Real v8 first-person entry and counter are visible.",
+    "Timber frames, plaster, stone pavement and product boxes are present, but roof ends remain broad dark faces.",
+    "Compared with Git reference1, layered cliffs/city overview, dense human activity, vegetation, material richness and lighting depth remain inadequate."
+  ],
+  "subsequentPatch": "New429 shader passed production WebGL birth capture. Same normal spawn shows timber framing and warm infill on roof end faces instead of broad flat dark areas; both birth captures show512 draw calls. This is neither an FPS result nor full reference art acceptance.",
+  "functionalUiResult": "24 actual input actions and 2 captures PASS on427 source, no purchase/exit/reload validation this run.",
+  "hardware": "Linux SwiftShader, not Mac performance."
+}

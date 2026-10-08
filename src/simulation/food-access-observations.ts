@@ -1,10 +1,11 @@
 import type { Building, Citizen, District, LifeProfile, Needs, NetworkNode, Shop, Vec3 } from '../types';
+import type { NightRetailState } from './night-retail';
 
 type FoodKind = 'farm' | 'dock' | 'market';
 type ObservedCitizen = Pick<Citizen, 'id' | 'name' | 'districtId' | 'position' | 'state' | 'destinationId' | 'money' | 'needs' | 'food' | 'route' | 'routeIndex'>;
 type ObservedShop = Pick<Shop, 'id' | 'buildingId' | 'districtId' | 'inventory' | 'price' | 'open'>;
 export interface FoodAccessState {
-  day: number; hour: number; weather: string;
+  day: number; hour: number; weather: string; tick?: number; nightRetail?: NightRetailState;
   citizens: readonly ObservedCitizen[]; shops: readonly ObservedShop[];
   extension?: { lastUpdate: number; actorProfiles: Readonly<Record<string, Pick<LifeProfile, 'alive'>>> };
 }
@@ -63,8 +64,19 @@ export function observeFoodAccess(state: FoodAccessState, world: FoodAccessWorld
     if (!FOOD_KINDS.includes(building.kind as FoodKind)) return [];
     const inventory = finite(shop.inventory, `shop ${shop.id} inventory`), price = finite(shop.price, `shop ${shop.id} price`);
     const kind = building.kind as FoodKind, closesAtHour = kind === 'market' ? 22 : 20;
+    // Saved declarations explain a night opening but cannot recreate the
+    // canonical, in-memory wage witness required by live commerce.
+    const job = kind === 'market' ? state.nightRetail?.jobs.slice().reverse().find(job => job.shopId === shop.id) : undefined;
+    const declaredNightRetail = job ? {
+      jobId: job.id, operatorId: job.operatorId, startsAt: job.startedAt, endsAt: job.endsAt,
+      status: job.status, servedMinutes: job.servedMinutes, lastObservedAt: job.lastObservedAt,
+      lastObservedTick: job.lastObservedTick,
+      recordedAtCurrentPhase: state.tick !== undefined && job.lastObservedTick === state.tick && job.lastObservedAt === clock,
+      serviceCertification: 'NOT_LIVE_CERTIFIED' as const,
+    } : undefined;
     return [{ id: shop.id, buildingId: shop.buildingId, districtId: shop.districtId, kind, open: shop.open, inventory, price,
       openStocked: shop.open && inventory >= 1, opensAtHour: 6, closesAtHour,
+      ...(declaredNightRetail ? { declaredNightRetail } : {}),
       scheduledOpenAtCurrentPhase: hour >= 6 && hour < closesAtHour }];
   });
   const sitesByBuilding = new Map(foodSites.map(shop => [shop.buildingId, shop]));
@@ -108,6 +120,7 @@ export function observeFoodAccess(state: FoodAccessState, world: FoodAccessWorld
     const estimatedArrivalPhaseMinute = walkingReference.minutes === null ? null
       : finite(hour * 60 + walkingReference.minutes, `actor ${actor.id} arrival phase minute`);
     const openingReference = destinationFoodShop ? {
+      ...(destinationFoodShop.declaredNightRetail ? { declaredNightRetail: { ...destinationFoodShop.declaredNightRetail } } : {}),
       opensAtHour: destinationFoodShop.opensAtHour, closesAtHour: destinationFoodShop.closesAtHour,
       scheduledOpenAtCurrentPhase: destinationFoodShop.scheduledOpenAtCurrentPhase,
       observedOpen: destinationFoodShop.open, estimatedArrivalPhaseMinute,

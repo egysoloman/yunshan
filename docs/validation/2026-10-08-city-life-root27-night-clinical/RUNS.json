@@ -1,0 +1,1403 @@
+{
+  "schema": "ROOT27-private-delivery-draft-v3",
+  "generatedAt": "2026-10-08T06:18:36.774401+00:00",
+  "overallStatus": "PARTIAL",
+  "isFinalDelivery": true,
+  "inputs": {
+    "agents": {
+      "path": "/workspace/yunshan/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    "prompt": {
+      "path": "/workspace/yunshan/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    "memoSnapshot": {
+      "path": "/workspace/yunshan/开发备忘录.md",
+      "bytes": 640929,
+      "sha256": "85833e88c7322daac93f7c1a0c1ba9531a29013a980997f74d4b63e85248c6be"
+    },
+    "memoReadBoundary": "ROOT27 recovery notes plus actual later429 build02/roof02/native05/native06 receipts and pure-original readback; completed receipts override earlier pending memo text.",
+    "previousMatrix": {
+      "path": "/workspace/yunshan/docs/validation/2026-10-07-city-life-root26-food-access/REQUIREMENTS-38.csv",
+      "bytes": 311232,
+      "sha256": "9253df699bd3d69a13a3c3d346cb836eed39cf7bdcb429bf67d06da874cdbe0b"
+    },
+    "subsystemGapReview": {
+      "path": "/workspace/yunshan-work/ROOT27-subsystem-gaps-20261007-01/ROOT27-SUBSYSTEM-GAPS.md",
+      "bytes": 22699,
+      "sha256": "3696760ed90cef1a26378c1798480b41d91d671d2731a56c0877f64efa7aaad7"
+    }
+  },
+  "currentSourceObservation": {
+    "at": "2026-10-08T06:18:09.045030+00:00",
+    "manifestSHA256": "f362b04c11f8b9acee2772888e09fc09e7c4410dc1d309a0c7c6055cf5de4d4a",
+    "inputFileCount": 429,
+    "allCurrentFilesHashMatchGateManifest": true,
+    "mismatchedPaths": [],
+    "changesSince427": {
+      "changed": [
+        "src/renderer.ts",
+        "src/simulation/night-retail.ts",
+        "src/simulation/power-grid.ts",
+        "src/simulation.ts"
+      ],
+      "added": [
+        "src/rendering/roof-end-finish.ts",
+        "tests/night-retail-bootstrap.test.ts"
+      ],
+      "removed": []
+    },
+    "note": "427 UI截图不覆盖后加429源码；文件数不是图身份，以完整manifest为准。",
+    "confirmation": "Same429 source map independently checked by NATIVE05-06-READBACK; all current confirmed gates share the identical encoded manifest SHA."
+  },
+  "implementedBoundary": {
+    "nightRetail": "原merchant/owner/workId、真实到场和原已资助当日剩余分钟、有限库存需求及供电；仅NPC；无新钱粮或午夜自动刷新480分钟。 在新代码下，符合条件的既有旧档也会惰性声明夜班；不声称所有旧档运行行为不变。",
+    "power": "原有限储能/水电消费与planned夜间负载历史、唯一任务来源及首次JSON预留；合成用例通过，默认World291无电网不覆盖本分支。 429新增首负荷声明资格：零需求、当前真实计量、非孤岛和可用源；实际task/工资/柜台仍受计量供电和原见证约束。",
+    "paidClinical": "clinical v2，一处实际诊所按稳定ID选择；max(100-health,symptomSeverity)→now-startedAt→patientId/orderId；原付费合同/材料/医生真实工作/每医两槽。",
+    "waitingDefinition": "登记以来年龄，含离场，不是连续现场候诊。",
+    "publicClinical": "公共原hook先行；未实现公私统一公平分诊。",
+    "newAndOldGames": "普通main仅无旧档时用新分诊工厂；旧clinical v1保持旧数组顺序、不暗升级；无clinic保持前工厂。",
+    "visual": "原三项微调之后，429按原profile和instance标记给屋顶端面添加陶边、木框/封檐、暖填充shader；0新增几何/碰撞/实例/draw批。新shader已通过正常出生的生产WebGL限定门；根仍ART_FAIL。",
+    "initialPowerTestScope": "5个synthetic module-host用例以供应账户谓词/参数电网验证资格；不构造自然大城行为证据。测试文件旧NOT_RUN注释仍在，实际执行状态以rules02回执为准。"
+  },
+  "historicalGates": [
+    {
+      "id": "native01",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-07T11:54:40.798149+00:00",
+      "endedAt": "2026-10-07T11:56:59.773393+00:00",
+      "wallSeconds": 138.975244,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/food-access-future-actual.ts",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/NATIVE01-PLAN.json"
+      ],
+      "inputFileCount": 421,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native01-gate/inputs-before.json",
+        "bytes": 46176,
+        "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native01-gate/receipt.json",
+        "bytes": 1040,
+        "sha256": "052598d53d03d6964109e0af4e3573592f8dd9738c0c6495b4d0a82cfb3a7061"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native01-gate/raw.log",
+        "bytes": 1526,
+        "sha256": "c4080bdaf4a757659d7cab3e8f679e2accdd88bae066b1da4877f2b0e31b6b26"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z"
+      ],
+      "boundary": "历史源码图；不作为当前427文件图自然运行/视觉完成证据。",
+      "fullOriginalEvidenceAvailable": false,
+      "availability": "receipt/log/source manifests/derived readbacks retained; complete SAVE/BUS/chunk originals lost after /tmp reset",
+      "revalidatedByDraftAuthor": false,
+      "primaryWindows": 16,
+      "coldShadowWindows": 8,
+      "reportedWindow": [
+        5608,
+        5672
+      ]
+    },
+    {
+      "id": "native02",
+      "reportedStatus": "FAIL",
+      "startedAt": "2026-10-07T12:26:28.018708+00:00",
+      "endedAt": "2026-10-07T12:27:12.891323+00:00",
+      "wallSeconds": 44.872615,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/food-access-future-actual.ts",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/NATIVE02-PLAN.json"
+      ],
+      "inputFileCount": 422,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native02-gate/inputs-before.json",
+        "bytes": 46280,
+        "sha256": "202b5573d6d708c02c8d32789d211f9cf10218bc206e3dce34fed51f121d2fe3"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native02-gate/receipt.json",
+        "bytes": 1040,
+        "sha256": "ffa03be32b67f7d9418877beee4115f3c7dc35598043fc2ec418027cf9ce3656"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native02-gate/raw.log",
+        "bytes": 8794,
+        "sha256": "ddd733c6cb3ee0e5f4bae703c19fc8ad0734dc45c941d18c0c5c907cbe4a4e0b"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z"
+      ],
+      "boundary": "历史源码图；不作为当前427文件图自然运行/视觉完成证据。",
+      "fullOriginalEvidenceAvailable": false,
+      "availability": "receipt/log/source manifests/derived readbacks retained; complete SAVE/BUS/chunk originals lost after /tmp reset",
+      "revalidatedByDraftAuthor": false,
+      "failureReason": "严格custody在22:00新增state.nightRetail时拒未知账户；前7完整窗保留历史记录，不改写为PASS。"
+    },
+    {
+      "id": "native03",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-07T12:30:29.256933+00:00",
+      "endedAt": "2026-10-07T12:32:33.301116+00:00",
+      "wallSeconds": 124.044183,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/food-access-future-actual.ts",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/NATIVE03-PLAN.json"
+      ],
+      "inputFileCount": 422,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native03-gate/inputs-before.json",
+        "bytes": 46280,
+        "sha256": "e60fe1baa089fba55984e6007bc2170ce4eb734746cddd958b86dff8fab2ba60"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native03-gate/receipt.json",
+        "bytes": 1040,
+        "sha256": "918f2f2e3cabc84bac2f46431b15fdfc9bf209951c80d6d523d057a9e575a323"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native03-gate/raw.log",
+        "bytes": 1750,
+        "sha256": "e0eda657e8f8ea0641da39155bd93c547b94d9f5a8b9dc79c970e7e9af77efea"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z"
+      ],
+      "boundary": "历史源码图；不作为当前427文件图自然运行/视觉完成证据。",
+      "fullOriginalEvidenceAvailable": false,
+      "availability": "receipt/log/source manifests/derived readbacks retained; complete SAVE/BUS/chunk originals lost after /tmp reset",
+      "revalidatedByDraftAuthor": false,
+      "primaryWindows": 16,
+      "coldShadowWindows": 8,
+      "reportedWindow": [
+        5608,
+        5672
+      ]
+    },
+    {
+      "id": "native04",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-07T12:40:02.502646+00:00",
+      "endedAt": "2026-10-07T12:43:51.488392+00:00",
+      "wallSeconds": 228.985746,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/food-access-future-actual.ts",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/NATIVE04-PLAN.json"
+      ],
+      "inputFileCount": 422,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native04-gate/inputs-before.json",
+        "bytes": 46280,
+        "sha256": "e60fe1baa089fba55984e6007bc2170ce4eb734746cddd958b86dff8fab2ba60"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native04-gate/receipt.json",
+        "bytes": 892,
+        "sha256": "a32d6e886b349d1e0f3e66cea8e88555a696d53b21ffe592c06ce928221bdb4b"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native04-gate/raw.log",
+        "bytes": 1665,
+        "sha256": "7dc1b8be3b29f32d6f64a65610f25ecd6297ba9ba588a3a4f3fe7bbf2bda16a2"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [],
+      "boundary": "历史源码图；不作为当前427文件图自然运行/视觉完成证据。",
+      "fullOriginalEvidenceAvailable": false,
+      "availability": "receipt/log/source manifests/derived readbacks retained; complete SAVE/BUS/chunk originals lost after /tmp reset",
+      "revalidatedByDraftAuthor": false,
+      "primaryWindows": 24,
+      "coldShadowWindows": 12,
+      "reportedWindow": [
+        5672,
+        5768
+      ]
+    },
+    {
+      "id": "night-rules01",
+      "reportedStatus": "FAIL",
+      "startedAt": "2026-10-07T13:06:21.137803+00:00",
+      "endedAt": "2026-10-07T13:06:48.318242+00:00",
+      "wallSeconds": 27.180439,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "tests/night-retail.test.ts",
+        "tests/retail-period.test.ts",
+        "tests/economy-resume-custody.test.ts"
+      ],
+      "inputFileCount": 423,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/night-rules01-gate/inputs-before.json",
+        "bytes": 46380,
+        "sha256": "e564537a5029df4c19bcb7ac9ed5d6ba6cbc05c26296e51a0260bda53695dc71"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/night-rules01-gate/receipt.json",
+        "bytes": 1317,
+        "sha256": "58e1c771e8d21ae4dbee42cd3b85e10a75988a4fce4f6904d8107b9b8843469f"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/night-rules01-gate/raw.log",
+        "bytes": 3623,
+        "sha256": "6c090257a8c4821512273af8d3ce6d0e81eb23cef8713f0d7ced2a0f524e7e46"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z",
+        "Z",
+        "Z"
+      ],
+      "boundary": "历史源码图；不作为当前427文件图自然运行/视觉完成证据。",
+      "counts": {
+        "tests": 26,
+        "pass": 25,
+        "fail": 1
+      },
+      "failureReason": "新正例只等6分钟，未覆盖原顾客25–60分钟decisionDeadline；其后只延长该测试真实等待上限，保留原失败。"
+    },
+    {
+      "id": "night-rules02-positive",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-07T13:08:02.797947+00:00",
+      "endedAt": "2026-10-07T13:08:07.572613+00:00",
+      "wallSeconds": 4.774666,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-name-pattern=an original funded merchant",
+        "tests/night-retail.test.ts"
+      ],
+      "inputFileCount": 423,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/night-rules02-positive-gate/inputs-before.json",
+        "bytes": 46380,
+        "sha256": "982e77ed0bf8d120cabcc40348102f27dbd1db5a62e1bd6d38727bcb50bfcf05"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/night-rules02-positive-gate/receipt.json",
+        "bytes": 973,
+        "sha256": "3c2d2b942d4b47b538fd49be5431c12ce9761a0f43d86d972951c91df0e689b8"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/night-rules02-positive-gate/raw.log",
+        "bytes": 233,
+        "sha256": "976d0de38be57dfdd0e9bb327cc59a13503aa3a6ee051f556fda731004cd97ef"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z"
+      ],
+      "boundary": "历史源码图；不作为当前427文件图自然运行/视觉完成证据。",
+      "counts": {
+        "tests": 1,
+        "pass": 1
+      }
+    },
+    {
+      "id": "power-rules01",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-07T13:09:30.779248+00:00",
+      "endedAt": "2026-10-07T13:09:54.983103+00:00",
+      "wallSeconds": 24.203855,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "tests/power-grid.test.ts",
+        "tests/power-grid-integration.test.ts",
+        "tests/power-grid-hydro.test.ts",
+        "tests/power-grid-hydro-integration.test.ts",
+        "tests/hydro-dispatch-history.test.ts",
+        "tests/hydro-dispatch-history-grid.test.ts",
+        "tests/hydro-grid-budget.test.ts"
+      ],
+      "inputFileCount": 423,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/power-rules01-gate/inputs-before.json",
+        "bytes": 46380,
+        "sha256": "982e77ed0bf8d120cabcc40348102f27dbd1db5a62e1bd6d38727bcb50bfcf05"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/power-rules01-gate/receipt.json",
+        "bytes": 1208,
+        "sha256": "fba0f0fc106d493eb25d14de42b54757c9a278768fdd041f106ee61183450cd2"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/power-rules01-gate/raw.log",
+        "bytes": 7307,
+        "sha256": "fbde5c81cc33db356839c0a603cac563da2f25b374f439499ad0f780f9a90d5f"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z"
+      ],
+      "boundary": "历史源码图；不作为当前427文件图自然运行/视觉完成证据。",
+      "counts": {
+        "tests": 67,
+        "pass": 67
+      }
+    },
+    {
+      "id": "visual-rules01",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-07T12:12:37.674075+00:00",
+      "endedAt": "2026-10-07T12:13:03.982182+00:00",
+      "wallSeconds": 26.308107,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=process",
+        "--test-concurrency=1",
+        "tests/architecture-bodies.test.ts",
+        "tests/architecture-detail.test.ts",
+        "tests/interior-lighting.test.ts",
+        "tests/architecture-wall-finish.test.ts"
+      ],
+      "inputFileCount": 421,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/visual-rules01-gate/inputs-before.json",
+        "bytes": 46176,
+        "sha256": "8c9eda83337ab9e3d1aa76ff6990a2693b3bf00ca9493e03abcd1633e89b14e5"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/visual-rules01-gate/receipt.json",
+        "bytes": 1549,
+        "sha256": "265025bc4ceccc872b9cdd6ffd3c77a0ff967a84a0bc11e96ca903bc045fe1c3"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/visual-rules01-gate/raw.log",
+        "bytes": 2764,
+        "sha256": "f65dd88789643e26b1eb2206cca9afaa2363a14992893bbf100f6a3a271d86be"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z",
+        "Z",
+        "Z",
+        "Z"
+      ],
+      "boundary": "历史源码图；不作为当前427文件图自然运行/视觉完成证据。",
+      "counts": {
+        "tests": 25,
+        "pass": 25
+      }
+    }
+  ],
+  "historicalSale": {
+    "evidenceLevel": "HISTORICAL_REPORTED_FROM_RETAINED_DERIVED_JSON_AND_LOGS",
+    "source": {
+      "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/NATIVE01-04-PURE-COMPARISON.v2.json",
+      "bytes": 696910,
+      "sha256": "b40184bb3a0cb4dd5141680bc74e31b3be16712ea41773624be11ec16949b959"
+    },
+    "sourceRun": "native04",
+    "graphInputCount": 422,
+    "clock": 5704,
+    "day": 3,
+    "hourText": "23:04",
+    "buyer": "citizen-367",
+    "shop": "shop-west-b54",
+    "foodUnits": 2,
+    "cost": 31.791896093653936,
+    "tax": 2.543351687492315,
+    "walletBefore": 352.1671782093785,
+    "walletAfter": 320.3752821157246,
+    "hungerBefore": 0,
+    "hungerAfter": 52,
+    "carriedFoodBefore": 0,
+    "carriedFoodAfter": 1,
+    "shopFoodBefore": 24,
+    "shopFoodAfter": 22,
+    "endClock": 5768,
+    "endTick": 2177,
+    "endLowFoodCitizens": 21,
+    "native04CounterMeals": 1,
+    "native04StoredMeals": 3,
+    "foodProduced": 0,
+    "materialProduced": 0,
+    "wagesPaid": 0,
+    "nextPayrollClock": 6780,
+    "notCurrentSourceNativeProof": true
+  },
+  "evidenceAvailability": {
+    "recoveryNotice": {
+      "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/RECOVERY-20261008.md",
+      "bytes": 524,
+      "sha256": "9ea0a1e8cd9b998030c0906ac560788fd766da1dd49639ee5714b3a36fdb9692"
+    },
+    "lost": [
+      "native01–04 complete SAVE/BUS/chunk original packages formerly under /tmp",
+      "temporary original night-power test draft/review artifacts stored only under /tmp"
+    ],
+    "retained": [
+      "gate receipts",
+      "raw logs",
+      "source hash manifests",
+      "derived JSON readbacks",
+      "three complete save files listed below"
+    ],
+    "fullOriginalAttachmentAvailable": false,
+    "doNotReconstructOrRelabelAsOriginal": true,
+    "comparisonV1Boundary": "首版BUS提取漏event wrapper，不能拿空sale列表否定原计数；v1仅保留失败/更正历史。",
+    "completeSaves": [
+      {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/INPUT-5608.original.save.json",
+        "bytes": 2992776,
+        "sha256": "bbaa6a7a5e0bfcda107d22e62a820c6aa65336b3e0a48266f00846e2306dad29",
+        "clock": 5608,
+        "completeFileAvailable": true,
+        "jsonParse": "PASS",
+        "historicalRecordedHashMatches": true,
+        "importOrSimulationRunByDraftAuthor": false
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/INPUT-5672-night03.original.save.json",
+        "bytes": 3415015,
+        "sha256": "9df6eec944ae4b79107f84c519a3c83f86e822ee2ae05b6748474baa1cd7e4d0",
+        "clock": 5672,
+        "completeFileAvailable": true,
+        "jsonParse": "PASS",
+        "historicalRecordedHashMatches": true,
+        "importOrSimulationRunByDraftAuthor": false
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/INPUT-5768-night04.original.save.json",
+        "bytes": 3588960,
+        "sha256": "37d5264f0f376d42b012735a3b20c6956ad4b5bfba57e00e1469b46778933660",
+        "clock": 5768,
+        "completeFileAvailable": true,
+        "jsonParse": "PASS",
+        "historicalRecordedHashMatches": true,
+        "importOrSimulationRunByDraftAuthor": false
+      }
+    ],
+    "new427UIOriginals": {
+      "available": true,
+      "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/recovery01",
+      "manifestDeclaredFiles": 103,
+      "verifiedByReadback": 103,
+      "note": "新UI原件持续保存在/workspace；这不恢复丢失的旧native01–04原件。"
+    },
+    "new429Originals": {
+      "roof02Available": true,
+      "roof02Path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/roof02",
+      "native05Available": true,
+      "native05Path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native05-originals",
+      "native06Status": "AVAILABLE_AND_READBACK_PASS",
+      "note": "独立新run，不补回旧native01–04原件。",
+      "native06Path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals",
+      "combinedReadback": {
+        "path": "/workspace/yunshan-work/ROOT27-delivery-draft-20261008-03/NATIVE05-06-READBACK.json",
+        "bytes": 975941,
+        "sha256": "03c14b88f5676c5cae0c4f8cb52cb974308928de9495515d06bca91d5dbd711a"
+      }
+    },
+    "fullOriginalAttachmentAvailableScope": "Historical native01-04 only; new native05/06 and screenshots are complete retained originals."
+  },
+  "pending": {
+    "currentSourceUIBrowser": {
+      "status": "NOT_RUN_FULL_CURRENT429_JOURNEY",
+      "receipt": null,
+      "prior427UiPassRecordedSeparately": true,
+      "current429BirthOnlyPassed": true
+    },
+    "clinicalNaturalAndNormalUIJourney": {
+      "status": "PENDING",
+      "receipt": null,
+      "priorUIProvedPolicyActivationOnly": true
+    },
+    "naturalZeroLoadFirstDemand": {
+      "status": "PENDING",
+      "receipt": null,
+      "syntheticRulePassIsNotNaturalCityProof": true
+    },
+    "completeReferenceArt": {
+      "status": "ART_FAIL",
+      "latestAcceptanceReceipt": {
+        "path": "/workspace/yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/ART-REVIEW.json",
+        "bytes": 975,
+        "sha256": "e5c123538d3259d5629df695cc2800fd5e276f33676f97846bdf000c707c885d"
+      },
+      "reviewedCurrent429Birth": true,
+      "fullReferenceTargetSatisfied": false
+    },
+    "payroll6780And14DaySteadyState": {
+      "status": "NOT_RUN",
+      "receipt": null
+    },
+    "macOSHardware": {
+      "status": "NOT_RUN",
+      "receipt": null
+    },
+    "extendedNaturalEconomy": {
+      "status": "NOT_RUN",
+      "completedWindow": [
+        5608,
+        5768
+      ],
+      "nextPayrollClock": 6780,
+      "remaining": "实际下一工资清算、持续生产供货与14日稳态；40有限主窗不等长期全城完成。"
+    }
+  },
+  "matrix": {
+    "generatedAt": "2026-10-08T06:18:36.774401+00:00",
+    "status": "PASS",
+    "mode": "Python CSV/byte preservation check only; no application test or Simulation",
+    "sourcePath": "/workspace/yunshan/docs/validation/2026-10-07-city-life-root26-food-access/REQUIREMENTS-38.csv",
+    "sourceSHA256": "9253df699bd3d69a13a3c3d346cb836eed39cf7bdcb429bf67d06da874cdbe0b",
+    "outputPath": "/workspace/yunshan-work/ROOT27-delivery-draft-20261008-03/REQUIREMENTS-38.csv",
+    "outputSHA256": "bd330d4181e211ae144d3c2ac663696b1efcaf6d373cea5da71e16023a4b3311",
+    "sourceRows": 38,
+    "sourceColumns": 52,
+    "outputRows": 38,
+    "outputColumns": 57,
+    "appendedColumns": [
+      "ROOT27计划",
+      "ROOT27实现",
+      "ROOT27运行",
+      "ROOT27验证",
+      "ROOT27剩余"
+    ],
+    "allOriginalCellsEqual": true,
+    "originalHeaderAndRowBytePrefixesPreserved": true,
+    "originalRowOrderPreserved": true,
+    "originalLineEndingsPreserved": true,
+    "all38Root27ValidationCellsStartPartial": true,
+    "priorDraftUnmodified": true
+  },
+  "revision": {
+    "number": 3,
+    "priorDirectory": "/workspace/yunshan-work/ROOT27-delivery-draft-20261008-02",
+    "priorFileSHA256": {
+      "REQUIREMENTS-38.csv": "6dae40de5c44627dc8864ecd2e7386b56ef80b7543993e414c7fd85700c2d416",
+      "SHA256SUMS": "77c523fdc090259f8f6ab79c98c88dcdc6651de609d010a8b6ac3eba6ef1ad65",
+      "MATRIX-PRESERVATION.json": "bb8552029af2f04200b9fe794d5d7522ae479c8518cbc4acf531f7fb4f4bdc89",
+      "RUNS.json": "8040d5478b6536dd73d7a7171c21861b5fee02021a5a5ca1f7c56fb04e13cb4c",
+      "REPORT.md": "da5ad090ae64934d5acc1b1809008bb3c37e15bee93220eed81154c7dc88ff4d"
+    },
+    "priorDraftUnmodified": true
+  },
+  "prior427ConfirmedGates": [
+    {
+      "id": "recovery-rules01",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T05:54:25.677945+00:00",
+      "endedAt": "2026-10-08T05:54:40.660476+00:00",
+      "wallSeconds": 14.982531,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "tests/night-retail-power.test.ts",
+        "tests/clinical-paid-triage.test.ts",
+        "tests/clinical-presence-regression.test.ts",
+        "tests/night-food-observations.test.ts",
+        "tests/food-access-observations.test.ts",
+        "tests/night-retail.test.ts",
+        "tests/economy-resume-custody.test.ts"
+      ],
+      "inputFileCount": 427,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-rules01-gate/inputs-before.json",
+        "bytes": 46817,
+        "sha256": "a9415b5af74d2339c121b79985382ecf0a5ada35ed16cfc912b4db94bfd2a4a9"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-rules01-gate/receipt.json",
+        "bytes": 2054,
+        "sha256": "4fe48e06e974b4d12ec181acc57ff5cc4b5f705d042bd59ac5a535c8f8e04390"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-rules01-gate/raw.log",
+        "bytes": 7961,
+        "sha256": "af3d603728276592fd714ebb1fce46b5626355111ddd9dfc0c0ecdf76308f8fb"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z",
+        "Z",
+        "Z",
+        "Z",
+        "Z",
+        "Z",
+        "Z"
+      ],
+      "boundary": "七测试文件的48例有限规则/夹具测试；合成电网与受控医疗不等全城自然端到端。",
+      "counts": {
+        "tests": 48,
+        "pass": 48,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "id": "recovery-types01",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T05:54:04.767878+00:00",
+      "endedAt": "2026-10-08T05:54:19.513059+00:00",
+      "wallSeconds": 14.745181,
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "inputFileCount": 427,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-types01-gate/inputs-before.json",
+        "bytes": 46817,
+        "sha256": "a9415b5af74d2339c121b79985382ecf0a5ada35ed16cfc912b4db94bfd2a4a9"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-types01-gate/receipt.json",
+        "bytes": 749,
+        "sha256": "b4b5890f81d4809b4d8fbc5a1191f6792bae6c83e9cdeaed408a3dac802b5d87"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-types01-gate/raw.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [],
+      "boundary": "仅tsc --noEmit类型检查，不等build/UI/native。"
+    },
+    {
+      "id": "recovery-build01",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T05:54:52.064962+00:00",
+      "endedAt": "2026-10-08T05:55:10.810384+00:00",
+      "wallSeconds": 18.745422,
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "inputFileCount": 427,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-build01-gate/inputs-before.json",
+        "bytes": 46817,
+        "sha256": "a9415b5af74d2339c121b79985382ecf0a5ada35ed16cfc912b4db94bfd2a4a9"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-build01-gate/receipt.json",
+        "bytes": 860,
+        "sha256": "92226a8404685c77cd97c291c0be57b6e80f3f92eaaa64e4c3305ff673af59bb"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-build01-gate/raw.log",
+        "bytes": 1061,
+        "sha256": "7159433850faf3298bf1f17ff4c20e19f42216cfb997a09898b236985db765be"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z"
+      ],
+      "boundary": "实际tsc --noEmit + vite build PASS；不代UI/native或参考美术验收。",
+      "warnings": [
+        "Some chunks are larger than 700 kB after minification."
+      ]
+    },
+    {
+      "id": "recovery-ui01",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T05:55:18.883236+00:00",
+      "endedAt": "2026-10-08T06:04:56.828685+00:00",
+      "wallSeconds": 577.945449,
+      "command": [
+        "node",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-plan/bounded-native-city-visual.mjs",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-plan/BOUND-RECOVERY01.json",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/recovery01"
+      ],
+      "inputFileCount": 427,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-ui01-gate/inputs-before.json",
+        "bytes": 46817,
+        "sha256": "a9415b5af74d2339c121b79985382ecf0a5ada35ed16cfc912b4db94bfd2a4a9"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-ui01-gate/receipt.json",
+        "bytes": 1396,
+        "sha256": "cafede09d71cd11c6089281cbce18b8393e227af127ac7ce6db974832fdb7aee"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-ui01-gate/raw.log",
+        "bytes": 304,
+        "sha256": "b817ca1937f1db4e8907a23df419091cdaed986e6515d7acb9dee72cf1880a12"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z",
+        "Z",
+        "Z"
+      ],
+      "boundary": "427生产bundle；普通fresh出生/真实W/E进店/到柜台限定门，不验证后来429用电/屋顶修补。",
+      "counts": {
+        "actions": 24,
+        "actionsPassed": 24,
+        "captures": 2
+      }
+    }
+  ],
+  "currentConfirmedGates": [
+    {
+      "id": "recovery-rules02",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T06:05:08.564970+00:00",
+      "endedAt": "2026-10-08T06:05:18.182084+00:00",
+      "wallSeconds": 9.617114,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "tests/night-retail-bootstrap.test.ts",
+        "tests/night-retail-power.test.ts",
+        "tests/night-retail.test.ts",
+        "tests/reference-roof-profile.test.ts"
+      ],
+      "inputFileCount": 429,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-rules02-gate/inputs-before.json",
+        "bytes": 47033,
+        "sha256": "f362b04c11f8b9acee2772888e09fc09e7c4410dc1d309a0c7c6055cf5de4d4a"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-rules02-gate/receipt.json",
+        "bytes": 1209,
+        "sha256": "e1bfc580f66389fda97b96182c142e8562a2713dd7458a3a95af29eb16e60a48"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-rules02-gate/raw.log",
+        "bytes": 2641,
+        "sha256": "e83c97b8cdfe733ee7b2609d8b98250c4edae57942a8fcdf24d28eafbd43c508"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z",
+        "Z"
+      ],
+      "boundary": "429图有限规则；新5例为synthetic module-host和参数电网，无自然大城启动证明；屋顶6例是几何规则，不是新材质GPU验收。",
+      "counts": {
+        "tests": 23,
+        "pass": 23,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "groups": {
+        "newSyntheticInitialPower": 5,
+        "existingNightRetail": 6,
+        "powerHistory": 6,
+        "existingRoofGeometry": 6
+      }
+    },
+    {
+      "id": "recovery-build02",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T06:05:30.323205+00:00",
+      "endedAt": "2026-10-08T06:05:47.737169+00:00",
+      "wallSeconds": 17.413964,
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "inputFileCount": 429,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-build02-gate/inputs-before.json",
+        "bytes": 47033,
+        "sha256": "f362b04c11f8b9acee2772888e09fc09e7c4410dc1d309a0c7c6055cf5de4d4a"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-build02-gate/receipt.json",
+        "bytes": 860,
+        "sha256": "5b730e5e5b90fbf5287cb0c78727cfc31794ba70bf1aefc8c9402628beabc8f4"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-build02-gate/raw.log",
+        "bytes": 1061,
+        "sha256": "f64cfacc06557a577fd1b97e28815e26317fbf036465f89bba3a909475fb2884"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z"
+      ],
+      "boundary": "429源tsc+vite实际PASS；大于700kB代码块警告保留。"
+    },
+    {
+      "id": "recovery-roof02",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T06:06:01.543423+00:00",
+      "endedAt": "2026-10-08T06:09:13.359121+00:00",
+      "wallSeconds": 191.815698,
+      "command": [
+        "node",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-plan/native-birth-roof-visual.mjs",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-plan/BOUND-ROOF02.json",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/roof02"
+      ],
+      "inputFileCount": 429,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-roof02-gate/inputs-before.json",
+        "bytes": 47033,
+        "sha256": "f362b04c11f8b9acee2772888e09fc09e7c4410dc1d309a0c7c6055cf5de4d4a"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-roof02-gate/receipt.json",
+        "bytes": 1386,
+        "sha256": "6ecbae871808d2407ed008c3636d1fca15715bf43c6cdb1335708dd70084646e"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-roof02-gate/raw.log",
+        "bytes": 282,
+        "sha256": "00ab11908c2d17d2286614b11459e2824a829ae2b9da36b97179ba3b5772930e"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z",
+        "Z",
+        "Z"
+      ],
+      "boundary": "429源仅正常出生、1暂停动作、1原图、0移动；不含柜台/购买/退出/重载/夜景/Mac。"
+    },
+    {
+      "id": "recovery-native05",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T06:09:43.602096+00:00",
+      "endedAt": "2026-10-08T06:11:27.849210+00:00",
+      "wallSeconds": 104.247114,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/food-access-future-actual.ts",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/NATIVE05-RECOVERY-PLAN.json"
+      ],
+      "inputFileCount": 429,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-native05-gate/inputs-before.json",
+        "bytes": 47033,
+        "sha256": "f362b04c11f8b9acee2772888e09fc09e7c4410dc1d309a0c7c6055cf5de4d4a"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-native05-gate/receipt.json",
+        "bytes": 1044,
+        "sha256": "a4700f11f646591e828e68b4c153f9761e175afef2817d8552c3dcced16a563b"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-native05-gate/raw.log",
+        "bytes": 1438,
+        "sha256": "296c329cb111a63a57a41f30e9ae1ee1344d7018e99dd7cf39653b694072a24b"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [
+        "Z"
+      ],
+      "boundary": "429源16主窗/8冷影子；原World291无powerGrid、clinical v1；不是有限电网首用电或自然v2分诊验证。"
+    },
+    {
+      "id": "recovery-native06",
+      "reportedStatus": "PASS",
+      "startedAt": "2026-10-08T06:14:17.498843+00:00",
+      "endedAt": "2026-10-08T06:16:51.421943+00:00",
+      "wallSeconds": 153.9231,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/food-access-future-actual.ts",
+        "/workspace/yunshan-work/ROOT27-night-food-20261007-01/NATIVE06-RECOVERY-PLAN.json"
+      ],
+      "inputFileCount": 429,
+      "beforeAfterManifestsEqual": true,
+      "manifest": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-native06-gate/inputs-before.json",
+        "bytes": 47033,
+        "sha256": "f362b04c11f8b9acee2772888e09fc09e7c4410dc1d309a0c7c6055cf5de4d4a"
+      },
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-native06-gate/receipt.json",
+        "bytes": 900,
+        "sha256": "45f3ac583cdcdcb091c648f92b37cd2c9911b50a31ffa8804228d3f99e4fb2cd"
+      },
+      "rawLog": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/recovery-native06-gate/raw.log",
+        "bytes": 1633,
+        "sha256": "c327d5b226c2fd33ea791f4fecc8c204b28530578847b82323c8a6e72d87b76b"
+      },
+      "rawHashMatchesReceipt": true,
+      "activeDescendants": [],
+      "retainedOwnedMemberStates": [],
+      "boundary": "当前429源从native05真实完整末档连续24主窗/12冷影子到5768；旧档clinical v1且无powerGrid，不冒自然v2诊疗/首用电或工资稳态。"
+    }
+  ],
+  "countsCannotBeSummed": {
+    "prior427RulePassCount": 48,
+    "current429RulePassCount": 23,
+    "hasOverlappingTests": true,
+    "doNotReportCombined71": true,
+    "reason": "源图不同且夜班/供电等用例重叠；未执行71项独立同源完整suite。"
+  },
+  "prior427UIEvidence": {
+    "result": {
+      "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/recovery01/RESULT.json",
+      "bytes": 51145,
+      "sha256": "c4953e0bbf2156d779dbf1356516b947cc22dca280ad6d33621385d3702d770e"
+    },
+    "resultStatus": "PASS_BOUNDED_NATIVE_BIRTH_AND_COUNTER_GRAPHICS",
+    "actions": 24,
+    "allActionStatusPass": true,
+    "originalCaptures": [
+      {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/recovery01/capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+        "bytes": 821331,
+        "sha256": "6333287c7f3127b735db273d83d7392939bea2d2eee519986fa8715959df76c1"
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/recovery01/capture-02-REAL-WALK-SALE-POINT.ORIGINAL.png",
+        "bytes": 633283,
+        "sha256": "81d0dd3143de4ba90111c831308e0a61a6a2bc8d41fa46e0ed24b4877310168e"
+      }
+    ],
+    "manifestReadback": {
+      "declaredFiles": 103,
+      "hashAndLengthPass": 103,
+      "mode": "read-only bytes; no browser or Simulation execution by drafter"
+    },
+    "scope": "Actual normal fresh v8, native W walking on original navigation, native E entry and native floor-plan walking to sale point. Two original first-person captures. No purchase, exit, persistence reload, night scene or Mac performance acceptance on this build.",
+    "platform": "Linux Chromium, ANGLE SwiftShader software GPU",
+    "injectedGameState": false,
+    "requestedWSeconds": 2.4,
+    "observedWSeconds": 2.5175999999999767,
+    "initialSave": {
+      "file": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/recovery01/actual-born.save.json.gz",
+        "bytes": 317376,
+        "sha256": "3fd3386e101a2f47058677f6c817c5d43b1292731effd6f4a5c6bb3093b79ef1"
+      },
+      "decodedBytes": 1976966,
+      "decodedSHA256": "81dea312565cb32ac65b1adab9bf7a301b2f55607be4ee60b03cf23ced85fa89",
+      "clinicalVersion": 2,
+      "selectedClinic": "academy-b15",
+      "citizens": 616,
+      "clinicalOrderCount": 0,
+      "clinicalStats": {
+        "funded": 0,
+        "purchasePaid": 0,
+        "serviceFees": 0,
+        "refunded": 0,
+        "completed": 0,
+        "cancelled": 0
+      },
+      "boundary": "激活声明，不是自然就医/治疗完成；未做持久重载。"
+    },
+    "originalResultArtStatus": "NOT_REVIEWED",
+    "rootArtReview": {
+      "path": "/workspace/yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/ART-REVIEW.json",
+      "bytes": 975,
+      "sha256": "e5c123538d3259d5629df695cc2800fd5e276f33676f97846bdf000c707c885d"
+    },
+    "rootArtResult": "ART_FAIL",
+    "new429ShaderCovered": false,
+    "rootArtReviewNote": "The shared review now also includes the later429 birth; prior427 RESULT itself retains NOT_REVIEWED."
+  },
+  "current429RoofEvidence": {
+    "result": {
+      "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/roof02/RESULT.json",
+      "bytes": 11200,
+      "sha256": "9b568023d9f9b17f66d0af5a35cad76cabad112622d4e9db38b515c4252ede55"
+    },
+    "reportedStatus": "PASS_NATIVE_BIRTH_ROOF_GRAPHICS",
+    "actions": 1,
+    "captures": 1,
+    "movementPulses": 0,
+    "naturalPlayerTravel": false,
+    "injectedGameState": false,
+    "scope": "Actual normal fresh v8 birth camera and production WebGL roof material only. No movement, counter, purchase, exit, persistence reload, night or Mac hardware acceptance on this build.",
+    "platform": "Linux Chromium, ANGLE SwiftShader software GPU",
+    "manifestReadback": {
+      "declaredFiles": 22,
+      "hashAndLengthPass": 22
+    },
+    "originalImage": {
+      "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/ui-originals/roof02/capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+      "bytes": 856151,
+      "sha256": "a838904872f599f72370997f36ac72e0d9a47bd97b8fd3880faf8e2b37505c55"
+    },
+    "comparison": {
+      "path": "/workspace/yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/BIRTH-COMPARISON.json",
+      "bytes": 966,
+      "sha256": "c119224dafe022b6d09919316ac04f51b68b999d1bbb291d30fae363f94293bb"
+    },
+    "sameCompleteSaveBytes": true,
+    "sameCompleteSaveSHA256": "54b7e456a5768619a06bab455cf0b5aed7f09ef5034bd573c48c3fb5a28b15fd",
+    "sameBodyCameraTime": true,
+    "drawCallsBeforeAndAfter": 512,
+    "trianglesBeforeAndAfter": 1092650,
+    "notAPerformanceBenchmark": true,
+    "originalResultArtStatus": "NOT_REVIEWED",
+    "rootArtReview": {
+      "path": "/workspace/yunshan/docs/validation/2026-10-08-city-life-root27-night-clinical/ART-REVIEW.json",
+      "bytes": 975,
+      "sha256": "e5c123538d3259d5629df695cc2800fd5e276f33676f97846bdf000c707c885d"
+    },
+    "rootArtResult": "ART_FAIL"
+  },
+  "currentNativeEvidence": {
+    "native05": {
+      "result": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native05-originals/RESULT.json",
+        "bytes": 1508,
+        "sha256": "125b4b2c97b273fb1893fe2f59e953516f22f5e2e782bdc6b21d3a3ae35b05b9"
+      },
+      "reportedResult": {
+        "status": "ACTUAL_COMPLETED",
+        "failure": null,
+        "constructors": 2,
+        "imports": 2,
+        "shadowSteps": 8,
+        "shadowReturned": 8,
+        "shadowExact": 8,
+        "ordinaryCalls": 16,
+        "returnedWindows": 16,
+        "completedWindows": 16,
+        "readers": 16,
+        "inputSaveSHA256": "bbaa6a7a5e0bfcda107d22e62a820c6aa65336b3e0a48266f00846e2306dad29",
+        "terminalSaveSHA256": "9df6eec944ae4b79107f84c519a3c83f86e822ee2ae05b6748474baa1cd7e4d0",
+        "tick": 2153,
+        "clock": 5672,
+        "commands": 0,
+        "injectedBodiesMoneyNeedsStockRolesTime": 0,
+        "bytesBeforeResult": 48456988,
+        "elapsedSeconds": 102.969,
+        "captureFailures": [],
+        "persistenceFailures": [],
+        "conservationViolations": [],
+        "maximumResidual": {
+          "cash": 3.4924596548080444e-10,
+          "food": 0,
+          "debt": 6.821210263296962e-13,
+          "fiscal": 3.4422242833898054e-11
+        },
+        "actualCounts": {
+          "foodProduced": 0,
+          "materialProduced": 0,
+          "storedMeals": 1,
+          "counterMeals": 35,
+          "playerMeals": 0,
+          "npcEarned": 132.349058245614,
+          "npcPaid": 0,
+          "publicNpcPaid": 0,
+          "privateNpcPaid": 0,
+          "npcPaymentCount": 0,
+          "canonicalEarnedCount": 48,
+          "fullSettlementCount": 0,
+          "fiscalEvents": -11.376452383543576,
+          "fiscalLedger": 0,
+          "fiscalLifecycle": 0
+        },
+        "scope": "New run after environment recovery; current final source graph. Exact durable original5608 input. Re-observe natural declarations, 16 main + 8 cold future. No restoration claim for vanished old native01-04 originals; no commands or state injections."
+      },
+      "originalDirectory": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native05-originals",
+      "fullOriginalEvidenceAvailable": true,
+      "originalReadback": {
+        "verifiedReferencedGzipArtifacts": 205,
+        "encodedAndDecodedHashAndLengthFailures": 0,
+        "categories": {
+          "saveBusCustodyTrace": 68,
+          "partitionParts": 129,
+          "coldShadows": 8
+        },
+        "shadowRawBytesEqualPrimary": 8,
+        "allPrimaryPhaseRecordsComplete": 160,
+        "mode": "read-only static bytes audit, no Simulation/import/step by delivery agents"
+      },
+      "terminalSave": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native05-originals/frames/0016-ordinary-016/whole-save.json.gz",
+        "bytes": 531268,
+        "sha256": "7555319593b9dcce9b0f8140aef9c9f394c326b0cbb2271d93e9c9ad09c375d7",
+        "decodedBytes": 3415015,
+        "decodedSHA256": "9df6eec944ae4b79107f84c519a3c83f86e822ee2ae05b6748474baa1cd7e4d0"
+      },
+      "loadedClinicalVersion": 1,
+      "powerGridPresent": false,
+      "citizens": 616,
+      "terminalHungryUnder30": 22,
+      "nightCounterSalesThrough5672": 0,
+      "nightOperators": [
+        {
+          "id": "citizen-300",
+          "shop": "shop-west-b54",
+          "servedMinutes": 32
+        },
+        {
+          "id": "citizen-531",
+          "shop": "shop-west-b41",
+          "servedMinutes": 32
+        }
+      ],
+      "boundary": "新run独立持久原件；不修复旧native01–04丢失原件，也不证明此旧档不存在的电网/v2分诊。"
+    },
+    "native06": {
+      "result": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/RESULT.json",
+        "bytes": 1626,
+        "sha256": "93437aa8ca6dc8eda7c4c606720aadbf919d814c4a9711d80774944e7a82d988"
+      },
+      "reportedResult": {
+        "status": "ACTUAL_COMPLETED",
+        "failure": null,
+        "constructors": 2,
+        "imports": 2,
+        "shadowSteps": 12,
+        "shadowReturned": 12,
+        "shadowExact": 12,
+        "ordinaryCalls": 24,
+        "returnedWindows": 24,
+        "completedWindows": 24,
+        "readers": 24,
+        "inputSaveSHA256": "9df6eec944ae4b79107f84c519a3c83f86e822ee2ae05b6748474baa1cd7e4d0",
+        "terminalSaveSHA256": "37d5264f0f376d42b012735a3b20c6956ad4b5bfba57e00e1469b46778933660",
+        "tick": 2177,
+        "clock": 5768,
+        "commands": 0,
+        "injectedBodiesMoneyNeedsStockRolesTime": 0,
+        "bytesBeforeResult": 97963059,
+        "elapsedSeconds": 153.255,
+        "captureFailures": [],
+        "persistenceFailures": [],
+        "conservationViolations": [],
+        "maximumResidual": {
+          "cash": 2.3283064365386963e-10,
+          "food": 0,
+          "debt": 4.547473508864641e-13,
+          "fiscal": 4.5488945943361614e-11
+        },
+        "actualCounts": {
+          "foodProduced": 0,
+          "materialProduced": 0,
+          "storedMeals": 3,
+          "counterMeals": 1,
+          "playerMeals": 0,
+          "npcEarned": 194.66963621052642,
+          "npcPaid": 0,
+          "publicNpcPaid": 0,
+          "privateNpcPaid": 0,
+          "npcPaymentCount": 0,
+          "canonicalEarnedCount": 59,
+          "fullSettlementCount": 0,
+          "fiscalEvents": -79.865693645841,
+          "fiscalLedger": 0,
+          "fiscalLifecycle": 0
+        },
+        "scope": "New final429 source continuation from exact actual native05 terminal. 24 main windows and 12 cold future through day4 00:08. Zero commands or body/money/needs/roles/stock/time injection. New retained originals; not restoration of vanished old native01-04. Legacy World291 has no declared finite grid; no natural finite-grid/bootstrap or long-term steady-state claim."
+      },
+      "originalDirectory": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals",
+      "fullOriginalEvidenceAvailable": true,
+      "terminalSave": {
+        "path": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0024-ordinary-024/whole-save.json.gz",
+        "file": "frames/0024-ordinary-024/whole-save.json.gz",
+        "rawBytes": 3588960,
+        "rawSHA256": "37d5264f0f376d42b012735a3b20c6956ad4b5bfba57e00e1469b46778933660",
+        "encodedBytes": 562500,
+        "encodedSHA256": "e7c1897633d48edbb1df12ee7d7442a88128bae103b1d78b1f449a936d35094f",
+        "decodedSha256": "37d5264f0f376d42b012735a3b20c6956ad4b5bfba57e00e1469b46778933660"
+      },
+      "terminal": {
+        "sourceFile": "/workspace/yunshan-work/ROOT27-night-food-20261007-01/native06-originals/frames/0024-ordinary-024/whole-save.json.gz",
+        "clock": 5768,
+        "tick": 2177,
+        "complete": true,
+        "decodedSha256": "37d5264f0f376d42b012735a3b20c6956ad4b5bfba57e00e1469b46778933660",
+        "citizenCount": 616,
+        "aliveCount": 616,
+        "lowHungerCount": 21,
+        "lowHungerWithoutCarriedFoodCount": 21,
+        "hasDeclaredPowerGridState": false,
+        "clinicalVersion": 1
+      },
+      "saleAndJobs": {
+        "path": "/workspace/yunshan-work/ROOT27-delivery-draft-20261008-03/NATIVE06-SALE-AND-JOBS.json",
+        "bytes": 34089,
+        "sha256": "11b2f5e82282d3649bc1423889a89713785af1586f6ebd8709b2800c09d76aaf"
+      },
+      "loadedClinicalVersion": 1,
+      "powerGridPresent": false,
+      "boundary": "独立新run原件，接真实native05末档；新429代码下旧档符合条件可惰性启用夜经营，clinical v1本身不暗升级。"
+    },
+    "combinedReadback": {
+      "artifact": {
+        "path": "/workspace/yunshan-work/ROOT27-delivery-draft-20261008-03/NATIVE05-06-READBACK.json",
+        "bytes": 975941,
+        "sha256": "03c14b88f5676c5cae0c4f8cb52cb974308928de9495515d06bca91d5dbd711a"
+      },
+      "status": "PASS",
+      "summary": {
+        "ordinaryWindows": 40,
+        "coldShadowWindows": 20,
+        "primaryPhases": 400,
+        "phaseHistogram": {
+          "time": 40,
+          "environment": 40,
+          "energy": 40,
+          "traffic": 40,
+          "people": 40,
+          "commerce": 40,
+          "finance": 40,
+          "security": 40,
+          "politics": 40,
+          "feedback": 40
+        },
+        "maximumAbsoluteResidual": {
+          "cash": 3.4924596548080444e-10,
+          "food": 0,
+          "debt": 6.821210263296962e-13,
+          "fiscal": 4.5488945943361614e-11
+        },
+        "everyResidualRecomputedExactly": true,
+        "originalFiles": 529,
+        "originalBytes": 146423181,
+        "encodedAndRawReferenceChecks": 445
+      },
+      "continuationChain": {
+        "native05TerminalEqualsNative06InputBytes": true,
+        "same429SourceMap": true
+      },
+      "notHistoricalRuns": true
+    }
+  },
+  "currentSaleEvidence": {
+    "artifact": {
+      "path": "/workspace/yunshan-work/ROOT27-delivery-draft-20261008-03/NATIVE06-SALE-AND-JOBS.json",
+      "bytes": 34089,
+      "sha256": "11b2f5e82282d3649bc1423889a89713785af1586f6ebd8709b2800c09d76aaf"
+    },
+    "status": "PASS",
+    "epoch": "native06 current429; original BUS and commerce before/after",
+    "clock": 5704,
+    "buyer": "citizen-367",
+    "shop": "shop-west-b54",
+    "quantity": 2,
+    "cost": 31.791896093653936,
+    "wallet": [
+      352.1671782093785,
+      320.3752821157246
+    ],
+    "hunger": [
+      0,
+      52
+    ],
+    "carriedFood": [
+      0,
+      1
+    ],
+    "shopStock": [
+      24,
+      22
+    ],
+    "queuedTax": [
+      0,
+      2.543351687492315
+    ],
+    "finalJobs": [
+      {
+        "operator": "citizen-300",
+        "servedMinutes": 64,
+        "endedAt": 5760
+      },
+      {
+        "operator": "citizen-531",
+        "servedMinutes": 36,
+        "endedAt": 5736
+      }
+    ],
+    "terminalClock": 5768,
+    "terminalCitizens": 616,
+    "terminalAlive": 616,
+    "terminalHungerUnder30": 21,
+    "wagesPaid": 0,
+    "productionFoodAndMaterial": 0,
+    "nextPayrollClock": 6780
+  },
+  "deliveryScope": "Final report for ROOT27 implementation checkpoint; overall goal remains PARTIAL. Library result is recorded separately; no upload success is inferred here.",
+  "draftAuthoringScope": {
+    "outputDirectory": "/workspace/yunshan-work/ROOT27-delivery-draft-20261008-03",
+    "sharedSourceOrDocsModified": false,
+    "nodeSimulationTestsBuildOrBrowserRunByDraftAuthor": false,
+    "externalUploadCommitPush": false
+  },
+  "rootIntegration": {
+    "reportIntegrated": true,
+    "implementationAndHeavyRunsOwnedByRoot": true,
+    "functionalInputCount": 429
+  }
+}

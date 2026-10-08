@@ -6,6 +6,7 @@ import {
 } from './power-grid-hydro';
 import { Flow, type Arc } from './power-network-flow';
 import { shopLifecycleAllowsOperation } from './shop_lifecycle';
+import { shopPlannedOpen } from './night-retail';
 import type { Simulation } from '../simulation';
 import type { Command, CommandResult, SimState, Vec3, WorldDefinition } from '../types';
 
@@ -112,7 +113,7 @@ export function dispatchPowerGrid(world: WorldDefinition, state: SimState, minut
   for (const item of sorted(grid.storage)) { const stored = previous.storedPMinutes[item.id]; need(finite(stored) && stored >= 0 && stored <= item.initialStoredPMinutes + EPS, '库存不得越过世界声明'); const available = Math.min(item.maximumP, stored / minutes); sourceArcs.set(item.id, flow.edge(source, nodeRefs.get(item.nodeId)!.input, available)); output.sources[item.id] = { availableP: available, suppliedP: 0, consumedPMinutes: 0 }; output.availableP += available; if (stored <= EPS) output.diagnostics.exhaustedStorageIds.push(item.id); }
   for (const item of sorted(grid.links)) { const a = nodeRefs.get(item.from)!, b = nodeRefs.get(item.to)!, capacity = item.closed ? item.capacityP : 0; linkArcs.set(item.id, { forward: flow.edge(a.output, b.input, capacity), backward: flow.edge(b.output, a.input, capacity) }); }
   const night = state.hour < 6 || state.hour >= 19, loads: Load[] = [];
-  for (const item of [...grid.buildings].sort((a, b) => a.buildingId.localeCompare(b.buildingId))) { const demand = item.baseP + (night ? item.nightP : 0) + item.shopP * state.shops.filter(shop => shop.buildingId === item.buildingId && state.hour >= 6 && state.hour < (world.buildings.find(site => site.id === shop.buildingId)!.kind === 'market' ? 22 : 20) && shopLifecycleAllowsOperation(state, shop.id)).length; loads.push({ key: 'building:' + item.buildingId, kind: 'building', id: item.buildingId, nodeId: item.nodeId, demandP: demand }); }
+  for (const item of [...grid.buildings].sort((a, b) => a.buildingId.localeCompare(b.buildingId))) { const demand = item.baseP + (night ? item.nightP : 0) + item.shopP * state.shops.filter(shop => shop.buildingId === item.buildingId && shopPlannedOpen(state, world.buildings.find(site => site.id === shop.buildingId)!, shop.id, at) && shopLifecycleAllowsOperation(state, shop.id)).length; loads.push({ key: 'building:' + item.buildingId, kind: 'building', id: item.buildingId, nodeId: item.nodeId, demandP: demand }); }
   for (const vehicle of sorted(state.vehicles)) loads.push({ key: 'vehicle:' + vehicle.id, kind: 'vehicle', id: vehicle.id, nodeId: grid.transport.find(item => item.edgeId === vehicle.edgeId)?.nodeId ?? null, demandP: .08, edgeId: vehicle.edgeId });
   for (const load of loads) { output.demandP += load.demandP; if (load.nodeId !== null) demandArcs.set(load.key, flow.edge(nodeRefs.get(load.nodeId)!.output, sink, load.demandP)); else (load.kind === 'building' ? output.diagnostics.unconnectedBuildings : output.diagnostics.unconnectedVehicles).push(load.id); }
   flow.solve(source, sink);
@@ -128,6 +129,29 @@ export function dispatchPowerGrid(world: WorldDefinition, state: SimState, minut
   const stored = { ...previous.storedPMinutes }, consumed = { ...previous.consumedPMinutes };
   for (const item of grid.storage) { const used = output.sources[item.id].consumedPMinutes; stored[item.id] = Math.max(0, stored[item.id] - used); consumed[item.id] += used; }
   return { ...previous, storedPMinutes: stored, consumedPMinutes: consumed, dispatch: output, totals: { demandedPMinutes: previous.totals.demandedPMinutes + output.demandP * minutes, servedPMinutes: previous.totals.servedPMinutes + output.servedP * minutes, unservedPMinutes: previous.totals.unservedPMinutes + output.unservedP * minutes } };
+}
+/** A connected, currently unloaded site may request a first measured load.
+ * This is only declaration eligibility: it never grants supply or paid work.
+ * Hydro requires its private live owner; v1 retains its existing current-meter
+ * trust boundary. An absent/stale meter, isolated node or unavailable source
+ * cannot bootstrap. A nonzero demand must use the actual supply ratio instead.
+ */
+export function gridBuildingCanRequestInitialLoad(state: SimState, buildingId: string): boolean {
+  const body = state.powerGrid; if (!body) return false;
+  if (body.version === 2) {
+    const dispatch = body.dispatch, now = state.day * 1440 + state.hour * 60, meter = dispatch?.buildings[buildingId];
+    if (!isCanonicalHydroDispatch(state) || !dispatch || dispatch.tick !== state.tick || dispatch.at !== now
+      || !meter || typeof meter.nodeId !== 'string') return false;
+    return meter.demandKW === 0 && meter.servedKW === 0 && meter.unservedKW === 0
+      && finite(dispatch.availableKW) && dispatch.availableKW > EPS
+      && !dispatch.diagnostics.islandNodeIds.includes(meter.nodeId);
+  }
+  const dispatch = body.dispatch, now = state.extension?.lastUpdate ?? state.day * 1440 + state.hour * 60, meter = dispatch?.buildings[buildingId];
+  if (!dispatch || dispatch.tick !== state.tick || Math.abs(dispatch.at - now) > EPS
+    || !meter || typeof meter.nodeId !== 'string') return false;
+  return meter.demandP === 0 && meter.servedP === 0 && meter.unservedP === 0
+    && finite(dispatch.availableP) && dispatch.availableP > EPS
+    && !dispatch.diagnostics.islandNodeIds.includes(meter.nodeId);
 }
 /** The per-building meter takes precedence over legacy city averages. */
 export function gridBuildingSupplyRatio(state: SimState, buildingId: string): number {

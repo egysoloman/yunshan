@@ -7,6 +7,7 @@ import { NEARBY_MEAL_ROUTE_POLICY } from './simulation/meal-route';
 import { upgradeServiceMaterialScheduling } from './host/upgrade-service-material-scheduling';
 import { upgradeFreightDelivery } from './host/upgrade-freight-delivery';
 import { upgradeResidentTuition } from './host/upgrade-resident-tuition';
+import { selectPaidClinicalTriageForNewCity } from './simulation/clinical';
 
 export const PRODUCT_CITY_LAYOUT = 'current-v6' as const;
 
@@ -63,6 +64,19 @@ export async function createLearningCityLifeProductCity(world: WorldDefinition):
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(before));
   const sha256 = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
   const result = await upgradeResidentTuition(simulation, sha256);
+  if (!result.ok) throw new Error(result.message);
+  return simulation;
+}
+
+/** Fresh-city paid triage at one actual clinic, selected by stable ID order.
+ * Earlier recipes and imported saves retain their declared clinical rules.
+ * A world without a clinic keeps the preceding recipe unchanged. */
+export async function createTriagedCityLifeProductCity(world: WorldDefinition): Promise<Simulation> {
+  const simulation = await createLearningCityLifeProductCity(world);
+  const site = world.buildings.filter(site => site.kind === 'clinic')
+    .sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0)[0];
+  if (!site) return simulation;
+  const result = selectPaidClinicalTriageForNewCity(simulation, site.id);
   if (!result.ok) throw new Error(result.message);
   return simulation;
 }

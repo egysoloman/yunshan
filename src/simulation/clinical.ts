@@ -4,6 +4,7 @@ import { floorPlanSupport, getBuildingBody, getBuildingUsePoints } from '../arch
 import { homeRestPointAt, homeRestPointBlockedByVoxels } from './home-rest';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import { gridBuildingSupplyRatio } from './power-grid';
+import { PAID_CLINICAL_TRIAGE_POLICY, paidClinicalTriageOrders, type PaidClinicalTriageSelection } from './clinical-paid-triage';
 import type { Building, BuildingFunctionPoint, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 
 export interface ClinicalReceipt { commodity: 'materials'; procurementId: string; purchasedAt: number; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; unitPrice: number; gross: number; net: number }[] }
@@ -19,7 +20,8 @@ export interface ClinicalOrder {
 export interface ClinicStock { receivedUnits: number; consumedUnits: number; availableUnits: number; archivedPurchasedUnits: number; archivedConsumedUnits: number }
 export interface ClinicalTotals { funded: number; purchasePaid: number; serviceFees: number; refunded: number; completed: number; cancelled: number }
 export interface ClinicalState {
-  version: 1; nextOrderId: number; orders: ClinicalOrder[]; stock: Record<string, ClinicStock>; nextVisitAt: Record<string, number>;
+  version: 1 | 2; paidTriage?: PaidClinicalTriageSelection;
+  nextOrderId: number; orders: ClinicalOrder[]; stock: Record<string, ClinicStock>; nextVisitAt: Record<string, number>;
   stats: ClinicalTotals; archived: ClinicalTotals & { count: number };
 }
 const EPS = 1e-7, LIMIT = 256, FEE = 30, MINUTES = 20, MONEY_LIMIT = 1e9;
@@ -337,6 +339,18 @@ function procure(simulation: Simulation, order: ClinicalOrder, site: Building): 
   simulation.emitEvent({ type: 'wholesale', shopId: source.shop.id, districtId: source.shop.districtId, amount: gross, quantity: 1, unitPrice: gross, siteId: site.id, procurementId: receipt.procurementId, purpose: 'clinical-material' });
   order.state = 'awaitingDoctor'; order.lastReason = clinicalPowerAvailable(s, site.id) ? '实物已购入并为患者保留；等待医生实际在岗。' : '已购材料和托管款保留；声明电网未足额供给该诊所，等候当前真实供能。';
 }
+/** Explicit new-city host choice. Existing/imported contracts are never
+ * upgraded by module import, phase processing, or load. The selector creates
+ * no patients, stock, doctors, cash, time, role or public-budget authority. */
+export function selectPaidClinicalTriageForNewCity(simulation: Simulation, siteId: string): CommandResult {
+  const s = simulation.state, c = s.clinical, site = simulation.worldDefinition.buildings.find(site => site.id === siteId);
+  if (s.tick !== 0 || clock(s) !== 480 || !c || JSON.stringify(c) !== JSON.stringify(initialize()))
+    return { ok: false, message: '只可为尚未推进且没有临床权利的新城显式选择分诊；旧档不自动升级。' };
+  if (!site || site.kind !== 'clinic') return { ok: false, message: '须选择此世界的一个实际诊所。' };
+  s.clinical = { ...c, version: 2, paidTriage: { policyId: PAID_CLINICAL_TRIAGE_POLICY, siteId } };
+  return { ok: true, message: '此具名诊所的既有付费订单按实际严重度和登记等候时间派发原容量；公共服务规则保留。' };
+}
+
 export function installClinical(simulation: Simulation): void {
   const sites = new Map(simulation.worldDefinition.buildings.map(site => [site.id, site]));
   simulation.state.clinical = initialize();
@@ -344,7 +358,16 @@ export function installClinical(simulation: Simulation): void {
   simulation.onPhase('people', (s, minutes) => {
     const c = s.clinical!;
     const availableDoctors = new Map<string, Citizen[]>();
-    for (const order of c.orders) {
+    // Only the declared paid queue changes its actual claim order. The saved
+    // insertion order stays intact; public patients retain their original
+    // earlier hooks and share the unchanged two-slot/doctor-time allocator.
+    const treatmentOrder = paidClinicalTriageOrders(c.orders, c.version === 2 ? c.paidTriage : undefined, clock(s), order => {
+      const patient = profile(s, order.patientId), payer = profile(s, order.payerId), episode = s.pathology?.episodes[order.patientId];
+      const currentSymptoms = episode && episode.lastObservedAt === clock(s)
+        && ['symptomatic', 'recovering'].includes(episode.phase) ? episode.severity : 0;
+      return { alive: patient?.alive ?? false, payerAlive: payer?.alive ?? false, health: patient?.health ?? NaN, symptomSeverity: currentSymptoms };
+    });
+    for (const order of treatmentOrder) {
       if (terminal(order)) continue;
       if (order.cancelledAt !== null || !profile(s, order.patientId).alive || !profile(s, order.payerId).alive) { stop(simulation, order); continue; }
       const site = sites.get(order.siteId)!;
@@ -390,7 +413,10 @@ export function validateClinicalState(s: SimState, world: WorldDefinition): void
   const number = (value: unknown, min: number, max: number, label: string, integer = false): void => ensure(typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max && (!integer || Number.isInteger(value)), label);
   const close = (a: number, b: number, label: string) => ensure(Math.abs(a - b) <= EPS * Math.max(1, Math.abs(a), Math.abs(b)), label);
   const sites = new Map(world.buildings.map(site => [site.id, site])), ids = new Set(['player', ...s.citizens.map(person => person.id)]), sourceIds = new Set(s.shops.filter(shop => sites.get(shop.buildingId)!.kind === 'workshop').map(shop => shop.id)), now = clock(s);
-  ensure(object(c) && c.version === 1, '版本'); number(c.nextOrderId, 1, 1e9, '订单序号', true); ensure(Array.isArray(c.orders) && c.orders.length <= LIMIT && object(c.stock) && object(c.nextVisitAt), '容器');
+  ensure(object(c) && (c.version === 1 || c.version === 2), '版本');
+  if (c.version === 1) ensure(c.paidTriage === undefined, '旧临床版本没有隐式分诊');
+  else ensure(object(c.paidTriage) && Object.keys(c.paidTriage).length === 2
+    && c.paidTriage.policyId === PAID_CLINICAL_TRIAGE_POLICY && sites.get(c.paidTriage.siteId)?.kind === 'clinic', '单诊所显式付费分诊来源'); number(c.nextOrderId, 1, 1e9, '订单序号', true); ensure(Array.isArray(c.orders) && c.orders.length <= LIMIT && object(c.stock) && object(c.nextVisitAt), '容器');
   ensure(object(c.stats) && object(c.archived), '累计回执');
   for (const totals of [c.stats, c.archived]) for (const key of ['funded', 'purchasePaid', 'serviceFees', 'refunded', 'completed', 'cancelled'] as const) number(totals[key], 0, 3e10, `累计${key}`, key === 'completed' || key === 'cancelled');
   number(c.archived.count, 0, 1e9, '归档计数', true); close(c.archived.completed + c.archived.cancelled, c.archived.count, '归档状态'); close(c.archived.funded, c.archived.count * FEE, '归档真实资金'); close(c.archived.funded, c.archived.purchasePaid + c.archived.serviceFees + c.archived.refunded, '归档款项守恒');

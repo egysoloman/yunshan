@@ -485,7 +485,7 @@ export class ArchitectureDetailManager {
 
   setLighting(daylight: number, power: number, buildingSupply?: (buildingId: string) => number): void {
     if (this.disposed) return;
-    const emission = .08 + (1 - THREE.MathUtils.clamp(daylight, 0, 1)) * 1.7;
+    const emission = .18 + (1 - THREE.MathUtils.clamp(daylight, 0, 1)) * 1.6;
     this.light.emissiveIntensity = THREE.MathUtils.clamp(power, 0, 1) * emission;
     for (const [id, entry] of this.entries) if (entry.lanternMaterial) {
       const supply = buildingSupply ? buildingSupply(id) : power;
@@ -510,9 +510,9 @@ export class ArchitectureDetailManager {
         if (!reference.luminous || reference.hidden) continue;
         const position = new THREE.Vector3().setFromMatrixPosition(reference.matrix).applyMatrix4(entry.group.matrixWorld);
         const cameraDistance = position.distanceTo(new THREE.Vector3(camera.x, camera.y, camera.z));
-        if (cameraDistance > 7.5) continue;
+        if (cameraDistance > 9) continue;
         sources.push({ anchorId: `${id}:lantern:${reference.index}`, source: 'resident-lantern', position: { x: position.x, y: position.y, z: position.z },
-          intensity: supplied * (2.4 + night * 29.6), distance: 7.5, decay: 2, color: '#ffdcaa', cameraDistance });
+          intensity: supplied * (6 + night * 26), distance: 9, decay: 2, color: '#ffdcaa', cameraDistance });
       }
     }
     sources.sort((a, b) => a.cameraDistance - b.cameraDistance || a.anchorId.localeCompare(b.anchorId));

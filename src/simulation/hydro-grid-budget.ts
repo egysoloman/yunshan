@@ -27,6 +27,11 @@ export function sharedHydroAppendCharUpperBound(world: WorldDefinition, state: S
   const vehicles = named(vehicleIds, object([...meterFields, ['edgeId', edge]]));
   const shopRows = state.shops.map(shop => object([
     ['id', quoted(shop.id)], ['buildingId', quoted(shop.buildingId)], ['allowsOperation', 5],
+    // Reserve a legal future declaration before people can create its first
+    // night job. The energy preflight runs earlier than that people phase.
+    ...(world.buildings.find(site => site.id === shop.buildingId)?.kind === 'market' ? [['nightRetailPlan', object([
+      ['jobId', quoted('night-retail-9007199254740991')], ['operatorId', 122], ['startsAt', DOUBLE], ['endsAt', DOUBLE],
+    ])] as const] : []),
   ]));
   const loadSources = object([
     ['shops', array(shopRows)], ...(world.hydroMaintenance !== undefined ? [['equipmentAvailable', 5] as const] : []),
