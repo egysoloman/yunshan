@@ -194,6 +194,16 @@ namespace Yunshan.Runtime
                     if (f.Kind == "bed") solid.LocalBox(frame, r.X0 + .2, plan.Y + f.Top - .2, r.Z0 + .2, r.X1 - .2, plan.Y + f.Top, r.Z1 - .2, linen);
                 }
             }
+            // Facade details (door and window frames, entrance lantern, plaque frame,
+            // wall-top bands, plinths, bay divisions, eave tiles and brackets) for
+            // the ground band, parity-tested against the web renderer's emitter.
+            foreach (var part in ArchitectureDetail.ProgramDetails(b, 0))
+            {
+                double hx = part.Size.X / 2, hy = part.Size.Y / 2, hz = part.Size.Z / 2;
+                var color = Space.Hex(part.Color);
+                if (part.Luminous) glass.LocalBox(frame, part.Position.X - hx, part.Position.Y - hy, part.Position.Z - hz, part.Position.X + hx, part.Position.Y + hy, part.Position.Z + hz, color);
+                else solid.LocalBox(frame, part.Position.X - hx, part.Position.Y - hy, part.Position.Z - hz, part.Position.X + hx, part.Position.Y + hy, part.Position.Z + hz, color);
+            }
             foreach (var region in ArchitectureFloorPlan.GetFloorPlanRoofRegions(body))
             {
                 var r = region.Rect;
