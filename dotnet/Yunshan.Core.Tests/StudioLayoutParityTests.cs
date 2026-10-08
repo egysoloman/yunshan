@@ -33,6 +33,7 @@ public class StudioLayoutParityTests
             .Put("stations", StudioPropLayout.StationPlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList())
             .Put("landmarks", StudioPropLayout.LandmarkPlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList())
             .Put("decks", StudioPropLayout.DeckTilePlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("pitch", s.Pitch).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList())
+            .Put("details", StudioPropLayout.NetworkDetailPlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList())
             .Put("roads", new Obj().Put("count", (double)roads.Count).Put("sample", roads.Where((_, i) => i % 41 == 0).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("pitch", s.Pitch).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList()));
         Assert.Equal(2, StudioPropLayout.LandmarkPlacements(world, assets).Count);
         var actual = Write(tree);

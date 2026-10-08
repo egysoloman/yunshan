@@ -12,7 +12,7 @@ export interface NetworkSink {
   box(key: NetworkMaterial, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation?: number, tag?: { roof?: boolean }): void;
   segment(key: NetworkMaterial, a: Vec3, b: Vec3, width: number, height: number, lift?: number, color?: string): void;
 }
-export interface NetworkStructureOptions { dressesStations: boolean; dressesRunway: boolean; dressesRailDeck?: boolean; dressesBridgeDeck?: boolean; dressesRoadDeck?: boolean }
+export interface NetworkStructureOptions { dressesStations: boolean; dressesRunway: boolean; dressesRailDeck?: boolean; dressesBridgeDeck?: boolean; dressesRoadDeck?: boolean; dressesRailKerb?: boolean; dressesRailPierCaps?: boolean }
 
 /** Roads, rails, bridges, lifts, cables, supports, guardrails, station
  * platforms and junction poles, as the renderer has always drawn them. */
@@ -47,14 +47,15 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
         const dx = b.x - a.x, dz = b.z - a.z, horizontal = Math.hypot(dx, dz) || 1, nx = -dz / horizontal, nz = dx / horizontal;
         for (const side of [-1, 1]) {
           const offset = guardrailOffset(edge), aa = { x: a.x + nx * offset * side, y: a.y, z: a.z + nz * offset * side }, bb = { x: b.x + nx * offset * side, y: b.y, z: b.z + nz * offset * side };
-          sink.segment('stone', aa, bb, rail ? .35 : roadTiled ? .36 : .4, rail ? .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, '#c0c2ac');
+          const railKerbTiled = rail && !!options.dressesRailKerb;
+          sink.segment('stone', aa, bb, rail ? railKerbTiled ? .31 : .35 : roadTiled ? .36 : .4, rail ? railKerbTiled ? .46 : .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, '#c0c2ac');
           const elevated = (a.y + b.y) / 2 - terrainHeight(world, (a.x + b.x) / 2, (a.z + b.z) / 2) > 4;
           if (edge.mode === 'bridge' || rail || elevated && edge.mode === 'road') for (const span of guardrailSpans(world, edge, i)) sink.segment('wood', { x: span.a.x + nx * offset * side, y: span.a.y, z: span.a.z + nz * offset * side }, { x: span.b.x + nx * offset * side, y: span.b.y, z: span.b.z + nz * offset * side }, GUARDRAIL_THICKNESS, .2, 1.1, '#6b7771');
         }
         if (edge.mode === 'road' && !edge.id.includes('runway')) { const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 + .04, z: (a.z + b.z) / 2 }; sink.segment('stone', { ...middle, x: middle.x - nx * 3.5, z: middle.z - nz * 3.5 }, { ...middle, x: middle.x + nx * 3.5, z: middle.z + nz * 3.5 }, .08, .04, 0, '#757e73'); }
         const length = Math.hypot(b.x - a.x, b.z - a.z), interval = rail ? 80 : 70;
         // Spacing spans all samples of the same edge, including the world's 4m rails.
-        for (let along = interval - supportRemainder; along <= length; along += interval) { const t = along / Math.max(.01, length), x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, y = a.y + (b.y - a.y) * t, ground = terrainHeight(world, x, z); if (y - ground > 5 && edge.mode !== 'bridge') { const tall = y - ground; sink.box('stone', x, ground + 1, z, rail ? 7 : 8, 2, rail ? 7 : 8, '#939e91'); sink.box('stone', x, ground + tall / 2, z, rail ? 3 : 4, tall, rail ? 3 : 4, '#a0aaa0'); sink.box('stone', x, y - 1.3, z, width + 1, 1.8, 4, '#929d92'); if (tall > 25) for (let tie = ground + 12; tie < y - 5; tie += 16) sink.box('wood', x, tie, z, rail ? 4 : 5, .6, rail ? 4 : 5); } }
+        for (let along = interval - supportRemainder; along <= length; along += interval) { const t = along / Math.max(.01, length), x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, y = a.y + (b.y - a.y) * t, ground = terrainHeight(world, x, z); if (y - ground > 5 && edge.mode !== 'bridge') { const tall = y - ground; sink.box('stone', x, ground + 1, z, rail ? 7 : 8, 2, rail ? 7 : 8, '#939e91'); sink.box('stone', x, ground + tall / 2, z, rail ? 3 : 4, tall, rail ? 3 : 4, '#a0aaa0'); if (!(rail && options.dressesRailPierCaps)) sink.box('stone', x, y - 1.3, z, width + 1, 1.8, 4, '#929d92'); if (tall > 25) for (let tie = ground + 12; tie < y - 5; tie += 16) sink.box('wood', x, tie, z, rail ? 4 : 5, .6, rail ? 4 : 5); } }
         supportRemainder = (supportRemainder + length) % interval;
       }
       if (edge.mode === 'bridge') emitBridge(world, edge, sink);

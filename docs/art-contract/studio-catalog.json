@@ -17,8 +17,8 @@
    "CHAR": 238
   },
   "byStatus": {
-   "unassigned": 754,
-   "placed": 34,
+   "unassigned": 751,
+   "placed": 37,
    "rejected": 5
   },
   "byFamily": {
@@ -349,7 +349,7 @@
     "triangles": 3140
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)",
    "studioNote": "M001第一轮参考精修候选；连续倒角/曲面、独立最小块件和真实纹理。旧母版另存；人工美术验收未完成。"
   },
   {
@@ -7636,7 +7636,7 @@
     "triangles": 3880
    },
    "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 and side lights BUILT-160 are placed)",
    "studioNote": "作者楼宽12m，每侧0.32w；中央4.32m净空，门头在Y=3.2m以上。左右窗不是封闭整立面；植物、门扇与人流系统另属组件。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8127,7 +8127,7 @@
     "triangles": 680
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)",
    "studioNote": "3m为柱芯截面；侧耳各出挑0.2m，总宽3.4m。作者高32m以验证高于25m时16m拉结层；4m道路柱、地形适配和其他高度未声称完成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8164,8 +8164,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 320
    },
-   "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "status": "placed",
    "studioNote": "3m柱芯中心承托7m墩帽；1.8m包含顶层0.2m橡胶支座。道路11m规格另需变体验证，未做结构安全认证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8203,7 +8202,7 @@
     "triangles": 116
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)",
    "studioNote": "为两根3m柱、柱轴距9m的作者场景，木梁端坐在137的16m层承耳上。25m阈值和每16m规则已记录并验证一层；非自动桥梁生成器。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8278,7 +8277,7 @@
     "triangles": 1394
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)",
    "studioNote": "8m作者直段，导轨轴相对轨道中线±1.8m；0.08m安装脚使钢梁中心位于路床顶面上0.2m的线路基准。无磁浮机制或车辆仿真。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8315,8 +8314,7 @@
     "sizeOnWorldVoxels": false,
     "triangles": 8100
    },
-   "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "status": "placed",
    "studioNote": "2m作者段；5mm网格保留0.35m条宽和±2.75m轴偏的半格边界。钢箱为真实空腔，不缩成实心墙；平台侧开口通过分段留空验证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8430,7 +8428,7 @@
     "triangles": 826
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)",
    "studioNote": "作者24m高，由安装位置Y=0.8m至24.8m；轴位为井架中线x+3.2m。井架与乘舱路线独立，不把光线当机械升降能力。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8958,7 +8956,7 @@
     "triangles": 464
    },
    "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 and side lights BUILT-160 are placed)",
    "studioNote": "作者实体安装厚0.15m，暖色来自灯芯与玻璃罩，非发光混凝土或一整段跑道。位置须绑定每个route段中心；当前仅有明确作者布点的静态拼装。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8995,8 +8993,7 @@
     "sizeOnWorldVoxels": false,
     "triangles": 160
    },
-   "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "status": "placed",
    "studioNote": "每件为一个侧灯母版，实例放在跑道中线z±16.5m；不能把两侧复用计两件。仅自发光显示，机场灯光序列和真实点光未实现。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -9148,7 +9145,7 @@
     "triangles": 308
    },
    "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 and side lights BUILT-160 are placed)",
    "studioNote": "按清单保留空白牌，不把参考图字母A或未绑定机位类型烧进几何；侧向安装需检查登机路径。杆高3m，牌居中Y3m，总高3.4m；无租用/登机交互。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -9528,7 +9525,7 @@
     "triangles": 1682
    },
    "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 and side lights BUILT-160 are placed)",
    "studioNote": "固定静态低台，不含座椅或整舱；作者眼位Y1.1m，装配后台顶Y0.4m。像素非业务数据，按钮未接驾驶控制。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -9680,7 +9677,7 @@
     "triangles": 1324
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)",
    "studioNote": "本件为pier；9m墩帽cap另选，6pier/8cap仅记录原描述数量，未编造原放置坐标。尺寸为作者接口样件，原隔离descriptor/terrain采样未提供。保留原巨块/ray负例与lowerdeck pier冲突；不声称原游戏最终PASS、三桥全净空或已集成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -10706,7 +10703,7 @@
     "triangles": 348
    },
    "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 and side lights BUILT-160 are placed)",
    "studioNote": "作者24m直段，路中线由同一保存的route点驱动物理涂料占用。未接实际Aircraft滚行状态，不以黄线证明可驾驶。原AviationPad/Vehicle/SimState、NetworkEdge、租用/登离/驾驶/权限状态未提供；仅作者米制几何与接口样件，不声称W上机、可驾驶、动画或原游戏集成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -10744,7 +10741,7 @@
     "triangles": 400
    },
    "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 and side lights BUILT-160 are placed)",
    "studioNote": "单个可复用stand母版；样件A/B各有独立位置与鼻向，均为空位，不复制静态飞机计数。作者机型包络翼展8.4m/长10m，原stand id、实际机型及登离状态未绑定。原AviationPad/Vehicle/SimState、NetworkEdge、租用/登离/驾驶/权限状态未提供；仅作者米制几何与接口样件，不声称W上机、可驾驶、动画或原游戏集成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -10782,7 +10779,7 @@
     "triangles": 1548
    },
    "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 and side lights BUILT-160 are placed)",
    "studioNote": "通道净宽2m、净高2.2m，作者登机门接收面Y2.4m。十二级外梯另选boardingStairs；不烘入飞机或航站。原AviationPad/Vehicle/SimState、NetworkEdge、租用/登离/驾驶/权限状态未提供；仅作者米制几何与接口样件，不声称W上机、可驾驶、动画或原游戏集成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -10858,7 +10855,7 @@
     "triangles": 834
    },
    "status": "unassigned",
-   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 is placed)",
+   "gap": "no matching game part at the same fixed size (the runway slab BUILT-158 and side lights BUILT-160 are placed)",
    "studioNote": "仅接台，不将装饰Torus计为真实泊位。原停泊环和船体/权限状态未提供；保存作者泊位接口与真实实体步路，原ring id为空。原AviationPad/Vehicle/SimState、NetworkEdge、租用/登离/驾驶/权限状态未提供；仅作者米制几何与接口样件，不声称W上机、可驾驶、动画或原游戏集成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11010,7 +11007,7 @@
     "triangles": 2772
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)",
    "studioNote": "作者轮踏半径0.5m/轮缘0.55m，最下轮缘Y0、踏面Y0.05；安装到真实双钢轨头，不借橡胶车胎。原Vehicle/AerialVehicle、SimState、NetworkEdge、停稳/权限/登离/飞行/转向状态及机型规格未提供；均为明确作者米制接口样件，不宣称原游戏W运行、驾驶、动画、浮力或受力认证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11428,7 +11425,7 @@
     "triangles": 280
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)",
    "studioNote": "局部顶1.2m、双承载垫0.4–0.6m，明确墩→帽→垫→梁→板层级；未解决原共享桥逻辑的历史失败。原Vehicle/AerialVehicle、SimState、NetworkEdge、停稳/权限/登离/飞行/转向状态及机型规格未提供；均为明确作者米制接口样件，不宣称原游戏W运行、驾驶、动画、浮力或受力认证。 已按图重建候选，待人工美术验收。"
   },
   {

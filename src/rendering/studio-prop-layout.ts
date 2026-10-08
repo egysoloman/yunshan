@@ -174,16 +174,18 @@ export function studioDeckTilePlacements(world: { edges: readonly { id: string; 
  * near the camera, over the network's own boxes (which are then drawn slightly
  * lower and narrower so the two never z-fight). */
 export const ROAD_TILES = [
-  { kind: 'road', asset: 'BUILT-131', width: 10, height: .5, lift: -.25 },
-  { kind: 'road-line', asset: 'BUILT-132', width: .16, height: .08, lift: .07 },
-  { kind: 'road-kerb', asset: 'BUILT-134', width: 9.9, height: .2, lift: .12 },
+  { kind: 'road', asset: 'BUILT-131', modes: ['road'], deck: 10, width: 10, height: .5, lift: -.25 },
+  { kind: 'road-line', asset: 'BUILT-132', modes: ['road'], deck: 10, width: .16, height: .08, lift: .07 },
+  { kind: 'road-kerb', asset: 'BUILT-134', modes: ['road'], deck: 10, width: 9.9, height: .2, lift: .12 },
+  // BUILT-142: the paired rail side strips (±2.75m, 0.35×0.5m), same near drawing.
+  { kind: 'rail-kerb', asset: 'BUILT-142', modes: ['maglev', 'lightRail'], deck: 6, width: 5.85, height: .5, lift: -.1 },
 ] as const;
 export function studioRoadTilePlacements(world: { edges: readonly { id: string; mode: string; points: readonly { x: number; y: number; z: number }[] }[] }, deckWidth: (edge: any) => number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
   const placements: StudioStaticPlacement[] = [];
   for (const tile of ROAD_TILES) {
     const asset = assets.get(tile.asset); if (!asset) continue;
-    // The road deck is 10m wide; each module is checked against its own part of that section.
-    for (const edge of world.edges) if (edge.mode === 'road' && !edge.id.includes('runway') && deckWidth(edge) === 10) tileEdgePath(edge, tile.kind, asset, tile.height, tile.lift, tile.width, placements);
+    // Each module is checked against its own part of the deck section.
+    for (const edge of world.edges) if ((tile.modes as readonly string[]).includes(edge.mode) && !edge.id.includes('runway') && deckWidth(edge) === tile.deck) tileEdgePath(edge, tile.kind, asset, tile.height, tile.lift, tile.width, placements);
   }
   return placements;
 }
@@ -212,4 +214,40 @@ function tileEdgePath(edge: { id: string; points: readonly { x: number; y: numbe
     const centre = { x: a.x + dx * t, y: a.y + dy * t + lift, z: a.z + dz * t };
     placements.push({ asset: asset.id, id: `${edge.id}:${kind}-deck:${k}`, position: { x: centre.x - rcx, y: centre.y - rcy, z: centre.z - rcz }, yaw, pitch });
   }
+}
+
+/** Studio parts authored at the exact size of fixed network boxes: BUILT-160
+ * runway side lights (0.9×0.3×0.9m, ±16.5m off each runway sample midpoint)
+ * and BUILT-138 rail pier caps (7×1.8×4m, on every elevated rail support of
+ * emitNetworkStructures). Both are axis-aligned like the boxes they replace.
+ * Display only; the support spacing repeats the network's own rule. */
+export const RUNWAY_LIGHT_ASSET = 'BUILT-160';
+export const RAIL_PIER_CAP_ASSET = 'BUILT-138';
+type DetailWorld = { buildings: readonly { id: string; kind: string }[]; edges: readonly { id: string; mode: string; points: readonly { x: number; y: number; z: number }[] }[] };
+export function studioNetworkDetailPlacements(world: DetailWorld, deckWidth: (edge: any) => number, groundHeight: (x: number, z: number) => number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
+  const placements: StudioStaticPlacement[] = [];
+  const at = (asset: StudioAsset, id: string, x: number, y: number, z: number) => {
+    const { min, max } = asset.boundsM;
+    placements.push({ asset: asset.id, id, position: { x: x - (min[0] + max[0]) / 2, y: y - (min[1] + max[1]) / 2, z: z - (min[2] + max[2]) / 2 }, yaw: 0 });
+  };
+  const light = assets.get(RUNWAY_LIGHT_ASSET), runway = world.edges.find(edge => edge.id === 'road-airport-runway-strip');
+  if (light && runway) for (const b of world.buildings) if (b.kind === 'airport') for (let i = 1; i < runway.points.length; i++) {
+    const a = runway.points[i - 1], next = runway.points[i], cx = (a.x + next.x) / 2, cy = (a.y + next.y) / 2 + .18, cz = (a.z + next.z) / 2;
+    for (const side of [-1, 1]) at(light, `${b.id}:runway-light:${i}:${side}`, cx, cy + .12, cz + side * 16.5);
+  }
+  const cap = assets.get(RAIL_PIER_CAP_ASSET);
+  if (cap) for (const edge of world.edges) {
+    if (edge.mode !== 'maglev' && edge.mode !== 'lightRail') continue;
+    const { min, max } = cap.boundsM; if (Math.abs(max[0] - min[0] - (deckWidth(edge) + 1)) > 1e-6 || Math.abs(max[1] - min[1] - 1.8) > 1e-6 || Math.abs(max[2] - min[2] - 4) > 1e-6) continue;
+    let supportRemainder = 0;
+    for (let i = 1; i < edge.points.length; i++) {
+      const a = edge.points[i - 1], b = edge.points[i], length = Math.hypot(b.x - a.x, b.z - a.z), interval = 80;
+      for (let along = interval - supportRemainder; along <= length; along += interval) {
+        const t = along / Math.max(.01, length), x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, y = a.y + (b.y - a.y) * t;
+        if (y - groundHeight(x, z) > 5) at(cap, `${edge.id}:pier-cap:${i}:${Math.round(along * 1000)}`, x, y - 1.3, z);
+      }
+      supportRemainder = (supportRemainder + length) % interval;
+    }
+  }
+  return placements;
 }

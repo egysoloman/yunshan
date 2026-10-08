@@ -178,11 +178,12 @@ namespace Yunshan.Core
         /// line and BUILT-134 kerbs every 2m along every road but the runway strip
         /// (renderers draw only the near ones).</summary>
         public const string RoadDeckAsset = "BUILT-131";
-        public static readonly (string Kind, string Asset, double Width, double Height, double Lift)[] RoadTiles =
+        public static readonly (string Kind, string Asset, string[] Modes, double Deck, double Width, double Height, double Lift)[] RoadTiles =
         {
-            ("road", "BUILT-131", 10, .5, -.25),
-            ("road-line", "BUILT-132", .16, .08, .07),
-            ("road-kerb", "BUILT-134", 9.9, .2, .12),
+            ("road", "BUILT-131", new[] { "road" }, 10, 10, .5, -.25),
+            ("road-line", "BUILT-132", new[] { "road" }, 10, .16, .08, .07),
+            ("road-kerb", "BUILT-134", new[] { "road" }, 10, 9.9, .2, .12),
+            ("rail-kerb", "BUILT-142", new[] { "maglev", "lightRail" }, 6, 5.85, .5, -.1),
         };
         public static List<StudioStaticPlacement> RoadTilePlacements(WorldDefinition world, IReadOnlyDictionary<string, StudioAssetBounds> assets)
         {
@@ -190,7 +191,7 @@ namespace Yunshan.Core
             foreach (var tile in RoadTiles)
             {
                 if (!assets.TryGetValue(tile.Asset, out var asset)) continue;
-                foreach (var edge in world.Edges) if (edge.Mode == "road" && !edge.Id.Contains("runway") && TransportGeometry.DeckWidth(edge) == 10) TileEdgePath(edge, tile.Kind, tile.Asset, asset, tile.Height, tile.Lift, tile.Width, result);
+                foreach (var edge in world.Edges) if (tile.Modes.Contains(edge.Mode) && !edge.Id.Contains("runway") && TransportGeometry.DeckWidth(edge) == tile.Deck) TileEdgePath(edge, tile.Kind, tile.Asset, asset, tile.Height, tile.Lift, tile.Width, result);
             }
             return result;
         }
@@ -217,6 +218,42 @@ namespace Yunshan.Core
                 double x = a.X + dx * t, y = a.Y + dy * t + lift, z = a.Z + dz * t;
                 result.Add(new StudioStaticPlacement { Asset = assetId, Id = $"{edge.Id}:{kind}-deck:{k}", Position = new Vec3(x - rcx, y - rcy, z - rcz), Yaw = yaw, Pitch = pitch });
             }
+        }
+
+
+        /// <summary>Port of studioNetworkDetailPlacements: BUILT-160 runway side lights and
+        /// BUILT-138 rail pier caps at the exact boxes they replace (axis-aligned).</summary>
+        public const string RunwayLightAsset = "BUILT-160", RailPierCapAsset = "BUILT-138";
+        public static List<StudioStaticPlacement> NetworkDetailPlacements(WorldDefinition world, IReadOnlyDictionary<string, StudioAssetBounds> assets)
+        {
+            var result = new List<StudioStaticPlacement>();
+            void At(string assetId, StudioAssetBounds asset, string id, double x, double y, double z) =>
+                result.Add(new StudioStaticPlacement { Asset = assetId, Id = id, Position = new Vec3(x - (asset.Min[0] + asset.Max[0]) / 2, y - (asset.Min[1] + asset.Max[1]) / 2, z - (asset.Min[2] + asset.Max[2]) / 2), Yaw = 0 });
+            var runway = world.Edges.FirstOrDefault(e => e.Id == "road-airport-runway-strip");
+            if (assets.TryGetValue(RunwayLightAsset, out var light) && runway != null)
+                foreach (var b in world.Buildings) if (b.Kind == "airport") for (int i = 1; i < runway.Points.Count; i++)
+                {
+                    Vec3 a = runway.Points[i - 1], next = runway.Points[i]; double cx = (a.X + next.X) / 2, cy = (a.Y + next.Y) / 2 + .18, cz = (a.Z + next.Z) / 2;
+                    foreach (var side in new[] { -1, 1 }) At(RunwayLightAsset, light, $"{b.Id}:runway-light:{i}:{side}", cx, cy + .12, cz + side * 16.5);
+                }
+            if (assets.TryGetValue(RailPierCapAsset, out var cap))
+                foreach (var edge in world.Edges)
+                {
+                    if (edge.Mode != "maglev" && edge.Mode != "lightRail") continue;
+                    if (Math.Abs(cap.Max[0] - cap.Min[0] - (TransportGeometry.DeckWidth(edge) + 1)) > 1e-6 || Math.Abs(cap.Max[1] - cap.Min[1] - 1.8) > 1e-6 || Math.Abs(cap.Max[2] - cap.Min[2] - 4) > 1e-6) continue;
+                    double supportRemainder = 0;
+                    for (int i = 1; i < edge.Points.Count; i++)
+                    {
+                        Vec3 a = edge.Points[i - 1], b = edge.Points[i]; double length = JsMath.Hypot(b.X - a.X, b.Z - a.Z), interval = 80;
+                        for (double along = interval - supportRemainder; along <= length; along += interval)
+                        {
+                            double t = along / Math.Max(.01, length), x = a.X + (b.X - a.X) * t, z = a.Z + (b.Z - a.Z) * t, y = a.Y + (b.Y - a.Y) * t;
+                            if (y - World.TerrainHeight(world, x, z) > 5) At(RailPierCapAsset, cap, $"{edge.Id}:pier-cap:{i}:{JsMath.ToJsString(JsMath.Round(along * 1000))}", x, y - 1.3, z);
+                        }
+                        supportRemainder = (supportRemainder + length) % interval;
+                    }
+                }
+            return result;
         }
 
         /// <summary>Lamp glow fraction for city power and daylight (both clamped 0..1).</summary>

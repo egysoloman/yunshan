@@ -20,7 +20,7 @@ namespace Yunshan.Core
     {
         static Vec3 V(double x, double y, double z) => new Vec3(x, y, z);
 
-        public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false, bool dressesRoadDeck = false)
+        public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false, bool dressesRoadDeck = false, bool dressesRailKerb = false, bool dressesRailPierCaps = false)
         {
             foreach (var edge in world.Edges)
             {
@@ -55,7 +55,8 @@ namespace Yunshan.Core
                     {
                         double offset = TransportGeometry.GuardrailOffset(edge);
                         var aa = V(a.X + nx * offset * side, a.Y, a.Z + nz * offset * side); var bb = V(b.X + nx * offset * side, b.Y, b.Z + nz * offset * side);
-                        sink.Segment("stone", aa, bb, rail ? .35 : roadTiled ? .36 : .4, rail ? .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, "#c0c2ac");
+                        bool railKerbTiled = rail && dressesRailKerb;
+                        sink.Segment("stone", aa, bb, rail ? railKerbTiled ? .31 : .35 : roadTiled ? .36 : .4, rail ? railKerbTiled ? .46 : .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, "#c0c2ac");
                         bool elevated = (a.Y + b.Y) / 2 - World.TerrainHeight(world, (a.X + b.X) / 2, (a.Z + b.Z) / 2) > 4;
                         if (edge.Mode == "bridge" || rail || elevated && edge.Mode == "road")
                             foreach (var span in TransportGeometry.GuardrailSpans(world, edge, i))
@@ -75,7 +76,7 @@ namespace Yunshan.Core
                             double tall = y - ground;
                             sink.Box("stone", x, ground + 1, z, rail ? 7 : 8, 2, rail ? 7 : 8, "#939e91");
                             sink.Box("stone", x, ground + tall / 2, z, rail ? 3 : 4, tall, rail ? 3 : 4, "#a0aaa0");
-                            sink.Box("stone", x, y - 1.3, z, width + 1, 1.8, 4, "#929d92");
+                            if (!(rail && dressesRailPierCaps)) sink.Box("stone", x, y - 1.3, z, width + 1, 1.8, 4, "#929d92");
                             if (tall > 25) for (double tie = ground + 12; tie < y - 5; tie += 16) sink.Box("wood", x, tie, z, rail ? 4 : 5, .6, rail ? 4 : 5);
                         }
                     }

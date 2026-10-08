@@ -2,7 +2,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Building, Vec3, WorldDefinition } from '../types';
 import { deckWidth } from '../transport-geometry';
-import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, studioBuildingPlacements, studioLandmarkPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
+import { terrainHeight } from '../world';
+import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, studioBuildingPlacements, studioLandmarkPlacements, studioNetworkDetailPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
 
 /** Fraction of an authored emissive maximum shown for a supply and daylight. */
 export function studioEmissiveFactor(daylight: number, power: number): number {
@@ -35,7 +36,7 @@ export class StudioPropPool {
     for (const building of world.buildings) this.buildings.set(building.id, building);
     // Deck tiles are drawn everywhere (they replace the network's deck boxes); the rest by distance.
     const tiles = studioDeckTilePlacements(world, deckWidth);
-    this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world), ...tiles];
+    this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world), ...tiles, ...studioNetworkDetailPlacements(world, deckWidth, (x, z) => terrainHeight(world, x, z))];
     for (const tile of tiles) this.permanentCount.set(tile.asset, (this.permanentCount.get(tile.asset) ?? 0) + 1);
     // Woodland models belong to WoodlandModelPool; this pool loads only what it places.
     const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...Object.values(STUDIO_TABLETOP) as string[], ...this.statics.map(p => p.asset)]);
@@ -83,6 +84,8 @@ export class StudioPropPool {
   /** True when this pool draws the given landmark (runway or forecourt). */
   dressesLandmark(suffix: 'runway' | 'forecourt'): boolean { return this.statics.some(p => p.id.endsWith(`:${suffix}`)); }
   /** True when studio deck tiles replace the network's own deck boxes for this kind. */
+  /** Runway lights (BUILT-160) and rail pier caps (BUILT-138) replace their boxes. */
+  dressesNetworkDetail(asset: string): boolean { return this.statics.some(p => p.asset === asset && (p.id.includes(':runway-light:') || p.id.includes(':pier-cap:'))); }
   dressesDeck(kind: keyof typeof DECK_TILES): boolean { return this.statics.some(p => p.id.includes(`:${kind}-deck:`)); }
 
   /** Lamp cores glow only with city power, brighter as daylight falls. */

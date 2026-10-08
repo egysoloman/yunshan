@@ -14,7 +14,7 @@ import { StudioPropPool } from './rendering/studio-props';
 import { WoodlandModelPool } from './rendering/woodland-models';
 import { groundDressing } from './rendering/woodland-layout';
 import { emitNetworkStructures } from './rendering/network-structures';
-import { studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
+import { RAIL_PIER_CAP_ASSET, RUNWAY_LIGHT_ASSET, studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
@@ -782,7 +782,7 @@ export class CityRenderer implements CityRendererAPI {
   private buildNetwork() {
     const batch = new BoxBatch(this.materials);
     for (const edge of this.world.edges) this.edges.set(edge.id, edge);
-    emitNetworkStructures(this.world, batch, { dressesStations: !!this.studioProps?.dressesStations, dressesRunway: !!this.studioProps?.dressesLandmark('runway'), dressesRailDeck: !!this.studioProps?.dressesDeck('rail'), dressesBridgeDeck: !!this.studioProps?.dressesDeck('bridge'), dressesRoadDeck: this.roadTiles.length > 0 });
+    emitNetworkStructures(this.world, batch, { dressesStations: !!this.studioProps?.dressesStations, dressesRunway: !!this.studioProps?.dressesLandmark('runway'), dressesRailDeck: !!this.studioProps?.dressesDeck('rail'), dressesBridgeDeck: !!this.studioProps?.dressesDeck('bridge'), dressesRoadDeck: this.roadTiles.some(t => t.asset === 'BUILT-131'), dressesRailKerb: this.roadTiles.some(t => t.asset === 'BUILT-142'), dressesRailPierCaps: !!this.studioProps?.dressesNetworkDetail(RAIL_PIER_CAP_ASSET) });
     const group = batch.build(undefined, 384);
     group.traverse(object => { if (object instanceof THREE.InstancedMesh && object.userData.distanceDetail) this.distanceDetails.push(object); });
     this.scene.add(group);
@@ -806,7 +806,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const b of this.world.buildings) {
       if (b.kind === 'airport') {
         const runway = this.world.edges.find(edge => edge.id === 'road-airport-runway-strip');
-        if (runway && runway.points.length > 1) for (let i = 1; i < runway.points.length; i++) { const a = runway.points[i - 1], next = runway.points[i], center = { x: (a.x + next.x) / 2, y: (a.y + next.y) / 2 + .18, z: (a.z + next.z) / 2 }; batch.box('amber', center.x, center.y, center.z, 6, .07, 1); for (const side of [-1, 1]) batch.box('cyan', center.x, center.y + .12, center.z + side * 16.5, .9, .3, .9); }
+        if (runway && runway.points.length > 1) for (let i = 1; i < runway.points.length; i++) { const a = runway.points[i - 1], next = runway.points[i], center = { x: (a.x + next.x) / 2, y: (a.y + next.y) / 2 + .18, z: (a.z + next.z) / 2 }; batch.box('amber', center.x, center.y, center.z, 6, .07, 1); if (!this.studioProps?.dressesNetworkDetail(RUNWAY_LIGHT_ASSET)) for (const side of [-1, 1]) batch.box('cyan', center.x, center.y + .12, center.z + side * 16.5, .9, .3, .9); }
       }
       if (b.kind === 'starport') {
         const ring = new THREE.Mesh(new THREE.TorusGeometry(Math.max(42, b.width * .6), 2.2, 4, 32), this.materials.cyan); ring.rotation.x = Math.PI / 2; ring.position.set(b.position.x, b.position.y + b.height + 12, b.position.z); this.scene.add(ring);

@@ -9,7 +9,7 @@ namespace Yunshan.Core
 {
     public static class GatewayStructures
     {
-        public static void Emit(WorldDefinition world, INetworkSink sink, bool forecourtDressed)
+        public static void Emit(WorldDefinition world, INetworkSink sink, bool forecourtDressed, bool runwayLightsDressed = false)
         {
             var civic = world.Buildings.FirstOrDefault(b => b.Kind == "core");
             if (civic != null && !forecourtDressed)
@@ -34,7 +34,7 @@ namespace Yunshan.Core
                     {
                         Vec3 a = runway.Points[i - 1], next = runway.Points[i]; var c = new Vec3((a.X + next.X) / 2, (a.Y + next.Y) / 2 + .18, (a.Z + next.Z) / 2);
                         sink.Box("amber", c.X, c.Y, c.Z, 6, .07, 1);
-                        foreach (var side in new[] { -1, 1 }) sink.Box("cyan", c.X, c.Y + .12, c.Z + side * 16, .9, .3, .9);
+                        if (!runwayLightsDressed) foreach (var side in new[] { -1, 1 }) sink.Box("cyan", c.X, c.Y + .12, c.Z + side * 16.5, .9, .3, .9);
                     }
                 }
                 if (b.Kind == "starport")

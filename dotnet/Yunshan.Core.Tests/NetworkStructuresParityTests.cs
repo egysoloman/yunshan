@@ -28,7 +28,7 @@ public class NetworkStructuresParityTests
         using (var gzip = new GZipStream(file, CompressionMode.Decompress))
         using (var reader = new StreamReader(gzip, Encoding.UTF8)) expected = reader.ReadToEnd();
         var recorder = new Recorder();
-        NetworkStructures.Emit(World.CreateWorld(), recorder, true, true, true, true, true);
+        NetworkStructures.Emit(World.CreateWorld(), recorder, true, true, true, true, true, true, true);
         var actual = recorder.Json.Append(']').ToString();
         if (expected != actual)
         {

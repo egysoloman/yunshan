@@ -46,8 +46,9 @@ try {
       return { feet, look };
     }, [name, views[name]]);
     await page.waitForTimeout(8000);
-    report[`${name}-drawn`] = await page.evaluate(() => window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 楼层设施模型').userData.studioPlacements);
+    // Software WebGL runs at ~1 frame/s: read the pool after the screenshot frame so it reflects this view.
     await page.screenshot({ path: `artifacts/landmark-${name}.png`, timeout: 180_000 });
+    report[`${name}-drawn`] = await page.evaluate(() => window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 楼层设施模型').userData.studioPlacements);
   }
   report.errors = errors;
   await writeFile('artifacts/landmarks-report.json', JSON.stringify(report, null, 1));
