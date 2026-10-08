@@ -71,6 +71,15 @@ function multiply(a: number[], b: number[]): number[] {
 }
 
 const round = (v: number) => Math.round(v * 1e6) / 1e6;
+/** Character masters carry their authored sockets (root-node extras.ports) and
+ * skin joint names, so both clients attach parts without reading glTF extras. */
+function characterRig(id: string, glb: Buffer): { ports?: { id: string; position: number[] }[]; joints?: string[] } {
+  if (!id.startsWith('CHAR-')) return {};
+  const json = JSON.parse(glb.subarray(20, 20 + glb.readUInt32LE(12)).toString()) as { nodes: { name?: string; extras?: { ports?: { id: string; position: number[] }[] } }[]; skins?: { joints: number[] }[] };
+  const ports = json.nodes[0]?.extras?.ports?.map(p => ({ id: p.id, position: p.position.map(round) }));
+  const joints = json.skins?.[0]?.joints.map(i => json.nodes[i].name ?? '');
+  return { ...(ports?.length ? { ports } : {}), ...(joints?.length ? { joints } : {}) };
+}
 const assets = ids.map(id => {
   const entry = index.entries.find(e => e.id === id);
   if (!entry?.file) throw new Error(`${id}: not in the effective atlas index`);
@@ -88,6 +97,7 @@ const assets = ids.map(id => {
     triangles: bounds.triangles, cellSizeM: entry.cellSizeM,
     boundsM: { min: bounds.min.map(round), max: bounds.max.map(round) },
     review: 'candidate: studio human art acceptance 0',
+    ...characterRig(id, glb),
   };
 });
 const manifest = { format: 'yunshan.studio-assets', version: 1, sourceRepository: 'https://github.com/stars2022/voxel-studio-yunshan', sourceCommit: commit, sourceIndexRun: index.run, units: 'metres', upAxis: 'Y', front: '+Z', assets };

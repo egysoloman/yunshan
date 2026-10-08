@@ -12,6 +12,7 @@ import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
 import { StudioPropPool } from './rendering/studio-props';
 import { WoodlandModelPool } from './rendering/woodland-models';
+import { StudioCharacterPool } from './rendering/studio-characters';
 import { groundDressing } from './rendering/woodland-layout';
 import { emitNetworkStructures } from './rendering/network-structures';
 import { RAIL_PIER_CAP_ASSET, RUNWAY_LIGHT_ASSET, studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
@@ -141,6 +142,7 @@ export class CityRenderer implements CityRendererAPI {
   private sky: THREE.Mesh;
   private skyMaterial: THREE.ShaderMaterial;
   private citizens: CitizenAppearancePool;
+  private studioCharacters?: StudioCharacterPool;
   private marketGoods: MarketGoodsPool;
   private studioProps: StudioPropPool;
   private marketShopfront: MarketShopfrontPool;
@@ -426,6 +428,7 @@ export class CityRenderer implements CityRendererAPI {
     this.signalGreen = new THREE.InstancedMesh(new THREE.BoxGeometry(.7, .55, .35), new THREE.MeshBasicMaterial({ color: '#ffffff' }), signalCount);
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.setUsage(THREE.DynamicDrawUsage); signal.frustumCulled = false; this.scene.add(signal); }
     this.citizens = new CitizenAppearancePool(this.scene, 1024);
+    this.studioCharacters = new StudioCharacterPool(this.scene); void this.studioCharacters.load();
     this.marketGoods = new MarketGoodsPool(this.scene, world);
     this.marketShopfront = new MarketShopfrontPool(this.scene, world);
     this.stationWayfinding = new StationWayfindingPool(this.scene, world);
@@ -958,7 +961,12 @@ export class CityRenderer implements CityRendererAPI {
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.needsUpdate = true; if (signal.instanceColor) signal.instanceColor.needsUpdate = true; }
     const detailedSigns = new Set<string>(this.architectureDetail.group.userData.activeBuildingIds ?? []);
     for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id && !detailedSigns.has(label.building.id) : this.insideId === label.building.id && this.insideFloor === label.floor;
-    this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality);
+    this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality, this.studioCharacters?.modelled);
+    this.studioCharacters?.update(state, this.camera.position, this.quality, id => {
+      const m = this.citizens.motionOf(id), c = state.citizens.find(x => x.id === id); if (!m || !c) return undefined;
+      const dead = state.extension?.actorProfiles[id]?.alive === false || c.state === 'dead', seated = c.state === 'riding';
+      return { ...m, seated, dead, walking: c.state === 'moving' && !seated && !dead };
+    });
     this.marketGoods.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 65 : 110);
     this.studioProps.update(this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), { id: this.insideId, floor: this.insideFloor }, this.quality === 'low' ? 45 : 90);
     this.marketShopfront.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 4 : 8);
@@ -1015,7 +1023,7 @@ export class CityRenderer implements CityRendererAPI {
     this.stationWayfinding?.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
-    this.woodlandModels?.dispose(); this.scene.remove(this.landscape.group); this.landscape.dispose();
+    this.woodlandModels?.dispose(); this.studioCharacters?.dispose(); this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
     // Palette materials are renderer-owned even after every near chunk using
     // one of them has been evicted. Dispose them once with attached materials.

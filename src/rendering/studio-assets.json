@@ -4030,6 +4030,6468 @@
         ]
       },
       "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "CHAR-073",
+      "name": "通用人体骨骼与手足挂点母版",
+      "assetId": "char-073",
+      "revision": 3,
+      "url": "studio-assets/CHAR-073.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-073/visual.glb",
+      "sha256": "075bdcc2cee3cb41ff7e851149241bdd4e705ffd6d534dc15e1ae99fd0aef141",
+      "bytes": 347368,
+      "triangles": 1584,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.271282,
+          0.01,
+          -0.17
+        ],
+        "max": [
+          0.271282,
+          1.685,
+          0.072
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "wrist-left",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "ankle-left",
+          "position": [
+            -0.1,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "wrist-right",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "ankle-right",
+          "position": [
+            0.1,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "shoulder-left",
+        "elbow-left",
+        "wrist-left",
+        "hand-left",
+        "hip-left",
+        "knee-left",
+        "ankle-left",
+        "toe-left",
+        "shoulder-right",
+        "elbow-right",
+        "wrist-right",
+        "hand-right",
+        "hip-right",
+        "knee-right",
+        "ankle-right",
+        "toe-right"
+      ]
+    },
+    {
+      "id": "CHAR-074",
+      "name": "儿童比例人体骨骼母版",
+      "assetId": "char-074",
+      "revision": 3,
+      "url": "studio-assets/CHAR-074.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-074/visual.glb",
+      "sha256": "5c46cc0dc770953c5f0e52d201e171952c3cd1dc0a445b13bb81e2fa85a31fa6",
+      "bytes": 359212,
+      "triangles": 1680,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.191552,
+          0.01,
+          -0.125
+        ],
+        "max": [
+          0.191552,
+          1.185,
+          0.0645
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "wrist-left",
+          "position": [
+            -0.168552,
+            0.607,
+            0
+          ]
+        },
+        {
+          "id": "ankle-left",
+          "position": [
+            -0.071,
+            0.0708,
+            0
+          ]
+        },
+        {
+          "id": "wrist-right",
+          "position": [
+            0.168552,
+            0.607,
+            0
+          ]
+        },
+        {
+          "id": "ankle-right",
+          "position": [
+            0.071,
+            0.0708,
+            0
+          ]
+        },
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0.985,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "spine",
+        "chest",
+        "neck",
+        "head",
+        "shoulder-left",
+        "elbow-left",
+        "wrist-left",
+        "hand-left",
+        "hip-left",
+        "knee-left",
+        "ankle-left",
+        "toe-left",
+        "shoulder-right",
+        "elbow-right",
+        "wrist-right",
+        "hand-right",
+        "hip-right",
+        "knee-right",
+        "ankle-right",
+        "toe-right"
+      ]
+    },
+    {
+      "id": "CHAR-059",
+      "name": "精细体素成年人体母版A（直线肩胯）",
+      "assetId": "char-059",
+      "revision": 3,
+      "url": "studio-assets/CHAR-059.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-059/visual.glb",
+      "sha256": "30187891ddb658ba03d8eab6cc9e1a5d2e265e14fb6c10be1a107f3185cea684",
+      "bytes": 198724,
+      "triangles": 1064,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.294148,
+          0,
+          -0.14076
+        ],
+        "max": [
+          0.294148,
+          1.472,
+          0.112996
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "bag-shoulder",
+          "position": [
+            0.2,
+            1.4159,
+            0
+          ]
+        },
+        {
+          "id": "shoulder--1",
+          "position": [
+            -0.205,
+            1.37,
+            0
+          ]
+        },
+        {
+          "id": "elbow--1",
+          "position": [
+            -0.236008,
+            1.1252,
+            0
+          ]
+        },
+        {
+          "id": "wrist--1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "hip--1",
+          "position": [
+            -0.1,
+            0.86,
+            0
+          ]
+        },
+        {
+          "id": "knee--1",
+          "position": [
+            -0.1,
+            0.46,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle--1",
+          "position": [
+            -0.1,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "shoulder-1",
+          "position": [
+            0.205,
+            1.37,
+            0
+          ]
+        },
+        {
+          "id": "elbow-1",
+          "position": [
+            0.236008,
+            1.1252,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "hip-1",
+          "position": [
+            0.1,
+            0.86,
+            0
+          ]
+        },
+        {
+          "id": "knee-1",
+          "position": [
+            0.1,
+            0.46,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle-1",
+          "position": [
+            0.1,
+            0.1003,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-060",
+      "name": "精细体素成年人体母版B（圆柔肩胯）",
+      "assetId": "char-060",
+      "revision": 3,
+      "url": "studio-assets/CHAR-060.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-060/visual.glb",
+      "sha256": "3333ad62179a52328994c5f7b8faf247ec900ce83a3f5d85dc062f850d8b9609",
+      "bytes": 260976,
+      "triangles": 1640,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.277148,
+          0,
+          -0.156244
+        ],
+        "max": [
+          0.277148,
+          1.472,
+          0.126087
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "bag-shoulder",
+          "position": [
+            0.183,
+            1.4109,
+            0
+          ]
+        },
+        {
+          "id": "shoulder--1",
+          "position": [
+            -0.188,
+            1.365,
+            0
+          ]
+        },
+        {
+          "id": "elbow--1",
+          "position": [
+            -0.219008,
+            1.1178,
+            0
+          ]
+        },
+        {
+          "id": "wrist--1",
+          "position": [
+            -0.231282,
+            0.887,
+            0
+          ]
+        },
+        {
+          "id": "hip--1",
+          "position": [
+            -0.111,
+            0.85,
+            0
+          ]
+        },
+        {
+          "id": "knee--1",
+          "position": [
+            -0.111,
+            0.45,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle--1",
+          "position": [
+            -0.111,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "shoulder-1",
+          "position": [
+            0.188,
+            1.365,
+            0
+          ]
+        },
+        {
+          "id": "elbow-1",
+          "position": [
+            0.219008,
+            1.1178,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            0.231282,
+            0.887,
+            0
+          ]
+        },
+        {
+          "id": "hip-1",
+          "position": [
+            0.111,
+            0.85,
+            0
+          ]
+        },
+        {
+          "id": "knee-1",
+          "position": [
+            0.111,
+            0.45,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle-1",
+          "position": [
+            0.111,
+            0.1003,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-061",
+      "name": "精细体素婴儿身体母版",
+      "assetId": "char-061",
+      "revision": 3,
+      "url": "studio-assets/CHAR-061.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-061/visual.glb",
+      "sha256": "8dcc3dcf7b19accfe24bc192030fa26c9c926df21638ec087975904d55f88ba0",
+      "bytes": 260876,
+      "triangles": 1640,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.150648,
+          0,
+          -0.083028
+        ],
+        "max": [
+          0.150648,
+          0.422,
+          0.06201
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0.41,
+            0
+          ]
+        },
+        {
+          "id": "bag-shoulder",
+          "position": [
+            0.091,
+            0.3762,
+            0
+          ]
+        },
+        {
+          "id": "shoulder--1",
+          "position": [
+            -0.096,
+            0.36,
+            0
+          ]
+        },
+        {
+          "id": "elbow--1",
+          "position": [
+            -0.115008,
+            0.2928,
+            0
+          ]
+        },
+        {
+          "id": "wrist--1",
+          "position": [
+            -0.122532,
+            0.242,
+            0
+          ]
+        },
+        {
+          "id": "hip--1",
+          "position": [
+            -0.055,
+            0.22,
+            0
+          ]
+        },
+        {
+          "id": "knee--1",
+          "position": [
+            -0.055,
+            0.125,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle--1",
+          "position": [
+            -0.055,
+            0.0552,
+            0
+          ]
+        },
+        {
+          "id": "shoulder-1",
+          "position": [
+            0.096,
+            0.36,
+            0
+          ]
+        },
+        {
+          "id": "elbow-1",
+          "position": [
+            0.115008,
+            0.2928,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            0.122532,
+            0.242,
+            0
+          ]
+        },
+        {
+          "id": "hip-1",
+          "position": [
+            0.055,
+            0.22,
+            0
+          ]
+        },
+        {
+          "id": "knee-1",
+          "position": [
+            0.055,
+            0.125,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle-1",
+          "position": [
+            0.055,
+            0.0552,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-062",
+      "name": "精细体素学龄前身体母版",
+      "assetId": "char-062",
+      "revision": 3,
+      "url": "studio-assets/CHAR-062.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-062/visual.glb",
+      "sha256": "3410b0f51c9b9eafb71cd1065d6c2f10311a1f5b19e106bc64ae5f4e80ebbc0f",
+      "bytes": 260908,
+      "triangles": 1640,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.163196,
+          0,
+          -0.084456
+        ],
+        "max": [
+          0.163196,
+          0.707,
+          0.072345
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0.695,
+            0
+          ]
+        },
+        {
+          "id": "bag-shoulder",
+          "position": [
+            0.111,
+            0.6543,
+            0
+          ]
+        },
+        {
+          "id": "shoulder--1",
+          "position": [
+            -0.116,
+            0.63,
+            0
+          ]
+        },
+        {
+          "id": "elbow--1",
+          "position": [
+            -0.132416,
+            0.5148,
+            0
+          ]
+        },
+        {
+          "id": "wrist--1",
+          "position": [
+            -0.138914,
+            0.427,
+            0
+          ]
+        },
+        {
+          "id": "hip--1",
+          "position": [
+            -0.06,
+            0.39,
+            0
+          ]
+        },
+        {
+          "id": "knee--1",
+          "position": [
+            -0.06,
+            0.205,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle--1",
+          "position": [
+            -0.06,
+            0.0531,
+            0
+          ]
+        },
+        {
+          "id": "shoulder-1",
+          "position": [
+            0.116,
+            0.63,
+            0
+          ]
+        },
+        {
+          "id": "elbow-1",
+          "position": [
+            0.132416,
+            0.5148,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            0.138914,
+            0.427,
+            0
+          ]
+        },
+        {
+          "id": "hip-1",
+          "position": [
+            0.06,
+            0.39,
+            0
+          ]
+        },
+        {
+          "id": "knee-1",
+          "position": [
+            0.06,
+            0.205,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle-1",
+          "position": [
+            0.06,
+            0.0531,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-063",
+      "name": "精细体素学龄儿童身体母版",
+      "assetId": "char-063",
+      "revision": 3,
+      "url": "studio-assets/CHAR-063.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-063/visual.glb",
+      "sha256": "71f44c13700f72da9084cc0f1ee0ea846382160b5f0f5523ce868e16f3cc80ff",
+      "bytes": 261808,
+      "triangles": 1652,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.200928,
+          0,
+          -0.09994
+        ],
+        "max": [
+          0.200928,
+          0.997,
+          0.084747
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0.985,
+            0
+          ]
+        },
+        {
+          "id": "bag-shoulder",
+          "position": [
+            0.133,
+            0.9424,
+            0
+          ]
+        },
+        {
+          "id": "shoulder--1",
+          "position": [
+            -0.138,
+            0.91,
+            0
+          ]
+        },
+        {
+          "id": "elbow--1",
+          "position": [
+            -0.159888,
+            0.7468,
+            0
+          ]
+        },
+        {
+          "id": "wrist--1",
+          "position": [
+            -0.168552,
+            0.607,
+            0
+          ]
+        },
+        {
+          "id": "hip--1",
+          "position": [
+            -0.071,
+            0.57,
+            0
+          ]
+        },
+        {
+          "id": "knee--1",
+          "position": [
+            -0.071,
+            0.3,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle--1",
+          "position": [
+            -0.071,
+            0.0708,
+            0
+          ]
+        },
+        {
+          "id": "shoulder-1",
+          "position": [
+            0.138,
+            0.91,
+            0
+          ]
+        },
+        {
+          "id": "elbow-1",
+          "position": [
+            0.159888,
+            0.7468,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            0.168552,
+            0.607,
+            0
+          ]
+        },
+        {
+          "id": "hip-1",
+          "position": [
+            0.071,
+            0.57,
+            0
+          ]
+        },
+        {
+          "id": "knee-1",
+          "position": [
+            0.071,
+            0.3,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle-1",
+          "position": [
+            0.071,
+            0.0708,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-064",
+      "name": "精细体素青少年身体母版",
+      "assetId": "char-064",
+      "revision": 3,
+      "url": "studio-assets/CHAR-064.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-064/visual.glb",
+      "sha256": "80492d7fa30f2d9aabbecbf94f4298df02fdbacd491fad9b2ab7c7d881a414b8",
+      "bytes": 260880,
+      "triangles": 1640,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.24466,
+          0,
+          -0.123869
+        ],
+        "max": [
+          0.24466,
+          1.282,
+          0.097838
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.27,
+            0
+          ]
+        },
+        {
+          "id": "bag-shoulder",
+          "position": [
+            0.161,
+            1.2305,
+            0
+          ]
+        },
+        {
+          "id": "shoulder--1",
+          "position": [
+            -0.166,
+            1.19,
+            0
+          ]
+        },
+        {
+          "id": "elbow--1",
+          "position": [
+            -0.19336,
+            0.9812,
+            0
+          ]
+        },
+        {
+          "id": "wrist--1",
+          "position": [
+            -0.20419,
+            0.792,
+            0
+          ]
+        },
+        {
+          "id": "hip--1",
+          "position": [
+            -0.088,
+            0.755,
+            0
+          ]
+        },
+        {
+          "id": "knee--1",
+          "position": [
+            -0.088,
+            0.405,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle--1",
+          "position": [
+            -0.088,
+            0.0885,
+            0
+          ]
+        },
+        {
+          "id": "shoulder-1",
+          "position": [
+            0.166,
+            1.19,
+            0
+          ]
+        },
+        {
+          "id": "elbow-1",
+          "position": [
+            0.19336,
+            0.9812,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            0.20419,
+            0.792,
+            0
+          ]
+        },
+        {
+          "id": "hip-1",
+          "position": [
+            0.088,
+            0.755,
+            0
+          ]
+        },
+        {
+          "id": "knee-1",
+          "position": [
+            0.088,
+            0.405,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle-1",
+          "position": [
+            0.088,
+            0.0885,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-065",
+      "name": "精细体素老年身体母版",
+      "assetId": "char-065",
+      "revision": 3,
+      "url": "studio-assets/CHAR-065.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-065/visual.glb",
+      "sha256": "73352ec70224188a49fcea599c982e1c2df76b4707f762d8eff16d4774f85518",
+      "bytes": 261780,
+      "triangles": 1652,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.256422,
+          0,
+          -0.137945
+        ],
+        "max": [
+          0.256422,
+          1.412,
+          0.108173
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.4,
+            0
+          ]
+        },
+        {
+          "id": "bag-shoulder",
+          "position": [
+            0.179,
+            1.35428,
+            0
+          ]
+        },
+        {
+          "id": "shoulder--1",
+          "position": [
+            -0.184,
+            1.31,
+            0
+          ]
+        },
+        {
+          "id": "elbow--1",
+          "position": [
+            -0.20919,
+            1.0772,
+            0
+          ]
+        },
+        {
+          "id": "wrist--1",
+          "position": [
+            -0.219162,
+            0.862,
+            0
+          ]
+        },
+        {
+          "id": "hip--1",
+          "position": [
+            -0.098,
+            0.825,
+            0
+          ]
+        },
+        {
+          "id": "knee--1",
+          "position": [
+            -0.098,
+            0.445,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle--1",
+          "position": [
+            -0.098,
+            0.09676,
+            0
+          ]
+        },
+        {
+          "id": "shoulder-1",
+          "position": [
+            0.184,
+            1.31,
+            0
+          ]
+        },
+        {
+          "id": "elbow-1",
+          "position": [
+            0.20919,
+            1.0772,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            0.219162,
+            0.862,
+            0
+          ]
+        },
+        {
+          "id": "hip-1",
+          "position": [
+            0.098,
+            0.825,
+            0
+          ]
+        },
+        {
+          "id": "knee-1",
+          "position": [
+            0.098,
+            0.445,
+            -0.005
+          ]
+        },
+        {
+          "id": "ankle-1",
+          "position": [
+            0.098,
+            0.09676,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-066",
+      "name": "精细成年头部母版",
+      "assetId": "char-066",
+      "revision": 3,
+      "url": "studio-assets/CHAR-066.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-066/visual.glb",
+      "sha256": "7bb86bfa6659a200653fcc88266e996518430a489d66303700a1ce86f460cc22",
+      "bytes": 180632,
+      "triangles": 932,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.098,
+          -0.022,
+          -0.116
+        ],
+        "max": [
+          0.098,
+          0.24,
+          0.086
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "hat-seat",
+          "position": [
+            0,
+            0.17,
+            0
+          ]
+        },
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-067",
+      "name": "精细婴幼儿头部母版",
+      "assetId": "char-067",
+      "revision": 3,
+      "url": "studio-assets/CHAR-067.glb",
+      "source": "projects/production/atlas-20261004084218/exports/CHAR-067/visual.glb",
+      "sha256": "8f79a859f1bf2c4b9cd280f608091a9038d3ef3d8c565644c09a005827d4088a",
+      "bytes": 172248,
+      "triangles": 848,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.091,
+          -0.022,
+          -0.102
+        ],
+        "max": [
+          0.091,
+          0.19,
+          0.086
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "hat-seat",
+          "position": [
+            0,
+            0.145,
+            0
+          ]
+        },
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-068",
+      "name": "精细儿童头部母版",
+      "assetId": "char-068",
+      "revision": 3,
+      "url": "studio-assets/CHAR-068.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-068/visual.glb",
+      "sha256": "41dd11c48f3b396a5ba0b56130b51ef6b9d648ed08a08d97debe909a7e9ceec4",
+      "bytes": 173816,
+      "triangles": 864,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.098,
+          -0.022,
+          -0.109056
+        ],
+        "max": [
+          0.098,
+          0.205,
+          0.081
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "hat-seat",
+          "position": [
+            0,
+            0.14555,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-069",
+      "name": "精细老年头部母版",
+      "assetId": "char-069",
+      "revision": 3,
+      "url": "studio-assets/CHAR-069.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-069/visual.glb",
+      "sha256": "a2854ea017c299c203ab3e36b10aa6474fcef00a37905193fed35a8244d6a21a",
+      "bytes": 188324,
+      "triangles": 1028,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.096,
+          -0.022,
+          -0.117741
+        ],
+        "max": [
+          0.096,
+          0.24,
+          0.084
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "hat-seat",
+          "position": [
+            0,
+            0.1704,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-070",
+      "name": "精细体素可握持手母版",
+      "assetId": "char-070",
+      "revision": 3,
+      "url": "studio-assets/CHAR-070.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-070/visual.glb",
+      "sha256": "d6fcd4e15095019b666b956591f912ea6b90ae43b310d9e3250990e247de3aea",
+      "bytes": 363984,
+      "triangles": 1520,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.044652,
+          -0.155,
+          -0.035
+        ],
+        "max": [
+          0.084015,
+          0.015,
+          0.034264
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "finger-tip-0",
+          "position": [
+            -0.03,
+            -0.14,
+            0
+          ]
+        },
+        {
+          "id": "finger-tip-1",
+          "position": [
+            -0.01,
+            -0.155,
+            0
+          ]
+        },
+        {
+          "id": "finger-tip-2",
+          "position": [
+            0.01,
+            -0.151,
+            0
+          ]
+        },
+        {
+          "id": "finger-tip-3",
+          "position": [
+            0.03,
+            -0.136,
+            0
+          ]
+        },
+        {
+          "id": "wrist",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "grip",
+          "position": [
+            0,
+            -0.058,
+            -0.042
+          ]
+        }
+      ],
+      "joints": [
+        "wrist",
+        "palm",
+        "finger-0-0",
+        "finger-0-1",
+        "finger-0-2",
+        "finger-1-0",
+        "finger-1-1",
+        "finger-1-2",
+        "finger-2-0",
+        "finger-2-1",
+        "finger-2-2",
+        "finger-3-0",
+        "finger-3-1",
+        "finger-3-2",
+        "thumb-0",
+        "thumb-1",
+        "thumb-2"
+      ]
+    },
+    {
+      "id": "CHAR-071",
+      "name": "精细体素裸足母版",
+      "assetId": "char-071",
+      "revision": 3,
+      "url": "studio-assets/CHAR-071.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-071/visual.glb",
+      "sha256": "8d69a718a78413c717ef14bbb0f12abe998c121df2f66db4df3bd94dfb63807a",
+      "bytes": 173512,
+      "triangles": 852,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.058,
+          -0.1003,
+          -0.181
+        ],
+        "max": [
+          0.058,
+          0.026,
+          0.066
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "ankle",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-072",
+      "name": "孕期腹部造型替换件",
+      "assetId": "char-072",
+      "revision": 3,
+      "url": "studio-assets/CHAR-072.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-072/visual.glb",
+      "sha256": "82bb398db1d87f6d5178e85c253ae53af237e00257c2be8004b8c1169a2f7b2a",
+      "bytes": 108764,
+      "triangles": 240,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.1804,
+          0,
+          -0.255
+        ],
+        "max": [
+          0.1804,
+          0.3785,
+          0.112996
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "abdomen-bottom",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "abdomen-top",
+          "position": [
+            0,
+            0.3785,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-085",
+      "name": "利落短发细体素母版",
+      "assetId": "char-085",
+      "revision": 3,
+      "url": "studio-assets/CHAR-085.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-085/visual.glb",
+      "sha256": "5c9629c6c1c2aeb822c473da3bc3fca3903ab43db6d62b67921a2709b6c9277b",
+      "bytes": 311784,
+      "triangles": 2112,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.137905,
+          0.075,
+          -0.134
+        ],
+        "max": [
+          0.137905,
+          0.275,
+          0.134
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-086",
+      "name": "侧分短发细体素母版",
+      "assetId": "char-086",
+      "revision": 3,
+      "url": "studio-assets/CHAR-086.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-086/visual.glb",
+      "sha256": "4e687454d9b72ab51c3e21265760b24d7643c1dd2522d665a0f2043d621861c9",
+      "bytes": 311784,
+      "triangles": 2112,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.141902,
+          0.075,
+          -0.134
+        ],
+        "max": [
+          0.141902,
+          0.275,
+          0.134
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-087",
+      "name": "自然微卷短发母版",
+      "assetId": "char-087",
+      "revision": 3,
+      "url": "studio-assets/CHAR-087.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-087/visual.glb",
+      "sha256": "68ef9b911200fb894f9e84018c206ab61e3f10970121310da18d44f94e60ac21",
+      "bytes": 367316,
+      "triangles": 2624,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.141948,
+          0.07,
+          -0.134
+        ],
+        "max": [
+          0.141948,
+          0.275,
+          0.139
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-088",
+      "name": "齐耳中短发母版",
+      "assetId": "char-088",
+      "revision": 3,
+      "url": "studio-assets/CHAR-088.glb",
+      "source": "projects/production/atlas-20261004093013/exports/CHAR-088/visual.glb",
+      "sha256": "6158e904798fe5b5e390139b9823285047859725c0cb63427ac74605254c3782",
+      "bytes": 329100,
+      "triangles": 2272,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.137757,
+          0.042,
+          -0.133232
+        ],
+        "max": [
+          0.137757,
+          0.275,
+          0.134
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-089",
+      "name": "披肩长发母版",
+      "assetId": "char-089",
+      "revision": 3,
+      "url": "studio-assets/CHAR-089.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-089/visual.glb",
+      "sha256": "da6f6f1f52e611f408d4ac7eebe4612f647a36927d85ed6389e6e4c95556a6d8",
+      "bytes": 465692,
+      "triangles": 2098,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.144464,
+          -0.276338,
+          -0.186814
+        ],
+        "max": [
+          0.144461,
+          0.275,
+          0.280887
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-090",
+      "name": "单编辫长发母版",
+      "assetId": "char-090",
+      "revision": 3,
+      "url": "studio-assets/CHAR-090.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-090/visual.glb",
+      "sha256": "ddaaa1ca1194d55f1fb16554bb01876917cb5af0e215e2728093947af0c80879",
+      "bytes": 481996,
+      "triangles": 2192,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.131996,
+          -0.30312,
+          -0.134
+        ],
+        "max": [
+          0.131996,
+          0.275,
+          0.306
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-091",
+      "name": "束发马尾母版",
+      "assetId": "char-091",
+      "revision": 3,
+      "url": "studio-assets/CHAR-091.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-091/visual.glb",
+      "sha256": "fadd53fee5207a6e2a0c59e28e1a2415256c94c24f80740c3c46b7727600c6e8",
+      "bytes": 428752,
+      "triangles": 1896,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.131996,
+          -0.310195,
+          -0.134
+        ],
+        "max": [
+          0.131996,
+          0.275,
+          0.307915
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-092",
+      "name": "盘髻母版",
+      "assetId": "char-092",
+      "revision": 3,
+      "url": "studio-assets/CHAR-092.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-092/visual.glb",
+      "sha256": "ef6a3036252eea4f554295d802ebbc33e4fa8cb02739fb079c4c312f931bad7d",
+      "bytes": 526172,
+      "triangles": 2448,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.131996,
+          0.033705,
+          -0.134
+        ],
+        "max": [
+          0.131996,
+          0.321,
+          0.215648
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-093",
+      "name": "古风束冠髻母版",
+      "assetId": "char-093",
+      "revision": 3,
+      "url": "studio-assets/CHAR-093.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-093/visual.glb",
+      "sha256": "26edc763c8f6a3b1176eac2ec49cd0e987940eae91170b37715137591360a734",
+      "bytes": 435352,
+      "triangles": 1924,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.131996,
+          -0.290939,
+          -0.134
+        ],
+        "max": [
+          0.131996,
+          0.398,
+          0.284926
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "crown-seat",
+          "position": [
+            0,
+            0.305,
+            0.06
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-094",
+      "name": "儿童双髻母版",
+      "assetId": "char-094",
+      "revision": 3,
+      "url": "studio-assets/CHAR-094.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-094/visual.glb",
+      "sha256": "8b0295c03cf41e4089f54ae6e58f186f4365e37fec138b1cfdbc1a5a0b744343",
+      "bytes": 370812,
+      "triangles": 1576,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.176,
+          0.028395,
+          -0.134
+        ],
+        "max": [
+          0.176,
+          0.272479,
+          0.12
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-095",
+      "name": "老年稀疏发母版",
+      "assetId": "char-095",
+      "revision": 3,
+      "url": "studio-assets/CHAR-095.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-095/visual.glb",
+      "sha256": "3f2867de49fe1d2b05f89af6b41bdf5d89f19cc4500bf51a4a2b3ab26550dbee",
+      "bytes": 272912,
+      "triangles": 1028,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.114634,
+          0.078,
+          -0.032756
+        ],
+        "max": [
+          0.114634,
+          0.255952,
+          0.106923
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-096",
+      "name": "短须胡髭挂件母版",
+      "assetId": "char-096",
+      "revision": 3,
+      "url": "studio-assets/CHAR-096.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-096/visual.glb",
+      "sha256": "8b127f1260d56c7d0e1c9f77c6798d0997a497329cb253c56e31863359fae01d",
+      "bytes": 170796,
+      "triangles": 484,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.058882,
+          -0.060284,
+          -0.131945
+        ],
+        "max": [
+          0.058882,
+          0.072627,
+          -0.059606
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "face-hair",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-097",
+      "name": "长须挂件母版",
+      "assetId": "char-097",
+      "revision": 3,
+      "url": "studio-assets/CHAR-097.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-097/visual.glb",
+      "sha256": "6d4aeeec73ee3e34eb90ae27f6c227039b9bee95fc9ea704303a506cdeedcd61",
+      "bytes": 197976,
+      "triangles": 644,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.058882,
+          -0.223458,
+          -0.238622
+        ],
+        "max": [
+          0.058882,
+          0.072627,
+          -0.059606
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "face-hair",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-098",
+      "name": "立体眉毛挂件母版",
+      "assetId": "char-098",
+      "revision": 3,
+      "url": "studio-assets/CHAR-098.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-098/visual.glb",
+      "sha256": "d95f007aba943abc114216f17cda0fd00dffb57f5d9b40749ae3beafb58788db",
+      "bytes": 107260,
+      "triangles": 120,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.058734,
+          0.141254,
+          -0.093513
+        ],
+        "max": [
+          0.058732,
+          0.158837,
+          -0.067656
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "face-hair",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-099",
+      "name": "布巾软帽母版",
+      "assetId": "char-099",
+      "revision": 3,
+      "url": "studio-assets/CHAR-099.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-099/visual.glb",
+      "sha256": "8f8f7aee78c03b7cedb6900296d976f0890fde16210cef79b1b262d7a95f7f6a",
+      "bytes": 244436,
+      "triangles": 880,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.175,
+          0.014249,
+          -0.168
+        ],
+        "max": [
+          0.175,
+          0.33,
+          0.20985
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hair-back",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-100",
+      "name": "发冠与簪槽母版",
+      "assetId": "char-100",
+      "revision": 3,
+      "url": "studio-assets/CHAR-100.glb",
+      "source": "projects/production/atlas-20261004101501/exports/CHAR-100/visual.glb",
+      "sha256": "7c17416384093605551a4bab3c3a4c51f9a2247ace1aa33a033a1b73879e66b3",
+      "bytes": 211240,
+      "triangles": 732,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.185,
+          -0.175,
+          -0.09
+        ],
+        "max": [
+          0.185,
+          0.15,
+          0.07
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "crown-seat",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pin-axis",
+          "position": [
+            0,
+            0.115,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-101",
+      "name": "警务制帽母版",
+      "assetId": "char-101",
+      "revision": 3,
+      "url": "studio-assets/CHAR-101.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-101/visual.glb",
+      "sha256": "872ac60144245f92ea61ec8e0f6a79d43afc651388a758c2d03cec171467e0d8",
+      "bytes": 223184,
+      "triangles": 728,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.197,
+          0.157,
+          -0.245
+        ],
+        "max": [
+          0.197,
+          0.304,
+          0.164
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-102",
+      "name": "守卫护盔母版",
+      "assetId": "char-102",
+      "revision": 3,
+      "url": "studio-assets/CHAR-102.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-102/visual.glb",
+      "sha256": "d74f09c18adf04e93b5930ff4923363546021d43b9ca2b13be88cdb7011db807",
+      "bytes": 281748,
+      "triangles": 1044,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.189,
+          -0.032499,
+          -0.245
+        ],
+        "max": [
+          0.189,
+          0.352,
+          0.165
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-103",
+      "name": "工坊防护帽母版",
+      "assetId": "char-103",
+      "revision": 3,
+      "url": "studio-assets/CHAR-103.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-103/visual.glb",
+      "sha256": "a85161a2687eebfb916800a44977e8e4ebe3fd02e03d6378c12e7fa7b2d6f777",
+      "bytes": 291452,
+      "triangles": 1084,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.189,
+          0.156,
+          -0.245
+        ],
+        "max": [
+          0.189,
+          0.352,
+          0.165
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-104",
+      "name": "农用斗笠母版",
+      "assetId": "char-104",
+      "revision": 3,
+      "url": "studio-assets/CHAR-104.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-104/visual.glb",
+      "sha256": "dbf0e040a6eb8de7624a9b640463739ef3be7cdbc73a424722ef2568842c60e5",
+      "bytes": 369280,
+      "triangles": 1524,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.342,
+          -0.032499,
+          -0.326
+        ],
+        "max": [
+          0.342,
+          0.4,
+          0.326
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-105",
+      "name": "厨房工作帽母版",
+      "assetId": "char-105",
+      "revision": 3,
+      "url": "studio-assets/CHAR-105.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-105/visual.glb",
+      "sha256": "9f94c864feebe8257616842504a63fef423b212f87035d4201603e93d10a185b",
+      "bytes": 392996,
+      "triangles": 1664,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.207937,
+          0.16,
+          -0.189979
+        ],
+        "max": [
+          0.207937,
+          0.46,
+          0.189979
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-106",
+      "name": "医护工作帽母版",
+      "assetId": "char-106",
+      "revision": 3,
+      "url": "studio-assets/CHAR-106.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-106/visual.glb",
+      "sha256": "0981466c48a8bfe5aa47f105afeeee53cceb653066fe3597c8c084a3f52d32f2",
+      "bytes": 213260,
+      "triangles": 664,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.169,
+          0.112073,
+          -0.16
+        ],
+        "max": [
+          0.169,
+          0.315,
+          0.197326
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-107",
+      "name": "发簪母版",
+      "assetId": "char-107",
+      "revision": 3,
+      "url": "studio-assets/CHAR-107.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-107/visual.glb",
+      "sha256": "265dabff558da3d6a545b00403fe94ca15999c0bcef06aa332253f6ac165f3ab",
+      "bytes": 175144,
+      "triangles": 492,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.194,
+          -0.1545,
+          -0.02
+        ],
+        "max": [
+          0.18,
+          0.029,
+          0.005
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "pin-axis",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-108",
+      "name": "近视眼镜母版",
+      "assetId": "char-108",
+      "revision": 3,
+      "url": "studio-assets/CHAR-108.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-108/visual.glb",
+      "sha256": "866561f3893675063b49433429dec20e0db773d93912740fb1b437776886681f",
+      "bytes": 164352,
+      "triangles": 392,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.157417,
+          0.097,
+          -0.1355
+        ],
+        "max": [
+          0.157417,
+          0.143,
+          0.099447
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-109",
+      "name": "科研防护眼镜母版",
+      "assetId": "char-109",
+      "revision": 3,
+      "url": "studio-assets/CHAR-109.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-109/visual.glb",
+      "sha256": "06556197354845fcc54dfb72d311e6cf9f20a253e9163d306a53ee0fdde1e701",
+      "bytes": 196212,
+      "triangles": 552,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.161851,
+          0.0905,
+          -0.1595
+        ],
+        "max": [
+          0.161851,
+          0.1495,
+          0.169854
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-110",
+      "name": "耳饰母版",
+      "assetId": "char-110",
+      "revision": 3,
+      "url": "studio-assets/CHAR-110.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-110/visual.glb",
+      "sha256": "e077e5ca9fb1403901fdf20ff54af595bc0e85a72c37de28dae6b8933bd45eeb",
+      "bytes": 147676,
+      "triangles": 304,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.124,
+          0.0045,
+          -0.035
+        ],
+        "max": [
+          0.124,
+          0.081,
+          -0.012879
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "ear--1",
+          "position": [
+            -0.103,
+            0.078,
+            -0.015
+          ]
+        },
+        {
+          "id": "ear-1",
+          "position": [
+            0.103,
+            0.078,
+            -0.015
+          ]
+        },
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-111",
+      "name": "医护口罩母版",
+      "assetId": "char-111",
+      "revision": 3,
+      "url": "studio-assets/CHAR-111.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-111/visual.glb",
+      "sha256": "7483d280f9f61c2cdaaaff5fc23e235847431dd9a00dcbf1fcfea8121e8289d7",
+      "bytes": 205144,
+      "triangles": 624,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.103429,
+          0.02432,
+          -0.134991
+        ],
+        "max": [
+          0.103429,
+          0.128043,
+          0.027441
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-112",
+      "name": "工坊防尘面罩母版",
+      "assetId": "char-112",
+      "revision": 3,
+      "url": "studio-assets/CHAR-112.glb",
+      "source": "projects/production/atlas-20261004105313/exports/CHAR-112/visual.glb",
+      "sha256": "ced2ade5f7122cd4de209182dd32cd85afce94a63a1a93e7e69e06bfd8b1af4d",
+      "bytes": 231236,
+      "triangles": 792,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.159763,
+          0.021,
+          -0.17
+        ],
+        "max": [
+          0.159763,
+          0.14199,
+          0.172976
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "head",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "head"
+      ]
+    },
+    {
+      "id": "CHAR-113",
+      "name": "短夹衣/交领上衣母版",
+      "assetId": "char-113",
+      "revision": 3,
+      "url": "studio-assets/CHAR-113.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-113/visual.glb",
+      "sha256": "aa35130598741f6002123846279204e8b77c196d5ff93a02ae6dc3720db636b0",
+      "bytes": 564508,
+      "triangles": 2568,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.318466,
+          0.88,
+          -0.16
+        ],
+        "max": [
+          0.318466,
+          1.446,
+          0.15224
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-114",
+      "name": "长袍上身母版",
+      "assetId": "char-114",
+      "revision": 3,
+      "url": "studio-assets/CHAR-114.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-114/visual.glb",
+      "sha256": "ec8f0f9a953b476113f21d3a0bcf2c71de9ed4af5b858dff36c80e41ed6ef630",
+      "bytes": 591012,
+      "triangles": 2728,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.318466,
+          0.69,
+          -0.215
+        ],
+        "max": [
+          0.318466,
+          1.446,
+          0.15224
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-115",
+      "name": "长袍精细下摆母版",
+      "assetId": "char-115",
+      "revision": 3,
+      "url": "studio-assets/CHAR-115.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-115/visual.glb",
+      "sha256": "c42e6b6e5734161adaa770174c3aace3b814b447fbf190d4baf25e4146ec42e3",
+      "bytes": 292968,
+      "triangles": 1044,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.322,
+          0.08,
+          -0.227
+        ],
+        "max": [
+          0.322,
+          0.88,
+          0.227
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-116",
+      "name": "外搭长衫母版",
+      "assetId": "char-116",
+      "revision": 3,
+      "url": "studio-assets/CHAR-116.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-116/visual.glb",
+      "sha256": "b08990536ed747b33100d750f5ecbb4a3b353f7033310a490e62641bf9a43ace",
+      "bytes": 524660,
+      "triangles": 2348,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.344466,
+          0.52,
+          -0.138321
+        ],
+        "max": [
+          0.344466,
+          1.446,
+          0.16724
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-117",
+      "name": "无袖马甲母版",
+      "assetId": "char-117",
+      "revision": 3,
+      "url": "studio-assets/CHAR-117.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-117/visual.glb",
+      "sha256": "3d16edc6f144eaf88ec0bde529477bfd8851878a098c15cd077200083b44ca4c",
+      "bytes": 391140,
+      "triangles": 1580,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.21948,
+          0.88,
+          -0.16
+        ],
+        "max": [
+          0.21948,
+          1.446,
+          0.15224
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-118",
+      "name": "日常长裤母版",
+      "assetId": "char-118",
+      "revision": 3,
+      "url": "studio-assets/CHAR-118.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-118/visual.glb",
+      "sha256": "8cdfcdeff08c2c0c796dbe1ef337acb1165b7af46248b23c65b0faf8fab0b453",
+      "bytes": 322468,
+      "triangles": 1220,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.19024,
+          0.1253,
+          -0.125
+        ],
+        "max": [
+          0.19024,
+          0.912,
+          0.124722
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "ankle-1",
+          "position": [
+            -0.1,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "ankle1",
+          "position": [
+            0.1,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-119",
+      "name": "长裙母版",
+      "assetId": "char-119",
+      "revision": 3,
+      "url": "studio-assets/CHAR-119.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-119/visual.glb",
+      "sha256": "9a600d9da67acd5b1abed3612aefd606e60fa2f479cccd3c4638ec567e86d2fd",
+      "bytes": 294904,
+      "triangles": 1060,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.352,
+          0.055,
+          -0.247
+        ],
+        "max": [
+          0.352,
+          0.88,
+          0.247
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-120",
+      "name": "织带腰封母版",
+      "assetId": "char-120",
+      "revision": 3,
+      "url": "studio-assets/CHAR-120.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-120/visual.glb",
+      "sha256": "32c48940628fefdb605a6881d86dce4776a31c1c7a333bccb50ecbb2fc581271",
+      "bytes": 179456,
+      "triangles": 436,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.25248,
+          0.54,
+          -0.205
+        ],
+        "max": [
+          0.25248,
+          0.943,
+          0.18524
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-121",
+      "name": "行走短靴母版",
+      "assetId": "char-121",
+      "revision": 3,
+      "url": "studio-assets/CHAR-121.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-121/visual.glb",
+      "sha256": "afb7b04a0eb8653cbfa0ea6118e32f68db09c35680526a2a894abf85f343089c",
+      "bytes": 316576,
+      "triangles": 1184,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.184,
+          -0.02,
+          -0.215
+        ],
+        "max": [
+          0.184,
+          0.245,
+          0.099
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "ankle-1",
+          "position": [
+            -0.1,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "ankle1",
+          "position": [
+            0.1,
+            0.1003,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-122",
+      "name": "布鞋母版",
+      "assetId": "char-122",
+      "revision": 3,
+      "url": "studio-assets/CHAR-122.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-122/visual.glb",
+      "sha256": "84612fe484fadf50ca08300206746a01146bac18c5b0f44620ada6f098d2d284",
+      "bytes": 272664,
+      "triangles": 920,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.183,
+          -0.02,
+          -0.212
+        ],
+        "max": [
+          0.183,
+          0.1343,
+          0.097
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "ankle-1",
+          "position": [
+            -0.1,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "ankle1",
+          "position": [
+            0.1,
+            0.1003,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-123",
+      "name": "儿童鞋母版",
+      "assetId": "char-123",
+      "revision": 3,
+      "url": "studio-assets/CHAR-123.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-123/visual.glb",
+      "sha256": "56e33633373b408b962d805064f675e5cae64913226faa327083ef77f6f2384e",
+      "bytes": 272712,
+      "triangles": 920,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.13076,
+          -0.014,
+          -0.1484
+        ],
+        "max": [
+          0.13076,
+          0.0946,
+          0.0685
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "ankle-1",
+          "position": [
+            -0.071,
+            0.0708,
+            0
+          ]
+        },
+        {
+          "id": "ankle1",
+          "position": [
+            0.071,
+            0.0708,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-124",
+      "name": "居家寝衣母版",
+      "assetId": "char-124",
+      "revision": 3,
+      "url": "studio-assets/CHAR-124.glb",
+      "source": "projects/production/atlas-20261004115622/exports/CHAR-124/visual.glb",
+      "sha256": "97cf0449e9609e6ae0f1d71aacd650ee9be53296a432367a5c8955cf74839b8a",
+      "bytes": 727992,
+      "triangles": 3436,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.318466,
+          0.1253,
+          -0.15224
+        ],
+        "max": [
+          0.318466,
+          1.446,
+          0.15224
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "ankle-1",
+          "position": [
+            -0.1,
+            0.1003,
+            0
+          ]
+        },
+        {
+          "id": "ankle1",
+          "position": [
+            0.1,
+            0.1003,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-125",
+      "name": "婴儿包衣母版",
+      "assetId": "char-125",
+      "revision": 3,
+      "url": "studio-assets/CHAR-125.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-125/visual.glb",
+      "sha256": "549f7efd72dbe477d5a5c7a1118c5877571c534156cbd9781e6d11233372dbab",
+      "bytes": 525688,
+      "triangles": 2304,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.162442,
+          0.211176,
+          -0.085
+        ],
+        "max": [
+          0.162442,
+          0.405059,
+          0.07605
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0.41,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.227059,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.122532,
+            0.242,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.122532,
+            0.242,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-126",
+      "name": "学堂童装母版",
+      "assetId": "char-126",
+      "revision": 3,
+      "url": "studio-assets/CHAR-126.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-126/visual.glb",
+      "sha256": "98911901abdd2f2c1fff3d67e26622304f2c8aca508e5c8ab1412015485f9a2d",
+      "bytes": 566256,
+      "triangles": 2524,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.215108,
+          0.485294,
+          -0.13
+        ],
+        "max": [
+          0.215108,
+          0.975118,
+          0.103935
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            0.985,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.584118,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.168552,
+            0.607,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.168552,
+            0.607,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-127",
+      "name": "警务制服模块母版",
+      "assetId": "char-127",
+      "revision": 3,
+      "url": "studio-assets/CHAR-127.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-127/visual.glb",
+      "sha256": "72c9bb1d2b4e7ffd37b15f08631987726308695106e2c0929fcd01a2af4d19b3",
+      "bytes": 550600,
+      "triangles": 2446,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.314236,
+          0.775,
+          -0.145
+        ],
+        "max": [
+          0.314236,
+          1.446,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-128",
+      "name": "守卫防护衣模块母版",
+      "assetId": "char-128",
+      "revision": 3,
+      "url": "studio-assets/CHAR-128.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-128/visual.glb",
+      "sha256": "f4b889a136caacf8f1c8b1398f83582721f44724723425c3d8dc6d009b181328",
+      "bytes": 598220,
+      "triangles": 2700,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.314236,
+          0.878,
+          -0.145
+        ],
+        "max": [
+          0.314236,
+          1.446,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-129",
+      "name": "驾驶调度服模块母版",
+      "assetId": "char-129",
+      "revision": 3,
+      "url": "studio-assets/CHAR-129.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-129/visual.glb",
+      "sha256": "c7cc0bd9fc210d2f5922c49f9d1be2f1689abd4f67b3a8eb90ca1e06e02d66fd",
+      "bytes": 566784,
+      "triangles": 2530,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.314236,
+          0.8,
+          -0.159141
+        ],
+        "max": [
+          0.314236,
+          1.446,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-130",
+      "name": "工坊劳动衣模块母版",
+      "assetId": "char-130",
+      "revision": 3,
+      "url": "studio-assets/CHAR-130.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-130/visual.glb",
+      "sha256": "bf469e8183ecf8238130bf103f47470b65beece2588510c9a667b9be1708d440",
+      "bytes": 608748,
+      "triangles": 2752,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.314236,
+          0.878,
+          -0.159641
+        ],
+        "max": [
+          0.314236,
+          1.446,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-131",
+      "name": "田作服模块母版",
+      "assetId": "char-131",
+      "revision": 3,
+      "url": "studio-assets/CHAR-131.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-131/visual.glb",
+      "sha256": "7e3d1f7556314a3b3f34eac00c0545758ef40f094078e998f06838ec650bb1f5",
+      "bytes": 500628,
+      "triangles": 2152,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.300024,
+          0.81,
+          -0.158403
+        ],
+        "max": [
+          0.300024,
+          1.446,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "sleeve-end-1",
+          "position": [
+            -0.236008,
+            1.1252,
+            0
+          ]
+        },
+        {
+          "id": "sleeve-end1",
+          "position": [
+            0.236008,
+            1.1252,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-132",
+      "name": "医生诊疗衣模块母版",
+      "assetId": "char-132",
+      "revision": 3,
+      "url": "studio-assets/CHAR-132.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-132/visual.glb",
+      "sha256": "84f46ac1a6f7790cc2d71e44a444f9a89ee84f4824406d7309c1a437ee00ced0",
+      "bytes": 535368,
+      "triangles": 2368,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.314236,
+          0.59,
+          -0.17
+        ],
+        "max": [
+          0.314236,
+          1.446,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-133",
+      "name": "护理工作衣模块母版",
+      "assetId": "char-133",
+      "revision": 3,
+      "url": "studio-assets/CHAR-133.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-133/visual.glb",
+      "sha256": "62302fc9513aebbcf445c8dfec0eb97ef5d8454e2635b7713ba3bd7390e67b40",
+      "bytes": 554028,
+      "triangles": 2472,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.314236,
+          0.55,
+          -0.175
+        ],
+        "max": [
+          0.314236,
+          1.446,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-134",
+      "name": "科研实验外套母版",
+      "assetId": "char-134",
+      "revision": 3,
+      "url": "studio-assets/CHAR-134.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-134/visual.glb",
+      "sha256": "11e2ca5a5218acd0dae4b2924ee259100021b58da5d5050af28c5cbafcd38c96",
+      "bytes": 609260,
+      "triangles": 2776,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.332236,
+          0.46,
+          -0.165
+        ],
+        "max": [
+          0.332236,
+          1.446,
+          0.15658
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-135",
+      "name": "店员服务衣模块母版",
+      "assetId": "char-135",
+      "revision": 3,
+      "url": "studio-assets/CHAR-135.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-135/visual.glb",
+      "sha256": "2dfd17fb1767b78e8c5f790ede74ba3b461a460c342c365191380e40cfd7d3e6",
+      "bytes": 578244,
+      "triangles": 2592,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.314236,
+          0.52,
+          -0.215
+        ],
+        "max": [
+          0.314236,
+          1.446,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-136",
+      "name": "工作围裙母版",
+      "assetId": "char-136",
+      "revision": 3,
+      "url": "studio-assets/CHAR-136.glb",
+      "source": "projects/production/atlas-20261004130221/exports/CHAR-136/visual.glb",
+      "sha256": "0ba4e23c3c325d1fdcb0315c635ee22ab53fda23a238e234230e727bba43e92d",
+      "bytes": 254580,
+      "triangles": 820,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.183245,
+          0.52,
+          -0.215
+        ],
+        "max": [
+          0.183245,
+          1.443,
+          0.135926
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "waist",
+          "position": [
+            0,
+            1,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-137",
+      "name": "官署礼常服模块母版",
+      "assetId": "char-137",
+      "revision": 3,
+      "url": "studio-assets/CHAR-137.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-137/visual.glb",
+      "sha256": "e3359524ee054d1ad5af8dfadc01667fdc33ed2831840dc2ffd99f95a9ffbae5",
+      "bytes": 765628,
+      "triangles": 3584,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.342952,
+          0.14,
+          -0.17
+        ],
+        "max": [
+          0.342952,
+          1.446,
+          0.18
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "hem",
+          "position": [
+            0,
+            0.14,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-138",
+      "name": "婚礼礼服模块母版",
+      "assetId": "char-138",
+      "revision": 3,
+      "url": "studio-assets/CHAR-138.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-138/visual.glb",
+      "sha256": "ff7762dcbfaf1009cd11d993a59d0c4e749fe2c0062f328f7e79cfe302c5f9bb",
+      "bytes": 796060,
+      "triangles": 3752,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.355872,
+          0.075,
+          -0.198
+        ],
+        "max": [
+          0.355872,
+          1.446,
+          0.28
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "hem",
+          "position": [
+            0,
+            0.075,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-139",
+      "name": "丧礼素服模块母版",
+      "assetId": "char-139",
+      "revision": 3,
+      "url": "studio-assets/CHAR-139.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-139/visual.glb",
+      "sha256": "a619ab42a0e796850016dc64a7598c9ffcc9a2a8ec1d70bccfdacd8bb3a75203",
+      "bytes": 810028,
+      "triangles": 3840,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.342952,
+          0.17,
+          -0.17
+        ],
+        "max": [
+          0.342952,
+          1.446,
+          0.18
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "hem",
+          "position": [
+            0,
+            0.17,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-140",
+      "name": "雨披母版",
+      "assetId": "char-140",
+      "revision": 3,
+      "url": "studio-assets/CHAR-140.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-140/visual.glb",
+      "sha256": "0dfecef8dbcc4a31748a900de27d66ea51cd802d946b10443986f829719f0b69",
+      "bytes": 350512,
+      "triangles": 1300,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.43918,
+          0.46,
+          -0.261
+        ],
+        "max": [
+          0.43918,
+          1.805,
+          0.261
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "hood-face",
+          "position": [
+            0,
+            1.6,
+            -0.15
+          ]
+        },
+        {
+          "id": "cape-bottom",
+          "position": [
+            0,
+            0.46,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-141",
+      "name": "围巾披肩母版",
+      "assetId": "char-141",
+      "revision": 3,
+      "url": "studio-assets/CHAR-141.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-141/visual.glb",
+      "sha256": "3ae3c5ba62d74c6e1ddabf2791688b44f1f75a6f0cb35dea2137b8688226169d",
+      "bytes": 161848,
+      "triangles": 280,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.1445,
+          0.57,
+          -0.19
+        ],
+        "max": [
+          0.112,
+          1.488,
+          0.153997
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-142",
+      "name": "防护手套母版",
+      "assetId": "char-142",
+      "revision": 3,
+      "url": "studio-assets/CHAR-142.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-142/visual.glb",
+      "sha256": "a1bb020650b993c79161965af746f3c0f67606917a63a827936c0e306c41ac37",
+      "bytes": 364340,
+      "triangles": 1364,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.0525,
+          -0.158,
+          -0.045
+        ],
+        "max": [
+          0.090332,
+          0.033,
+          0.04
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "finger-tip-0",
+          "position": [
+            -0.03,
+            -0.143,
+            0
+          ]
+        },
+        {
+          "id": "finger-tip-1",
+          "position": [
+            -0.01,
+            -0.158,
+            0
+          ]
+        },
+        {
+          "id": "finger-tip-2",
+          "position": [
+            0.01,
+            -0.154,
+            0
+          ]
+        },
+        {
+          "id": "finger-tip-3",
+          "position": [
+            0.03,
+            -0.139,
+            0
+          ]
+        },
+        {
+          "id": "wrist",
+          "position": [
+            0,
+            0.025,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "wrist",
+        "palm",
+        "finger-0-0",
+        "finger-0-1",
+        "finger-0-2",
+        "finger-1-0",
+        "finger-1-1",
+        "finger-1-2",
+        "finger-2-0",
+        "finger-2-1",
+        "finger-2-2",
+        "finger-3-0",
+        "finger-3-1",
+        "finger-3-2",
+        "thumb-0",
+        "thumb-1",
+        "thumb-2"
+      ]
+    },
+    {
+      "id": "CHAR-143",
+      "name": "水上救生穿戴母版",
+      "assetId": "char-143",
+      "revision": 3,
+      "url": "studio-assets/CHAR-143.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-143/visual.glb",
+      "sha256": "e936d828b663fdbcd73f9032f2124e5f9f6bb7c311900da51b84ba3d9d0e3ef8",
+      "bytes": 222844,
+      "triangles": 588,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.19,
+          0.96,
+          -0.235
+        ],
+        "max": [
+          0.19,
+          1.437785,
+          0.227
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-144",
+      "name": "飞行员护具母版",
+      "assetId": "char-144",
+      "revision": 3,
+      "url": "studio-assets/CHAR-144.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-144/visual.glb",
+      "sha256": "d0670585954e61ff675680b669257a15047d9d05a32255b0815d266fba5e08db",
+      "bytes": 658160,
+      "triangles": 2992,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.315466,
+          0.88,
+          -0.159141
+        ],
+        "max": [
+          0.315466,
+          1.469,
+          0.13858
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "neck",
+          "position": [
+            0,
+            1.46,
+            0
+          ]
+        },
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.88,
+            0
+          ]
+        },
+        {
+          "id": "wrist-1",
+          "position": [
+            -0.248282,
+            0.897,
+            0
+          ]
+        },
+        {
+          "id": "wrist1",
+          "position": [
+            0.248282,
+            0.897,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-145",
+      "name": "身体绷带挂件母版",
+      "assetId": "char-145",
+      "revision": 3,
+      "url": "studio-assets/CHAR-145.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-145/visual.glb",
+      "sha256": "c92da0e3dbdc82cf9550264c484b901fe3ff0480a069af22ff4d99d8d0b8bac3",
+      "bytes": 266128,
+      "triangles": 840,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.297121,
+          0.91,
+          -0.125209
+        ],
+        "max": [
+          0.297121,
+          1.297211,
+          0.115026
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "torso",
+          "position": [
+            0,
+            1,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-146",
+      "name": "肢体支具母版",
+      "assetId": "char-146",
+      "revision": 3,
+      "url": "studio-assets/CHAR-146.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-146/visual.glb",
+      "sha256": "d6aa2b1f11372633a163c118e2c81441cfcbce9b973dd21c60a821e6ec0d1342",
+      "bytes": 369896,
+      "triangles": 1412,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.01,
+          0.1903,
+          -0.105
+        ],
+        "max": [
+          0.21,
+          0.57,
+          0.092143
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "knee-axis",
+          "position": [
+            0.1,
+            0.46,
+            -0.005
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "pelvis",
+        "chest",
+        "head",
+        "shoulder-1",
+        "elbow-1",
+        "wrist-1",
+        "hip-1",
+        "knee-1",
+        "ankle-1",
+        "shoulder1",
+        "elbow1",
+        "wrist1",
+        "hip1",
+        "knee1",
+        "ankle1"
+      ]
+    },
+    {
+      "id": "CHAR-147",
+      "name": "旅行背包母版",
+      "assetId": "char-147",
+      "revision": 3,
+      "url": "studio-assets/CHAR-147.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-147/visual.glb",
+      "sha256": "74b76fd586e8ed3fe79050c1070e448dab886871a865e3823b875dd0fb945eb7",
+      "bytes": 296248,
+      "triangles": 1044,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.252,
+          0,
+          -0.175
+        ],
+        "max": [
+          0.252,
+          0.722809,
+          0.492959
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "bag-mouth",
+          "position": [
+            0,
+            0.5,
+            0
+          ]
+        },
+        {
+          "id": "lid-axis",
+          "position": [
+            0,
+            0.503,
+            -0.108
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "lid"
+      ]
+    },
+    {
+      "id": "CHAR-148",
+      "name": "细体素挎包母版",
+      "assetId": "char-148",
+      "revision": 3,
+      "url": "studio-assets/CHAR-148.glb",
+      "source": "projects/production/atlas-20261004135409/exports/CHAR-148/visual.glb",
+      "sha256": "00a50396cff2144f286914d47d99fd93b9a40649153811a185de4f170cd14d5e",
+      "bytes": 226360,
+      "triangles": 640,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.294,
+          0,
+          -0.203
+        ],
+        "max": [
+          0.204,
+          1.056821,
+          0.183
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "bag-mouth",
+          "position": [
+            0,
+            0.27,
+            0
+          ]
+        },
+        {
+          "id": "lid-axis",
+          "position": [
+            0,
+            0.273,
+            -0.081
+          ]
+        }
+      ],
+      "joints": [
+        "root",
+        "lid"
+      ]
+    },
+    {
+      "id": "CHAR-149",
+      "name": "职业工具腰带母版",
+      "assetId": "char-149",
+      "revision": 3,
+      "url": "studio-assets/CHAR-149.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-149/visual.glb",
+      "sha256": "6133f66fdb4d864dab675e7243a85f373be8444244c5f9f9b3fcfee9f35a309f",
+      "bytes": 275600,
+      "triangles": 836,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.27,
+          -0.085,
+          -0.235
+        ],
+        "max": [
+          0.266,
+          0.074,
+          0.158
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "waist",
+          "position": [
+            0,
+            0.035,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-150",
+      "name": "职业胸牌腰牌母版",
+      "assetId": "char-150",
+      "revision": 3,
+      "url": "studio-assets/CHAR-150.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-150/visual.glb",
+      "sha256": "5bbc6a35afa2b5b615879ebe8fcbb32721200dba1c32731514646068fc600c56",
+      "bytes": 201816,
+      "triangles": 448,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.045794,
+          0,
+          -0.015
+        ],
+        "max": [
+          0.045794,
+          0.235558,
+          0.025
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "clip",
+          "position": [
+            0,
+            0.083,
+            0.01
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-177",
+      "name": "角色手持油纸/科技伞母版",
+      "assetId": "char-177",
+      "revision": 3,
+      "url": "studio-assets/CHAR-177.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-177/visual.glb",
+      "sha256": "117cc0c57faa8a79c4be7d0e8a2cd8561ace8b1ca575861297162744cbbe56e1",
+      "bytes": 558912,
+      "triangles": 2428,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.51094,
+          -0.052,
+          -0.51094
+        ],
+        "max": [
+          0.51094,
+          0.9,
+          0.51094
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.092,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-178",
+      "name": "角色手持拐杖母版",
+      "assetId": "char-178",
+      "revision": 3,
+      "url": "studio-assets/CHAR-178.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-178/visual.glb",
+      "sha256": "74451e76adb725d0a68ba0dc0d0c9e9aeefa3e9ebb46e7f6f4ed2b2e2e994b2c",
+      "bytes": 214736,
+      "triangles": 516,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.073,
+          0,
+          -0.03
+        ],
+        "max": [
+          0.077,
+          0.885,
+          0.03
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.86,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-179",
+      "name": "角色手持腋拐母版",
+      "assetId": "char-179",
+      "revision": 3,
+      "url": "studio-assets/CHAR-179.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-179/visual.glb",
+      "sha256": "81a93cfbe557bd323ddf343138b7546e645547cf6c2a6d050d87fbfa03ba78ee",
+      "bytes": 211520,
+      "triangles": 500,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.126,
+          0,
+          -0.044
+        ],
+        "max": [
+          0.126,
+          1.338,
+          0.044
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.7729,
+            0
+          ]
+        },
+        {
+          "id": "underarm",
+          "position": [
+            0,
+            1.338,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-180",
+      "name": "角色手提购物袋母版",
+      "assetId": "char-180",
+      "revision": 3,
+      "url": "studio-assets/CHAR-180.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-180/visual.glb",
+      "sha256": "9012dc5ffc61442f001f04a1a6ce02fcc147743df5f1b418c5939e0d41076828",
+      "bytes": 256532,
+      "triangles": 760,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.155,
+          0,
+          -0.08
+        ],
+        "max": [
+          0.155,
+          0.498,
+          0.075
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "bag-mouth",
+          "position": [
+            0,
+            0.3,
+            0
+          ]
+        },
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.494,
+            -0.061
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-181",
+      "name": "角色手持食品包母版",
+      "assetId": "char-181",
+      "revision": 3,
+      "url": "studio-assets/CHAR-181.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-181/visual.glb",
+      "sha256": "93c744bfdfea507d24f0af9ac470fca90d2c4c7b2170925bda3189482937b3bc",
+      "bytes": 582468,
+      "triangles": 2524,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.1,
+          0,
+          -0.071
+        ],
+        "max": [
+          0.108078,
+          0.435207,
+          0.071
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "package-mouth",
+          "position": [
+            0,
+            0.24,
+            0
+          ]
+        },
+        {
+          "id": "support-bottom",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-182",
+      "name": "角色手持餐碗母版",
+      "assetId": "char-182",
+      "revision": 3,
+      "url": "studio-assets/CHAR-182.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-182/visual.glb",
+      "sha256": "2360f16443b23cab7b28b4ff7ebd908547291d86f99ab741b036fdd905bb9f24",
+      "bytes": 241648,
+      "triangles": 1580,
+      "cellSizeM": 0.01,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          0.2,
+          0.11,
+          0.2
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "bowl-mouth",
+          "position": [
+            0.1,
+            0.1,
+            0.1
+          ]
+        },
+        {
+          "id": "bowl-support",
+          "position": [
+            0.1,
+            0,
+            0.1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-183",
+      "name": "角色手持筷子母版",
+      "assetId": "char-183",
+      "revision": 3,
+      "url": "studio-assets/CHAR-183.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-183/visual.glb",
+      "sha256": "2fc6525b0d49f28b48b5c4eb8f2c5ec181901551ae427f7900e0bb5d7e2fabfd",
+      "bytes": 152316,
+      "triangles": 168,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.017339,
+          -0.000044,
+          -0.007
+        ],
+        "max": [
+          0.017339,
+          0.250088,
+          0.007
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "two-finger-hold",
+          "position": [
+            0,
+            0.18,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-184",
+      "name": "角色手持茶杯水杯母版",
+      "assetId": "char-184",
+      "revision": 3,
+      "url": "studio-assets/CHAR-184.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-184/visual.glb",
+      "sha256": "f0284c1cb8763f774d4c4147c6573e099b9ae515f89600713397dec9e90ccb0b",
+      "bytes": 227804,
+      "triangles": 572,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.055,
+          0,
+          -0.06
+        ],
+        "max": [
+          0.104,
+          0.152,
+          0.055
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "cup-mouth",
+          "position": [
+            0,
+            0.129,
+            0
+          ]
+        },
+        {
+          "id": "handle-hole",
+          "position": [
+            0.075,
+            0.071,
+            0
+          ]
+        },
+        {
+          "id": "lid-center",
+          "position": [
+            0,
+            0.143,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-185",
+      "name": "角色手持烹饪勺母版",
+      "assetId": "char-185",
+      "revision": 3,
+      "url": "studio-assets/CHAR-185.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-185/visual.glb",
+      "sha256": "7db5072e41999e42c8e167308edea5067f94b8f50938130025980ae6c646be3c",
+      "bytes": 226244,
+      "triangles": 564,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.06,
+          0,
+          -0.06
+        ],
+        "max": [
+          0.06,
+          0.390122,
+          0.398122
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.2844,
+            0.2924
+          ]
+        },
+        {
+          "id": "ladle-mouth",
+          "position": [
+            0,
+            0.056,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-186",
+      "name": "角色手持扫帚母版",
+      "assetId": "char-186",
+      "revision": 3,
+      "url": "studio-assets/CHAR-186.glb",
+      "source": "projects/production/atlas-20261004145623/exports/CHAR-186/visual.glb",
+      "sha256": "434001b36214ea16769d4daffa2436313fbc5c9d68cecf799514b5151615b4b7",
+      "bytes": 356384,
+      "triangles": 1308,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.13552,
+          0.012,
+          -0.05
+        ],
+        "max": [
+          0.13552,
+          1.22,
+          0.046
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.793,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-187",
+      "name": "角色手持抹布母版",
+      "assetId": "char-187",
+      "revision": 3,
+      "url": "studio-assets/CHAR-187.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-187/visual.glb",
+      "sha256": "3d6b3a09b838a42517eddbf345c2cafe272befa17f8f80721c8a4e7eb6e1f514",
+      "bytes": 199288,
+      "triangles": 360,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.12,
+          0.004821,
+          -0.052494
+        ],
+        "max": [
+          0.12,
+          0.32,
+          0.049497
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "cloth-fold",
+          "position": [
+            0,
+            0.31,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-188",
+      "name": "角色提桶母版",
+      "assetId": "char-188",
+      "revision": 3,
+      "url": "studio-assets/CHAR-188.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-188/visual.glb",
+      "sha256": "4bd0bc327817063f34eacf752708905a26c46dad040ad6e62b72176a677169e8",
+      "bytes": 216276,
+      "triangles": 456,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.164,
+          0,
+          -0.136
+        ],
+        "max": [
+          0.164,
+          0.431,
+          0.136
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.413,
+            0
+          ]
+        },
+        {
+          "id": "bucket-mouth",
+          "position": [
+            0,
+            0.265,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-189",
+      "name": "教师/学生手持书册母版",
+      "assetId": "char-189",
+      "revision": 3,
+      "url": "studio-assets/CHAR-189.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-189/visual.glb",
+      "sha256": "35667526202ac8e3bf221075234889a6b02642557d8e1b56241b7db3e2b35ef7",
+      "bytes": 193720,
+      "triangles": 744,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.005,
+          0,
+          0
+        ],
+        "max": [
+          0.23,
+          0.06,
+          0.31
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "book-support",
+          "position": [
+            0.115,
+            0,
+            0.155
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CHAR-190",
+      "name": "角色手持毛笔母版",
+      "assetId": "char-190",
+      "revision": 3,
+      "url": "studio-assets/CHAR-190.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-190/visual.glb",
+      "sha256": "7be68b9775aaaf1c39147fabc1c8f61302e387d4771c18cda0d815befc5451e0",
+      "bytes": 249772,
+      "triangles": 636,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.02,
+          -0.002,
+          -0.025
+        ],
+        "max": [
+          0.02,
+          0.448,
+          0.02
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.139,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-191",
+      "name": "角色手持终端母版",
+      "assetId": "char-191",
+      "revision": 3,
+      "url": "studio-assets/CHAR-191.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-191/visual.glb",
+      "sha256": "1e11fc538e96e4f6c5c124bf6ece613ac4f12ac068f790a2019ed10c73c48ade",
+      "bytes": 215024,
+      "triangles": 484,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.17,
+          0,
+          -0.025
+        ],
+        "max": [
+          0.17,
+          0.235,
+          0.088
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "rear-strap",
+          "position": [
+            0,
+            0.1175,
+            0.058
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-192",
+      "name": "角色手持记录板母版",
+      "assetId": "char-192",
+      "revision": 3,
+      "url": "studio-assets/CHAR-192.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-192/visual.glb",
+      "sha256": "5603b2ebe5604e186d7a7e5146f9b9ecab96900b0502a52c696741a2a373f9d9",
+      "bytes": 258444,
+      "triangles": 672,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.1235,
+          0,
+          -0.025
+        ],
+        "max": [
+          0.1235,
+          0.321,
+          0.08
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "rear-strap",
+          "position": [
+            0,
+            0.16,
+            0.05
+          ]
+        },
+        {
+          "id": "clip-slot",
+          "position": [
+            0,
+            0.28,
+            -0.012
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-193",
+      "name": "医生佩戴与手持诊察器母版",
+      "assetId": "char-193",
+      "revision": 3,
+      "url": "studio-assets/CHAR-193.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-193/visual.glb",
+      "sha256": "e810e6f3cf116de1d95863c90b2438742ad6457ab7996bc2e3aa4f96d2d4a6f0",
+      "bytes": 524244,
+      "triangles": 2164,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.091962,
+          0.024956,
+          -0.02
+        ],
+        "max": [
+          0.114,
+          0.471494,
+          0.017
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0.075,
+            0.18,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-194",
+      "name": "医护提携急救包母版",
+      "assetId": "char-194",
+      "revision": 3,
+      "url": "studio-assets/CHAR-194.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-194/visual.glb",
+      "sha256": "5bfdf295cfdb7b48e797affef7d3b6e66803d04033c52558b53d4bcd2e4e9a93",
+      "bytes": 276884,
+      "triangles": 864,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.175,
+          0,
+          -0.1
+        ],
+        "max": [
+          0.175,
+          0.328,
+          0.09
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.314,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-195",
+      "name": "医生手持诊脉/扫描探头母版",
+      "assetId": "char-195",
+      "revision": 3,
+      "url": "studio-assets/CHAR-195.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-195/visual.glb",
+      "sha256": "dd6e0f64267781a9ba111ece918583df1d74bd0aa9d0d66fd1331c8bec04d871",
+      "bytes": 308916,
+      "triangles": 940,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.049,
+          -0.09936,
+          -0.081
+        ],
+        "max": [
+          0.220598,
+          0.281,
+          0.031
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.086,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-196",
+      "name": "执勤手持照明器母版",
+      "assetId": "char-196",
+      "revision": 3,
+      "url": "studio-assets/CHAR-196.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-196/visual.glb",
+      "sha256": "ffb81009198a24c5de49888edeffd9bbfe0dff3266fb41d8edebe5c1493a3b7c",
+      "bytes": 254372,
+      "triangles": 696,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.085,
+          0,
+          -0.07
+        ],
+        "max": [
+          0.085,
+          0.383,
+          0.07
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.369,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-197",
+      "name": "执勤手持通信器母版",
+      "assetId": "char-197",
+      "revision": 3,
+      "url": "studio-assets/CHAR-197.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-197/visual.glb",
+      "sha256": "3ddc8a7343a1730176b5bc485f5a57be22b05f907de913cf9f39af5222241685",
+      "bytes": 242848,
+      "triangles": 624,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.035,
+          0,
+          -0.025
+        ],
+        "max": [
+          0.035,
+          0.345,
+          0.03
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.088,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-198",
+      "name": "警务手持勤务棍母版",
+      "assetId": "char-198",
+      "revision": 3,
+      "url": "studio-assets/CHAR-198.glb",
+      "source": "projects/production/atlas-20261004153834/exports/CHAR-198/visual.glb",
+      "sha256": "6923bf3b67eb92bcc77ec61437b1be91b156556c1f8c79a5c45e43c3d47be01b",
+      "bytes": 320688,
+      "triangles": 1020,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.028,
+          0,
+          -0.035
+        ],
+        "max": [
+          0.068,
+          0.602,
+          0.028
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.088,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-199",
+      "name": "维修手持扳手母版",
+      "assetId": "char-199",
+      "revision": 3,
+      "url": "studio-assets/CHAR-199.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-199/visual.glb",
+      "sha256": "66d4b9b961c9560634b64437639b6984060da6b6bec6a199031531b0c28db1b5",
+      "bytes": 224980,
+      "triangles": 444,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.047,
+          0.002,
+          -0.035
+        ],
+        "max": [
+          0.053,
+          0.31,
+          0.018
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.113,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-200",
+      "name": "工坊手持锤母版",
+      "assetId": "char-200",
+      "revision": 3,
+      "url": "studio-assets/CHAR-200.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-200/visual.glb",
+      "sha256": "3104ff7849bd5e32382d0b93192d56e92791bb7a09e3f52327a63e11d0df6973",
+      "bytes": 260448,
+      "triangles": 628,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.121,
+          0.022,
+          -0.065
+        ],
+        "max": [
+          0.121,
+          0.499,
+          0.062
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.11,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-201",
+      "name": "农业手持锄母版",
+      "assetId": "char-201",
+      "revision": 3,
+      "url": "studio-assets/CHAR-201.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-201/visual.glb",
+      "sha256": "6b117032169445955b1ae564ed688d225c0ca0d83e964a3e540835c666404916",
+      "bytes": 221472,
+      "triangles": 416,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.085,
+          0.02,
+          -0.239
+        ],
+        "max": [
+          0.155,
+          1.1,
+          0.022
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.47,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-202",
+      "name": "农业手提采收篮母版",
+      "assetId": "char-202",
+      "revision": 3,
+      "url": "studio-assets/CHAR-202.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-202/visual.glb",
+      "sha256": "ee1155ac8e4ad49679bb24f290288f0766b351dc0d5820b156538ecb357229d0",
+      "bytes": 681016,
+      "triangles": 3684,
+      "cellSizeM": 0.01,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          0.48,
+          0.43,
+          0.34
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0.24,
+            0.415,
+            0.17
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-203",
+      "name": "物流手抱包裹母版",
+      "assetId": "char-203",
+      "revision": 3,
+      "url": "studio-assets/CHAR-203.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-203/visual.glb",
+      "sha256": "34ba01e1286bce3a5aa0aa0c70a167c67cc010f35172d05dc087c30e0618adc8",
+      "bytes": 267880,
+      "triangles": 648,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.2,
+          -0.003,
+          -0.155
+        ],
+        "max": [
+          0.2,
+          0.347,
+          0.148
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "palm-support",
+          "position": [
+            0,
+            -0.004,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-204",
+      "name": "婚恋角色手持花束母版",
+      "assetId": "char-204",
+      "revision": 3,
+      "url": "studio-assets/CHAR-204.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-204/visual.glb",
+      "sha256": "26d8462d2157392663e0de4cbdb6554e3905c603abbd129f3baaec2e5a9d4908",
+      "bytes": 3359136,
+      "triangles": 17848,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.109535,
+          0.013789,
+          -0.098244
+        ],
+        "max": [
+          0.110528,
+          0.42,
+          0.12189
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.07,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-205",
+      "name": "葬礼角色手持悼念花母版",
+      "assetId": "char-205",
+      "revision": 3,
+      "url": "studio-assets/CHAR-205.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-205/visual.glb",
+      "sha256": "e74d73458069ea5a73f3964f930b73ddc6b7d50cadcd9b11b690cff46b99e73b",
+      "bytes": 2168168,
+      "triangles": 11232,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.08713,
+          0.014265,
+          -0.102064
+        ],
+        "max": [
+          0.081247,
+          0.42,
+          0.079
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            0.07,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-206",
+      "name": "婴儿照护背带母版",
+      "assetId": "char-206",
+      "revision": 3,
+      "url": "studio-assets/CHAR-206.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-206/visual.glb",
+      "sha256": "1499eff2d53920d2d947a0900f181e864790bac48a1d2ca343c411b6fcbc6a8a",
+      "bytes": 260148,
+      "triangles": 636,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.203,
+          0.91,
+          -0.42
+        ],
+        "max": [
+          0.203,
+          1.444194,
+          0.22
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "infant-seat",
+          "position": [
+            0,
+            0.94,
+            -0.298
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-207",
+      "name": "角色手持牵引绳母版",
+      "assetId": "char-207",
+      "revision": 3,
+      "url": "studio-assets/CHAR-207.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-207/visual.glb",
+      "sha256": "92e1c5fba40989ab91095ab62b0d72bd19d57a4068ffd0db3c96bffac768d311",
+      "bytes": 265076,
+      "triangles": 656,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.05,
+          0.021,
+          -0.01
+        ],
+        "max": [
+          0.21,
+          1.162,
+          0.078922
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "grip",
+          "position": [
+            0,
+            1.153,
+            0
+          ]
+        },
+        {
+          "id": "collar-clip",
+          "position": [
+            0.195,
+            0.033,
+            0.058
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
+    },
+    {
+      "id": "CHAR-208",
+      "name": "角色手持宠物喂食包母版",
+      "assetId": "char-208",
+      "revision": 3,
+      "url": "studio-assets/CHAR-208.glb",
+      "source": "projects/production/atlas-20261004165102/exports/CHAR-208/visual.glb",
+      "sha256": "e8d7883cbda3f90e1e687315290bd0339be92781d7fb25c18f65ed9aac705eab",
+      "bytes": 1363952,
+      "triangles": 6732,
+      "cellSizeM": 0.005,
+      "boundsM": {
+        "min": [
+          -0.11,
+          0,
+          -0.075
+        ],
+        "max": [
+          0.11,
+          0.33,
+          0.07
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0",
+      "ports": [
+        {
+          "id": "package-support",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "joints": [
+        "root"
+      ]
     }
   ]
 }

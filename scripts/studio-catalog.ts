@@ -48,7 +48,7 @@ const placed = new Set(manifest.assets.map(a => a.id));
  * fit studies are recorded in 开发备忘录.md STUDIO07–10). Each names the
  * decision or authoring that would place it. */
 const gaps: Record<string, string> = {
-  character: 'needs a rig decision: CHAR-002…015 part sizes differ from the game part boxes beyond the 0.9 scale floor, and CHAR-059…178 need skeletal animation the game does not have',
+  character: 'not worn by residents: the procedural-box masters CHAR-002…015 are superseded by the fine masters on the studio skeleton (CHAR-073/074, user decision 2026-10-08), CHAR-075 needs a first-person view, and animals CHAR-306…331 have no slot yet',
   furniture: 'no floor-plan fixture solid of this size within the 0.9–1 uniform scale (fixtures are tables 2.4×0.8×1.2, beds 2.4×0.6×1.2, counters 3.2×1.0×1.2)',
   prop: 'no game slot: a new fixture or use point would have to be added to the shared floor plan first',
   facade: 'authored for the legacy facade; 605 of 612 buildings use program walls whose bays (windows 1.6×1.4m) differ',
