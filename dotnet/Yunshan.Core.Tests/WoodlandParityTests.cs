@@ -46,3 +46,24 @@ public class RiverDressingParityTests
         Assert.True(expected == actual, "river dressing differs from TypeScript");
     }
 }
+
+public class GroundDressingParityTests
+{
+    [Fact]
+    public void GroundDressingMatchesTypeScript()
+    {
+        string expected;
+        using (var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", "ground-dressing-v6.json.gz")))
+        using (var gzip = new GZipStream(file, CompressionMode.Decompress))
+        using (var reader = new StreamReader(gzip, Encoding.UTF8)) expected = reader.ReadToEnd();
+        var world = World.CreateWorld();
+        var items = WoodlandLayout.GroundDressing(world, WoodlandLayout.Layout(world).Trees);
+        var actual = Write(new Obj().Put("items", items.Select(i => (object)new Obj().Put("id", (double)i.Id).Put("asset", i.Asset).Put("tier", i.Tier).Put("x", i.X).Put("y", i.Y).Put("z", i.Z).Put("yaw", i.Yaw)).ToList()));
+        Assert.Equal(658, items.Count);
+        if (expected != actual)
+        {
+            int i = 0; while (i < Math.Min(expected.Length, actual.Length) && expected[i] == actual[i]) i++;
+            Assert.Fail($"ground dressing differs at {i}: expected …{expected.Substring(Math.Max(0, i - 80), Math.Min(160, expected.Length - Math.Max(0, i - 80)))}… actual …{actual.Substring(Math.Max(0, i - 80), Math.Min(160, actual.Length - Math.Max(0, i - 80)))}…");
+        }
+    }
+}

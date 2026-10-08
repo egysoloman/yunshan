@@ -12,6 +12,7 @@ import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
 import { StudioPropPool } from './rendering/studio-props';
 import { WoodlandModelPool } from './rendering/woodland-models';
+import { groundDressing } from './rendering/woodland-layout';
 import { emitNetworkStructures } from './rendering/network-structures';
 import { studioDressesFixture } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
@@ -410,7 +411,7 @@ export class CityRenderer implements CityRendererAPI {
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
-    this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled);
+    this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled, groundDressing(world, this.landscape.woodland.trees));
     void this.woodlandModels.load();
     this.roadClosures = new RoadClosureOverlay(world); this.scene.add(this.roadClosures.group);
     this.studioProps = new StudioPropPool(this.scene, world);

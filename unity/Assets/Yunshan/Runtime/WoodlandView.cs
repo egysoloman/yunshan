@@ -14,6 +14,9 @@ namespace Yunshan.Runtime
     {
         // Same radii and counts as WOODLAND_MODEL_RANGE (balanced quality) on the web.
         public float TreeRange = 160, ShrubRange = 70; public int TreeCount = 120, ShrubCount = 120;
+        // Ground dressing (understorey, bank plants, mountain-foot rocks): near models only, no block form.
+        public float GroundRange = 70, RockRange = 280; public int GroundCount = 120, RockCount = 50;
+        readonly List<WoodlandLayout.GroundItem> ground;
         readonly WoodlandLayout.Result layout;
         readonly StudioAssets studio;
         readonly Transform root;
@@ -26,9 +29,9 @@ namespace Yunshan.Runtime
         public int ModelledTrees => modelledTrees.Count;
         public int Trees => layout.Trees.Count;
 
-        public WoodlandView(WoodlandLayout.Result layout, StudioAssets studio, Transform parent)
+        public WoodlandView(WoodlandLayout.Result layout, StudioAssets studio, Transform parent, List<WoodlandLayout.GroundItem> ground = null)
         {
-            this.layout = layout; this.studio = studio;
+            this.layout = layout; this.studio = studio; this.ground = ground ?? new List<WoodlandLayout.GroundItem>();
             root = new GameObject("山林 · 原尺寸体素工坊林木").transform; root.SetParent(parent, false);
             var shader = Shader.Find("Yunshan/InstancedColor");
             trunks = new InstancedBoxes(new Material(shader) { name = "云山 · 林木树干代理" });
@@ -50,6 +53,9 @@ namespace Yunshan.Runtime
                 .OrderBy(e => e.d).ThenBy(e => e.t.Id).Take(TreeCount).Select(e => e.t).ToList();
             var nearShrubs = layout.Shrubs.Where(s => studio.Has(s.Asset)).Select(s => (s, d: Distance(s.X, s.Z))).Where(e => e.d <= ShrubRange)
                 .OrderBy(e => e.d).ThenBy(e => e.s.Id).Take(ShrubCount).Select(e => e.s).ToList();
+            List<WoodlandLayout.GroundItem> NearGround(string tier, float range, int count) => ground.Where(g => g.Tier == tier && studio.Has(g.Asset)).Select(g => (g, d: Distance(g.X, g.Z))).Where(e => e.d <= range)
+                .OrderBy(e => e.d).ThenBy(e => e.g.Id).Take(count).Select(e => e.g).ToList();
+            var nearGround = NearGround("ground", GroundRange, GroundCount).Concat(NearGround("rock", RockRange, RockCount)).ToList();
             var used = new Dictionary<string, int>();
             GameObject Take(string asset)
             {
@@ -60,6 +66,7 @@ namespace Yunshan.Runtime
             }
             foreach (var t in nearTrees) { var go = Take(t.Asset); go.transform.SetPositionAndRotation(Space.ToUnity(t.X, t.Y, t.Z), Space.Yaw(t.Yaw)); }
             foreach (var s in nearShrubs) { var go = Take(s.Asset); go.transform.SetPositionAndRotation(Space.ToUnity(s.X, s.Y, s.Z), Space.Yaw(s.Yaw)); }
+            foreach (var g in nearGround) { var go = Take(g.Asset); go.transform.SetPositionAndRotation(Space.ToUnity(g.X, g.Y, g.Z), Space.Yaw(g.Yaw)); }
             foreach (var pair in pool) { used.TryGetValue(pair.Key, out int n); for (int i = n; i < pair.Value.Count; i++) pair.Value[i].SetActive(false); }
             modelledTrees.Clear(); foreach (var t in nearTrees) modelledTrees.Add(t.Id);
             // Every other tree: the web far proxy (trunk + two stepped crowns) at its model's height.

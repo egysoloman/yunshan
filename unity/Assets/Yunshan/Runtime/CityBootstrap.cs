@@ -119,7 +119,8 @@ namespace Yunshan.Runtime
                 foreach (var s in StudioPropLayout.StationPlacements(world, studio.Bounds)) studio.Place(s.Asset, stationRoot, s.Position, s.Yaw, 1);
                 status = "山林……";
                 var woodlandLayout = await Task.Run(() => WoodlandLayout.Layout(world));
-                woodland = new WoodlandView(woodlandLayout, studio, transform);
+                var groundItems = await Task.Run(() => WoodlandLayout.GroundDressing(world, woodlandLayout.Trees));
+                woodland = new WoodlandView(woodlandLayout, studio, transform, groundItems);
                 // Creek bank stones, reeds and plunge-pool foam (parity with the web terrain).
                 var dressing = await Task.Run(() => WoodlandLayout.RiverDressing(world));
                 var banks = new GameMeshBuilder();

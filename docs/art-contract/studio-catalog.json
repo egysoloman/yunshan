@@ -17,8 +17,8 @@
    "CHAR": 238
   },
   "byStatus": {
-   "unassigned": 766,
-   "placed": 22,
+   "unassigned": 757,
+   "placed": 31,
    "rejected": 5
   },
   "byFamily": {
@@ -4862,7 +4862,7 @@
     "triangles": 2104
    },
    "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot (understorey ENV-061/062/069 and bank plants ENV-065/066 are placed by groundDressing)",
    "studioNote": "本 ID 保留图示落地悬臂支架，灯罩玻璃与内部电发光芯分开，布穗为织物。玻璃透明混合无真实折射；无摆动、布料或灯光照度验证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -5660,7 +5660,7 @@
     "triangles": 23946
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "独立屋面与封闭山墙端，保留空屋腔；不是整幢建筑。瓦曲线以阶梯格表达，未接入 RoofRegion、屋顶行走或雨水模拟。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8395,7 +8395,7 @@
     "triangles": 2300
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "作者24m行程层；中央4.4m方轴真实开放。只含井架，不含升降舱、轿厢动画、上下landing或崖壁。145侧导轨是独立母版。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -10291,7 +10291,7 @@
     "triangles": 754
    },
    "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot (understorey ENV-061/062/069 and bank plants ENV-065/066 are placed by groundDressing)",
    "studioNote": "建筑域只含架与池壳；不含叶片、土壤、浇灌动画。三处底部排水孔贯通；安装在无门窗的明确墙段，保留通行净空。清单没有提供原Building/FloorPlan、terrain、RoofRegion或运动控制器；尺寸除注明外均为作者米制安装样件。碰撞与可见几何同源于原生体素，不声明原游戏集成、连续W运行或人工美术验收。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11621,7 +11621,7 @@
     "triangles": 11768
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "相邻24m作者块用全局X采样，tileX只改变采样/米制锚点，非原96m系统。完整0.2m三维占用是物理/编辑权威，显示与碰撞均由同一原生格派生；远壳仅合并同材质共面面片，无距离自动LOD或原96m流送接入。作者米制候选；未取得原WorldDefinition、NetworkEdge、terrainHeight、共享FloorPlan及身体控制器。不声明原游戏集成、受力认证或人工美术验收。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11659,7 +11659,7 @@
     "triangles": 11752
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "保留24m节理域与8m台阶参数；仅高度场岩台，不声称悬挑。完整0.2m三维占用是物理/编辑权威，显示与碰撞均由同一原生格派生；远壳仅合并同材质共面面片，无距离自动LOD或原96m流送接入。作者米制候选；未取得原WorldDefinition、NetworkEdge、terrainHeight、共享FloorPlan及身体控制器。不声明原游戏集成、受力认证或人工美术验收。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11697,7 +11697,7 @@
     "triangles": 9574
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "连续实体崖面不靠埋入装饰盒填高；作者界线与上下台面明确。完整0.2m三维占用是物理/编辑权威，显示与碰撞均由同一原生格派生；远壳仅合并同材质共面面片，无距离自动LOD或原96m流送接入。作者米制候选；未取得原WorldDefinition、NetworkEdge、terrainHeight、共享FloorPlan及身体控制器。不声明原游戏集成、受力认证或人工美术验收。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11735,7 +11735,7 @@
     "triangles": 8904
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "独立天然地质空间，没有城市铺面或虚构交通授权。完整0.2m三维占用是物理/编辑权威，显示与碰撞均由同一原生格派生；远壳仅合并同材质共面面片，无距离自动LOD或原96m流送接入。作者米制候选；未取得原WorldDefinition、NetworkEdge、terrainHeight、共享FloorPlan及身体控制器。不声明原游戏集成、受力认证或人工美术验收。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11773,7 +11773,7 @@
     "triangles": 16052
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "原交通路线未取得；作者样件在中央低鞍检查身体空间，不将原运输域埋入新地形。完整0.2m三维占用是物理/编辑权威，显示与碰撞均由同一原生格派生；远壳仅合并同材质共面面片，无距离自动LOD或原96m流送接入。作者米制候选；未取得原WorldDefinition、NetworkEdge、terrainHeight、共享FloorPlan及身体控制器。不声明原游戏集成、受力认证或人工美术验收。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11810,8 +11810,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 7094
    },
-   "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "status": "placed",
    "studioNote": "碎石不另计模型，未占用原河道/人行域；保留独立作者空通道。完整0.2m三维占用是物理/编辑权威，显示与碰撞均由同一原生格派生；远壳仅合并同材质共面面片，无距离自动LOD或原96m流送接入。作者米制候选；未取得原WorldDefinition、NetworkEdge、terrainHeight、共享FloorPlan及身体控制器。不声明原游戏集成、受力认证或人工美术验收。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11887,7 +11886,7 @@
     "triangles": 4652
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "明确三维占用减洞；洞底0、保守净空X3.6–8.4/Y0–4.6全进深，单值高度场不能替代。完整0.2m三维占用是物理/编辑权威，显示与碰撞均由同一原生格派生；远壳仅合并同材质共面面片，无距离自动LOD或原96m流送接入。作者米制候选；未取得原WorldDefinition、NetworkEdge、terrainHeight、共享FloorPlan及身体控制器。不声明原游戏集成、受力认证或人工美术验收。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11925,7 +11924,7 @@
     "triangles": 860
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "soilDepth为1/2米两个已验证厚度，同一根际家族。完整0.2m原生占用，米制/Y向上，编辑/显示/固体碰撞同源；静态近远网格共面合并，水面共面顶点及T接点共享索引，硬边法线独立。原WorldDefinition、单河九点/单瀑原路径、terrainHeight、96m流送、身体控制器均未提供；作者样件，不称原游戏集成或人工美术验收。水/泡沫非碰撞、不发光，无动画、流体、浮力或运行水速。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11962,8 +11961,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 2574
    },
-   "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "status": "placed",
    "studioNote": "底锚为实测包围盒底中，放在明确岩地上；不能盖住原地形裂缝。完整0.2m原生占用，米制/Y向上，编辑/显示/固体碰撞同源；静态近远网格共面合并，水面共面顶点及T接点共享索引，硬边法线独立。原WorldDefinition、单河九点/单瀑原路径、terrainHeight、96m流送、身体控制器均未提供；作者样件，不称原游戏集成或人工美术验收。水/泡沫非碰撞、不发光，无动画、流体、浮力或运行水速。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12000,8 +11998,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 754
    },
-   "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "status": "placed",
    "studioNote": "最大粒径参数0.4/0.8米，群内量化粒径0.4–0.8；石粒不是额外母版。完整0.2m原生占用，米制/Y向上，编辑/显示/固体碰撞同源；静态近远网格共面合并，水面共面顶点及T接点共享索引，硬边法线独立。原WorldDefinition、单河九点/单瀑原路径、terrainHeight、96m流送、身体控制器均未提供；作者样件，不称原游戏集成或人工美术验收。水/泡沫非碰撞、不发光，无动画、流体、浮力或运行水速。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12077,7 +12074,7 @@
     "triangles": 60142
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "原23峰参数/48m采样原件未取得。本作48m宽作者代理用完整0.2m占用，distantRock非碰撞，不称可探索山体或23个模型。完整0.2m原生占用，米制/Y向上，编辑/显示/固体碰撞同源；静态近远网格共面合并，水面共面顶点及T接点共享索引，硬边法线独立。原WorldDefinition、单河九点/单瀑原路径、terrainHeight、96m流送、身体控制器均未提供；作者样件，不称原游戏集成或人工美术验收。水/泡沫非碰撞、不发光，无动画、流体、浮力或运行水速。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12532,7 +12529,7 @@
     "triangles": 11638
    },
    "status": "unassigned",
-   "gap": "only the five species models and one shrub are used; others have no woodland species slot",
+   "gap": "only the five species models and one shrub are used; others have no woodland species slot (ENV-064 ferns are placed as understorey)",
    "studioNote": "原近4/远2层、384m批次是源清单描述。本作完整原生冠量近远精确共面合并，没有自动距离切换。完整0.2m原生占用为编辑/显示/固体碰撞权威，米制Y向上。作者几何候选，未获人工美术验收。原terrainHeight、坡度/湿度分区、道路建筑排除、生态状态和384m森林驻留控制器未收件；无自动距离LOD、风动或生长模拟。远景仅精确共面合并，保留所有原生冠量。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12718,7 +12715,7 @@
     "triangles": 2852
    },
    "status": "unassigned",
-   "gap": "only the five species models and one shrub are used; others have no woodland species slot",
+   "gap": "only the five species models and one shrub are used; others have no woodland species slot (ENV-064 ferns are placed as understorey)",
    "studioNote": "含明确作者岩样以核实贴附；装饰不替代原地形或原承托。完整0.2m原生占用为编辑/显示/固体碰撞权威，米制Y向上。作者几何候选，未获人工美术验收。原terrainHeight、坡度/湿度分区、道路建筑排除、生态状态和384m森林驻留控制器未收件；无自动距离LOD、风动或生长模拟。远景仅精确共面合并，保留所有原生冠量。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12792,8 +12789,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 2128
    },
-   "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "status": "placed",
    "studioNote": "木质细枝、成熟叶、嫩梢、花瓣与花药分别归类；换花色不新增模型。完整0.2m原生占用为编辑/显示/固体碰撞权威，米制Y向上。作者几何候选，未获人工美术验收。原terrainHeight、坡度/湿度分区、道路建筑排除、生态状态和384m森林驻留控制器未收件；无自动距离LOD、风动或生长模拟。远景仅精确共面合并，保留所有原生冠量。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12830,8 +12826,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 270
    },
-   "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "status": "placed",
    "studioNote": "保留0.4/0.6m高度与0.2m方茎；不是完整草坡，不能为追图擅自放大。完整0.2m原生占用为编辑、显示及固体碰撞权威，米制Y-up。作者技术候选，未获人工美术验收。原terrainHeight、建筑footprint/地下层/门位、共享FloorPlan、道路排除、生态状态和控制器未收件。无原游戏集成、结构受力/水力认证、自动距离LOD或生长动画。远景仅精确共面合并。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12868,8 +12863,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 1094
    },
-   "status": "unassigned",
-   "gap": "only the five species models and one shrub are used; others have no woodland species slot",
+   "status": "placed",
    "studioNote": "明确作者小地被套装，具体物种和湿度分区未获原状态核实。完整0.2m原生占用为编辑、显示及固体碰撞权威，米制Y-up。作者技术候选，未获人工美术验收。原terrainHeight、建筑footprint/地下层/门位、共享FloorPlan、道路排除、生态状态和控制器未收件。无原游戏集成、结构受力/水力认证、自动距离LOD或生长动画。远景仅精确共面合并。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12906,8 +12900,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 830
    },
-   "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "status": "placed",
    "studioNote": "源四茎0.2×1.6×0.2m，穗高另加0.6m；根须实接岸床。完整0.2m原生占用为编辑、显示及固体碰撞权威，米制Y-up。作者技术候选，未获人工美术验收。原terrainHeight、建筑footprint/地下层/门位、共享FloorPlan、道路排除、生态状态和控制器未收件。无原游戏集成、结构受力/水力认证、自动距离LOD或生长动画。远景仅精确共面合并。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12944,8 +12937,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 632
    },
-   "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "status": "placed",
    "studioNote": "只在作者0.4/0.8m浅静水样件验证，不放急瀑/深河；不模拟浮力。完整0.2m原生占用为编辑、显示及固体碰撞权威，米制Y-up。作者技术候选，未获人工美术验收。原terrainHeight、建筑footprint/地下层/门位、共享FloorPlan、道路排除、生态状态和控制器未收件。无原游戏集成、结构受力/水力认证、自动距离LOD或生长动画。远景仅精确共面合并。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -12983,7 +12975,7 @@
     "triangles": 2086
    },
    "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot (understorey ENV-061/062/069 and bank plants ENV-065/066 are placed by groundDressing)",
    "studioNote": "顶部锚为原点，向负Y垂落，壁面Z0。原每tile最多360块是源描述，作者叶簇放置数独立记录，不称原tile绑定。完整0.2m原生占用为编辑、显示及固体碰撞权威，米制Y-up。作者技术候选，未获人工美术验收。原terrainHeight、建筑footprint/地下层/门位、共享FloorPlan、道路排除、生态状态和控制器未收件。无原游戏集成、结构受力/水力认证、自动距离LOD或生长动画。远景仅精确共面合并。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -13020,8 +13012,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 668
    },
-   "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "status": "placed",
    "studioNote": "枯叶不是食品茶叶，腐木/树皮/心材分别归类；近地接触、孔洞及通路需要安装核实。完整0.2m原生占用为编辑、显示及固体碰撞权威，米制Y-up。作者技术候选，未获人工美术验收。原terrainHeight、建筑footprint/地下层/门位、共享FloorPlan、道路排除、生态状态和控制器未收件。无原游戏集成、结构受力/水力认证、自动距离LOD或生长动画。远景仅精确共面合并。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -13135,7 +13126,7 @@
     "triangles": 1796
    },
    "status": "unassigned",
-   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it",
+   "gap": "the terrain is one continuous generated shell; rock masters have no anchor in it (boulder ENV-015, scree ENV-011 and rubble ENV-016 are placed at the mountain feet by groundDressing)",
    "studioNote": "原楼板/柱属于建筑域，本母版不包含楼板或柱；辅助架仅核实际多点接触，不认证地基承载力。完整0.2m原生占用为编辑、显示及固体碰撞权威，米制Y-up。作者技术候选，未获人工美术验收。原terrainHeight、建筑footprint/地下层/门位、共享FloorPlan、道路排除、生态状态和控制器未收件。无原游戏集成、结构受力/水力认证、自动距离LOD或生长动画。远景仅精确共面合并。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -13439,7 +13430,7 @@
     "triangles": 204
    },
    "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot (understorey ENV-061/062/069 and bank plants ENV-065/066 are placed by groundDressing)",
    "studioNote": "基础块件保留0.2m体素；坡面使用独立连续网格，显示及碰撞导出同一网格。作者技术候选，待人工美术验收；原地形、FloorPlan、controller、usePoint、照明供电均未绑定。量化尺寸不是施工或承载认证；近远保留体素块件与连续坡面。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -13477,7 +13468,7 @@
     "triangles": 112
    },
    "status": "unassigned",
-   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot",
+   "gap": "ground cover is generated per terrain tile at the 0.2m grid; no model slot (understorey ENV-061/062/069 and bank plants ENV-065/066 are placed by groundDressing)",
    "studioNote": "基础块件保留0.2m体素；坡面使用独立连续网格，显示及碰撞导出同一网格。作者技术候选，待人工美术验收；原地形、FloorPlan、controller、usePoint、照明供电均未绑定。量化尺寸不是施工或承载认证；近远保留体素块件与连续坡面。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -13743,7 +13734,7 @@
     "triangles": 6208
    },
    "status": "unassigned",
-   "gap": "only the five species models and one shrub are used; others have no woodland species slot",
+   "gap": "only the five species models and one shrub are used; others have no woodland species slot (ENV-064 ferns are placed as understorey)",
    "studioNote": "独立手作盆景母版；基础叶簇体素、连续枝干，盆器依赖ENV097。作者浅盆匹配尺寸；原住宅安装0且地形未绑定，不能视为通行或重心稳定验收。 已按图重建候选，待人工美术验收。"
   },
   {

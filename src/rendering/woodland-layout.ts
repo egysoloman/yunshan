@@ -99,3 +99,62 @@ export function riverDressing(world: WorldDefinition): { stones: DressingBlock[]
   for (let i = 0; i < 80; i++) { const angle = i * 2.39996, r = 3 + woodlandHash(i, 805, world.seed) * 21; foam.push({ x: quantize(bottom.x + Math.cos(angle) * r), y: bottom.y + .72, z: quantize(bottom.z + Math.sin(angle) * r), w: quantize(.8 + woodlandHash(i, 806, world.seed) * 2), h: .2, d: .4 }); }
   return { stones, reeds, foam };
 }
+
+/** Studio ground dressing at original size (display only, near the camera):
+ * understorey under the trees, wet-bank plants at the creek reed sites and
+ * boulders and scree around the mountain feet. Each model's footprint centre
+ * sits on the cleared ground and its origin is at the lowest surface under the
+ * footprint, so nothing floats. Parity: C# WoodlandLayout.GroundDressing. */
+export const UNDERSTOREY_ASSETS = ['ENV-061', 'ENV-064', 'ENV-062', 'ENV-069'] as const;
+export const BANK_ASSETS = ['ENV-065', 'ENV-066'] as const;
+export const ROCK_ASSETS = ['ENV-015', 'ENV-011', 'ENV-016'] as const;
+/** Footprint centre (model space x, z) and clearance radius from the imported bounds. */
+export const GROUND_DRESSING_FOOTPRINT: Readonly<Record<string, { cx: number; cz: number; radius: number }>> = {
+  'ENV-061': { cx: 0, cz: 0, radius: 2.6 }, 'ENV-064': { cx: .1, cz: 0, radius: 1.8 }, 'ENV-062': { cx: .2, cz: .2, radius: .8 }, 'ENV-069': { cx: 3, cz: .1, radius: 3.2 },
+  'ENV-065': { cx: .2, cz: 0, radius: 1.8 }, 'ENV-066': { cx: 0, cz: .1, radius: 2 },
+  'ENV-015': { cx: 0, cz: 0, radius: 2.4 }, 'ENV-011': { cx: 8, cz: 6, radius: 9 }, 'ENV-016': { cx: 3, cz: 3, radius: 3.6 },
+};
+export const ROCK_HEIGHTS: Readonly<Record<string, number>> = { 'ENV-015': 8, 'ENV-011': 5, 'ENV-016': .8 };
+export type GroundDressingTier = 'ground' | 'rock';
+export interface GroundDressingItem { id: number; asset: string; tier: GroundDressingTier; x: number; y: number; z: number; yaw: number }
+
+export function groundDressing(world: WorldDefinition, trees: readonly WoodlandTree[]): GroundDressingItem[] {
+  const clear = createGroundClearance(world), surface = (x: number, z: number) => quantize(terrainHeight(world, x, z, true));
+  const items: GroundDressingItem[] = [];
+  const place = (asset: string, tier: GroundDressingTier, cx: number, cz: number, yaw: number, relief: number) => {
+    const f = GROUND_DRESSING_FOOTPRINT[asset], r = f.radius;
+    if (!clear(cx, cz, r)) return false;
+    const heights = [surface(cx, cz), surface(cx + r, cz), surface(cx - r, cz), surface(cx, cz + r), surface(cx, cz - r)];
+    const low = Math.min(...heights), high = Math.max(...heights);
+    if (low < 8 || high - low > relief) return false;
+    // origin = centre − rotY(yaw)·(cx, cz)
+    const c = Math.cos(yaw), s = Math.sin(yaw);
+    items.push({ id: items.length, asset, tier, x: cx - (c * f.cx + s * f.cz), y: low, z: cz - (-s * f.cx + c * f.cz), yaw });
+    return true;
+  };
+  for (const tree of trees) {
+    if (tree.id % 3 !== 1) continue;
+    const asset = UNDERSTOREY_ASSETS[Math.floor(woodlandHash(tree.id, 96, world.seed) * 4)];
+    const angle = woodlandHash(tree.id, 97, world.seed) * Math.PI * 2, distance = 4 + woodlandHash(tree.id, 98, world.seed) * 3;
+    place(asset, 'ground', quantize(tree.x + Math.cos(angle) * distance), quantize(tree.z + Math.sin(angle) * distance), Math.floor(woodlandHash(tree.id, 99, world.seed) * 4) * Math.PI / 2, 1.2);
+  }
+  let site = 0;
+  for (let i = 1; i < world.river.length; i++) {
+    const p = world.river[i], before = world.river[i - 1], width = 12 + Math.min(i, 5) * .6;
+    const segmentLength = Math.hypot(p.x - before.x, p.z - before.z), tangentX = -(p.z - before.z) / segmentLength, tangentZ = (p.x - before.x) / segmentLength;
+    for (let along = 0; along < segmentLength; along += 11.2) for (const side of [-1, 1]) {
+      const t = along / segmentLength, offset = width + 6.4 + woodlandHash(along, i, world.seed) * 3;
+      const x = quantize(before.x + (p.x - before.x) * t + tangentX * offset * side), z = quantize(before.z + (p.z - before.z) * t + tangentZ * offset * side);
+      if (surface(x, z) > before.y + (p.y - before.y) * t + 9) continue;
+      if (place(BANK_ASSETS[site % 2], 'ground', x, z, Math.floor(woodlandHash(along, i + 7, world.seed) * 4) * Math.PI / 2, 1.2)) site++;
+    }
+  }
+  world.mountains.forEach((mountain, m) => {
+    for (let n = 0; n < 16; n++) {
+      const asset = ROCK_ASSETS[n % 3], angle = n / 16 * Math.PI * 2 + woodlandHash(n, 900 + m, world.seed) * .3, distance = mountain.radius * (1.02 + woodlandHash(n, 901 + m, world.seed) * .3);
+      // A rock may sink into the slope by up to 70% of its own height.
+      place(asset, 'rock', quantize(mountain.x + Math.cos(angle) * distance), quantize(mountain.z + Math.sin(angle) * distance), Math.floor(woodlandHash(n, 902 + m, world.seed) * 4) * Math.PI / 2, ROCK_HEIGHTS[asset] * .7);
+    }
+  });
+  return items;
+}

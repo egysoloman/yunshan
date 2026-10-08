@@ -122,5 +122,67 @@ namespace Yunshan.Core
             }
             return result;
         }
+
+        public static readonly string[] UnderstoreyAssets = { "ENV-061", "ENV-064", "ENV-062", "ENV-069" };
+        public static readonly string[] BankAssets = { "ENV-065", "ENV-066" };
+        public static readonly string[] RockAssets = { "ENV-015", "ENV-011", "ENV-016" };
+        public static readonly Dictionary<string, double> RockHeights = new Dictionary<string, double> { ["ENV-015"] = 8, ["ENV-011"] = 5, ["ENV-016"] = .8 };
+        public static readonly Dictionary<string, (double Cx, double Cz, double Radius)> GroundDressingFootprint = new Dictionary<string, (double, double, double)>
+        {
+            ["ENV-061"] = (0, 0, 2.6), ["ENV-064"] = (.1, 0, 1.8), ["ENV-062"] = (.2, .2, .8), ["ENV-069"] = (3, .1, 3.2),
+            ["ENV-065"] = (.2, 0, 1.8), ["ENV-066"] = (0, .1, 2),
+            ["ENV-015"] = (0, 0, 2.4), ["ENV-011"] = (8, 6, 9), ["ENV-016"] = (3, 3, 3.6),
+        };
+        public sealed class GroundItem { public int Id; public string Asset, Tier; public double X, Y, Z, Yaw; }
+
+        /// <summary>Port of groundDressing: studio understorey, wet-bank plants and
+        /// mountain-foot rocks at original size, origin on the lowest ground under the footprint.</summary>
+        public static List<GroundItem> GroundDressing(WorldDefinition world, IReadOnlyList<Tree> trees)
+        {
+            var clear = GroundClearance(world); var items = new List<GroundItem>();
+            double Surface(double x, double z) => Quantize(World.TerrainHeight(world, x, z, true));
+            bool Place(string asset, string tier, double cx, double cz, double yaw, double relief)
+            {
+                var f = GroundDressingFootprint[asset]; double r = f.Radius;
+                if (!clear(cx, cz, r)) return false;
+                var heights = new[] { Surface(cx, cz), Surface(cx + r, cz), Surface(cx - r, cz), Surface(cx, cz + r), Surface(cx, cz - r) };
+                double low = heights.Min(), high = heights.Max();
+                if (low < 8 || high - low > relief) return false;
+                double c = JsMath.Cos(yaw), s = JsMath.Sin(yaw);
+                items.Add(new GroundItem { Id = items.Count, Asset = asset, Tier = tier, X = cx - (c * f.Cx + s * f.Cz), Y = low, Z = cz - (-s * f.Cx + c * f.Cz), Yaw = yaw });
+                return true;
+            }
+            foreach (var tree in trees)
+            {
+                if (tree.Id % 3 != 1) continue;
+                var asset = UnderstoreyAssets[(int)System.Math.Floor(Hash(tree.Id, 96, world.Seed) * 4)];
+                double angle = Hash(tree.Id, 97, world.Seed) * System.Math.PI * 2, distance = 4 + Hash(tree.Id, 98, world.Seed) * 3;
+                Place(asset, "ground", Quantize(tree.X + JsMath.Cos(angle) * distance), Quantize(tree.Z + JsMath.Sin(angle) * distance), System.Math.Floor(Hash(tree.Id, 99, world.Seed) * 4) * System.Math.PI / 2, 1.2);
+            }
+            int site = 0;
+            for (int i = 1; i < world.River.Count; i++)
+            {
+                Vec3 p = world.River[i], before = world.River[i - 1]; double width = 12 + System.Math.Min(i, 5) * .6;
+                double segmentLength = JsMath.Hypot(p.X - before.X, p.Z - before.Z), tangentX = -(p.Z - before.Z) / segmentLength, tangentZ = (p.X - before.X) / segmentLength;
+                for (double along = 0; along < segmentLength; along += 11.2) foreach (var side in new[] { -1, 1 })
+                {
+                    double t = along / segmentLength, offset = width + 6.4 + Hash(along, i, world.Seed) * 3;
+                    double x = Quantize(before.X + (p.X - before.X) * t + tangentX * offset * side), z = Quantize(before.Z + (p.Z - before.Z) * t + tangentZ * offset * side);
+                    if (Surface(x, z) > before.Y + (p.Y - before.Y) * t + 9) continue;
+                    if (Place(BankAssets[site % 2], "ground", x, z, System.Math.Floor(Hash(along, i + 7, world.Seed) * 4) * System.Math.PI / 2, 1.2)) site++;
+                }
+            }
+            for (int m = 0; m < world.Mountains.Count; m++)
+            {
+                var mountain = world.Mountains[m];
+                for (int n = 0; n < 16; n++)
+                {
+                    var asset = RockAssets[n % 3];
+                    double angle = n / 16.0 * System.Math.PI * 2 + Hash(n, 900 + m, world.Seed) * .3, distance = mountain.Radius * (1.02 + Hash(n, 901 + m, world.Seed) * .3);
+                    Place(asset, "rock", Quantize(mountain.X + JsMath.Cos(angle) * distance), Quantize(mountain.Z + JsMath.Sin(angle) * distance), System.Math.Floor(Hash(n, 902 + m, world.Seed) * 4) * System.Math.PI / 2, RockHeights[asset] * .7);
+                }
+            }
+            return items;
+        }
     }
 }
