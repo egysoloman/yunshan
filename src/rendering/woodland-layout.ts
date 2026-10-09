@@ -107,14 +107,18 @@ export function riverDressing(world: WorldDefinition): { stones: DressingBlock[]
  * footprint, so nothing floats. Parity: C# WoodlandLayout.GroundDressing. */
 export const UNDERSTOREY_ASSETS = ['ENV-061', 'ENV-064', 'ENV-062', 'ENV-069'] as const;
 export const BANK_ASSETS = ['ENV-065', 'ENV-066'] as const;
-export const ROCK_ASSETS = ['ENV-015', 'ENV-011', 'ENV-016'] as const;
+export const ROCK_ASSETS = ['ENV-015', 'ENV-011', 'ENV-016', 'ENV-014', 'ENV-013', 'ENV-081', 'ENV-008', 'ENV-001', 'ENV-010', 'ENV-006', 'ENV-005'] as const;
+/** ENV-059 root flare under every fourth broadleaf/pine model tree (same origin as the tree). */
+export const TREE_ROOTS = 'ENV-059';
 /** Footprint centre (model space x, z) and clearance radius from the imported bounds. */
 export const GROUND_DRESSING_FOOTPRINT: Readonly<Record<string, { cx: number; cz: number; radius: number }>> = {
   'ENV-061': { cx: 0, cz: 0, radius: 2.6 }, 'ENV-064': { cx: .1, cz: 0, radius: 1.8 }, 'ENV-062': { cx: .2, cz: .2, radius: .8 }, 'ENV-069': { cx: 3, cz: .1, radius: 3.2 },
   'ENV-065': { cx: .2, cz: 0, radius: 1.8 }, 'ENV-066': { cx: 0, cz: .1, radius: 2 },
   'ENV-015': { cx: 0, cz: 0, radius: 2.4 }, 'ENV-011': { cx: 8, cz: 6, radius: 9 }, 'ENV-016': { cx: 3, cz: 3, radius: 3.6 },
+  'ENV-014': { cx: 4, cz: 2.9, radius: 4.6 }, 'ENV-013': { cx: 6, cz: 4, radius: 6.8 }, 'ENV-081': { cx: 5, cz: 4, radius: 6 }, 'ENV-008': { cx: 9, cz: 7, radius: 10.6 },
+  'ENV-001': { cx: 12, cz: 8, radius: 13.6 }, 'ENV-010': { cx: 11, cz: 7, radius: 12.6 }, 'ENV-006': { cx: 8, cz: 6, radius: 9.6 }, 'ENV-005': { cx: 12, cz: 8, radius: 13.6 },
 };
-export const ROCK_HEIGHTS: Readonly<Record<string, number>> = { 'ENV-015': 8, 'ENV-011': 5, 'ENV-016': .8 };
+export const ROCK_HEIGHTS: Readonly<Record<string, number>> = { 'ENV-015': 8, 'ENV-011': 5, 'ENV-016': .8, 'ENV-014': 5.6, 'ENV-013': 10.6, 'ENV-081': 3.8, 'ENV-008': 12.8, 'ENV-001': 7.4, 'ENV-010': 9.6, 'ENV-006': 18.8, 'ENV-005': 16.8 };
 export type GroundDressingTier = 'ground' | 'rock';
 export interface GroundDressingItem { id: number; asset: string; tier: GroundDressingTier; x: number; y: number; z: number; yaw: number }
 
@@ -150,12 +154,13 @@ export function groundDressing(world: WorldDefinition, trees: readonly WoodlandT
     }
   }
   world.mountains.forEach((mountain, m) => {
-    for (let n = 0; n < 16; n++) {
-      const asset = ROCK_ASSETS[n % 3], angle = n / 16 * Math.PI * 2 + woodlandHash(n, 900 + m, world.seed) * .3, distance = mountain.radius * (1.02 + woodlandHash(n, 901 + m, world.seed) * .3);
+    for (let n = 0; n < 22; n++) {
+      const asset = ROCK_ASSETS[n % ROCK_ASSETS.length], angle = n / 22 * Math.PI * 2 + woodlandHash(n, 900 + m, world.seed) * .3, distance = mountain.radius * (1.02 + woodlandHash(n, 901 + m, world.seed) * .3);
       // A rock may sink into the slope by up to 70% of its own height.
       place(asset, 'rock', quantize(mountain.x + Math.cos(angle) * distance), quantize(mountain.z + Math.sin(angle) * distance), Math.floor(woodlandHash(n, 902 + m, world.seed) * 4) * Math.PI / 2, ROCK_HEIGHTS[asset] * .7);
     }
   });
+  for (const tree of trees) if ((tree.asset === 'ENV-050' || tree.asset === 'ENV-054') && tree.id % 4 === 0) items.push({ id: items.length, asset: TREE_ROOTS, tier: 'ground', x: tree.x, y: tree.y, z: tree.z, yaw: tree.yaw });
   return items;
 }
 

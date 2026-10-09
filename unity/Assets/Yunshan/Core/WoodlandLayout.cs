@@ -126,13 +126,15 @@ namespace Yunshan.Core
 
         public static readonly string[] UnderstoreyAssets = { "ENV-061", "ENV-064", "ENV-062", "ENV-069" };
         public static readonly string[] BankAssets = { "ENV-065", "ENV-066" };
-        public static readonly string[] RockAssets = { "ENV-015", "ENV-011", "ENV-016" };
-        public static readonly Dictionary<string, double> RockHeights = new Dictionary<string, double> { ["ENV-015"] = 8, ["ENV-011"] = 5, ["ENV-016"] = .8 };
+        public static readonly string[] RockAssets = { "ENV-015", "ENV-011", "ENV-016", "ENV-014", "ENV-013", "ENV-081", "ENV-008", "ENV-001", "ENV-010", "ENV-006", "ENV-005" };
+        public const string TreeRoots = "ENV-059";
+        public static readonly Dictionary<string, double> RockHeights = new Dictionary<string, double> { ["ENV-015"] = 8, ["ENV-011"] = 5, ["ENV-016"] = .8, ["ENV-014"] = 5.6, ["ENV-013"] = 10.6, ["ENV-081"] = 3.8, ["ENV-008"] = 12.8, ["ENV-001"] = 7.4, ["ENV-010"] = 9.6, ["ENV-006"] = 18.8, ["ENV-005"] = 16.8 };
         public static readonly Dictionary<string, (double Cx, double Cz, double Radius)> GroundDressingFootprint = new Dictionary<string, (double, double, double)>
         {
             ["ENV-061"] = (0, 0, 2.6), ["ENV-064"] = (.1, 0, 1.8), ["ENV-062"] = (.2, .2, .8), ["ENV-069"] = (3, .1, 3.2),
             ["ENV-065"] = (.2, 0, 1.8), ["ENV-066"] = (0, .1, 2),
             ["ENV-015"] = (0, 0, 2.4), ["ENV-011"] = (8, 6, 9), ["ENV-016"] = (3, 3, 3.6),
+            ["ENV-014"] = (4, 2.9, 4.6), ["ENV-013"] = (6, 4, 6.8), ["ENV-081"] = (5, 4, 6), ["ENV-008"] = (9, 7, 10.6), ["ENV-001"] = (12, 8, 13.6), ["ENV-010"] = (11, 7, 12.6), ["ENV-006"] = (8, 6, 9.6), ["ENV-005"] = (12, 8, 13.6),
         };
         public sealed class GroundItem { public int Id; public string Asset, Tier; public double X, Y, Z, Yaw; }
 
@@ -176,13 +178,14 @@ namespace Yunshan.Core
             for (int m = 0; m < world.Mountains.Count; m++)
             {
                 var mountain = world.Mountains[m];
-                for (int n = 0; n < 16; n++)
+                for (int n = 0; n < 22; n++)
                 {
-                    var asset = RockAssets[n % 3];
-                    double angle = n / 16.0 * System.Math.PI * 2 + Hash(n, 900 + m, world.Seed) * .3, distance = mountain.Radius * (1.02 + Hash(n, 901 + m, world.Seed) * .3);
+                    var asset = RockAssets[n % RockAssets.Length];
+                    double angle = n / 22.0 * System.Math.PI * 2 + Hash(n, 900 + m, world.Seed) * .3, distance = mountain.Radius * (1.02 + Hash(n, 901 + m, world.Seed) * .3);
                     Place(asset, "rock", Quantize(mountain.X + JsMath.Cos(angle) * distance), Quantize(mountain.Z + JsMath.Sin(angle) * distance), System.Math.Floor(Hash(n, 902 + m, world.Seed) * 4) * System.Math.PI / 2, RockHeights[asset] * .7);
                 }
             }
+            foreach (var tree in trees) if ((tree.Asset == "ENV-050" || tree.Asset == "ENV-054") && tree.Id % 4 == 0) items.Add(new GroundItem { Id = items.Count, Asset = TreeRoots, Tier = "ground", X = tree.X, Y = tree.Y, Z = tree.Z, Yaw = tree.Yaw });
             return items;
         }
 

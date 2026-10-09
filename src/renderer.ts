@@ -13,6 +13,7 @@ import { MarketGoodsPool } from './rendering/market-goods';
 import { StudioPropPool } from './rendering/studio-props';
 import { WoodlandModelPool } from './rendering/woodland-models';
 import { FirstPersonArms, StudioCharacterPool } from './rendering/studio-characters';
+import { StudioSkyModels } from './rendering/sky-models';
 import { faunaDressing, groundDressing } from './rendering/woodland-layout';
 const studioGroundAndFauna = (world: WorldDefinition, trees: Parameters<typeof groundDressing>[1]) => { const ground = groundDressing(world, trees); return [...ground, ...faunaDressing(world, trees, ground)]; };
 import { emitNetworkStructures } from './rendering/network-structures';
@@ -145,6 +146,7 @@ export class CityRenderer implements CityRendererAPI {
   private citizens: CitizenAppearancePool;
   private studioCharacters?: StudioCharacterPool;
   private firstPersonArms?: FirstPersonArms;
+  private skyModels?: StudioSkyModels;
   /** The player's studio forearms (CHAR-075) while walking on foot. */
   setFirstPersonArms(visible: boolean): void { if (this.firstPersonArms) this.firstPersonArms.visible = visible; }
   private marketGoods: MarketGoodsPool;
@@ -417,6 +419,7 @@ export class CityRenderer implements CityRendererAPI {
     this.moonOrb = new THREE.Mesh(new THREE.SphereGeometry(38, 12, 8), new THREE.MeshBasicMaterial({ color: '#d6e5e0' }));
     this.scene.add(this.sunOrb, this.moonOrb);
     this.stars = this.buildStars(); this.scene.add(this.stars);
+    this.skyModels = new StudioSkyModels(this.scene, this.sky, this.sunOrb, this.moonOrb, this.stars); void this.skyModels.load();
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
@@ -928,7 +931,7 @@ export class CityRenderer implements CityRendererAPI {
     const mistMaterial = this.mist.material as THREE.PointsMaterial; mistMaterial.color.copy(horizon).lerp(new THREE.Color('#e0e8df'), .25 + daylight * .35); mistMaterial.opacity = .13 + (1 - state.visibility) * .13; this.mist.position.x = Math.sin(elapsed * .015) * 24;
     const sprayMaterial = this.spray.material as THREE.PointsMaterial; sprayMaterial.color.copy(horizon).lerp(new THREE.Color('#eef6ed'), .8); sprayMaterial.opacity = .13 + daylight * .12; this.spray.position.x = Math.sin(elapsed * .24) * 2.8;
     this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.copy(horizon); fog.density = (.00022 + (1 - state.visibility) * .0002) * (6500 / this.distance);
-    this.sky.position.copy(this.camera.position); this.stars.position.copy(this.camera.position); (this.stars.material as THREE.PointsMaterial).opacity = (1 - daylight) * .8;
+    this.sky.position.copy(this.camera.position); this.stars.position.copy(this.camera.position); (this.stars.material as THREE.PointsMaterial).opacity = (1 - daylight) * .8; this.skyModels?.update(this.camera.position, (1 - daylight) * .8);
     this.sunOrb.position.copy(this.sun.position).multiplyScalar(3.6).add(this.camera.position); this.sunOrb.visible = altitude > -.08;
     this.moonOrb.position.copy(this.moon.position).multiplyScalar(3.6).add(this.camera.position); this.moonOrb.visible = altitude < .08;
     this.sun.target.position.copy(this.camera.position);
@@ -1029,7 +1032,7 @@ export class CityRenderer implements CityRendererAPI {
     this.stationWayfinding?.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
-    this.woodlandModels?.dispose(); this.studioCharacters?.dispose(); this.firstPersonArms?.dispose(); this.scene.remove(this.landscape.group); this.landscape.dispose();
+    this.woodlandModels?.dispose(); this.studioCharacters?.dispose(); this.firstPersonArms?.dispose(); this.skyModels?.dispose(); this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
     // Palette materials are renderer-owned even after every near chunk using
     // one of them has been evicted. Dispose them once with attached materials.

@@ -278,22 +278,22 @@ const WORKSHOP_DECOR = [set('LIFE-081', ['LIFE-085']), set('LIFE-082'), set('LIF
   set('LIFE-172'), set('LIFE-159'), set('LIFE-071', ['LIFE-073'])];
 const FARM_DECOR = [set('LIFE-086'), set('LIFE-088'), set('LIFE-087'), set('LIFE-075', ['LIFE-086']), set('LIFE-196')];
 const CIVIC_DECOR = [set('LIFE-141'), set('LIFE-142'), set('LIFE-146'), set('LIFE-143'), set('LIFE-144'), set('LIFE-147'), set('LIFE-148'), set('LIFE-150'), set('LIFE-178', ['LIFE-179']), set('LIFE-145'),
-  set('LIFE-153'), set('LIFE-154'), set('LIFE-187'), set('LIFE-188'), set('LIFE-189'), set('LIFE-200'), set('LIFE-185'), set('LIFE-176'), set('LIFE-177'), set('LIFE-175'), set('LIFE-117'), set('LIFE-118'), set('LIFE-193'), set('LIFE-149')];
+  set('LIFE-153'), set('LIFE-154'), set('LIFE-187'), set('LIFE-188'), set('LIFE-189'), set('LIFE-200'), set('LIFE-185'), set('LIFE-176'), set('LIFE-177'), set('LIFE-175'), set('LIFE-117'), set('LIFE-118'), set('LIFE-193'), set('LIFE-149'), set('ENV-134')];
 export const STUDIO_DECOR: Partial<Record<BuildingKind, readonly StudioDecorSet[]>> = {
   home: HOME_DECOR, farm: FARM_DECOR, market: MARKET_DECOR, workshop: WORKSHOP_DECOR,
   school: [set('LIFE-109', ['LIFE-107']), set('LIFE-110'), set('LIFE-112', ['LIFE-114']), set('LIFE-116'), set('LIFE-113'), set('LIFE-112', ['LIFE-115']), set('LIFE-169'), set('LIFE-170'), set('LIFE-182'), set('LIFE-183'), set('LIFE-180')],
   hall: CIVIC_DECOR, core: CIVIC_DECOR,
   police: [set('LIFE-152'), set('LIFE-155'), set('LIFE-157', ['LIFE-158']), set('LIFE-156'), set('LIFE-159')],
   clinic: [set('LIFE-123', ['LIFE-096']), set('LIFE-124'), set('LIFE-125'), set('LIFE-127', [], 'LIFE-121'), set('LIFE-122')],
-  bank: [set('LIFE-089'), set('LIFE-149', ['LIFE-090']), set('LIFE-146'), set('LIFE-149', ['LIFE-019']), set('LIFE-144')],
+  bank: [set('LIFE-089'), set('LIFE-149', ['LIFE-090']), set('LIFE-146'), set('LIFE-149', ['LIFE-019']), set('LIFE-144'), set('ENV-134')],
   station: [set('LIFE-147'), set('LIFE-193'), set('LIFE-140'), set('LIFE-091')],
   dock: [set('LIFE-087'), set('LIFE-088'), set('LIFE-075', ['LIFE-095']), set('LIFE-071')],
   airport: [set('LIFE-147'), set('LIFE-193'), set('LIFE-140')], starport: [set('LIFE-147'), set('LIFE-193'), set('LIFE-140')],
 };
 export const STUDIO_DECOR_PER_FLOOR = 4;
 /** Outdoor furniture in ground-floor courtyard corners (benches and stone lamps), at most two per building. */
-export const STUDIO_COURTYARD_DECOR: readonly StudioDecorSet[] = [set('ENV-098'), set('ENV-104')];
-export const STUDIO_COURTYARD_DECOR_PER_BUILDING = 2;
+export const STUDIO_COURTYARD_DECOR: readonly StudioDecorSet[] = [set('ENV-098'), set('ENV-104'), set('ENV-096'), set('ENV-097'), set('BUILT-240'), set('LIFE-186')];
+export const STUDIO_COURTYARD_DECOR_PER_BUILDING = 3;
 const DECOR_INSET = .22;
 export type StudioDecorPlacement = StudioPropPlacement & { yaw: number };
 type R = { x0: number; x1: number; z0: number; z1: number };

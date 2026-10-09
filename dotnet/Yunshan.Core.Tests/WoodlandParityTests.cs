@@ -62,7 +62,7 @@ public class GroundDressingParityTests
         object Rows(List<WoodlandLayout.GroundItem> list) => list.Select(i => (object)new Obj().Put("id", (double)i.Id).Put("asset", i.Asset).Put("tier", i.Tier).Put("x", i.X).Put("y", i.Y).Put("z", i.Z).Put("yaw", i.Yaw)).ToList();
         var actual = Write(new Obj().Put("items", Rows(items)).Put("fauna", Rows(fauna)));
         Assert.Equal(749, fauna.Count);
-        Assert.Equal(658, items.Count);
+        Assert.Equal(1422, items.Count);
         if (expected != actual)
         {
             int i = 0; while (i < Math.Min(expected.Length, actual.Length) && expected[i] == actual[i]) i++;

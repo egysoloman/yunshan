@@ -8,9 +8,11 @@ const manifest = JSON.parse(readFileSync('src/rendering/studio-assets.json', 'ut
 
 test('studio ground dressing stays on cleared ground at original size and never floats', () => {
   const world = createWorld(), items = groundDressing(world, woodlandLayout(world).trees), clear = createGroundClearance(world);
-  assert.equal(items.length, 658);
+  assert.equal(items.length, 1422);
   const byId = new Map(manifest.assets.map(a => [a.id, a]));
   for (const item of items) {
+    // Root flares share their (already cleared) tree's origin.
+    if (item.asset === 'ENV-059') continue;
     const asset = byId.get(item.asset), f = GROUND_DRESSING_FOOTPRINT[item.asset];
     assert.ok(asset, `${item.asset} imported`);
     // The footprint table is the imported bounds centre.

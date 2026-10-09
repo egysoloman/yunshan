@@ -11330,6 +11330,456 @@
         "right-thumb-1",
         "right-thumb-2"
       ]
+    },
+    {
+      "id": "ENV-110",
+      "name": "昼夜渐变天空穹顶母版",
+      "assetId": "env-110",
+      "revision": 3,
+      "url": "studio-assets/ENV-110.glb",
+      "source": "projects/production/atlas-20261004064850/exports/ENV-110/visual.glb",
+      "sha256": "55cb8ef4032a7d8f72b415ce53d3fa5b80e5d3d4fcf26927d13dcdb1e230fa9d",
+      "bytes": 254280,
+      "triangles": 3968,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          -14000,
+          -14000,
+          -14000
+        ],
+        "max": [
+          14000,
+          14000,
+          14000
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-112",
+      "name": "太阳视觉天体组件",
+      "assetId": "env-112",
+      "revision": 3,
+      "url": "studio-assets/ENV-112.glb",
+      "source": "projects/production/atlas-20261004064850/exports/ENV-112/visual.glb",
+      "sha256": "ea3bce9367f72034de2643d2a909478a1fb8261e4ff06e1ff9ccda3bfa0c0563",
+      "bytes": 192960,
+      "triangles": 3968,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          -68,
+          11932,
+          -68
+        ],
+        "max": [
+          68,
+          12068,
+          68
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-113",
+      "name": "月亮视觉天体组件",
+      "assetId": "env-113",
+      "revision": 3,
+      "url": "studio-assets/ENV-113.glb",
+      "source": "projects/production/atlas-20261004064850/exports/ENV-113/visual.glb",
+      "sha256": "6927beca97ba0893bafa9ea91c983196dcbeed19331eb64ba52e7486d9e9e477",
+      "bytes": 317672,
+      "triangles": 3968,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          -38,
+          11962,
+          -38
+        ],
+        "max": [
+          38,
+          12038,
+          38
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-114",
+      "name": "夜空星点组件",
+      "assetId": "env-114",
+      "revision": 3,
+      "url": "studio-assets/ENV-114.glb",
+      "source": "projects/production/atlas-20261004064850/exports/ENV-114/visual.glb",
+      "sha256": "ea2f0fb8e13c57e0ca8909c87e1cdee452c2e5e1a20251c94a5fd83c2a67f1cc",
+      "bytes": 268008,
+      "triangles": 3968,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          -13000,
+          -13000,
+          -13000
+        ],
+        "max": [
+          13000,
+          13000,
+          13000
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-059",
+      "name": "乔木根脚与附岩根系视觉组件",
+      "assetId": "env-059",
+      "revision": 3,
+      "url": "studio-assets/ENV-059.glb",
+      "source": "projects/production/atlas-20261004044107/exports/ENV-059/visual.glb",
+      "sha256": "ef4a51ed8222d54607034a68074fa3a559c99a0d88cdfd66ee8d350860e9c1c9",
+      "bytes": 281588,
+      "triangles": 2852,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          -3.8,
+          0,
+          -3.4
+        ],
+        "max": [
+          3.8,
+          4.4,
+          3.8
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-014",
+      "name": "土层剖面与裸露根际基底",
+      "assetId": "env-014",
+      "revision": 3,
+      "url": "studio-assets/ENV-014.glb",
+      "source": "projects/production/atlas-20261004035714/exports/ENV-014/visual.glb",
+      "sha256": "b2fa0d0f778efc43174ca511cfe5dc4d9830c262b8e615440c54dc41104d9860",
+      "bytes": 128228,
+      "triangles": 860,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          -0.2
+        ],
+        "max": [
+          8,
+          5.6,
+          6
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-013",
+      "name": "悬挑岩檐与天然穿洞组件",
+      "assetId": "env-013",
+      "revision": 3,
+      "url": "studio-assets/ENV-013.glb",
+      "source": "projects/production/atlas-20261004030820/exports/ENV-013/visual.glb",
+      "sha256": "2d3ee333908bfe3c5a04ee94aa2b271b8597cfcadcd1300115bcb9d65928f4f7",
+      "bytes": 411852,
+      "triangles": 4652,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          12,
+          10.6,
+          8
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-081",
+      "name": "多点接地基础与山体承托母版",
+      "assetId": "env-081",
+      "revision": 3,
+      "url": "studio-assets/ENV-081.glb",
+      "source": "projects/production/atlas-20261004053531/exports/ENV-081/visual.glb",
+      "sha256": "75a1ca3f683074e0e717acb9778369bee7e1815c1978bb361e622e7262366d5b",
+      "bytes": 205860,
+      "triangles": 1796,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          10,
+          3.8,
+          8
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-008",
+      "name": "错层岩台与次级崖阶母版",
+      "assetId": "env-008",
+      "revision": 3,
+      "url": "studio-assets/ENV-008.glb",
+      "source": "projects/production/atlas-20261004030820/exports/ENV-008/visual.glb",
+      "sha256": "ae5f5a5d305553e1e0ce4c24cc79aa49cfcb6f94bae79697c554cb1c5bcde1e1",
+      "bytes": 734988,
+      "triangles": 8904,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          18,
+          12.8,
+          14
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-001",
+      "name": "权威连续岩土表面母版",
+      "assetId": "env-001",
+      "revision": 3,
+      "url": "studio-assets/ENV-001.glb",
+      "source": "projects/production/atlas-20261004030820/exports/ENV-001/visual.glb",
+      "sha256": "0507af1f957433fd105dd5b1a7c2716544baa2ecef033d02745a3c8adb993171",
+      "bytes": 952624,
+      "triangles": 11768,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          24,
+          7.4,
+          16
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-010",
+      "name": "山鞍与山脊过渡块",
+      "assetId": "env-010",
+      "revision": 3,
+      "url": "studio-assets/ENV-010.glb",
+      "source": "projects/production/atlas-20261004030820/exports/ENV-010/visual.glb",
+      "sha256": "e357b2a59a32e936b2e534fd0ddecc24b1dace5c320c4cff3af1f634c58b4153",
+      "bytes": 1278268,
+      "triangles": 16052,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          22,
+          9.6,
+          14
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-006",
+      "name": "不规则高陡连续崖壁断面母版",
+      "assetId": "env-006",
+      "revision": 3,
+      "url": "studio-assets/ENV-006.glb",
+      "source": "projects/production/atlas-20261004030820/exports/ENV-006/visual.glb",
+      "sha256": "b492e6b74af0072a6fc9b53e18162212a14327247a9ccf6ec92cce655d824bf1",
+      "bytes": 785908,
+      "triangles": 9574,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          16,
+          18.799999,
+          12
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-005",
+      "name": "节理裂隙分层岩台母版",
+      "assetId": "env-005",
+      "revision": 3,
+      "url": "studio-assets/ENV-005.glb",
+      "source": "projects/production/atlas-20261004030820/exports/ENV-005/visual.glb",
+      "sha256": "ca8286679290462ccbeaa04a5695500b66e0454d8132f6b97f5766283d968fe4",
+      "bytes": 951432,
+      "triangles": 11752,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          24,
+          16.799999,
+          16
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-096",
+      "name": "独立花槽与树池边框母版",
+      "assetId": "env-096",
+      "revision": 3,
+      "url": "studio-assets/ENV-096.glb",
+      "source": "projects/production/atlas-20261004064850/exports/ENV-096/visual.glb",
+      "sha256": "0d88b7c81f2eca724e5b048749731f9a4a2bcc1cb29439ffd57af8c36a5df106",
+      "bytes": 88400,
+      "triangles": 204,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          6,
+          1.4,
+          2
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-097",
+      "name": "独立花盆与种植容器母版",
+      "assetId": "env-097",
+      "revision": 3,
+      "url": "studio-assets/ENV-097.glb",
+      "source": "projects/production/atlas-20261004074226/exports/ENV-097/visual.glb",
+      "sha256": "f8b1b76b0ed7794c74832df3377c051ad09f440da763e161a76d090cb9743756",
+      "bytes": 86884,
+      "triangles": 112,
+      "cellSizeM": 0.2,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          2.4,
+          1.8,
+          2.4
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "BUILT-240",
+      "name": "建筑垂直绿化安装架与花池壳",
+      "assetId": "built-240",
+      "revision": 3,
+      "url": "studio-assets/BUILT-240.glb",
+      "source": "projects/production/atlas-20261004010658/exports/BUILT-240/visual.glb",
+      "sha256": "f5ca6865f3753dbfe7658aaae78fbc4d5304246a089fb675441e56e289beae73",
+      "bytes": 109156,
+      "triangles": 754,
+      "cellSizeM": 0.05,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          2.4,
+          3.2,
+          0.8
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "LIFE-186",
+      "name": "节庆花灯外壳",
+      "assetId": "life-186",
+      "revision": 3,
+      "url": "studio-assets/LIFE-186.glb",
+      "source": "projects/production/atlas-20261003081509/exports/LIFE-186/visual.glb",
+      "sha256": "e32fc6bb1581eba2c7748ea90283f25c3264253a46fe314f0105ef69e8ab75b0",
+      "bytes": 201672,
+      "triangles": 2104,
+      "cellSizeM": 0.01,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0.18
+        ],
+        "max": [
+          0.94,
+          2.05,
+          0.55
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "ENV-134",
+      "name": "未来国风盆景剪裁矮树母版",
+      "assetId": "env-134",
+      "revision": 3,
+      "url": "studio-assets/ENV-134.glb",
+      "source": "projects/production/atlas-20261004074226/exports/ENV-134/visual.glb",
+      "sha256": "c30d89342caa43c9ccd57278b187c47bb71104c06972032db3e608217d27e427",
+      "bytes": 578492,
+      "triangles": 6208,
+      "cellSizeM": 0.04,
+      "boundsM": {
+        "min": [
+          -1.12,
+          0.16,
+          -0.32
+        ],
+        "max": [
+          1.04,
+          2.48,
+          0.32
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
     }
   ]
 }

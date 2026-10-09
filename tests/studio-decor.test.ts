@@ -24,5 +24,5 @@ test('display-only décor places every listed studio furniture asset at original
   }
   const listed = new Set([...Object.values(STUDIO_DECOR), STUDIO_COURTYARD_DECOR].flatMap(sets => sets!.flatMap(s => [s.base, ...(s.tops ?? []), ...(s.above ? [s.above] : []), ...(s.wear ?? [])])));
   assert.deepEqual([...listed].filter(id => !seen.has(id)), []);
-  assert.equal(total, 22229);
+  assert.equal(total, 22809);
 });

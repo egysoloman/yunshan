@@ -276,7 +276,7 @@ namespace Yunshan.Core
             Set("LIFE-172"), Set("LIFE-159"), Set("LIFE-071", new[] { "LIFE-073" }) };
         static readonly DecorSet[] FarmDecor = { Set("LIFE-086"), Set("LIFE-088"), Set("LIFE-087"), Set("LIFE-075", new[] { "LIFE-086" }), Set("LIFE-196") };
         static readonly DecorSet[] CivicDecor = { Set("LIFE-141"), Set("LIFE-142"), Set("LIFE-146"), Set("LIFE-143"), Set("LIFE-144"), Set("LIFE-147"), Set("LIFE-148"), Set("LIFE-150"), Set("LIFE-178", new[] { "LIFE-179" }), Set("LIFE-145"),
-            Set("LIFE-153"), Set("LIFE-154"), Set("LIFE-187"), Set("LIFE-188"), Set("LIFE-189"), Set("LIFE-200"), Set("LIFE-185"), Set("LIFE-176"), Set("LIFE-177"), Set("LIFE-175"), Set("LIFE-117"), Set("LIFE-118"), Set("LIFE-193"), Set("LIFE-149") };
+            Set("LIFE-153"), Set("LIFE-154"), Set("LIFE-187"), Set("LIFE-188"), Set("LIFE-189"), Set("LIFE-200"), Set("LIFE-185"), Set("LIFE-176"), Set("LIFE-177"), Set("LIFE-175"), Set("LIFE-117"), Set("LIFE-118"), Set("LIFE-193"), Set("LIFE-149"), Set("ENV-134") };
         public static readonly Dictionary<string, DecorSet[]> Decor = new Dictionary<string, DecorSet[]>
         {
             ["home"] = HomeDecor, ["farm"] = FarmDecor, ["market"] = MarketDecor, ["workshop"] = WorkshopDecor,
@@ -284,13 +284,13 @@ namespace Yunshan.Core
             ["hall"] = CivicDecor, ["core"] = CivicDecor,
             ["police"] = new[] { Set("LIFE-152"), Set("LIFE-155"), Set("LIFE-157", new[] { "LIFE-158" }), Set("LIFE-156"), Set("LIFE-159") },
             ["clinic"] = new[] { Set("LIFE-123", new[] { "LIFE-096" }), Set("LIFE-124"), Set("LIFE-125"), Set("LIFE-127", null, "LIFE-121"), Set("LIFE-122") },
-            ["bank"] = new[] { Set("LIFE-089"), Set("LIFE-149", new[] { "LIFE-090" }), Set("LIFE-146"), Set("LIFE-149", new[] { "LIFE-019" }), Set("LIFE-144") },
+            ["bank"] = new[] { Set("LIFE-089"), Set("LIFE-149", new[] { "LIFE-090" }), Set("LIFE-146"), Set("LIFE-149", new[] { "LIFE-019" }), Set("LIFE-144"), Set("ENV-134") },
             ["station"] = new[] { Set("LIFE-147"), Set("LIFE-193"), Set("LIFE-140"), Set("LIFE-091") },
             ["dock"] = new[] { Set("LIFE-087"), Set("LIFE-088"), Set("LIFE-075", new[] { "LIFE-095" }), Set("LIFE-071") },
             ["airport"] = new[] { Set("LIFE-147"), Set("LIFE-193"), Set("LIFE-140") }, ["starport"] = new[] { Set("LIFE-147"), Set("LIFE-193"), Set("LIFE-140") },
         };
-        public static readonly DecorSet[] CourtyardDecor = { Set("ENV-098"), Set("ENV-104") };
-        public const int DecorPerFloor = 4, CourtyardDecorPerBuilding = 2;
+        public static readonly DecorSet[] CourtyardDecor = { Set("ENV-098"), Set("ENV-104"), Set("ENV-096"), Set("ENV-097"), Set("BUILT-240"), Set("LIFE-186") };
+        public const int DecorPerFloor = 4, CourtyardDecorPerBuilding = 3;
         const double DecorInset = .22;
 
         static bool Overlaps(Rect a, Rect b, double grow = 0) => a.X0 < b.X1 + grow - 1e-9 && a.X1 > b.X0 - grow + 1e-9 && a.Z0 < b.Z1 + grow - 1e-9 && a.Z1 > b.Z0 - grow + 1e-9;
