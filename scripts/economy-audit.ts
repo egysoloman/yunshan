@@ -110,7 +110,7 @@ const commodities = commodityObserver(buildings, new Map(sim.state.shops.map(sho
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const totals = { sales: 0, saleCount: 0, saleTax: 0, fares: 0, payrollPublicRequested: 0,
   payrollPublicPaid: 0, payrollPrivateRequested: 0, payrollPrivate: 0, wageTax: 0, wholesale: 0, wholesaleTax: 0,
-  businessExpenses: 0, storedMeals: 0, production: 0, productionMinutes: 0, operationsRequested: 0, operations: 0, publicSupplies: 0, procurementTax: 0, civicProcurement: 0, security: 0, financeDelta: 0, roadworkPayroll: 0, roadworkMinutes: 0 };
+  businessExpenses: 0, storedMeals: 0, production: 0, productionMinutes: 0, operationsRequested: 0, operations: 0, publicSupplies: 0, procurementTax: 0, civicProcurement: 0, security: 0, financeDelta: 0, roadworkPayroll: 0, roadworkMinutes: 0, profitTax: 0 };
 const ledger: Record<string, { count: number; amount: number; eventObserved: number }> = {};
 const seenLedger = new WeakSet<LedgerEntry>();
 const deaths: Record<string, unknown>[] = [];
@@ -140,6 +140,7 @@ sim.onEvent('sale', event => {
 sim.onEvent('transit-fare', event => { totals.fares += event.amount ?? 0; });
 sim.onEvent('wholesale', event => { totals.wholesale += event.amount ?? 0; totals.wholesaleTax += (event.amount ?? 0) * sim.state.taxRate; });
 sim.onEvent('business-expense', event => { totals.businessExpenses += event.amount ?? 0; });
+sim.onEvent('profit-tax', event => { totals.profitTax += event.amount ?? 0; });
 sim.onEvent('stored-meal', event => { totals.storedMeals += event.amount ?? 0; commodities.storedMeal(event); });
 sim.onEvent('food-consumed', event => { commodities.foodConsumed(event); });
 sim.onEvent('production', event => { totals.production += event.amount ?? 0; totals.productionMinutes += event.minutes ?? 0; commodities.production(event); assert.ok((event.minutes ?? 0) > 0 && (event.amount ?? 0) > 0, 'production evidence requires positive actual labor and output'); });
@@ -312,7 +313,7 @@ try {
   }
   // Periodic '城市…' rows summarize earlier movements; adding those again would double-count.
   const explicit = Object.entries(ledger).filter(([purpose]) => !purpose.startsWith('城市')).reduce((sum, [, row]) => sum + row.amount - row.eventObserved, 0);
-  const expected = initialTreasury + totals.saleTax + totals.wholesaleTax + totals.procurementTax + totals.businessExpenses + totals.wageTax + totals.fares
+  const expected = initialTreasury + totals.saleTax + totals.wholesaleTax + totals.procurementTax + totals.businessExpenses + totals.wageTax + totals.fares + totals.profitTax
     - totals.payrollPublicPaid - totals.operations - totals.security - totals.civicProcurement + explicit - core().taxes - (sim.state.playerLabor?.job?.employer.kind === 'public' ? sim.state.playerLabor.job.escrow : 0);
   reconciliationResidual = expected - sim.state.treasury;
   assert.ok(Math.abs(reconciliationResidual) < 1e-6, `treasury reconciliation residual ${reconciliationResidual}`);
