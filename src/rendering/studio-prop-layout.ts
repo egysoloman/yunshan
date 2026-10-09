@@ -104,9 +104,9 @@ export function studioCeilingLampPlacements(building: Building, assets: Readonly
 
 /** Every studio placement of a building's floor-plan fixtures and lamps. */
 export function studioBuildingPlacements(building: Building, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioPropPlacement[] {
-  const body = getBuildingBody(building); if (!body) return [];
+  const body = getBuildingBody(building); if (!body) return studioFacadePlacements(building, assets);
   return [...body.floorPlans.flatMap(plan => getFloorPlanFixtures(building, plan).flatMap(fixture => layoutStudioFixture(fixture, plan.floor, plan.y, assets, building.kind) ?? [])),
-    ...studioCeilingLampPlacements(building, assets), ...studioDecorPlacements(building, assets)];
+    ...studioCeilingLampPlacements(building, assets), ...studioDecorPlacements(building, assets), ...studioFacadePlacements(building, assets)];
 }
 
 /** A fixed, world-space studio model (origin = its min corner, yaw about Y). */
@@ -372,4 +372,124 @@ export function studioDecorPlacements(building: Building, assets: ReadonlyMap<st
     }
   }
   return result;
+}
+
+/** Facade décor (user decision 2026-10-09): legacy studio facade parts at
+ * original size mounted on the outer face of real program walls, display
+ * only — walls, openings, windows, collision and walking are unchanged. A part
+ * is hung only on a free span of an exterior wall: no door or window may cross
+ * its height range, on every storey it reaches. Studio facade parts have their
+ * back at z = 0 and face +Z, so +Z turns to the wall's outward normal. The two
+ * legacy-facade kinds (the 天枢 core and the summit pavilions) get their own
+ * authored parts at their legacy geometry. */
+export const FACADE_DOOR_SIDE: Partial<Record<BuildingKind, string>> = { home: 'BUILT-063', farm: 'BUILT-063', market: 'BUILT-101', clinic: 'BUILT-116', workshop: 'BUILT-244', hall: 'BUILT-045', school: 'BUILT-045', police: 'BUILT-045', bank: 'BUILT-045', dock: 'BUILT-045', station: 'BUILT-045' };
+export const FACADE_WALL: Partial<Record<BuildingKind, readonly string[]>> = {
+  // BUILT-071 stays rejected (it would hang below eye height); every part that juts out hangs above 1.72m.
+  home: ['BUILT-070'], farm: ['BUILT-070'], market: ['BUILT-069', 'BUILT-070'], workshop: ['BUILT-069', 'BUILT-070'], hall: ['BUILT-045'], school: ['BUILT-045'], police: ['BUILT-045'],
+  clinic: ['BUILT-070'], bank: ['BUILT-045'], dock: ['BUILT-070'], station: ['BUILT-070'], airport: ['BUILT-070'], starport: ['BUILT-070'],
+};
+export const FACADE_EAVE = ['BUILT-053', 'BUILT-248', 'BUILT-061', 'BUILT-073', 'BUILT-246', 'BUILT-074'] as const;
+export const FACADE_LIMITS = { wallPerFloor: 2, wall: 6, eave: 8, fins: 4 } as const;
+/** Every facade part this layout can place (for loading). */
+export const STUDIO_FACADE_ASSETS = ['BUILT-054', 'BUILT-108', 'BUILT-241', 'BUILT-219', 'BUILT-072', 'BUILT-088', 'BUILT-089', 'BUILT-090', 'BUILT-091', ...FACADE_EAVE] as const;
+
+type WallMount = { floor: number; along: number; y0: number };
+export function studioFacadePlacements(building: Building, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioDecorPlacement[] {
+  const out: StudioDecorPlacement[] = [], seed = studioDecorSeed(building.id);
+  const put = (id: string, key: string, floor: number, x: number, y: number, z: number, yaw: number) => {
+    const a = assets.get(id); if (!a) return;
+    out.push({ asset: id, fixtureId: `facade:${floor}:${key}`, floor, scale: 1, yaw, local: { x, y, z } });
+  };
+  // Legacy geometry (renderer box coordinates are relative to the building position; placements add 0.6).
+  if (building.kind === 'pavilion') {
+    const w = building.width, d = building.depth, a = assets.get('BUILT-072');
+    if (a) for (const [sx, sz] of [[-1, -1], [1, -1], [1, 1], [-1, 1]] as const) {
+      const yaw = sz > 0 ? 0 : Math.PI, c = Math.cos(yaw), s = Math.sin(yaw), mx = (a.boundsM.min[0] + a.boundsM.max[0]) / 2, mz = (a.boundsM.min[2] + a.boundsM.max[2]) / 2;
+      put(a.id, `post:${sx}:${sz}`, 0, sx * w * .4 - (mx * c + mz * s), -.6, sz * d * .4 - (-mx * s + mz * c), yaw);
+    }
+    return out;
+  }
+  if (building.kind === 'core') {
+    const w = building.width, d = building.depth, h = building.height;
+    const centred = (id: string, key: string, x: number, y: number, z: number) => { const a = assets.get(id); if (!a) return; put(id, key, 0, x - (a.boundsM.min[0] + a.boundsM.max[0]) / 2, y - .6, z - a.boundsM.min[2], 0); };
+    centred('BUILT-088', 'south-portico', 0, 0, d / 2);
+    for (const x of [-w / 2 + 1.2, w / 2 - 1.2]) centred('BUILT-089', `pillar:${x}`, x, 0, d / 2);
+    for (const x of [-w * .25, w * .25]) centred('BUILT-090', `gallery:${x}`, x, 5.5, d / 2);
+    const top = assets.get('BUILT-091'); if (top) put(top.id, 'observation', 0, -(top.boundsM.min[0] + top.boundsM.max[0]) / 2, h - .6, -(top.boundsM.min[2] + top.boundsM.max[2]) / 2, 0);
+    return out;
+  }
+  const body = getBuildingBody(building); if (!body) return out;
+  const plans = body.floorPlans.filter(p => p.floor >= 0), top = plans.reduce((m, p) => Math.max(m, p.floor), 0);
+  const sameWall = (a: { a: [number, number]; b: [number, number] }, b: { a: [number, number]; b: [number, number] }) => a.a[0] === b.a[0] && a.a[1] === b.a[1] && a.b[0] === b.b[0] && a.b[1] === b.b[1];
+  // Exterior walls of each storey, with the outward side: open air or an open-air courtyard on one side, a room or corridor on the other.
+  const exterior = plans.flatMap(plan => {
+    const regions = [...plan.interior, ...plan.circulation];
+    return plan.walls.flatMap((wall, index) => {
+      const length = Math.hypot(wall.b[0] - wall.a[0], wall.b[1] - wall.a[1]); if (length < 1) return [];
+      const dx = (wall.b[0] - wall.a[0]) / length, dz = (wall.b[1] - wall.a[1]) / length, mx = (wall.a[0] + wall.b[0]) / 2, mz = (wall.a[1] + wall.b[1]) / 2;
+      for (const side of [1, -1]) { const nx = -dz * side, nz = dx * side;
+        if (!regions.some(r => contains(r, mx + nx * .8, mz + nz * .8)) && regions.some(r => contains(r, mx - nx * .8, mz - nz * .8))) return [{ plan, wall, index, length, dx, dz, nx, nz }]; }
+      return [];
+    });
+  });
+  type Exterior = (typeof exterior)[number];
+  // Is [from, to] along the wall free of doors and windows over [y0, y1] above this storey's floor, on every storey it reaches?
+  const free = (e: Exterior, from: number, to: number, y0: number, y1: number, ignoreOpening = false) => {
+    if (from < .3 || to > e.length - .3) return false;
+    const storeyHeight = e.plan.ceilingY - e.plan.y;
+    for (const p of plans) {
+      const lo = p.y - e.plan.y, hi = lo + (p.ceilingY - p.y); if (hi <= y0 || lo >= y1) continue;
+      if (p.floor > top) return false;
+      const w = p.walls.find(x => sameWall(x, e.wall)); if (!w) return false;
+      const gaps = [...(w.opening && !(ignoreOpening && p === e.plan) ? [{ from: w.opening.from, to: w.opening.to, bottom: 0, top: w.opening.height }] : []), ...(w.windows ?? [])];
+      if (gaps.some(g => g.from < to + .15 && g.to > from - .15 && lo + g.bottom < y1 && lo + g.top > y0)) return false;
+      if (p === e.plan && y1 > storeyHeight + .2 && p.floor === top) return false;
+    }
+    return true;
+  };
+  const mount = (e: Exterior, id: string, key: string, along: number, y0: number, outward = .21, ignoreOpening = false) => {
+    const a = assets.get(id); if (!a) return false;
+    const { min, max } = a.boundsM, width = max[0] - min[0], height = max[1] - min[1];
+    if (!free(e, along - width / 2, along + width / 2, y0, y0 + height, ignoreOpening)) return false;
+    const yaw = Math.atan2(e.nx, e.nz), c = Math.cos(yaw), s = Math.sin(yaw), mx = (min[0] + max[0]) / 2;
+    // The part's back (z = min) meets the wall's outer face (thickness/2 + outward from the centre line).
+    const cx = e.wall.a[0] + e.dx * along + e.nx * (outward - min[2]), cz = e.wall.a[1] + e.dz * along + e.nz * (outward - min[2]);
+    put(id, `${e.index}:${key}`, e.plan.floor, cx - mx * c, e.plan.y + y0 - min[1], cz + mx * s, yaw);
+    return true;
+  };
+  let walls = 0, eaves = 0, fins = 0, yardDoors = 0;
+  for (const e of exterior) {
+    const w = e.wall, door = w.opening && e.plan.floor === 0 ? w.opening : undefined, entrance = door?.use === 'entrance';
+    if (door && (entrance || yardDoors++ < 2)) {
+      // Entrance: a lantern each side and the use's door-side part.
+      mount(e, 'BUILT-054', 'lantern-a', door.from - .55, 1.76); mount(e, 'BUILT-054', 'lantern-b', door.to + .55, 1.76);
+      const side = FACADE_DOOR_SIDE[building.kind]; if (side) { const a = assets.get(side); if (a) { const half = (a.boundsM.max[0] - a.boundsM.min[0]) / 2, y0 = side === 'BUILT-116' ? .5 : 0;
+        // Beside the door: on its own wall if there is room, else on the nearest wall of the same facade line, at its end nearest the door.
+        if (!mount(e, side, 'door-side', door.to + 1.2 + half, y0) && !mount(e, side, 'door-side', door.from - 1.2 - half, y0)) {
+          const doorX = w.a[0] + e.dx * (door.from + door.to) / 2, doorZ = w.a[1] + e.dz * (door.from + door.to) / 2, offset = doorX * e.nx + doorZ * e.nz;
+          const line = exterior.filter(o => o.plan === e.plan && o !== e && Math.abs(o.nx - e.nx) < 1e-6 && Math.abs(o.nz - e.nz) < 1e-6 && Math.abs(o.wall.a[0] * o.nx + o.wall.a[1] * o.nz - offset) < 1e-6)
+            .map(o => { const t = (doorX - o.wall.a[0]) * o.dx + (doorZ - o.wall.a[1]) * o.dz; return { o, t, d: t < 0 ? -t : t > o.length ? t - o.length : 0 }; }).sort((p, q) => p.d - q.d)[0];
+          if (line && line.d < 8) mount(line.o, side, 'door-side', line.t <= 0 ? .6 + half : line.o.length - .6 - half, y0);
+        } } }
+      // A free-standing portico over the entrance (it frames the doorway, which stays open).
+      if (entrance && ['hall', 'school', 'police'].includes(building.kind)) mount(e, 'BUILT-108', 'colonnade', (door.from + door.to) / 2, 0, .22, true);
+      if (entrance && building.districtId === 'core') mount(e, 'BUILT-241', 'emitter', door.from - 2.2, 0);
+    }
+    // Storey walls: up to two parts per wall per storey, from the use's list.
+    const list = FACADE_WALL[building.kind] ?? [];
+    for (let k = 0, placed = 0; list.length && k < 6 && placed < FACADE_LIMITS.wallPerFloor && walls < FACADE_LIMITS.wall; k++) {
+      const id = list[(seed + k + e.index) % list.length], along = e.length * (k + .5) / 6;
+      if (mount(e, id, `wall:${k}`, along, id === 'BUILT-045' ? .3 : 1.76)) { placed++; walls++; }
+    }
+    // Wall heads of the top storey: eave brackets and trims every few metres.
+    if (e.plan.floor === top) for (let along = 2.6; along < e.length - 2.6 && eaves < FACADE_LIMITS.eave; along += 6.2) {
+      const id = FACADE_EAVE[(seed + Math.floor(along)) % FACADE_EAVE.length], a = assets.get(id); if (!a) continue;
+      const storey = e.plan.ceilingY - e.plan.y, wallTop = Math.min(storey, w.height);
+      if (mount(e, id, `eave:${along}`, along, wallTop - (a.boundsM.max[1] - a.boundsM.min[1]))) eaves++;
+    }
+    // Tall towers: vertical sun fins across storeys on blank wall strips.
+    if (plans.length >= 8 && e.plan.floor === 0 && ['home', 'bank', 'hall'].includes(building.kind))
+      for (let along = 1.2; along < e.length - 1.2 && fins < FACADE_LIMITS.fins; along += 2.4) if (mount(e, 'BUILT-219', `fin:${along}`, along, .2)) fins++;
+  }
+  return out;
 }

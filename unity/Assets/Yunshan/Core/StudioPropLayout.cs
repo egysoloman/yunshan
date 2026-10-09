@@ -118,10 +118,11 @@ namespace Yunshan.Core
         public static List<StudioPropPlacement> BuildingPlacements(Building building, IReadOnlyDictionary<string, StudioAssetBounds> assets)
         {
             var body = ArchitectureFloorPlan.GetBuildingBody(building); var result = new List<StudioPropPlacement>();
-            if (body == null) return result;
+            if (body == null) return FacadePlacements(building, assets);
             foreach (var plan in body.FloorPlans) foreach (var fixture in plan.Fixtures) { var placed = LayoutFixture(fixture, plan.Floor, plan.Y, assets, building.Kind); if (placed != null) result.AddRange(placed); }
             result.AddRange(CeilingLampPlacements(building, assets));
             result.AddRange(DecorPlacements(building, assets));
+            result.AddRange(FacadePlacements(building, assets));
             return result;
         }
 
@@ -377,6 +378,128 @@ namespace Yunshan.Core
                 }
             }
             return result;
+        }
+
+
+        // Port of studioFacadePlacements: legacy studio facade parts on free spans of exterior program walls (display only).
+        public static readonly Dictionary<string, string> FacadeDoorSide = new Dictionary<string, string> { ["home"] = "BUILT-063", ["farm"] = "BUILT-063", ["market"] = "BUILT-101", ["clinic"] = "BUILT-116", ["workshop"] = "BUILT-244", ["hall"] = "BUILT-045", ["school"] = "BUILT-045", ["police"] = "BUILT-045", ["bank"] = "BUILT-045", ["dock"] = "BUILT-045", ["station"] = "BUILT-045" };
+        public static readonly Dictionary<string, string[]> FacadeWall = new Dictionary<string, string[]>
+        {
+            ["home"] = new[] { "BUILT-070" }, ["farm"] = new[] { "BUILT-070" }, ["market"] = new[] { "BUILT-069", "BUILT-070" }, ["workshop"] = new[] { "BUILT-069", "BUILT-070" }, ["hall"] = new[] { "BUILT-045" }, ["school"] = new[] { "BUILT-045" }, ["police"] = new[] { "BUILT-045" },
+            ["clinic"] = new[] { "BUILT-070" }, ["bank"] = new[] { "BUILT-045" }, ["dock"] = new[] { "BUILT-070" }, ["station"] = new[] { "BUILT-070" }, ["airport"] = new[] { "BUILT-070" }, ["starport"] = new[] { "BUILT-070" },
+        };
+        public static readonly string[] FacadeEave = { "BUILT-053", "BUILT-248", "BUILT-061", "BUILT-073", "BUILT-246", "BUILT-074" };
+        const int FacadeWallPerFloor = 2, FacadeWallMax = 6, FacadeEaveMax = 8, FacadeFinsMax = 4;
+        sealed class Exterior { public FloorPlan Plan; public Wall Wall; public int Index; public double Length, Dx, Dz, Nx, Nz; }
+        static string Num(double v) => JsMath.ToJsString(v);
+
+        public static List<StudioPropPlacement> FacadePlacements(Building building, IReadOnlyDictionary<string, StudioAssetBounds> assets)
+        {
+            var output = new List<StudioPropPlacement>(); int seed = DecorSeed(building.Id);
+            void Put(string id, string key, int floor, double x, double y, double z, double yaw) { if (!assets.ContainsKey(id)) return; output.Add(new StudioPropPlacement { Asset = id, FixtureId = $"facade:{floor}:{key}", Floor = floor, Scale = 1, Yaw = yaw, Local = new Vec3(x, y, z) }); }
+            if (building.Kind == "pavilion")
+            {
+                double w = building.Width, d = building.Depth;
+                if (assets.TryGetValue("BUILT-072", out var a)) foreach (var (sx, sz) in new[] { (-1, -1), (1, -1), (1, 1), (-1, 1) })
+                {
+                    double yaw = sz > 0 ? 0 : Math.PI, c = JsMath.Cos(yaw), s = JsMath.Sin(yaw), mx = (a.Min[0] + a.Max[0]) / 2, mz = (a.Min[2] + a.Max[2]) / 2;
+                    Put(a.Id, $"post:{sx}:{sz}", 0, sx * w * .4 - (mx * c + mz * s), -.6, sz * d * .4 - (-mx * s + mz * c), yaw);
+                }
+                return output;
+            }
+            if (building.Kind == "core")
+            {
+                double w = building.Width, d = building.Depth, h = building.Height;
+                void Centred(string id, string key, double x, double y, double z) { if (!assets.TryGetValue(id, out var a)) return; Put(id, key, 0, x - (a.Min[0] + a.Max[0]) / 2, y - .6, z - a.Min[2], 0); }
+                Centred("BUILT-088", "south-portico", 0, 0, d / 2);
+                foreach (var x in new[] { -w / 2 + 1.2, w / 2 - 1.2 }) Centred("BUILT-089", "pillar:" + Num(x), x, 0, d / 2);
+                foreach (var x in new[] { -w * .25, w * .25 }) Centred("BUILT-090", "gallery:" + Num(x), x, 5.5, d / 2);
+                if (assets.TryGetValue("BUILT-091", out var top0)) Put(top0.Id, "observation", 0, -(top0.Min[0] + top0.Max[0]) / 2, h - .6, -(top0.Min[2] + top0.Max[2]) / 2, 0);
+                return output;
+            }
+            var body = ArchitectureFloorPlan.GetBuildingBody(building); if (body == null) return output;
+            var plans = body.FloorPlans.Where(p => p.Floor >= 0).ToList(); int top = plans.Aggregate(0, (m, p) => Math.Max(m, p.Floor));
+            bool SameWall(Wall a, Wall b) => a.A.X == b.A.X && a.A.Z == b.A.Z && a.B.X == b.B.X && a.B.Z == b.B.Z;
+            var exterior = new List<Exterior>();
+            foreach (var plan in plans)
+            {
+                var regions = plan.Interior.Concat(plan.Circulation).ToList();
+                for (int index = 0; index < plan.Walls.Count; index++)
+                {
+                    var wall = plan.Walls[index]; double length = JsMath.Hypot(wall.B.X - wall.A.X, wall.B.Z - wall.A.Z); if (length < 1) continue;
+                    double dx = (wall.B.X - wall.A.X) / length, dz = (wall.B.Z - wall.A.Z) / length, mx = (wall.A.X + wall.B.X) / 2, mz = (wall.A.Z + wall.B.Z) / 2;
+                    foreach (var side in new[] { 1, -1 })
+                    {
+                        double nx = -dz * side, nz = dx * side;
+                        if (!regions.Any(r => ArchitectureFloorPlan.Contains(r, mx + nx * .8, mz + nz * .8)) && regions.Any(r => ArchitectureFloorPlan.Contains(r, mx - nx * .8, mz - nz * .8)))
+                        { exterior.Add(new Exterior { Plan = plan, Wall = wall, Index = index, Length = length, Dx = dx, Dz = dz, Nx = nx, Nz = nz }); break; }
+                    }
+                }
+            }
+            bool Free(Exterior e, double from, double to, double y0, double y1, bool ignoreOpening)
+            {
+                if (from < .3 || to > e.Length - .3) return false;
+                double storeyHeight = e.Plan.CeilingY - e.Plan.Y;
+                foreach (var p in plans)
+                {
+                    double lo = p.Y - e.Plan.Y, hi = lo + (p.CeilingY - p.Y); if (hi <= y0 || lo >= y1) continue;
+                    if (p.Floor > top) return false;
+                    var w = p.Walls.FirstOrDefault(x => SameWall(x, e.Wall)); if (w == null) return false;
+                    var gaps = new List<(double From, double To, double Bottom, double Top)>();
+                    if (w.Opening != null && !(ignoreOpening && p == e.Plan)) gaps.Add((w.Opening.From, w.Opening.To, 0, w.Opening.Height));
+                    foreach (var g in w.Windows ?? new List<WallWindow>()) gaps.Add((g.From, g.To, g.Bottom, g.Top));
+                    if (gaps.Any(g => g.From < to + .15 && g.To > from - .15 && lo + g.Bottom < y1 && lo + g.Top > y0)) return false;
+                    if (p == e.Plan && y1 > storeyHeight + .2 && p.Floor == top) return false;
+                }
+                return true;
+            }
+            bool Mount(Exterior e, string id, string key, double along, double y0, double outward = .21, bool ignoreOpening = false)
+            {
+                if (!assets.TryGetValue(id, out var a)) return false;
+                double width = a.Max[0] - a.Min[0], height = a.Max[1] - a.Min[1];
+                if (!Free(e, along - width / 2, along + width / 2, y0, y0 + height, ignoreOpening)) return false;
+                double yaw = JsMath.Atan2(e.Nx, e.Nz), c = JsMath.Cos(yaw), s = JsMath.Sin(yaw), mx = (a.Min[0] + a.Max[0]) / 2;
+                double cx = e.Wall.A.X + e.Dx * along + e.Nx * (outward - a.Min[2]), cz = e.Wall.A.Z + e.Dz * along + e.Nz * (outward - a.Min[2]);
+                Put(id, $"{e.Index}:{key}", e.Plan.Floor, cx - mx * c, e.Plan.Y + y0 - a.Min[1], cz + mx * s, yaw);
+                return true;
+            }
+            int walls = 0, eaves = 0, fins = 0, yardDoors = 0;
+            foreach (var e in exterior)
+            {
+                var w = e.Wall; var door = w.Opening != null && e.Plan.Floor == 0 ? w.Opening : null; bool entrance = door?.Use == "entrance";
+                if (door != null && (entrance || yardDoors++ < 2))
+                {
+                    Mount(e, "BUILT-054", "lantern-a", door.From - .55, 1.76); Mount(e, "BUILT-054", "lantern-b", door.To + .55, 1.76);
+                    if (FacadeDoorSide.TryGetValue(building.Kind, out var side) && assets.TryGetValue(side, out var sa))
+                    {
+                        double half = (sa.Max[0] - sa.Min[0]) / 2, y0 = side == "BUILT-116" ? .5 : 0;
+                        if (!Mount(e, side, "door-side", door.To + 1.2 + half, y0) && !Mount(e, side, "door-side", door.From - 1.2 - half, y0))
+                        {
+                            double doorX = w.A.X + e.Dx * (door.From + door.To) / 2, doorZ = w.A.Z + e.Dz * (door.From + door.To) / 2, offset = doorX * e.Nx + doorZ * e.Nz;
+                            var line = exterior.Where(o => o.Plan == e.Plan && o != e && Math.Abs(o.Nx - e.Nx) < 1e-6 && Math.Abs(o.Nz - e.Nz) < 1e-6 && Math.Abs(o.Wall.A.X * o.Nx + o.Wall.A.Z * o.Nz - offset) < 1e-6)
+                                .Select(o => { double t = (doorX - o.Wall.A.X) * o.Dx + (doorZ - o.Wall.A.Z) * o.Dz; return (O: o, T: t, D: t < 0 ? -t : t > o.Length ? t - o.Length : 0); }).OrderBy(x => x.D).ToList();
+                            if (line.Count > 0 && line[0].D < 8) Mount(line[0].O, side, "door-side", line[0].T <= 0 ? .6 + half : line[0].O.Length - .6 - half, y0);
+                        }
+                    }
+                    if (entrance && (building.Kind == "hall" || building.Kind == "school" || building.Kind == "police")) Mount(e, "BUILT-108", "colonnade", (door.From + door.To) / 2, 0, .22, true);
+                    if (entrance && building.DistrictId == "core") Mount(e, "BUILT-241", "emitter", door.From - 2.2, 0);
+                }
+                if (FacadeWall.TryGetValue(building.Kind, out var list))
+                    for (int k = 0, placed = 0; list.Length > 0 && k < 6 && placed < FacadeWallPerFloor && walls < FacadeWallMax; k++)
+                    {
+                        var id = list[(seed + k + e.Index) % list.Length]; double along = e.Length * (k + .5) / 6;
+                        if (Mount(e, id, "wall:" + k, along, id == "BUILT-045" ? .3 : 1.76)) { placed++; walls++; }
+                    }
+                if (e.Plan.Floor == top) for (double along = 2.6; along < e.Length - 2.6 && eaves < FacadeEaveMax; along += 6.2)
+                {
+                    var id = FacadeEave[(seed + (int)Math.Floor(along)) % FacadeEave.Length]; if (!assets.TryGetValue(id, out var a)) continue;
+                    double storey = e.Plan.CeilingY - e.Plan.Y, wallTop = Math.Min(storey, w.Height);
+                    if (Mount(e, id, "eave:" + Num(along), along, wallTop - (a.Max[1] - a.Min[1]))) eaves++;
+                }
+                if (plans.Count >= 8 && e.Plan.Floor == 0 && (building.Kind == "home" || building.Kind == "bank" || building.Kind == "hall"))
+                    for (double along = 1.2; along < e.Length - 1.2 && fins < FacadeFinsMax; along += 2.4) if (Mount(e, "BUILT-219", "fin:" + Num(along), along, .2)) fins++;
+            }
+            return output;
         }
 
         /// <summary>Lamp glow fraction for city power and daylight (both clamped 0..1).</summary>

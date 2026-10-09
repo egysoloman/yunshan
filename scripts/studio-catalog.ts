@@ -51,7 +51,7 @@ const gaps: Record<string, string> = {
   character: 'not used: the procedural-box masters CHAR-002…015 are superseded by the fine masters worn on the studio skeleton (CHAR-073/074, user decision 2026-10-08), and the animal skeleton masters CHAR-324…327 are reference rigs (the studio animals ship as rigid single-joint models and are placed as such)',
   furniture: 'no floor-plan fixture solid of this size within the 0.9–1 uniform scale (fixtures are tables 2.4×0.8×1.2, beds 2.4×0.6×1.2, counters 3.2×1.0×1.2)',
   prop: 'no game slot: a new fixture or use point would have to be added to the shared floor plan first',
-  facade: 'authored for the legacy facade; 605 of 612 buildings use program walls whose bays (windows 1.6×1.4m) differ',
+  facade: 'not placed as facade décor (user decision 2026-10-09: original-size parts on free exterior wall spans only): it would cross a door or window, needs a wall taller than a storey, or replaces a door, window, stair or slab of the program walls',
   stair: 'program stairs are generated from the shared floor plan; fixed stair modules do not match its treads and landings',
   road: 'fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)',
   rail: 'fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 and the side strips BUILT-142 are tiled along every rail path; pier caps BUILT-138 sit on every elevated support)',
@@ -89,7 +89,7 @@ const entries = index.entries.map(entry => {
     id: entry.id, kind: entry.kind ?? 'master', ...(entry.parentCatalogId ? { parent: entry.parentCatalogId } : {}), name: label?.name ?? entry.id, category: entry.id.split('-')[0], family: family(entry.id, label?.name ?? ''), sheet: entry.sheet ?? null, theme: label?.theme ?? null,
     revision: entry.revision ?? null, representation: entry.representation ?? null, sizeM: size, boundsM: { min: bounds.min.map(round), max: bounds.max.map(round) },
     source: source ?? null, checks,
-    status: placed.has(entry.id) ? 'placed' : rejected.has(entry.id) ? 'rejected' : 'unassigned', ...(rejected.has(entry.id) ? { reason: rejected.get(entry.id) } : !placed.has(entry.id) ? { gap: entry.kind === 'variant' || entry.kind === 'assembly' ? 'whole studio composition with its own collision; game buildings and networks keep their authoritative geometry' : gaps[family(entry.id, label?.name ?? '')] ?? gaps.other } : {}),
+    status: placed.has(entry.id) ? 'placed' : rejected.has(entry.id) ? 'rejected' : 'unassigned', ...(rejected.has(entry.id) ? { reason: rejected.get(entry.id) } : !placed.has(entry.id) ? { gap: entry.kind === 'variant' || entry.kind === 'assembly' ? 'whole studio composition with its own collision; game buildings and networks keep their authoritative geometry (user decision 2026-10-09: not placed)' : gaps[family(entry.id, label?.name ?? '')] ?? gaps.other } : {}),
     studioNote: entry.note ?? null,
   };
 });

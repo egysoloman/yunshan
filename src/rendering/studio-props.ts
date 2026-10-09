@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Building, Vec3, WorldDefinition } from '../types';
 import { deckWidth } from '../transport-geometry';
 import { terrainHeight } from '../world';
-import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, STUDIO_DECOR, STUDIO_COURTYARD_DECOR, studioBuildingPlacements, studioLandmarkPlacements, studioNetworkDetailPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
+import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, STUDIO_DECOR, STUDIO_COURTYARD_DECOR, STUDIO_FACADE_ASSETS, FACADE_DOOR_SIDE, FACADE_WALL, studioBuildingPlacements, studioLandmarkPlacements, studioNetworkDetailPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
 
 /** Fraction of an authored emissive maximum shown for a supply and daylight. */
 export function studioEmissiveFactor(daylight: number, power: number): number {
@@ -40,7 +40,8 @@ export class StudioPropPool {
     for (const tile of tiles) this.permanentCount.set(tile.asset, (this.permanentCount.get(tile.asset) ?? 0) + 1);
     // Woodland models belong to WoodlandModelPool; this pool loads only what it places.
     const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...Object.values(STUDIO_TABLETOP) as string[], ...this.statics.map(p => p.asset),
-      ...[...Object.values(STUDIO_DECOR), STUDIO_COURTYARD_DECOR].flatMap(sets => sets!.flatMap(d => [d.base, ...(d.tops ?? []), ...(d.above ? [d.above] : [])]))]);
+      ...[...Object.values(STUDIO_DECOR), STUDIO_COURTYARD_DECOR].flatMap(sets => sets!.flatMap(d => [d.base, ...(d.tops ?? []), ...(d.above ? [d.above] : []), ...(d.wear ?? [])])),
+      ...STUDIO_FACADE_ASSETS, ...Object.values(FACADE_DOOR_SIDE) as string[], ...Object.values(FACADE_WALL).flat() as string[]]);
     for (const asset of STUDIO_ASSETS.filter(asset => used.has(asset.id))) {
       const mesh = new THREE.InstancedMesh(this.placeholder, this.placeholderMaterial, this.capacityFor(asset.id));
       this.prepare(mesh, `${asset.id} ${asset.name} · 占位`);
