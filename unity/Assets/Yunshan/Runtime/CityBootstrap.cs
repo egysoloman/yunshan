@@ -23,6 +23,7 @@ namespace Yunshan.Runtime
         StudioAssets studio;
         StudioCharacterView characters;
         GameObject firstPersonArms;
+        StudioSky studioSky;
         FirstPersonController walker;
         SimSession session;
         CityLifeView life;
@@ -144,6 +145,7 @@ namespace Yunshan.Runtime
                 // CHAR-075, the player's forearms, under the eye (web FIRST_PERSON_ARMS: game offset (0, −0.17, −0.22),
                 // model facing −Z; the Unity camera looks along +Z, so the model turns half a turn).
                 var arms = studio?.Template("CHAR-075");
+                studioSky = new StudioSky(studio, view);
                 if (arms != null) { firstPersonArms = Instantiate(arms, view.transform, false); firstPersonArms.SetActive(true); firstPersonArms.transform.localPosition = new Vector3(0, -.17f, .22f); firstPersonArms.transform.localRotation = Quaternion.Euler(0, 180, 0); }
                 if (signFont == null) signFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
                 stationSigns = new StationSignPool(stationRoot, world, signFont);
@@ -383,7 +385,8 @@ namespace Yunshan.Runtime
             float visibility = (float)(session?.Frame?.Visibility ?? 1);
             RenderSettings.fogColor = Color.Lerp(new Color(.13f, .23f, .3f), new Color(.74f, .84f, .87f), daylight);
             RenderSettings.fogDensity = .0005f + (1 - visibility) * .0008f;
-            if (view != null) { view.clearFlags = CameraClearFlags.SolidColor; view.backgroundColor = RenderSettings.fogColor; }
+            if (studioSky != null && studioSky.Active) studioSky.Update(sunGame, altitude, daylight, Mathf.Max(0, 1 - Mathf.Abs(altitude) * 4), RenderSettings.fogColor);
+            else if (view != null) { view.clearFlags = CameraClearFlags.SolidColor; view.backgroundColor = RenderSettings.fogColor; }
             studio?.SetLighting(daylight, Mathf.Clamp01(energy));
             // Lit windows at night, as the web facade night term: (1 − daylight) × power × 0.8.
             glassMaterial.SetFloat("_Emission", (1 - daylight) * Mathf.Clamp01(energy) * .8f);

@@ -8,8 +8,8 @@ import { STUDIO_ASSETS } from './studio-prop-layout';
  * lends its geometry to the existing day–night sky shader (colours, clouds and
  * night stay procedural); sun and moon replace their orbs; the star field
  * replaces the star points and fades with the same night opacity. Self-lit
- * and unfogged, as the procedural sky. Web only: the Unity client clears to
- * the fog colour and has a 6km far plane. */
+ * and unfogged, as the procedural sky. Unity: Runtime/StudioSky.cs draws the
+ * same masters with a 30km sky camera before the 6km city camera. */
 export const SKY_MODELS = { dome: 'ENV-110', sun: 'ENV-112', moon: 'ENV-113', stars: 'ENV-114' } as const;
 
 function unlit(object: THREE.Object3D, transparent = false): THREE.Material[] {
