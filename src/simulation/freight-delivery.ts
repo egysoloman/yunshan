@@ -1,7 +1,11 @@
 import type { NetworkEdge, Vehicle, WorldDefinition } from '../types';
 
 export const DEMAND_FOOD_FREIGHT_POLICY = 'demand-food-freight-v1' as const;
-export type FoodFreightPolicy = typeof DEMAND_FOOD_FREIGHT_POLICY;
+/** v2 adds relay: an empty declared carrier at a junction of a district that
+ * is not short loads that district's waiting freight for a short district. */
+export const DEMAND_FOOD_FREIGHT_POLICY_V2 = 'demand-food-freight-v2' as const;
+export type FoodFreightPolicy = typeof DEMAND_FOOD_FREIGHT_POLICY | typeof DEMAND_FOOD_FREIGHT_POLICY_V2;
+export const FOOD_FREIGHT_POLICIES: readonly FoodFreightPolicy[] = [DEMAND_FOOD_FREIGHT_POLICY, DEMAND_FOOD_FREIGHT_POLICY_V2];
 
 /** Markets buy freight only while below this stock (Simulation shop batch). */
 export const MARKET_FREIGHT_INTAKE_LIMIT = 36;
@@ -24,8 +28,8 @@ export function validateFoodFreightPolicy(data: Record<string, any>): void {
   const envelope = Object.hasOwn(data, 'foodFreightPolicyId');
   const runtime = !!data.runtime && Object.hasOwn(data.runtime, 'foodFreightPolicyId');
   if (!envelope && !runtime) return;
-  if (!envelope || !runtime || data.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY
-    || data.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY
+  if (!envelope || !runtime || !FOOD_FREIGHT_POLICIES.includes(data.foodFreightPolicyId)
+    || data.runtime.foodFreightPolicyId !== data.foodFreightPolicyId
     || data.version !== 4 || data.motionVersion !== 2 || data.runtime.npcMotionVersion !== 2) throw new Error('无效存档字段：food freight policy pair。');
 }
 
@@ -53,6 +57,12 @@ export class FreightHops {
     this.cache.set(key, result);
     return result;
   }
+}
+
+/** True when a district's markets are at or above the intake line (or it has none). */
+export function districtSupplied(demand: readonly FreightDemand[], districtId: string): boolean {
+  const row = demand.find(r => r.districtId === districtId);
+  return !row || row.markets <= 0 || row.stock / row.markets >= MARKET_FREIGHT_INTAKE_LIMIT;
 }
 
 /** The reachable district with the least food per market below the intake

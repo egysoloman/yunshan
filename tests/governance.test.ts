@@ -168,6 +168,20 @@ test('genuine pending old18 campaign keeps original fee and count through thirty
   assert.equal(origin.sourceCommit, 'aeca2679bd984527273c334def2672ad83fe758f'); assert.equal(origin.followingSha256.length, 32);
   const loaded = candidate.importSave(origin.save); assert.equal(loaded.ok, true, loaded.message); assert.equal(candidate.exportSave(), origin.save);
   assert.equal(candidate.state.governance, undefined);
-  for (let tick = 0; tick < 32; tick++) { candidate.step(.25); assert.equal(createHash('sha256').update(candidate.exportSave()).digest('hex'), origin.followingSha256[tick]); }
+  // followingSha256 are the whole-city bytes the source commit wrote. Later
+  // unrelated rules (whole school levels from 9f1d9dc, then food and petitions)
+  // change other residents from tick 11, so the city bytes are exact only up to
+  // there; the campaign itself is checked against the source run's own result:
+  // counted at tick 30 at 63.6% with no further fee, and no new political body.
+  const money = candidate.state.player.money, campaign = structuredClone(runtime(candidate).campaign);
+  assert.deepEqual(campaign, { countAt: 600, votes: 63.6 });
+  for (let tick = 0; tick < 32; tick++) {
+    candidate.step(.25);
+    if (tick < 10) assert.equal(createHash('sha256').update(candidate.exportSave()).digest('hex'), origin.followingSha256[tick], `source bytes tick ${tick + 1}`);
+    assert.equal(candidate.state.player.money, money, `original fee only, tick ${tick + 1}`); assert.equal(candidate.state.governance, undefined);
+    if (tick < 29) assert.deepEqual(runtime(candidate).campaign, campaign, `pending campaign unchanged, tick ${tick + 1}`);
+    else assert.equal(runtime(candidate).campaign ?? null, null, `counted at the source tick ${tick + 1}`);
+  }
   assert.equal(candidate.hasIdentity('mayor'), true); assert.equal(candidate.state.governance, undefined);
+  assert.ok(candidate.state.events.some(event => event.text === '计票完成：支持率63.6%，你当选云山市长。'));
 });

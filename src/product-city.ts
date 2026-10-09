@@ -4,8 +4,8 @@ import type { WorldDefinition } from './types';
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY } from './simulation/reference-collision';
 import { ROAD_FOOD_PICKUP_POLICY } from './simulation/freight-access';
 import { NEARBY_MEAL_ROUTE_POLICY } from './simulation/meal-route';
-import { STAFFED_FARM_YIELD_POLICY } from './simulation/farm-yield';
-import { DEMAND_FOOD_FREIGHT_POLICY } from './simulation/freight-delivery';
+import { STAFFED_FARM_YIELD_POLICY_V2 } from './simulation/farm-yield';
+import { DEMAND_FOOD_FREIGHT_POLICY_V2 } from './simulation/freight-delivery';
 import { upgradeServiceMaterialScheduling } from './host/upgrade-service-material-scheduling';
 
 export const PRODUCT_CITY_LAYOUT = 'current-v6' as const;
@@ -28,7 +28,7 @@ export function createArchivedProductCity(world: WorldDefinition): Simulation {
 /** New cities select continuous ordinary reference legs; imports retain their
  * existing history, motion and collision contracts. */
 export function createCurrentProductCity(world: WorldDefinition): Simulation {
-  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: NEARBY_MEAL_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY });
+  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: NEARBY_MEAL_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V2, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V2 });
 }
 
 /** Fresh city-life recipe for both graphical and headless hosts. The policy's

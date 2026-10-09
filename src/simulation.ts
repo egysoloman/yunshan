@@ -7,8 +7,8 @@ import { createCivicHistory, freezeCivicHistory } from './simulation/civic-histo
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
 import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
-import { laborMinutesPerUnit, STAFFED_FARM_YIELD_POLICY, type FarmYieldPolicy } from './simulation/farm-yield';
-import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
+import { FARM_YIELD_POLICIES, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
+import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY_V2, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
 import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetState } from './simulation/supplemental-budget';
@@ -36,7 +36,7 @@ import { installBanking } from './simulation/banking';
 import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
 import { installPlayerLabor, type PlayerLaborEmployer, type PlayerLaborJob } from './simulation/player-labor';
-import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPoints, installHomeRest } from './simulation/home-rest';
+import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPoints, installHomeRest, voxelEscapeAllowed } from './simulation/home-rest';
 import { validatePublicDisinfectionBudgetCrossReferences } from './simulation/hygiene-public';
 import { installHygiene, hygieneNeedsContinuousPeople } from './simulation/hygiene';
 import { installPathology } from './simulation/pathology';
@@ -174,8 +174,8 @@ export class Simulation implements SimulationAPI {
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.farmYieldPolicyId !== undefined && (options.farmYieldPolicyId !== STAFFED_FARM_YIELD_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.foodFreightPolicyId !== undefined && (options.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.farmYieldPolicyId !== undefined && (!FARM_YIELD_POLICIES.includes(options.farmYieldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.foodFreightPolicyId !== undefined && (!FOOD_FREIGHT_POLICIES.includes(options.foodFreightPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
@@ -1031,7 +1031,7 @@ export class Simulation implements SimulationAPI {
             vehicle.cargo = Math.min(producer.inventory, freightCarrier.cargoCapacity); producer.inventory -= vehicle.cargo;
             (this.runtime.cargoSources ??= {})[vehicle.id] = producer.id;
             this.bus.emit({ type: 'cargo-loaded', vehicleId: vehicle.id, nodeId, shopId: producer.id, districtId: producer.districtId, amount: vehicle.cargo, quantity: vehicle.cargo });
-          }
+          } else this.relayFoodFreight(vehicle, nodeId, node.districtId, freightCarrier.cargoCapacity);
         }
         if (vehicle.kind === 'flight') this.bus.emit({ type: 'flight' });
         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
@@ -1242,9 +1242,25 @@ export class Simulation implements SimulationAPI {
     for (const vehicle of this.state.vehicles) { const bound = this.runtime.cargoDestinations?.[vehicle.id]; const row = bound ? rows.get(bound) : undefined; if (row && vehicle.cargo > 0) row.stock += vehicle.cargo; }
     return [...rows.values()];
   }
+  /** demand-food-freight-v2 relay: an empty carrier in a district that is not
+   * short takes the oldest waiting lot there (its owner is kept as the cargo
+   * source) and is bound to the short district at once. Nothing is created. */
+  private relayFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string, capacity: number): void {
+    if (this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY_V2 || vehicle.cargo > 0 || (this.runtime.freight[districtId] ?? 0) < 1) return;
+    const demand = this.foodFreightDemand(); if (!districtSupplied(demand, districtId)) return;
+    const destination = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, demand); if (!destination || destination === districtId) return;
+    const lots = this.runtime.freightLots ??= {}, deliveries = lots[districtId] ??= [{ shopId: null, quantity: this.runtime.freight[districtId] }];
+    const lot = deliveries[0]; if (!lot || lot.quantity < 1) return;
+    const quantity = Math.min(Math.floor(lot.quantity), capacity); if (quantity < 1) return;
+    lot.quantity -= quantity; if (lot.quantity < 1e-7) deliveries.shift();
+    this.runtime.freight[districtId] = Math.max(0, this.runtime.freight[districtId] - quantity);
+    vehicle.cargo = quantity;
+    if (lot.shopId) (this.runtime.cargoSources ??= {})[vehicle.id] = lot.shopId; else if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id];
+    (this.runtime.cargoDestinations ??= {})[vehicle.id] = destination;
+  }
   /** True while a declared carrier keeps its food for a district further on. */
   private holdFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string): boolean {
-    if (this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY || !this.freightCarriers.has(vehicle.id)) return false;
+    if (!this.runtime.foodFreightPolicyId || !this.freightCarriers.has(vehicle.id)) return false;
     const destinations = this.runtime.cargoDestinations ??= {}, bound = destinations[vehicle.id];
     if (bound) return bound !== districtId && this.freightHops.hops(vehicle.kind, bound).has(nodeId);
     const chosen = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, this.foodFreightDemand());
@@ -1424,7 +1440,7 @@ export class Simulation implements SimulationAPI {
   private foodShortageHiringOffer(shop: Shop, applicant: Citizen, salary: number): boolean {
     const site = this.buildings.get(shop.buildingId)!, ownerId = this.shopOwnerId(shop), owner = ownerId === 'player' ? this.state.player : this.state.citizens.find(c => c.id === ownerId);
     const profile = ownerId ? this.state.extension?.actorProfiles[ownerId] : undefined;
-    if (!['farm', 'dock'].includes(site.kind) || shop.inventory >= 120 || !shopLifecycleAllowsNewPayroll(this.state, shop.id) || !this.foodHiringApplicantAvailable(applicant)
+    if (!['farm', 'dock'].includes(site.kind) || shop.inventory >= producerStockCap(this.runtime.farmYieldPolicyId, site.kind) || !shopLifecycleAllowsNewPayroll(this.state, shop.id) || !this.foodHiringApplicantAvailable(applicant)
       || this.shopFunds(shop) - this.shopProtectedFunds(shop) - 20 * 8 / 24 < salary || !owner || !profile?.alive || profile.age < 18 || profile.health < 45
       || owner.needs.hunger < 40 || owner.needs.fatigue < 35 || homeRestPointBlockedByVoxels(owner.position, this.state.voxels)
       || !this.isNearBuilding(site, owner.position, 2) || !this.isAtBuildingFunctionPoint(site, owner.position, 'work', ownerId === 'player' ? this.state.player : { role: this.citizenIdentity(owner as Citizen), identities: [this.citizenIdentity(owner as Citizen)] })
@@ -1613,7 +1629,7 @@ export class Simulation implements SimulationAPI {
     if (this.runtime.npcMotionVersion === 2) this.runtime.npcStairCursors = this.savedNpcStairCursors();
   }
   private citizenPhysicalSegmentAllowed(citizen: Citizen, from: Vec3, to: Vec3, building?: Building, floor?: number): boolean {
-    if (homeRestPointBlockedByVoxels(to, this.state.voxels)) return false;
+    if (homeRestPointBlockedByVoxels(to, this.state.voxels) && !voxelEscapeAllowed(from, to, this.state.voxels)) return false;
     if (building && floor !== undefined) {
       const role = this.citizenIdentity(citizen);
       const identity = { role, identities: [role] };
@@ -1951,7 +1967,7 @@ export class Simulation implements SimulationAPI {
       }
       if (shop.open && ['farm', 'workshop', 'dock'].includes(building.kind)) {
         const technology = this.state.extension?.technologies.find(t => t.sector === (building.kind === 'farm' ? 'agriculture' : 'manufacturing'))?.level ?? 0;
-        const produced = Math.min(Math.max(0, 120 - shop.inventory), productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) * (this.state.powerGrid ? 1 : siteEnergy) * (1 + technology * .12));
+        const produced = Math.min(Math.max(0, producerStockCap(this.runtime.farmYieldPolicyId, building.kind) - shop.inventory), (this.state.powerGrid ? productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) : productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) * district.energy / 100) * (1 + technology * .12));
         shop.inventory = clamp(shop.inventory + produced, 0, 10000);
         if (produced > 0) this.bus.emit({ type: 'production', shopId: shop.id, districtId: shop.districtId, amount: produced, minutes: this.state.powerGrid ? productiveLabor : labor });
       }
@@ -2699,7 +2715,7 @@ export class Simulation implements SimulationAPI {
       }
       if (r.publicSupply !== undefined) number(r.publicSupply, 0, 1, 'public supply fulfillment'); if (r.operationUnitPrice !== undefined) number(r.operationUnitPrice, 4, 1e12, 'observed public material unit price');
       if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
-      if (r.cargoDestinations !== undefined) { ensure(r.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY && r.cargoDestinations && typeof r.cargoDestinations === 'object' && !Array.isArray(r.cargoDestinations), 'freight destinations declared'); for (const [id, districtId] of Object.entries(r.cargoDestinations)) ensure(this.freightCarriers.has(id) && districtIds.has(districtId as string) && (s.vehicles.find((v: Vehicle) => v.id === id)?.cargo ?? 0) > 0, 'freight destination reference'); }
+      if (r.cargoDestinations !== undefined) { ensure(FOOD_FREIGHT_POLICIES.includes(r.foodFreightPolicyId) && r.cargoDestinations && typeof r.cargoDestinations === 'object' && !Array.isArray(r.cargoDestinations), 'freight destinations declared'); for (const [id, districtId] of Object.entries(r.cargoDestinations)) ensure(this.freightCarriers.has(id) && districtIds.has(districtId as string) && (s.vehicles.find((v: Vehicle) => v.id === id)?.cargo ?? 0) > 0, 'freight destination reference'); }
       if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }
       for (const id of array(r.playerBusinesses, 512, 'businesses')) ensure(shopIds.has(id), 'business id'); ensure(new Set(r.playerBusinesses).size === r.playerBusinesses.length, 'duplicate businesses');
       for (const shop of shops) if (shop.lifecycleVersion === 1) ensure(r.playerBusinesses.includes(shop.id) === (shop.ownerId === 'player' && !s.extension?.companies.some((company: { buildingId: string; shopBindingReleasedAt?: number }) => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)), 'managed business mirror must reflect actual operating owner');
