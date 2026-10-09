@@ -9,6 +9,7 @@
  */
 import { createInterface } from 'node:readline';
 import { Simulation } from '../simulation';
+import { characterFacts } from '../rendering/studio-character-facts';
 import { createCityLifeProductCity, PRODUCT_CITY_LAYOUT } from '../product-city';
 import { savedWorldFingerprint, selectSavedWorld } from '../persistence/world-layout';
 import { isRoadOpen, releaseRoadExitPermit, roadMovementAllowed } from '../roads';
@@ -25,7 +26,8 @@ export const HOST_PROTOCOL = 1;
 export interface HostRequest { id?: number; op: string; [key: string]: unknown }
 export interface HostResponse { id?: number; ok: boolean; result?: unknown; error?: string }
 
-export interface HostFrameCitizen { id: string; name: string; role: string; state: string; position: Vec3; next: Vec3 | null; age: number; alive: boolean; mood: number; stress: number; seated: boolean }
+export interface HostFrameCitizen { id: string; name: string; role: string; state: string; position: Vec3; next: Vec3 | null; age: number; alive: boolean; mood: number; stress: number; seated: boolean;
+  /** Studio character facts (studio-character-facts.ts), within 60m of the focus only. */ health?: number; pregnant?: boolean; ceremony?: 'wedding' | 'funeral' | null; infantNearby?: boolean }
 export interface HostFrame {
   tick: number; day: number; hour: number; paused: boolean; speed: number; weather: string; visibility: number; energy: number; treasury: number; support: number;
   player: { position: Vec3; role: string; identities: string[]; money: number; reputation: number; needs: SimState['player']['needs']; inventory: Record<string, number>; homeId: string | null; vehicleId: string | null; education: number; driving: boolean; alive: boolean };
@@ -146,7 +148,8 @@ export class SimHost {
       if (buried.has(c.id) || !dead && c.tier === 'statistical') continue;
       if (Math.hypot(c.position.x - focus.x, c.position.y - focus.y, c.position.z - focus.z) > radius) continue;
       const next = c.route?.[c.routeIndex ?? 0];
-      citizens.push({ id: c.id, name: c.name, role: c.role, state: c.state, position: point(c.position), next: next ? point(next) : null, age: profile?.age ?? 30, alive: !dead, mood: profile?.mood ?? 60, stress: profile?.stress ?? 20, seated: c.state === 'riding' });
+      const facts = Math.hypot(c.position.x - focus.x, c.position.y - focus.y, c.position.z - focus.z) <= 60 ? characterFacts(state, c) : {};
+      citizens.push({ id: c.id, name: c.name, role: c.role, state: c.state, position: point(c.position), next: next ? point(next) : null, age: profile?.age ?? 30, alive: !dead, mood: profile?.mood ?? 60, stress: profile?.stress ?? 20, seated: c.state === 'riding', ...facts });
     }
     const stations = new Set(world.nodes.filter(n => n.station).map(n => n.id)), signals: Record<string, number> = {};
     for (const [nodeId, phase] of Object.entries(state.signals ?? {})) if (stations.has(nodeId)) signals[nodeId] = phase;

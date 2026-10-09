@@ -22,7 +22,7 @@ test('display-only décor places every listed studio furniture asset at original
       for (const f of plan.fixtures) assert.ok(!(x > f.rect.x0 && x < f.rect.x1 && z > f.rect.z0 && z < f.rect.z1), `${building.id} ${p.fixtureId} outside fixture ${f.id}`);
     }
   }
-  const listed = new Set([...Object.values(STUDIO_DECOR), STUDIO_COURTYARD_DECOR].flatMap(sets => sets!.flatMap(s => [s.base, ...(s.tops ?? []), ...(s.above ? [s.above] : [])])));
+  const listed = new Set([...Object.values(STUDIO_DECOR), STUDIO_COURTYARD_DECOR].flatMap(sets => sets!.flatMap(s => [s.base, ...(s.tops ?? []), ...(s.above ? [s.above] : []), ...(s.wear ?? [])])));
   assert.deepEqual([...listed].filter(id => !seen.has(id)), []);
-  assert.equal(total, 22176);
+  assert.equal(total, 22229);
 });

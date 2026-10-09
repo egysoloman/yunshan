@@ -1,6 +1,7 @@
 // Port of src/rendering/woodland-layout.ts (woodlandLayout and
 // createGroundClearance). Trees and shrubs are display only and use the
 // voxel-studio models at their original size. Parity-tested against TS.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -182,6 +183,62 @@ namespace Yunshan.Core
                     Place(asset, "rock", Quantize(mountain.X + JsMath.Cos(angle) * distance), Quantize(mountain.Z + JsMath.Sin(angle) * distance), System.Math.Floor(Hash(n, 902 + m, world.Seed) * 4) * System.Math.PI / 2, RockHeights[asset] * .7);
                 }
             }
+            return items;
+        }
+
+        public static readonly string[] FarmAnimals = { "CHAR-310", "CHAR-311", "CHAR-312", "CHAR-313", "CHAR-314", "CHAR-315" };
+        public static readonly string[] WildAnimals = { "CHAR-316", "CHAR-317", "CHAR-318", "CHAR-319" };
+        public const string LivestockTag = "CHAR-331";
+        public static readonly Dictionary<string, double> FaunaRadius = new Dictionary<string, double>
+        {
+            ["CHAR-310"] = .37, ["CHAR-311"] = .36, ["CHAR-312"] = .42, ["CHAR-313"] = .44, ["CHAR-314"] = .53, ["CHAR-315"] = .81, ["CHAR-316"] = .63, ["CHAR-317"] = .59, ["CHAR-318"] = .31, ["CHAR-319"] = .14, ["CHAR-320"] = .48,
+        };
+        static int SeedOf(string id) { int h = 0; foreach (char ch in id) h = (h * 31 + ch) % 1000003; return h; }
+
+        /// <summary>Port of faunaDressing: display-only studio animals (farms, woodland, creek, plunge pool, flowering shrubs).</summary>
+        public static List<GroundItem> FaunaDressing(WorldDefinition world, IReadOnlyList<Tree> trees, IReadOnlyList<GroundItem> ground)
+        {
+            var clear = GroundClearance(world); var items = new List<GroundItem>(); int first = ground.Count;
+            double Surface(double x, double z) => Quantize(World.TerrainHeight(world, x, z, true));
+            void Push(string asset, double x, double y, double z, double yaw) => items.Add(new GroundItem { Id = first + items.Count, Asset = asset, Tier = "ground", X = x, Y = y, Z = z, Yaw = yaw });
+            bool Animal(string asset, double x, double z, double yaw)
+            {
+                double r = FaunaRadius[asset]; if (!clear(x, z, r)) return false;
+                double y = Surface(x, z); if (y < 8 || Math.Abs(Surface(x + r, z) - y) > .6 || Math.Abs(Surface(x, z + r) - y) > .6) return false;
+                Push(asset, x, y, z, yaw); if (asset == "CHAR-314" || asset == "CHAR-315") Push(LivestockTag, x, y, z, yaw);
+                return true;
+            }
+            foreach (var b in world.Buildings) if (b.Kind == "farm") for (int k = 0; k < 4; k++)
+            {
+                double angle = k / 4.0 * Math.PI * 2 + Hash(k, 910, world.Seed) * .6, reach = JsMath.Hypot(b.Width, b.Depth) / 2 + 4;
+                Animal(FarmAnimals[(SeedOf(b.Id) + k) % FarmAnimals.Length], Quantize(b.Position.X + JsMath.Cos(angle) * reach), Quantize(b.Position.Z + JsMath.Sin(angle) * reach), Hash(k, 911, world.Seed) * Math.PI * 2);
+            }
+            foreach (var tree in trees)
+            {
+                if (tree.Id % 9 != 4) continue;
+                double angle = Hash(tree.Id, 920, world.Seed) * Math.PI * 2, distance = 5 + Hash(tree.Id, 921, world.Seed) * 3;
+                Animal(WildAnimals[(int)Math.Floor(Hash(tree.Id, 922, world.Seed) * WildAnimals.Length)], Quantize(tree.X + JsMath.Cos(angle) * distance), Quantize(tree.Z + JsMath.Sin(angle) * distance), Hash(tree.Id, 923, world.Seed) * Math.PI * 2);
+            }
+            int flower = 0;
+            foreach (var item in ground) if (item.Asset == "ENV-061" && flower++ % 2 == 0)
+            {
+                Push("CHAR-322", item.X, item.Y + 3.2 + .4, item.Z, Hash(item.Id, 930, world.Seed) * Math.PI * 2);
+                Push("CHAR-323", item.X + .6, item.Y + 3.2 + .1, item.Z + .4, Hash(item.Id, 931, world.Seed) * Math.PI * 2);
+            }
+            for (int i = 1; i < world.River.Count; i++)
+            {
+                Vec3 p = world.River[i], before = world.River[i - 1]; double width = 12 + Math.Min(i, 5) * .6;
+                double length = JsMath.Hypot(p.X - before.X, p.Z - before.Z), nx = -(p.Z - before.Z) / length, nz = (p.X - before.X) / length, yaw = JsMath.Atan2(p.X - before.X, p.Z - before.Z) + Math.PI;
+                for (double along = 16.8; along < length; along += 33.6)
+                {
+                    double t = along / length, cx = before.X + (p.X - before.X) * t, cz = before.Z + (p.Z - before.Z) * t, cy = before.Y + (p.Y - before.Y) * t;
+                    int side = Hash(along, i + 940, world.Seed) < .5 ? -1 : 1; double offset = width + 1.6;
+                    Animal("CHAR-320", Quantize(cx + nx * offset * side), Quantize(cz + nz * offset * side), yaw);
+                    Push("CHAR-321", Quantize(cx), cy - .2, Quantize(cz), yaw);
+                }
+            }
+            var bottom = world.Waterfall.Bottom;
+            for (int k = 0; k < 6; k++) { double angle = k / 6.0 * Math.PI * 2, r = 10 + Hash(k, 950, world.Seed) * 14; Push("CHAR-309", Quantize(bottom.X + JsMath.Cos(angle) * r), bottom.Y + .6 - .3, Quantize(bottom.Z + JsMath.Sin(angle) * r), angle + Math.PI); }
             return items;
         }
     }

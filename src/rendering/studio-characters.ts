@@ -6,6 +6,7 @@ import {
   CHARACTER_JOINTS, CHARACTER_PARENT, garmentJoint, portMap, STUDIO_CHARACTER_ASSETS, studioBodyJoint, studioCharacterLook, studioCharacterPose, studioCharacterRest, studioMountOffset,
   type CharacterContext, type CharacterLook,
 } from './studio-character-look';
+import { characterFacts } from './studio-character-facts';
 
 /** Residents near the camera drawn as studio characters on the studio
  * skeleton (CHAR-073 adults, CHAR-074 children). Everyone else stays the
@@ -72,11 +73,7 @@ export class StudioCharacterPool {
     let built = 0;
     for (const { c } of near) {
       const profile = state.extension?.actorProfiles[c.id], m = motion(c.id); if (!m) continue;
-      const active = (state.family?.ceremonies ?? []).find(x => x.completedAt === null && (x.organizerId === c.id || x.guestIds.includes(c.id) || x.kind === 'wedding' && x.subjectId === c.id));
-      const context: CharacterContext = { age: profile?.age ?? 30, role: c.role, state: c.state, hour: state.hour, weather: state.weather, health: profile?.health,
-        pregnant: (state.family?.pregnancies ?? []).some(p => p.carrierId === c.id), ceremony: active?.kind ?? null,
-        infantNearby: Object.entries(state.family?.children ?? {}).some(([childId, child]) => child.parentIds.includes(c.id) && (state.extension?.actorProfiles[childId]?.age ?? 9) < 2
-          && state.citizens.some(x => x.id === childId && Math.hypot(x.position.x - c.position.x, x.position.y - c.position.y, x.position.z - c.position.z) < 2)) };
+      const context: CharacterContext = { age: profile?.age ?? 30, role: c.role, state: c.state, hour: state.hour, weather: state.weather, ...characterFacts(state, c) };
       const look = studioCharacterLook(c.id, context), key = [look.rig, look.body, ...look.parts.map(p => `${p.asset}@${p.mount}`)].join('|');
       let character = this.characters.get(c.id);
       if (!character || character.key !== key) {
@@ -151,4 +148,20 @@ export class StudioCharacterPool {
     for (const list of this.parts.values()) for (const part of list) { part.geometry.dispose(); for (const m of [part.material].flat()) m.dispose(); }
     this.group.removeFromParent();
   }
+}
+
+/** CHAR-075, the player's own forearms and hands in first person, held under
+ * the eye on the camera (both face −Z). Shown only while walking on foot. */
+export const FIRST_PERSON_ARMS = { asset: 'CHAR-075', offset: [0, -.17, -.22] } as const;
+export class FirstPersonArms {
+  private readonly holder = new THREE.Group();
+  private disposed = false;
+  constructor(private readonly camera: THREE.Camera) { this.holder.name = '体素工坊 · 第一人称双手'; this.holder.position.set(...FIRST_PERSON_ARMS.offset); this.holder.visible = false; camera.add(this.holder); }
+  async load(baseUrl = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/'): Promise<boolean> {
+    const asset = STUDIO_ASSETS.find(a => a.id === FIRST_PERSON_ARMS.asset); if (!asset) return false;
+    try { const gltf = await new GLTFLoader().loadAsync(baseUrl + asset.url); if (this.disposed) return false; gltf.scene.traverse(o => { o.frustumCulled = false; }); this.holder.add(gltf.scene); return true; }
+    catch (error) { console.warn('first-person arms not loaded:', error); return false; }
+  }
+  set visible(value: boolean) { this.holder.visible = value; }
+  dispose(): void { this.disposed = true; this.holder.removeFromParent(); }
 }

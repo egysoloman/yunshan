@@ -158,3 +158,62 @@ export function groundDressing(world: WorldDefinition, trees: readonly WoodlandT
   });
   return items;
 }
+
+/** Studio animals, display only (no simulation entity, collision or stock):
+ * livestock around farms, wild animals in the woodland stands, egrets on the
+ * creek banks, fish in the creek and the plunge pool, butterflies and bees
+ * over the flowering shrubs. Cows and goats wear the livestock tag (authored
+ * in the animal's own model space, so it shares the animal's origin). Ids
+ * follow groundDressing's items. Parity: C# WoodlandLayout.FaunaDressing. */
+export const FARM_ANIMALS = ['CHAR-310', 'CHAR-311', 'CHAR-312', 'CHAR-313', 'CHAR-314', 'CHAR-315'] as const;
+export const WILD_ANIMALS = ['CHAR-316', 'CHAR-317', 'CHAR-318', 'CHAR-319'] as const;
+export const LIVESTOCK_TAG = 'CHAR-331';
+/** Clearance radius (half the larger horizontal extent of the imported bounds). */
+export const FAUNA_RADIUS: Readonly<Record<string, number>> = {
+  'CHAR-310': .37, 'CHAR-311': .36, 'CHAR-312': .42, 'CHAR-313': .44, 'CHAR-314': .53, 'CHAR-315': .81, 'CHAR-316': .63, 'CHAR-317': .59, 'CHAR-318': .31, 'CHAR-319': .14, 'CHAR-320': .48,
+};
+export function faunaDressing(world: WorldDefinition, trees: readonly WoodlandTree[], ground: readonly GroundDressingItem[]): GroundDressingItem[] {
+  const clear = createGroundClearance(world), surface = (x: number, z: number) => quantize(terrainHeight(world, x, z, true));
+  const items: GroundDressingItem[] = [], first = ground.length;
+  const push = (asset: string, x: number, y: number, z: number, yaw: number) => items.push({ id: first + items.length, asset, tier: 'ground', x, y, z, yaw });
+  const animal = (asset: string, x: number, z: number, yaw: number) => {
+    const r = FAUNA_RADIUS[asset]; if (!clear(x, z, r)) return false;
+    const y = surface(x, z); if (y < 8 || Math.abs(surface(x + r, z) - y) > .6 || Math.abs(surface(x, z + r) - y) > .6) return false;
+    push(asset, x, y, z, yaw); if (asset === 'CHAR-314' || asset === 'CHAR-315') push(LIVESTOCK_TAG, x, y, z, yaw);
+    return true;
+  };
+  // Farms: four animals around each farm, 4m outside its footprint.
+  for (const b of world.buildings) if (b.kind === 'farm') for (let k = 0; k < 4; k++) {
+    const angle = k / 4 * Math.PI * 2 + woodlandHash(k, 910, world.seed) * .6, reach = Math.hypot(b.width, b.depth) / 2 + 4;
+    animal(FARM_ANIMALS[(studioSeedOf(b.id) + k) % FARM_ANIMALS.length], quantize(b.position.x + Math.cos(angle) * reach), quantize(b.position.z + Math.sin(angle) * reach), woodlandHash(k, 911, world.seed) * Math.PI * 2);
+  }
+  // Woodland: one wild animal beside every ninth tree.
+  for (const tree of trees) {
+    if (tree.id % 9 !== 4) continue;
+    const angle = woodlandHash(tree.id, 920, world.seed) * Math.PI * 2, distance = 5 + woodlandHash(tree.id, 921, world.seed) * 3;
+    animal(WILD_ANIMALS[Math.floor(woodlandHash(tree.id, 922, world.seed) * WILD_ANIMALS.length)], quantize(tree.x + Math.cos(angle) * distance), quantize(tree.z + Math.sin(angle) * distance), woodlandHash(tree.id, 923, world.seed) * Math.PI * 2);
+  }
+  // Flowering shrubs: a butterfly 0.4m and a bee 0.1m over the top of every other ENV-061 (3.2m tall).
+  let flower = 0;
+  for (const item of ground) if (item.asset === 'ENV-061' && flower++ % 2 === 0) {
+    push('CHAR-322', item.x, item.y + 3.2 + .4, item.z, woodlandHash(item.id, 930, world.seed) * Math.PI * 2);
+    push('CHAR-323', item.x + .6, item.y + 3.2 + .1, item.z + .4, woodlandHash(item.id, 931, world.seed) * Math.PI * 2);
+  }
+  // Creek: an egret on the bank and a fish in the stream every 33.6m, facing downstream.
+  for (let i = 1; i < world.river.length; i++) {
+    const p = world.river[i], before = world.river[i - 1], width = 12 + Math.min(i, 5) * .6;
+    const length = Math.hypot(p.x - before.x, p.z - before.z), nx = -(p.z - before.z) / length, nz = (p.x - before.x) / length, yaw = Math.atan2(p.x - before.x, p.z - before.z) + Math.PI;
+    for (let along = 16.8; along < length; along += 33.6) {
+      const t = along / length, cx = before.x + (p.x - before.x) * t, cz = before.z + (p.z - before.z) * t, cy = before.y + (p.y - before.y) * t;
+      const side = woodlandHash(along, i + 940, world.seed) < .5 ? -1 : 1, offset = width + 1.6;
+      animal('CHAR-320', quantize(cx + nx * offset * side), quantize(cz + nz * offset * side), yaw);
+      // The fish's waterline sits just under the creek surface.
+      push('CHAR-321', quantize(cx), cy - .2, quantize(cz), yaw);
+    }
+  }
+  // Plunge pool: six ornamental fish circling under the surface (pool water at bottom.y + 0.6).
+  const bottom = world.waterfall.bottom;
+  for (let k = 0; k < 6; k++) { const angle = k / 6 * Math.PI * 2, r = 10 + woodlandHash(k, 950, world.seed) * 14; push('CHAR-309', quantize(bottom.x + Math.cos(angle) * r), bottom.y + .6 - .3, quantize(bottom.z + Math.sin(angle) * r), angle + Math.PI); }
+  return items;
+}
+function studioSeedOf(id: string) { let h = 0; for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) % 1000003; return h; }

@@ -218,6 +218,7 @@ function frame(now: number): void {
   const interior = controller.inside ? `${controller.inside.id}:${controller.floor}` : null;
   if (interior !== currentInterior) { city.setInterior(controller.inside?.id ?? null, controller.floor); currentInterior = interior; }
   updateBlocks();
+  (city as { setFirstPersonArms?(visible: boolean): void }).setFirstPersonArms?.(controller.mode === 'walk' && !simulation.state.player.vehicleId && !activeAircraft(simulation.state));
   city.update(simulation.state, elapsed);
   aviationRenderer.update(simulation.state, elapsed);
   if (now - lastRender >= 1000 / settings.fpsCap - 0.5) {

@@ -263,12 +263,15 @@ export function studioNetworkDetailPlacements(world: DetailWorld, deckWidth: (ed
  * inside the rooms, clear of walls, corridors, courtyards, stairs, fixtures
  * (+0.6m), use points and the stair point (1m), door openings (1.2m) and other
  * décor; walking surfaces, collision and use points are unchanged. */
-export interface StudioDecorSet { base: string; tops?: readonly string[]; above?: string }
-const set = (base: string, tops: string[] = [], above?: string): StudioDecorSet => ({ base, tops, above });
+export interface StudioDecorSet { base: string; tops?: readonly string[]; above?: string; /** Worn by the base (pet accessories), authored in its own model space: same origin. */ wear?: readonly string[] }
+const set = (base: string, tops: string[] = [], above?: string, wear?: string[]): StudioDecorSet => ({ base, tops, above, ...(wear ? { wear } : {}) });
+/** CHAR-329 hangs from the collar CHAR-328: collar tag-mount − tag hanger-top (manifest ports). */
+export const PET_TAG = { asset: 'CHAR-329', on: 'CHAR-328', offset: [.032, .292728, -.318034] } as const;
 const HOME_DECOR = [set('LIFE-037', ['LIFE-038', 'LIFE-048'], 'LIFE-041'), set('LIFE-039'), set('LIFE-043'), set('LIFE-050', ['LIFE-051'], 'LIFE-055'), set('LIFE-024', ['LIFE-009'], 'LIFE-029'),
   set('LIFE-052', [], 'LIFE-057'), set('LIFE-008', [], 'LIFE-030'), set('LIFE-037', ['LIFE-038', 'LIFE-040']), set('LIFE-042'), set('LIFE-053'), set('LIFE-054'), set('LIFE-198'), set('LIFE-197'), set('LIFE-196'),
   set('LIFE-037', ['LIFE-038', 'LIFE-044', 'LIFE-045']), set('LIFE-194'), set('LIFE-195'), set('LIFE-227'), set('LIFE-023'), set('LIFE-031'), set('LIFE-191'), set('LIFE-192', ['LIFE-049']), set('LIFE-174'),
-  set('LIFE-184', ['LIFE-181']), set('LIFE-037', ['LIFE-038', 'LIFE-046']), set('LIFE-037', ['LIFE-038', 'LIFE-047'])];
+  set('LIFE-184', ['LIFE-181']), set('LIFE-037', ['LIFE-038', 'LIFE-046']), set('LIFE-037', ['LIFE-038', 'LIFE-047']),
+  set('CHAR-307', [], undefined, ['CHAR-330', 'CHAR-328', 'CHAR-329']), set('CHAR-306'), set('CHAR-308')];
 const MARKET_DECOR = [set('LIFE-066', ['LIFE-068'], 'LIFE-070'), set('LIFE-065', ['LIFE-092']), set('LIFE-067', ['LIFE-069']), set('LIFE-065', ['LIFE-093']), set('LIFE-071'), set('LIFE-080'), set('LIFE-065', ['LIFE-094']),
   set('LIFE-074'), set('LIFE-091'), set('LIFE-199'), set('LIFE-140')];
 const WORKSHOP_DECOR = [set('LIFE-081', ['LIFE-085']), set('LIFE-082'), set('LIFE-083'), set('LIFE-075', ['LIFE-076']), set('LIFE-084'), set('LIFE-078'), set('LIFE-079'), set('LIFE-075', ['LIFE-095']),
@@ -303,7 +306,7 @@ export function studioDecorSeed(id: string) { let h = 0; for (let i = 0; i < id.
 
 export function studioDecorPlacements(building: Building, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioDecorPlacement[] {
   const body = getBuildingBody(building); if (!body) return [];
-  const usableOf = (sets: readonly StudioDecorSet[] | undefined) => (sets ?? []).filter(s => [s.base, ...(s.tops ?? []), ...(s.above ? [s.above] : [])].every(id => assets.has(id)));
+  const usableOf = (sets: readonly StudioDecorSet[] | undefined) => (sets ?? []).filter(s => [s.base, ...(s.tops ?? []), ...(s.above ? [s.above] : []), ...(s.wear ?? [])].every(id => assets.has(id)));
   const usable = usableOf(STUDIO_DECOR[building.kind]), outdoor = usableOf(STUDIO_COURTYARD_DECOR);
   const result: StudioDecorPlacement[] = [];
   const seed = studioDecorSeed(building.id);
@@ -355,6 +358,12 @@ export function studioDecorPlacements(building: Building, assets: ReadonlyMap<st
           add(base, 0, `${key}:base`, false);
           stack.forEach((item, i) => add(item.asset, item.y, `${key}:top${i}`, false));
           if (hung) add(hung, hungY, `${key}:above`, true);
+          // Worn accessories share the base's own origin and turn (the tag hangs from the collar).
+          const origin = result[result.length - 1 - stack.length - (hung ? 1 : 0)].local;
+          (decor.wear ?? []).forEach((id, i) => {
+            const o = id === PET_TAG.asset ? PET_TAG.offset : [0, 0, 0];
+            result.push({ asset: id, fixtureId: `decor:${plan.floor}:${key}:wear${i}`, floor: plan.floor, scale: 1, yaw, local: { x: origin.x + o[0] * c + o[2] * s, y: origin.y + o[1], z: origin.z - o[0] * s + o[2] * c } });
+          });
           taken.push(extent); placed++;
           if (pass.outdoor) { outdoorPlaced++; outdoorCursor = (start + attempt + 1) % pass.sets.length; } else cursor = (start + attempt + 1) % pass.sets.length;
           break;

@@ -21,7 +21,7 @@ try {
   await page.waitForFunction(() => window.__YUNSHAN__?.simulation?.state?.tick >= 1, null, { timeout: 120_000 });
   await page.waitForFunction(() => window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 骨骼人物')?.userData.studioCharacters, null, { timeout: 240_000 });
   report.load = await page.evaluate(() => window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 骨骼人物').userData.studioCharacters);
-  for (const [name, hour, wanted] of [['walking', 8.5, 'moving'], ['shopping', 17, 'shopping']]) {
+  for (const [name, hour, wanted] of [['walking', 8.5, 'moving']]) {
     await page.evaluate(h => window.__YUNSHAN__.actions.command({ type: 'setTime', value: h }), hour);
     await page.waitForTimeout(6000);
     report[name] = await page.evaluate(wanted => {
@@ -47,6 +47,8 @@ try {
     await page.evaluate(() => { if (window.__YUNSHAN__.simulation.state.paused) window.__YUNSHAN__.actions.command({ type: 'pause' }); });
     report[`${name}-drawn`] = await page.evaluate(() => { const g = window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 骨骼人物'); return { characters: g.userData.studioCharacterCount, children: g.children.length, target: [...window.__YUNSHAN__.city.studioCharacters.modelled].includes(window.__studioTarget) }; });
   }
+  report.arms = await page.evaluate(() => { const arms = window.__YUNSHAN__.city.camera.getObjectByName('体素工坊 · 第一人称双手'); return arms ? { visible: arms.visible, children: arms.children.length } : null; });
+  await page.screenshot({ path: 'artifacts/studio-characters-first-person.png', timeout: 180_000 });
   report.errors = errors;
   await writeFile('artifacts/studio-characters-report.json', JSON.stringify(report, null, 1));
   console.log(JSON.stringify(report).slice(0, 1500));

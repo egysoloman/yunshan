@@ -261,12 +261,15 @@ namespace Yunshan.Core
 
 
         // Port of studioDecorPlacements (display-only décor in free room and courtyard corners).
-        public sealed class DecorSet { public string Base; public string[] Tops; public string Above; }
-        static DecorSet Set(string b, string[] tops = null, string above = null) => new DecorSet { Base = b, Tops = tops ?? new string[0], Above = above };
+        public sealed class DecorSet { public string Base; public string[] Tops; public string Above; public string[] Wear; }
+        static DecorSet Set(string b, string[] tops = null, string above = null, string[] wear = null) => new DecorSet { Base = b, Tops = tops ?? new string[0], Above = above, Wear = wear ?? new string[0] };
+        /// <summary>CHAR-329 hangs from the collar CHAR-328 (collar tag-mount − tag hanger-top).</summary>
+        public const string PetTagAsset = "CHAR-329"; public static readonly double[] PetTagOffset = { .032, .292728, -.318034 };
         static readonly DecorSet[] HomeDecor = { Set("LIFE-037", new[] { "LIFE-038", "LIFE-048" }, "LIFE-041"), Set("LIFE-039"), Set("LIFE-043"), Set("LIFE-050", new[] { "LIFE-051" }, "LIFE-055"), Set("LIFE-024", new[] { "LIFE-009" }, "LIFE-029"),
             Set("LIFE-052", null, "LIFE-057"), Set("LIFE-008", null, "LIFE-030"), Set("LIFE-037", new[] { "LIFE-038", "LIFE-040" }), Set("LIFE-042"), Set("LIFE-053"), Set("LIFE-054"), Set("LIFE-198"), Set("LIFE-197"), Set("LIFE-196"),
             Set("LIFE-037", new[] { "LIFE-038", "LIFE-044", "LIFE-045" }), Set("LIFE-194"), Set("LIFE-195"), Set("LIFE-227"), Set("LIFE-023"), Set("LIFE-031"), Set("LIFE-191"), Set("LIFE-192", new[] { "LIFE-049" }), Set("LIFE-174"),
-            Set("LIFE-184", new[] { "LIFE-181" }), Set("LIFE-037", new[] { "LIFE-038", "LIFE-046" }), Set("LIFE-037", new[] { "LIFE-038", "LIFE-047" }) };
+            Set("LIFE-184", new[] { "LIFE-181" }), Set("LIFE-037", new[] { "LIFE-038", "LIFE-046" }), Set("LIFE-037", new[] { "LIFE-038", "LIFE-047" }),
+            Set("CHAR-307", null, null, new[] { "CHAR-330", "CHAR-328", "CHAR-329" }), Set("CHAR-306"), Set("CHAR-308") };
         static readonly DecorSet[] MarketDecor = { Set("LIFE-066", new[] { "LIFE-068" }, "LIFE-070"), Set("LIFE-065", new[] { "LIFE-092" }), Set("LIFE-067", new[] { "LIFE-069" }), Set("LIFE-065", new[] { "LIFE-093" }), Set("LIFE-071"), Set("LIFE-080"), Set("LIFE-065", new[] { "LIFE-094" }),
             Set("LIFE-074"), Set("LIFE-091"), Set("LIFE-199"), Set("LIFE-140") };
         static readonly DecorSet[] WorkshopDecor = { Set("LIFE-081", new[] { "LIFE-085" }), Set("LIFE-082"), Set("LIFE-083"), Set("LIFE-075", new[] { "LIFE-076" }), Set("LIFE-084"), Set("LIFE-078"), Set("LIFE-079"), Set("LIFE-075", new[] { "LIFE-095" }),
@@ -299,7 +302,7 @@ namespace Yunshan.Core
         {
             var result = new List<StudioPropPlacement>();
             var body = ArchitectureFloorPlan.GetBuildingBody(building); if (body == null) return result;
-            List<DecorSet> UsableOf(IEnumerable<DecorSet> sets) => (sets ?? new DecorSet[0]).Where(st => new[] { st.Base }.Concat(st.Tops).Concat(st.Above != null ? new[] { st.Above } : new string[0]).All(assets.ContainsKey)).ToList();
+            List<DecorSet> UsableOf(IEnumerable<DecorSet> sets) => (sets ?? new DecorSet[0]).Where(st => new[] { st.Base }.Concat(st.Tops).Concat(st.Above != null ? new[] { st.Above } : new string[0]).Concat(st.Wear).All(assets.ContainsKey)).ToList();
             var usable = UsableOf(Decor.TryGetValue(building.Kind, out var kindSets) ? kindSets : null); var outdoor = UsableOf(CourtyardDecor);
             int seed = DecorSeed(building.Id);
             int cursor = usable.Count > 0 ? seed % usable.Count : 0, outdoorCursor = outdoor.Count > 0 ? seed % outdoor.Count : 0, outdoorPlaced = 0;
@@ -359,6 +362,12 @@ namespace Yunshan.Core
                                 Add(bse, 0, key + ":base", false);
                                 for (int i = 0; i < stack.Count; i++) Add(stack[i].Asset, stack[i].Y, $"{key}:top{i}", false);
                                 if (hung != null) Add(hung, hungY, key + ":above", true);
+                                var origin = result[result.Count - 1 - stack.Count - (hung != null ? 1 : 0)].Local;
+                                for (int i = 0; i < decor.Wear.Length; i++)
+                                {
+                                    var id = decor.Wear[i]; var o = id == PetTagAsset ? PetTagOffset : new double[] { 0, 0, 0 };
+                                    result.Add(new StudioPropPlacement { Asset = id, FixtureId = $"decor:{plan.Floor}:{key}:wear{i}", Floor = plan.Floor, Scale = 1, Yaw = yaw, Local = new Vec3(origin.X + o[0] * c + o[2] * sn, origin.Y + o[1], origin.Z - o[0] * sn + o[2] * c) });
+                                }
                                 taken.Add(extent); placed++;
                                 if (pass.Outdoor) { outdoorPlaced++; outdoorCursor = (start + attempt + 1) % pass.Sets.Count; } else cursor = (start + attempt + 1) % pass.Sets.Count;
                                 break;

@@ -15,6 +15,8 @@ namespace Yunshan.Core.Host
         public sealed class Citizen
         {
             public string Id, Name, Role, State; public Vec3 Position, Next; public double Age, Mood, Stress; public bool Alive, Seated;
+            /// <summary>Studio character facts (near the focus only).</summary>
+            public double? Health; public bool Pregnant, InfantNearby; public string Ceremony;
         }
         public sealed class Vehicle
         {
@@ -75,6 +77,7 @@ namespace Yunshan.Core.Host
                     Id = Json.Str(d, "id"), Name = Json.Str(d, "name"), Role = Json.Str(d, "role"), State = Json.Str(d, "state"),
                     Position = Json.Vec(d["position"]), Next = d.TryGetValue("next", out var next) ? Json.Vec(next) : null,
                     Age = Json.Num(d, "age", 30), Mood = Json.Num(d, "mood", 60), Stress = Json.Num(d, "stress", 20), Alive = Json.Bool(d, "alive", true), Seated = Json.Bool(d, "seated"),
+                    Health = d.ContainsKey("health") ? Json.Num(d, "health") : (double?)null, Pregnant = Json.Bool(d, "pregnant"), InfantNearby = Json.Bool(d, "infantNearby"), Ceremony = d.TryGetValue("ceremony", out var ceremony) && ceremony is string ce ? ce : null,
                 });
             }
             foreach (var v in Json.Arr(o, "vehicles") ?? new List<object>())

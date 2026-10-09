@@ -58,7 +58,10 @@ public class GroundDressingParityTests
         using (var reader = new StreamReader(gzip, Encoding.UTF8)) expected = reader.ReadToEnd();
         var world = World.CreateWorld();
         var items = WoodlandLayout.GroundDressing(world, WoodlandLayout.Layout(world).Trees);
-        var actual = Write(new Obj().Put("items", items.Select(i => (object)new Obj().Put("id", (double)i.Id).Put("asset", i.Asset).Put("tier", i.Tier).Put("x", i.X).Put("y", i.Y).Put("z", i.Z).Put("yaw", i.Yaw)).ToList()));
+        var fauna = WoodlandLayout.FaunaDressing(world, WoodlandLayout.Layout(world).Trees, items);
+        object Rows(List<WoodlandLayout.GroundItem> list) => list.Select(i => (object)new Obj().Put("id", (double)i.Id).Put("asset", i.Asset).Put("tier", i.Tier).Put("x", i.X).Put("y", i.Y).Put("z", i.Z).Put("yaw", i.Yaw)).ToList();
+        var actual = Write(new Obj().Put("items", Rows(items)).Put("fauna", Rows(fauna)));
+        Assert.Equal(749, fauna.Count);
         Assert.Equal(658, items.Count);
         if (expected != actual)
         {

@@ -14,11 +14,14 @@ namespace Yunshan.Runtime
     {
 #pragma warning disable 0649 // assigned by JsonUtility
         [Serializable] class BoundsJson { public double[] min; public double[] max; }
-        [Serializable] class Entry { public string id; public string name; public string url; public string sha256; public int triangles; public BoundsJson boundsM; }
+        [Serializable] class PortJson { public string id; public double[] position; }
+        [Serializable] class Entry { public string id; public string name; public string url; public string sha256; public int triangles; public BoundsJson boundsM; public PortJson[] ports; public string[] joints; }
         [Serializable] class Manifest { public string sourceCommit; public Entry[] assets; }
 #pragma warning restore 0649
 
         public readonly Dictionary<string, StudioAssetBounds> Bounds = new Dictionary<string, StudioAssetBounds>();
+        /// <summary>Authored sockets of character masters (manifest `ports`), game-space metres.</summary>
+        public readonly Dictionary<string, Dictionary<string, double[]>> Ports = new Dictionary<string, Dictionary<string, double[]>>();
         readonly Dictionary<string, GameObject> templates = new Dictionary<string, GameObject>();
         readonly Transform templateRoot;
         string directory;
@@ -63,7 +66,11 @@ namespace Yunshan.Runtime
             var manifestPath = directory == null ? null : ManifestPath(directory);
             if (manifestPath == null) { Debug.LogWarning("云山：未找到体素工坊资产清单，场景使用程序几何。"); return; }
             var manifest = JsonUtility.FromJson<Manifest>(File.ReadAllText(manifestPath));
-            foreach (var entry in manifest.assets) Bounds[entry.id] = new StudioAssetBounds(entry.id, entry.boundsM.min, entry.boundsM.max);
+            foreach (var entry in manifest.assets)
+            {
+                Bounds[entry.id] = new StudioAssetBounds(entry.id, entry.boundsM.min, entry.boundsM.max);
+                var ports = new Dictionary<string, double[]>(); foreach (var port in entry.ports ?? new PortJson[0]) ports[port.id] = port.position; Ports[entry.id] = ports;
+            }
             foreach (var entry in manifest.assets)
             {
                 var file = Path.Combine(directory, Path.GetFileName(entry.url));
@@ -81,6 +88,8 @@ namespace Yunshan.Runtime
         }
 
         public bool Has(string id) => templates.ContainsKey(id);
+        /// <summary>The hidden template of a loaded asset (for assembling characters), or null.</summary>
+        public GameObject Template(string id) => templates.TryGetValue(id, out var t) ? t : null;
 
         // Authored emission per template material (copies share these materials).
         readonly List<(Material material, string property, Color authored)> emissive = new List<(Material, string, Color)>();

@@ -12,8 +12,9 @@ import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
 import { StudioPropPool } from './rendering/studio-props';
 import { WoodlandModelPool } from './rendering/woodland-models';
-import { StudioCharacterPool } from './rendering/studio-characters';
-import { groundDressing } from './rendering/woodland-layout';
+import { FirstPersonArms, StudioCharacterPool } from './rendering/studio-characters';
+import { faunaDressing, groundDressing } from './rendering/woodland-layout';
+const studioGroundAndFauna = (world: WorldDefinition, trees: Parameters<typeof groundDressing>[1]) => { const ground = groundDressing(world, trees); return [...ground, ...faunaDressing(world, trees, ground)]; };
 import { emitNetworkStructures } from './rendering/network-structures';
 import { RAIL_PIER_CAP_ASSET, RUNWAY_LIGHT_ASSET, studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
@@ -143,6 +144,9 @@ export class CityRenderer implements CityRendererAPI {
   private skyMaterial: THREE.ShaderMaterial;
   private citizens: CitizenAppearancePool;
   private studioCharacters?: StudioCharacterPool;
+  private firstPersonArms?: FirstPersonArms;
+  /** The player's studio forearms (CHAR-075) while walking on foot. */
+  setFirstPersonArms(visible: boolean): void { if (this.firstPersonArms) this.firstPersonArms.visible = visible; }
   private marketGoods: MarketGoodsPool;
   private studioProps: StudioPropPool;
   private marketShopfront: MarketShopfrontPool;
@@ -416,7 +420,7 @@ export class CityRenderer implements CityRendererAPI {
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
-    this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled, groundDressing(world, this.landscape.woodland.trees), this.roadTiles.map((t, id) => ({ id, asset: t.asset, ...t.position, yaw: t.yaw, pitch: t.pitch ?? 0 })));
+    this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled, studioGroundAndFauna(world, this.landscape.woodland.trees), this.roadTiles.map((t, id) => ({ id, asset: t.asset, ...t.position, yaw: t.yaw, pitch: t.pitch ?? 0 })));
     void this.woodlandModels.load();
     this.roadClosures = new RoadClosureOverlay(world); this.scene.add(this.roadClosures.group);
     this.studioProps = new StudioPropPool(this.scene, world);
@@ -429,6 +433,8 @@ export class CityRenderer implements CityRendererAPI {
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.setUsage(THREE.DynamicDrawUsage); signal.frustumCulled = false; this.scene.add(signal); }
     this.citizens = new CitizenAppearancePool(this.scene, 1024);
     this.studioCharacters = new StudioCharacterPool(this.scene); void this.studioCharacters.load();
+    if (!this.camera.parent) this.scene.add(this.camera);
+    this.firstPersonArms = new FirstPersonArms(this.camera); void this.firstPersonArms.load();
     this.marketGoods = new MarketGoodsPool(this.scene, world);
     this.marketShopfront = new MarketShopfrontPool(this.scene, world);
     this.stationWayfinding = new StationWayfindingPool(this.scene, world);
@@ -1023,7 +1029,7 @@ export class CityRenderer implements CityRendererAPI {
     this.stationWayfinding?.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
-    this.woodlandModels?.dispose(); this.studioCharacters?.dispose(); this.scene.remove(this.landscape.group); this.landscape.dispose();
+    this.woodlandModels?.dispose(); this.studioCharacters?.dispose(); this.firstPersonArms?.dispose(); this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
     // Palette materials are renderer-owned even after every near chunk using
     // one of them has been evicted. Dispose them once with attached materials.

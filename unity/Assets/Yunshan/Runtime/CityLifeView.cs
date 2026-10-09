@@ -25,6 +25,14 @@ namespace Yunshan.Runtime
         readonly LineRenderer navigation;
         SimFrame indexed;
         public int Residents { get; private set; }
+        /// <summary>Residents drawn by StudioCharacterView (left out of the box residents).</summary>
+        public HashSet<string> Modelled = new HashSet<string>();
+        /// <summary>The interpolated position, yaw and displacement-driven walk phase of a resident.</summary>
+        public bool TryMotion(string id, out Vec3 position, out double yaw, out double phase)
+        {
+            if (motion.TryGetValue(id, out var m)) { position = m.Position; yaw = m.Yaw; phase = m.Phase; return true; }
+            position = null; yaw = phase = 0; return false;
+        }
 
         public CityLifeView(WorldDefinition world, Transform parent)
         {
@@ -95,6 +103,7 @@ namespace Yunshan.Runtime
                 double phase = (previous?.Phase ?? 0) + (walking && !frame.Paused && travel < 50 ? travel * Math.PI / 1.1 : 0);
                 motion[c.Id] = new Motion { Position = position, Yaw = yaw, Phase = phase };
                 double range = Distance(position, camera);
+                if (Modelled.Contains(c.Id)) { Residents++; continue; }
                 bool near = !dead && range <= 110;
                 // Parts are cached per appearance; a walking stride only scales the
                 // template's swing (taken at phase π/2) by sin(phase).

@@ -21,6 +21,8 @@ namespace Yunshan.Runtime
         WorldDefinition world;
         Material solidMaterial, glassMaterial, waterMaterial;
         StudioAssets studio;
+        StudioCharacterView characters;
+        GameObject firstPersonArms;
         FirstPersonController walker;
         SimSession session;
         CityLifeView life;
@@ -122,7 +124,8 @@ namespace Yunshan.Runtime
                 foreach (var s in StudioPropLayout.StationPlacements(world, studio.Bounds)) studio.Place(s.Asset, stationRoot, s.Position, s.Yaw, 1);
                 status = "山林……";
                 var woodlandLayout = await Task.Run(() => WoodlandLayout.Layout(world));
-                var groundItems = await Task.Run(() => WoodlandLayout.GroundDressing(world, woodlandLayout.Trees));
+                // Ground dressing, then the studio animals that follow it (faunaDressing on the web).
+                var groundItems = await Task.Run(() => { var g = WoodlandLayout.GroundDressing(world, woodlandLayout.Trees); g.AddRange(WoodlandLayout.FaunaDressing(world, woodlandLayout.Trees, g)); return g; });
                 var roadTiles = await Task.Run(() => StudioPropLayout.RoadTilePlacements(world, studio.Bounds));
                 woodland = new WoodlandView(woodlandLayout, studio, transform, groundItems, roadTiles);
                 // Creek bank stones, reeds and plunge-pool foam (parity with the web terrain).
@@ -137,6 +140,11 @@ namespace Yunshan.Runtime
                 walker.PointerOverUi = PointerOverUi;
                 if (session.Frame != null) OnPlayerMovedBySimulation(session.Frame);
                 life = new CityLifeView(world, transform);
+                if (studio != null) characters = new StudioCharacterView(studio, transform);
+                // CHAR-075, the player's forearms, under the eye (web FIRST_PERSON_ARMS: game offset (0, −0.17, −0.22),
+                // model facing −Z; the Unity camera looks along +Z, so the model turns half a turn).
+                var arms = studio?.Template("CHAR-075");
+                if (arms != null) { firstPersonArms = Instantiate(arms, view.transform, false); firstPersonArms.SetActive(true); firstPersonArms.transform.localPosition = new Vector3(0, -.17f, .22f); firstPersonArms.transform.localRotation = Quaternion.Euler(0, 180, 0); }
                 if (signFont == null) signFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
                 stationSigns = new StationSignPool(stationRoot, world, signFont);
                 status = null;
@@ -284,6 +292,8 @@ namespace Yunshan.Runtime
             if (walker != null && GUIUtility.keyboardControl == 0) HandleKeys();
             UpdateSky();
             if (life != null && session.Frame != null) life.Draw(session, feet);
+            if (characters != null && life != null && session.Frame != null && feet != null) characters.Update(session.Frame, life, feet);
+            if (firstPersonArms != null) firstPersonArms.SetActive(mode == "walk" && walker != null && !walker.Driving);
             if (woodland != null) woodland.Update(view.transform.position);
         }
 
