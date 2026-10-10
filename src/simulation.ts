@@ -8,6 +8,7 @@ import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } 
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
 import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
+import { allocateExports, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
 import { closeFiscalDay, councilTaxRate, profitTaxSplit, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
@@ -118,6 +119,8 @@ interface Runtime {
   /** staffed-farm-yield-v3: workshop inputs held by each food producer. */
   farmInputs?: Record<string, number>;
   publicFinancePolicyId?: PublicFinancePolicy;
+  foreignTradePolicyId?: ForeignTradePolicy;
+  foreignTrade?: ForeignTradeState;
   /** Council budget rule: the open fiscal day and its smoothed predecessors. */
   fiscalDay?: FiscalDay;
   /** Declared food freight: destination district of each loaded carrier. */
@@ -176,13 +179,14 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.farmYieldPolicyId !== undefined && (!FARM_YIELD_POLICIES.includes(options.farmYieldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.foodFreightPolicyId !== undefined && (!FOOD_FREIGHT_POLICIES.includes(options.foodFreightPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.publicFinancePolicyId !== undefined && (!PUBLIC_FINANCE_POLICIES.includes(options.publicFinancePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.publicFinancePolicyId !== undefined && (!PUBLIC_FINANCE_POLICIES.includes(options.publicFinancePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.foreignTradePolicyId !== undefined && (!FOREIGN_TRADE_POLICIES.includes(options.foreignTradePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
@@ -204,6 +208,7 @@ export class Simulation implements SimulationAPI {
     if (options?.freightPickupPolicyId) this.runtime.freightPickupPolicyId = options.freightPickupPolicyId;
     if (options?.farmYieldPolicyId) { this.runtime.farmYieldPolicyId = options.farmYieldPolicyId; if (farmInputsUsed(options.farmYieldPolicyId)) this.runtime.farmInputs = {}; }
     if (options?.foodFreightPolicyId) { this.runtime.foodFreightPolicyId = options.foodFreightPolicyId; this.runtime.cargoDestinations = {}; }
+    if (options?.foreignTradePolicyId) { this.runtime.foreignTradePolicyId = options.foreignTradePolicyId; this.runtime.foreignTrade = { enabled: true, exportedUnits: 0, exportGross: 0 }; }
     if (options?.publicFinancePolicyId) { this.runtime.publicFinancePolicyId = options.publicFinancePolicyId; this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net: 0, base: 0 }; }
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
     this.runtime.customers = {};
@@ -2058,6 +2063,7 @@ export class Simulation implements SimulationAPI {
     this.state.treasury = clamp(this.state.treasury + this.runtime.taxes, 0, 1e12); this.runtime.taxes = 0;
     if (this.now + 1e-7 >= this.runtime.financeAt) {
       const hours = Math.max(1, (this.now - this.runtime.financeAt + 60) / 60); this.runtime.financeAt = this.now + 60;
+      this.exportSurplus(hours);
       if (!this.state.banking) {
       this.state.bankBalance = clamp(this.state.bankBalance * (1 + .000015 * hours), 0, 1e9);
       this.state.loan = clamp(this.state.loan * (1 + .00008 * hours), 0, 1e9);
@@ -2170,6 +2176,23 @@ export class Simulation implements SimulationAPI {
       this.transferShopFunds(shop, -payment); this.transferShopFunds(supplier, net);
       shop.profit -= payment; supplier.revenue += payment; supplier.profit += net;
       this.bus.emit({ type: 'wholesale', shopId: supplier.id, districtId: supplier.districtId, amount: payment, quantity, unitPrice: quote.unitPrice, purpose: 'farm-inputs' });
+    }
+  }
+  /** foreign-trade-v1: the hour's cargo flights sell surplus to outside buyers. */
+  private exportSurplus(hours: number): void {
+    const trade = this.runtime.foreignTrade; if (!trade?.enabled) return;
+    const offers = this.state.shops.flatMap(shop => {
+      const kind = this.buildings.get(shop.buildingId)?.kind;
+      if (kind === 'workshop' && !this.buildings.get(shop.buildingId)?.facility) return [{ shopId: shop.id, surplus: shop.inventory - MATERIAL_EXPORT_LINE, price: WORLD_MATERIAL_PRICE }];
+      if (kind === 'farm' || kind === 'dock') return [{ shopId: shop.id, surplus: shop.inventory - FOOD_EXPORT_LINE, price: WORLD_FOOD_PRICE }];
+      return [];
+    });
+    for (const sale of allocateExports(offers, EXPORT_UNITS_PER_HOUR * Math.min(hours, 24))) {
+      const shop = this.state.shops.find(s => s.id === sale.shopId)!, gross = sale.quantity * sale.price, net = gross * (1 - this.state.taxRate);
+      if (this.shopFunds(shop) + net > 1e9) continue;
+      shop.inventory -= sale.quantity; this.transferShopFunds(shop, net); this.runtime.taxes += gross - net;
+      shop.revenue += gross; shop.profit += net; trade.exportedUnits += sale.quantity; trade.exportGross += gross;
+      this.bus.emit({ type: 'foreign-export', shopId: shop.id, districtId: shop.districtId, amount: gross, quantity: sale.quantity, unitPrice: sale.price });
     }
   }
   private payPublicRelief(): void {
@@ -2435,6 +2458,12 @@ export class Simulation implements SimulationAPI {
       const hall = this.buildingNear(command.targetId, ['hall', 'core']); if (!hall) return fail('请到议事堂登记参选。'); if (this.hasIdentity('mayor') || this.runtime.campaign) return fail('已当选或正在等待计票。'); if (p.education < 2 || p.experience < 4 || p.reputation < 8) return fail('候选资格：教育2、经验4、声望8。'); if (p.money < 120) return fail('竞选登记需要120云币。');
       const affection = this.state.relationships.length ? this.state.relationships.reduce((n, r) => n + r.affection, 0) / this.state.relationships.length : 0; this.receivePublicFee(120, '市长竞选登记费', hall.districtId); this.runtime.campaign = { countAt: this.now + 120, votes: clamp(this.state.support + p.reputation * .7 + affection * .1) }; return success('已登记竞选，两小时后公布真实民意计票结果。');
     }
+    if (command.type === 'foreignTrade') {
+      const trade = this.runtime.foreignTrade; if (!trade) return fail('本城未设立对外贸易。');
+      if (!this.hasIdentity('mayor')) return fail('仅当选市长可开关对外贸易。');
+      trade.enabled = command.value === 1; this.notice('policy', trade.enabled ? '市长开放对外贸易：货运航班每小时出口剩余物料与粮食。' : '市长关闭对外贸易。');
+      return success(trade.enabled ? '已开放对外贸易。' : '已关闭对外贸易。');
+    }
     if (command.type === 'policy') {
       if (!this.hasIdentity('mayor')) return fail('仅当选市长可提交政策。'); if (!this.buildingNear(command.targetId, ['hall', 'core'])) return fail('请到议事堂提交政策。'); const taxRate = command.taxRate ?? this.state.taxRate, policeBudget = command.policeBudget ?? this.state.policeBudget;
       if (!finite(taxRate) || taxRate < 0 || taxRate > .3 || !finite(policeBudget) || policeBudget < 0 || policeBudget > 1) return fail('税率范围0至30%，警务预算范围0至100%。'); this.state.policyPending = { taxRate, policeBudget, applyAt: this.now + 120 }; return success('政策已送议会审议，两小时后生效；财政、治安和支持率将随之反馈。');
@@ -2550,10 +2579,11 @@ export class Simulation implements SimulationAPI {
   get farmYieldPolicyId(): FarmYieldPolicy | 'legacy' { return this.runtime.farmYieldPolicyId ?? 'legacy'; }
   get foodFreightPolicyId(): FoodFreightPolicy | 'legacy' { return this.runtime.foodFreightPolicyId ?? 'legacy'; }
   get publicFinancePolicyId(): PublicFinancePolicy | 'legacy' { return this.runtime.publicFinancePolicyId ?? 'legacy'; }
+  get foreignTradePolicyId(): ForeignTradePolicy | 'legacy' { return this.runtime.foreignTradePolicyId ?? 'legacy'; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }

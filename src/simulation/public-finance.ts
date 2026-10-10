@@ -11,7 +11,10 @@
 export const SHOP_PROFIT_TAX_POLICY = 'shop-profit-tax-v1' as const;
 export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY;
 export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY];
-export const PROFIT_TAX_SHARE = .5;
+/** Was .5; the user judged half of all distributed profit unrealistic
+ * (2026-10-10) once the shortfall was traced to logistics and a closed
+ * economy, so it is a 20% corporate-style rate. */
+export const PROFIT_TAX_SHARE = .2;
 
 /** Splits one distributable amount into the public profit tax and the owner's dividend. */
 export function profitTaxSplit(policy: PublicFinancePolicy | undefined, distributable: number): { tax: number; dividend: number } {
