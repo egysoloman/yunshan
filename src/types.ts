@@ -36,7 +36,9 @@ export interface Building { commercialRouteRevision?: 1; commercialGeometryRevis
 export interface NetworkNode { id: string; districtId: string; name: string; position: Vec3; station: boolean }
 export interface NetworkEdge { id: string; from: string; to: string; mode: TransportMode; length: number; capacity: number; points: Vec3[] }
 export interface Mountain { x: number; z: number; height: number; radius: number }
-export interface WorldDefinition { powerGrid?: PowerGridDefinition; seed: number; voxelSize: number; size: number; districts: District[]; buildings: Building[]; nodes: NetworkNode[]; edges: NetworkEdge[]; mountains: Mountain[]; spawn: Vec3; waterfall: { top: Vec3; bottom: Vec3; width: number }; river: Vec3[] }
+/** Road fleet placement chosen by the world recipe (R2 street recipe); absent in every registered layout, which keep the simulation's length rule. */
+export interface FleetPlacement { edgeId: string; vehicles: number; stationRoad: boolean }
+export interface WorldDefinition { fleetPlan?: FleetPlacement[]; powerGrid?: PowerGridDefinition; seed: number; voxelSize: number; size: number; districts: District[]; buildings: Building[]; nodes: NetworkNode[]; edges: NetworkEdge[]; mountains: Mountain[]; spawn: Vec3; waterfall: { top: Vec3; bottom: Vec3; width: number }; river: Vec3[] }
 export interface Needs { hunger: number; fatigue: number; social: number; fun: number }
 export interface Citizen { food?: number; skills?: Record<string, number>; socialIdentities?: string[]; historyTags?: string[]; education?: number; id: string; name: string; districtId: string; homeId: string; workId: string; role: string; position: Vec3; state: string; destinationId: string | null; money: number; needs: Needs; tier: 'active' | 'regional' | 'statistical'; route?: Vec3[]; routeIndex?: number; partnerId?: string | null }
 export interface Vehicle { id: string; kind: TransportMode; position: Vec3; edgeId: string; progress: number; direction: number; speed: number; state: string; passengers: number; cargo: number; nextDeparture: number }

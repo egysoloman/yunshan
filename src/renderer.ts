@@ -518,9 +518,10 @@ export class CityRenderer implements CityRendererAPI {
         batch.box(part.material, position.x, position.y, position.z, part.size.x, part.size.y, part.size.z,
           part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof, ceiling: part.purpose === 'floor' || part.purpose === 'roof', windowStyle: b.commercialGeometryRevision === 1 ? 2 : 1 }, undefined, part.facade, part.template);
       }
+      // One roof profile in both levels of detail: switching LOD never changes a roof.
       const shell = programRoofShell(b, programParts);
       if (shell) { const at = buildingWorldPosition(b, shell.position);
-        batch.box('roof', at.x, at.y + .12, at.z, shell.width, shell.rise, shell.depth, shell.color, b.rotation, { building: b.id, floor: shell.floor, roof: true }, { form: shell.form, simple: far }); }
+        batch.box('roof', at.x, at.y + .12, at.z, shell.width, shell.rise, shell.depth, shell.color, b.rotation, { building: b.id, floor: shell.floor, roof: true }, { form: shell.form, simple: true }); }
       return;
     }
     const w = b.width, d = b.depth, height = b.height, base = b.position.y + .6, floors = Math.max(1, b.floors), fh = height / floors, basements = Math.max(0, b.basements ?? 0);

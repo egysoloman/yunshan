@@ -225,10 +225,13 @@ export class Simulation implements SimulationAPI {
     // A civic laboratory can occupy a workshop-shaped building, but its public
     // payroll and research resources must not become a fictitious retail shop.
     for (const b of world.buildings.filter(b => !b.facility && ['market', 'workshop', 'farm', 'dock'].includes(b.kind))) this.state.shops.push({ id: `shop-${b.id}`, buildingId: b.id, districtId: b.districtId, inventory: b.kind === 'farm' ? 160 : 90, price: b.kind === 'market' ? 12 : 8, revenue: 0, profit: 0, customers: 0, open: true, employees: this.workforce.get(b.id)?.length ?? 0 });
+    // A recipe's explicit road fleet replaces the length rule for its roads only.
+    const fleetPlan = world.fleetPlan ? new Map(world.fleetPlan.map(row => [row.edgeId, row])) : null;
     for (const e of world.edges) {
-      if (e.mode === 'bridge' || e.mode === 'road' && e.length < 80) continue;
-      const stationRoad = e.mode === 'road' && world.nodes.find(n => n.id === e.from)?.station && world.nodes.find(n => n.id === e.to)?.station;
-      if (e.mode === 'road' && !stationRoad) { const destination = world.buildings.find(b => `${b.id}-door` === e.from || `${b.id}-door` === e.to); if (!destination || !['market', 'workshop', 'farm', 'dock'].includes(destination.kind)) continue; }
+      if (fleetPlan && e.mode === 'road' && !fleetPlan.has(e.id)) continue;
+      if (!(fleetPlan && e.mode === 'road') && (e.mode === 'bridge' || e.mode === 'road' && e.length < 80)) continue;
+      const stationRoad = fleetPlan && e.mode === 'road' ? fleetPlan.get(e.id)!.stationRoad : e.mode === 'road' && world.nodes.find(n => n.id === e.from)?.station && world.nodes.find(n => n.id === e.to)?.station;
+      if (!fleetPlan && e.mode === 'road' && !stationRoad) { const destination = world.buildings.find(b => `${b.id}-door` === e.from || `${b.id}-door` === e.to); if (!destination || !['market', 'workshop', 'farm', 'dock'].includes(destination.kind)) continue; }
       const count = stationRoad ? 2 : 1;
       for (let i = 0; i < count; i++) {
         const progress = i / count, id = `vehicle-${e.id}-${i}`;

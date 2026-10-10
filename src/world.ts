@@ -345,8 +345,222 @@ const civicPlan = [
   { id: 'core-dock-building', name: '瀑云潭·天枢水运码头', kind: 'dock' as BuildingKind, x: 125, z: 155, y: 93.4 },
 ];
 
-/** Orthogonal obstacle routing keeps every connector outside all building walls. */
+/** Street recipe for the world being generated. `grid4` is every registered
+ * layout's original orthogonal router; `smooth` is the R2 street recipe
+ * (docs/设计/路网重做方案.md §3.2 A): 8-neighbour A* corridor, cost-bounded
+ * string pulling with an exact swept clearance test, clearance-checked Chaikin
+ * corners, then the same lattice resample and grading as the original. */
+let streetRecipe: 'grid4' | 'smooth' = 'grid4';
 function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuilding?: Building, clearance = 5): Vec3[] {
+  return streetRecipe === 'smooth' ? routeSmooth(world, start, end, startBuilding, clearance) : routeGroundGrid4(world, start, end, startBuilding, clearance);
+}
+const MAX_GRADE = .2, MIN_SPACING = 4, MAX_SPACING = 24, RIVER_KEEP = 22;
+function routeSmooth(world: WorldDefinition, start: Vec3, end: Vec3, startBuilding?: Building, clearance = 5): Vec3[] {
+  const GRID = 8, index = indexFor(world), land = index.landHeights;
+  const first = startBuilding ? { ...start, z: q(start.z + 10) } : start;
+  const sx = Math.round(first.x / GRID), sz = Math.round(first.z / GRID);
+  const tx = Math.round(end.x / GRID), tz = Math.round(end.z / GRID);
+  const vx = end.x - start.x, vz = end.z - start.z, projectedLength = vx * vx + vz * vz || 1;
+  const inRect = (b: Building, px: number, pz: number) => Math.abs(px - b.position.x) < b.width / 2 + 5 && Math.abs(pz - b.position.z) < b.depth / 2 + 5;
+  const blockedCache = new Map<string, boolean>();
+  const blocked = (x: number, z: number) => {
+    const id = `${x}:${z}`; const cached = blockedCache.get(id); if (cached !== undefined) return cached;
+    const px = x * GRID, pz = z * GRID;
+    const result = (index.buildings.get(key(px, pz)) ?? []).some(b => inRect(b, px, pz));
+    blockedCache.set(id, result); return result;
+  };
+  const gridGround = (x: number, z: number) => {
+    const id = `${x}:${z}`; let y = land.get(id);
+    if (y === undefined) { y = naturalHeight(world, x * GRID, z * GRID); land.set(id, y); }
+    return y;
+  };
+  // Field cost per metre, identical to routeGround's per-cell step cost / GRID.
+  const field = (px: number, pz: number, ground: number) => {
+    const projection = clamp(((px - start.x) * vx + (pz - start.z) * vz) / projectedLength, 0, 1);
+    const plannedGrade = start.y + (end.y - start.y) * projection;
+    let c = 1 + Math.min(200, Math.abs(ground + .6 - plannedGrade)) * .35 / GRID;
+    if (clearance > 5) {
+      let enclosure = 0;
+      for (const b of index.buildings.get(key(px, pz)) ?? []) {
+        const gap = Math.max(Math.abs(px - b.position.x) - b.width / 2, Math.abs(pz - b.position.z) - b.depth / 2);
+        enclosure = Math.max(enclosure, Math.max(0, clearance - gap) * 8);
+      }
+      c += enclosure / GRID;
+    }
+    return c;
+  };
+  const groundAt = (px: number, pz: number) => {
+    const gx = px / GRID, gz = pz / GRID, x0 = Math.floor(gx), z0 = Math.floor(gz), fx = gx - x0, fz = gz - z0;
+    return (gridGround(x0, z0) * (1 - fx) + gridGround(x0 + 1, z0) * fx) * (1 - fz) + (gridGround(x0, z0 + 1) * (1 - fx) + gridGround(x0 + 1, z0 + 1) * fx) * fz;
+  };
+  const segmentCost = (a: { x: number; z: number }, b: { x: number; z: number }) => {
+    const len = Math.hypot(b.x - a.x, b.z - a.z), n = Math.max(1, Math.ceil(len / 4));
+    let total = 0;
+    for (let i = 0; i < n; i++) { const t = (i + .5) / n, px = a.x + (b.x - a.x) * t, pz = a.z + (b.z - a.z) * t; total += field(px, pz, groundAt(px, pz)); }
+    return total * len / n;
+  };
+  const search = (diagonal: boolean) => {
+    const startKey = `${sx}:${sz}`, targetKey = `${tx}:${tz}`;
+    const open: { x: number; z: number; f: number; g: number }[] = [{ x: sx, z: sz, f: 0, g: 0 }];
+    const cost = new Map([[startKey, 0]]), previous = new Map<string, string>();
+    const pop = () => {
+      const root = open[0], last = open.pop()!;
+      if (open.length) { open[0] = last; let i = 0; while (true) { const l = i * 2 + 1, r = l + 1; let child = i; if (l < open.length && open[l].f < open[child].f) child = l; if (r < open.length && open[r].f < open[child].f) child = r; if (child === i) break; [open[i], open[child]] = [open[child], open[i]]; i = child; } }
+      return root;
+    };
+    const push = (item: { x: number; z: number; f: number; g: number }) => { open.push(item); let i = open.length - 1; while (i > 0) { const p = (i - 1) >> 1; if (open[p].f <= item.f) break; open[i] = open[p]; i = p; } open[i] = item; };
+    const moves = diagonal ? [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]] : [[1, 0], [-1, 0], [0, 1], [0, -1]];
+    const free = (x: number, z: number) => `${x}:${z}` === targetKey || !blocked(x, z);
+    let found = false;
+    while (open.length && cost.size < 90000) {
+      const current = pop(), id = `${current.x}:${current.z}`;
+      if (current.g !== cost.get(id)) continue;
+      if (id === targetKey) { found = true; break; }
+      for (const [dx, dz] of moves) {
+        const x = current.x + dx, z = current.z + dz, next = `${x}:${z}`;
+        if (Math.abs(x * GRID) > world.size / 2 || Math.abs(z * GRID) > world.size / 2 || !free(x, z)) continue;
+        // No corner cutting: both orthogonal cells free keeps the diagonal outside every +5m rectangle.
+        if (dx && dz && (!free(current.x + dx, current.z) || !free(current.x, current.z + dz))) continue;
+        const step = dx && dz ? Math.SQRT2 : 1;
+        const g = current.g + field(x * GRID, z * GRID, gridGround(x, z)) * GRID * step;
+        if (g >= (cost.get(next) ?? Infinity)) continue;
+        const ax = Math.abs(x - tx), az = Math.abs(z - tz);
+        cost.set(next, g); previous.set(next, id);
+        push({ x, z, g, f: g + (diagonal ? Math.max(ax, az) + (Math.SQRT2 - 1) * Math.min(ax, az) : ax + az) * GRID });
+      }
+    }
+    if (!found) throw new Error(`No safe street route from (${start.x},${start.z}) to (${end.x},${end.z})`);
+    const reversed = [targetKey]; while (reversed[reversed.length - 1] !== startKey) reversed.push(previous.get(reversed[reversed.length - 1])!);
+    return reversed.reverse().map(id => { const [x, z] = id.split(':').map(Number); return { x: x * GRID, y: 0, z: z * GRID }; });
+  };
+  // Buildings already enclosing a fixed endpoint are exempt, as the grid router's target cell is.
+  const exempt = new Set<Building>();
+  for (const p of [first, end, { x: sx * GRID, z: sz * GRID }, { x: tx * GRID, z: tz * GRID }]) for (const b of index.buildings.get(key(p.x, p.z)) ?? []) if (inRect(b, p.x, p.z)) exempt.add(b);
+  if (startBuilding) exempt.delete(startBuilding);
+  const riverGap = (px: number, pz: number) => nearestSegment(world.river, px, pz).distance;
+  // Exact swept test of a segment against every (+5m) building rectangle.
+  const segmentClear = (a: { x: number; z: number }, b: { x: number; z: number }) => {
+    const seen = new Set<Building>();
+    for (let cx = Math.floor(Math.min(a.x, b.x) / CELL); cx <= Math.floor(Math.max(a.x, b.x) / CELL); cx++) for (let cz = Math.floor(Math.min(a.z, b.z) / CELL); cz <= Math.floor(Math.max(a.z, b.z) / CELL); cz++) for (const bd of index.buildings.get(`${cx},${cz}`) ?? []) {
+      if (seen.has(bd)) continue; seen.add(bd);
+      // A building already enclosing an endpoint's margin still keeps its walls.
+      const margin = exempt.has(bd) ? 0 : 5, hx = bd.width / 2 + margin, hz = bd.depth / 2 + margin, dx = b.x - a.x, dz = b.z - a.z;
+      let t0 = 0, t1 = 1, ok = true;
+      for (const [p, d, lo, hi] of [[a.x, dx, bd.position.x - hx, bd.position.x + hx], [a.z, dz, bd.position.z - hz, bd.position.z + hz]]) {
+        if (Math.abs(d) < 1e-12) { if (p <= lo || p >= hi) { ok = false; break; } continue; }
+        let u0 = (lo - p) / d, u1 = (hi - p) / d; if (u0 > u1) [u0, u1] = [u1, u0];
+        t0 = Math.max(t0, u0); t1 = Math.min(t1, u1); if (t0 >= t1) { ok = false; break; }
+      }
+      if (ok) return false;
+    }
+    return true;
+  };
+  const riverOk = (a: { x: number; z: number }, b: { x: number; z: number }, allowNear: boolean) => {
+    if (allowNear) return true;
+    const len = Math.hypot(b.x - a.x, b.z - a.z), n = Math.max(1, Math.ceil(len / 6));
+    for (let i = 0; i <= n; i++) if (riverGap(a.x + (b.x - a.x) * i / n, a.z + (b.z - a.z) * i / n) < RIVER_KEEP) return false;
+    return true;
+  };
+  const head = startBuilding ? [start, first] : [start];
+  const horizontal = (pts: { x: number; z: number }[]) => pts.slice(1).reduce((s, p, i) => s + Math.hypot(p.x - pts[i].x, p.z - pts[i].z), 0);
+  const minimumLength = Math.abs(end.y - start.y) / MAX_GRADE;
+  const headLength = startBuilding ? Math.hypot(first.x - start.x, first.z - start.z) : 0;
+  const pull = (control: Vec3[]) => {
+    // control[0] is the fixed lead point; string pulling keeps cost <= the A* corridor cost.
+    const n = control.length, near = control.map(p => riverGap(p.x, p.z) < RIVER_KEEP);
+    const segCost: number[] = [0], segLen: number[] = [0];
+    for (let i = 1; i < n; i++) { segCost.push(segCost[i - 1] + segmentCost(control[i - 1], control[i])); segLen.push(segLen[i - 1] + Math.hypot(control[i].x - control[i - 1].x, control[i].z - control[i - 1].z)); }
+    let budget = segLen[n - 1] + headLength - minimumLength; // horizontal metres that may still be removed
+    const out = [control[0]]; let i = 0;
+    while (i < n - 1) {
+      let best = i + 1, fails = 0, nearSpan = near[i];
+      for (let j = i + 2; j < n && j - i <= 90; j++) {
+        nearSpan = nearSpan || near[j - 1] || near[j];
+        const saved = segLen[j] - segLen[i] - Math.hypot(control[j].x - control[i].x, control[j].z - control[i].z);
+        if (saved <= budget && segmentClear(control[i], control[j]) && riverOk(control[i], control[j], nearSpan) && segmentCost(control[i], control[j]) <= (segCost[j] - segCost[i]) * 1.0 + 1e-9) { best = j; fails = 0; }
+        else if (++fails > 10) break;
+      }
+      budget -= segLen[best] - segLen[i] - Math.hypot(control[best].x - control[i].x, control[best].z - control[i].z);
+      out.push(control[best]); i = best;
+    }
+    return out;
+  };
+  const chaikin = (pts: Vec3[], iterations: number) => {
+    let current = pts.map(p => ({ x: p.x, y: 0, z: p.z }));
+    for (let it = 0; it < iterations; it++) {
+      const next: Vec3[] = [current[0]];
+      for (let i = 1; i < current.length - 1; i++) {
+        const a = current[i - 1], b = current[i], c = current[i + 1];
+        const la = Math.hypot(b.x - a.x, b.z - a.z), lc = Math.hypot(c.x - b.x, c.z - b.z);
+        const cut = Math.min(it === 0 ? 36 : 1e9, .25 * la, .25 * lc);
+        const p = { x: b.x + (a.x - b.x) * cut / la, y: 0, z: b.z + (a.z - b.z) * cut / la };
+        const r = { x: b.x + (c.x - b.x) * cut / lc, y: 0, z: b.z + (c.z - b.z) * cut / lc };
+        // Only the new chord leaves the already-cleared polyline.
+        if (cut > .5 && segmentClear(p, r) && riverOk(p, r, riverGap(b.x, b.z) < RIVER_KEEP)) next.push(p, r);
+        else { next.push(b); }
+      }
+      next.push(current[current.length - 1]);
+      if (horizontal(next) + headLength < minimumLength) break;
+      current = next;
+    }
+    return current;
+  };
+  const build = (cells: Vec3[], doPull: boolean) => {
+    const control: Vec3[] = [first, ...cells, end];
+    const pulled = doPull ? pull(control) : control;
+    return chaikin(pulled, 4);
+  };
+  let curve = build(search(true), true);
+  if (horizontal(curve) + headLength < minimumLength - 1e-6) {
+    curve = build(search(false), true);
+    if (horizontal(curve) + headLength < minimumLength - 1e-6) return routeGroundGrid4(world, start, end, startBuilding, clearance);
+  }
+  // Drop vertices within one lattice unit of the chord (Douglas-Peucker), then
+  // subdivide long straights and keep >= MIN_SPACING between lattice points.
+  const keep = new Array(curve.length).fill(false); keep[0] = keep[curve.length - 1] = true;
+  const stack: [number, number][] = [[0, curve.length - 1]];
+  while (stack.length) {
+    const [i, j] = stack.pop()!; let worst = -1, at = -1;
+    for (let k = i + 1; k < j; k++) { const d = nearestSegment([curve[i], curve[j]], curve[k].x, curve[k].z).distance; if (d > worst) { worst = d; at = k; } }
+    if (worst > UNIT) { keep[at] = true; stack.push([i, at], [at, j]); }
+  }
+  const simplified = [...head, ...curve.filter((_, i) => keep[i]).slice(startBuilding ? 1 : 1)];
+  if (startBuilding) simplified.splice(1, 0); // head already includes first
+  const dense: Vec3[] = [];
+  for (let i = 1; i < simplified.length; i++) {
+    const a = simplified[i - 1], b = simplified[i], steps = Math.max(1, Math.ceil(Math.hypot(a.x - b.x, a.z - b.z) / MAX_SPACING));
+    for (let j = i === 1 ? 0 : 1; j <= steps; j++) { const t = j / steps; dense.push({ x: q(a.x + (b.x - a.x) * t), y: 0, z: q(a.z + (b.z - a.z) * t) }); }
+  }
+  for (let i = dense.length - 2; i > 0; i--) if (Math.hypot(dense[i].x - dense[i + 1].x, dense[i].z - dense[i + 1].z) < MIN_SPACING || Math.hypot(dense[i].x - dense[i - 1].x, dense[i].z - dense[i - 1].z) < MIN_SPACING) dense.splice(i, 1);
+  const cumulative = [0];
+  for (let i = 1; i < dense.length; i++) cumulative.push(cumulative[i - 1] + Math.hypot(dense[i].x - dense[i - 1].x, dense[i].z - dense[i - 1].z));
+  const length = cumulative[cumulative.length - 1];
+  for (let i = 0; i < dense.length; i++) dense[i].y = q(start.y + (end.y - start.y) * (length ? cumulative[i] / length : 0));
+  dense[0] = { ...start }; dense[dense.length - 1] = { ...end };
+  // Final swept check of the lattice polyline against every actual footprint:
+  // resampling may move a chord; such a route keeps the original router.
+  for (let i = 1; i < dense.length; i++) {
+    const a = dense[i - 1], b = dense[i];
+    for (let cx = Math.floor(Math.min(a.x, b.x) / CELL); cx <= Math.floor(Math.max(a.x, b.x) / CELL); cx++) for (let cz = Math.floor(Math.min(a.z, b.z) / CELL); cz <= Math.floor(Math.max(a.z, b.z) / CELL); cz++)
+      for (const bd of index.buildings.get(`${cx},${cz}`) ?? []) if (segmentEntersFootprint(a, b, bd)) return routeGroundGrid4(world, start, end, startBuilding, clearance);
+  }
+  return dense;
+}
+
+/** True when segment a-b passes through the open interior of a footprint. */
+function segmentEntersFootprint(a: Vec3, b: Vec3, building: Building): boolean {
+  let t0 = 0, t1 = 1;
+  for (const [p, d, c, half] of [[a.x, b.x - a.x, building.position.x, building.width / 2], [a.z, b.z - a.z, building.position.z, building.depth / 2]]) {
+    const lo = c - half + 1e-6, hi = c + half - 1e-6;
+    if (Math.abs(d) < 1e-12) { if (p <= lo || p >= hi) return false; continue; }
+    let u0 = (lo - p) / d, u1 = (hi - p) / d; if (u0 > u1) [u0, u1] = [u1, u0];
+    t0 = Math.max(t0, u0); t1 = Math.min(t1, u1); if (t0 >= t1) return false;
+  }
+  return true;
+}
+
+/** Orthogonal obstacle routing keeps every connector outside all building walls. */
+function routeGroundGrid4(world: WorldDefinition, start: Vec3, end: Vec3, startBuilding?: Building, clearance = 5): Vec3[] {
   const GRID = 8;
   const first = startBuilding ? { ...start, z: q(start.z + 10) } : start;
   const sx = Math.round(first.x / GRID), sz = Math.round(first.z / GRID);
@@ -427,6 +641,16 @@ function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuildi
   for (let i = 0; i < dense.length; i++) dense[i].y = q(start.y + (end.y - start.y) * (length ? cumulative[i] / length : 0));
   dense[0] = { ...start }; dense[dense.length - 1] = { ...end };
   return dense;
+}
+
+/** R2 development street recipe (docs/设计/路网重做方案.md §3.1): the v5 world
+ * with the smooth router, shared door streets and low-rise buildings. It is not a registered
+ * layout and must not be saved; it exists to measure and show the new streets
+ * until the full current-v8 recipe is frozen and registered. */
+export function createStreetWorld(seed = 20261001): WorldDefinition & { layoutVersion: CityLayoutVersion; streetRecipe: 'dev-streets' } {
+  const previous = streetRecipe; streetRecipe = 'smooth';
+  // Based on v5: the low-rise town has no commercial tower step.
+  try { return Object.assign(createWorld(seed, 'current-v5'), { streetRecipe: 'dev-streets' as const }); } finally { streetRecipe = previous; }
 }
 
 export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = CURRENT_CITY_LAYOUT): WorldDefinition & { layoutVersion: CityLayoutVersion } {
@@ -522,6 +746,17 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
       if (kind === 'airport') { designWidth = 120; designDepth = 70; floors = 6; }
       if (kind === 'starport') { designWidth = 130; designDepth = 90; floors = 14; }
       if (kind === 'pavilion') floors = 1;
+      if (streetRecipe === 'smooth' && !civic) {
+        // Decision 1 (docs/设计/世界重建总方案.md §5): a terraced low-rise town.
+        // Homes are 2–4 storey courtyard houses; markets and the market
+        // district's banks may rise to 5–7 storey pavilions; only Tianshu stays tall.
+        const lowRise: Partial<Record<BuildingKind, number>> = {
+          home: Math.min(4, 2 + (quarter + within) % 3), market: 2 + within % 2, workshop: 2 + within % 2, school: 2 + within % 2,
+          clinic: 3 + within % 2, hall: 3 + within % 2, police: 3, bank: p.id === 'market' ? 5 + within % 3 : 3 + within % 2,
+          station: 2, airport: 4, starport: 6,
+        };
+        floors = lowRise[kind] ?? floors;
+      }
       const width = 'width' in (civic ?? {}) ? civic!.width! : Math.round(designWidth * (.94 + rng() * .12) / .4) * .4;
       const depth = 'depth' in (civic ?? {}) ? civic!.depth! : Math.round(designDepth * (.94 + rng() * .12) / .4) * .4;
       if (civic && 'floors' in civic) floors = civic.floors!;
@@ -591,10 +826,73 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
   const trunks: [string, string][] = [['river', 'market'], ['market', 'workshop'], ['workshop', 'west'], ['west', 'academy'], ['market', 'academy'], ['academy', 'core'], ['core', 'government'], ['government', 'summit'], ['core', 'east'], ['east', 'airport'], ['east', 'starport'], ['government', 'starport']];
   for (const [a, b] of trunks) addEdge(station(a).id, station(b).id, 'road', routeGround(world, station(a).position, station(b).position), 220);
   for (const stops of quarters.values()) for (const stop of stops) addEdge(stop.id, station(stop.districtId).id, 'road', routeGround(world, stop.position, station(stop.districtId).position), 90);
+  // Street recipe: each door joins the nearest street already built in its
+  // district (splitting that street at a vertex into a junction), so doors share
+  // streets instead of each running a private road to the station.
+  const nodeById = new Map(world.nodes.map(n => [n.id, n]));
+  let junctions = 0;
+  const splitAt = (edge: NetworkEdge, index: number, districtId: string): NetworkNode => {
+    if (index === 0) return nodeById.get(edge.from)!;
+    if (index === edge.points.length - 1) return nodeById.get(edge.to)!;
+    const point = edge.points[index], junction: NetworkNode = { id: `junction-${districtId}-${junctions++}`, districtId, name: `${plans.find(p => p.id === districtId)!.name}·街口`, position: { ...point }, station: false };
+    world.nodes.push(junction); nodeById.set(junction.id, junction);
+    const tail = edge.points.slice(index), head = edge.points.slice(0, index + 1);
+    const length = (points: Vec3[]) => points.slice(1).reduce((total, p, i) => total + distance(points[i], p), 0);
+    world.edges.push({ id: `${edge.id}~${junction.id}`, from: junction.id, to: edge.to, mode: edge.mode, points: tail, length: length(tail), capacity: edge.capacity });
+    edge.points = head; edge.to = junction.id; edge.length = length(head);
+    indices.delete(world);
+    return junction;
+  };
+  /** Nearest street vertices of the door's district that a gentle stub can reach. */
+  const streetCandidates = (b: Building, door: Vec3) => {
+    const lead = { x: door.x, z: door.z + 10 }, found: { edge: NetworkEdge; index: number; d: number }[] = [];
+    for (const edge of world.edges) {
+      if (edge.mode !== 'road' || edge.id.includes('runway')) continue;
+      if (nodeById.get(edge.from)?.districtId !== b.districtId && nodeById.get(edge.to)?.districtId !== b.districtId) continue;
+      for (let i = 0; i < edge.points.length; i++) {
+        // A door node lies on its own building's wall; never route into it.
+        if (i === 0 && edge.from.endsWith('-door') || i === edge.points.length - 1 && edge.to.endsWith('-door')) continue;
+        const p = edge.points[i], d = Math.hypot(p.x - lead.x, p.z - lead.z);
+        if (d < 14 || Math.abs(p.y - door.y) > d * .12) continue;
+        found.push({ edge, index: i, d });
+      }
+    }
+    return found.sort((a, b) => a.d - b.d);
+  };
+  const joinStreet = (b: Building, node: NetworkNode): Vec3[] | null => {
+    const tried = new Set<string>();
+    for (const candidate of streetCandidates(b, node.position)) {
+      const target = candidate.edge.points[candidate.index], at = `${target.x}:${target.z}`;
+      if (tried.has(at)) continue; tried.add(at); if (tried.size > 6) break;
+      let points: Vec3[];
+      try { points = routeGround(world, node.position, target, b); } catch { continue; }
+      const joined = splitAt(candidate.edge, candidate.index, b.districtId);
+      addEdge(node.id, joined.id, 'road', points, 30);
+      return points;
+    }
+    return null;
+  };
   for (const b of world.buildings) {
     const node: NetworkNode = { id: `${b.id}-door`, districtId: b.districtId, name: b.name, position: { ...b.door }, station: false }; world.nodes.push(node);
-    const destination = b.id === 'core-dock-building' ? liftBottom : buildingAnchors.get(b.id) ?? station(b.districtId);
-    addEdge(node.id, destination.id, 'road', routeGround(world, node.position, destination.position, b), 30);
+    const fallback = b.id === 'core-dock-building' ? liftBottom : buildingAnchors.get(b.id) ?? station(b.districtId);
+    nodeById.set(node.id, node);
+    if (streetRecipe === 'smooth' && b.id !== 'core-dock-building' && joinStreet(b, node)) continue;
+    addEdge(node.id, fallback.id, 'road', routeGround(world, node.position, fallback.position, b), 30);
+  }
+  if (streetRecipe === 'smooth') {
+    // Same fleet as the orthogonal layouts' length rule produced: two vehicles
+    // (the second a freight carrier) per station-to-station road, one per
+    // commercial door, independent of how short the shared stubs became.
+    const stationIds = new Set(world.nodes.filter(n => n.station).map(n => n.id)), plan: NonNullable<WorldDefinition['fleetPlan']> = [];
+    for (const edge of world.edges) {
+      if (edge.mode !== 'road' || edge.id.includes('~') || edge.id.includes('runway')) continue;
+      const pieces = world.edges.filter(e => e.id === edge.id || e.id.startsWith(`${edge.id}~`)), length = pieces.reduce((sum, e) => sum + e.length, 0);
+      const origin = edge.from, end = pieces.find(e => !world.edges.some(other => other !== e && pieces.includes(other) && other.from === e.to))?.to ?? edge.to;
+      if (stationIds.has(origin) && stationIds.has(end)) { if (length >= 80) plan.push({ edgeId: edge.id, vehicles: 2, stationRoad: true }); continue; }
+      const site = world.buildings.find(b => `${b.id}-door` === origin);
+      if (site && ['market', 'workshop', 'farm', 'dock'].includes(site.kind)) plan.push({ edgeId: edge.id, vehicles: 1, stationRoad: false });
+    }
+    world.fleetPlan = plan;
   }
   const stationApronGrade = (points: Vec3[], atStart: boolean, desiredFlat: number) => {
     const cumulative = [0]; for (let i = 1; i < points.length; i++) cumulative.push(cumulative[i - 1] + Math.hypot(points[i].x - points[i - 1].x, points[i].z - points[i - 1].z));

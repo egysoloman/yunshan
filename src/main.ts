@@ -13,6 +13,7 @@ import type { JourneyNavigationPlan, TransitJourney, WalkingJourney } from './jo
 import { releaseRoadExitPermit } from './roads';
 import { readSavedGame, writeSavedGame } from './persistence';
 import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-layout';
+import { createStreetWorld } from './world';
 import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, ViewState } from './types';
 
 const PREF_KEY = 'yunshan.preferences.v1';
@@ -29,7 +30,11 @@ try { previousSave = await readSavedGame(); } catch { startupReadFailed = true; 
 let startupLayoutError = '';
 let selection: ReturnType<typeof selectSavedWorld>;
 try { selection = selectSavedWorld(previousSave, PRODUCT_CITY_LAYOUT); } catch (error) { startupLayoutError = error instanceof Error ? error.message : '未知城市布局'; selection = selectSavedWorld(undefined, PRODUCT_CITY_LAYOUT); }
-let autosaveAllowed = !startupReadFailed && !startupLayoutError;
+// R2 development preview (?world=streets): the unregistered street recipe,
+// shown for review only. It never loads or overwrites the saved journey.
+const streetPreview = new URLSearchParams(location.search).get('world') === 'streets';
+if (streetPreview) selection = { world: createStreetWorld(), layout: selection.layout };
+let autosaveAllowed = !startupReadFailed && !startupLayoutError && !streetPreview;
 const world = selection.world;
 const simulation = await createCityLifeProductCity(world);
 let city: CityRenderer;
@@ -159,7 +164,7 @@ const actions: UIActions = {
 ui = new CityUI(app, world, actions);
 
 try {
-  if (previousSave && !startupLayoutError) {
+  if (previousSave && !startupLayoutError && !streetPreview) {
     const result = simulation.importSave(previousSave);
     if (result.ok) { syncPlayerView(); ui.notify('已恢复这个浏览器中的上次旅程。'); }
     else { autosaveAllowed = false; ui.notify('上次存档无法恢复，已保留原存档并停止自动覆盖：' + result.message, false); }
@@ -369,6 +374,7 @@ function showNotice(message: string, ok = true): void { notice = message; ui?.no
 function persistPreferences(): void { try { localStorage.setItem(PREF_KEY, JSON.stringify(settings)); } catch { /* Saving settings is optional. */ } }
 async function save(explicit: boolean): Promise<void> {
   if (!explicit && !autosaveAllowed) return;
+  if (streetPreview) { if (explicit) showNotice('街网预览不保存旅程。', false); return; }
   try { await writeSavedGame(simulation.exportSave(), world); autosaveAllowed = true; if (explicit) showNotice('旅程已保存在当前浏览器。'); }
   catch { if (explicit) showNotice('浏览器存储不可用或已满，请下载 JSON 存档。', false); }
 }
