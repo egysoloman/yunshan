@@ -4,6 +4,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
+import { cloudBanks } from './rendering/cloud-banks';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
 import { samplePolyline, terrainHeight } from './world';
 import { RoadClosureOverlay } from './rendering/road-closures';
@@ -448,6 +449,7 @@ export class CityRenderer implements CityRendererAPI {
     this.stars = this.buildStars(); this.scene.add(this.stars);
     this.skyModels = new StudioSkyModels(this.scene, this.sky, this.sunOrb, this.moonOrb, this.stars); void this.skyModels.load();
     this.mist = this.buildMist(); this.scene.add(this.mist);
+    this.clouds = this.buildCloudBanks(); this.scene.add(this.clouds);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
     this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled, studioGroundAndFauna(world, this.landscape.woodland.trees), this.roadTiles.map((t, id) => ({ id, asset: t.asset, ...t.position, yaw: t.yaw, pitch: t.pitch ?? 0 })));
@@ -868,6 +870,27 @@ export class CityRenderer implements CityRendererAPI {
     return new THREE.Points(geo, new THREE.PointsMaterial({ size: 26, color: '#d3e9e1', transparent: true, opacity: 0, depthWrite: false, fog: false }));
   }
 
+  private clouds!: THREE.Group;
+  private buildCloudBanks() {
+    // Soft irregular blob: overlapping radial lobes, faded to zero at the edge.
+    const canvas = document.createElement('canvas'); canvas.width = canvas.height = 256;
+    const context = canvas.getContext('2d');
+    if (context) { for (let i = 0; i < 14; i++) { const a = i * 2.39996, r = 30 + (i % 4) * 14, x = 128 + Math.cos(a) * (18 + (i % 5) * 9), y = 128 + Math.sin(a) * (12 + (i % 3) * 8);
+      const g = context.createRadialGradient(x, y, 0, x, y, r + 40); g.addColorStop(0, 'rgba(255,255,255,.36)'); g.addColorStop(.55, 'rgba(255,255,255,.12)'); g.addColorStop(1, 'rgba(255,255,255,0)'); context.fillStyle = g; context.fillRect(0, 0, 256, 256); } }
+    const texture = new THREE.CanvasTexture(canvas), group = new THREE.Group(); group.name = '云海 · 谷间云带';
+    const puffs = cloudBanks(this.world), sea = puffs.filter(p => p.layer === 'sea'), valley = puffs.filter(p => p.layer === 'valley');
+    // The sea is a deck of large horizontal soft planes, overlapping into one layer seen from above.
+    const deckMaterial = new THREE.MeshBasicMaterial({ map: texture, color: '#eef0ea', transparent: true, opacity: .5, depthWrite: false, fog: true, side: THREE.DoubleSide });
+    const deck = new THREE.InstancedMesh(new THREE.PlaneGeometry(1, 1), deckMaterial, sea.length), m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler();
+    sea.forEach((p, i) => { e.set(-Math.PI / 2, 0, (p.x * 13 + p.z * 7) % (Math.PI * 2)); q.setFromEuler(e); m.compose(new THREE.Vector3(p.x, p.y, p.z), q, new THREE.Vector3(p.size * 2.2, p.size * 1.6, 1)); deck.setMatrixAt(i, m); });
+    deck.userData.cloudLayer = 'sea'; deck.renderOrder = 2; deck.frustumCulled = false; group.add(deck);
+    if (valley.length) {
+      const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(valley.flatMap(p => [p.x, p.y, p.z]), 3));
+      const bands = new THREE.Points(geometry, new THREE.PointsMaterial({ map: texture, size: valley.reduce((n, p) => n + p.size, 0) / valley.length * 1.8, color: '#eef0ea', transparent: true, opacity: .3, depthWrite: false, fog: true }));
+      bands.userData.cloudLayer = 'valley'; bands.renderOrder = 2; group.add(bands);
+    }
+    return group;
+  }
   private buildMist() {
     const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128;
     const context = canvas.getContext('2d');
@@ -960,6 +983,8 @@ export class CityRenderer implements CityRendererAPI {
     this.skyMaterial.uniforms.top.value.copy(top); this.skyMaterial.uniforms.horizon.value.copy(horizon);
     this.skyMaterial.uniforms.daylight.value = daylight;
     const mistMaterial = this.mist.material as THREE.PointsMaterial; mistMaterial.color.copy(horizon).lerp(new THREE.Color('#e0e8df'), .25 + daylight * .35); mistMaterial.opacity = .13 + (1 - state.visibility) * .13; this.mist.position.x = Math.sin(elapsed * .015) * 24;
+    for (const layer of this.clouds.children as (THREE.Mesh | THREE.Points)[]) { const m = layer.material as THREE.MeshBasicMaterial | THREE.PointsMaterial; m.color.set(grade.fogColor).lerp(new THREE.Color('#fbf6ec'), .35 + daylight * .45); m.opacity = (layer.userData.cloudLayer === 'sea' ? .5 : .3) * (.45 + daylight * .55); }
+    this.clouds.position.x = Math.sin(elapsed * .011) * 18; this.clouds.position.z = Math.cos(elapsed * .008) * 14;
     const sprayMaterial = this.spray.material as THREE.PointsMaterial; sprayMaterial.color.copy(horizon).lerp(new THREE.Color('#eef6ed'), .8); sprayMaterial.opacity = .13 + daylight * .12; this.spray.position.x = Math.sin(elapsed * .24) * 2.8;
     this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.set(grade.fogColor); fog.density = (.00022 + (1 - state.visibility) * .0002) * grade.fogDensityScale * (6500 / this.distance);
     this.sky.position.copy(this.camera.position); this.stars.position.copy(this.camera.position); (this.stars.material as THREE.PointsMaterial).opacity = (1 - daylight) * .8; this.skyModels?.update(this.camera.position, (1 - daylight) * .8);
