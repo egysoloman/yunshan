@@ -41,8 +41,10 @@ export class NpcStairMotion {
   private readonly memberIndex = new WeakMap<Building, number>();
   private readonly counters = { routes: 0, materializations: 0, cacheHits: 0, geometryChecks: 0, staleLegs: 0, buildingScans: 0 };
 
-  constructor(world: WorldDefinition) {
-    this.world = world;
+  /** Sample length for validating and walking physical legs (see npc-motion-coarse.ts). */
+  private readonly step: () => number;
+  constructor(world: WorldDefinition, step: () => number = () => .05) {
+    this.world = world; this.step = step;
     world.buildings.forEach((building, index) => this.memberIndex.set(building, index));
   }
 
@@ -243,7 +245,7 @@ export class NpcStairMotion {
         const first = this.support(b, leg.from), last = this.support(b, leg.to); if (!first || !last) return null;
         const part: NpcStairPart = { kind: 'riser', from: { ...leg.from }, to: { ...leg.to }, length: distance(leg.from, leg.to), fromFloor: first.floor, toFloor: last.floor, faces: entry };
         leg.parts.push(part); leg.length = part.length;
-        const samples = Math.max(1, Math.ceil(part.length / .05)); let previous = part.from;
+        const samples = Math.max(1, Math.ceil(part.length / this.step())); let previous = part.from;
         for (let i = 0; i <= samples; i++) {
           const position = interpolate(part.from, part.to, i / samples), support = this.pose(leg, part, position);
           if (!support || blocksFloorPlanMovement(b, support.floor, previous, position, BODY_RADIUS, EYE_HEIGHT)) return null;
@@ -287,7 +289,7 @@ export class NpcStairMotion {
     }
     if (!append(leg.to)) return null;
     for (const part of leg.parts) {
-      const samples = Math.max(1, Math.ceil(part.length / .05)); let previous = part.from;
+      const samples = Math.max(1, Math.ceil(part.length / this.step())); let previous = part.from;
       for (let i = 0; i <= samples; i++) {
         const position = interpolate(part.from, part.to, i / samples), support = this.pose(leg, part, position);
         if (!support || blocksFloorPlanMovement(b, support.floor, previous, position, BODY_RADIUS, EYE_HEIGHT)) return null;
@@ -381,7 +383,7 @@ export class NpcStairMotion {
       return { position, usedDistance, finishedLeg: allowed, blocked: !allowed };
     }
     while (remaining > 0 && cursor.piece < leg.parts.length) {
-      const part = leg.parts[cursor.piece], outstanding = part.length - cursor.offset, increment = Math.min(remaining, outstanding, .05), atEnd = increment === outstanding;
+      const part = leg.parts[cursor.piece], outstanding = part.length - cursor.offset, increment = Math.min(remaining, outstanding, this.step()), atEnd = increment === outstanding;
       const offset = atEnd ? part.length : cursor.offset + increment, proposed = atEnd ? { ...part.to } : interpolate(part.from, part.to, offset / part.length), support = this.pose(leg, part, proposed);
       if (!support || !callback(position, proposed, leg.building, support.floor) || blocksFloorPlanMovement(leg.building, support.floor, position, proposed, BODY_RADIUS, EYE_HEIGHT)) return { position, usedDistance, finishedLeg: false, blocked: true };
       cursor.offset = offset; position = proposed; usedDistance += increment; remaining -= increment;
