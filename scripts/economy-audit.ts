@@ -238,6 +238,9 @@ sim.onPhase('feedback', () => {
     const aggregate = ledger[row.purpose] ??= { count: 0, amount: 0, eventObserved: 0 };
     aggregate.count++; aggregate.amount += row.amount;
     if (row.sourceEvent === 'transit-fare' || row.sourceEvent === 'public-payroll-escrow') aggregate.eventObserved += row.amount;
+    // power.ts ledgers its repair materials and also emits them as
+    // civic-procurement events (already in totals.civicProcurement).
+    else if (row.purpose === '能源维修实际工业材料采购') aggregate.eventObserved += row.amount;
   }
 });
 
