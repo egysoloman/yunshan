@@ -28,6 +28,28 @@ import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
 
+/** R1 W4 (docs/设计/美术与渲染改造方案.md §4.2): one merged pitched display roof per
+ * floor-plan building, on the top floor's footprint, so drone-distance blocks
+ * read as roofed halls instead of flat slabs. Display only: collision, rooms and
+ * function points are untouched; viewing roofs and transport/landmark bodies keep
+ * their own tops. Halls take a hip roof, everyday buildings an overhanging gable. */
+const HIP_ROOF_KINDS = new Set(['school', 'hall', 'clinic', 'bank', 'police', 'temple']);
+const BARE_ROOF_KINDS = new Set(['station', 'airport', 'starport', 'core', 'pavilion']);
+export function programRoofShell(b: Building, parts: readonly { position: Vec3; size: Vec3; floor: number; roof: boolean }[]): { form: 'hip' | 'gable'; width: number; depth: number; rise: number; color: string; position: Vec3; floor: number } | null {
+  if (BARE_ROOF_KINDS.has(b.kind) || b.id === 'core-main' || b.facility || b.floors > 7) return null;
+  // The shell sits on the body's actual top roof (local frame), never on the plot.
+  const roofs = parts.filter(p => p.roof), top = Math.max(...roofs.map(p => p.position.y + p.size.y / 2));
+  if (!roofs.length || !Number.isFinite(top)) return null;
+  const highest = roofs.filter(p => p.position.y + p.size.y / 2 > top - .6), floor = Math.max(...highest.map(p => p.floor));
+  if (b.floorUses?.[floor]?.includes('观景')) return null;
+  let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity, area = 0;
+  for (const p of highest) { x0 = Math.min(x0, p.position.x - p.size.x / 2); x1 = Math.max(x1, p.position.x + p.size.x / 2); z0 = Math.min(z0, p.position.z - p.size.z / 2); z1 = Math.max(z1, p.position.z + p.size.z / 2); area += p.size.x * p.size.z; }
+  const w = x1 - x0, d = z1 - z0;
+  // A loose cluster of small tops (courtyard compounds) is left as it is: one roof over it would float.
+  if (!(w > 2 && d > 2) || area / (w * d) < .7) return null;
+  const overhang = Math.min(3, Math.max(.8, Math.min(w, d) * .08)), rise = Math.min(11, Math.max(1.8, Math.min(w, d) * .4)), hip = HIP_ROOF_KINDS.has(b.kind);
+  return { form: hip ? 'hip' : 'gable', width: w + overhang * 2, depth: d + overhang * 2, rise, color: hip ? '#2c4d48' : '#38504c', position: { x: (x0 + x1) / 2, y: top, z: (z0 + z1) / 2 }, floor: Math.max(0, floor) };
+}
 const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad' };
 type MaterialKey = keyof typeof PALETTE;
 interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
@@ -487,6 +509,9 @@ export class CityRenderer implements CityRendererAPI {
         batch.box(part.material, position.x, position.y, position.z, part.size.x, part.size.y, part.size.z,
           part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof, ceiling: part.purpose === 'floor' || part.purpose === 'roof', windowStyle: b.commercialGeometryRevision === 1 ? 2 : 1 }, undefined, part.facade, part.template);
       }
+      const shell = programRoofShell(b, programParts);
+      if (shell) { const at = buildingWorldPosition(b, shell.position);
+        batch.box('roof', at.x, at.y + .12, at.z, shell.width, shell.rise, shell.depth, shell.color, b.rotation, { building: b.id, floor: shell.floor, roof: true }, { form: shell.form, simple: far }); }
       return;
     }
     const w = b.width, d = b.depth, height = b.height, base = b.position.y + .6, floors = Math.max(1, b.floors), fh = height / floors, basements = Math.max(0, b.basements ?? 0);
