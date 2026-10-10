@@ -526,6 +526,27 @@ function validatedSupportFootprints(p:FloorPlan,base:Rect[],surfaces:StairSurfac
   // bounds the map to the current floor height and current stair heights.
   supportFootprintCache.set(p,result);return result;
 }
+// In a fixed-geometry window the stair surfaces of a floor (and their rects)
+// are trusted; every support loop only acts on a surface whose rect contains
+// the query point, so a 1m cell index that lists each surface in every cell its
+// rect (plus eps) overlaps yields exactly those surfaces, in collection order.
+const surfaceCells=new WeakMap<StairSurface[],{epoch:number;x0:number;z0:number;nx:number;nz:number;cells:(number[]|undefined)[]}|null>();
+function surfacesAt(surfaces:StairSurface[],x:number,z:number):StairSurface[] {
+  if(fixedDepth===0||!Number.isFinite(x)||!Number.isFinite(z))return surfaces;
+  let index=surfaceCells.get(surfaces);
+  if(index===undefined||index!==null&&index.epoch!==fixedEpoch){
+    let x0=Infinity,z0=Infinity,x1=-Infinity,z1=-Infinity,finite=true;
+    for(const s of surfaces){const r=s.rect;if(![r.x0,r.x1,r.z0,r.z1].every(Number.isFinite)){finite=false;break;}x0=Math.min(x0,r.x0-eps);z0=Math.min(z0,r.z0-eps);x1=Math.max(x1,r.x1+eps);z1=Math.max(z1,r.z1+eps);}
+    const nx=Math.floor(x1-x0)+1,nz=Math.floor(z1-z0)+1;
+    if(!finite||!surfaces.length||nx*nz>250000)index=null;
+    else{const cells:(number[]|undefined)[]=new Array(nx*nz);surfaces.forEach((s,k)=>{const r=s.rect;for(let i=Math.floor(r.x0-eps-x0);i<=Math.floor(r.x1+eps-x0);i++)for(let j=Math.floor(r.z0-eps-z0);j<=Math.floor(r.z1+eps-z0);j++)(cells[i*nz+j]??=[]).push(k);});index={epoch:fixedEpoch,x0,z0,nx,nz,cells};}
+    surfaceCells.set(surfaces,index);
+  }
+  if(index===null)return surfaces;
+  const i=Math.floor(x-index.x0),j=Math.floor(z-index.z0);
+  if(i<0||j<0||i>=index.nx||j>=index.nz)return [];
+  const cell=index.cells[i*index.nz+j];return cell?cell.map(k=>surfaces[k]):[];
+}
 export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radius=.35):FloorSupport|null {
   const p=getBuildingFloorPlan(b,floor);if(!p)return null;const local=buildingLocalPosition(b,worldPosition),plans=nearPlans(b,p),surfaces=stairSurfaces(b,p,plans);
   const choices:{top:number;kind:FloorSupport['kind'];floor:number;link?:FloorSupport['link']}[]=[];
@@ -547,13 +568,13 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
     }
     (supportedAt??=new Map()).set(top,supported);return supported;
   };
-  let raisedStair=false;
-  for(const s of surfaces)if(contains(s.rect,local.x,local.z)&&s.top>p.y+eps&&s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps){raisedStair=true;break;}
-  if(!raisedStair&&containsUnion(base,local.x,local.z)&&(radius===0||Math.abs(p.y-local.y)<=.42+eps)&&diskSupportedAt(p.y)) {
+  let raisedStair=false;const here=surfacesAt(surfaces,local.x,local.z);
+  for(const s of here)if(contains(s.rect,local.x,local.z)&&s.top>p.y+eps&&s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps){raisedStair=true;break;}
+  if(!raisedStair&&(radius===0||Math.abs(p.y-local.y)<=.42+eps)&&containsUnion(base,local.x,local.z)&&diskSupportedAt(p.y)) {
     const kind=contains(p.stairLanding,local.x,local.z)?'stairs':containsUnion(p.interior,local.x,local.z)?'room':containsUnion(p.circulation,local.x,local.z)?'gallery':'courtyard';choices.push({top:p.y,kind,floor:p.floor});
   }
-  let onStair=false;for(const s of surfaces)if(contains(s.rect,local.x,local.z)){onStair=true;break;}
-  if(onStair)for(const s of surfaces) {
+  let onStair=false;for(const s of here)if(contains(s.rect,local.x,local.z)){onStair=true;break;}
+  if(onStair)for(const s of here) {
     if(!contains(s.rect,local.x,local.z) || s.top>local.y+.22+eps || s.top<local.y-.42-eps || !diskSupportedAt(s.top))continue;
     const target=getBuildingFloorPlan(b,s.toFloor)!;
     choices.push({top:s.top,kind:'stairs',floor:s.top>=target.y-eps?s.toFloor:s.fromFloor,link:{fromFloor:s.fromFloor,toFloor:s.toFloor}});
