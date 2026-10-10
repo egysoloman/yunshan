@@ -97,16 +97,16 @@ test('relay loads freight waiting in a supplied district for a short one, keepin
   assert(relayed > 0, 'empty carriers picked up loads bound for east');
 });
 
-test('v3 carriers keep their food while no district is short instead of stranding it where they stand', () => {
+test('v3 carriers deliver to the least stocked market district even when none is short, never where no market is', () => {
   const world = createProductWorld(), sim = createCurrentProductCity(world);
   sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
   // The demand view is replaced so that every district with markets is supplied; shops and ledgers stay real.
-  const internals = sim as unknown as { foodFreightDemand: () => { districtId: string; markets: number; stock: number }[]; bus: { on(type: string, f: (e: { amount?: number }) => void): void } };
+  const internals = sim as unknown as { foodFreightDemand: () => { districtId: string; markets: number; stock: number }[]; bus: { on(type: string, f: (e: { amount?: number; districtId?: string }) => void): void } };
   const real = internals.foodFreightDemand.bind(sim);
   internals.foodFreightDemand = () => real().map(row => ({ ...row, stock: Math.max(row.stock, MARKET_FREIGHT_INTAKE_LIMIT * row.markets) }));
-  let unloaded = 0; internals.bus.on('cargo-arrived', e => { unloaded += e.amount ?? 0; });
-  const carried = () => sim.state.vehicles.reduce((n, v) => n + v.cargo, 0), before = carried();
-  for (let tick = 0; tick < 140; tick++) sim.step(.25);
-  assert.equal(unloaded, 0, 'nothing is unloaded while every market district is supplied');
-  assert.ok(carried() >= before, `held cargo stays on its carriers (${before} -> ${carried()})`);
+  const marketDistricts = new Set(world.buildings.filter(b => b.kind === 'market' && !b.facility).map(b => b.districtId));
+  const at: string[] = []; internals.bus.on('cargo-arrived', e => at.push(e.districtId ?? ''));
+  for (let tick = 0; tick < 200; tick++) sim.step(.25);
+  assert.ok(at.length > 0, 'loaded carriers still deliver while every district is supplied');
+  assert.deepEqual(at.filter(d => !marketDistricts.has(d)), [], 'no unload in a district without markets');
 });
