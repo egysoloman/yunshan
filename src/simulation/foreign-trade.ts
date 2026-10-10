@@ -4,7 +4,8 @@
  * is enabled, each settlement hour the city's cargo flights carry at most
  * EXPORT_UNITS_PER_HOUR of surplus out at fixed world prices: workshop
  * materials above MATERIAL_EXPORT_LINE and producer food above
- * FOOD_EXPORT_LINE. The buyer is outside the city, so the gross is new money;
+ * FOOD_EXPORT_LINE, food only while every market district is at its intake
+ * line (a probe exported 883 food units a day while 17 markets were empty). The buyer is outside the city, so the gross is new money;
  * the seller keeps the net and the city taxes it at its business rate. The
  * elected mayor may close or reopen trade; a city without a mayor keeps it open. */
 export const FOREIGN_TRADE_POLICY = 'foreign-trade-v1' as const;

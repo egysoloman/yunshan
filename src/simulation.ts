@@ -10,7 +10,7 @@ import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy }
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { allocateExports, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
 import { closeFiscalDay, councilTaxRate, profitTaxSplit, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
-import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
+import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
 import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetState } from './simulation/supplemental-budget';
@@ -1055,6 +1055,11 @@ export class Simulation implements SimulationAPI {
           // A declared food carrier takes the open leg whose far end is fewest hops from its destination district.
           const hops = this.freightHops.hops(vehicle.kind, freightBound), far = (c: { edge: NetworkEdge }) => hops.get(c.edge.from === nodeId ? c.edge.to : c.edge.from) ?? Infinity;
           const best = Math.min(...candidates.map(far)); if (finite(best)) candidates = candidates.filter(c => far(c) === best);
+        } else if (vehicle.cargo === 0 && !manual && freightCarrier?.kind === vehicle.kind && this.runtime.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY_V3 && candidates.length && this.pickupTargets(freightCarrier.cargoCapacity).length) {
+          // An empty v3 carrier takes the open leg whose far end is fewest hops from a producer door holding a full load.
+          const doors = this.pickupTargets(freightCarrier.cargoCapacity).map(id => this.freightHops.toNode(vehicle.kind, id));
+          const far = (c: { edge: NetworkEdge }) => { const end = c.edge.from === nodeId ? c.edge.to : c.edge.from; return Math.min(...doors.map(h => h.get(end) ?? Infinity)); };
+          const best = Math.min(...candidates.map(far)); if (finite(best)) candidates = candidates.filter(c => far(c) === best);
         } else if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
         if (candidates.length && ['road', 'lightRail', 'maglev', 'ferry'].includes(vehicle.kind)) { const chosen = manual ? this.chooseTurn(edge, vehicle.direction, nodeId, candidates) : candidates[Math.floor(this.random() * candidates.length)]; vehicle.edgeId = chosen.edge.id; vehicle.direction = chosen.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1; }
         else if (isRoadOpen(this.state, edge.id)) vehicle.direction *= -1;
@@ -1271,14 +1276,17 @@ export class Simulation implements SimulationAPI {
     if (lot.shopId) (this.runtime.cargoSources ??= {})[vehicle.id] = lot.shopId; else if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id];
     (this.runtime.cargoDestinations ??= {})[vehicle.id] = destination;
   }
+  /** Door nodes of food producers holding at least one full load. */
+  private pickupTargets(capacity: number): string[] {
+    return this.state.shops.filter(shop => { const site = this.buildings.get(shop.buildingId); return !!site && !site.facility && ['farm', 'dock'].includes(site.kind) && shop.inventory >= capacity; }).map(shop => `${shop.buildingId}-door`);
+  }
   /** True while a declared carrier keeps its food for a district further on. */
   private holdFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string): boolean {
     if (!this.runtime.foodFreightPolicyId || !this.freightCarriers.has(vehicle.id)) return false;
     const destinations = this.runtime.cargoDestinations ??= {}, bound = destinations[vehicle.id];
     if (bound) return bound !== districtId && this.freightHops.hops(vehicle.kind, bound).has(nodeId);
-    const demand = this.foodFreightDemand(), chosen = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, demand);
-    if (!chosen) return this.runtime.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY_V3 && districtSupplied(demand, districtId);
-    if (chosen === districtId) return false;
+    const demand = this.foodFreightDemand(), chosen = this.runtime.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY_V3 ? leastStockedDistrict(this.freightHops, vehicle.kind, nodeId, demand) : chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, demand);
+    if (!chosen || chosen === districtId) return false;
     destinations[vehicle.id] = chosen; return true;
   }
   private walkingDistance(citizen: Citizen, destination: Building): number { const target = this.buildingNode(destination); return Math.min(...this.walkingAnchors(citizen).map(a => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity))); }
@@ -2181,10 +2189,11 @@ export class Simulation implements SimulationAPI {
   /** foreign-trade-v1: the hour's cargo flights sell surplus to outside buyers. */
   private exportSurplus(hours: number): void {
     const trade = this.runtime.foreignTrade; if (!trade?.enabled) return;
+    const demand = this.foodFreightDemand(), foodSurplus = demand.every(row => districtSupplied(demand, row.districtId));
     const offers = this.state.shops.flatMap(shop => {
       const kind = this.buildings.get(shop.buildingId)?.kind;
       if (kind === 'workshop' && !this.buildings.get(shop.buildingId)?.facility) return [{ shopId: shop.id, surplus: shop.inventory - MATERIAL_EXPORT_LINE, price: WORLD_MATERIAL_PRICE }];
-      if (kind === 'farm' || kind === 'dock') return [{ shopId: shop.id, surplus: shop.inventory - FOOD_EXPORT_LINE, price: WORLD_FOOD_PRICE }];
+      if ((kind === 'farm' || kind === 'dock') && foodSurplus) return [{ shopId: shop.id, surplus: shop.inventory - FOOD_EXPORT_LINE, price: WORLD_FOOD_PRICE }];
       return [];
     });
     for (const sale of allocateExports(offers, EXPORT_UNITS_PER_HOUR * Math.min(hours, 24))) {
