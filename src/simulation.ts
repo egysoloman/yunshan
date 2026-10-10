@@ -8,7 +8,7 @@ import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } 
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
 import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
 import { FARM_YIELD_POLICIES, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
-import { closeFiscalDay, councilTaxRate, profitTaxSplit, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
+import { closeFiscalDay, councilTaxRate, profitTaxSplit, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY_V2, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
@@ -2144,6 +2144,17 @@ export class Simulation implements SimulationAPI {
     if (this.state.crimes.length > 120) this.state.crimes = this.state.crimes.filter(c => c.status !== 'resolved').concat(this.state.crimes.filter(c => c.status === 'resolved').slice(-60));
     if (this.runtime.policeSupplies) archivePoliceSupplies(this.runtime.policeSupplies, this.state.crimes);
   }
+  private payPublicRelief(): void {
+    const prices = this.state.shops.filter(shop => this.shopCommodity(shop) === 'food' && shop.inventory >= 1).map(shop => shop.price);
+    if (!prices.length) return;
+    const floor = RELIEF_MEALS * Math.min(...prices), profiles = this.state.extension?.actorProfiles;
+    const claims = this.state.citizens.filter(c => profiles?.[c.id]?.alive !== false && c.money < floor).map(c => ({ id: c.id, money: c.money }));
+    for (const payment of reliefPayments(claims, floor, this.publicBudgetSnapshot().available)) {
+      const citizen = this.state.citizens.find(c => c.id === payment.id)!;
+      this.state.treasury -= payment.amount; citizen.money += payment.amount;
+      this.bus.emit({ type: 'public-relief', citizenId: citizen.id, districtId: citizen.districtId, amount: payment.amount });
+    }
+  }
   private politics() {
     this.reviewPublicShifts();
     const pending = this.state.policyPending;
@@ -2152,6 +2163,7 @@ export class Simulation implements SimulationAPI {
     if (fiscal && this.state.day !== fiscal.day) {
       const { net, base } = closeFiscalDay(fiscal, this.state.taxRate, this.state.treasury);
       this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net, base };
+      this.payPublicRelief();
       const rate = councilTaxRate(this.state.taxRate, net, base, this.state.treasury);
       if (rate !== this.state.taxRate && !this.hasIdentity('mayor') && !this.state.policyPending) {
         this.notice('policy', `议会按上日公共收支${net < 0 ? '赤字' : '盈余'}${Math.abs(net).toFixed(0)}文，将营业税率由${(this.state.taxRate * 100).toFixed(1)}%调整为${(rate * 100).toFixed(1)}%。`); this.state.taxRate = rate;

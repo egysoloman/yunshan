@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
-import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, profitTaxSplit, SHOP_PROFIT_TAX_POLICY, validatePublicFinancePolicy } from '../src/simulation/public-finance';
+import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, validatePublicFinancePolicy } from '../src/simulation/public-finance';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -87,5 +87,24 @@ test('a non-mayor city adjusts its tax at the day boundary; a player mayor keeps
     assert.notEqual(sim.state.day, day);
     if (mayor) assert.equal(sim.state.taxRate, before, 'the mayor alone sets the rate');
     else assert.ok(sim.state.taxRate > before, `the council raised ${before} to ${sim.state.taxRate}`);
+  }
+});
+
+test('relief tops the poorest up to the floor first and never exceeds the available cash', () => {
+  assert.deepEqual(reliefPayments([{ id: 'b', money: 10 }, { id: 'a', money: 2 }, { id: 'c', money: 40 }], 30, 1000), [{ id: 'a', amount: 28 }, { id: 'b', amount: 20 }]);
+  assert.deepEqual(reliefPayments([{ id: 'b', money: 10 }, { id: 'a', money: 2 }], 30, 35), [{ id: 'a', amount: 28 }, { id: 'b', amount: 7 }]);
+  assert.deepEqual(reliefPayments([{ id: 'a', money: 2 }], 30, 0), []);
+});
+
+test('at the day boundary a declared city pays relief to a resident below two meals; an archived city does not', () => {
+  for (const [make, declared] of [[createCurrentProductCity, true], [createArchivedProductCity, false]] as const) {
+    const sim = make(civicFixtureWorld()), flows: { citizenId?: string; amount?: number }[] = [];
+    (sim as unknown as { bus: { on(type: string, f: (e: { citizenId?: string; amount?: number }) => void): void } }).bus.on('public-relief', e => flows.push(e));
+    sim.command({ type: 'speed', value: 8 });
+    const person = sim.state.citizens.find(c => c.role !== '学生')!; person.money = 1; // controlled poverty; the rest is the simulator's own
+    const day = sim.state.day;
+    for (let tick = 0; tick < 900 && sim.state.day === day; tick++) sim.step(.25);
+    const paid = flows.filter(f => f.citizenId === person.id).reduce((n, f) => n + (f.amount ?? 0), 0);
+    if (declared) assert.ok(paid > 0, 'the poor resident received relief'); else assert.equal(flows.length, 0);
   }
 });

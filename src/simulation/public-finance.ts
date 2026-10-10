@@ -53,3 +53,27 @@ export function closeFiscalDay(day: FiscalDay, rate: number, treasury: number): 
   const net = treasury - day.treasury, base = rate > 0 ? day.tax / rate : 0;
   return day.base > 0 ? { net: (day.net + net) / 2, base: (day.base + base) / 2 } : { net, base };
 }
+
+/** Under the same declared policy, public relief closes the poverty trap the
+ * 14-day audit with a balanced treasury still showed (poor residents 0→163,
+ * many at hunger 0 holding less than one meal): shops fund work minutes only
+ * from their own cash, a day of food costs more than most wages, and owner
+ * profit stops circulating. Once a day, after guardians' support, each living
+ * resident holding less than two meals at the cheapest stocked food price is
+ * topped up to that amount from the public budget's available cash (never its
+ * payroll or operating reserves), poorest first. The council rule then prices
+ * the relief into the next day's tax rate. */
+export const RELIEF_MEALS = 2;
+export interface ReliefClaim { id: string; money: number }
+
+/** Allocates relief, poorest first, within the available public cash. */
+export function reliefPayments(claims: ReliefClaim[], floor: number, available: number): { id: string; amount: number }[] {
+  const out: { id: string; amount: number }[] = [];
+  let budget = Math.max(0, available);
+  for (const claim of [...claims].sort((a, b) => a.money - b.money || a.id.localeCompare(b.id))) {
+    const amount = Math.min(Math.max(0, floor - claim.money), budget);
+    if (amount <= 1e-9) continue;
+    out.push({ id: claim.id, amount }); budget -= amount;
+  }
+  return out;
+}
