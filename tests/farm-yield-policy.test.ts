@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
-import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
-import { LEGACY_LABOR_MINUTES_PER_UNIT, LEGACY_PRODUCER_STOCK_CAP, laborMinutesPerUnit, producerStockCap, STAFFED_FARM_YIELD_POLICY, STAFFED_FARM_YIELD_POLICY_V2, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2, STAFFED_FOOD_PRODUCER_STOCK_CAP_V2, validateFarmYieldPolicy } from '../src/simulation/farm-yield';
+import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
+import { LEGACY_LABOR_MINUTES_PER_UNIT, LEGACY_PRODUCER_STOCK_CAP, laborMinutesPerUnit, producerStockCap, STAFFED_FARM_YIELD_POLICY, STAFFED_FARM_YIELD_POLICY_V2, STAFFED_FARM_YIELD_POLICY_V3, FARM_INPUT_PER_UNIT, foodOutputWithInputs, UNAIDED_FOOD_RATE, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2, STAFFED_FOOD_PRODUCER_STOCK_CAP_V2, validateFarmYieldPolicy } from '../src/simulation/farm-yield';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -34,8 +34,9 @@ test('only food producers of a declared city change yield; workshops and legacy 
 
 test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V2);
-  assert.equal(doc.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V2); assert.equal(doc.runtime.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V2);
+  assert.equal(city.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V3);
+  assert.equal(doc.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V3); assert.equal(doc.runtime.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V3);
+  assert.deepEqual(doc.runtime.farmInputs, {}, 'a v3 city starts with no farm inputs');
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
@@ -44,4 +45,30 @@ test('a new product city declares the policy and keeps it through save, partitio
   const current = createCurrentProductCity(world); assert.equal(current.importSave(original).ok, true); assert.equal(current.farmYieldPolicyId, 'legacy'); assert.equal(current.exportSave(), original);
   const forged = { ...doc, runtime: { ...doc.runtime } }; delete forged.runtime.farmYieldPolicyId;
   assert.equal(createCurrentProductCity(world).importSave(JSON.stringify(forged)).ok, false, 'a half declaration is rejected');
+});
+
+test('v3 food output uses inputs first and yields at the unaided rate without them, within the store', () => {
+  assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY_V3, 'farm'), STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2);
+  assert.equal(producerStockCap(STAFFED_FARM_YIELD_POLICY_V3, 'dock'), STAFFED_FOOD_PRODUCER_STOCK_CAP_V2);
+  assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY_V3, 'workshop'), LEGACY_LABOR_MINUTES_PER_UNIT);
+  assert.deepEqual(foodOutputWithInputs(10, 5, 100), { units: 10, inputsUsed: 10 * FARM_INPUT_PER_UNIT });
+  assert.deepEqual(foodOutputWithInputs(10, 0, 100), { units: 10 * UNAIDED_FOOD_RATE, inputsUsed: 0 });
+  const partial = foodOutputWithInputs(10, .4, 100); // 4 aided units, 6 unaided
+  assert.ok(Math.abs(partial.units - (4 + 6 * UNAIDED_FOOD_RATE)) < 1e-9 && Math.abs(partial.inputsUsed - .4) < 1e-9);
+  assert.deepEqual(foodOutputWithInputs(10, 5, 3), { units: 3, inputsUsed: 3 * FARM_INPUT_PER_UNIT }, 'a full store consumes only what it produced');
+});
+
+test('v3 staffed food producers buy workshop materials as taxed wholesale inputs and use them', () => {
+  const world = createProductWorld(), sim = createCurrentProductCity(world), internals = sim as unknown as { runtime: { farmInputs: Record<string, number> }; bus: { on(type: string, f: (e: { purpose?: string; amount?: number; quantity?: number }) => void): void } };
+  const bought: { amount: number; quantity: number }[] = [];
+  internals.bus.on('wholesale', e => { if (e.purpose === 'farm-inputs') bought.push({ amount: e.amount ?? 0, quantity: e.quantity ?? 0 }); });
+  sim.command({ type: 'speed', value: 8 });
+  const materials = () => sim.state.shops.filter(s => world.buildings.find(b => b.id === s.buildingId)?.kind === 'workshop').reduce((n, s) => n + s.inventory, 0);
+  for (let tick = 0; tick < 240 && !bought.length; tick++) sim.step(.25);
+  assert.ok(bought.length > 0 && bought.every(b => b.quantity >= 1 && b.amount > 0), 'a producer paid for inputs');
+  const held = Object.values(internals.runtime.farmInputs).reduce((a, b) => a + b, 0);
+  assert.ok(held > 0 && held <= bought.reduce((n, b) => n + b.quantity, 0) + 1e-9, 'inputs held never exceed what was bought');
+  assert.ok(Number.isFinite(materials()));
+  const saved = sim.exportSave(), reader = createCurrentProductCity(world);
+  assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
 });

@@ -7,7 +7,7 @@ import { createCivicHistory, freezeCivicHistory } from './simulation/civic-histo
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
 import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
-import { FARM_YIELD_POLICIES, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
+import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { closeFiscalDay, councilTaxRate, profitTaxSplit, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
@@ -115,6 +115,8 @@ interface Runtime {
   freightPickupPolicyId?: FreightPickupPolicy;
   farmYieldPolicyId?: FarmYieldPolicy;
   foodFreightPolicyId?: FoodFreightPolicy;
+  /** staffed-farm-yield-v3: workshop inputs held by each food producer. */
+  farmInputs?: Record<string, number>;
   publicFinancePolicyId?: PublicFinancePolicy;
   /** Council budget rule: the open fiscal day and its smoothed predecessors. */
   fiscalDay?: FiscalDay;
@@ -200,7 +202,7 @@ export class Simulation implements SimulationAPI {
     if (options?.referenceCollisionPolicyId) this.runtime.referenceCollisionPolicyId = options.referenceCollisionPolicyId;
     if (options?.mealRoutePolicyId) this.runtime.mealRoutePolicyId = options.mealRoutePolicyId;
     if (options?.freightPickupPolicyId) this.runtime.freightPickupPolicyId = options.freightPickupPolicyId;
-    if (options?.farmYieldPolicyId) this.runtime.farmYieldPolicyId = options.farmYieldPolicyId;
+    if (options?.farmYieldPolicyId) { this.runtime.farmYieldPolicyId = options.farmYieldPolicyId; if (farmInputsUsed(options.farmYieldPolicyId)) this.runtime.farmInputs = {}; }
     if (options?.foodFreightPolicyId) { this.runtime.foodFreightPolicyId = options.foodFreightPolicyId; this.runtime.cargoDestinations = {}; }
     if (options?.publicFinancePolicyId) { this.runtime.publicFinancePolicyId = options.publicFinancePolicyId; this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net: 0, base: 0 }; }
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
@@ -1972,9 +1974,14 @@ export class Simulation implements SimulationAPI {
         }
         this.runtime.freight[shop.districtId] = Math.max(0, cargo - received);
       }
+      if (shop.open && ['farm', 'dock'].includes(building.kind) && farmInputsUsed(this.runtime.farmYieldPolicyId)) this.buyFarmInputs(shop);
       if (shop.open && ['farm', 'workshop', 'dock'].includes(building.kind)) {
         const technology = this.state.extension?.technologies.find(t => t.sector === (building.kind === 'farm' ? 'agriculture' : 'manufacturing'))?.level ?? 0;
-        const produced = Math.min(Math.max(0, producerStockCap(this.runtime.farmYieldPolicyId, building.kind) - shop.inventory), (this.state.powerGrid ? productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) : productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) * district.energy / 100) * (1 + technology * .12));
+        const room = Math.max(0, producerStockCap(this.runtime.farmYieldPolicyId, building.kind) - shop.inventory), potential = (this.state.powerGrid ? productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) : productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) * district.energy / 100) * (1 + technology * .12);
+        const inputs = farmInputsUsed(this.runtime.farmYieldPolicyId) && ['farm', 'dock'].includes(building.kind) ? this.runtime.farmInputs ??= {} : undefined;
+        const output = inputs ? foodOutputWithInputs(potential, inputs[shop.id] ?? 0, room) : { units: Math.min(room, potential), inputsUsed: 0 };
+        const produced = output.units;
+        if (inputs && output.inputsUsed > 0) inputs[shop.id] = Math.max(0, (inputs[shop.id] ?? 0) - output.inputsUsed);
         shop.inventory = clamp(shop.inventory + produced, 0, 10000);
         if (produced > 0) this.bus.emit({ type: 'production', shopId: shop.id, districtId: shop.districtId, amount: produced, minutes: this.state.powerGrid ? productiveLabor : labor });
       }
@@ -2144,6 +2151,26 @@ export class Simulation implements SimulationAPI {
     }
     if (this.state.crimes.length > 120) this.state.crimes = this.state.crimes.filter(c => c.status !== 'resolved').concat(this.state.crimes.filter(c => c.status === 'resolved').slice(-60));
     if (this.runtime.policeSupplies) archivePoliceSupplies(this.runtime.policeSupplies, this.state.crimes);
+  }
+  /** staffed-farm-yield-v3: a staffed food producer below its reorder line buys
+   * workshop materials as inputs with its own spendable cash, nearest district
+   * first, as a taxed wholesale; nothing is created. */
+  private buyFarmInputs(shop: Shop): void {
+    const inputs = this.runtime.farmInputs ??= {};
+    if ((inputs[shop.id] ?? 0) >= FARM_INPUT_REORDER || !(this.workforce.get(shop.buildingId)?.length)) return;
+    const suppliers = this.state.shops.filter(s => this.shopCommodity(s) === 'materials' && s.inventory >= 1 && !this.buildings.get(s.buildingId)?.facility)
+      .sort((a, b) => Number(b.districtId === shop.districtId) - Number(a.districtId === shop.districtId) || b.inventory - a.inventory || a.id.localeCompare(b.id));
+    for (const supplier of suppliers) {
+      const want = Math.floor(FARM_INPUT_ORDER_TARGET - (inputs[shop.id] ?? 0)); if (want < 1) break;
+      const quote = this.quoteSupply(supplier.id, want);
+      const quantity = Math.min(Math.floor(quote.quantity), want, Math.floor(Math.max(0, this.shopFunds(shop) - this.shopProtectedFunds(shop)) / quote.unitPrice), Math.floor(Math.max(0, 1e9 - this.shopFunds(supplier)) / quote.unitPrice));
+      if (quantity < 1) break;
+      const payment = quantity * quote.unitPrice, net = payment * (1 - this.state.taxRate);
+      supplier.inventory -= quantity; inputs[shop.id] = (inputs[shop.id] ?? 0) + quantity;
+      this.transferShopFunds(shop, -payment); this.transferShopFunds(supplier, net);
+      shop.profit -= payment; supplier.revenue += payment; supplier.profit += net;
+      this.bus.emit({ type: 'wholesale', shopId: supplier.id, districtId: supplier.districtId, amount: payment, quantity, unitPrice: quote.unitPrice, purpose: 'farm-inputs' });
+    }
   }
   private payPublicRelief(): void {
     const prices = this.state.shops.filter(shop => this.shopCommodity(shop) === 'food' && shop.inventory >= 1).map(shop => shop.price);
@@ -2747,6 +2774,7 @@ export class Simulation implements SimulationAPI {
       }
       if (r.publicSupply !== undefined) number(r.publicSupply, 0, 1, 'public supply fulfillment'); if (r.operationUnitPrice !== undefined) number(r.operationUnitPrice, 4, 1e12, 'observed public material unit price');
       if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
+      if (r.farmInputs !== undefined) { ensure(FARM_YIELD_POLICIES.includes(r.farmYieldPolicyId) && farmInputsUsed(r.farmYieldPolicyId) && r.farmInputs && typeof r.farmInputs === 'object' && !Array.isArray(r.farmInputs), 'farm inputs declared'); for (const [id, units] of Object.entries(r.farmInputs)) { ensure(shopIds.has(id), 'farm input owner'); number(units, 0, 100000, 'farm input units'); } }
       if (r.fiscalDay !== undefined) { ensure(PUBLIC_FINANCE_POLICIES.includes(r.publicFinancePolicyId) && r.fiscalDay && typeof r.fiscalDay === 'object' && Object.keys(r.fiscalDay).sort().join() === 'base,day,net,tax,treasury', 'fiscal day declared'); number(r.fiscalDay.day, 0, 1e8, 'fiscal day', true); money(r.fiscalDay.treasury, 'fiscal day treasury'); number(r.fiscalDay.tax, 0, 1e12, 'fiscal day tax'); number(r.fiscalDay.net, -1e12, 1e12, 'fiscal day net'); number(r.fiscalDay.base, 0, 1e15, 'fiscal day base'); }
       if (r.cargoDestinations !== undefined) { ensure(FOOD_FREIGHT_POLICIES.includes(r.foodFreightPolicyId) && r.cargoDestinations && typeof r.cargoDestinations === 'object' && !Array.isArray(r.cargoDestinations), 'freight destinations declared'); for (const [id, districtId] of Object.entries(r.cargoDestinations)) ensure(this.freightCarriers.has(id) && districtIds.has(districtId as string) && (s.vehicles.find((v: Vehicle) => v.id === id)?.cargo ?? 0) > 0, 'freight destination reference'); }
       if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }
