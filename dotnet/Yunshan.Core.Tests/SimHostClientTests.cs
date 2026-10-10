@@ -14,6 +14,14 @@ public class SimHostClientTests
         return dir?.FullName ?? throw new InvalidOperationException("repository root not found");
     }
 
+    static string WorldReference(string layout)
+    {
+        using var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", $"world-{layout}.json.gz"));
+        using var gzip = new System.IO.Compression.GZipStream(file, System.IO.Compression.CompressionMode.Decompress);
+        using var reader = new StreamReader(gzip, System.Text.Encoding.UTF8);
+        return reader.ReadToEnd();
+    }
+
     [Fact]
     public void JsonRoundTripsProtocolValues()
     {
@@ -33,13 +41,15 @@ public class SimHostClientTests
         Assert.NotNull(launch);
         using var client = launch.Start();
         var opened = await client.Open();
-        Assert.Equal("current-v6", Json.Str(opened, "layout"));
+        Assert.Equal("current-v8", Json.Str(opened, "layout"));
         Assert.Equal(20261001d, Json.Num(opened, "seed"));
 
-        // The C# port builds the same city the host simulates.
-        var world = World.CreateWorld(Json.Num(opened, "seed"), Json.Str(opened, "layout"));
+        // The host sends the city it simulates; C# receives it byte for byte
+        // (canonical JSON of the TypeScript world, scripts/parity/world.ts).
+        var world = await client.World();
         Assert.Equal(world.Buildings.Count, (int)Json.Num(opened, "buildings"));
         Assert.Equal(world.Edges.Count, (int)Json.Num(opened, "edges"));
+        Assert.Equal(WorldReference("current-v8"), CanonicalJson.Write(CanonicalJson.World(world)));
 
         var frame = await client.Step(.25, "walk", world.Spawn, null, 300, 0);
         Assert.Equal(1d, frame.Ticks);

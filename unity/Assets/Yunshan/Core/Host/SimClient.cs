@@ -139,6 +139,8 @@ namespace Yunshan.Core.Host
             => Pane.ListFrom(await Request("panes", new Dictionary<string, object> { ["view"] = new Dictionary<string, object> { ["mode"] = mode, ["inside"] = insideBuildingId } }).ConfigureAwait(false));
 
         public async Task<string> Save() => Json.Str(await Request("save").ConfigureAwait(false), "save");
+        /// <summary>The city the host is simulating (canonical world JSON).</summary>
+        public async Task<WorldDefinition> World() => WorldJson.FromJson(Json.Obj(await Request("world").ConfigureAwait(false), "world"));
 
         /// <summary>Loads a save of the same city layout; (ok, message, reopen).</summary>
         public async Task<(bool ok, string message, bool reopen)> Load(string save)

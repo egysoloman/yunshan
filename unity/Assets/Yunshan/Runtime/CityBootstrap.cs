@@ -71,14 +71,11 @@ namespace Yunshan.Runtime
                 session.PlayerMovedBySimulation += OnPlayerMovedBySimulation;
                 session.Start();
                 status = "启动权威模拟并生成城市……";
-                var defaultWorld = Task.Run(() => World.CreateWorld());
                 while (session.State == SimSession.Phase.Starting) { session.Update(0, "walk", null, null, null, null); await Task.Yield(); }
-                world = await defaultWorld;
-                if (session.State == SimSession.Phase.Ready && (session.Layout != World.CurrentCityLayout || session.Seed != world.Seed))
-                {
-                    status = $"按存档重建城市布局 {session.Layout}……";
-                    world = await Task.Run(() => World.CreateWorld(session.Seed, session.Layout));
-                }
+                // Draw the city the host simulates (it sends its world after opening,
+                // including the rebuilt current-v8 that exists only in TypeScript).
+                // Without a running host the C# compatibility generator shows v6.
+                world = session.World ?? await Task.Run(() => World.CreateWorld());
 
                 status = "采样地形……";
                 int min = (int)Math.Floor(-world.Size / 2 / CityGeometry.TerrainChunk), max = (int)Math.Ceiling(world.Size / 2 / CityGeometry.TerrainChunk) - 1;

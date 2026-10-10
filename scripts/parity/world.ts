@@ -15,7 +15,9 @@ export function canonical(value: unknown): unknown {
 }
 if (process.argv[1]?.endsWith("world.ts")) {
 const layout = (process.argv[3] ?? 'current-v6') as Parameters<typeof createWorld>[1];
-const json = JSON.stringify(canonical(createWorld(20261001, layout)));
+// The road fleet plan is simulation input, not drawn geometry; C# never reads it.
+const { fleetPlan: _fleet, ...world } = createWorld(20261001, layout);
+const json = JSON.stringify(canonical(world));
 writeFileSync(process.argv[2], gzipSync(json, { level: 9 }));
 console.log(`${layout}: ${json.length} bytes`);
 }

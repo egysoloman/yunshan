@@ -59,6 +59,13 @@ const point = (p: Vec3): Vec3 => ({ x: round(p.x), y: round(p.y), z: round(p.z) 
 const finiteVec = (v: unknown): v is Vec3 => !!v && typeof v === 'object' && ['x', 'y', 'z'].every(k => Number.isFinite((v as Record<string, unknown>)[k]));
 const MODES: ViewMode[] = ['walk', 'drone', 'jet'];
 
+/** Keys sorted (UTF-16 order), undefined members dropped: scripts/parity/world.ts. */
+function canonicalWorld(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(canonicalWorld);
+  if (value && typeof value === 'object') { const out: Record<string, unknown> = {}; for (const key of Object.keys(value).sort()) { const v = (value as Record<string, unknown>)[key]; if (v !== undefined) out[key] = canonicalWorld(v); } return out; }
+  return value;
+}
+
 export class SimHost {
   private sim: Simulation | null = null;
   private world: WorldDefinition | null = null;
@@ -89,6 +96,9 @@ export class SimHost {
       case 'context': return contextModel(this.requireSim(), this.world!, request.view as ContextView);
       case 'panes': return panesModel(this.requireSim(), this.world!, request.view as ContextView);
       case 'save': return { save: this.requireSim().exportSave() };
+      // The running city, canonical JSON (sorted keys) of the world the host
+      // simulates. Unity draws this instead of regenerating it in C#.
+      case 'world': { this.requireSim(); const { fleetPlan: _fleet, ...world } = this.world! as WorldDefinition; return { world: canonicalWorld(world) }; }
       case 'load': {
         const save = request.save;
         if (typeof save !== 'string' || !save) throw new Error('存档为空。');

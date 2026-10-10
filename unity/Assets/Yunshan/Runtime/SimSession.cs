@@ -18,8 +18,10 @@ namespace Yunshan.Runtime
         public enum Phase { Starting, Ready, Failed }
         public Phase State { get; private set; } = Phase.Starting;
         public string Status { get; private set; } = "正在启动权威模拟……";
-        public string Layout { get; private set; } = World.CurrentCityLayout;
+        public string Layout { get; private set; } = Yunshan.Core.World.CurrentCityLayout;
         public double Seed { get; private set; } = 20261001;
+        /// <summary>The world the host simulates, sent by it after opening (null until Ready).</summary>
+        public WorldDefinition World { get; private set; }
         public SimFrame Frame { get; private set; }
         public SimFrame PreviousFrame { get; private set; }
         public float FrameArrivedAt { get; private set; }
@@ -71,10 +73,11 @@ namespace Yunshan.Runtime
                         mainThread.Enqueue(() => Say("原存档无法读取，已开新城：" + error.Message, false));
                         opened = await client.Open(null);
                     }
+                    var world = await client.World();
                     var frame = await client.Step(0, "walk", null, null, 260, 0);
                     mainThread.Enqueue(() =>
                     {
-                        Layout = Json.Str(opened, "layout", World.CurrentCityLayout); Seed = Json.Num(opened, "seed", 20261001);
+                        Layout = Json.Str(opened, "layout", Yunshan.Core.World.CurrentCityLayout); Seed = Json.Num(opened, "seed", 20261001); World = world;
                         Accept(frame, true);
                         State = Phase.Ready; Status = $"模拟就绪：{Json.Num(opened, "citizens")} 位居民 · {Json.Num(opened, "vehicles")} 辆载具";
                     });
