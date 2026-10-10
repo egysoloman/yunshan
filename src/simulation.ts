@@ -9,7 +9,7 @@ import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy 
 import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
-import { allocateExports, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
+import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
 import { closeFiscalDay, councilTaxRate, profitTaxSplit, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
@@ -2203,7 +2203,11 @@ export class Simulation implements SimulationAPI {
       if ((kind === 'farm' || kind === 'dock') && foodSurplus) return [{ shopId: shop.id, surplus: shop.inventory - FOOD_EXPORT_LINE, price: WORLD_FOOD_PRICE }];
       return [];
     });
+    // foreign-trade-v2: materials leave only from the city-wide surplus.
+    const materialSites = offers.filter(offer => this.shopCommodity(this.state.shops.find(s => s.id === offer.shopId)!) === 'materials');
+    let materialRoom = this.runtime.foreignTradePolicyId === FOREIGN_TRADE_POLICY_V2 ? cityMaterialSurplus(materialSites.map(offer => offer.surplus + MATERIAL_EXPORT_LINE)) : Infinity;
     for (const sale of allocateExports(offers, EXPORT_UNITS_PER_HOUR * Math.min(hours, 24))) {
+      if (materialRoom !== Infinity && materialSites.some(offer => offer.shopId === sale.shopId)) { sale.quantity = Math.min(sale.quantity, Math.floor(materialRoom)); if (sale.quantity < 1) continue; materialRoom -= sale.quantity; }
       const shop = this.state.shops.find(s => s.id === sale.shopId)!, gross = sale.quantity * sale.price, net = gross * (1 - this.state.taxRate);
       if (this.shopFunds(shop) + net > 1e9) continue;
       shop.inventory -= sale.quantity; this.transferShopFunds(shop, net); this.runtime.taxes += gross - net;

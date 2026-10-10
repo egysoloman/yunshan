@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
-import { allocateExports, EXPORT_UNITS_PER_HOUR, FOREIGN_TRADE_POLICY, MATERIAL_EXPORT_LINE, validateForeignTradePolicy } from '../src/simulation/foreign-trade';
+import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOREIGN_TRADE_POLICY, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, validateForeignTradePolicy } from '../src/simulation/foreign-trade';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -28,8 +28,8 @@ test('the hour\'s cargo capacity goes to the largest surpluses first in whole un
 
 test('a new product city declares trade and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.foreignTradePolicyId, FOREIGN_TRADE_POLICY);
-  assert.equal(doc.foreignTradePolicyId, FOREIGN_TRADE_POLICY); assert.deepEqual(doc.runtime.foreignTrade, trade);
+  assert.equal(city.foreignTradePolicyId, FOREIGN_TRADE_POLICY_V2);
+  assert.equal(doc.foreignTradePolicyId, FOREIGN_TRADE_POLICY_V2); assert.deepEqual(doc.runtime.foreignTrade, trade);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   const archive = createArchivedProductCity(world);
@@ -54,4 +54,19 @@ test('surplus workshop materials are exported at the settlement hour as new taxe
   const before = exports.length; shop.inventory = MATERIAL_EXPORT_LINE + 2000;
   for (let tick = 0; tick < 60; tick++) sim.step(.25);
   assert.equal(exports.length, before, 'a closed city exports nothing');
+});
+
+test('v2 exports materials only from the city-wide surplus, never from one full workshop while the city is short', () => {
+  assert.equal(cityMaterialSurplus([MATERIAL_EXPORT_LINE + 50, MATERIAL_EXPORT_LINE - 80]), 0, 'one rich site cannot drain a short city');
+  assert.equal(cityMaterialSurplus([MATERIAL_EXPORT_LINE + 50, MATERIAL_EXPORT_LINE - 20]), 30);
+  assert.equal(cityMaterialSurplus([]), 0);
+  validateForeignTradePolicy({ version: 4, motionVersion: 2, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, runtime: { npcMotionVersion: 2, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, foreignTrade: { enabled: true, exportedUnits: 0, exportGross: 0 } } });
+  const world = createProductWorld(), sim = createCurrentProductCity(world), exported: { shopId?: string; quantity?: number }[] = [];
+  (sim as unknown as { bus: { on(type: string, f: (e: { shopId?: string; quantity?: number }) => void): void } }).bus.on('foreign-export', e => exported.push(e));
+  sim.command({ type: 'speed', value: 8 });
+  const workshops = sim.state.shops.filter(s => world.buildings.find(b => b.id === s.buildingId && b.kind === 'workshop' && !b.facility));
+  for (const shop of workshops) shop.inventory = 20;
+  workshops[0].inventory = MATERIAL_EXPORT_LINE + 2000;
+  for (let tick = 0; tick < 60; tick++) sim.step(.25);
+  assert.equal(exported.filter(e => workshops.some(w => w.id === e.shopId)).length, 0, 'the city as a whole has no material surplus');
 });

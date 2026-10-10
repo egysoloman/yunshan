@@ -9,8 +9,19 @@
  * the seller keeps the net and the city taxes it at its business rate. The
  * elected mayor may close or reopen trade; a city without a mayor keeps it open. */
 export const FOREIGN_TRADE_POLICY = 'foreign-trade-v1' as const;
-export type ForeignTradePolicy = typeof FOREIGN_TRADE_POLICY;
-export const FOREIGN_TRADE_POLICIES: readonly ForeignTradePolicy[] = [FOREIGN_TRADE_POLICY];
+/** v2 (2026-10-10): v1 exported each workshop's stock above the line even
+ * while the city as a whole was short: with v4 workshop output a probe
+ * exported ~580 units in 2.3 days while total stock kept falling, so public
+ * upkeep would still run dry. A v2 city exports materials only from its
+ * city-wide surplus: total workshop stock above (workshops × line). */
+export const FOREIGN_TRADE_POLICY_V2 = 'foreign-trade-v2' as const;
+export type ForeignTradePolicy = typeof FOREIGN_TRADE_POLICY | typeof FOREIGN_TRADE_POLICY_V2;
+export const FOREIGN_TRADE_POLICIES: readonly ForeignTradePolicy[] = [FOREIGN_TRADE_POLICY, FOREIGN_TRADE_POLICY_V2];
+
+/** v2: the city-wide material surplus available to export this hour. */
+export function cityMaterialSurplus(stocks: readonly number[]): number {
+  return Math.max(0, stocks.reduce((sum, stock) => sum + stock, 0) - stocks.length * MATERIAL_EXPORT_LINE);
+}
 export const EXPORT_UNITS_PER_HOUR = 60;
 export const MATERIAL_EXPORT_LINE = 90;
 export const FOOD_EXPORT_LINE = 200;

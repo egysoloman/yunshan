@@ -11,14 +11,25 @@ export const STAFFED_FARM_YIELD_POLICY_V2 = 'staffed-farm-yield-v2' as const;
  * per unit; labour without inputs yields at half that rate. Producers buy
  * inputs from workshops with their own cash, as a taxed wholesale. */
 export const STAFFED_FARM_YIELD_POLICY_V3 = 'staffed-farm-yield-v3' as const;
-export type FarmYieldPolicy = typeof STAFFED_FARM_YIELD_POLICY | typeof STAFFED_FARM_YIELD_POLICY_V2 | typeof STAFFED_FARM_YIELD_POLICY_V3;
-export const FARM_YIELD_POLICIES: readonly FarmYieldPolicy[] = [STAFFED_FARM_YIELD_POLICY, STAFFED_FARM_YIELD_POLICY_V2, STAFFED_FARM_YIELD_POLICY_V3];
+/** v4 (production side, 2026-10-10): v3 left workshops at the original 30
+ * minutes per unit while adding farm inputs to their buyers. A two-day probe
+ * measured workshop output 397–483 units/day against 734 drawn (public upkeep
+ * 445, farm inputs 228, police ~60); the 14-day v8 audit ran out of materials
+ * on day 11.5, public supply failed, energy fell below the shops' 25% line and
+ * every shop closed. A staffed workshop now yields one unit per 15 attended
+ * minutes. Food producers, prices, wages, hours and every actor's movement
+ * are those of v3. */
+export const STAFFED_FARM_YIELD_POLICY_V4 = 'staffed-farm-yield-v4' as const;
+export type FarmYieldPolicy = typeof STAFFED_FARM_YIELD_POLICY | typeof STAFFED_FARM_YIELD_POLICY_V2 | typeof STAFFED_FARM_YIELD_POLICY_V3 | typeof STAFFED_FARM_YIELD_POLICY_V4;
+export const FARM_YIELD_POLICIES: readonly FarmYieldPolicy[] = [STAFFED_FARM_YIELD_POLICY, STAFFED_FARM_YIELD_POLICY_V2, STAFFED_FARM_YIELD_POLICY_V3, STAFFED_FARM_YIELD_POLICY_V4];
 export const FARM_INPUT_PER_UNIT = .1;
 /** A producer reorders below this input stock, up to FARM_INPUT_ORDER_TARGET. */
 export const FARM_INPUT_REORDER = 6;
 export const FARM_INPUT_ORDER_TARGET = 24;
 export const UNAIDED_FOOD_RATE = .5;
-export const farmInputsUsed = (policy: FarmYieldPolicy | undefined) => policy === STAFFED_FARM_YIELD_POLICY_V3;
+export const farmInputsUsed = (policy: FarmYieldPolicy | undefined) => policy === STAFFED_FARM_YIELD_POLICY_V3 || policy === STAFFED_FARM_YIELD_POLICY_V4;
+export const STAFFED_WORKSHOP_LABOR_MINUTES_PER_UNIT_V4 = 15;
+const staffedFood = (policy: FarmYieldPolicy | undefined) => policy === STAFFED_FARM_YIELD_POLICY_V2 || policy === STAFFED_FARM_YIELD_POLICY_V3 || policy === STAFFED_FARM_YIELD_POLICY_V4;
 
 /** Original rule: every producer turns 30 attended, powered labour minutes into one unit. */
 export const LEGACY_LABOR_MINUTES_PER_UNIT = 30;
@@ -39,12 +50,12 @@ export const STAFFED_FOOD_PRODUCER_STOCK_CAP_V2 = 240;
 const food = (kind: BuildingKind) => kind === 'farm' || kind === 'dock';
 
 export function laborMinutesPerUnit(policy: FarmYieldPolicy | undefined, kind: BuildingKind): number {
-  if (!food(kind)) return LEGACY_LABOR_MINUTES_PER_UNIT;
-  return policy === STAFFED_FARM_YIELD_POLICY_V2 || policy === STAFFED_FARM_YIELD_POLICY_V3 ? STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2 : policy === STAFFED_FARM_YIELD_POLICY ? STAFFED_FOOD_LABOR_MINUTES_PER_UNIT : LEGACY_LABOR_MINUTES_PER_UNIT;
+  if (!food(kind)) return policy === STAFFED_FARM_YIELD_POLICY_V4 && kind === 'workshop' ? STAFFED_WORKSHOP_LABOR_MINUTES_PER_UNIT_V4 : LEGACY_LABOR_MINUTES_PER_UNIT;
+  return staffedFood(policy) ? STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2 : policy === STAFFED_FARM_YIELD_POLICY ? STAFFED_FOOD_LABOR_MINUTES_PER_UNIT : LEGACY_LABOR_MINUTES_PER_UNIT;
 }
 /** Production and food hiring stop at this producer stock. */
 export function producerStockCap(policy: FarmYieldPolicy | undefined, kind: BuildingKind): number {
-  return (policy === STAFFED_FARM_YIELD_POLICY_V2 || policy === STAFFED_FARM_YIELD_POLICY_V3) && food(kind) ? STAFFED_FOOD_PRODUCER_STOCK_CAP_V2 : LEGACY_PRODUCER_STOCK_CAP;
+  return staffedFood(policy) && food(kind) ? STAFFED_FOOD_PRODUCER_STOCK_CAP_V2 : LEGACY_PRODUCER_STOCK_CAP;
 }
 
 /** The envelope and runtime declare the same explicit new-city policy. */

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
-import { LEGACY_LABOR_MINUTES_PER_UNIT, LEGACY_PRODUCER_STOCK_CAP, laborMinutesPerUnit, producerStockCap, STAFFED_FARM_YIELD_POLICY, STAFFED_FARM_YIELD_POLICY_V2, STAFFED_FARM_YIELD_POLICY_V3, FARM_INPUT_PER_UNIT, foodOutputWithInputs, UNAIDED_FOOD_RATE, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2, STAFFED_FOOD_PRODUCER_STOCK_CAP_V2, validateFarmYieldPolicy } from '../src/simulation/farm-yield';
+import { LEGACY_LABOR_MINUTES_PER_UNIT, LEGACY_PRODUCER_STOCK_CAP, laborMinutesPerUnit, producerStockCap, STAFFED_FARM_YIELD_POLICY, STAFFED_FARM_YIELD_POLICY_V2, STAFFED_FARM_YIELD_POLICY_V3, STAFFED_FARM_YIELD_POLICY_V4, STAFFED_WORKSHOP_LABOR_MINUTES_PER_UNIT_V4, FARM_INPUT_PER_UNIT, foodOutputWithInputs, UNAIDED_FOOD_RATE, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2, STAFFED_FOOD_PRODUCER_STOCK_CAP_V2, validateFarmYieldPolicy } from '../src/simulation/farm-yield';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -34,9 +34,9 @@ test('only food producers of a declared city change yield; workshops and legacy 
 
 test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V3);
-  assert.equal(doc.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V3); assert.equal(doc.runtime.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V3);
-  assert.deepEqual(doc.runtime.farmInputs, {}, 'a v3 city starts with no farm inputs');
+  assert.equal(city.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V4);
+  assert.equal(doc.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V4); assert.equal(doc.runtime.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V4);
+  assert.deepEqual(doc.runtime.farmInputs, {}, 'a v4 city starts with no farm inputs');
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
@@ -71,4 +71,16 @@ test('v3 staffed food producers buy workshop materials as taxed wholesale inputs
   assert.ok(Number.isFinite(materials()));
   const saved = sim.exportSave(), reader = createCurrentProductCity(world);
   assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
+});
+
+test('v4 keeps every v3 food rule and staffs workshops at 15 minutes per unit', () => {
+  assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY_V4, 'workshop'), STAFFED_WORKSHOP_LABOR_MINUTES_PER_UNIT_V4);
+  assert.equal(STAFFED_WORKSHOP_LABOR_MINUTES_PER_UNIT_V4, 15);
+  for (const kind of ['farm', 'dock'] as const) {
+    assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY_V4, kind), laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY_V3, kind));
+    assert.equal(producerStockCap(STAFFED_FARM_YIELD_POLICY_V4, kind), producerStockCap(STAFFED_FARM_YIELD_POLICY_V3, kind));
+  }
+  assert.equal(producerStockCap(STAFFED_FARM_YIELD_POLICY_V4, 'workshop'), LEGACY_PRODUCER_STOCK_CAP);
+  assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY_V3, 'workshop'), LEGACY_LABOR_MINUTES_PER_UNIT, 'v3 cities keep their workshops');
+  validateFarmYieldPolicy({ version: 4, motionVersion: 2, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, runtime: { npcMotionVersion: 2, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4 } });
 });

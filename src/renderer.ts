@@ -11,7 +11,7 @@ import { samplePolyline, terrainHeight } from './world';
 import { RoadClosureOverlay } from './rendering/road-closures';
 import { getFloorDimensions, getStairPosition } from './access';
 import { buildLandscape } from './rendering/terrain';
-import { createRoofGeometry, type RoofProfile } from './rendering/architecture-layout';
+import { createRoofGeometry, roofHeightAt, type RoofProfile } from './rendering/architecture-layout';
 import { buildProgramArchitecture, type ArchitectureTemplate } from './rendering/architecture-bodies';
 import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floor-plan';
 import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering/architecture-detail';
@@ -41,7 +41,10 @@ import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_T
  * their own tops. Halls take a hip roof, everyday buildings an overhanging gable. */
 const HIP_ROOF_KINDS = new Set(['school', 'hall', 'clinic', 'bank', 'police', 'temple']);
 const BARE_ROOF_KINDS = new Set(['station', 'airport', 'starport', 'core', 'pavilion']);
-export function programRoofShell(b: Building, parts: readonly { position: Vec3; size: Vec3; floor: number; roof: boolean }[]): { form: 'hip' | 'gable'; width: number; depth: number; rise: number; color: string; position: Vec3; floor: number } | null {
+/** R3 first step: a hall of two or more storeys gets a second, lower eave
+ * (重檐) — a hip ring one storey below the top, wrapped around the walls. */
+export interface RoofSkirt { width: number; depth: number; rise: number; position: Vec3; floor: number; hole: [number, number, number, number] }
+export function programRoofShell(b: Building, parts: readonly { position: Vec3; size: Vec3; floor: number; roof: boolean }[]): { form: 'hip' | 'gable'; width: number; depth: number; rise: number; color: string; position: Vec3; floor: number; skirt?: RoofSkirt } | null {
   if (BARE_ROOF_KINDS.has(b.kind) || b.id === 'core-main' || b.facility || b.floors > 7) return null;
   // The shell sits on the body's actual top roof (local frame), never on the plot.
   const roofs = parts.filter(p => p.roof), top = Math.max(...roofs.map(p => p.position.y + p.size.y / 2));
@@ -54,7 +57,16 @@ export function programRoofShell(b: Building, parts: readonly { position: Vec3; 
   // A loose cluster of small tops (courtyard compounds) is left as it is: one roof over it would float.
   if (!(w > 2 && d > 2) || area / (w * d) < .7) return null;
   const overhang = Math.min(3, Math.max(.8, Math.min(w, d) * .08)), rise = Math.min(11, Math.max(1.8, Math.min(w, d) * .4)), hip = HIP_ROOF_KINDS.has(b.kind);
-  return { form: hip ? 'hip' : 'gable', width: w + overhang * 2, depth: d + overhang * 2, rise, color: hip ? '#2c4d48' : '#38504c', position: { x: (x0 + x1) / 2, y: top, z: (z0 + z1) / 2 }, floor: Math.max(0, floor) };
+  const centre = { x: (x0 + x1) / 2, y: top, z: (z0 + z1) / 2 }, storey = b.height / Math.max(1, b.floors);
+  let skirt: RoofSkirt | undefined;
+  if (hip && floor >= 1 && top - storey > 2.5) {
+    // The ring's inner edge meets the wall; its outer eave reaches 2.2× the main overhang.
+    const reach = overhang * 2.2, W = w + reach * 2, D = d + reach * 2, ringRise = Math.min(4, Math.max(1.2, reach * .9));
+    // Scale the hip profile so the eave sits ringRise below where the ring meets the wall.
+    const inner = Math.min(roofHeightAt('hip', w / 2 / W, 0), roofHeightAt('hip', 0, d / 2 / D)), eave = roofHeightAt('hip', 0, .5), scale = ringRise / Math.max(.05, inner - eave);
+    skirt = { width: W, depth: D, rise: scale, position: { ...centre, y: top - storey + .3 - scale * inner }, floor: Math.max(0, floor - 1), hole: [-w / 2 / W, w / 2 / W, -d / 2 / D, d / 2 / D] };
+  }
+  return { form: hip ? 'hip' : 'gable', width: w + overhang * 2, depth: d + overhang * 2, rise, color: hip ? '#2c4d48' : '#38504c', position: centre, floor: Math.max(0, floor), skirt };
 }
 const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad' };
 type MaterialKey = keyof typeof PALETTE;
@@ -521,7 +533,9 @@ export class CityRenderer implements CityRendererAPI {
       // One roof profile in both levels of detail: switching LOD never changes a roof.
       const shell = programRoofShell(b, programParts);
       if (shell) { const at = buildingWorldPosition(b, shell.position);
-        batch.box('roof', at.x, at.y + .12, at.z, shell.width, shell.rise, shell.depth, shell.color, b.rotation, { building: b.id, floor: shell.floor, roof: true }, { form: shell.form, simple: true }); }
+        batch.box('roof', at.x, at.y + .12, at.z, shell.width, shell.rise, shell.depth, shell.color, b.rotation, { building: b.id, floor: shell.floor, roof: true }, { form: shell.form, simple: true });
+        if (shell.skirt) { const ring = buildingWorldPosition(b, shell.skirt.position);
+          batch.box('roof', ring.x, ring.y, ring.z, shell.skirt.width, shell.skirt.rise, shell.skirt.depth, shell.color, b.rotation, { building: b.id, floor: shell.skirt.floor, roof: true }, { form: 'hip', simple: true, innerHole: shell.skirt.hole }); } }
       return;
     }
     const w = b.width, d = b.depth, height = b.height, base = b.position.y + .6, floors = Math.max(1, b.floors), fh = height / floors, basements = Math.max(0, b.basements ?? 0);
