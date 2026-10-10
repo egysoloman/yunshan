@@ -128,7 +128,10 @@ export function buildLandscape(world: WorldDefinition): {
     const y = terrainHeight(world, x, z, includeBasements);
     const result = quantize(y); heightCache.set(key, result); return result;
   }
-  const palette = { rock: new THREE.Color('#63746e'), cliff: new THREE.Color('#8b9487'), soil: new THREE.Color('#8b7859'), grass: new THREE.Color('#5a7542'), gravel: new THREE.Color('#b3b5a0'), wet: new THREE.Color('#608981') };
+  // R1 palette (docs/设计/美术与渲染改造方案.md W2): deeper, cooler grass that stays
+  // green under the golden display sun. (Flat untextured district paving was tried
+  // and read as sand; stone courts belong to the rebuilt ground, R2.)
+  const palette = { rock: new THREE.Color('#63746e'), cliff: new THREE.Color('#8b9487'), soil: new THREE.Color('#8b7859'), grass: new THREE.Color('#4a6a4c'), gravel: new THREE.Color('#b3b5a0'), wet: new THREE.Color('#608981') };
   function groundColor(x: number, z: number, y: number, slope: number, side = false) {
     const r = riverAt(x, z), field = Math.sin(x / 43) * Math.cos(z / 58), broad = Math.sin(x / 240 + z / 180);
     let color: THREE.Color;
