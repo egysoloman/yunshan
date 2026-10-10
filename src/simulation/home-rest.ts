@@ -89,6 +89,19 @@ export function homeRestPointBlockedByVoxels(position: Vec3, voxels: readonly { 
   });
 }
 
+/** A body already overlapping a placed cube (the cube was placed onto it) may
+ * step only away from it: every cube blocking `to` must also block `from` and
+ * be no nearer at `to` (inside the cube's own core the gap stays 0). It never lets a body enter a cube it was clear of. */
+export function voxelEscapeAllowed(from: Vec3, to: Vec3, voxels: readonly { position: Vec3 }[]): boolean {
+  const gap = (v: { position: Vec3 }, p: Vec3) => {
+    if (v.position.y + .1 <= p.y + .01 || v.position.y - .1 >= p.y + 1.72) return Infinity;
+    const dx = Math.max(Math.abs(v.position.x - p.x) - .1, 0), dz = Math.max(Math.abs(v.position.z - p.z) - .1, 0);
+    return dx * dx + dz * dz;
+  };
+  const limit = BODY_RADIUS * BODY_RADIUS - EPS;
+  return voxels.every(v => { const at = gap(v, to); if (at >= limit) return true; const was = gap(v, from); return was < limit && at >= was; });
+}
+
 /** NPC targets can avoid a player's actual occupied bed; sides are one bed. */
 export function homeRestBedOccupied(state: RestState, bedId: string): boolean {
   const session = state.homeRest?.session, player = state.player;

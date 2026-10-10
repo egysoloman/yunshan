@@ -224,11 +224,13 @@ export function installFamily(simulation: Simulation): void {
   };
   const homePossible = (ids: [string, string], homeId: string) => {
     const home = buildings.get(homeId); if (!home || home.kind !== 'home' || isCloseKin(state(), ids[0], ids[1])) return false;
-    const count = state().citizens.filter(person => alive(person.id) && person.homeId === home.id).length + Number(alive('player') && state().player.homeId === home.id);
-    if (count + ids.filter(id => actor(id)?.homeId !== home.id).length > home.capacity) return false;
+    // Every condition is a pure check; the cheap personal ones run before the city-wide resident count.
+    if (!ids.every(id => { const person = actor(id); return !!person && alive(id) && profile(id).age >= 18 && person.money >= 120 && (id === 'player' || simulation.buildingTravelDistance(home.id, (person as Citizen).workId) <= 500); })) return false;
     // Infants cannot independently travel; keep their established home until escorted travel exists.
     if (Object.entries(family().children).some(([id, child]) => alive(id) && profile(id).age < 6 && child.parentIds.some(parentId => ids.includes(parentId)) && actor(id)!.homeId !== home.id)) return false;
-    return ids.every(id => { const person = actor(id); return !!person && alive(id) && profile(id).age >= 18 && person.money >= 120 && (id === 'player' || simulation.buildingTravelDistance(home.id, (person as Citizen).workId) <= 500); });
+    let count = Number(alive('player') && state().player.homeId === home.id);
+    for (const person of state().citizens) if (person.homeId === home.id && alive(person.id)) count++;
+    return count + ids.filter(id => actor(id)?.homeId !== home.id).length <= home.capacity;
   };
   const moveTogether = (ids: [string, string], homeId: string): boolean => {
     const home = buildings.get(homeId);
@@ -260,12 +262,14 @@ export function installFamily(simulation: Simulation): void {
     if (now() >= f.nextBondAt - 1e-7 && f.bonds.length < 64) {
       f.nextBondAt = now() + 60;
       const singles = state().citizens.filter(person => !person.partnerId && alive(person.id) && profile(person.id).age >= 18 && profile(person.id).age <= 45 && profile(person.id).mood >= 65 && profile(person.id).stress <= 35 && person.needs.social >= 50);
+      // Courting actors: exactly those in an unmarried bond whose actors all live; new bonds join it below.
+      const courting = new Set(f.bonds.filter(bond => bond.stage !== 'married' && bond.actorIds.every(alive)).flatMap(bond => bond.actorIds));
+      const involved = (id: string) => courting.has(id);
       for (const first of singles) {
-        const involved = (id: string) => f.bonds.some(bond => bond.stage !== 'married' && bond.actorIds.every(alive) && bond.actorIds.includes(id));
         if (involved(first.id)) continue;
         const second = singles.find(person => person.id !== first.id && !involved(person.id) && !isCloseKin(state(), first.id, person.id) && Math.abs(profile(first.id).age - profile(person.id).age) <= 15 && distance(first.position, person.position) <= 12);
         if (!second) continue;
-        f.bonds.push({ actorIds: [first.id, second.id], stage: 'courtship', startedAt: now(), since: now(), sharedMinutes: 0, affection: [45, 45], trust: [35, 35], consent: [true, true] });
+        f.bonds.push({ actorIds: [first.id, second.id], stage: 'courtship', startedAt: now(), since: now(), sharedMinutes: 0, affection: [45, 45], trust: [35, 35], consent: [true, true] }); courting.add(first.id); courting.add(second.id);
         if (f.bonds.length >= 64) break;
       }
     }

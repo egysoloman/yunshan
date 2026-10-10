@@ -2,8 +2,9 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { Quality, Vec3, WorldDefinition } from '../types';
 import { getWaterfallPath, terrainHeight } from '../world';
+import { riverDressing, woodlandLayout, type WoodlandShrub, type WoodlandTree } from './woodland-layout';
 
-interface Block { x: number; y: number; z: number; w: number; h: number; d: number; color: THREE.Color }
+interface Block { x: number; y: number; z: number; w: number; h: number; d: number; color: THREE.Color; id?: number }
 interface Segment { a: Vec3; b: Vec3; width: number; cutting?: boolean; bridge?: boolean }
 interface Surface { positions: number[]; colors: number[]; indices: number[] }
 interface TerrainTile { x: number; z: number; coarse: THREE.Mesh; fine?: THREE.Group; fineStep?: number; used: number; indexStart: number; originalIndices: number[]; hidden: boolean }
@@ -49,6 +50,7 @@ export function createTreeCrownGeometry(lod: 'near' | 'far'): THREE.BufferGeomet
  * rocks/plants are generated only around the camera and evicted after use. */
 export function buildLandscape(world: WorldDefinition): {
   group: THREE.Group; water: THREE.ShaderMaterial[]; vegetation: THREE.Group;
+  woodland: { trees: readonly WoodlandTree[]; shrubs: readonly WoodlandShrub[]; setModelled(trees: ReadonlySet<number>, shrubs: ReadonlySet<number>): void };
   update(camera: Vec3, quality: Quality): void; dispose(): void;
 } {
   const group = new THREE.Group(), vegetation = new THREE.Group();
@@ -126,7 +128,10 @@ export function buildLandscape(world: WorldDefinition): {
     const y = terrainHeight(world, x, z, includeBasements);
     const result = quantize(y); heightCache.set(key, result); return result;
   }
-  const palette = { rock: new THREE.Color('#63746e'), cliff: new THREE.Color('#8b9487'), soil: new THREE.Color('#8b7859'), grass: new THREE.Color('#5a7542'), gravel: new THREE.Color('#b3b5a0'), wet: new THREE.Color('#608981') };
+  // R1 palette (docs/设计/美术与渲染改造方案.md W2): deeper, cooler grass that stays
+  // green under the golden display sun. (Flat untextured district paving was tried
+  // and read as sand; stone courts belong to the rebuilt ground, R2.)
+  const palette = { rock: new THREE.Color('#63746e'), cliff: new THREE.Color('#8b9487'), soil: new THREE.Color('#8b7859'), grass: new THREE.Color('#4a6a4c'), gravel: new THREE.Color('#b3b5a0'), wet: new THREE.Color('#608981') };
   function groundColor(x: number, z: number, y: number, slope: number, side = false) {
     const r = riverAt(x, z), field = Math.sin(x / 43) * Math.cos(z / 58), broad = Math.sin(x / 240 + z / 180);
     let color: THREE.Color;
@@ -265,27 +270,21 @@ export function buildLandscape(world: WorldDefinition): {
     const r = riverAt(x, z); return r.distance > r.width + margin && Math.hypot(x - world.waterfall.bottom.x, z - world.waterfall.bottom.z) > 56;
   }
   const trunks: Block[] = [], crowns: Block[] = [], bushes: Block[] = [];
-  // Woodland grows in overlapping stands along the actual neighbourhood edge
-  // and the mountain shoulder. Each stand retains its canopy mass in far LOD.
-  const stands = world.districts.filter(district => !['airport', 'starport'].includes(district.kind)).flatMap((district, index) => Array.from({ length: 8 }, (_, side) => {
-    const angle = side / 8 * Math.PI * 2 + index * .21, distance = district.radius * .86;
-    return { x: district.center.x + Math.cos(angle) * distance, z: district.center.z + Math.sin(angle) * distance, radius: 100 };
-  }));
-  for (const mountain of world.mountains) for (let side = 0; side < 5; side++) { const angle = side / 5 * Math.PI * 2; stands.push({ x: mountain.x + Math.cos(angle) * mountain.radius * .54, z: mountain.z + Math.sin(angle) * mountain.radius * .54, radius: 65 }); }
-  if (!stands.length) stands.push({ x: 0, z: 0, radius: world.size * .35 });
-  for (let i = 0; i < 70000 && trunks.length < 5200; i++) {
-    const stand = stands[i % stands.length], angle = hash(i, 38, world.seed) * Math.PI * 2, radius = Math.sqrt(hash(i, 73, world.seed)) * stand.radius;
-    const x = quantize(stand.x + Math.cos(angle) * radius), z = quantize(stand.z + Math.sin(angle) * radius), y = surfaceHeight(x, z);
-    if (y < 8 || y > 630 || !clearGround(x, z, 3)) continue;
-    if (Math.abs(surfaceHeight(x + 2, z) - y) > 8 || Math.abs(surfaceHeight(x, z + 2) - y) > 8) continue;
-    const height = quantize(16 + hash(i, 92, world.seed) * 15), species = Math.floor(i / stands.length) % 9;
-    const color = new THREE.Color(species === 0 ? '#ad6b3a' : species === 1 ? '#a79541' : species === 2 ? '#6b854c' : '#365d40').lerp(new THREE.Color('#83986c'), hash(i, 91, world.seed) * .35);
-    trunks.push({ x, y: y + height * .35, z, w: .8, h: height * .7, d: .8, color: new THREE.Color('#6b5c45') });
+  // Positions, species and heights come from the shared woodland layout (also
+  // used by the Unity client). Heights are the studio models' own: when the
+  // model pool draws a tree, its blocks here are hidden (setModelled).
+  const layout = woodlandLayout(world), stands = { length: layout.stands };
+  for (const tree of layout.trees) {
+    const { x, y, z, height, species, id } = tree;
+    const color = new THREE.Color(species === 0 ? '#ad6b3a' : species === 1 ? '#a79541' : species === 2 ? '#6b854c' : '#365d40').lerp(new THREE.Color('#83986c'), hash(id, 91, world.seed) * .35);
+    trunks.push({ x, y: y + height * .35, z, w: .8, h: height * .7, d: .8, color: new THREE.Color('#6b5c45'), id });
     // Each tier has projecting voxel branches, leaving light between crowns.
-    for (let tier = 0; tier < 4; tier++) { const width = quantize(height * (.84 - tier * .13)); crowns.push({ x: x + (tier % 2 ? 1 : -1) * height * .11, y: y + height * (.49 + tier * .12), z: z + height * .075 * (tier - 1), w: width, h: quantize(height * .23), d: width * .8, color: color.clone().multiplyScalar(.85 + tier * .06) }); }
-    if (i % 2 === 0) bushes.push({ x: x + 3.2, y: y + .9, z: z + 2, w: 2.8, h: 1.8, d: 2.2, color: color.clone().lerp(new THREE.Color('#819169'), .2) });
+    for (let tier = 0; tier < 4; tier++) { const width = quantize(height * (.84 - tier * .13)); crowns.push({ x: x + (tier % 2 ? 1 : -1) * height * .11, y: y + height * (.49 + tier * .12), z: z + height * .075 * (tier - 1), w: width, h: quantize(height * .23), d: width * .8, color: color.clone().multiplyScalar(.85 + tier * .06), id }); }
   }
+  for (const shrub of layout.shrubs) bushes.push({ x: shrub.x, y: shrub.y + .9, z: shrub.z, w: 2.8, h: 1.8, d: 2.2, color: new THREE.Color('#6b854c').lerp(new THREE.Color('#819169'), .2), id: shrub.id });
   const forestChunks: { x: number; z: number; detail: THREE.Group; proxy: THREE.Group }[] = [];
+  const woodlandMeshes: { mesh: THREE.InstancedMesh; ids: number[]; shrub: boolean; original: Float32Array }[] = [];
+  const track = (parent: THREE.Group, blocks: Block[], shrub = false) => { if (!blocks.length) return; const mesh = parent.children.at(-1) as THREE.InstancedMesh; woodlandMeshes.push({ mesh, ids: blocks.map(b => b.id!), shrub, original: Float32Array.from(mesh.instanceMatrix.array as Float32Array) }); };
   const forest = new Map<string, { trunks: Block[]; crowns: Block[]; bushes: Block[] }>();
   for (const [key, blocks] of [['trunks', trunks], ['crowns', crowns], ['bushes', bushes]] as const) for (const block of blocks) {
     const cell = `${Math.floor(block.x / 384)}:${Math.floor(block.z / 384)}`, lists = forest.get(cell) ?? { trunks: [], crowns: [], bushes: [] };
@@ -294,13 +293,25 @@ export function buildLandscape(world: WorldDefinition): {
   for (const [key, lists] of forest) {
     const [x, z] = key.split(':').map(Number), detail = new THREE.Group(), proxy = new THREE.Group();
     detail.name = `林木近景 ${key}`; proxy.name = `远林冠影 ${key}`; vegetation.add(detail, proxy);
-    batch('山林树干', lists.trunks, rock, detail); batch('错层乔木冠', lists.crowns, crownLeaf, detail, nearCanopy); batch('山林灌木', lists.bushes, leaf, detail);
+    batch('山林树干', lists.trunks, rock, detail); track(detail, lists.trunks);
+    batch('错层乔木冠', lists.crowns, crownLeaf, detail, nearCanopy); track(detail, lists.crowns);
+    batch('山林灌木', lists.bushes, leaf, detail); track(detail, lists.bushes, true);
     const distantCrowns = lists.trunks.flatMap((t, i) => {
       const color = lists.crowns[i * 4]?.color ?? new THREE.Color('#527151');
       return [0, 1].map(tier => ({ ...t, x: t.x + (tier ? 1 : -1) * t.h * .15, y: t.y + t.h * (.42 + tier * .35), z: t.z + tier * t.h * .1, w: quantize(t.h * (tier ? .9 : 1.25)), h: quantize(t.h * .55), d: quantize(t.h * (tier ? .75 : 1.08)), color: color.clone().multiplyScalar(tier ? 1.08 : .92) }));
     });
-    batch('远林树干代理', lists.trunks, rock, proxy); batch('远林错层树冠代理', distantCrowns, crownLeaf, proxy, farCanopy);
+    batch('远林树干代理', lists.trunks, rock, proxy); track(proxy, lists.trunks);
+    batch('远林错层树冠代理', distantCrowns, crownLeaf, proxy, farCanopy); track(proxy, distantCrowns);
     detail.visible = false; forestChunks.push({ x: (x + .5) * 384, z: (z + .5) * 384, detail, proxy });
+  }
+  const zero = new THREE.Matrix4().makeScale(0, 0, 0).elements;
+  /** Hides the blocks of trees and shrubs whose studio model is drawn. */
+  function setModelled(trees: ReadonlySet<number>, shrubs: ReadonlySet<number>) {
+    for (const { mesh, ids, shrub, original } of woodlandMeshes) {
+      const hidden = shrub ? shrubs : trees, array = mesh.instanceMatrix.array as Float32Array;
+      for (let i = 0; i < ids.length; i++) array.set(hidden.has(ids[i]) ? zero : original.subarray(i * 16, i * 16 + 16), i * 16);
+      mesh.instanceMatrix.needsUpdate = true;
+    }
   }
 
   // The rock face is the actual continuous terrain shell. No floating or
@@ -308,21 +319,15 @@ export function buildLandscape(world: WorldDefinition): {
   // world-space material normals and the near shell keeps real stepped faces.
 
   const water: THREE.ShaderMaterial[] = [createWater(false), createWater(true)]; materials.add(water[0]); materials.add(water[1]);
-  const bankBlocks: Block[] = [], reeds: Block[] = [];
+  // Bank stones, reeds and foam come from the shared dressing (also drawn by Unity).
+  const dressing = riverDressing(world);
+  const bankBlocks: Block[] = dressing.stones.map(b => ({ ...b, color: new THREE.Color('#a5aaa0') })), reeds: Block[] = dressing.reeds.map(b => ({ ...b, color: new THREE.Color('#849a6b') }));
   const vertices: number[] = [], uvs: number[] = [], indices: number[] = []; let flowDistance = 0;
   for (let i = 0; i < world.river.length; i++) {
     const p = world.river[i], before = world.river[Math.max(0, i - 1)], after = world.river[Math.min(world.river.length - 1, i + 1)]; if (i) flowDistance += Math.hypot(p.x - before.x, p.z - before.z);
     const dx = after.x - before.x, dz = after.z - before.z, length = Math.hypot(dx, dz) || 1, nx = -dz / length, nz = dx / length, width = 12 + Math.min(i, 5) * .6;
     vertices.push(p.x + nx * width, p.y + .55, p.z + nz * width, p.x - nx * width, p.y + .55, p.z - nz * width); uvs.push(0, flowDistance / 40, 1, flowDistance / 40);
     if (i) { const n = i * 2; indices.push(n - 2, n, n - 1, n - 1, n, n + 1); }
-    if (!i) continue;
-    const segmentLength = Math.hypot(p.x - before.x, p.z - before.z), tangentX = -(p.z - before.z) / segmentLength, tangentZ = (p.x - before.x) / segmentLength;
-    for (let along = 0; along < segmentLength; along += 5.6) for (const side of [-1, 1]) {
-      const t = along / segmentLength, x = quantize(before.x + (p.x - before.x) * t + tangentX * (width + 2 + hash(along, i, world.seed) * 3) * side), z = quantize(before.z + (p.z - before.z) * t + tangentZ * (width + 2 + hash(along, i, world.seed) * 3) * side), y = surfaceHeight(x, z);
-      if (!clearGround(x, z, 1.2) || y > before.y + (p.y - before.y) * t + 9) continue;
-      bankBlocks.push({ x, y: y + .35, z, w: quantize(1.2 + hash(along, i + 2, world.seed) * 2.8), h: .6, d: quantize(1 + hash(along, i + 3, world.seed) * 2), color: new THREE.Color('#a5aaa0') });
-      if (along % 11.2 < 1) for (let stem = 0; stem < 4; stem++) reeds.push({ x: x + stem * .4, y: y + .8, z: z + stem % 2 * .4, w: .2, h: 1.6, d: .2, color: new THREE.Color('#849a6b') });
-    }
   }
   const streamGeometry = new THREE.BufferGeometry(); streamGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3)); streamGeometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2)); streamGeometry.setIndex(indices); streamGeometry.computeVertexNormals(); geometries.add(streamGeometry);
   const creek = new THREE.Mesh(streamGeometry, water[0]); creek.name = '瀑潭→清溪→水岸 · 共顶点连续水面'; creek.renderOrder = 2; group.add(creek);
@@ -335,8 +340,7 @@ export function buildLandscape(world: WorldDefinition): {
   const fall = new THREE.Mesh(fallGeometry, water[1]); fall.name = '云瀑 · 153m落差水帘'; fall.renderOrder = 3; group.add(fall);
   const poolGeometry = new THREE.CircleGeometry(50, 24); poolGeometry.rotateX(-Math.PI / 2); geometries.add(poolGeometry);
   const pool = new THREE.Mesh(poolGeometry, water[0]); pool.position.set(bottom.x, bottom.y + .6, bottom.z); pool.name = '瀑下潭 · 可见落水与下游接合'; pool.renderOrder = 2; group.add(pool);
-  const foam: Block[] = [];
-  for (let i = 0; i < 80; i++) { const angle = i * 2.39996, r = 3 + hash(i, 805, world.seed) * 21; foam.push({ x: quantize(bottom.x + Math.cos(angle) * r), y: bottom.y + .72, z: quantize(bottom.z + Math.sin(angle) * r), w: quantize(.8 + hash(i, 806, world.seed) * 2), h: .2, d: .4, color: new THREE.Color('#d3e9df') }); }
+  const foam: Block[] = dressing.foam.map(b => ({ ...b, color: new THREE.Color('#d3e9df') }));
   batch('瀑潭 · 体素泡沫', foam, rock);
   // Surface samples are build-time scratch data. Keeping all resolutions in a
   // permanent map would turn a landscape stream into an unbounded height cache.
@@ -381,9 +385,9 @@ export function buildLandscape(world: WorldDefinition): {
     heightCache.clear();
   }
   group.userData.water = { continuous: true, riverVertices: world.river.length * 2, plungePoolRadius: 50, waterfallDrop: top.y - bottom.y };
-  group.userData.woodland = { stands: stands.length, trees: trunks.length, canopyLayers: 4, farCanopyLayers: 2, distribution: 'continuous district rim belts and mountain shoulders', floatingRockBodies: 0,
+  group.userData.woodland = { stands: stands.length, trees: trunks.length, shrubs: bushes.length, heightsFrom: 'studio model bounds (woodland-layout.ts)', canopyLayers: 4, farCanopyLayers: 2, distribution: 'continuous district rim belts and mountain shoulders', floatingRockBodies: 0,
     sharedCrownGeometries: 2, nearCrownTriangles: nearCanopy.index!.count / 3, farCrownTriangles: farCanopy.index!.count / 3 };
-  return { group, water, vegetation, update, dispose() { group.traverse(object => { if (object instanceof THREE.InstancedMesh) object.dispose(); }); geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose()); group.clear(); } };
+  return { group, water, vegetation, woodland: { trees: layout.trees, shrubs: layout.shrubs, setModelled }, update, dispose() { group.traverse(object => { if (object instanceof THREE.InstancedMesh) object.dispose(); }); geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose()); group.clear(); } };
 }
 
 function hash(x: number, z: number, seed: number) { const value = Math.sin(x * 12.9898 + z * 78.233 + seed * .113) * 43758.5453; return value - Math.floor(value); }

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import type { Building, Vec3 } from '../types';
-import { getBuildingBody, getFloorPlanFixtures, getFloorPlanRoofRegions, getFloorPlanSlabRegions, rectangleCover, wallPanels, type Rect, type RoofRegion, type WallPanel } from '../architecture-floor-plan';
+import { getBuildingBody, getFloorPlanFixtures, getFloorPlanRoofRegions, getFloorPlanSlabRegions, rectangleCover, wallPanels, type FloorFixture, type Rect, type RoofRegion, type WallPanel } from '../architecture-floor-plan';
 
 /** Normalized, centre-anchored geometry; one template per roof orientation.
  * Its final instance bounds, rather than a second proxy envelope, describe the
@@ -91,7 +91,9 @@ export function programRoofPart(region: RoofRegion, timberFinish = false): Progr
 /** Null preserves every original emitter for all four historical layouts and
  * the landmark/pavilion. New bodies use the provider's rooms, holes, doors,
  * windows and exposed roofs; the far silhouette retains those same courts. */
-export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'): ProgramArchitecturePart[] | null {
+/** `skipFixture` leaves a fixture's display to another renderer (a studio
+ * asset); its solid and use point in the shared plan are unchanged. */
+export function buildProgramArchitecture(building: Building, lod: 'near' | 'far', options: { skipFixture?: (fixture: FloorFixture) => boolean } = {}): ProgramArchitecturePart[] | null {
   const body = getBuildingBody(building); if (!body) return null;
   const parts: ProgramArchitecturePart[] = [];
   const commercial = building.commercialGeometryRevision === 1;
@@ -153,6 +155,7 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
       // The table, bed and counter solids also belong to the shared plan.
       // Their display changes no inventory, wages or interaction state.
       for (const fixture of getFloorPlanFixtures(building, plan)) {
+        if (options.skipFixture?.(fixture)) continue;
         const r = fixture.rect, width = r.x1 - r.x0, depth = r.z1 - r.z0, { bottom, top } = fixture, height = top - bottom;
         const firstPart = parts.length;
         // These are resident structural batches, separate from the facade

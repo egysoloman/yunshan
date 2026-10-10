@@ -115,7 +115,9 @@ export class CitizenAppearancePool {
     this.body.name='居民 · 0.2m人体与衣饰合批';this.faces.name='居民 · 近景面孔彩绘合批';this.group.name='真实居民 · 衣饰步态与生命状态';
     for(const mesh of [this.body,this.faces]){mesh.count=0;mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);mesh.frustumCulled=false;this.group.add(mesh);}parent.add(this.group);
   }
-  update(state:SimState,cameraPosition:Vec3,_elapsed:number,renderDistance:number,quality:Quality='balanced'):void {
+  /** Per-resident displacement-driven motion, for the studio character pool. */
+  motionOf(id:string):{yaw:number;phase:number}|undefined{const m=this.motion.get(id);return m&&{yaw:m.yaw,phase:m.phase};}
+  update(state:SimState,cameraPosition:Vec3,_elapsed:number,renderDistance:number,quality:Quality='balanced',modelled:ReadonlySet<string>=new Set()):void {
     if(this.disposed)return;
     if(this.stateRef!==state){this.motion.clear();this.stateRef=state;}
     const visibleDistance=Math.min(renderDistance,quality==='low'?1000:1900),faceRange=faceDistance(quality),fullRange=quality==='low'?65:quality==='high'?180:110;
@@ -130,7 +132,7 @@ export class CitizenAppearancePool {
       const yaw=travel>.001&&travel<50?Math.atan2(dx,dz):previous?.yaw??initialYaw;
       const phase=(previous?.phase??0)+(walking&&!state.paused&&travel<50?travel*Math.PI/1.1:0);
       this.motion.set(citizen.id,{position:{...citizen.position},yaw,phase});
-      if(residents>=this.capacity||buried.has(citizen.id)||range>(dead?faceRange:visibleDistance)||!dead&&citizen.tier==='statistical')continue;
+      if(residents>=this.capacity||buried.has(citizen.id)||range>(dead?faceRange:visibleDistance)||!dead&&citizen.tier==='statistical'||modelled.has(citizen.id))continue;
       const pose={yaw,phase,walking,seated,dead},detail=!dead&&range<=fullRange?'near':'far',appearance=describeCitizen(citizen,profile,pose,detail);
       this.yawRotation.setFromAxisAngle(this.upAxis,yaw);
       for(const part of appearance.parts){

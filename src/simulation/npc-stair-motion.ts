@@ -41,12 +41,24 @@ export class NpcStairMotion {
   private readonly memberIndex = new WeakMap<Building, number>();
   private readonly counters = { routes: 0, materializations: 0, cacheHits: 0, geometryChecks: 0, staleLegs: 0, buildingScans: 0 };
 
-  constructor(world: WorldDefinition) {
-    this.world = world;
+  /** Sample length for validating and walking physical legs (see npc-motion-coarse.ts). */
+  private readonly step: () => number;
+  constructor(world: WorldDefinition, step: () => number = () => .05) {
+    this.world = world; this.step = step;
     world.buildings.forEach((building, index) => this.memberIndex.set(building, index));
   }
 
   stats() { return { ...this.counters }; }
+
+  // Within one simulation tick the world's floor plans are fixed: no phase
+  // edits geometry. Geometry fingerprints and body supports are then
+  // remembered for the rest of that tick only; every new tick (and every call
+  // outside a tick) reads the public descriptors again.
+  private tick: { geometry: Map<string, string>; support: Map<string, FloorSupport | null> } | null = null;
+  withinTick<T>(run: () => T): T {
+    const outer = this.tick; this.tick = outer ?? { geometry: new Map(), support: new Map() };
+    try { return run(); } finally { this.tick = outer; }
+  }
 
   private plans(b: Building, floors: readonly number[]): FloorPlan[] { return floors.map(floor => getBuildingFloorPlan(b, floor)).filter((plan): plan is FloorPlan => !!plan); }
 
@@ -63,6 +75,12 @@ export class NpcStairMotion {
   private geometry(b: Building, floors: readonly number[]): string {
     this.counters.geometryChecks++;
     if (!this.member(b)) throw new Error('physical stair building no longer belongs to this world');
+    const memo = this.tick?.geometry, key = memo ? `${this.memberIndex.get(b)}:${floors.join(',')}` : '';
+    const known = memo?.get(key); if (known !== undefined) return known;
+    const value = this.fingerprint(b, floors); memo?.set(key, value); return value;
+  }
+
+  private fingerprint(b: Building, floors: readonly number[]): string {
     // Floor plans are public mutable descriptors. Include their values rather
     // than relying on array identity, and inspect only this leg's nearby floors.
     return JSON.stringify([b.id, b.floorPlanProfile, b.stairGeometryRevision, b.commercialGeometryRevision, b.commercialRouteRevision,
@@ -72,6 +90,14 @@ export class NpcStairMotion {
 
   private support(b: Building, position: Vec3): FloorSupport | null {
     if (!finitePoint(position)) return null;
+    const memo = this.tick?.support;
+    if (!memo) return this.measuredSupport(b, position);
+    const coordinate = (n: number) => Object.is(n, -0) ? '-0' : String(n), key = `${this.memberIndex.get(b) ?? b.id}|${coordinate(position.x)}|${coordinate(position.y)}|${coordinate(position.z)}`;
+    if (memo.has(key)) return memo.get(key)!;
+    const value = this.measuredSupport(b, position); memo.set(key, value); return value;
+  }
+
+  private measuredSupport(b: Building, position: Vec3): FloorSupport | null {
     const nominal = Math.round((position.y - b.position.y - .6) / (b.height / b.floors));
     let best: FloorSupport | null = null;
     for (const floor of [nominal, nominal - 1, nominal + 1]) {
@@ -149,11 +175,16 @@ export class NpcStairMotion {
       }
     }
 
-    const witnesses: Witness[] = [];
+    const witnesses: Witness[] = [], length = Math.hypot(to.x - from.x, to.z - from.z);
     for (const b of this.world.buildings) {
       this.counters.buildingScans++;
-      const a = buildingLocalPosition(b, from), z = buildingLocalPosition(b, to);
       const margin = Math.max(b.width, b.depth) / 2 + 3;
+      // Every point of the leg's local bounding box lies within the leg's length
+      // of its start. Beyond the square's circumradius plus that length (and a
+      // metre for rotation rounding) the box test below must reject the site.
+      const reach = margin * Math.SQRT2 + length + 1, ox = from.x - b.position.x, oz = from.z - b.position.z;
+      if (Number.isFinite(reach) && ox * ox + oz * oz > reach * reach) continue;
+      const a = buildingLocalPosition(b, from), z = buildingLocalPosition(b, to);
       if (Math.min(a.x, z.x) > margin || Math.max(a.x, z.x) < -margin || Math.min(a.z, z.z) > margin || Math.max(a.z, z.z) < -margin) continue;
       const height = b.height / b.floors;
       if (!(height > 0) || !Number.isFinite(height)) continue;
@@ -214,7 +245,7 @@ export class NpcStairMotion {
         const first = this.support(b, leg.from), last = this.support(b, leg.to); if (!first || !last) return null;
         const part: NpcStairPart = { kind: 'riser', from: { ...leg.from }, to: { ...leg.to }, length: distance(leg.from, leg.to), fromFloor: first.floor, toFloor: last.floor, faces: entry };
         leg.parts.push(part); leg.length = part.length;
-        const samples = Math.max(1, Math.ceil(part.length / .05)); let previous = part.from;
+        const samples = Math.max(1, Math.ceil(part.length / this.step())); let previous = part.from;
         for (let i = 0; i <= samples; i++) {
           const position = interpolate(part.from, part.to, i / samples), support = this.pose(leg, part, position);
           if (!support || blocksFloorPlanMovement(b, support.floor, previous, position, BODY_RADIUS, EYE_HEIGHT)) return null;
@@ -258,7 +289,7 @@ export class NpcStairMotion {
     }
     if (!append(leg.to)) return null;
     for (const part of leg.parts) {
-      const samples = Math.max(1, Math.ceil(part.length / .05)); let previous = part.from;
+      const samples = Math.max(1, Math.ceil(part.length / this.step())); let previous = part.from;
       for (let i = 0; i <= samples; i++) {
         const position = interpolate(part.from, part.to, i / samples), support = this.pose(leg, part, position);
         if (!support || blocksFloorPlanMovement(b, support.floor, previous, position, BODY_RADIUS, EYE_HEIGHT)) return null;
@@ -352,7 +383,7 @@ export class NpcStairMotion {
       return { position, usedDistance, finishedLeg: allowed, blocked: !allowed };
     }
     while (remaining > 0 && cursor.piece < leg.parts.length) {
-      const part = leg.parts[cursor.piece], outstanding = part.length - cursor.offset, increment = Math.min(remaining, outstanding, .05), atEnd = increment === outstanding;
+      const part = leg.parts[cursor.piece], outstanding = part.length - cursor.offset, increment = Math.min(remaining, outstanding, this.step()), atEnd = increment === outstanding;
       const offset = atEnd ? part.length : cursor.offset + increment, proposed = atEnd ? { ...part.to } : interpolate(part.from, part.to, offset / part.length), support = this.pose(leg, part, proposed);
       if (!support || !callback(position, proposed, leg.building, support.floor) || blocksFloorPlanMovement(leg.building, support.floor, position, proposed, BODY_RADIUS, EYE_HEIGHT)) return { position, usedDistance, finishedLeg: false, blocked: true };
       cursor.offset = offset; position = proposed; usedDistance += increment; remaining -= increment;

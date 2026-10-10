@@ -1,0 +1,113 @@
+import type { NetworkEdge, Vehicle, WorldDefinition } from '../types';
+
+export const DEMAND_FOOD_FREIGHT_POLICY = 'demand-food-freight-v1' as const;
+/** v2 adds relay: an empty declared carrier at a junction of a district that
+ * is not short loads that district's waiting freight for a short district. */
+export const DEMAND_FOOD_FREIGHT_POLICY_V2 = 'demand-food-freight-v2' as const;
+/** v3 unloads only where markets can take the food. The 2-day probe of v2
+ * measured 1,235 units loaded a day yet 60% unloaded back in river (markets
+ * full) and workshop (no market), and every unload in academy, government,
+ * starport and core (no market) stayed unbought: with no district short, a
+ * v2 carrier unloaded where it stood. A v3 carrier holding food unloads only
+ * in a district whose markets are below the intake line; otherwise it keeps
+ * its cargo until a district is short. Relay is as in v2. Audit 7 then held
+ * 5,534 units in farms with waiting freight at 0 and two carriers loaded:
+ * empty carriers wandered the main roads and seldom reached a producer's
+ * door, the only place they load. An empty v3 carrier therefore turns at each
+ * junction onto the leg fewest hops from the nearest producer door holding a
+ * full load. The first probe of that held every carrier's opening cargo while
+ * no district was short, so carriers never emptied and loads fell from 45 to
+ * 0-7 a day: a loaded v3 carrier therefore always delivers, to the reachable
+ * market district with least food per market (short or not), and never to a
+ * district without markets. */
+export const DEMAND_FOOD_FREIGHT_POLICY_V3 = 'demand-food-freight-v3' as const;
+export type FoodFreightPolicy = typeof DEMAND_FOOD_FREIGHT_POLICY | typeof DEMAND_FOOD_FREIGHT_POLICY_V2 | typeof DEMAND_FOOD_FREIGHT_POLICY_V3;
+export const FOOD_FREIGHT_POLICIES: readonly FoodFreightPolicy[] = [DEMAND_FOOD_FREIGHT_POLICY, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3];
+
+/** Markets buy freight only while below this stock (Simulation shop batch). */
+export const MARKET_FREIGHT_INTAKE_LIMIT = 36;
+
+/** Declared new-city rule. The 14-day product audit with the staffed farm
+ * yield measured 4,738 freight units waiting unclaimed in river and 2,972 in
+ * workshop, where markets already held stock, while every market in the
+ * market, east, summit and west districts was empty: an unrouted carrier
+ * unloaded at the very next junction it reached. A declared carrier holding
+ * food now keeps a destination district (the reachable district whose markets
+ * hold the least food per market, counting waiting freight and cargo already
+ * bound there), turns at each junction onto the open leg nearest that district,
+ * and unloads only on arrival. Speeds, capacities, prices, payments, opening
+ * hours and every passenger rule are unchanged; with no district short of
+ * food the carrier unloads where it stands, as before. */
+export interface FreightDemand { districtId: string; markets: number; stock: number }
+
+/** The envelope and runtime declare the same explicit new-city policy. */
+export function validateFoodFreightPolicy(data: Record<string, any>): void {
+  const envelope = Object.hasOwn(data, 'foodFreightPolicyId');
+  const runtime = !!data.runtime && Object.hasOwn(data.runtime, 'foodFreightPolicyId');
+  if (!envelope && !runtime) return;
+  if (!envelope || !runtime || !FOOD_FREIGHT_POLICIES.includes(data.foodFreightPolicyId)
+    || data.runtime.foodFreightPolicyId !== data.foodFreightPolicyId
+    || data.version !== 4 || data.motionVersion !== 2 || data.runtime.npcMotionVersion !== 2) throw new Error('无效存档字段：food freight policy pair。');
+}
+
+/** Hop counts to the nearest node of each district over one vehicle mode,
+ * ignoring closures (the live departure list already excludes closed legs). */
+export class FreightHops {
+  private readonly cache = new Map<string, Map<string, number>>();
+  private readonly byMode = new Map<string, NetworkEdge[]>();
+  constructor(private readonly world: WorldDefinition) {
+    for (const edge of world.edges) { const list = this.byMode.get(edge.mode) ?? []; list.push(edge); this.byMode.set(edge.mode, list); }
+  }
+  /** Hop counts to one node over one vehicle mode. */
+  toNode(mode: Vehicle['kind'], nodeId: string): Map<string, number> { return this.search(`${mode}@${nodeId}`, mode, node => node.id === nodeId); }
+  hops(mode: Vehicle['kind'], districtId: string): Map<string, number> {
+    return this.search(`${mode}>${districtId}`, mode, node => node.districtId === districtId);
+  }
+  private search(key: string, mode: Vehicle['kind'], origin: (node: WorldDefinition['nodes'][number]) => boolean): Map<string, number> {
+    const cached = this.cache.get(key); if (cached) return cached;
+    const adjacent = new Map<string, string[]>();
+    for (const edge of this.byMode.get(mode) ?? []) {
+      (adjacent.get(edge.from) ?? adjacent.set(edge.from, []).get(edge.from)!).push(edge.to);
+      (adjacent.get(edge.to) ?? adjacent.set(edge.to, []).get(edge.to)!).push(edge.from);
+    }
+    const result = new Map<string, number>(), queue: string[] = [];
+    for (const node of this.world.nodes) if (origin(node) && adjacent.has(node.id)) { result.set(node.id, 0); queue.push(node.id); }
+    for (let head = 0; head < queue.length; head++) {
+      const id = queue[head], next = result.get(id)! + 1;
+      for (const neighbour of adjacent.get(id) ?? []) if (!result.has(neighbour)) { result.set(neighbour, next); queue.push(neighbour); }
+    }
+    this.cache.set(key, result);
+    return result;
+  }
+}
+
+/** True when a district's markets are at or above the intake line (or it has none). */
+export function districtSupplied(demand: readonly FreightDemand[], districtId: string): boolean {
+  const row = demand.find(r => r.districtId === districtId);
+  return !row || row.markets <= 0 || row.stock / row.markets >= MARKET_FREIGHT_INTAKE_LIMIT;
+}
+
+/** v3: the reachable district with markets holding least food per market,
+ * whether or not it is below the intake limit; ties go to the lower id. */
+export function leastStockedDistrict(hops: FreightHops, mode: Vehicle['kind'], nodeId: string, demand: readonly FreightDemand[]): string | null {
+  let best: { id: string; perMarket: number } | null = null;
+  for (const row of demand) {
+    if (row.markets <= 0 || !hops.hops(mode, row.districtId).has(nodeId)) continue;
+    const perMarket = row.stock / row.markets;
+    if (!best || perMarket < best.perMarket || perMarket === best.perMarket && row.districtId < best.id) best = { id: row.districtId, perMarket };
+  }
+  return best?.id ?? null;
+}
+
+/** The reachable district with the least food per market below the intake
+ * limit; ties go to the lower district id. Null when no district is short. */
+export function chooseFreightDestination(hops: FreightHops, mode: Vehicle['kind'], nodeId: string, demand: readonly FreightDemand[]): string | null {
+  let best: { id: string; perMarket: number } | null = null;
+  for (const row of demand) {
+    if (row.markets <= 0) continue;
+    const perMarket = row.stock / row.markets;
+    if (perMarket >= MARKET_FREIGHT_INTAKE_LIMIT || !hops.hops(mode, row.districtId).has(nodeId)) continue;
+    if (!best || perMarket < best.perMarket || perMarket === best.perMarket && row.districtId < best.id) best = { id: row.districtId, perMarket };
+  }
+  return best?.id ?? null;
+}
