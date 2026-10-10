@@ -13,8 +13,11 @@ export const ARCHITECTURAL_GEOMETRY_VERSION = FLOOR_PLAN_GEOMETRY_VERSION;
 /** current-v8 recipe identities, bound into its saved-world fingerprint. */
 export const STREET_RECIPE_VERSION = 'shared-smooth-streets-1';
 export const LOW_RISE_RECIPE_VERSION = 'low-rise-town-1';
+export const V8_TERRAIN_RECIPE_VERSION = 'plinth-shoulder-6';
 
 const UNIT = .2;
+/** current-v8: width of the step from a building's plinth down to natural ground. */
+const PLINTH_SHOULDER = 6;
 const q = (n: number) => Math.round(n / UNIT) * UNIT;
 const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
 const smooth = (n: number) => { n = clamp(n, 0, 1); return n * n * (3 - 2 * n); };
@@ -206,7 +209,10 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
   }
   // Adjacent houses sit on joined shoulders instead of isolated pointed
   // mounds. The wider shoulder ends before the untouched road centreline.
-  if (roadGap > 9 && foundationGap < 54) y += (foundationY - y) * (1 - smooth(foundationGap / 54)) * .82;
+  // current-v8 plinths: each building stands on its own flat terrace that ends
+  // in a steep step a few metres beyond the wall, instead of a 54 m soft hill.
+  const terraced = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion === 'current-v8', shoulder = terraced ? PLINTH_SHOULDER : 54;
+  if (roadGap > 9 && foundationGap < shoulder) y += (foundationY - y) * (1 - smooth(foundationGap / shoulder)) * (terraced ? 1 : .82);
   const reliefWeight = world.buildings.length ? smooth((foundationGap - 10) / 38) * smooth((roadGap - 12) / 20) * smooth((y - 14) / 22) : 0;
   // Long fault ridges and smaller fractures share the collision height. This
   // breaks evenly spaced proxy facets without shifting houses or rail stops.
@@ -218,7 +224,7 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
     const near = nearestSegment([a, b], x, z);
     if (near.distance > 7) continue;
     let valley = planningGroundHeight(world, x, z, includeBasements, false);
-    if (foundationGap < 54) valley += (foundationY - valley) * (1 - smooth(foundationGap / 54)) * .82;
+    if (foundationGap < shoulder) valley += (foundationY - valley) * (1 - smooth(foundationGap / shoulder)) * (terraced ? 1 : .82);
     valley += fracture * smooth((foundationGap - 10) / 38) * smooth((valley - 14) / 22);
     if (near.y - valley > 12) y = Math.min(y, valley);
   }

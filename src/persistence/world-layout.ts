@@ -1,4 +1,4 @@
-import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, ARCHITECTURAL_GEOMETRY_VERSION, LOW_RISE_RECIPE_VERSION, STREET_RECIPE_VERSION, createWorld } from '../world';
+import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, ARCHITECTURAL_GEOMETRY_VERSION, LOW_RISE_RECIPE_VERSION, STREET_RECIPE_VERSION, V8_TERRAIN_RECIPE_VERSION, createWorld } from '../world';
 import { cachedWorld, cachedWorldFingerprint } from './world-cache';
 import { MARKET_STATION_APRON_VERSION, MARKET_STATION_APRON_MAX_GRADE, MARKET_STATION_APRON_OFFSETS } from '../market-station-apron';
 import { parseSaveWithinResources } from './save-resource';
@@ -45,7 +45,7 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   } : undefined;
   // The new code-owned street recipe binds actual edge coordinates above;
   // these limits identify its authoritative grading contract. Old text is exact.
-  const streets = layout === 'current-v8' ? { algorithm: STREET_RECIPE_VERSION, fleet: world.fleetPlan } : layout === 'current-v7' ? { algorithm: MARKET_STATION_APRON_VERSION, maximumGrade: MARKET_STATION_APRON_MAX_GRADE, offsets: MARKET_STATION_APRON_OFFSETS } : undefined;
+  const streets = layout === 'current-v8' ? { algorithm: STREET_RECIPE_VERSION, fleet: world.fleetPlan, terrain: V8_TERRAIN_RECIPE_VERSION } : layout === 'current-v7' ? { algorithm: MARKET_STATION_APRON_VERSION, maximumGrade: MARKET_STATION_APRON_MAX_GRADE, offsets: MARKET_STATION_APRON_OFFSETS } : undefined;
   const legacyDescriptor = streets ? { ...geometry, terrain, architecture, streets } : architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry;
   const text = JSON.stringify(world.powerGrid ? { ...legacyDescriptor, powerGrid: world.powerGrid } : legacyDescriptor);
   let hash = 2166136261;
