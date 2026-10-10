@@ -17,8 +17,17 @@ export interface NetworkStructureOptions { dressesStations: boolean; dressesRunw
 /** Roads, rails, bridges, lifts, cables, supports, guardrails, station
  * platforms and junction poles, as the renderer has always drawn them. */
 export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink, options: NetworkStructureOptions): void {
+    // current-v8 streets bend at any angle: a square deck at each interior
+    // vertex (on the bisector) closes the wedge between rigid segment boxes,
+    // and a pad covers every street junction. Older layouts keep their boxes.
+    const anyAngleStreets = (world as WorldDefinition & { layoutVersion?: string }).layoutVersion === 'current-v8';
     for (const edge of world.edges) {
       if (edge.mode === 'flight') continue;
+      if (anyAngleStreets && edge.mode === 'road' && !edge.id.includes('runway')) for (let i = 1; i < edge.points.length - 1; i++) {
+        const a = edge.points[i - 1], p = edge.points[i], b = edge.points[i + 1], width = deckWidth(edge) - .04;
+        const yaw = Math.atan2(b.x - a.x, b.z - a.z);
+        sink.box('stone', p.x, p.y - .28, p.z, width, .5, width, '#555f61', yaw);
+      }
       let supportRemainder = 0;
       for (let i = 1; i < edge.points.length; i++) {
         const a = edge.points[i - 1], b = edge.points[i];
@@ -64,7 +73,7 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
       const p = node.position;
       // The studio pool draws platform and shelter at the same platform extent.
       if (node.station) { if (!options.dressesStations) { sink.box('stone', p.x, p.y - .6, p.z, 22, 1, 18); sink.box('cyan', p.x, p.y + .1, p.z + 8, 20, .2, .35); for (const x of [-8, 8]) { sink.box('wood', p.x + x, p.y + 3, p.z, .8, 6, .8); sink.box('amber', p.x + x, p.y + 5.7, p.z, 1.5, .35, 1.5); } sink.box('roof', p.x, p.y + 6.4, p.z, 23, .65, 11, undefined, 0, { roof: true }); } sink.box('wood', p.x + 12, p.y + 1.8, p.z + 11, .35, 3.6, .35); sink.box('wood', p.x + 12, p.y + 3.5, p.z + 11, 1, 1.6, .65); }
-      else if (node.id.includes('junction') || node.id.includes('road')) { sink.box('wood', p.x + 4, p.y + 2.2, p.z + 4, .4, 4.4, .4); }
+      else if (node.id.includes('junction') || node.id.includes('road')) { sink.box('wood', p.x + 4, p.y + 2.2, p.z + 4, .4, 4.4, .4); if (anyAngleStreets && node.id.startsWith('junction-')) sink.box('stone', p.x, p.y - .28, p.z, 11, .5, 11, '#555f61'); }
     }
 }
 

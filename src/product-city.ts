@@ -12,7 +12,7 @@ import { NPC_MOTION_COARSE_POLICY } from './simulation/npc-motion-coarse';
 import { DEMAND_FOOD_FREIGHT_POLICY_V3 } from './simulation/freight-delivery';
 import { upgradeServiceMaterialScheduling } from './host/upgrade-service-material-scheduling';
 
-export const PRODUCT_CITY_LAYOUT = 'current-v6' as const;
+export const PRODUCT_CITY_LAYOUT = 'current-v8' as const;
 
 /** Product recipe is explicit; compatibility createWorld() retains current-v6. */
 export function createProductWorld(seed = 20261001): ReturnType<typeof createWorld> {

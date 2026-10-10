@@ -5,11 +5,14 @@ import { isRoadOpen } from './roads';
 import { getFloorDimensions } from './access';
 import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
 
-export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6', 'current-v7'] as const;
+export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6', 'current-v7', 'current-v8'] as const;
 export type CityLayoutVersion = typeof CITY_LAYOUT_VERSIONS[number];
 export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v6';
 export const GEOLOGICAL_GEOMETRY_VERSION = 'yunshan-geology-v3-terraced-cellular-1';
 export const ARCHITECTURAL_GEOMETRY_VERSION = FLOOR_PLAN_GEOMETRY_VERSION;
+/** current-v8 recipe identities, bound into its saved-world fingerprint. */
+export const STREET_RECIPE_VERSION = 'shared-smooth-streets-1';
+export const LOW_RISE_RECIPE_VERSION = 'low-rise-town-1';
 
 const UNIT = .2;
 const q = (n: number) => Math.round(n / UNIT) * UNIT;
@@ -52,7 +55,7 @@ function indexFor(world: WorldDefinition) {
   if (!index) {
     index = { segments: new Map(), elevated: new Map(), buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: new Map() };
     const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' ? 70 : 14;
+    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8' ? 70 : 14;
     for (const b of world.buildings) {
       let halfWidth = b.width / 2, halfDepth = b.depth / 2;
       if (b.floorPlanProfile) {
@@ -206,7 +209,7 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
   const fracture = Math.sin(x * .036 + Math.sin(z * .012) * 1.7) * Math.cos(z * .027) * 3.2 + Math.sin((x + z * .72) * .081) * 1.1;
   y += fracture * reliefWeight;
   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
+  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
   if (roadGap < 9) for (const { edge, a, b } of index.segments.get(key(x, z)) ?? []) if (edge.mode === 'road' && !edge.id.includes('runway')) {
     const near = nearestSegment([a, b], x, z);
     if (near.distance > 7) continue;
@@ -643,18 +646,25 @@ function routeGroundGrid4(world: WorldDefinition, start: Vec3, end: Vec3, startB
   return dense;
 }
 
-/** R2 development street recipe (docs/设计/路网重做方案.md §3.1): the v5 world
- * with the smooth router, shared door streets and low-rise buildings. It is not a registered
- * layout and must not be saved; it exists to measure and show the new streets
- * until the full current-v8 recipe is frozen and registered. */
-export function createStreetWorld(seed = 20261001): WorldDefinition & { layoutVersion: CityLayoutVersion; streetRecipe: 'dev-streets' } {
-  const previous = streetRecipe; streetRecipe = 'smooth';
-  // Based on v5: the low-rise town has no commercial tower step.
-  try { return Object.assign(createWorld(seed, 'current-v5'), { streetRecipe: 'dev-streets' as const }); } finally { streetRecipe = previous; }
+/** The R2 rebuilt world (docs/设计/世界重建总方案.md): `current-v8`. */
+export function createStreetWorld(seed = 20261001): WorldDefinition & { layoutVersion: CityLayoutVersion } {
+  return createWorld(seed, 'current-v8');
 }
 
 export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = CURRENT_CITY_LAYOUT): WorldDefinition & { layoutVersion: CityLayoutVersion } {
   if (!CITY_LAYOUT_VERSIONS.includes(layoutVersion)) throw new Error('Unknown city layout version');
+  if (layoutVersion === 'current-v8') {
+    // R2 rebuilt world: the v5 generator with the smooth street router, shared
+    // door streets, an explicit road fleet and the low-rise town (decision 1).
+    // It has no commercial tower step. Saves bind to its own fingerprint.
+    const previous = streetRecipe; streetRecipe = 'smooth';
+    try {
+      const base = createWorld(seed, 'current-v5');
+      base.layoutVersion = 'current-v8';
+      indices.delete(base);
+      return base;
+    } finally { streetRecipe = previous; }
+  }
   if (layoutVersion === 'current-v7') {
     const base = createWorld(seed, 'current-v6');
     applyMarketStationApron(base);

@@ -2,7 +2,7 @@
  *   npx tsx scripts/roads/road-metrics.ts [v6|streets] [out-dir]
  * Prints a JSON summary; with out-dir also writes an SVG plan and zoom crops. */
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { createStreetWorld, createWorld } from '../../src/world';
+import { createStreetWorld, createWorld, terrainHeight } from '../../src/world';
 import type { NetworkEdge, Vec3, WorldDefinition } from '../../src/types';
 
 const which = process.argv[2] ?? 'v6', out = process.argv[3];
@@ -38,13 +38,19 @@ for (const e of roads) for (let i = 1; i < e.points.length; i++) {
   for (let s = 0; s <= n; s++) { const k = `${Math.floor((a.x + (b.x - a.x) * s / n) / 4)},${Math.floor((a.z + (b.z - a.z) * s / n) / 4)}`; (owners.get(k) ?? owners.set(k, new Set()).get(k)!).add(e.id); }
 }
 const shared = [...owners.values()].filter(s => s.size > 1).length;
+// Road samples every 4 m: deck hovering over (or buried under) the carved terrain.
+let hovering = 0, buried = 0, samples = 0;
+for (const e of roads) for (let i = 1; i < e.points.length; i++) {
+  const a = e.points[i - 1], b = e.points[i], n = Math.max(1, Math.ceil(h(a, b) / 4));
+  for (let s = 0; s < n; s++) { const t = s / n, x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, y = a.y + (b.y - a.y) * t, gap = y - .6 - terrainHeight(world, x, z); samples++; if (gap > 1.5) hovering++; else if (gap < -1.5) buried++; }
+}
 const result = {
   recipe: which, generationMs, buildings: world.buildings.length, roadEdges: roads.length, doorEdges: roads.filter(isDoor).length,
   nodes: world.nodes.length, junctions: world.nodes.filter(n => n.id.startsWith('junction-')).length,
   totalKm: +(length / 1000).toFixed(1), doorKm: +(roads.filter(isDoor).reduce((s, e) => s + e.length, 0) / 1000).toFixed(1),
   pathRatio: +(length / straight).toFixed(3), rightAnglesPerKm: +(right / (length / 1000)).toFixed(2),
   sharpTurnsPerKm: +(sharp / (length / 1000)).toFixed(2), axisShare: +(axis / length).toFixed(3),
-  sharedCellShare: +(shared / owners.size).toFixed(3), maxGrade: +maxGrade.toFixed(3), roadPoints: points,
+  sharedCellShare: +(shared / owners.size).toFixed(3), hoveringShare: +(hovering / samples).toFixed(4), buriedShare: +(buried / samples).toFixed(4), maxGrade: +maxGrade.toFixed(3), roadPoints: points,
 };
 console.log(JSON.stringify(result, null, 1));
 

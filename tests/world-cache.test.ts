@@ -34,6 +34,13 @@ test('a cached world is the generated world, as an independent copy with its sha
   const restored = restoreWorld(snapshotWorld(fresh)); assertSameGraph(fresh, restored);
 });
 
+test('the rebuilt current-v8 world caches with its fleet plan and shared junction points', () => {
+  const fresh = createWorld(20261001, 'current-v8'), cached = cachedWorld(20261001, 'current-v8');
+  assertSameGraph(fresh, cached);
+  assert.ok(cached.fleetPlan && cached.fleetPlan.length > 0);
+  assert.equal(cachedWorldFingerprint(20261001, 'current-v8', savedWorldFingerprint), savedWorldFingerprint(fresh));
+});
+
 test('packaged snapshots are used only beside the exact bundle that generated them', () => {
   const dir = mkdtempSync(join(tmpdir(), 'yunshan-worlds-')), bundle = join(dir, 'sim-host.mjs'), file = join(dir, 'worlds.json.gz');
   writeFileSync(bundle, 'bundle bytes');
