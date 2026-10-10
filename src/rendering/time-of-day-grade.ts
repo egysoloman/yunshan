@@ -45,7 +45,7 @@ export function timeOfDayGrade(hour: number, visibility: number): TimeOfDayGrade
   const clear = Math.min(1, Math.max(0, visibility));
   // Key:fill >= 4:1 in clear daylight; overcast/fog flattens the key.
   const sunIntensity = daylight * (2.6 + clear * 1.2);
-  const fillIntensity = .62 + daylight * .32 + (1 - clear) * .25;
+  const fillIntensity = .62 + daylight * .32 + (1 - daylight) * .28 + (1 - clear) * .25;
   const horizon = mixHex(mixHex('#1d3546', '#d9c9a8', daylight), '#f0b27a', twilight * .45);
   return {
     sunDirection, daylight, twilight,
