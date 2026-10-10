@@ -985,7 +985,7 @@ export class CityRenderer implements CityRendererAPI {
     };
     const signed = new Set<string>();
     for (const building of this.world.buildings.filter(b => { if (b.districtId === 'core') return true; if (b.kind === 'home' || b.kind === 'farm') return false; const key = `${b.districtId}:${b.kind}`; if (signed.has(key)) return false; signed.add(key); return true; })) {
-      const sprite = make(building.name); if (sprite) { sprite.position.set(building.door.x, building.position.y + Math.min(5.2, building.height / building.floors * .8), building.door.z + .8); sprite.scale.set(Math.min(18, Math.max(8, building.width * .35)), 2.4, 1); this.labels.push({ building, sprite }); }
+      const sprite = make(building.name); if (sprite) { sprite.position.set(building.door.x + Math.round(Math.sin(building.rotation)) * .8, building.position.y + Math.min(5.2, building.height / building.floors * .8), building.door.z + Math.round(Math.cos(building.rotation)) * .8); sprite.scale.set(Math.min(18, Math.max(8, building.width * .35)), 2.4, 1); this.labels.push({ building, sprite }); }
       if (building.kind === 'core') {
         const uses = building.floorUses;
         for (let floor = -(building.basements ?? 0); floor < building.floors; floor++) {

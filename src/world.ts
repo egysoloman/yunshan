@@ -19,6 +19,10 @@ const q = (n: number) => Math.round(n / UNIT) * UNIT;
 const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
 const smooth = (n: number) => { n = clamp(n, 0, 1); return n * n * (3 - 2 * n); };
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+/** Outward normal of a building's front wall, for rotations in quarter turns (0 for every older layout). */
+const doorNormal = (b: Pick<Building, 'rotation'>) => ({ x: Math.round(Math.sin(b.rotation)), z: Math.round(Math.cos(b.rotation)) });
+/** The point 10 m out from a door: where every door stub leaves the building's clearance. */
+const doorLead = (b: Pick<Building, 'rotation'>, door: Vec3): Vec3 => { const n = doorNormal(b); return n.x === 0 && n.z === 1 ? { ...door, z: q(door.z + 10) } : { ...door, x: q(door.x + 10 * n.x), z: q(door.z + 10 * n.z) }; };
 
 interface DistrictPlan { id: string; name: string; kind: string; x: number; z: number; y: number; radius: number; color: string; count: number; kinds: BuildingKind[] }
 const plans: DistrictPlan[] = [
@@ -360,7 +364,7 @@ function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuildi
 const MAX_GRADE = .2, MIN_SPACING = 4, MAX_SPACING = 24, RIVER_KEEP = 22;
 function routeSmooth(world: WorldDefinition, start: Vec3, end: Vec3, startBuilding?: Building, clearance = 5): Vec3[] {
   const GRID = 8, index = indexFor(world), land = index.landHeights;
-  const first = startBuilding ? { ...start, z: q(start.z + 10) } : start;
+  const first = startBuilding ? doorLead(startBuilding, start) : start;
   const sx = Math.round(first.x / GRID), sz = Math.round(first.z / GRID);
   const tx = Math.round(end.x / GRID), tz = Math.round(end.z / GRID);
   const vx = end.x - start.x, vz = end.z - start.z, projectedLength = vx * vx + vz * vz || 1;
@@ -565,7 +569,7 @@ function segmentEntersFootprint(a: Vec3, b: Vec3, building: Building): boolean {
 /** Orthogonal obstacle routing keeps every connector outside all building walls. */
 function routeGroundGrid4(world: WorldDefinition, start: Vec3, end: Vec3, startBuilding?: Building, clearance = 5): Vec3[] {
   const GRID = 8;
-  const first = startBuilding ? { ...start, z: q(start.z + 10) } : start;
+  const first = startBuilding ? doorLead(startBuilding, start) : start;
   const sx = Math.round(first.x / GRID), sz = Math.round(first.z / GRID);
   const tx = Math.round(end.x / GRID), tz = Math.round(end.z / GRID);
   const coordinateKey = (x: number, z: number) => `${x}:${z}`;
@@ -719,7 +723,7 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     world.nodes.push(...local); quarters.set(p.id, local);
   }
   const intersects = (x: number, z: number, width: number, depth: number, otherX: number, otherZ: number, otherWidth: number, otherDepth: number, margin = 16) => Math.abs(otherX - x) < (otherWidth + width) / 2 + margin && Math.abs(otherZ - z) < (otherDepth + depth) / 2 + margin;
-  const safeSite = (x: number, z: number, width: number, depth: number) => {
+  const safeSite = (x: number, z: number, width: number, depth: number, facing = 1) => {
     if (Math.abs(x) + width / 2 > 2120 || Math.abs(z) + depth / 2 > 2120) return false;
     if (z + depth / 2 > 1435 && z - depth / 2 < 1545 && x + width / 2 > 650 && x - width / 2 < 1730) return false;
     if (nearestSegment(world.river, x, z).distance < Math.hypot(width, depth) / 2 + 30) return false;
@@ -727,8 +731,8 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     if (world.nodes.some(n => intersects(x, z, width, depth, n.position.x, n.position.z, 42, 42, 4))) return false;
     if (civicPlan.some(c => intersects(x, z, width, depth, c.x, c.z, 'width' in c ? c.width! : 36, 'depth' in c ? c.depth! : 24))) return false;
     return !world.buildings.some(b => intersects(x, z, width, depth, b.position.x, b.position.z, b.width, b.depth)
-      || intersects(x, z, width, depth, b.door.x, b.door.z + 12, 14, 24, 2)
-      || intersects(x, z + depth / 2 + 12, 14, 24, b.position.x, b.position.z, b.width, b.depth, 2));
+      || intersects(x, z, width, depth, b.door.x, b.door.z + 12 * doorNormal(b).z, 14, 24, 2)
+      || intersects(x, z + (depth / 2 + 12) * facing, 14, 24, b.position.x, b.position.z, b.width, b.depth, 2));
   };
   for (const [districtIndex, p] of plans.entries()) {
     const localStops = quarters.get(p.id)!;
@@ -773,6 +777,7 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
       const baseRadius = 88 + ring * 64;
       let x = q(anchor.position.x + Math.cos(angle) * baseRadius), z = q(anchor.position.z + Math.sin(angle) * baseRadius);
       let placed = false;
+      const facesStop = (k: BuildingKind, siteZ: number) => streetRecipe === 'smooth' && !civic && !['station', 'airport', 'starport', 'pavilion', 'core'].includes(k) && siteZ > anchor.position.z + 6;
       if (civic) { x = civic.x; z = civic.z; placed = true; }
       else if (i === 0 && ['summit', 'airport', 'starport'].includes(p.id)) {
         x = p.x; z = p.z - (p.id === 'summit' ? 105 : 115);
@@ -782,9 +787,11 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
         const r = baseRadius + Math.floor(attempt / 12) * 11;
         const theta = angle + ((attempt % 12) - 5) * .19;
         x = q(anchor.position.x + Math.cos(theta) * r); z = q(anchor.position.z + Math.sin(theta) * r);
-        if (safeSite(x, z, width, depth)) { placed = true; break; }
+        if (safeSite(x, z, width, depth, facesStop(kind, z) ? -1 : 1)) { placed = true; break; }
       }
       if (!placed) throw new Error(`No buildable site for ${p.id}/${i}`);
+      // current-v8: a building beyond its quarter stop turns to face it (door toward −z).
+      const rotation = !civic && facesStop(kind, z) ? Math.PI : 0;
       const terrace = ring * 4 + Math.round(Math.sin(angle)) * 2;
       const ground = naturalHeight(world, x, z);
       const terraceTarget = anchor.position.y - .6 + (p.id === 'airport' ? 0 : terrace);
@@ -793,7 +800,7 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
       const targetHeight = civic && 'height' in civic ? civic.height! : currentLayout ? floors * storeyHeight[kind] : floors * (kind === 'bank' ? 4.8 : kind === 'hall' ? 5.2 : kind === 'airport' ? 6 : kind === 'starport' ? 6.6 : 4) + (kind === 'pavilion' ? 8 : 4.8 + within % 3 * 1.6);
       // Floors, including upper rooms and basement slabs, share the voxel lattice.
       const height = q(Math.round(targetHeight / floors / UNIT) * UNIT * floors);
-      const building: Building = { id: civic?.id ?? `${p.id}-b${i}`, districtId: p.id, name: civic?.name ?? `${p.name}·${anchor.name.split('·')[1].replace('驿', '')}·${kindName[kind]}${within + 1}`, kind, position: { x, y, z }, width, depth, height, floors, rotation: 0, door: { x, y: q(y + .6), z: q(z + depth / 2) }, capacity: floors * Math.floor(width * depth / 32), seed: Math.floor(rng() * 0x7FFFFFFF) };
+      const building: Building = { id: civic?.id ?? `${p.id}-b${i}`, districtId: p.id, name: civic?.name ?? `${p.name}·${anchor.name.split('·')[1].replace('驿', '')}·${kindName[kind]}${within + 1}`, kind, position: { x, y, z }, width, depth, height, floors, rotation, door: { x, y: q(y + .6), z: q(z + (rotation ? -depth : depth) / 2) }, capacity: floors * Math.floor(width * depth / 32), seed: Math.floor(rng() * 0x7FFFFFFF) };
       if (civic && 'facility' in civic) {
         Object.assign(building, { facility: civic.facility, publicFloors: civic.publicFloors, requiredPermission: civic.requiredPermission });
         building.floorUses = Array.from({ length: floors }, (_, f) => f < civic.publicFloors! ? '公共服务与展览' : civic.name.split('·')[1] ?? '市政办公');
@@ -835,7 +842,6 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
   world.nodes.push(liftBottom, liftTop);
   const trunks: [string, string][] = [['river', 'market'], ['market', 'workshop'], ['workshop', 'west'], ['west', 'academy'], ['market', 'academy'], ['academy', 'core'], ['core', 'government'], ['government', 'summit'], ['core', 'east'], ['east', 'airport'], ['east', 'starport'], ['government', 'starport']];
   for (const [a, b] of trunks) addEdge(station(a).id, station(b).id, 'road', routeGround(world, station(a).position, station(b).position), 220);
-  for (const stops of quarters.values()) for (const stop of stops) addEdge(stop.id, station(stop.districtId).id, 'road', routeGround(world, stop.position, station(stop.districtId).position), 90);
   // Street recipe: each door joins the nearest street already built in its
   // district (splitting that street at a vertex into a junction), so doors share
   // streets instead of each running a private road to the station.
@@ -855,7 +861,7 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
   };
   /** Nearest street vertices of the door's district that a gentle stub can reach. */
   const streetCandidates = (b: Building, door: Vec3) => {
-    const lead = { x: door.x, z: door.z + 10 }, found: { edge: NetworkEdge; index: number; d: number }[] = [];
+    const lead = doorLead(b, door), found: { edge: NetworkEdge; index: number; d: number }[] = [];
     for (const edge of world.edges) {
       if (edge.mode !== 'road' || edge.id.includes('runway')) continue;
       if (nodeById.get(edge.from)?.districtId !== b.districtId && nodeById.get(edge.to)?.districtId !== b.districtId) continue;
@@ -863,22 +869,75 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
         // A door node lies on its own building's wall; never route into it.
         if (i === 0 && edge.from.endsWith('-door') || i === edge.points.length - 1 && edge.to.endsWith('-door')) continue;
         const p = edge.points[i], d = Math.hypot(p.x - lead.x, p.z - lead.z);
-        if (d < 14 || Math.abs(p.y - door.y) > d * .12) continue;
+        if (d < 14 || Math.abs(p.y - door.y) > d * .18) continue;
         found.push({ edge, index: i, d });
       }
     }
     return found.sort((a, b) => a.d - b.d);
   };
+  /** First street a stub would cross without meeting it: [edge, nearest vertex index]. */
+  const firstCrossing = (points: Vec3[]): { edge: NetworkEdge; index: number; at: { x: number; z: number } } | null => {
+    for (let k = 1; k < points.length; k++) {
+      const a = points[k - 1], b = points[k];
+      let best: { edge: NetworkEdge; index: number; t: number; at: { x: number; z: number } } | null = null;
+      for (const edge of world.edges) {
+        if (edge.mode !== 'road' || edge.id.includes('runway')) continue;
+        for (let j = 1; j < edge.points.length; j++) {
+          const c = edge.points[j - 1], d = edge.points[j];
+          if (Math.max(c.x, d.x) < Math.min(a.x, b.x) || Math.min(c.x, d.x) > Math.max(a.x, b.x) || Math.max(c.z, d.z) < Math.min(a.z, b.z) || Math.min(c.z, d.z) > Math.max(a.z, b.z)) continue;
+          const den = (b.x - a.x) * (d.z - c.z) - (b.z - a.z) * (d.x - c.x); if (Math.abs(den) < 1e-9) continue;
+          const t = ((c.x - a.x) * (d.z - c.z) - (c.z - a.z) * (d.x - c.x)) / den, u = ((c.x - a.x) * (b.z - a.z) - (c.z - a.z) * (b.x - a.x)) / den;
+          if (t <= 1e-6 || t >= 1 - 1e-6 || u <= 1e-6 || u >= 1 - 1e-6 || (best && t >= best.t)) continue;
+          best = { edge, index: u < .5 ? j - 1 : j, t, at: { x: c.x + (d.x - c.x) * u, z: c.z + (d.z - c.z) * u } };
+        }
+      }
+      if (best) return best;
+    }
+    return null;
+  };
+  /** The crossed street's vertex nearest the crossing that a gentle link from `from` can reach. */
+  const reachableVertex = (edge: NetworkEdge, at: { x: number; z: number }, from: Vec3, lead: Vec3) => {
+    const order = edge.points.map((p, i) => ({ i, d: Math.hypot(p.x - at.x, p.z - at.z) })).sort((a, b) => a.d - b.d);
+    for (const { i } of order) {
+      if (i === 0 && edge.from.endsWith('-door') || i === edge.points.length - 1 && edge.to.endsWith('-door')) continue;
+      const p = edge.points[i], d = Math.hypot(p.x - lead.x, p.z - lead.z);
+      if (d >= 14 && Math.abs(p.y - from.y) <= d * .18) return i;
+    }
+    return -1;
+  };
+  for (const stops of quarters.values()) for (const stop of stops) {
+    const home = station(stop.districtId);
+    let points = routeGround(world, stop.position, home.position), destination = home;
+    // Street recipe: a quarter road that would cross a trunk joins it there.
+    for (let hop = 0; streetRecipe === 'smooth' && hop < 4; hop++) {
+      const crossing = firstCrossing(points); if (!crossing) break;
+      const index = reachableVertex(crossing.edge, crossing.at, stop.position, stop.position); if (index < 0) break;
+      let next: Vec3[]; try { next = routeGround(world, stop.position, crossing.edge.points[index]); } catch { break; }
+      points = next; destination = splitAt(crossing.edge, index, stop.districtId);
+    }
+    addEdge(stop.id, destination.id, 'road', points, 90);
+  }
   const joinStreet = (b: Building, node: NetworkNode): Vec3[] | null => {
     const tried = new Set<string>();
-    for (const candidate of streetCandidates(b, node.position)) {
-      const target = candidate.edge.points[candidate.index], at = `${target.x}:${target.z}`;
-      if (tried.has(at)) continue; tried.add(at); if (tried.size > 6) break;
-      let points: Vec3[];
-      try { points = routeGround(world, node.position, target, b); } catch { continue; }
-      const joined = splitAt(candidate.edge, candidate.index, b.districtId);
-      addEdge(node.id, joined.id, 'road', points, 30);
-      return points;
+    for (const first of streetCandidates(b, node.position)) {
+      let candidate = first;
+      for (let hop = 0; hop < 5; hop++) {
+        const target = candidate.edge.points[candidate.index], at = `${target.x}:${target.z}`;
+        if (tried.has(at) || tried.size > 12) break; tried.add(at);
+        // A door node lies on its own building's wall; never route into it.
+        if (candidate.index === 0 && candidate.edge.from.endsWith('-door') || candidate.index === candidate.edge.points.length - 1 && candidate.edge.to.endsWith('-door')) break;
+        const lead = doorLead(b, node.position), d = Math.hypot(target.x - lead.x, target.z - lead.z);
+        if (d < 14 || Math.abs(target.y - node.position.y) > d * .18) break;
+        let points: Vec3[];
+        try { points = routeGround(world, node.position, target, b); } catch { break; }
+        // Streets meet at junctions: a stub that would cross another street
+        // instead joins that street at its nearest vertex.
+        const crossing = firstCrossing(points);
+        if (crossing) { const index = reachableVertex(crossing.edge, crossing.at, node.position, doorLead(b, node.position)); if (index < 0) break; candidate = { edge: crossing.edge, index, d: 0 }; continue; }
+        const joined = splitAt(candidate.edge, candidate.index, b.districtId);
+        addEdge(node.id, joined.id, 'road', points, 30);
+        return points;
+      }
     }
     return null;
   };
@@ -887,7 +946,15 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     const fallback = b.id === 'core-dock-building' ? liftBottom : buildingAnchors.get(b.id) ?? station(b.districtId);
     nodeById.set(node.id, node);
     if (streetRecipe === 'smooth' && b.id !== 'core-dock-building' && joinStreet(b, node)) continue;
-    addEdge(node.id, fallback.id, 'road', routeGround(world, node.position, fallback.position, b), 30);
+    let points = routeGround(world, node.position, fallback.position, b), destination = fallback;
+    // A long fallback stub still joins the first street it would cross.
+    for (let hop = 0; streetRecipe === 'smooth' && b.id !== 'core-dock-building' && hop < 4; hop++) {
+      const crossing = firstCrossing(points); if (!crossing) break;
+      const index = reachableVertex(crossing.edge, crossing.at, node.position, doorLead(b, node.position)); if (index < 0) break;
+      let next: Vec3[]; try { next = routeGround(world, node.position, crossing.edge.points[index], b); } catch { break; }
+      points = next; destination = splitAt(crossing.edge, index, b.districtId);
+    }
+    addEdge(node.id, destination.id, 'road', points, 30);
   }
   if (streetRecipe === 'smooth') {
     // Same fleet as the orthogonal layouts' length rule produced: two vehicles
@@ -898,7 +965,7 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
       if (edge.mode !== 'road' || edge.id.includes('~') || edge.id.includes('runway')) continue;
       const pieces = world.edges.filter(e => e.id === edge.id || e.id.startsWith(`${edge.id}~`)), length = pieces.reduce((sum, e) => sum + e.length, 0);
       const origin = edge.from, end = pieces.find(e => !world.edges.some(other => other !== e && pieces.includes(other) && other.from === e.to))?.to ?? edge.to;
-      if (stationIds.has(origin) && stationIds.has(end)) { if (length >= 80) plan.push({ edgeId: edge.id, vehicles: 2, stationRoad: true }); continue; }
+      if (stationIds.has(origin) && !end.endsWith('-door')) { plan.push({ edgeId: edge.id, vehicles: 2, stationRoad: true }); continue; }
       const site = world.buildings.find(b => `${b.id}-door` === origin);
       if (site && ['market', 'workshop', 'farm', 'dock'].includes(site.kind)) plan.push({ edgeId: edge.id, vehicles: 1, stationRoad: false });
     }

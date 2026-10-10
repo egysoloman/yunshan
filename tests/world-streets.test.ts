@@ -3,6 +3,7 @@ import test from 'node:test';
 import { createStreetWorld, createWorld, findPath } from '../src/world';
 import { savedWorldFingerprint } from '../src/persistence/world-layout';
 import type { Building, Vec3 } from '../src/types';
+import { roadCrossings } from '../scripts/roads/crossings';
 
 // R2 development street recipe (docs/设计/路网重做方案.md): the same world
 // invariants as tests/world.test.ts, plus the street-shape targets of P1.
@@ -73,5 +74,8 @@ test('streets meet the P1 shape targets', () => {
     }
     assert.ok(right / (length / 1000) <= 3, `${world.seed}: ${(right / (length / 1000)).toFixed(2)} right-angle turns per km`);
     assert.ok(axis / length <= .2, `${world.seed}: axis share ${(axis / length).toFixed(3)}`);
+    // Streets meet at junctions; v6 has 67 crossings that share no node.
+    const crossings = roadCrossings(world.edges);
+    assert.ok(crossings.length <= 40, `${world.seed}: ${crossings.length} street crossings without a junction`);
   }
 });
