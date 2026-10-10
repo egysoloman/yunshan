@@ -91,9 +91,17 @@ test('native host drives the authoritative simulation through requests', async (
   const mayor: ContextAction[] = [], mayorNotes: string[] = [];
   rules().policyActions(hall, mayor, mayorNotes);
   const tax = Math.round(sim.state.taxRate * 100), police = Math.round(sim.state.policeBudget * 100);
-  assert.deepEqual(mayor.map(a => [a.command?.taxRate, a.command?.policeBudget]), [[(tax - 1) / 100, police / 100], [(tax + 1) / 100, police / 100], [tax / 100, (police - 5) / 100], [tax / 100, (police + 5) / 100]]);
-  assert(mayor.every(a => a.command?.type === 'policy' && a.command.targetId === hall.id && !a.disabled));
-  const away = sim.command(mayor[1].command!);
+  const schemes = mayor.filter(a => a.command?.type === 'policy');
+  assert.deepEqual(schemes.map(a => [a.command?.taxRate, a.command?.policeBudget]), [[(tax - 1) / 100, police / 100], [(tax + 1) / 100, police / 100], [tax / 100, (police - 5) / 100], [tax / 100, (police + 5) / 100]]);
+  assert(schemes.every(a => a.command?.targetId === hall.id && !a.disabled));
+  // A new city declares foreign trade: the mayor may close it, through the simulation's own command.
+  const trade = mayor.filter(a => a.command?.type === 'foreignTrade');
+  assert.deepEqual(trade.map(a => [a.label, a.command?.value]), [['关闭对外贸易', 0]]); assert.match(mayorNotes.join(''), /对外贸易：开放/);
+  assert.equal(sim.command(trade[0].command!).ok, true);
+  const reopened: ContextAction[] = []; rules().policyActions(hall, reopened, []);
+  assert.deepEqual(reopened.filter(a => a.command?.type === 'foreignTrade').map(a => a.command?.value), [1]);
+  assert.equal(sim.command({ type: 'foreignTrade', value: 1 }).ok, true);
+  const away = sim.command(schemes[1].command!);
   assert.equal(away.ok, false); assert.match(away.message, /议事/);
   sim.state.policyPending = { taxRate: .2, policeBudget: .5, applyAt: sim.state.tick + 120 };
   const pending: ContextAction[] = [], pendingNotes: string[] = [];

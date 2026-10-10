@@ -60,6 +60,12 @@ export class ContextRules {
     actions.push(
       scheme(`提交税率 ${tax - 1}%`, tax - 1, police, tax <= 0), scheme(`提交税率 ${tax + 1}%`, tax + 1, police, tax >= 30),
       scheme(`提交治安预算 ${police - 5}%`, tax, police - 5, police < 5), scheme(`提交治安预算 ${police + 5}%`, tax, police + 5, police > 95));
+    // foreign-trade-v1: the elected mayor opens or closes the city's cargo-flight exports.
+    const trade = (this.sim as unknown as { runtime: { foreignTrade?: { enabled: boolean; exportedUnits: number; exportGross: number } } }).runtime.foreignTrade;
+    if (trade) {
+      notes.push(`对外贸易：${trade.enabled ? '开放' : '关闭'} · 累计出口 ${Math.round(trade.exportedUnits)} 份、${Math.round(trade.exportGross)} 文。`);
+      actions.push({ label: trade.enabled ? '关闭对外贸易' : '开放对外贸易', command: { type: 'foreignTrade', value: trade.enabled ? 0 : 1 }, disabled: this.view.mode !== 'walk' });
+    }
   }
   canWorkAt(kind: BuildingKind): boolean {
     const workplaces: Record<string, BuildingKind[]> = { traveler: ['market', 'workshop', 'farm', 'dock'], police: ['police'], soldier: ['police', 'starport'], teacher: ['school'], driver: ['station', 'airport', 'starport', 'dock'], merchant: ['market', 'workshop', 'farm'], mayor: ['hall', 'core'], scientist: ['school', 'core', 'workshop'], official: ['hall', 'core'], council: ['hall', 'core'] };
