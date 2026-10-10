@@ -9,7 +9,7 @@ import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy 
 import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
 import { FARM_YIELD_POLICIES, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { closeFiscalDay, councilTaxRate, profitTaxSplit, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
-import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY_V2, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
+import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
 import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetState } from './simulation/supplemental-budget';
@@ -1252,7 +1252,7 @@ export class Simulation implements SimulationAPI {
    * short takes the oldest waiting lot there (its owner is kept as the cargo
    * source) and is bound to the short district at once. Nothing is created. */
   private relayFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string, capacity: number): void {
-    if (this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY_V2 || vehicle.cargo > 0 || (this.runtime.freight[districtId] ?? 0) < 1) return;
+    if (this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY_V2 && this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY_V3 || vehicle.cargo > 0 || (this.runtime.freight[districtId] ?? 0) < 1) return;
     const demand = this.foodFreightDemand(); if (!districtSupplied(demand, districtId)) return;
     const destination = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, demand); if (!destination || destination === districtId) return;
     const lots = this.runtime.freightLots ??= {}, deliveries = lots[districtId] ??= [{ shopId: null, quantity: this.runtime.freight[districtId] }];
@@ -1269,8 +1269,9 @@ export class Simulation implements SimulationAPI {
     if (!this.runtime.foodFreightPolicyId || !this.freightCarriers.has(vehicle.id)) return false;
     const destinations = this.runtime.cargoDestinations ??= {}, bound = destinations[vehicle.id];
     if (bound) return bound !== districtId && this.freightHops.hops(vehicle.kind, bound).has(nodeId);
-    const chosen = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, this.foodFreightDemand());
-    if (!chosen || chosen === districtId) return false;
+    const demand = this.foodFreightDemand(), chosen = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, demand);
+    if (!chosen) return this.runtime.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY_V3 && districtSupplied(demand, districtId);
+    if (chosen === districtId) return false;
     destinations[vehicle.id] = chosen; return true;
   }
   private walkingDistance(citizen: Citizen, destination: Building): number { const target = this.buildingNode(destination); return Math.min(...this.walkingAnchors(citizen).map(a => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity))); }

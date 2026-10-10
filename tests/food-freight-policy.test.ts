@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
-import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY, DEMAND_FOOD_FREIGHT_POLICY_V2, districtSupplied, FreightHops, MARKET_FREIGHT_INTAKE_LIMIT, validateFoodFreightPolicy } from '../src/simulation/freight-delivery';
+import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FreightHops, MARKET_FREIGHT_INTAKE_LIMIT, validateFoodFreightPolicy } from '../src/simulation/freight-delivery';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -37,8 +37,8 @@ test('the destination is the reachable district with least food per market below
 
 test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V2);
-  assert.equal(doc.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V2); assert.equal(doc.runtime.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V2);
+  assert.equal(city.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V3);
+  assert.equal(doc.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V3); assert.equal(doc.runtime.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V3);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
@@ -72,14 +72,19 @@ test('declared carriers route food to a short district and release it only there
   assert(Object.values(internals.runtime.cargoDestinations).every(d => d === 'east'));
 });
 
-test('v2 relay loads freight waiting in a supplied district for a short one, keeping its owner and total', () => {
+test('relay loads freight waiting in a supplied district for a short one, keeping its owner and total', () => {
   const world = createProductWorld(), sim = createCurrentProductCity(world);
   sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
   const internals = sim as unknown as { foodFreightDemand: () => { districtId: string; markets: number; stock: number }[]; runtime: { freight: Record<string, number>; freightLots: Record<string, { shopId: string | null; quantity: number }[]>; cargoDestinations: Record<string, string>; cargoSources: Record<string, string> } };
   const real = internals.foodFreightDemand.bind(sim);
   internals.foodFreightDemand = () => real().map(row => row.districtId === 'east' ? { ...row, stock: 0 } : { ...row, stock: Math.max(row.stock, MARKET_FREIGHT_INTAKE_LIMIT * row.markets) });
   const total = () => Object.values(internals.runtime.freight).reduce((a, b) => a + b, 0) + sim.state.vehicles.reduce((a, v) => a + v.cargo, 0);
-  // Run until carriers have dropped unbound initial cargo somewhere, then watch relays.
+  // Controlled waiting freight in supplied river (v3 carriers no longer strand cargo there themselves); then watch relays.
+  // The generated fleet's initial cargo is moved into that lot, so empty carriers start across the city and the total is unchanged.
+  const seeded = sim.state.vehicles.reduce((n, v) => n + v.cargo, 0) + 400;
+  for (const vehicle of sim.state.vehicles) vehicle.cargo = 0;
+  internals.runtime.freight.river = (internals.runtime.freight.river ?? 0) + seeded;
+  (internals.runtime.freightLots ??= {}).river = [...(internals.runtime.freightLots.river ?? []), { shopId: null, quantity: seeded }];
   let relayed = 0;
   // Carriers reach junctions only now and then; 400 quarter-second steps at speed 8 is enough for a few relays.
   for (let tick = 0; tick < 400; tick++) {
@@ -90,4 +95,18 @@ test('v2 relay loads freight waiting in a supplied district for a short one, kee
     for (const lots of Object.values(internals.runtime.freightLots)) for (const lot of lots) assert(lot.quantity >= -1e-9);
   }
   assert(relayed > 0, 'empty carriers picked up loads bound for east');
+});
+
+test('v3 carriers keep their food while no district is short instead of stranding it where they stand', () => {
+  const world = createProductWorld(), sim = createCurrentProductCity(world);
+  sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
+  // The demand view is replaced so that every district with markets is supplied; shops and ledgers stay real.
+  const internals = sim as unknown as { foodFreightDemand: () => { districtId: string; markets: number; stock: number }[]; bus: { on(type: string, f: (e: { amount?: number }) => void): void } };
+  const real = internals.foodFreightDemand.bind(sim);
+  internals.foodFreightDemand = () => real().map(row => ({ ...row, stock: Math.max(row.stock, MARKET_FREIGHT_INTAKE_LIMIT * row.markets) }));
+  let unloaded = 0; internals.bus.on('cargo-arrived', e => { unloaded += e.amount ?? 0; });
+  const carried = () => sim.state.vehicles.reduce((n, v) => n + v.cargo, 0), before = carried();
+  for (let tick = 0; tick < 140; tick++) sim.step(.25);
+  assert.equal(unloaded, 0, 'nothing is unloaded while every market district is supplied');
+  assert.ok(carried() >= before, `held cargo stays on its carriers (${before} -> ${carried()})`);
 });

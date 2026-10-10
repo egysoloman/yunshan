@@ -4,8 +4,16 @@ export const DEMAND_FOOD_FREIGHT_POLICY = 'demand-food-freight-v1' as const;
 /** v2 adds relay: an empty declared carrier at a junction of a district that
  * is not short loads that district's waiting freight for a short district. */
 export const DEMAND_FOOD_FREIGHT_POLICY_V2 = 'demand-food-freight-v2' as const;
-export type FoodFreightPolicy = typeof DEMAND_FOOD_FREIGHT_POLICY | typeof DEMAND_FOOD_FREIGHT_POLICY_V2;
-export const FOOD_FREIGHT_POLICIES: readonly FoodFreightPolicy[] = [DEMAND_FOOD_FREIGHT_POLICY, DEMAND_FOOD_FREIGHT_POLICY_V2];
+/** v3 unloads only where markets can take the food. The 2-day probe of v2
+ * measured 1,235 units loaded a day yet 60% unloaded back in river (markets
+ * full) and workshop (no market), and every unload in academy, government,
+ * starport and core (no market) stayed unbought: with no district short, a
+ * v2 carrier unloaded where it stood. A v3 carrier holding food unloads only
+ * in a district whose markets are below the intake line; otherwise it keeps
+ * its cargo until a district is short. Relay is as in v2. */
+export const DEMAND_FOOD_FREIGHT_POLICY_V3 = 'demand-food-freight-v3' as const;
+export type FoodFreightPolicy = typeof DEMAND_FOOD_FREIGHT_POLICY | typeof DEMAND_FOOD_FREIGHT_POLICY_V2 | typeof DEMAND_FOOD_FREIGHT_POLICY_V3;
+export const FOOD_FREIGHT_POLICIES: readonly FoodFreightPolicy[] = [DEMAND_FOOD_FREIGHT_POLICY, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3];
 
 /** Markets buy freight only while below this stock (Simulation shop batch). */
 export const MARKET_FREIGHT_INTAKE_LIMIT = 36;
