@@ -8,6 +8,8 @@
  * Response: {"id":1,"ok":true,"result":{...}}  or  {"id":1,"ok":false,"error":"..."}
  */
 import { createInterface } from 'node:readline';
+import { dirname, join } from 'node:path';
+import { installPackagedWorldSnapshots } from './world-snapshots';
 import { Simulation } from '../simulation';
 import { characterFacts } from '../rendering/studio-character-facts';
 import { createCityLifeProductCity, PRODUCT_CITY_LAYOUT } from '../product-city';
@@ -200,4 +202,8 @@ export function runStdioHost(): void {
   input.on('close', () => { void queue.then(() => process.exit(0)); });
 }
 
-if (process.argv[1] && /sim-host\.(ts|mjs|js)$/.test(process.argv[1])) runStdioHost();
+if (process.argv[1] && /sim-host\.(ts|mjs|js)$/.test(process.argv[1])) {
+  // A packaged host may carry the worlds its own bundle generated (see world-snapshots.ts).
+  if (process.argv[1].endsWith('.mjs')) installPackagedWorldSnapshots(process.argv[1], join(dirname(process.argv[1]), 'worlds.json.gz'));
+  runStdioHost();
+}

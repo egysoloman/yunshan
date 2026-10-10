@@ -1,4 +1,5 @@
 import { Simulation } from './simulation';
+import { cachedWorld } from './persistence/world-cache';
 import { createWorld } from './world';
 import type { WorldDefinition } from './types';
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY } from './simulation/reference-collision';
@@ -14,7 +15,7 @@ export const PRODUCT_CITY_LAYOUT = 'current-v6' as const;
 
 /** Product recipe is explicit; compatibility createWorld() retains current-v6. */
 export function createProductWorld(seed = 20261001): ReturnType<typeof createWorld> {
-  return createWorld(seed, PRODUCT_CITY_LAYOUT);
+  return cachedWorld(seed, PRODUCT_CITY_LAYOUT) as ReturnType<typeof createWorld>;
 }
 
 /** Version-three recipe retained for hosts that explicitly selected its contract. */

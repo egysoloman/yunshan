@@ -1,4 +1,5 @@
 import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, ARCHITECTURAL_GEOMETRY_VERSION, createWorld } from '../world';
+import { cachedWorld, cachedWorldFingerprint } from './world-cache';
 import { MARKET_STATION_APRON_VERSION, MARKET_STATION_APRON_MAX_GRADE, MARKET_STATION_APRON_OFFSETS } from '../market-station-apron';
 import { parseSaveWithinResources } from './save-resource';
 import { validateCityRulesetEnvelope } from '../simulation/city-ruleset';
@@ -56,7 +57,7 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
 export function selectSavedWorld(json?: string | null, newCityLayout: CityLayoutVersion = CURRENT_CITY_LAYOUT): { world: WorldDefinition & { layoutVersion: CityLayoutVersion }; layout: CityLayoutVersion } {
   if (json === undefined || json === null || json === '') {
     if (!CITY_LAYOUT_VERSIONS.includes(newCityLayout)) throw new Error('不支持的新城市配方。');
-    return { world: createWorld(20261001, newCityLayout), layout: newCityLayout };
+    return { world: cachedWorld(20261001, newCityLayout) as WorldDefinition & { layoutVersion: CityLayoutVersion }, layout: newCityLayout };
   }
   let data: Record<string, any>;
   try { data = parseSaveWithinResources(json); } catch { throw new Error('保存的旅程格式损坏；原存档已保留。'); }
@@ -68,9 +69,9 @@ export function selectSavedWorld(json?: string | null, newCityLayout: CityLayout
   validateCityRulesetEnvelope(data);
   // A label in an imported file does not authorize a different layout. Rebuild
   // every supported candidate from our code and match the complete fingerprint.
+  // Same candidate order as before; only the matching world is copied out.
   for (const layout of CITY_LAYOUT_VERSIONS) {
-    const world = createWorld(data.worldSeed, layout);
-    if (savedWorldFingerprint(world) === data.worldFingerprint) return { world, layout };
+    if (cachedWorldFingerprint(data.worldSeed, layout, savedWorldFingerprint) === data.worldFingerprint) return { world: cachedWorld(data.worldSeed, layout) as WorldDefinition & { layoutVersion: CityLayoutVersion }, layout };
   }
   throw new Error('此存档的世界布局不属于当前支持的版本；原存档已保留，不能以新城覆盖。');
 }
