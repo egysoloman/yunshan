@@ -2269,6 +2269,13 @@ export class Simulation implements SimulationAPI {
   private notice(type: string, text: string, districtId?: string) { this.state.events.push({ id: ++this.runtime.eventId, tick: this.state.tick, type, text, ...(districtId ? { districtId } : {}) }); if (this.state.events.length > 100) this.state.events.shift(); return this.runtime.eventId; }
   isNearBuilding(building: Building, position: Vec3 = this.state.player.position, doorRadius = 32): boolean {
     if (!this.validPosition(position)) return false;
+    // Every true answer below is either within doorRadius of the door or
+    // inside the floorPlanPresence reach (largest footprint diagonal + 24m),
+    // which also contains every legacy floor rectangle; anything beyond both is false.
+    let width = building.width, depth = building.depth;
+    for (const footprint of building.floorFootprints ?? []) { if (footprint && footprint.width > width) width = footprint.width; if (footprint && footprint.depth > depth) depth = footprint.depth; }
+    const cx = position.x - building.position.x, cz = position.z - building.position.z, reach = Math.hypot(width, depth) + 24;
+    if (cx * cx + cz * cz > reach * reach && distance(position, building.door) > doorRadius) return false;
     if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) {
       const presence = this.floorPlanPresence(building, position);
       if (presence) return presence.kind === 'room' || presence.kind === 'stairs';
