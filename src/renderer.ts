@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
 import { samplePolyline, terrainHeight } from './world';
@@ -1044,9 +1048,23 @@ export class CityRenderer implements CityRendererAPI {
     if (this.lastRender) { const delta = Math.min(100, now - this.lastRender); this.frameAverage = this.frameAverage * .97 + delta * .03; }
     this.lastRender = now;
     if (this.dynamicResolution && now - this.adaptAt > 2500) { const previous = this.resolutionScale; if (this.frameAverage > 37) this.resolutionScale = Math.max(.65, this.resolutionScale - .08); else if (this.frameAverage < 21) this.resolutionScale = Math.min(1, this.resolutionScale + .04); if (previous !== this.resolutionScale) this.resize(); this.adaptAt = now; }
-    this.renderer.render(this.scene, this.camera);
+    // R1 W3: bloom only at "high" quality; a high threshold lets only lanterns,
+    // lit windows and water highlights spill. Other qualities render directly.
+    // Draw statistics cover every pass of the frame, not only the last full-screen quad.
+    if (this.quality === 'high') { const composer = this.bloomComposer(); this.renderer.info.autoReset = false; this.renderer.info.reset(); composer.render(); }
+    else { this.renderer.info.autoReset = true; this.renderer.render(this.scene, this.camera); }
   }
-  resize() { const width = Math.max(1, this.container.clientWidth), height = Math.max(1, this.container.clientHeight); this.camera.aspect = width / height; this.camera.updateProjectionMatrix(); const base = this.quality === 'high' ? 1.8 : this.quality === 'low' ? 1 : 1.35; this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, base) * this.resolutionScale); this.renderer.setSize(width, height); }
+  private composer?: EffectComposer;
+  private bloomComposer(): EffectComposer {
+    if (this.composer) return this.composer;
+    const size = this.renderer.getSize(new THREE.Vector2()), composer = new EffectComposer(this.renderer);
+    composer.addPass(new RenderPass(this.scene, this.camera));
+    composer.addPass(new UnrealBloomPass(size, .32, .45, .92));
+    composer.addPass(new OutputPass());
+    composer.setPixelRatio(this.renderer.getPixelRatio()); composer.setSize(size.x, size.y);
+    return this.composer = composer;
+  }
+  resize() { const width = Math.max(1, this.container.clientWidth), height = Math.max(1, this.container.clientHeight); this.camera.aspect = width / height; this.camera.updateProjectionMatrix(); const base = this.quality === 'high' ? 1.8 : this.quality === 'low' ? 1 : 1.35; this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, base) * this.resolutionScale); this.renderer.setSize(width, height); if (this.composer) { this.composer.setPixelRatio(this.renderer.getPixelRatio()); this.composer.setSize(width, height); } }
   setQuality(quality: Quality) { this.quality = quality; this.resolutionScale = 1; this.landscape.vegetation.visible = quality !== 'low'; this.resize(); }
   setRenderDistance(distance: number) { this.distance = THREE.MathUtils.clamp(distance, 800, 6000); this.camera.far = Math.max(15000, this.distance * 1.6); this.camera.updateProjectionMatrix(); }
   setDynamicResolution(enabled: boolean) { this.dynamicResolution = enabled; if (!enabled) { this.resolutionScale = 1; this.resize(); } }
