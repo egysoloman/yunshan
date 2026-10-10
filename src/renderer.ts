@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { timeOfDayGrade } from './rendering/time-of-day-grade';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
 import { samplePolyline, terrainHeight } from './world';
 import { RoadClosureOverlay } from './rendering/road-closures';
@@ -912,25 +913,26 @@ export class CityRenderer implements CityRendererAPI {
     for (const mesh of this.distanceDetails) { const bounds = mesh.boundingSphere!; mesh.visible = bounds.center.distanceTo(this.camera.position) < bounds.radius + (this.quality === 'high' ? 300 : this.quality === 'low' ? 90 : 180); }
     this.architectureDetail.update(this.camera.position, { buildingId: this.insideId, floor: this.insideFloor }, this.quality);
     for (const material of this.landscape.water) if (material.uniforms.time) material.uniforms.time.value = elapsed;
-    const angle = (state.hour - 6) / 24 * Math.PI * 2, altitude = Math.sin(angle), daylight = THREE.MathUtils.smoothstep(altitude, -.12, .28), twilight = Math.max(0, 1 - Math.abs(altitude) * 4);
+    // Display grade (docs/设计/美术与渲染改造方案.md §2.2): golden low sun, cool fill, warm haze.
+    const grade = timeOfDayGrade(state.hour, state.visibility), daylight = grade.daylight, altitude = grade.sunDirection[1];
     for (const material of this.landscape.water) if (material.uniforms.light) material.uniforms.light.value = daylight;
-    this.sun.position.set(Math.cos(angle) * 2500, altitude * 2500, altitude * 1400); this.moon.position.copy(this.sun.position).multiplyScalar(-1);
-    this.sun.intensity = daylight * 2.9; this.moon.intensity = (1 - daylight) * .72; this.fill.intensity = .68 + daylight * .45;
-    this.fill.color.set('#89aec3').lerp(new THREE.Color('#bed5dd'), daylight); this.fill.groundColor.set('#405953').lerp(new THREE.Color('#7e8c7b'), daylight);
+    this.sun.position.set(grade.sunDirection[0] * 2500, grade.sunDirection[1] * 2500, grade.sunDirection[2] * 2500); this.moon.position.copy(this.sun.position).multiplyScalar(-1);
+    this.sun.color.set(grade.sunColor); this.sun.intensity = grade.sunIntensity; this.moon.intensity = grade.moonIntensity; this.fill.intensity = grade.fillIntensity;
+    this.fill.color.set(grade.fillSky); this.fill.groundColor.set(grade.fillGround);
     // A shadow-free low-angle bounce approximation lights actual opaque soffits
     // and bridge undersides. It follows daylight, adds no hidden geometry, and
     // leaves sun shadows and the original road/roof solids intact.
-    this.groundBounce.intensity = .035 + daylight * .44;
-    this.groundBounce.color.set('#8296a0').lerp(new THREE.Color('#dfcfac'), daylight);
+    this.groundBounce.intensity = grade.bounceIntensity;
+    this.groundBounce.color.set(grade.bounceColor);
     this.groundBounce.position.set(this.camera.position.x - 700, this.camera.position.y - 700, this.camera.position.z + 300);
     this.groundBounce.target.position.copy(this.camera.position);
-    const horizon = new THREE.Color('#203b4c').lerp(new THREE.Color('#bdd7dd'), daylight).lerp(new THREE.Color('#e2af86'), twilight * .35);
-    const top = new THREE.Color('#071822').lerp(new THREE.Color('#418daf'), daylight);
+    const horizon = new THREE.Color(grade.skyHorizon), top = new THREE.Color(grade.skyTop);
+    this.renderer.toneMappingExposure = grade.exposure;
     this.skyMaterial.uniforms.top.value.copy(top); this.skyMaterial.uniforms.horizon.value.copy(horizon);
     this.skyMaterial.uniforms.daylight.value = daylight;
     const mistMaterial = this.mist.material as THREE.PointsMaterial; mistMaterial.color.copy(horizon).lerp(new THREE.Color('#e0e8df'), .25 + daylight * .35); mistMaterial.opacity = .13 + (1 - state.visibility) * .13; this.mist.position.x = Math.sin(elapsed * .015) * 24;
     const sprayMaterial = this.spray.material as THREE.PointsMaterial; sprayMaterial.color.copy(horizon).lerp(new THREE.Color('#eef6ed'), .8); sprayMaterial.opacity = .13 + daylight * .12; this.spray.position.x = Math.sin(elapsed * .24) * 2.8;
-    this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.copy(horizon); fog.density = (.00022 + (1 - state.visibility) * .0002) * (6500 / this.distance);
+    this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.set(grade.fogColor); fog.density = (.00022 + (1 - state.visibility) * .0002) * grade.fogDensityScale * (6500 / this.distance);
     this.sky.position.copy(this.camera.position); this.stars.position.copy(this.camera.position); (this.stars.material as THREE.PointsMaterial).opacity = (1 - daylight) * .8; this.skyModels?.update(this.camera.position, (1 - daylight) * .8);
     this.sunOrb.position.copy(this.sun.position).multiplyScalar(3.6).add(this.camera.position); this.sunOrb.visible = altitude > -.08;
     this.moonOrb.position.copy(this.moon.position).multiplyScalar(3.6).add(this.camera.position); this.moonOrb.visible = altitude < .08;
