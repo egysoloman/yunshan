@@ -3,8 +3,9 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
-import { timeOfDayGrade } from './rendering/time-of-day-grade';
+import { mixHex, timeOfDayGrade } from './rendering/time-of-day-grade';
 import { cloudBanks } from './rendering/cloud-banks';
+import { lanternGlows } from './rendering/lantern-glow';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
 import { samplePolyline, terrainHeight } from './world';
 import { RoadClosureOverlay } from './rendering/road-closures';
@@ -450,6 +451,8 @@ export class CityRenderer implements CityRendererAPI {
     this.skyModels = new StudioSkyModels(this.scene, this.sky, this.sunOrb, this.moonOrb, this.stars); void this.skyModels.load();
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.clouds = this.buildCloudBanks(); this.scene.add(this.clouds);
+    this.lanterns = this.buildLanternGlow(); this.scene.add(this.lanterns);
+    this.silhouettes = this.buildSilhouetteRing(); this.scene.add(this.silhouettes);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
     this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled, studioGroundAndFauna(world, this.landscape.woodland.trees), this.roadTiles.map((t, id) => ({ id, asset: t.asset, ...t.position, yaw: t.yaw, pitch: t.pitch ?? 0 })));
@@ -891,6 +894,58 @@ export class CityRenderer implements CityRendererAPI {
     }
     return group;
   }
+  private silhouettes!: THREE.Group;
+  private buildSilhouetteRing() {
+    // R1 W6a: distant mountain-city silhouette cards (design §2.3, asset #20
+    // low-cost version). Three rings beyond the world edge; the nearer rings
+    // carry stepped roofs and towers on the ridges, the farthest is bare
+    // ridge. Bases sink below the cloud sea. Display only.
+    const group = new THREE.Group(); group.name = '远景山城剪影';
+    const layers = [{ radius: 4300, height: 760, city: 1, seed: 11 }, { radius: 5800, height: 1050, city: .5, seed: 23 }, { radius: 7600, height: 1400, city: 0, seed: 37 }];
+    for (const [index, layer] of layers.entries()) {
+      const canvas = document.createElement('canvas'); canvas.width = 2048; canvas.height = 256;
+      const context = canvas.getContext('2d');
+      if (context) {
+        const rand = (i: number) => { const x = Math.sin(i * 127.1 + layer.seed * 311.7) * 43758.5453; return x - Math.floor(x); };
+        const ridge = (x: number) => { const t = x / 2048 * Math.PI * 2; return .5 + .22 * Math.sin(t * 3 + layer.seed) + .12 * Math.sin(t * 7 + layer.seed * 2) + .06 * Math.sin(t * 17 + layer.seed * 3); };
+        context.fillStyle = '#fff'; context.beginPath(); context.moveTo(0, 256);
+        for (let x = 0; x <= 2048; x += 8) context.lineTo(x, 256 - ridge(x) * 230);
+        context.lineTo(2048, 256); context.closePath(); context.fill();
+        // Stepped halls and towers on the upper slopes.
+        for (let i = 0; i < 160 * layer.city; i++) {
+          const x = rand(i) * 2048, top = 256 - ridge(x) * 230, w = 6 + rand(i + 500) * 16, h = 6 + rand(i + 900) * (rand(i + 1300) > .85 ? 40 : 14);
+          if (ridge(x) < .45) continue;
+          context.fillRect(x - w / 2, top - h, w, h + 6); context.beginPath(); context.moveTo(x - w / 2 - 4, top - h); context.lineTo(x, top - h - 5 - w * .25); context.lineTo(x + w / 2 + 4, top - h); context.fill();
+        }
+      }
+      const texture = new THREE.CanvasTexture(canvas); texture.wrapS = THREE.RepeatWrapping;
+      const material = new THREE.MeshBasicMaterial({ map: texture, color: '#9aa9a8', transparent: true, alphaTest: .4, depthWrite: false, fog: false, side: THREE.BackSide });
+      const ring = new THREE.Mesh(new THREE.CylinderGeometry(layer.radius, layer.radius, layer.height, 96, 1, true), material);
+      ring.position.y = layer.height / 2 - 40; ring.rotation.y = layer.seed; ring.renderOrder = -6 + index; ring.userData.silhouetteLayer = index; ring.frustumCulled = false;
+      // Only alpha from the texture: colour comes from the material.
+      group.add(ring);
+    }
+    return group;
+  }
+  private lanterns!: THREE.Points;
+  private buildLanternGlow() {
+    // Additive warm glow with a minimum on-screen size, so lanterns still read
+    // as points of light at drone distance; it only lights after dusk.
+    const glows = lanternGlows(this.world), geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(glows.flatMap(g => [g.x, g.y, g.z]), 3));
+    geometry.setAttribute('glowSize', new THREE.Float32BufferAttribute(glows.map(g => g.kind === 'street' ? 3.6 : g.kind === 'eave' ? 2.8 : 3.2), 1));
+    const material = new THREE.ShaderMaterial({
+      uniforms: { night: { value: 0 }, scale: { value: 400 } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      vertexShader: `attribute float glowSize; uniform float scale; varying float vFade;
+        void main() { vec4 mv = modelViewMatrix * vec4(position, 1.0); float d = -mv.z; gl_Position = projectionMatrix * mv;
+          gl_PointSize = clamp(glowSize * scale / max(d, 1.0), 3.5, 16.0); vFade = clamp(1.4 - d / 4200.0, .25, 1.0); }`,
+      fragmentShader: `uniform float night; varying float vFade;
+        void main() { vec2 c = gl_PointCoord - .5; float r = length(c) * 2.0; if (r > 1.0) discard;
+          float core = smoothstep(.3, .0, r), halo = pow(1.0 - r, 1.6);
+          gl_FragColor = vec4(vec3(1.0, .48, .14) * (core * 1.1 + halo * .7) * night * vFade, 1.0); }`,
+    });
+    const points = new THREE.Points(geometry, material); points.name = '灯笼远景发光'; points.frustumCulled = false; points.renderOrder = 3; return points;
+  }
   private buildMist() {
     const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128;
     const context = canvas.getContext('2d');
@@ -984,6 +1039,10 @@ export class CityRenderer implements CityRendererAPI {
     this.skyMaterial.uniforms.daylight.value = daylight;
     const mistMaterial = this.mist.material as THREE.PointsMaterial; mistMaterial.color.copy(horizon).lerp(new THREE.Color('#e0e8df'), .25 + daylight * .35); mistMaterial.opacity = .13 + (1 - state.visibility) * .13; this.mist.position.x = Math.sin(elapsed * .015) * 24;
     for (const layer of this.clouds.children as (THREE.Mesh | THREE.Points)[]) { const m = layer.material as THREE.MeshBasicMaterial | THREE.PointsMaterial; m.color.set(grade.fogColor).lerp(new THREE.Color('#fbf6ec'), .35 + daylight * .45); m.opacity = (layer.userData.cloudLayer === 'sea' ? .5 : .3) * (.45 + daylight * .55); }
+    for (const ring of this.silhouettes.children as THREE.Mesh[]) (ring.material as THREE.MeshBasicMaterial).color.set(grade.fogColor).lerp(new THREE.Color(mixHex('#3d5a5a', grade.skyTop, .25)), [.62, .42, .24][ring.userData.silhouetteLayer as number]);
+    this.silhouettes.position.set(this.camera.position.x * .6, 0, this.camera.position.z * .6);
+    const glow = this.lanterns.material as THREE.ShaderMaterial; glow.uniforms.night.value = Math.max(0, 1 - daylight * 1.6); this.lanterns.visible = glow.uniforms.night.value > .01;
+    glow.uniforms.scale.value = this.renderer.domElement.height / (2 * Math.tan(THREE.MathUtils.degToRad(this.camera.fov) / 2));
     this.clouds.position.x = Math.sin(elapsed * .011) * 18; this.clouds.position.z = Math.cos(elapsed * .008) * 14;
     const sprayMaterial = this.spray.material as THREE.PointsMaterial; sprayMaterial.color.copy(horizon).lerp(new THREE.Color('#eef6ed'), .8); sprayMaterial.opacity = .13 + daylight * .12; this.spray.position.x = Math.sin(elapsed * .24) * 2.8;
     this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.set(grade.fogColor); fog.density = (.00022 + (1 - state.visibility) * .0002) * grade.fogDensityScale * (6500 / this.distance);

@@ -89,14 +89,20 @@ canvas {
   justify-content:space-between;
   padding:26px 30px 20px;
   gap:20px;
-  background:linear-gradient(180deg,rgba(244,241,225,.86),rgba(245,242,231,.32) 70%,transparent);
-  color:var(--ink)
+  background:linear-gradient(180deg,rgba(244,241,225,.62),rgba(245,242,231,.14) 62%,transparent);
+  color:var(--ink);
+  text-shadow:0 0 3px rgba(250,247,236,.85)
 }
 
 .city-brand {
   display:flex;
   align-items:center;
   gap:13px
+}
+
+/* Photo mode hides every overlay element; the canvas stays interactive. */
+.city-ui.photo-mode > * {
+  visibility:hidden
 }
 
 .brand-seal {
@@ -109,9 +115,10 @@ canvas {
   background:#547360;
   border:1px solid #f0ebd8;
   outline:1px solid #547360;
+  flex:0 0 auto;
   font-family:var(--serif);
   font-size:25px;
-  writing-mode:vertical-rl
+  line-height:1
 }
 
 .city-brand h1 {
