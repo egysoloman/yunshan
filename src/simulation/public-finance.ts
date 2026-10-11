@@ -9,8 +9,18 @@
  * every other flow are unchanged; a shop without a living owner keeps its
  * cash as before. */
 export const SHOP_PROFIT_TAX_POLICY = 'shop-profit-tax-v1' as const;
-export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY;
-export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY];
+/** v2 (2026-10-11). The 14-day audit still moved 42k from residents into
+ * shop cash (+51k): a shop pays no dividend at all while any earned wage is
+ * unpaid, and a staffed shop accrues wages all day, so 18.6k of 29.6k shop
+ * cash on day 3 was held back by a few coins of payroll. Under v2 the shop
+ * pays while wages are owed: the reserve already covers its protected funds
+ * (owed and committed payroll), so owners receive only the cash above them. Same 20% profit
+ * tax, same reserve, rates, wages and prices. */
+export const SHOP_PROFIT_TAX_POLICY_V2 = 'shop-profit-tax-v2' as const;
+export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2;
+export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2];
+/** v2 pays dividends while wages are owed (they stay reserved); v1 and legacy wait for none owed. */
+export const dividendWaitsForPayroll = (policy: PublicFinancePolicy | undefined) => policy !== SHOP_PROFIT_TAX_POLICY_V2;
 /** Was .5; the user judged half of all distributed profit unrealistic
  * (2026-10-10) once the shortfall was traced to logistics and a closed
  * economy, so it is a 20% corporate-style rate. */
@@ -18,7 +28,7 @@ export const PROFIT_TAX_SHARE = .2;
 
 /** Splits one distributable amount into the public profit tax and the owner's dividend. */
 export function profitTaxSplit(policy: PublicFinancePolicy | undefined, distributable: number): { tax: number; dividend: number } {
-  const tax = policy === SHOP_PROFIT_TAX_POLICY ? distributable * PROFIT_TAX_SHARE : 0;
+  const tax = policy === SHOP_PROFIT_TAX_POLICY || policy === SHOP_PROFIT_TAX_POLICY_V2 ? distributable * PROFIT_TAX_SHARE : 0;
   return { tax, dividend: distributable - tax };
 }
 
