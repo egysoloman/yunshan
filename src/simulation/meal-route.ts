@@ -7,7 +7,7 @@ export const NEARBY_MEAL_ROUTE_POLICY = 'nearby-food-v1' as const;
  * decay, meal recovery, prices, walking speed and routes are unchanged. */
 export const NEARBY_LUNCH_MEAL_ROUTE_POLICY = 'nearby-food-v2' as const;
 /** v3 (2026-10-11, outdoor routines, step 2). v2 plus an evening outing:
- * between 18:30 and 21:00 a resident who is neither hungry (hunger ≥ 50) nor
+ * between 18:30 and 21:00 a resident who has eaten (hunger ≥ 65) and is not
  * tired (fatigue ≥ 45) values going out to socialise EVENING_BONUS more at
  * the pavilions, halls and docks already offered (no purchase, no money moves).
  * Market shops are not offered: their floor plans have no social point.
@@ -25,7 +25,7 @@ export function lunchBonus(policy: MealRoutePolicy | undefined, hour: number, hu
 }
 /** v3 evening preference for one outing offer (0 outside the window). */
 export function eveningBonus(policy: MealRoutePolicy | undefined, hour: number, hunger: number, fatigue: number): number {
-  return policy === NEARBY_EVENING_ROUTE_POLICY && hour >= 18.5 && hour < 21 && hunger >= 50 && fatigue >= 45 ? EVENING_BONUS : 0;
+  return policy === NEARBY_EVENING_ROUTE_POLICY && hour >= 18.5 && hour < 21 && hunger >= 65 && fatigue >= 45 ? EVENING_BONUS : 0;
 }
 
 /** Preserve the original highest-score activity. Only when its winner is food
