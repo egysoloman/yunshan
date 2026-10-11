@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO.Compression;
 using System.Text;
 using Xunit;
@@ -20,15 +21,25 @@ public class NetworkStructuresParityTests
             => Add($"[\"s\",{S(key)},{N(a.X)},{N(a.Y)},{N(a.Z)},{N(b.X)},{N(b.Y)},{N(b.Z)},{N(width)},{N(height)},{N(lift)},{S(color)}]");
     }
 
-    [Fact]
-    public void NetworkMatchesTypeScript()
+    static string Gunzip(string name)
     {
-        string expected;
-        using (var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", "network-v6.json.gz")))
-        using (var gzip = new GZipStream(file, CompressionMode.Decompress))
-        using (var reader = new StreamReader(gzip, Encoding.UTF8)) expected = reader.ReadToEnd();
+        using var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", name));
+        using var gzip = new GZipStream(file, CompressionMode.Decompress);
+        using var reader = new StreamReader(gzip, Encoding.UTF8);
+        return reader.ReadToEnd();
+    }
+
+    /// <summary>current-v8 exists only in TypeScript: Unity receives it from the
+    /// host, so this test loads the same canonical world the host sends.</summary>
+    [Theory]
+    [InlineData("current-v6")]
+    [InlineData("current-v8")]
+    public void NetworkMatchesTypeScript(string layout)
+    {
+        var expected = Gunzip(layout == "current-v6" ? "network-v6.json.gz" : "network-v8.json.gz");
+        var world = layout == "current-v6" ? World.CreateWorld() : Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip($"world-{layout}.json.gz")));
         var recorder = new Recorder();
-        NetworkStructures.Emit(World.CreateWorld(), recorder, true, true, true, true, true, true, true);
+        NetworkStructures.Emit(world, recorder, true, true, true, true, true, true, true);
         var actual = recorder.Json.Append(']').ToString();
         if (expected != actual)
         {

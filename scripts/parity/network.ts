@@ -5,7 +5,8 @@ import { gzipSync } from 'node:zlib';
 import { createWorld } from '../../src/world';
 import { emitNetworkStructures } from '../../src/rendering/network-structures';
 
-const world = createWorld(), calls: unknown[] = [];
+const layout = (process.argv[3] ?? 'current-v6') as Parameters<typeof createWorld>[1];
+const world = createWorld(20261001, layout), calls: unknown[] = [];
 emitNetworkStructures(world, {
   box: (key, x, y, z, sx, sy, sz, color, rotation, tag) => { calls.push(['b', key, x, y, z, sx, sy, sz, color ?? null, rotation ?? 0, tag?.roof ?? false]); },
   segment: (key, a, b, width, height, lift, color) => { calls.push(['s', key, a.x, a.y, a.z, b.x, b.y, b.z, width, height, lift ?? 0, color ?? null]); },

@@ -22,9 +22,19 @@ namespace Yunshan.Core
 
         public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false, bool dressesRoadDeck = false, bool dressesRailKerb = false, bool dressesRailPierCaps = false)
         {
+            // current-v8 streets bend at any angle: a square deck at each interior
+            // vertex (on the bisector) closes the wedge between rigid segment boxes,
+            // and a pad covers every street junction. Older layouts keep their boxes.
+            bool anyAngleStreets = world.LayoutVersion == "current-v8";
             foreach (var edge in world.Edges)
             {
                 if (edge.Mode == "flight") continue;
+                if (anyAngleStreets && edge.Mode == "road" && !edge.Id.Contains("runway")) for (int i = 1; i < edge.Points.Count - 1; i++)
+                {
+                    Vec3 a = edge.Points[i - 1], p = edge.Points[i], b = edge.Points[i + 1];
+                    double width = TransportGeometry.DeckWidth(edge) - .04, yaw = JsMath.Atan2(b.X - a.X, b.Z - a.Z);
+                    sink.Box("stone", p.X, p.Y - .28, p.Z, width, .5, width, "#555f61", yaw);
+                }
                 double supportRemainder = 0;
                 for (int i = 1; i < edge.Points.Count; i++)
                 {
@@ -97,7 +107,7 @@ namespace Yunshan.Core
                     }
                     sink.Box("wood", p.X + 12, p.Y + 1.8, p.Z + 11, .35, 3.6, .35); sink.Box("wood", p.X + 12, p.Y + 3.5, p.Z + 11, 1, 1.6, .65);
                 }
-                else if (node.Id.Contains("junction") || node.Id.Contains("road")) sink.Box("wood", p.X + 4, p.Y + 2.2, p.Z + 4, .4, 4.4, .4);
+                else if (node.Id.Contains("junction") || node.Id.Contains("road")) { sink.Box("wood", p.X + 4, p.Y + 2.2, p.Z + 4, .4, 4.4, .4); if (anyAngleStreets && node.Id.StartsWith("junction-")) sink.Box("stone", p.X, p.Y - .28, p.Z, 11, .5, 11, "#555f61"); }
             }
         }
 
