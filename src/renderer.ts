@@ -69,7 +69,7 @@ export function programRoofShell(b: Building, parts: readonly { position: Vec3; 
   }
   return { form: hip ? 'hip' : 'gable', width: w + overhang * 2, depth: d + overhang * 2, rise, color: hip ? '#2c4d48' : '#38504c', position: centre, floor: Math.max(0, floor), skirt };
 }
-const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad' };
+const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad', lantern: '#b8432f' };
 type MaterialKey = keyof typeof PALETTE;
 interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
 interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean; ceiling?: boolean }
@@ -224,7 +224,7 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     this.renderer.domElement.setAttribute('aria-label', '云山巨城实时三维世界');
     this.container.appendChild(this.renderer.domElement);
-    this.materials = Object.fromEntries(Object.keys(PALETTE).filter(key => key !== 'metal' || this.world.buildings.some(site => site.commercialGeometryRevision === 1)).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : key === 'metal' ? .42 : .83, metalness: key === 'glass' ? .32 : key === 'metal' ? .72 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
+    this.materials = Object.fromEntries(Object.keys(PALETTE).filter(key => key !== 'metal' || this.world.buildings.some(site => site.commercialGeometryRevision === 1)).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : key === 'metal' ? .42 : .83, metalness: key === 'glass' ? .32 : key === 'metal' ? .72 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : key === 'lantern' ? '#ff5a28' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : key === 'lantern' ? .05 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
     for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v5`; this.materials[key].onBeforeCompile = shader => {
       shader.vertexShader = 'varying vec3 vArchitecture;varying vec3 vArchitectureNormal;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
@@ -850,7 +850,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const string of lanternStrings(this.world)) {
       for (const pole of string.poles) { batch.box('wood', pole.x, pole.y + 2.9, pole.z, .3, 5.8, .3, '#5a3a26'); batch.box('wood', pole.x, pole.y + 5.85, pole.z, .5, .2, .5, '#3d2a1d'); }
       const [a, b] = string.poles; batch.segment('wood', { x: a.x, y: a.y + 5.75, z: a.z }, { x: b.x, y: b.y + 5.75, z: b.z }, .05, .05, 0, '#2f2a24');
-      for (const l of string.lanterns) { batch.box('red', l.x, l.y, l.z, .55, .7, .55, '#b8432f'); batch.box('wood', l.x, l.y + .42, l.z, .35, .12, .35, '#3d2a1d'); }
+      for (const l of string.lanterns) { batch.box('lantern', l.x, l.y, l.z, .55, .7, .55, '#b8432f'); batch.box('wood', l.x, l.y + .42, l.z, .35, .12, .35, '#3d2a1d'); }
     }
     const group = batch.build(undefined, 384);
     group.traverse(object => { if (object instanceof THREE.InstancedMesh && object.userData.distanceDetail) this.distanceDetails.push(object); });
@@ -1083,6 +1083,8 @@ export class CityRenderer implements CityRendererAPI {
     for (const chunk of this.chunks) { const casts = Math.hypot(chunk.center.x - this.camera.position.x, chunk.center.z - this.camera.position.z) < 140; chunk.detail.traverse(object => { if (object instanceof THREE.Mesh) object.castShadow = casts; }); }
     this.architectureDetail.group.traverse(object => { if (object instanceof THREE.Mesh) { object.castShadow = true; object.receiveShadow = true; } });
     const energy = Math.max(.18, state.energy / 100); this.materials.cyan.emissiveIntensity = (.22 + (1 - daylight) * 2) * energy; this.materials.amber.emissiveIntensity = .45 + (1 - daylight) * 3;
+    // Candle-lit paper lanterns: off the grid, faint by day, glowing at night.
+    this.materials.lantern.emissiveIntensity = .05 + (1 - daylight) * 1.2;
     this.facadeNight.value = (1 - daylight) * Math.max(0, state.energy / 100) * .8;
     this.architectureDetail.setLighting(daylight, state.energy / 100);
     this.studioProps?.setLighting(daylight, state.energy / 100);

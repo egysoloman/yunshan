@@ -12,7 +12,7 @@ namespace Yunshan.Runtime
     public sealed class NetworkStructureMeshes : INetworkSink
     {
         const double Cell = 384;
-        static readonly Dictionary<string, string> Palette = new Dictionary<string, string> { ["stone"] = "#a0ab9f", ["wood"] = "#73533b", ["roof"] = "#456760", ["amber"] = "#ffd39a", ["cyan"] = "#82d9d0", ["red"] = "#954c40" };
+        static readonly Dictionary<string, string> Palette = new Dictionary<string, string> { ["stone"] = "#a0ab9f", ["wood"] = "#73533b", ["roof"] = "#456760", ["amber"] = "#ffd39a", ["cyan"] = "#82d9d0", ["red"] = "#954c40", ["lantern"] = "#b8432f" };
         readonly Dictionary<(long, long), GameMeshBuilder> cells = new Dictionary<(long, long), GameMeshBuilder>();
         readonly Dictionary<(long, long), GameMeshBuilder> glowCells = new Dictionary<(long, long), GameMeshBuilder>();
 
@@ -27,7 +27,7 @@ namespace Yunshan.Runtime
         public void Box(string key, double x, double y, double z, double sx, double sy, double sz, string color = null, double rotation = 0, bool roof = false)
         {
             if (sx <= 0 || sy <= 0 || sz <= 0) return;
-            For(x, z, key == "amber" || key == "cyan").LocalBox(GameMeshBuilder.GameFrame(x, y, z, rotation), -sx / 2, -sy / 2, -sz / 2, sx / 2, sy / 2, sz / 2, ColorOf(key, color), true);
+            For(x, z, key == "amber" || key == "cyan" || key == "lantern").LocalBox(GameMeshBuilder.GameFrame(x, y, z, rotation), -sx / 2, -sy / 2, -sz / 2, sx / 2, sy / 2, sz / 2, ColorOf(key, color), true);
         }
 
         public void Segment(string key, Vec3 a, Vec3 b, double width, double height, double lift = 0, string color = null)
@@ -43,7 +43,7 @@ namespace Yunshan.Runtime
             var rotation = new Quaternion((float)(qx / n), (float)(qy / n), (float)(qz / n), (float)(qw / n));
             var centre = new Vector3((float)((ax + bx) / 2), (float)((ay + by) / 2), (float)((az + bz) / 2));
             var frame = Matrix4x4.TRS(centre, rotation, Vector3.one);
-            For(centre.x, centre.z, key == "amber" || key == "cyan").LocalBox(frame, -width / 2, -height / 2, -length / 2, width / 2, height / 2, length / 2, ColorOf(key, color), true);
+            For(centre.x, centre.z, key == "amber" || key == "cyan" || key == "lantern").LocalBox(frame, -width / 2, -height / 2, -length / 2, width / 2, height / 2, length / 2, ColorOf(key, color), true);
         }
 
         /// <summary>Solid and glowing meshes per cell.</summary>

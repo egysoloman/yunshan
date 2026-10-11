@@ -49,7 +49,7 @@ namespace Yunshan.Core
                 foreach (var pole in s.Poles) { sink.Box("wood", pole.X, pole.Y + 2.9, pole.Z, .3, 5.8, .3, "#5a3a26"); sink.Box("wood", pole.X, pole.Y + 5.85, pole.Z, .5, .2, .5, "#3d2a1d"); }
                 Vec3 a = s.Poles[0], b = s.Poles[1];
                 sink.Segment("wood", new Vec3(a.X, a.Y + 5.75, a.Z), new Vec3(b.X, b.Y + 5.75, b.Z), .05, .05, 0, "#2f2a24");
-                foreach (var l in s.Lanterns) { sink.Box("red", l.X, l.Y, l.Z, .55, .7, .55, "#b8432f"); sink.Box("wood", l.X, l.Y + .42, l.Z, .35, .12, .35, "#3d2a1d"); }
+                foreach (var l in s.Lanterns) { sink.Box("lantern", l.X, l.Y, l.Z, .55, .7, .55, "#b8432f"); sink.Box("wood", l.X, l.Y + .42, l.Z, .35, .12, .35, "#3d2a1d"); }
             }
         }
     }
