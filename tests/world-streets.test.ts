@@ -4,6 +4,7 @@ import { createStreetWorld, createWorld, findPath } from '../src/world';
 import { savedWorldFingerprint } from '../src/persistence/world-layout';
 import type { Building, Vec3 } from '../src/types';
 import { roadCrossings } from '../scripts/roads/crossings';
+import { deckClashes } from '../scripts/roads/deck-clashes';
 
 // R2 development street recipe (docs/设计/路网重做方案.md): the same world
 // invariants as tests/world.test.ts, plus the street-shape targets of P1.
@@ -77,6 +78,13 @@ test('streets meet the P1 shape targets', () => {
     // Streets meet at junctions. Counting every interior crossing (also between
     // roads that share an end node elsewhere) v6 has 368 and v8 about 40.
     const crossings = roadCrossings(world.edges);
-    assert.ok(crossings.length <= 45, `${world.seed}: ${crossings.length} street crossings without a junction`);
+    assert.ok(crossings.length <= 36, `${world.seed}: ${crossings.length} street crossings without a junction`);
   }
+});
+
+test('door stubs keep out from under other streets\' decks', () => {
+  // A walker on a stub stands under another street's deck when the two 10 m
+  // decks overlap in plan with one 1.8–4.8 m above the other. v8 had 102.
+  const world = worlds[0], overhead = deckClashes(world.edges, world.nodes).filter(c => c.dy >= 1.8 && c.gap < 8);
+  assert.ok(overhead.length <= 50, `${overhead.length} overhead decks`);
 });
