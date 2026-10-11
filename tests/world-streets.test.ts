@@ -74,8 +74,9 @@ test('streets meet the P1 shape targets', () => {
     }
     assert.ok(right / (length / 1000) <= 3, `${world.seed}: ${(right / (length / 1000)).toFixed(2)} right-angle turns per km`);
     assert.ok(axis / length <= .2, `${world.seed}: axis share ${(axis / length).toFixed(3)}`);
-    // Streets meet at junctions; v6 has 67 crossings that share no node.
+    // Streets meet at junctions. Counting every interior crossing (also between
+    // roads that share an end node elsewhere) v6 has 368 and v8 about 40.
     const crossings = roadCrossings(world.edges);
-    assert.ok(crossings.length <= 40, `${world.seed}: ${crossings.length} street crossings without a junction`);
+    assert.ok(crossings.length <= 45, `${world.seed}: ${crossings.length} street crossings without a junction`);
   }
 });

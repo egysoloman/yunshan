@@ -13,7 +13,8 @@ export function roadCrossings(edges: NetworkEdge[]): RoadCrossing[] {
   const found = new Map<string, RoadCrossing>();
   for (const list of grid.values()) for (let p = 0; p < list.length; p++) for (let q = p + 1; q < list.length; q++) {
     const [e, i] = list[p], [f, j] = list[q];
-    if (e === f || e.from === f.from || e.from === f.to || e.to === f.from || e.to === f.to) continue;
+    // Interior-only intersection (t, u strictly inside) already excludes roads that merely meet at a shared node.
+    if (e === f) continue;
     const a = e.points[i - 1], b = e.points[i], c = f.points[j - 1], d = f.points[j];
     const den = (b.x - a.x) * (d.z - c.z) - (b.z - a.z) * (d.x - c.x); if (Math.abs(den) < 1e-9) continue;
     const t = ((c.x - a.x) * (d.z - c.z) - (c.z - a.z) * (d.x - c.x)) / den, u = ((c.x - a.x) * (b.z - a.z) - (c.z - a.z) * (b.x - a.x)) / den;
