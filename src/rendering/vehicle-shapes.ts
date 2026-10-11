@@ -8,11 +8,14 @@ export interface VehicleShape { length: number; width: number; lift: number; bod
 
 export function vehicleShape(kind: TransportMode): VehicleShape {
   const flight = kind === 'flight', train = kind === 'maglev' || kind === 'lightRail', boat = kind === 'ferry';
-  const length = flight ? 17 : train ? 16 : boat ? 11 : kind === 'cable' ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = kind === 'cable' ? 2.5 : 0;
+  const cable = kind === 'cable', length = flight ? 17 : train ? 16 : boat ? 11 : cable ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = cable ? 4.6 : 0;
+  // A cable cabin hangs from the haul rope drawn 8.5–9 m above the line
+  // (network-structures): its trim becomes the grip arm up to the rope.
+  const roof = 2.1 + lift + .4, rope = 8.6;
   return {
     length, width, lift,
     body: { y: 1.1 + lift, width, height: flight ? .8 : 1.5, length, color: flight ? '#d5c7aa' : train ? '#d0b985' : '#a77851' },
     head: { y: 2.1 + lift, width: flight ? 3 : width * .85, height: flight ? 1.8 : .8, length: length * .68, color: '#517f82' },
-    trim: { y: .6 + lift, width: width + .25, height: .2, length: length * .85, color: '#3f6f73' },
+    trim: cable ? { y: (roof + rope) / 2, width: .25, height: rope - roof, length: .25, color: '#3f6f73' } : { y: .6 + lift, width: width + .25, height: .2, length: length * .85, color: '#3f6f73' },
   };
 }
