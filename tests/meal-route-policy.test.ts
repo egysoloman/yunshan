@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createHash } from 'node:crypto';
-import { chooseNearestTiedMeal } from '../src/simulation/meal-route';
+import { chooseNearestTiedMeal, LUNCH_BONUS, lunchBonus, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, validateMealRoutePolicy } from '../src/simulation/meal-route';
 import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
 import { upgradeMealRoute } from '../src/host/upgrade-meal-route';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
@@ -52,8 +52,22 @@ test('meal policy preserves source actors at cutover and cannot disappear in ful
   assert.equal(sim.exportSave(), original);
   assert.equal(sim.mealRoutePolicyId, 'legacy');
   const current = createCurrentProductCity(world);
-  assert.equal(current.mealRoutePolicyId, 'nearby-food-v1');
+  assert.equal(current.mealRoutePolicyId, 'nearby-food-v2', 'new cities declare the lunch-break meal policy');
   assert.equal(current.referenceCollisionPolicyId, 'continuous-upright-v1');
   assert.equal(current.importSave(original).ok, true);
   assert.equal(current.exportSave(), original, 'loading a new factory does not activate either policy');
+});
+
+test('v2 adds a midday lunch preference for residents who are not full; v1 and legacy cities keep their meals', () => {
+  assert.equal(lunchBonus(NEARBY_LUNCH_MEAL_ROUTE_POLICY, 12, 70), LUNCH_BONUS);
+  for (const [hour, hunger] of [[11.4, 70], [13, 70], [12, 80], [18, 40]] as const) assert.equal(lunchBonus(NEARBY_LUNCH_MEAL_ROUTE_POLICY, hour, hunger), 0);
+  assert.equal(lunchBonus(NEARBY_MEAL_ROUTE_POLICY, 12, 70), 0);
+  assert.equal(lunchBonus(undefined, 12, 70), 0);
+  const declared = { version: 4, motionVersion: 2, mealRoutePolicyId: NEARBY_LUNCH_MEAL_ROUTE_POLICY, runtime: { npcMotionVersion: 2, mealRoutePolicyId: NEARBY_LUNCH_MEAL_ROUTE_POLICY } };
+  validateMealRoutePolicy(declared);
+  assert.throws(() => validateMealRoutePolicy({ ...declared, runtime: { ...declared.runtime, mealRoutePolicyId: NEARBY_MEAL_ROUTE_POLICY } }), /meal route policy pair/, 'envelope and runtime name the same version');
+  const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave();
+  assert.equal(JSON.parse(saved).mealRoutePolicyId, NEARBY_LUNCH_MEAL_ROUTE_POLICY);
+  const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
+  assert.equal(assembleSave(partitionSave(saved, world)), saved);
 });

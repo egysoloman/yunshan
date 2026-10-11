@@ -6,7 +6,7 @@ import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, va
 import { createCivicHistory, freezeCivicHistory } from './simulation/civic-history';
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
-import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
+import { chooseNearestTiedMeal, lunchBonus, MEAL_ROUTE_POLICIES, nearestMealPolicy, type MealRoutePolicy } from './simulation/meal-route';
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
@@ -183,7 +183,7 @@ export class Simulation implements SimulationAPI {
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
     if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId', 'npcMotionPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.mealRoutePolicyId !== undefined && (!MEAL_ROUTE_POLICIES.includes(options.mealRoutePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.farmYieldPolicyId !== undefined && (!FARM_YIELD_POLICIES.includes(options.farmYieldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.foodFreightPolicyId !== undefined && (!FOOD_FREIGHT_POLICIES.includes(options.foodFreightPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
@@ -1536,7 +1536,7 @@ export class Simulation implements SimulationAPI {
       const relation = this.state.relationships.find(r => r.npcId === citizen.id); if (relation && this.hostilityRank(relation) >= 2 && this.playerOwnsShop(shop)) continue;
       const building = this.buildings.get(shop.buildingId)!;
       if (distance(citizen.position, building.door) > 1200 && building.districtId !== citizen.districtId) continue;
-      add(building, 'eat', (100 - citizen.needs.hunger) * 1.15 + (citizen.needs.hunger < 30 ? 260 : 0) + (hour >= 18 && hour < 19 ? 12 : 0) - (night ? 50 : 0));
+      add(building, 'eat', (100 - citizen.needs.hunger) * 1.15 + (citizen.needs.hunger < 30 ? 260 : 0) + (hour >= 18 && hour < 19 ? 12 : 0) - (night ? 50 : 0) + lunchBonus(this.runtime.mealRoutePolicyId, hour, citizen.needs.hunger));
     }
     const profile = this.state.extension?.actorProfiles[citizen.id];
     if (hour >= 17 && hour < 22 && citizen.needs.hunger >= 40 && citizen.needs.fatigue >= 35) for (const plan of this.state.family?.movePlans ?? []) {
@@ -1565,7 +1565,7 @@ export class Simulation implements SimulationAPI {
       if (['pavilion', 'station', 'clinic'].includes(building.kind) && (citizen.needs.fatigue < 25 || night && !homeBedAvailable)) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
     }
     candidates.sort((a, b) => b.score - a.score);
-    const chosen = this.runtime.mealRoutePolicyId === NEARBY_MEAL_ROUTE_POLICY ? chooseNearestTiedMeal(candidates) : candidates[0];
+    const chosen = nearestMealPolicy(this.runtime.mealRoutePolicyId) ? chooseNearestTiedMeal(candidates) : candidates[0];
     return chosen ? { destination: chosen.destination, activity: chosen.activity } : { destination: home, activity: 'rest' };
   }
   private routeToRoadwork(citizen: Citizen, task: NonNullable<ReturnType<typeof roadworkTask>>): Vec3[] {
@@ -1828,7 +1828,7 @@ export class Simulation implements SimulationAPI {
       const committedTreatment = treatment && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25;
       if (committedTreatment) this.runtime.activities[citizen.id] = 'heal';
       const reconsiderCivic = this.effectiveRuleset === 'civic-local-v1' && previousActivity === 'work' && civicStaffingOpportunities(this, citizen).length > 0;
-      const reconsiderMeal = this.runtime.mealRoutePolicyId === NEARBY_MEAL_ROUTE_POLICY && previousActivity === 'eat' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
+      const reconsiderMeal = nearestMealPolicy(this.runtime.mealRoutePolicyId) && previousActivity === 'eat' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
       const committedNeed = !!citizen.destinationId && (citizen.state === 'roadWaiting' || !reconsiderMeal && previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || !reconsiderCivic && previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
       if (committedTreatment) destination = this.buildings.get(treatment.siteId)!;
       else if (!committedNeed && (reconsiderCivic || !citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
