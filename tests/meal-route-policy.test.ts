@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createHash } from 'node:crypto';
-import { chooseNearestTiedMeal, LUNCH_BONUS, lunchBonus, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, validateMealRoutePolicy } from '../src/simulation/meal-route';
+import { chooseNearestTiedMeal, EVENING_BONUS, eveningBonus, LUNCH_BONUS, lunchBonus, NEARBY_EVENING_ROUTE_POLICY, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, validateMealRoutePolicy } from '../src/simulation/meal-route';
 import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
 import { upgradeMealRoute } from '../src/host/upgrade-meal-route';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
@@ -70,4 +70,13 @@ test('v2 adds a midday lunch preference for residents who are not full; v1 and l
   assert.equal(JSON.parse(saved).mealRoutePolicyId, NEARBY_LUNCH_MEAL_ROUTE_POLICY);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
+});
+
+test('v3 keeps the lunch break and adds an evening outing for rested, fed residents only', () => {
+  assert.equal(lunchBonus(NEARBY_EVENING_ROUTE_POLICY, 12, 70), LUNCH_BONUS);
+  assert.equal(eveningBonus(NEARBY_EVENING_ROUTE_POLICY, 19.5, 60, 60), EVENING_BONUS);
+  for (const [hour, hunger, fatigue] of [[18.4, 60, 60], [21, 60, 60], [19.5, 49, 60], [19.5, 60, 44]] as const) assert.equal(eveningBonus(NEARBY_EVENING_ROUTE_POLICY, hour, hunger, fatigue), 0);
+  for (const policy of [NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, undefined]) assert.equal(eveningBonus(policy, 19.5, 60, 60), 0, `${policy} has no evening outing`);
+  const declared = { version: 4, motionVersion: 2, mealRoutePolicyId: NEARBY_EVENING_ROUTE_POLICY, runtime: { npcMotionVersion: 2, mealRoutePolicyId: NEARBY_EVENING_ROUTE_POLICY } };
+  validateMealRoutePolicy(declared);
 });

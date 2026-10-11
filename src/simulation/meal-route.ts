@@ -6,14 +6,26 @@ export const NEARBY_MEAL_ROUTE_POLICY = 'nearby-food-v1' as const;
  * and return. A probe counted 41 of 616 residents outdoors at noon. Hunger
  * decay, meal recovery, prices, walking speed and routes are unchanged. */
 export const NEARBY_LUNCH_MEAL_ROUTE_POLICY = 'nearby-food-v2' as const;
-export type MealRoutePolicy = typeof NEARBY_MEAL_ROUTE_POLICY | typeof NEARBY_LUNCH_MEAL_ROUTE_POLICY;
-export const MEAL_ROUTE_POLICIES: readonly MealRoutePolicy[] = [NEARBY_MEAL_ROUTE_POLICY, NEARBY_LUNCH_MEAL_ROUTE_POLICY];
+/** v3 (2026-10-11, outdoor routines, step 2). v2 plus an evening outing:
+ * between 18:30 and 21:00 a resident who is neither hungry (hunger ≥ 50) nor
+ * tired (fatigue ≥ 45) values going out to socialise EVENING_BONUS more, at
+ * the pavilions, halls and docks already offered and along the open shops of
+ * their own district's market streets (a stroll: no purchase, no money moves).
+ * Need decay and recovery, prices, walking speed and routes are unchanged. */
+export const NEARBY_EVENING_ROUTE_POLICY = 'nearby-food-v3' as const;
+export type MealRoutePolicy = typeof NEARBY_MEAL_ROUTE_POLICY | typeof NEARBY_LUNCH_MEAL_ROUTE_POLICY | typeof NEARBY_EVENING_ROUTE_POLICY;
+export const MEAL_ROUTE_POLICIES: readonly MealRoutePolicy[] = [NEARBY_MEAL_ROUTE_POLICY, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_EVENING_ROUTE_POLICY];
+export const EVENING_BONUS = 45;
 export const LUNCH_BONUS = 90;
 /** Both declared policies compare tied food offers by actual travel. */
-export const nearestMealPolicy = (policy: MealRoutePolicy | undefined) => policy === NEARBY_MEAL_ROUTE_POLICY || policy === NEARBY_LUNCH_MEAL_ROUTE_POLICY;
-/** v2 lunch preference for one food offer. */
+export const nearestMealPolicy = (policy: MealRoutePolicy | undefined) => policy !== undefined && MEAL_ROUTE_POLICIES.includes(policy);
+/** v2/v3 lunch preference for one food offer. */
 export function lunchBonus(policy: MealRoutePolicy | undefined, hour: number, hunger: number): number {
-  return policy === NEARBY_LUNCH_MEAL_ROUTE_POLICY && hour >= 11.5 && hour < 13 && hunger < 80 ? LUNCH_BONUS : 0;
+  return (policy === NEARBY_LUNCH_MEAL_ROUTE_POLICY || policy === NEARBY_EVENING_ROUTE_POLICY) && hour >= 11.5 && hour < 13 && hunger < 80 ? LUNCH_BONUS : 0;
+}
+/** v3 evening preference for one outing offer (0 outside the window). */
+export function eveningBonus(policy: MealRoutePolicy | undefined, hour: number, hunger: number, fatigue: number): number {
+  return policy === NEARBY_EVENING_ROUTE_POLICY && hour >= 18.5 && hour < 21 && hunger >= 50 && fatigue >= 45 ? EVENING_BONUS : 0;
 }
 
 /** Preserve the original highest-score activity. Only when its winner is food

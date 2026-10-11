@@ -6,7 +6,7 @@ import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, va
 import { createCivicHistory, freezeCivicHistory } from './simulation/civic-history';
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
-import { chooseNearestTiedMeal, lunchBonus, MEAL_ROUTE_POLICIES, nearestMealPolicy, type MealRoutePolicy } from './simulation/meal-route';
+import { chooseNearestTiedMeal, eveningBonus, lunchBonus, MEAL_ROUTE_POLICIES, nearestMealPolicy, type MealRoutePolicy } from './simulation/meal-route';
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
@@ -1561,7 +1561,10 @@ export class Simulation implements SimulationAPI {
       const child = this.state.family?.children[citizen.id];
       if (building.kind === 'school' && child && child.schoolId !== building.id) continue;
       if (building.kind === 'school' && hour >= 7 && hour < 19) add(building, 'study', Math.max(0, 4 - (citizen.education ?? 0)) * 8 + (citizen.role === '学生' && shift ? 55 : 0) + (citizen.skills?.learning ?? 20) * .2);
-      if (['pavilion', 'hall', 'dock'].includes(building.kind)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 - (night ? 60 : 0));
+      const evening = eveningBonus(this.runtime.mealRoutePolicyId, hour, citizen.needs.hunger, citizen.needs.fatigue);
+      if (['pavilion', 'hall', 'dock'].includes(building.kind)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 - (night ? 60 : 0) + evening);
+      // v3 evening stroll along the district's open market shops (no purchase).
+      if (evening && building.kind === 'market' && this.state.shops.some(shop => shop.buildingId === building.id && shop.open)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 + evening);
       if (['pavilion', 'station', 'clinic'].includes(building.kind) && (citizen.needs.fatigue < 25 || night && !homeBedAvailable)) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
     }
     candidates.sort((a, b) => b.score - a.score);
