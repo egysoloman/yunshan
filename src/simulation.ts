@@ -1327,7 +1327,7 @@ export class Simulation implements SimulationAPI {
     this.citizenRoadRevisions.set(citizen, this.ensureRoadRouting());
     if (!rebuild && citizen.destinationId === destination.id && destination.floorPlanProfile !== FLOOR_PLAN_PROFILE) return;
     if (destination.floorPlanProfile === FLOOR_PLAN_PROFILE) {
-      const action = this.runtime.activities[citizen.id], purpose = this.activityPointPurpose(action);
+      const action = this.runtime.activities[citizen.id], purpose = this.activityPointPurpose(action, destination);
       const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
       const restPoints = destination.kind === 'home' && action === 'rest' ? this.availableHomeRestPoints(citizen, destination) : null;
       const availablePoints: BuildingFunctionPoint[] = restPoints
@@ -1563,6 +1563,8 @@ export class Simulation implements SimulationAPI {
       if (building.kind === 'school' && hour >= 7 && hour < 19) add(building, 'study', Math.max(0, 4 - (citizen.education ?? 0)) * 8 + (citizen.role === '学生' && shift ? 55 : 0) + (citizen.skills?.learning ?? 20) * .2);
       const evening = eveningBonus(this.runtime.mealRoutePolicyId, hour, citizen.needs.hunger, citizen.needs.fatigue);
       if (['pavilion', 'hall', 'dock'].includes(building.kind)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 - (night ? 60 : 0) + evening);
+      // v3 evening stroll past the district's open market counters (no purchase).
+      if (evening && building.kind === 'market' && this.state.shops.some(shop => shop.buildingId === building.id && shop.open)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 + evening);
       if (['pavilion', 'station', 'clinic'].includes(building.kind) && (citizen.needs.fatigue < 25 || night && !homeBedAvailable)) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
     }
     candidates.sort((a, b) => b.score - a.score);
@@ -1861,7 +1863,7 @@ export class Simulation implements SimulationAPI {
       const person = { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] };
       const atActivityPoint = destination.kind === 'home' && activity === 'rest'
         ? !!homeRestPointAt(destination, citizen.position, person) && !homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)
-        : this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity), person);
+        : this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity, destination), person);
       if (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !atActivityPoint) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
       // A clinic observer receives only a real completed walking/arrival leg.
       // This optional source event changes no movement, needs or attendance.
@@ -2323,7 +2325,9 @@ export class Simulation implements SimulationAPI {
   private buildingFunctionPoints(building: Building): BuildingFunctionPoint[] {
     return building.functionPoints ?? Array.from({ length: building.floors }, (_, floor) => getBuildingUsePoints(building, floor)).flat();
   }
-  private activityPointPurpose(activity: string | undefined): BuildingFunctionPoint['purpose'] {
+  private activityPointPurpose(activity: string | undefined, destination?: Building): BuildingFunctionPoint['purpose'] {
+    // A v3 evening stroll at a market browses at its counter (no purchase).
+    if (activity === 'social' && destination?.kind === 'market') return 'sale';
     return activity === 'eat' ? 'sale' : ['work', 'businessReview', 'budgetReview', 'shopLifecycle'].includes(activity ?? '') ? 'work' : 'service';
   }
   /** A v4 facility is used at its real point on a legally accessible floor.
