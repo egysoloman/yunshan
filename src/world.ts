@@ -959,18 +959,6 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     }
     return -1;
   };
-  for (const stops of quarters.values()) for (const stop of stops) {
-    const home = station(stop.districtId);
-    let points = routeGround(world, stop.position, home.position), destination = home;
-    // Street recipe: a quarter road that would cross a trunk joins it there.
-    for (let hop = 0; streetRecipe === 'smooth' && hop < 4; hop++) {
-      const crossing = firstCrossing(points); if (!crossing) break;
-      const index = reachableVertex(crossing.edge, crossing.at, stop.position, stop.position); if (index < 0) break;
-      let next: Vec3[]; try { next = routeGround(world, stop.position, crossing.edge.points[index]); } catch { break; }
-      points = next; destination = splitAt(crossing.edge, index, stop.districtId);
-    }
-    addEdge(stop.id, destination.id, 'road', points, 90);
-  }
   /** Road decks by 16 m cell, rebuilt when streets are added: a cell within
    * 7 m of a deck more than .5 m above or below the stub's own grade costs 12/m. */
   let deckCells: Map<string, [Vec3, Vec3][]> | null = null, deckEdges = 0;
@@ -992,6 +980,19 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
       return 0;
     };
   };
+  for (const stops of quarters.values()) for (const stop of stops) {
+    const home = station(stop.districtId);
+    const quarterRoute = (to: Vec3) => { if (streetRecipe !== 'smooth') return routeGround(world, stop.position, to); try { deckPenalty = deckCost(); return routeGround(world, stop.position, to); } finally { deckPenalty = null; } };
+    let points = quarterRoute(home.position), destination = home;
+    // Street recipe: a quarter road that would cross a trunk joins it there.
+    for (let hop = 0; streetRecipe === 'smooth' && hop < 4; hop++) {
+      const crossing = firstCrossing(points); if (!crossing) break;
+      const index = reachableVertex(crossing.edge, crossing.at, stop.position, stop.position); if (index < 0) break;
+      let next: Vec3[]; try { next = quarterRoute(crossing.edge.points[index]); } catch { break; }
+      points = next; destination = splitAt(crossing.edge, index, stop.districtId);
+    }
+    addEdge(stop.id, destination.id, 'road', points, 90);
+  }
   const joinStreet = (b: Building, node: NetworkNode): Vec3[] | null => {
     const tried = new Set<string>();
     const accept = (edge: NetworkEdge, index: number, points: Vec3[]) => { const joined = splitAt(edge, index, b.districtId); addEdge(node.id, joined.id, 'road', points, 30); return points; };
@@ -1029,12 +1030,13 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     const fallback = b.id === 'core-dock-building' ? liftBottom : buildingAnchors.get(b.id) ?? station(b.districtId);
     nodeById.set(node.id, node);
     if (streetRecipe === 'smooth' && b.id !== 'core-dock-building' && joinStreet(b, node)) continue;
-    let points = routeGround(world, node.position, fallback.position, b), destination = fallback;
+    const stubRoute = (to: Vec3) => { if (streetRecipe !== 'smooth' || b.id === 'core-dock-building') return routeGround(world, node.position, to, b); try { deckPenalty = deckCost(); return routeGround(world, node.position, to, b); } finally { deckPenalty = null; } };
+    let points = stubRoute(fallback.position), destination = fallback;
     // A long fallback stub still joins the first street it would cross.
     for (let hop = 0; streetRecipe === 'smooth' && b.id !== 'core-dock-building' && hop < 4; hop++) {
       const crossing = firstCrossing(points); if (!crossing) break;
       const index = reachableVertex(crossing.edge, crossing.at, node.position, doorLead(b, node.position)); if (index < 0) break;
-      let next: Vec3[]; try { next = routeGround(world, node.position, crossing.edge.points[index], b); } catch { break; }
+      let next: Vec3[]; try { next = stubRoute(crossing.edge.points[index]); } catch { break; }
       points = next; destination = splitAt(crossing.edge, index, b.districtId);
     }
     addEdge(node.id, destination.id, 'road', points, 30);
