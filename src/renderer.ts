@@ -960,10 +960,10 @@ export class CityRenderer implements CityRendererAPI {
       uniforms: { night: { value: 0 }, scale: { value: 400 } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
       vertexShader: `attribute float glowSize; uniform float scale; varying float vFade;
         void main() { vec4 mv = modelViewMatrix * vec4(position, 1.0); float d = -mv.z; gl_Position = projectionMatrix * mv;
-          gl_PointSize = clamp(glowSize * scale / max(d, 1.0), 3.5, 16.0); vFade = clamp(1.4 - d / 4200.0, .25, 1.0); }`,
+          gl_PointSize = clamp(glowSize * scale / max(d, 1.0), 6.0, 18.0); vFade = clamp(1.4 - d / 4200.0, .25, 1.0); }`,
       fragmentShader: `uniform float night; varying float vFade;
         void main() { vec2 c = gl_PointCoord - .5; float r = length(c) * 2.0; if (r > 1.0) discard;
-          float core = smoothstep(.3, .0, r), halo = pow(1.0 - r, 1.6);
+          float core = smoothstep(.42, .0, r), halo = pow(1.0 - r, 1.4);
           gl_FragColor = vec4(vec3(1.0, .48, .14) * (core * 1.1 + halo * .7) * night * vFade, 1.0); }`,
     });
     const points = new THREE.Points(geometry, material); points.name = '灯笼远景发光'; points.frustumCulled = false; points.renderOrder = 3; return points;
