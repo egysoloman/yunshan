@@ -1,4 +1,5 @@
 import type { WorldDefinition } from '../types';
+import { lanternStrings } from './lantern-strings';
 
 /** R1 W5 (docs/设计/美术与渲染改造方案.md §2.5, S6): display-only far glow of
  * lanterns. Near the camera the modelled lanterns are visible; at drone
@@ -6,7 +7,7 @@ import type { WorldDefinition } from '../types';
  * the concept art is strung with warm lights. Glows sit where the city already
  * has lights: a pair beside every door, the eave corners and mid-eaves of low buildings and
  * street lamps along roads. Positions are a pure function of the world. */
-export interface LanternGlow { x: number; y: number; z: number; kind: 'door' | 'eave' | 'street' }
+export interface LanternGlow { x: number; y: number; z: number; kind: 'door' | 'eave' | 'street' | 'string' }
 
 const NO_EAVE = new Set(['station', 'airport', 'starport', 'core', 'facility']);
 
@@ -28,5 +29,6 @@ export function lanternGlows(world: WorldDefinition, streetSpacing = 36): Lanter
       carry -= seg;
     }
   }
+  for (const string of lanternStrings(world)) for (const lantern of string.lanterns) out.push({ ...lantern, kind: 'string' });
   return out;
 }
