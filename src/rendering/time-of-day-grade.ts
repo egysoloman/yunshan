@@ -45,16 +45,18 @@ export function timeOfDayGrade(hour: number, visibility: number): TimeOfDayGrade
   const clear = Math.min(1, Math.max(0, visibility));
   // Key:fill >= 4:1 in clear daylight; overcast/fog flattens the key.
   const sunIntensity = daylight * (2.6 + clear * 1.2);
-  const fillIntensity = .62 + daylight * .32 + (1 - daylight) * .28 + (1 - clear) * .25;
+  // Night: a stronger cool moon-sky fill so streets and roofs stay legible
+  // between lantern glows (R1 night target: near-black ≤65%).
+  const fillIntensity = .62 + daylight * .32 + (1 - daylight) * .55 + (1 - clear) * .25;
   const horizon = mixHex(mixHex('#1d3546', '#d9c9a8', daylight), '#f0b27a', twilight * .45);
   return {
     sunDirection, daylight, twilight,
     sunColor: daylight > 0 ? sunColorAt(Math.max(0, elevation)) : '#ffd29a', sunIntensity,
     moonIntensity: (1 - daylight) * .72,
-    fillSky: mixHex('#7f9fb6', '#9fb7c9', daylight), fillGround: mixHex('#3d5149', '#6f7a62', daylight), fillIntensity,
+    fillSky: mixHex('#8aa6cf', '#9fb7c9', daylight), fillGround: mixHex('#3d5149', '#6f7a62', daylight), fillIntensity,
     bounceColor: mixHex('#8296a0', '#d8c39c', daylight), bounceIntensity: .03 + daylight * .3,
     skyTop: mixHex('#071822', '#3f86b4', daylight), skyHorizon: horizon,
     fogColor: mixHex(horizon, '#e8dcc0', daylight * .35), fogDensityScale: .55 + (1 - clear) * .6,
-    exposure: 1.06 + daylight * .06,
+    exposure: 1.06 + daylight * .06 + (1 - daylight) * .1,
   };
 }
