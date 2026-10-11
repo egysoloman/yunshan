@@ -105,7 +105,7 @@ namespace Yunshan.Runtime
                 var details = StudioPropLayout.NetworkDetailPlacements(world, studio.Bounds).Where(p => studio.Has(p.Asset)).ToList();
                 bool pierCapsDressed = details.Any(p => p.Asset == StudioPropLayout.RailPierCapAsset), runwayLightsDressed = details.Any(p => p.Asset == StudioPropLayout.RunwayLightAsset);
                 var decks = await Task.Run(() => StudioPropLayout.DeckTilePlacements(world, studio.Bounds).Where(p => studio.Has(p.Asset)).ToList());
-                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed, railDeckDressed, bridgeDeckDressed, roadDeckDressed, railKerbDressed, pierCapsDressed); GatewayStructures.Emit(world, sink, forecourtDressed, runwayLightsDressed); return sink; });
+                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed, railDeckDressed, bridgeDeckDressed, roadDeckDressed, railKerbDressed, pierCapsDressed); GatewayStructures.Emit(world, sink, forecourtDressed, runwayLightsDressed); LanternStrings.Emit(world, sink); return sink; });
                 var networkRoot = new GameObject("路网结构").transform; networkRoot.SetParent(transform, false);
                 foreach (var (mesh, glow) in network.Build()) Show(networkRoot, mesh, glow ? glassMaterial : solidMaterial);
                 Show(transform, CityGeometry.WaterMesh(world), waterMaterial);

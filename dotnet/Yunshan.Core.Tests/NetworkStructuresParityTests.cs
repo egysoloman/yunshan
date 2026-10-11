@@ -8,7 +8,7 @@ namespace Yunshan.Core.Tests;
 /// <summary>Replays scripts/parity/network.ts: every network box and segment, call by call.</summary>
 public class NetworkStructuresParityTests
 {
-    sealed class Recorder : INetworkSink
+    internal sealed class Recorder : INetworkSink
     {
         public readonly StringBuilder Json = new StringBuilder("[");
         bool first = true;
@@ -21,7 +21,7 @@ public class NetworkStructuresParityTests
             => Add($"[\"s\",{S(key)},{N(a.X)},{N(a.Y)},{N(a.Z)},{N(b.X)},{N(b.Y)},{N(b.Z)},{N(width)},{N(height)},{N(lift)},{S(color)}]");
     }
 
-    static string Gunzip(string name)
+    internal static string Gunzip(string name)
     {
         using var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", name));
         using var gzip = new GZipStream(file, CompressionMode.Decompress);
@@ -46,5 +46,16 @@ public class NetworkStructuresParityTests
             int i = 0; while (i < Math.Min(expected.Length, actual.Length) && expected[i] == actual[i]) i++;
             Assert.Fail($"network differs at {i}/{expected.Length}: expected …{expected.Substring(Math.Max(0, i - 160), Math.Min(320, expected.Length - Math.Max(0, i - 160)))}… actual …{actual.Substring(Math.Max(0, i - 160), Math.Min(320, actual.Length - Math.Max(0, i - 160)))}…");
         }
+    }
+
+    [Fact]
+    public void LanternStringsMatchTypeScript()
+    {
+        var world = Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v8.json.gz")));
+        var recorder = new Recorder();
+        LanternStrings.Emit(world, recorder);
+        Assert.Equal(Gunzip("lantern-strings-v8.json.gz"), recorder.Json.Append(']').ToString());
+        var v6 = new Recorder(); LanternStrings.Emit(World.CreateWorld(), v6);
+        Assert.Equal("[]", v6.Json.Append(']').ToString());
     }
 }
