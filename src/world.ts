@@ -409,7 +409,7 @@ function routeSmooth(world: WorldDefinition, start: Vec3, end: Vec3, startBuildi
     const projection = clamp(((px - start.x) * vx + (pz - start.z) * vz) / projectedLength, 0, 1);
     const plannedGrade = start.y + (end.y - start.y) * projection;
     let c = 1 + Math.min(200, Math.abs(ground + .6 - plannedGrade)) * .35 / GRID;
-    if (deckPenalty && Math.hypot(px - end.x, pz - end.z) > 16 && Math.hypot(px - start.x, pz - start.z) > 16) c += deckPenalty(px, pz, ground + .6);
+    if (deckPenalty && Math.hypot(px - end.x, pz - end.z) > 16 && Math.hypot(px - start.x, pz - start.z) > 8) c += deckPenalty(px, pz, ground + .6);
     // Forecourts: a street keeps out of the 14 m in front of a door unless it
     // passes there at the door's own level (a stub can then still reach it).
     if (Math.hypot(px - end.x, pz - end.z) > 16) for (const b of forecourtsFor(world).get(`${Math.floor(px / 16)},${Math.floor(pz / 16)}`) ?? []) {
