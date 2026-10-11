@@ -136,7 +136,9 @@ namespace Yunshan.Runtime
                     foreach (var r in ArchitectureFloorPlan.RectangleCover(first.Interior)) builder.LocalBox(frame, r.X0, first.Y, r.Z0, r.X1, top, r.Z1, first.Floor < 0 ? plinth : wall);
                     i = end;
                 }
-                foreach (var region in ArchitectureFloorPlan.GetFloorPlanRoofRegions(body)) builder.LocalBox(frame, region.Rect.X0, region.Bottom, region.Rect.Z0, region.Rect.X1, region.Top, region.Rect.Z1, roof);
+                var roofs = ArchitectureFloorPlan.GetFloorPlanRoofRegions(body);
+                foreach (var region in roofs) builder.LocalBox(frame, region.Rect.X0, region.Bottom, region.Rect.Z0, region.Rect.X1, region.Top, region.Rect.Z1, roof);
+                PitchedRoof(builder, frame, RoofShell.Of(b, roofs));
             }
             else LegacyBuilding(builder, b, wall, roof);
             return builder.Build(b.Name + " · 远景");
@@ -218,7 +220,10 @@ namespace Yunshan.Runtime
                 if (part.Luminous) glass.LocalBox(frame, part.Position.X - hx, part.Position.Y - hy, part.Position.Z - hz, part.Position.X + hx, part.Position.Y + hy, part.Position.Z + hz, color);
                 else solid.LocalBox(frame, part.Position.X - hx, part.Position.Y - hy, part.Position.Z - hz, part.Position.X + hx, part.Position.Y + hy, part.Position.Z + hz, color);
             }
-            foreach (var region in ArchitectureFloorPlan.GetFloorPlanRoofRegions(body))
+            var roofRegions = ArchitectureFloorPlan.GetFloorPlanRoofRegions(body);
+            // One roof profile in both levels of detail, as the web renderer.
+            PitchedRoof(solid, frame, RoofShell.Of(b, roofRegions));
+            foreach (var region in roofRegions)
             {
                 var r = region.Rect;
                 if (region.Kind != "gable") { solid.LocalBox(frame, r.X0, region.Bottom, r.Z0, r.X1, region.Top, r.Z1, roof); continue; }
@@ -242,6 +247,40 @@ namespace Yunshan.Runtime
             result.Add((Slice(hi - .2, hi), bottom, top - .2, true));
             result.Add((Slice(lo + .2, hi - .2), bottom, top - .2, false));
             return result;
+        }
+
+        /// <summary>Pitched shell over the body's top and, on halls, its lower eave
+        /// ring: the far-proxy grid of createRoofGeometry, a tiled top over a
+        /// soffit 4% of the rise lower, with the open edges closed.</summary>
+        static void PitchedRoof(GameMeshBuilder builder, Matrix4x4 frame, RoofShellSpec shell)
+        {
+            if (shell == null) return;
+            var color = Space.Hex(shell.Color);
+            RoofProfile(builder, frame, shell.Form, shell.Position.X, shell.Position.Y + .12, shell.Position.Z, shell.Width, shell.Rise, shell.Depth, null, color);
+            if (shell.Skirt != null) RoofProfile(builder, frame, "hip", shell.Skirt.Position.X, shell.Skirt.Position.Y, shell.Skirt.Position.Z, shell.Skirt.Width, shell.Skirt.Rise, shell.Skirt.Depth, shell.Skirt.Hole, color);
+        }
+
+        static void RoofProfile(GameMeshBuilder builder, Matrix4x4 frame, string form, double cx, double cy, double cz, double width, double rise, double depth, double[] hole, Color color)
+        {
+            var (xs, zs) = RoofShell.Grid(form, hole);
+            int nx = xs.Count - 1, nz = zs.Count - 1;
+            Vector3 P(int i, int k, int layer) => frame.MultiplyPoint3x4(new Vector3((float)(cx + xs[i] * width), (float)(cy + (RoofShell.HeightAt(form, xs[i], zs[k]) - layer * .04) * rise), (float)(cz + zs[k] * depth)));
+            bool Kept(int i, int k) => i >= 0 && k >= 0 && i < nx && k < nz && (hole == null || !((xs[i] + xs[i + 1]) / 2 > hole[0] && (xs[i] + xs[i + 1]) / 2 < hole[1] && (zs[k] + zs[k + 1]) / 2 > hole[2] && (zs[k] + zs[k + 1]) / 2 < hole[3]));
+            var up = frame.MultiplyVector(Vector3.up);
+            for (int k = 0; k < nz; k++) for (int i = 0; i < nx; i++)
+            {
+                if (!Kept(i, k)) continue;
+                Vector3 a = P(i, k, 0), b = P(i + 1, k, 0), c = P(i + 1, k + 1, 0), d = P(i, k + 1, 0);
+                Vector3 a1 = P(i, k, 1), b1 = P(i + 1, k, 1), c1 = P(i + 1, k + 1, 1), d1 = P(i, k + 1, 1);
+                var mid = (a + b + c + d) / 4;
+                builder.QuadOutward(a, b, c, d, mid - up * 100, color);
+                builder.QuadOutward(a1, b1, c1, d1, mid + up * 100, color);
+                var cell = (a + c + a1 + c1) / 4;
+                if (!Kept(i, k - 1)) builder.QuadOutward(a, b, b1, a1, cell, color);
+                if (!Kept(i, k + 1)) builder.QuadOutward(d, c, c1, d1, cell, color);
+                if (!Kept(i - 1, k)) builder.QuadOutward(a, d, d1, a1, cell, color);
+                if (!Kept(i + 1, k)) builder.QuadOutward(b, c, c1, b1, cell, color);
+            }
         }
 
         /// <summary>Triangular prism whose height follows the shared roof support profile.</summary>
