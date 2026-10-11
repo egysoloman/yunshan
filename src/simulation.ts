@@ -1563,8 +1563,6 @@ export class Simulation implements SimulationAPI {
       if (building.kind === 'school' && hour >= 7 && hour < 19) add(building, 'study', Math.max(0, 4 - (citizen.education ?? 0)) * 8 + (citizen.role === '学生' && shift ? 55 : 0) + (citizen.skills?.learning ?? 20) * .2);
       const evening = eveningBonus(this.runtime.mealRoutePolicyId, hour, citizen.needs.hunger, citizen.needs.fatigue);
       if (['pavilion', 'hall', 'dock'].includes(building.kind)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 - (night ? 60 : 0) + evening);
-      // v3 evening stroll along the district's open market shops (no purchase).
-      if (evening && building.kind === 'market' && this.state.shops.some(shop => shop.buildingId === building.id && shop.open)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 + evening);
       if (['pavilion', 'station', 'clinic'].includes(building.kind) && (citizen.needs.fatigue < 25 || night && !homeBedAvailable)) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
     }
     candidates.sort((a, b) => b.score - a.score);
