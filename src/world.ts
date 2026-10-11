@@ -1114,9 +1114,7 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
   // A true vertical shaft has two stations at the same horizontal coordinate.
   addEdge(liftBottom.id, liftTop.id, 'lift', [liftBottom.position, liftTop.position], 30);
   addEdge(liftTop.id, station('core').id, 'bridge', routeGround(world, liftTop.position, station('core').position), 80);
-  // Street recipe: the lift-bottom road, routed after the streets, keeps out from under their decks.
-  const liftRoad = (() => { if (streetRecipe !== 'smooth') return routeGround(world, liftBottom.position, station('east').position); try { deckPenalty = deckCost(); return routeGround(world, liftBottom.position, station('east').position); } finally { deckPenalty = null; } })();
-  addEdge(liftBottom.id, station('east').id, 'road', liftRoad, 100);
+  addEdge(liftBottom.id, station('east').id, 'road', routeGround(world, liftBottom.position, station('east').position), 100);
   const dockA: NetworkNode = { id: 'river-dock', districtId: 'river', name: '清溪渡船码头', position: { x: -580, y: 15.6, z: 1010 }, station: true };
   const dockB: NetworkNode = { id: 'market-dock', districtId: 'market', name: '千灯水运码头', position: { x: -110, y: 56.6, z: 460 }, station: true };
   world.nodes.push(dockA, dockB);
