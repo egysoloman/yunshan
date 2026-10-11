@@ -153,11 +153,14 @@ namespace Yunshan.Runtime
                     direction = Math.Atan2(b.X - a.X, b.Z - a.Z) + (v.Direction < 0 ? Math.PI : 0);
                 }
                 bool flight = v.Kind == "flight", train = v.Kind == "maglev" || v.Kind == "lightRail", boat = v.Kind == "ferry";
-                double length = flight ? 17 : train ? 16 : boat ? 11 : v.Kind == "cable" ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = v.Kind == "cable" ? 2.5 : 0;
+                // Web vehicle-shapes.ts: a cable cabin hangs from the 8.6 m haul rope on a grip arm.
+                bool cable = v.Kind == "cable";
+                double length = flight ? 17 : train ? 16 : boat ? 11 : cable ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = cable ? 4.6 : 0;
                 var rotation = Space.Yaw(direction);
                 bodies.Add(Space.ToUnity(p.X, p.Y + 1.1 + lift, p.Z), rotation, new Vector3((float)width, flight ? .8f : 1.5f, (float)length), Space.Hex(flight ? "#d5c7aa" : train ? "#d0b985" : "#a77851"));
                 bodies.Add(Space.ToUnity(p.X, p.Y + 2.1 + lift, p.Z), rotation, new Vector3((float)(flight ? 3 : width * .85), flight ? 1.8f : .8f, (float)(length * .68)), Space.Hex("#517f82"));
-                bodies.Add(Space.ToUnity(p.X, p.Y + .6 + lift, p.Z), rotation, new Vector3((float)(width + .25), .2f, (float)(length * .85)), Space.Hex("#3f6f73"));
+                if (cable) { double roof = 2.1 + lift + .4, rope = 8.6; bodies.Add(Space.ToUnity(p.X, p.Y + (roof + rope) / 2, p.Z), rotation, new Vector3(.25f, (float)(rope - roof), .25f), Space.Hex("#3f6f73")); }
+                else bodies.Add(Space.ToUnity(p.X, p.Y + .6 + lift, p.Z), rotation, new Vector3((float)(width + .25), .2f, (float)(length * .85)), Space.Hex("#3f6f73"));
             }
         }
 
