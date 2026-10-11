@@ -1062,5 +1062,22 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
   addEdge(runwayWest.id, station('starport').id, 'flight', [runwayWest.position, runwayEast.position, { x: 1850, y: 180, z: 1480 }, { x: 1920, y: 420, z: 900 }, { x: 1840, y: 590, z: -150 }, { x: 1580, y: 550, z: -1120 }, { x: 1440, y: 410, z: -1280 }, station('starport').position], 70);
   addEdge(runwayWest.id, station('workshop').id, 'flight', [runwayWest.position, runwayEast.position, { x: 1850, y: 180, z: 1480 }, { x: 1600, y: 430, z: 1750 }, { x: -500, y: 500, z: 1450 }, { x: -1420, y: 330, z: 560 }, station('workshop').position], 50);
   world.spawn = { x: -330, y: getWalkHeight(world, -330, 487), z: 487 };
+  // current-v8: the original spawn lies under the smoothed rail fan at the
+  // market station. Arrive instead on a market street with open sky: no rail,
+  // cable or lift within 60 m, near shop doors and the station.
+  if (streetRecipe === 'smooth') {
+    const tracks = world.edges.filter(e => ['maglev', 'lightRail', 'cable', 'lift'].includes(e.mode)), home = station('market').position;
+    const markets = world.buildings.filter(b => b.districtId === 'market' && b.kind === 'market');
+    let best: { p: Vec3; score: number } | null = null;
+    for (const edge of world.edges) if (edge.mode === 'road' && !edge.id.includes('runway')) for (const p of edge.points) {
+      const fromStation = Math.hypot(p.x - home.x, p.z - home.z);
+      if (fromStation < 60 || fromStation > 220 || tracks.some(t => nearestSegment(t.points, p.x, p.z).distance < 60)) continue;
+      // The arrival view looks north (−z): keep a 20 m wide, 60 m deep street view clear of walls.
+      if (world.buildings.some(b => Math.abs(b.position.x - p.x) < b.width / 2 + 10 && b.position.z + b.depth / 2 > p.z - 60 && b.position.z - b.depth / 2 < p.z + 4)) continue;
+      const score = markets.filter(b => Math.hypot(b.door.x - p.x, b.door.z - p.z) < 45).length * 100 - fromStation;
+      if (!best || score > best.score) best = { p, score };
+    }
+    if (best) world.spawn = { x: best.p.x, y: getWalkHeight(world, best.p.x, best.p.z), z: best.p.z };
+  }
   return world;
 }
