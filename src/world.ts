@@ -371,7 +371,7 @@ let streetRecipe: 'grid4' | 'smooth' = 'grid4';
  * out of other streets' decks unless they meet them at the same height). */
 let deckPenalty: ((x: number, z: number, deckY: number) => number) | null = null;
 /** Street recipe frontage: terrace row spacing, length and vertex step; the door's distance from the street centre. */
-const ROW_SPACING = 104, ROW_TIERS = 2, ROW_LENGTH = 240, ROW_STEP = 8, FRONTAGE = 11, FRONTAGE_GAP = 4;
+const ROW_SPACING = 104, ROW_TIERS = 2, ROW_RELIEF = 10, ROW_LENGTH = 240, ROW_STEP = 8, FRONTAGE = 11, FRONTAGE_GAP = 4;
 let deckSamples: Map<string, { x: number; z: number }[]> | null = null;
 const frontageStreets = new Map<string, Vec3[]>(), frontageGround = new Map<string, number>();
 const hashString = (text: string) => { let h = 2166136261; for (let i = 0; i < text.length; i++) h = Math.imul(h ^ text.charCodeAt(i), 16777619) >>> 0; return h; };
@@ -1034,13 +1034,15 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     // river, building, other deck or ground they would float over or cut into.
     const deckClear = (x: number, z: number, own: Set<NetworkEdge>, radius: number) => !world.edges.some(e => (e.mode === 'road' || e.mode === 'bridge') && !own.has(e) && nearestSegment(e.points, x, z).distance < radius);
     const buildingClear = (x: number, z: number, margin: number) => !world.buildings.some(b => Math.abs(x - b.position.x) < b.width / 2 + margin && Math.abs(z - b.position.z) < b.depth / 2 + margin);
+    const noDecks = new Set<NetworkEdge>();
     const stepFrom = (from: Vec3, dx: number, dz: number, steps: number, own: Set<NetworkEdge>): Vec3[] => {
       const points: Vec3[] = [{ ...from }];
       for (let k = 1; k <= steps; k++) {
         const prev = points[points.length - 1], x = q(from.x + dx * k) + 0, z = q(from.z + dz * k) + 0, ground = naturalHeight(world, x, z) + .6;
         const y = q(clamp(ground, prev.y - ROW_STEP * .18, prev.y + ROW_STEP * .18)) + 0;
-        if (Math.abs(x) > 2050 || Math.abs(z) > 2050 || Math.abs(y - ground) > 6 || nearestSegment(world.river, x, z).distance < 30 || !buildingClear(x, z, 9)) break;
-        if (k * ROW_STEP > 14 && !deckClear(x, z, own, 12)) break;
+        if (Math.abs(x) > 2050 || Math.abs(z) > 2050 || Math.abs(y - ground) > ROW_RELIEF || nearestSegment(world.river, x, z).distance < 30 || !buildingClear(x, z, 9)) break;
+        // Near its start a row may run beside its own hub's roads; beyond 20 m it keeps clear of every deck.
+        if (!deckClear(x, z, k * ROW_STEP > 20 ? noDecks : own, 12)) break;
         points.push({ x, y, z });
       }
       return points;
