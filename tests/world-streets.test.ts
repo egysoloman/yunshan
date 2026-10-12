@@ -64,7 +64,11 @@ test('streets meet the P1 shape targets', () => {
   for (const world of worlds) {
     const roads = world.edges.filter(e => e.mode === 'road' && !e.id.includes('runway'));
     let length = 0, axis = 0, right = 0;
+    // Terrace rows and their connectors are east–west / north–south by design
+    // (lots line them with doors facing the street); the axis share counts the routed streets.
+    const terrace = (e: typeof roads[number]) => e.id.includes('-terrace-') || e.from.endsWith('-door') && e.points.length === 2;
     for (const e of roads) {
+      if (terrace(e)) continue;
       let previous: { dx: number; dz: number; len: number } | null = null;
       for (let i = 1; i < e.points.length; i++) {
         const a = e.points[i - 1], b = e.points[i], dx = b.x - a.x, dz = b.z - a.z, len = Math.hypot(dx, dz);
@@ -78,7 +82,7 @@ test('streets meet the P1 shape targets', () => {
     // Streets meet at junctions. Counting every interior crossing (also between
     // roads that share an end node elsewhere) v6 has 368 and v8 about 40.
     const crossings = roadCrossings(world.edges);
-    assert.ok(crossings.length <= 32, `${world.seed}: ${crossings.length} street crossings without a junction`);
+    assert.ok(crossings.length <= 16, `${world.seed}: ${crossings.length} street crossings without a junction`);
   }
 });
 
@@ -86,5 +90,5 @@ test('door stubs keep out from under other streets\' decks', () => {
   // A walker on a stub stands under another street's deck when the two 10 m
   // decks overlap in plan with one 1.8–4.8 m above the other. v8 had 102.
   const world = worlds[0], overhead = deckClashes(world.edges, world.nodes).filter(c => c.dy >= 1.8 && c.gap < 8);
-  assert.ok(overhead.length <= 28, `${overhead.length} overhead decks`);
+  assert.ok(overhead.length <= 20, `${overhead.length} overhead decks`);
 });

@@ -3,15 +3,18 @@ import test from 'node:test';
 import { createWorld } from '../src/world';
 import { buildingLocalPosition, getBuildingBody, getBuildingEntrance } from '../src/architecture-floor-plan';
 
-// current-v8 low-rise town: buildings beyond their quarter stop are turned to
-// face it (a half turn), so every door/room rule must hold in both directions.
+// current-v8 low-rise town: streets come first and buildings take lots facing
+// a street, north or south (a half turn), so every door/room rule must hold in both directions.
 const world = createWorld(20261001, 'current-v8');
 const inside = (b: typeof world.buildings[number], x: number, z: number, margin = 0) => Math.abs(x - b.position.x) < b.width / 2 - margin && Math.abs(z - b.position.z) < b.depth / 2 - margin;
 
-test('v8 is a low-rise town with half-turned buildings facing their stops', () => {
+test('v8 is a low-rise town whose doors face their streets, half of them turned', () => {
   const turned = world.buildings.filter(b => b.rotation !== 0);
   assert.ok(turned.length > 150, `${turned.length} turned`);
   assert.ok(turned.every(b => b.rotation === Math.PI && b.floorPlanProfile && b.door.z < b.position.z));
+  // Most doors join their street with one short level link.
+  const short = world.edges.filter(e => e.from.endsWith('-door') && e.points.length === 2 && e.length < 20);
+  assert.ok(short.length >= world.buildings.length * .8, `${short.length} short door links`);
   for (const b of world.buildings) if (b.kind !== 'core' && !b.id.startsWith('core-')) assert.ok(b.floors <= (b.kind === 'starport' ? 6 : 7), `${b.id} has ${b.floors} floors`);
 });
 
