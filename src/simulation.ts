@@ -10,7 +10,7 @@ import { chooseNearestTiedMeal, eveningBonus, lunchBonus, MEAL_ROUTE_POLICIES, n
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
-import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, profitTaxSplit, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
+import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
@@ -441,7 +441,7 @@ export class Simulation implements SimulationAPI {
       if (!plan || plan.day !== day) plan = labor.shifts[shop.id] = { day, shopId: shop.id, assignments: [], reviews: [] };
       if (plan.reviews.length >= 150) continue;
       // Amendments use newly received cash and keep every earlier rate/minute.
-      for (const citizen of roster) if (!plan.assignments.some(item => item.citizenId === citizen.id)) plan.assignments.push({ citizenId: citizen.id, ratePerMinute: (this.runtime.wageAccruals ?? []).find(item => item.citizenId === citizen.id && item.shopId === shop.id)?.ratePerMinute ?? 32 * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100) / 480, minutesCap: 0, workedMinutes: 0 });
+      for (const citizen of roster) if (!plan.assignments.some(item => item.citizenId === citizen.id)) plan.assignments.push({ citizenId: citizen.id, ratePerMinute: (this.runtime.wageAccruals ?? []).find(item => item.citizenId === citizen.id && item.shopId === shop.id)?.ratePerMinute ?? privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100) / 480, minutesCap: 0, workedMinutes: 0 });
       const earnedDebt = this.shopPayrollDebt(shop), priorCommitment = this.shopCommittedPayroll(shop), operatingReserve = 20 * 8 / 24 + shopLifecycleReservedFunds(this.state, shop.id), cash = this.shopFunds(shop);
       const available = Math.max(0, cash - earnedDebt - priorCommitment - operatingReserve);
       const remaining = plan.assignments.filter(item => roster.some(c => c.id === item.citizenId) && item.minutesCap < 480);
@@ -1484,7 +1484,7 @@ export class Simulation implements SimulationAPI {
     if (!plan || plan.day !== day) {
       const roster = this.privateRoster(shop, plan);
       plan = labor.shifts[shop.id] = { day, shopId: shop.id, assignments: roster.map(person => ({ citizenId: person.id,
-        ratePerMinute: (this.runtime.wageAccruals ?? []).find(item => item.citizenId === person.id && item.shopId === shop.id)?.ratePerMinute ?? 32 * (.7 + this.state.districts.find(d => d.id === person.districtId)!.prosperity / 100) / 480, minutesCap: 0, workedMinutes: 0 })), reviews: [] };
+        ratePerMinute: (this.runtime.wageAccruals ?? []).find(item => item.citizenId === person.id && item.shopId === shop.id)?.ratePerMinute ?? privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === person.districtId)!.prosperity / 100) / 480, minutesCap: 0, workedMinutes: 0 })), reviews: [] };
     }
     return plan;
   }
@@ -1496,7 +1496,7 @@ export class Simulation implements SimulationAPI {
     if (currentShop) return;
     // Qualified officials stay available to review budgets at their real office.
     if (['official', 'council', 'mayor'].includes(this.citizenIdentity(citizen)) || !this.foodHiringApplicantAvailable(citizen)) return;
-    const dailySalary = 32 * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
+    const dailySalary = privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
     const offers = this.state.shops.filter(shop => shop.open && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && (tradeSignals(this, shop.id).sold > 0 || this.foodShortageHiringOffer(shop, citizen, dailySalary))).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)));
     const offer = offers[0]; if (!offer) return;
     const time = this.state.extension?.lastUpdate ?? this.now, day = Math.floor(time / 1440);

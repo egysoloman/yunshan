@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
-import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, validatePublicFinancePolicy } from '../src/simulation/public-finance';
+import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, validatePublicFinancePolicy } from '../src/simulation/public-finance';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -34,8 +34,8 @@ test('the profit tax takes its share of the distributable amount and the owner r
 
 test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V2);
-  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V2); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V2);
+  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V3);
+  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V3); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V3);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
@@ -115,4 +115,11 @@ test('v2 keeps the 20% profit tax and pays dividends while wages are owed; v1 an
   assert.equal(dividendWaitsForPayroll(SHOP_PROFIT_TAX_POLICY_V2), false);
   assert.equal(dividendWaitsForPayroll(SHOP_PROFIT_TAX_POLICY), true);
   assert.equal(dividendWaitsForPayroll(undefined), true);
+});
+
+test('v3 keeps v2 dividends and the 20% profit tax and raises only the private shop wage base', () => {
+  assert.equal(privateWageBase(SHOP_PROFIT_TAX_POLICY_V3), 40);
+  for (const policy of [SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY, undefined]) assert.equal(privateWageBase(policy), 32);
+  assert.equal(dividendWaitsForPayroll(SHOP_PROFIT_TAX_POLICY_V3), false);
+  assert.equal(profitTaxSplit(SHOP_PROFIT_TAX_POLICY_V3, 100).tax, 100 * PROFIT_TAX_SHARE);
 });
