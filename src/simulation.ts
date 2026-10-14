@@ -1847,7 +1847,8 @@ export class Simulation implements SimulationAPI {
       } else destination = this.buildings.get(citizen.destinationId!)!;
       const held = blockedReplan ? { route: citizen.route, routeIndex: citizen.routeIndex, state: citizen.state, destinationId: citizen.destinationId } : null;
       if (blockedReplan && (this.runtime.decisionAt[citizen.id] ?? 0) <= this.now + 1e-7) this.runtime.decisionAt[citizen.id] = this.now + 25;
-      this.setDestination(citizen, destination, blockedReplan);
+      // A resident mid-flight keeps the exact route and cursor it is following.
+      if (!midFlight) this.setDestination(citizen, destination, blockedReplan);
       // A re-plan that is itself blocked at once is dropped: the resident keeps
       // the previous leg and stair cursor, a state the save reader accepts.
       // A kept re-plan releases a stair cursor that no longer matches its route.
