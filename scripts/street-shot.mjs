@@ -39,5 +39,27 @@ try {
     await page.screenshot({ path: `artifacts/street-${district}-${label}.png`, timeout: 180_000 });
     console.log(district, label, JSON.stringify(view));
   }
+  // From the highest ground ~260 m out, looking down over the district's buildings.
+  for (const district of shots) {
+    const view = await page.evaluate(([district]) => {
+      const { world, controller, simulation, actions, terrainHeight } = window.__YUNSHAN__;
+      actions.command({ type: 'setTime', value: 18.9 });
+      const homes = world.buildings.filter(b => b.districtId === district), cx = homes.reduce((s, b) => s + b.position.x, 0) / homes.length, cz = homes.reduce((s, b) => s + b.position.z, 0) / homes.length;
+      const cy = homes.reduce((s, b) => s + b.position.y, 0) / homes.length;
+      let feet = null;
+      for (let k = 0; k < 24; k++) { const a = k / 24 * Math.PI * 2, x = cx + Math.cos(a) * 260, z = cz + Math.sin(a) * 260, y = Math.max(...homes.filter(b => Math.hypot(b.position.x - x, b.position.z - z) < 60).map(b => b.position.y + b.height), -1e9);
+        if (y > -1e9 && (!feet || y > feet.y)) feet = { x, y: y + 2, z }; }
+      if (!feet) return null;
+      const look = { x: cx, y: cy, z: cz };
+      simulation.state.player.position = { ...feet };
+      controller.setMode('walk', feet); Object.assign(controller['feet'], feet);
+      controller.yaw = Math.atan2(-(look.x - feet.x), -(look.z - feet.z)); controller.pitch = Math.atan2(look.y - feet.y - 1.72, Math.hypot(look.x - feet.x, look.z - feet.z)); controller['orient']();
+      return feet;
+    }, [district]);
+    if (!view) continue;
+    await page.waitForTimeout(8000);
+    await page.screenshot({ path: `artifacts/street-${district}-over.png`, timeout: 180_000 });
+    console.log(district, 'over', JSON.stringify(view));
+  }
   console.log('errors', JSON.stringify(errors));
 } finally { await browser?.close(); server.kill(); }
