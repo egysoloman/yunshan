@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
-import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, validatePublicFinancePolicy } from '../src/simulation/public-finance';
+import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, STAFF_PROFIT_SHARE, staffProfitShare, validatePublicFinancePolicy } from '../src/simulation/public-finance';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -34,8 +34,8 @@ test('the profit tax takes its share of the distributable amount and the owner r
 
 test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V3);
-  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V3); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V3);
+  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V4);
+  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V4); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V4);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
@@ -122,4 +122,22 @@ test('v3 keeps v2 dividends and the 20% profit tax and raises only the private s
   for (const policy of [SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY, undefined]) assert.equal(privateWageBase(policy), 32);
   assert.equal(dividendWaitsForPayroll(SHOP_PROFIT_TAX_POLICY_V3), false);
   assert.equal(profitTaxSplit(SHOP_PROFIT_TAX_POLICY_V3, 100).tax, 100 * PROFIT_TAX_SHARE);
+});
+
+test('v4 keeps v3 and gives the shop staff an equal share of the owner dividend', () => {
+  assert.equal(privateWageBase(SHOP_PROFIT_TAX_POLICY_V4), 40);
+  assert.equal(dividendWaitsForPayroll(SHOP_PROFIT_TAX_POLICY_V4), false);
+  assert.equal(profitTaxSplit(SHOP_PROFIT_TAX_POLICY_V4, 100).tax, 100 * PROFIT_TAX_SHARE);
+  assert.deepEqual(staffProfitShare(SHOP_PROFIT_TAX_POLICY_V4, 100, 3), { owner: 100 - 100 * STAFF_PROFIT_SHARE, each: 100 * STAFF_PROFIT_SHARE / 3 });
+  for (const [policy, staff] of [[SHOP_PROFIT_TAX_POLICY_V3, 3], [SHOP_PROFIT_TAX_POLICY_V4, 0], [undefined, 2]] as const) assert.deepEqual(staffProfitShare(policy, 100, staff), { owner: 100, each: 0 });
+  const world = civicFixtureWorld(), sim = createCurrentProductCity(world), flows = listen(sim);
+  sim.command({ type: 'speed', value: 8 });
+  const companies = new Set(sim.state.extension!.companies.filter(c => c.shopBindingReleasedAt === undefined).map(c => c.buildingId));
+  const shop = sim.state.shops.find(s => s.ownerId && s.ownerId !== 'player' && !companies.has(s.buildingId) && sim.state.citizens.some(c => c.workId === s.buildingId && c.id !== s.ownerId && c.role !== '学生'))!; assert.ok(shop, 'a staffed owner shop');
+  const staff = sim.state.citizens.filter(c => c.workId === shop.buildingId && c.id !== shop.ownerId && c.role !== '学生');
+  shop.cash = (shop.cash ?? 0) + 2000; shop.profit = Math.max(shop.profit, 2000);
+  for (let tick = 0; tick < 60 && !flows.some(f => f.shopId === shop.id && f.type === 'business-dividend'); tick++) sim.step(.25);
+  const paid = flows.filter(f => f.shopId === shop.id && f.type === 'business-dividend') as { citizenId?: string; amount?: number }[];
+  const toStaff = paid.filter(f => staff.some(c => c.id === f.citizenId)).reduce((n, f) => n + (f.amount ?? 0), 0), all = paid.reduce((n, f) => n + (f.amount ?? 0), 0);
+  assert.ok(all > 0 && Math.abs(toStaff - all * STAFF_PROFIT_SHARE) < 1e-6, `staff received ${toStaff} of ${all}`);
 });

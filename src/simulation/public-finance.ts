@@ -22,13 +22,26 @@ export const SHOP_PROFIT_TAX_POLICY_V2 = 'shop-profit-tax-v2' as const;
  * (×(0.7 + prosperity/100)) left 141 adults below 80 coins. Shops pay a
  * PRIVATE_WAGE_BASE_V3 base; public, roadwork and player rates are unchanged. */
 export const SHOP_PROFIT_TAX_POLICY_V3 = 'shop-profit-tax-v3' as const;
-export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3;
-export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3];
-/** v2/v3 pay dividends while wages are owed (they stay reserved); v1 and legacy wait for none owed. */
-export const dividendWaitsForPayroll = (policy: PublicFinancePolicy | undefined) => policy !== SHOP_PROFIT_TAX_POLICY_V2 && policy !== SHOP_PROFIT_TAX_POLICY_V3;
+/** v4 (2026-10-14). v3 plus staff profit sharing: the 14-day audit kept every
+ * resident fed but poor adults rose 0→201 while a few owners held up to 19
+ * shops and the top tenth held 41% of resident cash; 59 of 170 merchants were
+ * poor. Of each owner dividend STAFF_PROFIT_SHARE goes in equal parts to the
+ * shop's living adult staff (none: the owner keeps it). Same tax, reserve,
+ * wages and prices. */
+export const SHOP_PROFIT_TAX_POLICY_V4 = 'shop-profit-tax-v4' as const;
+export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4;
+export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4];
+/** v2–v4 pay dividends while wages are owed (they stay reserved); v1 and legacy wait for none owed. */
+export const dividendWaitsForPayroll = (policy: PublicFinancePolicy | undefined) => policy !== SHOP_PROFIT_TAX_POLICY_V2 && policy !== SHOP_PROFIT_TAX_POLICY_V3 && policy !== SHOP_PROFIT_TAX_POLICY_V4;
 export const PRIVATE_WAGE_BASE = 32, PRIVATE_WAGE_BASE_V3 = 40;
 /** Daily private shop wage base under a declared policy. */
-export const privateWageBase = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V3 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
+export const privateWageBase = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V3 || policy === SHOP_PROFIT_TAX_POLICY_V4 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
+export const STAFF_PROFIT_SHARE = .3;
+/** Splits an owner dividend between the owner and the staff (v4 only). */
+export function staffProfitShare(policy: PublicFinancePolicy | undefined, dividend: number, staff: number): { owner: number; each: number } {
+  if (policy !== SHOP_PROFIT_TAX_POLICY_V4 || staff <= 0 || !(dividend > 0)) return { owner: dividend, each: 0 };
+  const each = dividend * STAFF_PROFIT_SHARE / staff; return { owner: dividend - each * staff, each };
+}
 /** Was .5; the user judged half of all distributed profit unrealistic
  * (2026-10-10) once the shortfall was traced to logistics and a closed
  * economy, so it is a 20% corporate-style rate. */
@@ -36,7 +49,7 @@ export const PROFIT_TAX_SHARE = .2;
 
 /** Splits one distributable amount into the public profit tax and the owner's dividend. */
 export function profitTaxSplit(policy: PublicFinancePolicy | undefined, distributable: number): { tax: number; dividend: number } {
-  const tax = policy === SHOP_PROFIT_TAX_POLICY || policy === SHOP_PROFIT_TAX_POLICY_V2 || policy === SHOP_PROFIT_TAX_POLICY_V3 ? distributable * PROFIT_TAX_SHARE : 0;
+  const tax = policy === SHOP_PROFIT_TAX_POLICY || policy === SHOP_PROFIT_TAX_POLICY_V2 || policy === SHOP_PROFIT_TAX_POLICY_V3 || policy === SHOP_PROFIT_TAX_POLICY_V4 ? distributable * PROFIT_TAX_SHARE : 0;
   return { tax, dividend: distributable - tax };
 }
 
