@@ -86,7 +86,8 @@ try {
     const { world, simulation, controller, actions, getView } = window.__YUNSHAN__;
     actions.command({ type: 'setTime', value: 12 });
     const building = world.buildings.find(b => b.kind === 'market');
-    simulation.state.player.position = { ...building.door, z: building.door.z + 2 };
+    // Two metres out of the door, whichever way the building faces (current-v8 turns half its lots).
+    simulation.state.player.position = { ...building.door, x: building.door.x + 2 * Math.round(Math.sin(building.rotation)), z: building.door.z + 2 * Math.round(Math.cos(building.rotation)) };
     controller.setMode('walk', simulation.state.player.position);
     actions.interact();
     return { id: building.id, inside: getView().inside, nearbyId: getView().nearbyBuilding?.id, money: simulation.state.player.money };

@@ -27,7 +27,7 @@ try {
       const { world, simulation, controller, actions, getView } = window.__YUNSHAN__;
       actions.command({ type: 'setTime', value: 12 });
       const building = world.buildings.filter(b => b.kind === kind)[kind === 'market' ? 0 : 3];
-      simulation.state.player.position = { ...building.door, z: building.door.z + 2 };
+      simulation.state.player.position = { ...building.door, x: building.door.x + 2 * Math.round(Math.sin(building.rotation)), z: building.door.z + 2 * Math.round(Math.cos(building.rotation)) };
       controller.setMode('walk', simulation.state.player.position);
       actions.interact();
       return { id: building.id, inside: getView().inside };
