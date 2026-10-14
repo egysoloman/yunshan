@@ -1841,8 +1841,18 @@ export class Simulation implements SimulationAPI {
       else if (!committedNeed && (reconsiderCivic || !citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
         const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
       } else destination = this.buildings.get(citizen.destinationId!)!;
-      if (blockedReplan) { delete this.runtime.npcStairCursors?.[citizen.id]; if ((this.runtime.decisionAt[citizen.id] ?? 0) <= this.now + 1e-7) this.runtime.decisionAt[citizen.id] = this.now + 25; }
+      const held = blockedReplan ? { route: citizen.route, routeIndex: citizen.routeIndex, state: citizen.state, destinationId: citizen.destinationId } : null;
+      if (blockedReplan && (this.runtime.decisionAt[citizen.id] ?? 0) <= this.now + 1e-7) this.runtime.decisionAt[citizen.id] = this.now + 25;
       this.setDestination(citizen, destination, blockedReplan);
+      // A re-plan that is itself blocked at once is dropped: the resident keeps
+      // the previous leg and stair cursor, a state the save reader accepts.
+      // A kept re-plan releases a stair cursor that no longer matches its route.
+      if (held && citizen.route !== held.route) {
+        const blocked = !!citizen.route && (citizen.routeIndex ?? 0) < citizen.route.length && this.npcStairMotion.describe(citizen.route, citizen.routeIndex ?? 0).kind === 'blocked'
+          && !this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex ?? 0, citizen.position);
+        if (blocked) Object.assign(citizen, held);
+        else { const cursor = this.runtime.npcStairCursors?.[citizen.id]; if (cursor && !this.nativeCursorMatches(citizen, cursor)) delete this.runtime.npcStairCursors![citizen.id]; }
+      }
       if (citizen.state === 'roadWaiting') continue;
       if (citizen.state === 'unreachable') { citizen.destinationId = null; continue; }
       if (distance(citizen.position, destination.door) > 200) {
