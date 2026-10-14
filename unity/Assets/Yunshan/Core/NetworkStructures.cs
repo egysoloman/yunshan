@@ -77,6 +77,13 @@ namespace Yunshan.Core
                         var middle = V((a.X + b.X) / 2, (a.Y + b.Y) / 2 + .04, (a.Z + b.Z) / 2);
                         sink.Segment("stone", V(middle.X - nx * 3.5, middle.Y, middle.Z - nz * 3.5), V(middle.X + nx * 3.5, middle.Y, middle.Z + nz * 3.5), .08, .04, 0, "#757e73");
                     }
+                    // current-v8 terrace streets stand on stone embankments (network-structures.ts).
+                    if (anyAngleStreets && edge.Mode == "road" && edge.Id.Contains("-terrace-"))
+                    {
+                        double ground = JsMath.Min(JsMath.Min(World.TerrainHeight(world, a.X, a.Z), World.TerrainHeight(world, b.X, b.Z)), World.TerrainHeight(world, (a.X + b.X) / 2, (a.Z + b.Z) / 2));
+                        double fill = JsMath.Min(a.Y, b.Y) - .5 - ground;
+                        if (fill > 1.2 && fill < 14) sink.Segment("stone", a, b, width + .8, fill + .5, -.5 - (fill + .5) / 2, "#8d8a7b");
+                    }
                     double length = JsMath.Hypot(b.X - a.X, b.Z - a.Z), interval = rail ? 80 : 70;
                     for (double along = interval - supportRemainder; along <= length; along += interval)
                     {

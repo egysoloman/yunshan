@@ -62,6 +62,14 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
           if (edge.mode === 'bridge' || rail || elevated && edge.mode === 'road') for (const span of guardrailSpans(world, edge, i)) sink.segment('wood', { x: span.a.x + nx * offset * side, y: span.a.y, z: span.a.z + nz * offset * side }, { x: span.b.x + nx * offset * side, y: span.b.y, z: span.b.z + nz * offset * side }, GUARDRAIL_THICKNESS, .2, 1.1, '#6b7771');
         }
         if (edge.mode === 'road' && !edge.id.includes('runway')) { const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 + .04, z: (a.z + b.z) / 2 }; sink.segment('stone', { ...middle, x: middle.x - nx * 3.5, z: middle.z - nz * 3.5 }, { ...middle, x: middle.x + nx * 3.5, z: middle.z + nz * 3.5 }, .08, .04, 0, '#757e73'); }
+        // current-v8 terrace streets stand on stone embankments where they ride
+        // above the ground (fill): a retaining wall from the lowest ground under
+        // the segment up to the deck, as the concept's terraced town.
+        if (anyAngleStreets && edge.mode === 'road' && edge.id.includes('-terrace-')) {
+          const ground = Math.min(terrainHeight(world, a.x, a.z), terrainHeight(world, b.x, b.z), terrainHeight(world, (a.x + b.x) / 2, (a.z + b.z) / 2));
+          const fill = Math.min(a.y, b.y) - .5 - ground;
+          if (fill > 1.2 && fill < 14) sink.segment('stone', a, b, width + .8, fill + .5, -.5 - (fill + .5) / 2, '#8d8a7b');
+        }
         const length = Math.hypot(b.x - a.x, b.z - a.z), interval = rail ? 80 : 70;
         // Spacing spans all samples of the same edge, including the world's 4m rails.
         for (let along = interval - supportRemainder; along <= length; along += interval) { const t = along / Math.max(.01, length), x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, y = a.y + (b.y - a.y) * t, ground = terrainHeight(world, x, z); if (y - ground > 5 && edge.mode !== 'bridge') { const tall = y - ground; sink.box('stone', x, ground + 1, z, rail ? 7 : 8, 2, rail ? 7 : 8, '#939e91'); sink.box('stone', x, ground + tall / 2, z, rail ? 3 : 4, tall, rail ? 3 : 4, '#a0aaa0'); if (!(rail && options.dressesRailPierCaps)) sink.box('stone', x, y - 1.3, z, width + 1, 1.8, 4, '#929d92'); if (tall > 25) for (let tie = ground + 12; tie < y - 5; tie += 16) sink.box('wood', x, tie, z, rail ? 4 : 5, .6, rail ? 4 : 5); } }
