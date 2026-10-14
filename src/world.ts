@@ -1195,6 +1195,20 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     addEdge(node.id, destination.id, 'road', points, 30);
   }
   if (streetRecipe === 'smooth') {
+    // A terrace row ends at its last door: the empty tail beyond it, a row
+    // with no lots at all and a connector left leading nowhere are removed.
+    for (;;) {
+      const degree = new Map<string, number>(); for (const e of world.edges) for (const id of [e.from, e.to]) degree.set(id, (degree.get(id) ?? 0) + 1);
+      const loose = (id: string) => id.includes('-terrace-') && degree.get(id) === 1;
+      const dead = new Set(world.edges.filter(e => e.mode === 'road' && (loose(e.from) || loose(e.to))));
+      if (!dead.size) break;
+      const ends = new Set([...dead].flatMap(e => [e.from, e.to].filter(loose)));
+      world.edges = world.edges.filter(e => !dead.has(e)); world.nodes = world.nodes.filter(n => !ends.has(n.id));
+      for (const id of ends) nodeById.delete(id);
+      indices.delete(world);
+    }
+  }
+  if (streetRecipe === 'smooth') {
     // Same fleet as the orthogonal layouts' length rule produced: two vehicles
     // (the second a freight carrier) per station-to-station road, one per
     // commercial door, independent of how short the shared stubs became.
