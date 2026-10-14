@@ -8,15 +8,18 @@ namespace Yunshan.Core.Tests;
 /// <summary>Replays scripts/parity/woodland.ts: every tree and shrub position, species, model, height and yaw.</summary>
 public class WoodlandParityTests
 {
-    [Fact]
-    public void WoodlandMatchesTypeScript()
+    static string Gunzip(string name)
     {
-        string expected;
-        using (var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", "woodland-v6.json.gz")))
-        using (var gzip = new GZipStream(file, CompressionMode.Decompress))
-        using (var reader = new StreamReader(gzip, Encoding.UTF8)) expected = reader.ReadToEnd();
-        var layout = WoodlandLayout.Layout(World.CreateWorld());
-        Assert.Equal(5200, layout.Trees.Count);
+        using var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", name));
+        using var gzip = new GZipStream(file, CompressionMode.Decompress);
+        using var reader = new StreamReader(gzip, Encoding.UTF8); return reader.ReadToEnd();
+    }
+
+    static void Compare(string fixture, WorldDefinition world, int trees)
+    {
+        string expected = Gunzip(fixture);
+        var layout = WoodlandLayout.Layout(world);
+        Assert.Equal(trees, layout.Trees.Count);
         var tree = new Obj()
             .Put("trees", layout.Trees.Select(t => new Obj().Put("id", (double)t.Id).Put("asset", t.Asset).Put("species", (double)t.Species).Put("x", t.X).Put("y", t.Y).Put("z", t.Z).Put("height", t.Height).Put("yaw", t.Yaw)).ToList())
             .Put("shrubs", layout.Shrubs.Select(s => new Obj().Put("id", (double)s.Id).Put("asset", s.Asset).Put("x", s.X).Put("y", s.Y).Put("z", s.Z).Put("yaw", s.Yaw)).ToList())
@@ -28,6 +31,14 @@ public class WoodlandParityTests
             Assert.Fail($"woodland differs at {i}: expected …{expected.Substring(Math.Max(0, i - 80), Math.Min(160, expected.Length - Math.Max(0, i - 80)))}… actual …{actual.Substring(Math.Max(0, i - 80), Math.Min(160, actual.Length - Math.Max(0, i - 80)))}…");
         }
     }
+
+    [Fact]
+    public void WoodlandMatchesTypeScript() => Compare("woodland-v6.json.gz", World.CreateWorld(), 5200);
+
+    /// <summary>current-v8 adds the slope gardens inside each district.</summary>
+    [Fact]
+    public void V8SlopeGardensMatchTypeScript() =>
+        Compare("woodland-v8.json.gz", Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v8.json.gz"))), 9657);
 }
 
 public class RiverDressingParityTests
