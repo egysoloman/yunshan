@@ -1,4 +1,5 @@
 import type { Building, BuildingKind } from '../types';
+import { pavedStreet } from '../transport-geometry';
 import { contains, getBuildingBody, getFloorPlanFixtures, getFloorPlanSlabRegions, wallPanels, type FloorFixture, type Rect } from '../architecture-floor-plan';
 import manifest from './studio-assets.json';
 
@@ -182,12 +183,13 @@ export const ROAD_TILES = [
   // BUILT-142: the paired rail side strips (±2.75m, 0.35×0.5m), same near drawing.
   { kind: 'rail-kerb', asset: 'BUILT-142', modes: ['maglev', 'lightRail'], deck: 6, width: 5.85, height: .5, lift: -.1 },
 ] as const;
-export function studioRoadTilePlacements(world: { edges: readonly { id: string; mode: string; points: readonly { x: number; y: number; z: number }[] }[] }, deckWidth: (edge: any) => number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
+export function studioRoadTilePlacements(world: { edges: readonly { id: string; mode: string; from: string; to: string; points: readonly { x: number; y: number; z: number }[] }[] }, deckWidth: (edge: any) => number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
   const placements: StudioStaticPlacement[] = [];
   for (const tile of ROAD_TILES) {
     const asset = assets.get(tile.asset); if (!asset) continue;
-    // Each module is checked against its own part of the deck section.
-    for (const edge of world.edges) if ((tile.modes as readonly string[]).includes(edge.mode) && !edge.id.includes('runway') && deckWidth(edge) === tile.deck) tileEdgePath(edge, tile.kind, asset, tile.height, tile.lift, tile.width, placements);
+    // Each module is checked against its own part of the deck section. Paved
+    // stone streets keep only their kerbs: no slate surface or centre line.
+    for (const edge of world.edges) if ((tile.modes as readonly string[]).includes(edge.mode) && !edge.id.includes('runway') && deckWidth(edge) === tile.deck && !(tile.kind !== 'road-kerb' && pavedStreet(world, edge))) tileEdgePath(edge, tile.kind, asset, tile.height, tile.lift, tile.width, placements);
   }
   return placements;
 }

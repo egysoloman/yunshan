@@ -195,7 +195,7 @@ namespace Yunshan.Core
             foreach (var tile in RoadTiles)
             {
                 if (!assets.TryGetValue(tile.Asset, out var asset)) continue;
-                foreach (var edge in world.Edges) if (tile.Modes.Contains(edge.Mode) && !edge.Id.Contains("runway") && TransportGeometry.DeckWidth(edge) == tile.Deck) TileEdgePath(edge, tile.Kind, tile.Asset, asset, tile.Height, tile.Lift, tile.Width, result);
+                foreach (var edge in world.Edges) if (tile.Modes.Contains(edge.Mode) && !edge.Id.Contains("runway") && TransportGeometry.DeckWidth(edge) == tile.Deck && !(tile.Kind != "road-kerb" && TransportGeometry.PavedStreet(world, edge))) TileEdgePath(edge, tile.Kind, tile.Asset, asset, tile.Height, tile.Lift, tile.Width, result);
             }
             return result;
         }

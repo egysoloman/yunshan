@@ -1,6 +1,6 @@
 import type { NetworkEdge, Vec3, WorldDefinition } from '../types';
 import { samplePolyline, terrainHeight } from '../world';
-import { deckWidth, GUARDRAIL_THICKNESS, guardrailOffset, guardrailSpans, hasGuardrailAt } from '../transport-geometry';
+import { deckWidth, GUARDRAIL_THICKNESS, guardrailOffset, guardrailSpans, hasGuardrailAt, pavedStreet } from '../transport-geometry';
 
 /** Material keys the network uses (renderer palette). */
 export type NetworkMaterial = 'stone' | 'wood' | 'cyan' | 'amber' | 'roof';
@@ -14,6 +14,8 @@ export interface NetworkSink {
 }
 export interface NetworkStructureOptions { dressesStations: boolean; dressesRunway: boolean; dressesRailDeck?: boolean; dressesBridgeDeck?: boolean; dressesRoadDeck?: boolean; dressesRailKerb?: boolean; dressesRailPierCaps?: boolean }
 
+const PAVING = '#8a8170';
+
 /** Roads, rails, bridges, lifts, cables, supports, guardrails, station
  * platforms and junction poles, as the renderer has always drawn them. */
 export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink, options: NetworkStructureOptions): void {
@@ -23,10 +25,12 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
     const anyAngleStreets = (world as WorldDefinition & { layoutVersion?: string }).layoutVersion === 'current-v8';
     for (const edge of world.edges) {
       if (edge.mode === 'flight') continue;
+      // Terrace streets and door paths are stone paving (PAVING), not slate road.
+      const paved = pavedStreet(world, edge);
       if (anyAngleStreets && edge.mode === 'road' && !edge.id.includes('runway')) for (let i = 1; i < edge.points.length - 1; i++) {
         const a = edge.points[i - 1], p = edge.points[i], b = edge.points[i + 1], width = deckWidth(edge) - .04;
         const yaw = Math.atan2(b.x - a.x, b.z - a.z);
-        sink.box('stone', p.x, p.y - .28, p.z, width, .5, width, '#555f61', yaw);
+        sink.box('stone', p.x, p.y - .28, p.z, width, .5, width, paved ? PAVING : '#555f61', yaw);
       }
       let supportRemainder = 0;
       for (let i = 1; i < edge.points.length; i++) {
@@ -47,10 +51,10 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
         // Near the camera the studio road modules (BUILT-131/132/134) are drawn at the exact extents
         // of the deck, centre line and kerbs; those boxes shrink slightly so the two never z-fight, and the far deck takes
         // the module's own slate concrete (#555f61, its top-face texel) so there is no colour seam.
-        const roadTiled = edge.mode === 'road' && !edge.id.includes('runway') && !!options.dressesRoadDeck;
-        if (!dressedDeck) sink.segment('stone', a, b, roadTiled ? width - .04 : width, rail ? 1.4 : .5, rail ? -.9 : roadTiled ? -.28 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : roadTiled ? '#555f61' : '#969987');
+        const roadTiled = edge.mode === 'road' && !edge.id.includes('runway') && !!options.dressesRoadDeck, surfaceTiled = roadTiled && !paved;
+        if (!dressedDeck) sink.segment('stone', a, b, surfaceTiled ? width - .04 : width, rail ? 1.4 : .5, rail ? -.9 : surfaceTiled ? -.28 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : paved ? PAVING : roadTiled ? '#555f61' : '#969987');
         if (rail) { sink.segment('cyan', { ...a, x: a.x - 1.8 }, { ...b, x: b.x - 1.8 }, .28, .24, .16); sink.segment('cyan', { ...a, x: a.x + 1.8 }, { ...b, x: b.x + 1.8 }, .28, .24, .16); }
-        else if (edge.mode !== 'bridge') sink.segment('stone', a, b, roadTiled ? .12 : .16, roadTiled ? .06 : .08, roadTiled ? .06 : .07, '#d1c6a1');
+        else if (edge.mode !== 'bridge' && !paved) sink.segment('stone', a, b, roadTiled ? .12 : .16, roadTiled ? .06 : .08, roadTiled ? .06 : .07, '#d1c6a1');
         // Curbs, paving seams and separate shoulders make the travelled deck
         // legible at body height without widening the shared collision surface.
         const dx = b.x - a.x, dz = b.z - a.z, horizontal = Math.hypot(dx, dz) || 1, nx = -dz / horizontal, nz = dx / horizontal;
@@ -61,7 +65,9 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
           const elevated = (a.y + b.y) / 2 - terrainHeight(world, (a.x + b.x) / 2, (a.z + b.z) / 2) > 4;
           if (edge.mode === 'bridge' || rail || elevated && edge.mode === 'road') for (const span of guardrailSpans(world, edge, i)) sink.segment('wood', { x: span.a.x + nx * offset * side, y: span.a.y, z: span.a.z + nz * offset * side }, { x: span.b.x + nx * offset * side, y: span.b.y, z: span.b.z + nz * offset * side }, GUARDRAIL_THICKNESS, .2, 1.1, '#6b7771');
         }
-        if (edge.mode === 'road' && !edge.id.includes('runway')) { const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 + .04, z: (a.z + b.z) / 2 }; sink.segment('stone', { ...middle, x: middle.x - nx * 3.5, z: middle.z - nz * 3.5 }, { ...middle, x: middle.x + nx * 3.5, z: middle.z + nz * 3.5 }, .08, .04, 0, '#757e73'); }
+        // Paving seams across the stone street every quarter segment (rows step every 8m).
+        if (paved) for (const t of [.25, .5, .75]) { const m = { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t + .02, z: a.z + (b.z - a.z) * t }; sink.segment('stone', { ...m, x: m.x - nx * 4.6, z: m.z - nz * 4.6 }, { ...m, x: m.x + nx * 4.6, z: m.z + nz * 4.6 }, .14, .05, 0, '#6d675a'); }
+        else if (edge.mode === 'road' && !edge.id.includes('runway')) { const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 + .04, z: (a.z + b.z) / 2 }; sink.segment('stone', { ...middle, x: middle.x - nx * 3.5, z: middle.z - nz * 3.5 }, { ...middle, x: middle.x + nx * 3.5, z: middle.z + nz * 3.5 }, .08, .04, 0, '#757e73'); }
         // current-v8 terrace streets stand on stone embankments where they ride
         // above the ground (fill): a retaining wall from the lowest ground under
         // the segment up to the deck, as the concept's terraced town.
@@ -77,11 +83,36 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
       }
       if (edge.mode === 'bridge') emitBridge(world, edge, sink);
     }
+    // current-v8 junctions meet at any angle: the pole stands on whichever
+    // corner keeps the most clearance from every nearby street centreline.
+    const CELL = 32, segments = new Map<string, [Vec3, Vec3][]>();
+    if (anyAngleStreets) for (const edge of world.edges) if (edge.mode === 'road' && !edge.id.includes('runway')) for (let i = 1; i < edge.points.length; i++) {
+      const a = edge.points[i - 1], b = edge.points[i];
+      for (let gx = Math.floor(Math.min(a.x, b.x) / CELL); gx <= Math.floor(Math.max(a.x, b.x) / CELL); gx++) for (let gz = Math.floor(Math.min(a.z, b.z) / CELL); gz <= Math.floor(Math.max(a.z, b.z) / CELL); gz++) {
+        const key = gx + ',' + gz, list = segments.get(key) ?? []; list.push([a, b]); segments.set(key, list);
+      }
+    }
+    const clearance = (x: number, z: number) => {
+      let best = Infinity;
+      for (let gx = Math.floor(x / CELL) - 1; gx <= Math.floor(x / CELL) + 1; gx++) for (let gz = Math.floor(z / CELL) - 1; gz <= Math.floor(z / CELL) + 1; gz++) for (const [a, b] of segments.get(gx + ',' + gz) ?? []) {
+        const dx = b.x - a.x, dz = b.z - a.z, n = dx * dx + dz * dz, t = n === 0 ? 0 : Math.max(0, Math.min(1, ((x - a.x) * dx + (z - a.z) * dz) / n));
+        best = Math.min(best, Math.hypot(x - a.x - dx * t, z - a.z - dz * t));
+      }
+      return best;
+    };
+    const poleCorner = (p: Vec3) => {
+      let best = { x: p.x + 4, z: p.z + 4 }, score = -Infinity;
+      for (const reach of [6.5, 9.5]) for (const [cx, cz] of [[1, 1], [-1, 1], [-1, -1], [1, -1]]) {
+        const x = p.x + cx * reach, z = p.z + cz * reach, clear = clearance(x, z);
+        if (clear > score) { score = clear; best = { x, z }; }
+      }
+      return best;
+    };
     for (const node of world.nodes) {
       const p = node.position;
       // The studio pool draws platform and shelter at the same platform extent.
       if (node.station) { if (!options.dressesStations) { sink.box('stone', p.x, p.y - .6, p.z, 22, 1, 18); sink.box('cyan', p.x, p.y + .1, p.z + 8, 20, .2, .35); for (const x of [-8, 8]) { sink.box('wood', p.x + x, p.y + 3, p.z, .8, 6, .8); sink.box('amber', p.x + x, p.y + 5.7, p.z, 1.5, .35, 1.5); } sink.box('roof', p.x, p.y + 6.4, p.z, 23, .65, 11, undefined, 0, { roof: true }); } sink.box('wood', p.x + 12, p.y + 1.8, p.z + 11, .35, 3.6, .35); sink.box('wood', p.x + 12, p.y + 3.5, p.z + 11, 1, 1.6, .65); }
-      else if (node.id.includes('junction') || node.id.includes('road')) { sink.box('wood', p.x + 4, p.y + 2.2, p.z + 4, .4, 4.4, .4); if (anyAngleStreets && node.id.startsWith('junction-')) sink.box('stone', p.x, p.y - .28, p.z, 11, .5, 11, '#555f61'); }
+      else if (node.id.includes('junction') || node.id.includes('road')) { const pole = anyAngleStreets ? poleCorner(p) : { x: p.x + 4, z: p.z + 4 }; sink.box('wood', pole.x, p.y + 2.2, pole.z, .4, 4.4, .4); if (anyAngleStreets && node.id.startsWith('junction-')) sink.box('stone', p.x, p.y - .28, p.z, 11, .5, 11, '#555f61'); }
     }
 }
 

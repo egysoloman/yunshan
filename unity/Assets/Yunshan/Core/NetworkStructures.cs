@@ -19,6 +19,7 @@ namespace Yunshan.Core
     public static class NetworkStructures
     {
         static Vec3 V(double x, double y, double z) => new Vec3(x, y, z);
+        const string Paving = "#8a8170";
 
         public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false, bool dressesRoadDeck = false, bool dressesRailKerb = false, bool dressesRailPierCaps = false)
         {
@@ -29,11 +30,13 @@ namespace Yunshan.Core
             foreach (var edge in world.Edges)
             {
                 if (edge.Mode == "flight") continue;
+                // Terrace streets and door paths are stone paving, not slate road (network-structures.ts).
+                bool paved = TransportGeometry.PavedStreet(world, edge);
                 if (anyAngleStreets && edge.Mode == "road" && !edge.Id.Contains("runway")) for (int i = 1; i < edge.Points.Count - 1; i++)
                 {
                     Vec3 a = edge.Points[i - 1], p = edge.Points[i], b = edge.Points[i + 1];
                     double width = TransportGeometry.DeckWidth(edge) - .04, yaw = JsMath.Atan2(b.X - a.X, b.Z - a.Z);
-                    sink.Box("stone", p.X, p.Y - .28, p.Z, width, .5, width, "#555f61", yaw);
+                    sink.Box("stone", p.X, p.Y - .28, p.Z, width, .5, width, paved ? Paving : "#555f61", yaw);
                 }
                 double supportRemainder = 0;
                 for (int i = 1; i < edge.Points.Count; i++)
@@ -55,10 +58,10 @@ namespace Yunshan.Core
                     double width = TransportGeometry.DeckWidth(edge);
                     bool dressedDeck = edge.Id == "road-airport-runway-strip" && dressesRunway || rail && dressesRailDeck || edge.Mode == "bridge" && dressesBridgeDeck;
                     // Near studio road tiles (BUILT-131/132/134) sit at the exact deck, line and kerb extents; these boxes shrink slightly.
-                    bool roadTiled = edge.Mode == "road" && !edge.Id.Contains("runway") && dressesRoadDeck;
-                    if (!dressedDeck) sink.Segment("stone", a, b, roadTiled ? width - .04 : width, rail ? 1.4 : .5, rail ? -.9 : roadTiled ? -.28 : -.25, rail ? "#84948e" : edge.Mode == "bridge" ? "#b8b3a0" : roadTiled ? "#555f61" : "#969987");
+                    bool roadTiled = edge.Mode == "road" && !edge.Id.Contains("runway") && dressesRoadDeck, surfaceTiled = roadTiled && !paved;
+                    if (!dressedDeck) sink.Segment("stone", a, b, surfaceTiled ? width - .04 : width, rail ? 1.4 : .5, rail ? -.9 : surfaceTiled ? -.28 : -.25, rail ? "#84948e" : edge.Mode == "bridge" ? "#b8b3a0" : paved ? Paving : roadTiled ? "#555f61" : "#969987");
                     if (rail) { sink.Segment("cyan", V(a.X - 1.8, a.Y, a.Z), V(b.X - 1.8, b.Y, b.Z), .28, .24, .16); sink.Segment("cyan", V(a.X + 1.8, a.Y, a.Z), V(b.X + 1.8, b.Y, b.Z), .28, .24, .16); }
-                    else if (edge.Mode != "bridge") sink.Segment("stone", a, b, roadTiled ? .12 : .16, roadTiled ? .06 : .08, roadTiled ? .06 : .07, "#d1c6a1");
+                    else if (edge.Mode != "bridge" && !paved) sink.Segment("stone", a, b, roadTiled ? .12 : .16, roadTiled ? .06 : .08, roadTiled ? .06 : .07, "#d1c6a1");
                     double dx = b.X - a.X, dz = b.Z - a.Z, horizontal = JsMath.Hypot(dx, dz); if (horizontal == 0) horizontal = 1;
                     double nx = -dz / horizontal, nz = dx / horizontal;
                     foreach (var side in new[] { -1, 1 })
@@ -72,7 +75,13 @@ namespace Yunshan.Core
                             foreach (var span in TransportGeometry.GuardrailSpans(world, edge, i))
                                 sink.Segment("wood", V(span.A.X + nx * offset * side, span.A.Y, span.A.Z + nz * offset * side), V(span.B.X + nx * offset * side, span.B.Y, span.B.Z + nz * offset * side), TransportGeometry.GuardrailThickness, .2, 1.1, "#6b7771");
                     }
-                    if (edge.Mode == "road" && !edge.Id.Contains("runway"))
+                    if (paved)
+                        foreach (var t in new[] { .25, .5, .75 })
+                        {
+                            var m = V(a.X + (b.X - a.X) * t, a.Y + (b.Y - a.Y) * t + .02, a.Z + (b.Z - a.Z) * t);
+                            sink.Segment("stone", V(m.X - nx * 4.6, m.Y, m.Z - nz * 4.6), V(m.X + nx * 4.6, m.Y, m.Z + nz * 4.6), .14, .05, 0, "#6d675a");
+                        }
+                    else if (edge.Mode == "road" && !edge.Id.Contains("runway"))
                     {
                         var middle = V((a.X + b.X) / 2, (a.Y + b.Y) / 2 + .04, (a.Z + b.Z) / 2);
                         sink.Segment("stone", V(middle.X - nx * 3.5, middle.Y, middle.Z - nz * 3.5), V(middle.X + nx * 3.5, middle.Y, middle.Z + nz * 3.5), .08, .04, 0, "#757e73");
@@ -101,6 +110,44 @@ namespace Yunshan.Core
                 }
                 if (edge.Mode == "bridge") EmitBridge(world, edge, sink);
             }
+            // current-v8 junctions meet at any angle: the pole stands on whichever
+            // corner keeps the most clearance from every nearby street centreline (network-structures.ts).
+            const double Cell = 32;
+            var segments = new Dictionary<(double, double), List<(Vec3 A, Vec3 B)>>();
+            if (anyAngleStreets) foreach (var edge in world.Edges) if (edge.Mode == "road" && !edge.Id.Contains("runway")) for (int i = 1; i < edge.Points.Count; i++)
+            {
+                Vec3 a = edge.Points[i - 1], b = edge.Points[i];
+                for (double gx = Math.Floor(JsMath.Min(a.X, b.X) / Cell); gx <= Math.Floor(JsMath.Max(a.X, b.X) / Cell); gx++)
+                    for (double gz = Math.Floor(JsMath.Min(a.Z, b.Z) / Cell); gz <= Math.Floor(JsMath.Max(a.Z, b.Z) / Cell); gz++)
+                    {
+                        var key = (gx, gz);
+                        if (!segments.TryGetValue(key, out var list)) segments[key] = list = new List<(Vec3 A, Vec3 B)>();
+                        list.Add((a, b));
+                    }
+            }
+            double Clearance(double x, double z)
+            {
+                double best = double.PositiveInfinity;
+                for (double gx = Math.Floor(x / Cell) - 1; gx <= Math.Floor(x / Cell) + 1; gx++)
+                    for (double gz = Math.Floor(z / Cell) - 1; gz <= Math.Floor(z / Cell) + 1; gz++)
+                        if (segments.TryGetValue((gx, gz), out var list)) foreach (var (a, b) in list)
+                        {
+                            double dx = b.X - a.X, dz = b.Z - a.Z, n = dx * dx + dz * dz, t = n == 0 ? 0 : JsMath.Max(0, JsMath.Min(1, ((x - a.X) * dx + (z - a.Z) * dz) / n));
+                            best = JsMath.Min(best, JsMath.Hypot(x - a.X - dx * t, z - a.Z - dz * t));
+                        }
+                return best;
+            }
+            (double X, double Z) PoleCorner(Vec3 p)
+            {
+                (double X, double Z) best = (p.X + 4, p.Z + 4); double score = double.NegativeInfinity;
+                foreach (var reach in new[] { 6.5, 9.5 })
+                    foreach (var (cx, cz) in new[] { (1.0, 1.0), (-1.0, 1.0), (-1.0, -1.0), (1.0, -1.0) })
+                    {
+                        double x = p.X + cx * reach, z = p.Z + cz * reach, clear = Clearance(x, z);
+                        if (clear > score) { score = clear; best = (x, z); }
+                    }
+                return best;
+            }
             foreach (var node in world.Nodes)
             {
                 var p = node.Position;
@@ -114,7 +161,7 @@ namespace Yunshan.Core
                     }
                     sink.Box("wood", p.X + 12, p.Y + 1.8, p.Z + 11, .35, 3.6, .35); sink.Box("wood", p.X + 12, p.Y + 3.5, p.Z + 11, 1, 1.6, .65);
                 }
-                else if (node.Id.Contains("junction") || node.Id.Contains("road")) { sink.Box("wood", p.X + 4, p.Y + 2.2, p.Z + 4, .4, 4.4, .4); if (anyAngleStreets && node.Id.StartsWith("junction-")) sink.Box("stone", p.X, p.Y - .28, p.Z, 11, .5, 11, "#555f61"); }
+                else if (node.Id.Contains("junction") || node.Id.Contains("road")) { var pole = anyAngleStreets ? PoleCorner(p) : (X: p.X + 4, Z: p.Z + 4); sink.Box("wood", pole.X, p.Y + 2.2, pole.Z, .4, 4.4, .4); if (anyAngleStreets && node.Id.StartsWith("junction-")) sink.Box("stone", p.X, p.Y - .28, p.Z, 11, .5, 11, "#555f61"); }
             }
         }
 
