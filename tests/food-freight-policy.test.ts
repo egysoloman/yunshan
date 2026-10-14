@@ -69,7 +69,10 @@ test('declared carriers route food to a short district and release it only there
   assert(releases.length > 0, 'bound carriers arrived');
   assert(releases.every(r => r.bound === r.at), 'bound cargo is released only in its destination district');
   assert(east > 28 * 10, `east received routed freight (${east})`);
-  assert(Object.values(internals.runtime.cargoDestinations).every(d => d === 'east'));
+  // v3 binds a carrier to the least-stocked district it can reach: aircraft
+  // cannot reach east and take the least-stocked of their own airfields.
+  const roadBound = Object.entries(internals.runtime.cargoDestinations).filter(([id]) => !id.startsWith('vehicle-flight-'));
+  assert(roadBound.length > 10 && roadBound.every(([, d]) => d === 'east'), JSON.stringify(roadBound));
 });
 
 test('relay loads freight waiting in a supplied district for a short one, keeping its owner and total', () => {
