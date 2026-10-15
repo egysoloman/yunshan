@@ -11,7 +11,7 @@ import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmI
 import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
 import { BANK_ACTION_NAMES, RELATION_NAMES, SOCIAL_ACTION_NAMES } from './simulation/player-names';
-import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, ownersMayClose, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
+import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
@@ -1493,11 +1493,9 @@ export class Simulation implements SimulationAPI {
   private considerShopMove(citizen: Citizen): void {
     if (!shopStaffMayMove(this.runtime.publicFinancePolicyId) || citizen.money >= STUDY_GRANT_CEILING || this.state.hour < 8 || this.state.hour >= 17 || citizen.needs.hunger < 45 || citizen.needs.fatigue < 40 || (this.runtime.decisionAt[citizen.id] ?? 0) > this.now) return;
     const current = this.state.shops.find(shop => shop.buildingId === citizen.workId);
-    // v7: once a shop is suspended its owner and staff may leave it too, whatever cash it still holds.
-    const closed = !!current && ownersMayClose(this.runtime.publicFinancePolicyId) && !shopLifecycleAllowsOperation(this.state, current.id);
-    if (!current || this.shopOwnerId(current) === citizen.id && !closed || citizen.role === '学生') return;
+    if (!current || this.shopOwnerId(current) === citizen.id || citizen.role === '学生') return;
     const dailySalary = privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
-    if (!closed && this.shopFunds(current) - this.shopProtectedFunds(current) >= dailySalary) return;
+    if (this.shopFunds(current) - this.shopProtectedFunds(current) >= dailySalary) return;
     const day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440), today = this.runtime.privateLabor?.shifts[current.id];
     // A substantial promise for today (half a day or more) keeps the worker; a few funded minutes do not.
     if (today?.day === day && today.assignments.some(item => item.citizenId === citizen.id && item.minutesCap >= 240)) return;
