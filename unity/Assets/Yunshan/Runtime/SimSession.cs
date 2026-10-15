@@ -22,6 +22,8 @@ namespace Yunshan.Runtime
         public double Seed { get; private set; } = 20261001;
         /// <summary>The world the host simulates, sent by it after opening (null until Ready).</summary>
         public WorldDefinition World { get; private set; }
+        /// <summary>Where a new player first looks (host-computed); null when unknown.</summary>
+        public Vec3 ArrivalLook { get; private set; }
         public SimFrame Frame { get; private set; }
         public SimFrame PreviousFrame { get; private set; }
         public float FrameArrivedAt { get; private set; }
@@ -77,7 +79,7 @@ namespace Yunshan.Runtime
                     var frame = await client.Step(0, "walk", null, null, 260, 0);
                     mainThread.Enqueue(() =>
                     {
-                        Layout = Json.Str(opened, "layout", Yunshan.Core.World.CurrentCityLayout); Seed = Json.Num(opened, "seed", 20261001); World = world;
+                        Layout = Json.Str(opened, "layout", Yunshan.Core.World.CurrentCityLayout); Seed = Json.Num(opened, "seed", 20261001); World = world; ArrivalLook = client.ArrivalLook;
                         Accept(frame, true);
                         State = Phase.Ready; Status = $"模拟就绪：{Json.Num(opened, "citizens")} 位居民 · {Json.Num(opened, "vehicles")} 辆载具";
                     });

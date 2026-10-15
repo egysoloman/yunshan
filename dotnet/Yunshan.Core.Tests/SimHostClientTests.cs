@@ -50,6 +50,9 @@ public class SimHostClientTests
         Assert.Equal(world.Buildings.Count, (int)Json.Num(opened, "buildings"));
         Assert.Equal(world.Edges.Count, (int)Json.Num(opened, "edges"));
         Assert.Equal(WorldReference("current-v8"), CanonicalJson.Write(CanonicalJson.World(world)));
+        // The host also sends where a new player first looks: 60 m out at the spawn, never straight down.
+        Assert.NotNull(client.ArrivalLook);
+        Assert.Equal(60, Math.Sqrt(Math.Pow(client.ArrivalLook.X - world.Spawn.X, 2) + Math.Pow(client.ArrivalLook.Z - world.Spawn.Z, 2)), 6);
 
         var frame = await client.Step(.25, "walk", world.Spawn, null, 300, 0);
         Assert.Equal(1d, frame.Ticks);

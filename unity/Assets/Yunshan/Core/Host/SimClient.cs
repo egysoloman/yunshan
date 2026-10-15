@@ -139,8 +139,17 @@ namespace Yunshan.Core.Host
             => Pane.ListFrom(await Request("panes", new Dictionary<string, object> { ["view"] = new Dictionary<string, object> { ["mode"] = mode, ["inside"] = insideBuildingId } }).ConfigureAwait(false));
 
         public async Task<string> Save() => Json.Str(await Request("save").ConfigureAwait(false), "save");
+        /// <summary>Where a new player first looks (src/rendering/arrival-view.ts, computed by the host
+        /// from the fleet plan it does not send); null before World() or from an older host.</summary>
+        public Vec3 ArrivalLook { get; private set; }
         /// <summary>The city the host is simulating (canonical world JSON).</summary>
-        public async Task<WorldDefinition> World() => WorldJson.FromJson(Json.Obj(await Request("world").ConfigureAwait(false), "world"));
+        public async Task<WorldDefinition> World()
+        {
+            var reply = await Request("world").ConfigureAwait(false);
+            var look = Json.Obj(reply, "arrivalLook");
+            ArrivalLook = look == null ? null : new Vec3(Json.Num(look, "x"), Json.Num(look, "y"), Json.Num(look, "z"));
+            return WorldJson.FromJson(Json.Obj(reply, "world"));
+        }
 
         /// <summary>Loads a save of the same city layout; (ok, message, reopen).</summary>
         public async Task<(bool ok, string message, bool reopen)> Load(string save)

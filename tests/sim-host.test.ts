@@ -19,6 +19,8 @@ test('native host drives the authoritative simulation through requests', async (
   assert.equal(info.layout, 'current-v8'); assert.equal(info.seed, 20261001); assert.match(info.fingerprint, /^[0-9a-f]{1,8}$/);
   assert(info.buildings > 500 && info.citizens > 300);
 
+  const sent = (await host.handle({ id: 21, op: 'world' })).result as { world: WorldDefinition; arrivalLook: { x: number; y: number; z: number } };
+  assert.ok(Math.abs(Math.hypot(sent.arrivalLook.x - sent.world.spawn.x, sent.arrivalLook.z - sent.world.spawn.z) - 60) < 1e-6, 'the host sends the arrival look with its world');
   const stepped = await host.handle({ id: 3, op: 'step', seconds: .25, mode: 'walk', sinceEventId: 0 });
   assert.equal(stepped.ok, true, stepped.error);
   const frame = stepped.result as HostFrame;

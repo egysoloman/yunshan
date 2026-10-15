@@ -135,6 +135,8 @@ namespace Yunshan.Runtime
 
                 walker = view.gameObject.AddComponent<FirstPersonController>();
                 walker.Initialise(world, view, CanAccess, () => session.Voxels);
+                // A new player faces the market the web arrival camera shows (yaw 0 looks along −z).
+                if (session.ArrivalLook is Vec3 look) { var feet = walker.Walker.Feet; walker.Walker.Yaw = Math.Atan2(-(look.X - feet.X), -(look.Z - feet.Z)); walker.Walker.Pitch = 0; }
                 walker.PointerOverUi = PointerOverUi;
                 if (session.Frame != null) OnPlayerMovedBySimulation(session.Frame);
                 life = new CityLifeView(world, transform);

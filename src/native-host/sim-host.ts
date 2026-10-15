@@ -1,3 +1,4 @@
+import { arrivalLook } from '../rendering/arrival-view';
 /**
  * Native host for the authoritative simulation. The Unity client starts this
  * process and exchanges one JSON object per line on stdin/stdout. The rules,
@@ -98,7 +99,8 @@ export class SimHost {
       case 'save': return { save: this.requireSim().exportSave() };
       // The running city, canonical JSON (sorted keys) of the world the host
       // simulates. Unity draws this instead of regenerating it in C#.
-      case 'world': { this.requireSim(); const { fleetPlan: _fleet, ...world } = this.world! as WorldDefinition; return { world: canonicalWorld(world) }; }
+      // The arrival look (where a new player first faces) needs the fleet plan, which the client never receives.
+      case 'world': { this.requireSim(); const { fleetPlan: _fleet, ...world } = this.world! as WorldDefinition; return { world: canonicalWorld(world), arrivalLook: arrivalLook(this.world!, this.world!.spawn) }; }
       case 'load': {
         const save = request.save;
         if (typeof save !== 'string' || !save) throw new Error('存档为空。');
