@@ -161,7 +161,7 @@ export class CityUI {
         <div class="city-brand"><span class="brand-seal" aria-hidden="true">云</span><div><h1>云山巨城</h1><p>一座山水之间的未来之城</p></div><span class="brand-rule" aria-hidden="true"></span><span class="brand-caption">山河入城<br>万家灯火</span></div>
         <div class="world-status"><span class="live-marker"><i></i> LIVE</span><span data-ref="day">初抵云山</span><strong data-ref="clock">—</strong><span data-ref="weather"></span><button type="button" class="icon-button" data-action="help" aria-label="展开操作说明" title="操作说明">?</button><button type="button" class="panel-toggle" data-action="panel" data-testid="panel-toggle" aria-expanded="false" aria-controls="city-panel"><span class="panel-toggle-symbol">☷</span><span>城市手册</span></button></div>
       </header>
-      <div class="welcome-note" data-ref="welcome"><span class="welcome-dot"></span><div><strong>初抵云山，天地皆可游。</strong><span>你已抵达城中 · WASD 步行，E 使用设施 · 航空器需在停机位取得</span></div><button type="button" class="icon-button" data-action="dismiss-welcome" aria-label="关闭欢迎提示">×</button></div>
+      <div class="welcome-note" data-ref="welcome"><span class="welcome-dot"></span><div><strong>初抵云山，天地皆可游。</strong><span>你已抵达城中 · WASD 步行，E 使用设施 · 航空器需在停机位取得</span><span class="first-day" data-ref="first-day" role="list" aria-label="第一天可以做的事"></span></div><button type="button" class="icon-button" data-action="dismiss-welcome" aria-label="关闭欢迎提示">×</button></div>
       <div class="navigation-strip" data-ref="navigation" hidden><span class="route-dot"></span><div><span class="eyebrow">正在导航</span><strong data-ref="destination"></strong></div><span data-ref="route-distance"></span><button type="button" class="text-button" data-action="transit">查看线路</button></div>
       <div class="aim-point" data-ref="aim" hidden aria-hidden="true"></div>
       <aside class="context-card glass-card" data-ref="context" aria-label="附近交互" hidden><div class="context-tabs" data-ref="context-tabs"></div><div data-ref="context-body"></div></aside>
@@ -181,9 +181,10 @@ export class CityUI {
       <div class="render-stats" data-ref="render-stats" aria-label="性能数据"></div>`;
     this.addExtensionSections();
     for (const node of this.root.querySelectorAll<HTMLElement>('[data-ref]')) this.refs.set(node.dataset.ref!, node);
+    // The welcome note stays until it is dismissed or its first-day list is done.
     try {
       if (localStorage.getItem('yunshan.ui.welcomeSeen.v1') === '1') this.ref('welcome').hidden = true;
-      else localStorage.setItem('yunshan.ui.welcomeSeen.v1', '1');
+      this.firstDay = new Set(JSON.parse(localStorage.getItem('yunshan.ui.firstDay.v1') ?? '[]'));
     } catch { /* The controls remain usable when browser storage is restricted. */ }
     this.mapCanvas = this.ref<HTMLCanvasElement>('map');
     container.append(this.root);
@@ -283,6 +284,26 @@ export class CityUI {
     if (inside) return true;
     return Math.hypot(p.x - building.door.x, p.y - building.door.y, p.z - building.door.z) <= 32;
   }
+  private firstDay = new Set<string>();
+  private purchaseMoney: number | null = null;
+  /** A short first-day list in the welcome note (display only), ticked from the player's own state. */
+  private updateFirstDay(state: SimState, view: ViewState): void {
+    const list = this.refs.get('first-day'); if (!list) return;
+    const steps: [string, string, string, boolean][] = [
+      ['walk', '走走看看', '沿街走走，看看千灯市集', spatialDistance(view.position, this.world.spawn) > 30],
+      ['eat', '买份吃的', '走进商肆，在柜台买一份吃的', this.purchaseMoney !== null && state.player.money < this.purchaseMoney - 1e-9],
+      ['work', '做次工班', '在店里做一次 60 分钟现场工班', !!state.playerLabor?.job || (state.playerLabor?.history.length ?? 0) > 0],
+      ['meet', '认识居民', '靠近一位居民，按 E 聊聊', state.relationships.some(r => r.encounters > 0)],
+    ];
+    let changed = false;
+    for (const [id, , , done] of steps) if (done && !this.firstDay.has(id)) { this.firstDay.add(id); changed = true; }
+    if (changed) try { localStorage.setItem('yunshan.ui.firstDay.v1', JSON.stringify([...this.firstDay])); } catch { /* storage restricted */ }
+    const signature = steps.map(([id]) => this.firstDay.has(id) ? '1' : '0').join('');
+    if (list.dataset.signature === signature) return;
+    list.dataset.signature = signature;
+    list.replaceChildren(element('b', '', '第一天'), ...steps.map(([id, label, hint]) => { const item = element('i', this.firstDay.has(id) ? 'done' : '', ` · ${this.firstDay.has(id) ? '✓' : ''}${label}`); item.setAttribute('role', 'listitem'); item.title = hint; item.dataset.step = id; return item; }));
+    if (steps.every(([id]) => this.firstDay.has(id))) { this.ref('welcome').hidden = true; try { localStorage.setItem('yunshan.ui.welcomeSeen.v1', '1'); } catch { /* storage restricted */ } }
+  }
   private atKind(...kinds: BuildingKind[]): boolean { return this.world.buildings.some(b => kinds.includes(b.kind) && this.atBuilding(b.id)); }
   private atKindPoint(purpose: BuildingFunctionPoint['purpose'], ...kinds: BuildingKind[]): boolean { return this.world.buildings.some(b => kinds.includes(b.kind) && this.atBuilding(b.id, purpose)); }
   private pointAvailable(building: Building, purpose?: BuildingFunctionPoint['purpose']): boolean {
@@ -381,6 +402,7 @@ export class CityUI {
     if (button.dataset.destination) { this.actions.travel(button.dataset.destination,this.ref<HTMLSelectElement>('journey-preference').value as 'walk'|'transit'); return; }
     if (button.dataset.navigation) { if (this.actions.navigateTarget) this.actions.navigateTarget(button.dataset.navigation,this.ref<HTMLSelectElement>('journey-preference').value as 'walk'|'transit'); else this.actions.travel(button.dataset.navigation); return; }
     if (button.dataset.command) {
+      if (this.state && ['purchase', 'eat'].includes(button.dataset.command)) this.purchaseMoney = this.state.player.money;
       this.actions.command({ type: button.dataset.command as Command['type'], targetId: button.dataset.target, value: button.dataset.value === undefined ? undefined : Number(button.dataset.value), position: button.dataset.x === undefined ? undefined : { x: Number(button.dataset.x), y: Number(button.dataset.y), z: Number(button.dataset.z) } });
       return;
     }
@@ -398,7 +420,7 @@ export class CityUI {
       case 'close-panel': this.setPanel(false); break;
       case 'transit': this.setPanel(true, 'transit'); break;
       case 'help': this.ref('help').hidden = !this.ref('help').hidden; break;
-      case 'dismiss-welcome': this.ref('welcome').hidden = true; break;
+      case 'dismiss-welcome': this.ref('welcome').hidden = true; try { localStorage.setItem('yunshan.ui.welcomeSeen.v1', '1'); } catch { /* storage restricted */ } break;
       case 'mode': this.actions.setMode(button.dataset.mode as ViewState['mode']); break;
       case 'pause': if (state) this.actions.command({ type: 'pause', value: state.paused ? 0 : 1 }); break;
       case 'interact': this.actions.interact(); break;
@@ -471,6 +493,7 @@ export class CityUI {
   update(state: SimState, view: ViewState): void {
     this.state = state;
     this.view = view;
+    this.updateFirstDay(state, view);
     this.setText('day', `第 ${state.day + 1} 日`);
     this.setText('clock', clock(state.hour));
     this.setText('weather', state.weather);
