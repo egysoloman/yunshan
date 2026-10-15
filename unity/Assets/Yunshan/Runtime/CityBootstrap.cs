@@ -613,6 +613,9 @@ namespace Yunshan.Runtime
                 var edge = world.Edges.FirstOrDefault(e => e.Id == id); if (edge == null) continue;
                 foreach (var p in edge.Points) Mark(At(p.X, p.Z), 2, new Color(.68f, .25f, .18f));
             }
+            // Where people actually are now (Core/CrowdSpots, same rule as the web map).
+            var crowd = frame != null ? CrowdSpots.Find(frame.Citizens.Select(c => (c.Position.X, c.Position.Z, c.State, c.Alive))) : new List<CrowdSpot>();
+            foreach (var spot in crowd) Mark(At(spot.X, spot.Z), 4 + Mathf.Sqrt(spot.Count) * 1.6f, new Color(.84f, .47f, .2f, .4f));
             var feet = walker.Feet; Mark(At(feet.X, feet.Z), 5, new Color(.81f, .57f, .28f)); Mark(At(feet.X, feet.Z), 2.5f, Color.white);
             var e = Event.current;
             if (e.type == EventType.MouseDown && map.Contains(e.mousePosition))
@@ -637,6 +640,8 @@ namespace Yunshan.Runtime
                 GUILayout.EndHorizontal();
             }
             else GUILayout.Label("点击地图上的城区或建筑，规划步行或公共交通行程。", small);
+            if (crowd.Count > 0) { var top = crowd[0]; var near = world.Districts.OrderBy(d => (d.Center.X - top.X) * (d.Center.X - top.X) + (d.Center.Z - top.Z) * (d.Center.Z - top.Z)).First(); GUILayout.Label($"此刻最热闹：{near.Name}一带 · {top.Count} 人在外", small); }
+            else GUILayout.Label("此刻城中多在家中歇息", small);
             GUILayout.EndArea();
         }
 
