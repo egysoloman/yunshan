@@ -25,6 +25,7 @@ namespace Yunshan.Runtime
         GameObject firstPersonArms;
         StudioSky studioSky;
         FirstPersonController walker;
+        AmbienceAudio ambience; List<Vec3> waterfall; Vec3 ambienceFeet; float ambienceClock;
         SimSession session;
         CityLifeView life;
         Light sun;
@@ -135,6 +136,8 @@ namespace Yunshan.Runtime
 
                 walker = view.gameObject.AddComponent<FirstPersonController>();
                 walker.Initialise(world, view, CanAccess, () => session.Voxels);
+                // Procedural ambience (Core/Ambience.Levels from the city's own state; no audio assets).
+                ambience = view.gameObject.AddComponent<AmbienceAudio>(); waterfall = World.GetWaterfallPath(world);
                 // A new player faces the market the web arrival camera shows (yaw 0 looks along −z).
                 if (session.ArrivalLook is Vec3 look) { var feet = walker.Walker.Feet; walker.Walker.Yaw = Math.Atan2(-(look.X - feet.X), -(look.Z - feet.Z)); walker.Walker.Pitch = 0; }
                 walker.PointerOverUi = PointerOverUi;
@@ -277,6 +280,24 @@ namespace Yunshan.Runtime
             return root.gameObject;
         }
 
+        /// <summary>Every 0.2 s: the ambience levels at the player (web main.ts updateAmbience).</summary>
+        void UpdateAmbience(Vec3 feet, string mode)
+        {
+            ambienceClock += Time.unscaledDeltaTime;
+            if (ambience == null || feet == null || world == null || session.Frame == null || ambienceClock < .2f) return;
+            double seconds = ambienceClock; ambienceClock = 0;
+            double water = double.PositiveInfinity;
+            foreach (var line in new[] { world.River, waterfall }) if (line != null) for (int i = 1; i < line.Count; i++) water = Math.Min(water, SegmentDistanceXZ(feet, line[i - 1], line[i]));
+            double speed = ambienceFeet != null && seconds > 0 ? Math.Sqrt(Math.Pow(feet.X - ambienceFeet.X, 2) + Math.Pow(feet.Z - ambienceFeet.Z, 2)) / seconds : 0; ambienceFeet = new Vec3(feet.X, feet.Y, feet.Z);
+            int people = 0; foreach (var c in session.Frame.Citizens) if (c.Alive && c.State != "riding" && Math.Sqrt(Math.Pow(c.Position.X - feet.X, 2) + Math.Pow(c.Position.Y - feet.Y, 2) + Math.Pow(c.Position.Z - feet.Z, 2)) < 25) people++;
+            ambience.Apply(Ambience.Levels(new AmbienceInput { Hour = session.Frame.Hour, Position = feet, Ground = World.TerrainHeight(world, feet.X, feet.Z), WaterDistance = water, NearbyPeople = people, WalkingSpeed = mode == "walk" ? speed : 0, Inside = walker?.Walker.Inside != null, Weather = session.Frame.Weather ?? "晴", Paused = session.Frame.Paused }));
+        }
+        static double SegmentDistanceXZ(Vec3 p, Vec3 a, Vec3 b)
+        {
+            double dx = b.X - a.X, dz = b.Z - a.Z, n = dx * dx + dz * dz, t = n > 0 ? Math.Max(0, Math.Min(1, ((p.X - a.X) * dx + (p.Z - a.Z) * dz) / n)) : 0;
+            return Math.Sqrt(Math.Pow(p.X - a.X - dx * t, 2) + Math.Pow(p.Z - a.Z - dz * t, 2));
+        }
+
         void Update()
         {
             if (session == null) return;
@@ -290,6 +311,7 @@ namespace Yunshan.Runtime
             }
             var feet = walker != null ? walker.Feet : null;
             session.Update(Time.unscaledDeltaTime, mode, feet, feet, controls, walker?.Walker.Inside?.Id);
+            UpdateAmbience(feet, mode);
             if (walker != null && GUIUtility.keyboardControl == 0) HandleKeys();
             UpdateSky();
             if (life != null && session.Frame != null) life.Draw(session, feet);
