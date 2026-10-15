@@ -11,7 +11,7 @@ import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmI
 import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
 import { BANK_ACTION_NAMES, RELATION_NAMES, SOCIAL_ACTION_NAMES } from './simulation/player-names';
-import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
+import { admitsMigrants, closeFiscalDay, councilTaxRate, MIGRANT_SAVINGS, MIGRANTS_PER_DAY, MIGRATION_CAP, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
@@ -1522,7 +1522,8 @@ export class Simulation implements SimulationAPI {
     // Qualified officials stay available to review budgets at their real office.
     if (['official', 'council', 'mayor'].includes(this.citizenIdentity(citizen)) || !this.foodHiringApplicantAvailable(citizen)) return;
     const dailySalary = privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
-    const offers = this.state.shops.filter(shop => shop.open && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && (tradeSignals(this, shop.id).sold > 0 || this.foodShortageHiringOffer(shop, citizen, dailySalary))).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)));
+    // Shops are closed at the night close: a hiring shop is one that may operate and pay new staff, and sold recently.
+    const offers = this.state.shops.filter(shop => shopLifecycleAllowsOperation(this.state, shop.id) && shopLifecycleAllowsNewPayroll(this.state, shop.id) && !this.shopInsolvent(shop) && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && (tradeSignals(this, shop.id).sold > 0 || this.foodShortageHiringOffer(shop, citizen, dailySalary))).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)));
     const offer = offers[0]; if (!offer) return;
     const time = this.state.extension?.lastUpdate ?? this.now, day = Math.floor(time / 1440);
     const plan = this.preparePrivateAcceptance(offer, day);
@@ -2278,6 +2279,50 @@ export class Simulation implements SimulationAPI {
     this.studyBudget.available -= amount; this.state.treasury -= amount; citizen.money += amount;
     this.bus.emit({ type: 'study-grant', citizenId: citizen.id, districtId: citizen.districtId, amount });
   }
+  /** v7: adults from outside the city take funded shop jobs with room at a home within 500 m. */
+  private admitMigrants(): void {
+    const f = this.state.family, e = this.state.extension;
+    if (!admitsMigrants(this.runtime.publicFinancePolicyId) || !f || f.version !== 2 || !e) return;
+    const profiles = e.actorProfiles, at = e.lastUpdate, day = Math.floor(at / 1440);
+    const living = this.state.citizens.filter(c => profiles[c.id]?.alive !== false), occupants = new Map<string, number>();
+    for (const c of living) occupants.set(c.homeId, (occupants.get(c.homeId) ?? 0) + 1);
+    const homes = this.world.buildings.filter(b => b.kind === 'home' && b.capacity > 0);
+    const salary = (districtId: string) => privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === districtId)!.prosperity / 100);
+    const spare = (shop: Shop) => this.shopFunds(shop) - this.shopProtectedFunds(shop);
+    // Shops are closed at the night close: a hiring shop is one that may operate and pay new staff, and sold recently.
+    const offers = this.state.shops.filter(shop => shopLifecycleAllowsOperation(this.state, shop.id) && shopLifecycleAllowsNewPayroll(this.state, shop.id) && !this.shopInsolvent(shop) && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && tradeSignals(this, shop.id).sold > 0 && spare(shop) >= salary(this.buildings.get(shop.buildingId)!.districtId))
+      .sort((a, b) => spare(b) - spare(a) || a.id.localeCompare(b.id));
+    let admitted = 0, alive = living.length;
+    for (const shop of offers) {
+      if (admitted >= MIGRANTS_PER_DAY || alive >= MIGRATION_CAP || this.state.citizens.length + f.pregnancies.length >= 1024) break;
+      const fill = (home: Building) => (occupants.get(home.id) ?? 0) / home.capacity;
+      const home = homes.filter(h => (occupants.get(h.id) ?? 0) < h.capacity && this.buildingTravelDistance(h.id, shop.buildingId) <= 500)
+        .sort((a, b) => fill(a) - fill(b) || this.buildingTravelDistance(a.id, shop.buildingId) - this.buildingTravelDistance(b.id, shop.buildingId) || a.id.localeCompare(b.id))[0];
+      const work = this.buildings.get(shop.buildingId)!, wage = home && salary(home.districtId);
+      if (!home || spare(shop) < wage!) continue;
+      const n = f.nextResidentId++, id = `resident-${n}`, arrivalAge = 20 + n * 7 % 21;
+      const name = `${'沈云林白苏陆江顾温叶程许'[n % 12]}${'溪岚青舟遥宁竹澄川月星禾'[n * 5 % 12]}${'安和远新来歌晴望山岳帆乐'[n * 7 % 12]}`;
+      const role = ({ market: '商人', workshop: '工人', farm: '农民' } as Record<string, string>)[work.kind] ?? '工人';
+      const citizen = { id, name, districtId: home.districtId, homeId: home.id, workId: work.id, role, position: copy(home.door), state: 'atHome', destinationId: null, money: MIGRANT_SAVINGS, food: 0,
+        needs: { hunger: 80, fatigue: 80, social: 60, fun: 60 }, tier: this.state.districts.find(d => d.id === home.districtId)?.tier ?? 'statistical', route: [], routeIndex: 0, partnerId: null,
+        skills: { craft: 30, learning: 20, social: 30 }, education: 1, socialIdentities: ['newcomer'], historyTags: ['山外迁入'] } as Citizen;
+      this.state.citizens.push(citizen);
+      profiles[id] = { age: arrivalAge, health: 85, mood: 70, stress: 20, alive: true, skill: 30, family: [], historyTags: ['山外迁入'] };
+      (f.migrants ??= {})[id] = { arrivedAt: at, arrivalAge, homeId: home.id, workId: work.id, savings: MIGRANT_SAVINGS };
+      e.publicLedger.push({ tick: this.state.tick, actorId: id, amount: MIGRANT_SAVINGS, purpose: '山外迁入自带积蓄', districtId: home.districtId, account: 'household' });
+      if (e.publicLedger.length > 512) e.publicLedger.splice(0, e.publicLedger.length - 512);
+      const plan = this.preparePrivateAcceptance(shop, day);
+      if (!plan.assignments.some(item => item.citizenId === id)) {
+        const firstUnpromised = plan.assignments.findIndex(item => item.minutesCap === 0);
+        plan.assignments.splice(firstUnpromised < 0 ? plan.assignments.length : firstUnpromised, 0, { citizenId: id, ratePerMinute: wage! / 480, minutesCap: 0, workedMinutes: 0 });
+      }
+      shop.employees++; this.state.districts.find(d => d.id === home.districtId)!.residents++;
+      occupants.set(home.id, (occupants.get(home.id) ?? 0) + 1); admitted++; alive++;
+      this.notice('family', `${name}从山外迁来云山，住进${home.name}，在${work.name}找到了工作。`, home.districtId);
+      this.bus.emit({ type: 'resident-arrived', citizenId: id, districtId: home.districtId, amount: MIGRANT_SAVINGS });
+    }
+    if (admitted) this.refreshWorkforce();
+  }
   private payPublicRelief(): void {
     const profiles = this.state.extension?.actorProfiles, students = this.state.citizens.filter(c => c.role === '学生' && profiles?.[c.id]?.alive !== false);
     for (const payment of studentBursaries(this.runtime.publicFinancePolicyId, students.map(c => ({ id: c.id, money: c.money })), students.length ? this.publicBudgetSnapshot().available : 0)) {
@@ -2304,6 +2349,7 @@ export class Simulation implements SimulationAPI {
       const { net, base } = closeFiscalDay(fiscal, this.state.taxRate, this.state.treasury);
       this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net, base };
       this.payPublicRelief();
+      this.admitMigrants();
       const rate = councilTaxRate(this.state.taxRate, net, base, this.state.treasury);
       if (rate !== this.state.taxRate && !this.hasIdentity('mayor') && !this.state.policyPending) {
         this.notice('policy', `议会按上日公共收支${net < 0 ? '赤字' : '盈余'}${Math.abs(net).toFixed(0)}文，将营业税率由${(this.state.taxRate * 100).toFixed(1)}%调整为${(rate * 100).toFixed(1)}%。`); this.state.taxRate = rate;
@@ -2740,7 +2786,9 @@ export class Simulation implements SimulationAPI {
       const registered = s.family?.children;
       if (registered !== undefined) ensure(registered && typeof registered === 'object' && !Array.isArray(registered), 'birth registration');
       const expectedCitizenIds = new Set(this.baselineCitizenIds);
-      for (const id of Object.keys(registered ?? {})) { ensure(/^resident-[1-9][0-9]*$/.test(id), 'registered resident identity'); expectedCitizenIds.add(id); }
+      const migrants = s.family?.migrants;
+      if (migrants !== undefined) ensure(migrants && typeof migrants === 'object' && !Array.isArray(migrants) && admitsMigrants(r.publicFinancePolicyId), 'migrant registration');
+      for (const id of [...Object.keys(registered ?? {}), ...Object.keys(migrants ?? {})]) { ensure(/^resident-[1-9][0-9]*$/.test(id), 'registered resident identity'); expectedCitizenIds.add(id); }
       const citizens = array(s.citizens, 1024, 'citizens'); ensure(citizens.length === expectedCitizenIds.size, 'citizen count'); unique(citizens, 'duplicate citizens');
       for (const c of citizens) { ensure(expectedCitizenIds.has(c.id) && districtIds.has(c.districtId), 'citizen identity'); ensure(this.buildings.has(c.homeId) && this.buildings.has(c.workId), 'citizen building'); vec(c.position, 'citizen position'); string(c.name, 'citizen name', 80); string(c.role, 'citizen role', 60); string(c.state, 'citizen state', 40); if (c.skills !== undefined) { ensure(c.skills && typeof c.skills === 'object' && Object.keys(c.skills).length <= 32, 'citizen skills'); for (const value of Object.values(c.skills)) number(value, 0, 100, 'citizen skill'); } if (c.education !== undefined) number(c.education, 0, 10000, 'citizen education'); for (const tag of array(c.socialIdentities ?? [], 32, 'social identities')) string(tag, 'social identity', 100); for (const tag of array(c.historyTags ?? [], 32, 'history tags')) string(tag, 'history tag', 100); ensure(c.destinationId === null || this.buildings.has(c.destinationId), 'destination'); money(c.money, 'citizen money'); needs(c.needs, 'citizen needs'); ensure(['active', 'regional', 'statistical'].includes(c.tier), 'citizen tier'); if (c.route !== undefined) for (const point of array(c.route, 1024, 'route')) vec(point, 'route position'); if (c.routeIndex !== undefined) number(c.routeIndex, 0, c.route?.length ?? 0, 'routeIndex', true); ensure(c.partnerId == null || c.partnerId === 'player' || expectedCitizenIds.has(c.partnerId), 'citizen partner'); }
       const expectedVehicleIds = new Set(this.state.vehicles.map(v => v.id)); const vehicles = array(s.vehicles, 2048, 'vehicles'); ensure(vehicles.length === expectedVehicleIds.size, 'vehicle count'); unique(vehicles, 'duplicate vehicles');

@@ -86,7 +86,10 @@ export interface FamilyState {
   nextEstateSaleId: number;
   formalLearningVersion?: 1 | 2;
   formalLearning?: Record<string, FormalLearningRecord>;
+  /** Adults who arrived from outside the city (declared migration policy). */
+  migrants?: Record<string, FamilyMigrant>;
 }
+export interface FamilyMigrant { arrivedAt: number; arrivalAge: number; homeId: string; workId: string; savings: number }
 type FamilySimState = SimState & { family?: FamilyState };
 type ProvisionedCitizen = Citizen & { food?: number };
 const clamp = (value: number, min = 0, max = 100) => Math.max(min, Math.min(max, value));
@@ -628,7 +631,17 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
     const seen = new Set([id]), visit = (ancestor: string) => { ensure(!seen.has(ancestor), '谱系循环'); if (!children[ancestor]) return; seen.add(ancestor); for (const parent of children[ancestor].parentIds) visit(parent); seen.delete(ancestor); };
     for (const parent of parents) visit(parent);
   }
-  ensure(candidate.citizens.filter(person => person.id.startsWith('resident-')).every(person => children[person.id]), '新增人口必须出生登记');
+  const migrants = f.migrants === undefined ? {} : dict(f.migrants, 1024, '迁入登记');
+  if (f.migrants !== undefined) ensure(f.version === 2, '旧家庭版本不能夹带迁入登记');
+  for (const [id, migrant] of Object.entries(migrants)) {
+    ensure(/^resident-[1-9][0-9]*$/.test(id) && Number(id.slice(9)) < f.nextResidentId && ids.has(id) && !children[id] && object(migrant), '迁入居民登记');
+    num(migrant.arrivedAt, 0, f.lastUpdate, '迁入时间'); num(migrant.arrivalAge, 18, 60, '迁入年龄'); num(migrant.savings, 0, 1e6, '迁入积蓄');
+    ensure(sites.get(migrant.homeId)?.kind === 'home' && sites.has(migrant.workId), '迁入住所与岗位');
+    const life = candidate.extension!.actorProfiles[id], diedAt = f.estates?.[id]?.settledAt;
+    const lifeClock = life?.alive === false && finite(diedAt) ? diedAt : f.lastUpdate;
+    ensure(!!life && Math.abs(life.age - migrant.arrivalAge - (lifeClock - migrant.arrivedAt) / GAME_YEAR) <= .00002, '迁入居民年龄必须来自迁入年龄与实际时间');
+  }
+  ensure(candidate.citizens.filter(person => person.id.startsWith('resident-')).every(person => children[person.id] || migrants[person.id]), '新增人口必须出生或迁入登记');
   const pregnancyIds = new Set<string>(), pregnantParents = new Set<string>();
   for (const pregnancy of array(f.pregnancies, 128, '孕育')) {
     ensure(object(pregnancy) && /^pregnancy-[1-9][0-9]*$/.test(pregnancy.id) && Number(pregnancy.id.slice(10)) < f.nextPregnancyId && !pregnancyIds.has(pregnancy.id), '孕育标识'); pregnancyIds.add(pregnancy.id);
@@ -651,7 +664,7 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
     if (estate.bankSettlement !== undefined) { ensure(object(estate.bankSettlement) && typeof estate.bankSettlement.closed === 'boolean', '银行清算回执'); for (const key of ['debtPaid', 'depositClaimsTransferred', 'unpaidLoss']) num(estate.bankSettlement[key], 0, 1e12, '真实债务与存款权益清算'); ensure(['settled', 'awaitingExecutor'].includes(estate.status) && (estate.bankSettlement.closed || estate.status === 'awaitingExecutor'), '银行未结清前保留执行人待办'); }
     if (estate.businesses !== undefined) for (const [shopId, heirId] of Object.entries(dict(estate.businesses, candidate.shops.length, '经营权继承回执'))) ensure(candidate.shops.some(shop => shop.id === shopId) && heirs.includes(heirId), '实际经营权与法定继承人');
   }
-  if (f.version === 1) { ensure([f.bonds, f.households, f.movePlans, f.ceremonies, f.careGuardians, f.estateSales, f.nextHouseholdId, f.nextCeremonyId, f.nextBondAt, f.nextEstateSaleId, f.formalLearningVersion, f.formalLearning].every(value => value === undefined), '旧家庭版本不能夹带未校验字段'); return; }
+  if (f.version === 1) { ensure([f.bonds, f.households, f.movePlans, f.ceremonies, f.careGuardians, f.estateSales, f.nextHouseholdId, f.nextCeremonyId, f.nextBondAt, f.nextEstateSaleId, f.formalLearningVersion, f.formalLearning, f.migrants].every(value => value === undefined), '旧家庭版本不能夹带未校验字段'); return; }
   ensure(f.formalLearningVersion === undefined ? f.formalLearning === undefined : [1, 2].includes(f.formalLearningVersion) && object(f.formalLearning), '正式授课版本与收据正文必须同时存在');
   if (f.formalLearningVersion === 2) ensure(!!candidate.familyEducation && Object.values(f.formalLearning!).some(record => record.tuitionPages?.flat().length), '正式家庭版本二须至少一份真实学费资格及原托管模块');
   if (f.formalLearning !== undefined) ensure(Object.keys(f.formalLearning).length > 0, '正式授课正文保留至少一份真实资格来源');
