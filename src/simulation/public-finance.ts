@@ -29,17 +29,32 @@ export const SHOP_PROFIT_TAX_POLICY_V3 = 'shop-profit-tax-v3' as const;
  * shop's living adult staff (none: the owner keeps it). Same tax, reserve,
  * wages and prices. */
 export const SHOP_PROFIT_TAX_POLICY_V4 = 'shop-profit-tax-v4' as const;
-export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4;
-export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4];
-/** v2–v4 pay dividends while wages are owed (they stay reserved); v1 and legacy wait for none owed. */
-export const dividendWaitsForPayroll = (policy: PublicFinancePolicy | undefined) => policy !== SHOP_PROFIT_TAX_POLICY_V2 && policy !== SHOP_PROFIT_TAX_POLICY_V3 && policy !== SHOP_PROFIT_TAX_POLICY_V4;
+/** v5 (2026-10-15). v4 plus a public study grant: after v4, 58 of 64
+ * students were still poor; they have no income but their guardians'
+ * support. A student studying at a school is paid STUDY_GRANT_PER_MINUTE of
+ * the minutes actually spent there from the public budget's available cash
+ * (never its payroll or operating reserves); school hours (7–19) bound it to
+ * about 29 coins a day. The council prices it into the tax rate. */
+export const SHOP_PROFIT_TAX_POLICY_V5 = 'shop-profit-tax-v5' as const;
+export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5;
+export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5];
+const LATER_THAN_V1 = new Set<PublicFinancePolicy | undefined>([SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5]);
+/** v2–v5 pay dividends while wages are owed (they stay reserved); v1 and legacy wait for none owed. */
+export const dividendWaitsForPayroll = (policy: PublicFinancePolicy | undefined) => !LATER_THAN_V1.has(policy);
 export const PRIVATE_WAGE_BASE = 32, PRIVATE_WAGE_BASE_V3 = 40;
 /** Daily private shop wage base under a declared policy. */
-export const privateWageBase = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V3 || policy === SHOP_PROFIT_TAX_POLICY_V4 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
+export const privateWageBase = (policy: PublicFinancePolicy | undefined) => LATER_THAN_V1.has(policy) && policy !== SHOP_PROFIT_TAX_POLICY_V2 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
+/** Staff profit sharing (v4 and later). */
+export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5;
+export const STUDY_GRANT_PER_MINUTE = .04;
+/** The study grant for minutes studied at a school (v5 only), within the available public cash. */
+export function studyGrant(policy: PublicFinancePolicy | undefined, minutes: number, available: number): number {
+  return policy === SHOP_PROFIT_TAX_POLICY_V5 && minutes > 0 ? Math.max(0, Math.min(minutes * STUDY_GRANT_PER_MINUTE, available)) : 0;
+}
 export const STAFF_PROFIT_SHARE = .3;
 /** Splits an owner dividend between the owner and the staff (v4 only). */
 export function staffProfitShare(policy: PublicFinancePolicy | undefined, dividend: number, staff: number): { owner: number; each: number } {
-  if (policy !== SHOP_PROFIT_TAX_POLICY_V4 || staff <= 0 || !(dividend > 0)) return { owner: dividend, each: 0 };
+  if (!sharesProfitWithStaff(policy) || staff <= 0 || !(dividend > 0)) return { owner: dividend, each: 0 };
   const each = dividend * STAFF_PROFIT_SHARE / staff; return { owner: dividend - each * staff, each };
 }
 /** Was .5; the user judged half of all distributed profit unrealistic
@@ -49,7 +64,7 @@ export const PROFIT_TAX_SHARE = .2;
 
 /** Splits one distributable amount into the public profit tax and the owner's dividend. */
 export function profitTaxSplit(policy: PublicFinancePolicy | undefined, distributable: number): { tax: number; dividend: number } {
-  const tax = policy === SHOP_PROFIT_TAX_POLICY || policy === SHOP_PROFIT_TAX_POLICY_V2 || policy === SHOP_PROFIT_TAX_POLICY_V3 || policy === SHOP_PROFIT_TAX_POLICY_V4 ? distributable * PROFIT_TAX_SHARE : 0;
+  const tax = policy === SHOP_PROFIT_TAX_POLICY || policy === SHOP_PROFIT_TAX_POLICY_V2 || LATER_THAN_V1.has(policy) ? distributable * PROFIT_TAX_SHARE : 0;
   return { tax, dividend: distributable - tax };
 }
 

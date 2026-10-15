@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
-import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
-import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, STAFF_PROFIT_SHARE, staffProfitShare, validatePublicFinancePolicy } from '../src/simulation/public-finance';
+import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
+import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, STAFF_PROFIT_SHARE, STUDY_GRANT_PER_MINUTE, staffProfitShare, studyGrant, validatePublicFinancePolicy } from '../src/simulation/public-finance';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -34,8 +34,8 @@ test('the profit tax takes its share of the distributable amount and the owner r
 
 test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V4);
-  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V4); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V4);
+  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V5);
+  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V5); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V5);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
@@ -140,4 +140,23 @@ test('v4 keeps v3 and gives the shop staff an equal share of the owner dividend'
   const paid = flows.filter(f => f.shopId === shop.id && f.type === 'business-dividend') as { citizenId?: string; amount?: number }[];
   const toStaff = paid.filter(f => staff.some(c => c.id === f.citizenId)).reduce((n, f) => n + (f.amount ?? 0), 0), all = paid.reduce((n, f) => n + (f.amount ?? 0), 0);
   assert.ok(all > 0 && Math.abs(toStaff - all * STAFF_PROFIT_SHARE) < 1e-6, `staff received ${toStaff} of ${all}`);
+});
+
+test('v5 keeps v4 and pays students a grant for minutes studied at school from available public cash', () => {
+  assert.equal(privateWageBase(SHOP_PROFIT_TAX_POLICY_V5), 40);
+  assert.equal(dividendWaitsForPayroll(SHOP_PROFIT_TAX_POLICY_V5), false);
+  assert.equal(staffProfitShare(SHOP_PROFIT_TAX_POLICY_V5, 100, 2).each, 100 * STAFF_PROFIT_SHARE / 2);
+  assert.equal(studyGrant(SHOP_PROFIT_TAX_POLICY_V5, 60, 1e6), 60 * STUDY_GRANT_PER_MINUTE);
+  assert.equal(studyGrant(SHOP_PROFIT_TAX_POLICY_V5, 60, 1), 1, 'never more than the available cash');
+  for (const policy of [SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY, undefined]) assert.equal(studyGrant(policy, 60, 1e6), 0);
+  // The civic fixture has no school; the product world's students study at real schools.
+  const world = createProductWorld(), sim = createCurrentProductCity(world), grants: { citizenId?: string; amount?: number }[] = [];
+  (sim as unknown as { bus: { on(type: string, f: (e: { citizenId?: string; amount?: number }) => void): void } }).bus.on('study-grant', e => grants.push(e));
+  sim.command({ type: 'speed', value: 8 });
+  const treasury = sim.state.treasury;
+  sim.setFocus(world.spawn, 'walk');
+  for (let tick = 0; tick < 1200 && !grants.length; tick++) sim.step(.25);
+  assert.ok(grants.length > 0, 'a student studying at school received a grant');
+  assert.ok(grants.every(g => sim.state.citizens.find(c => c.id === g.citizenId)?.role === '学生'), 'only students');
+  assert.ok(Number.isFinite(sim.state.treasury) && treasury > 0);
 });
