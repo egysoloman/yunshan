@@ -63,24 +63,32 @@ export const SHOP_PROFIT_TAX_POLICY_V6 = 'shop-profit-tax-v6' as const;
  * is registered in family.migrants, and takes that shop job. The living
  * population never passes MIGRATION_CAP. */
 export const SHOP_PROFIT_TAX_POLICY_V7 = 'shop-profit-tax-v7' as const;
-export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5 | typeof SHOP_PROFIT_TAX_POLICY_V6 | typeof SHOP_PROFIT_TAX_POLICY_V7;
-export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7];
-const LATER_THAN_V1 = new Set<PublicFinancePolicy | undefined>([SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7]);
+/** v8 (2026-10-15). v7 with an arrival quarter: only 18 residents lived
+ * within 300 m of the city entrance (the player's arrival point), so its
+ * lantern streets stayed empty. Migrants first take offers from shops within
+ * ARRIVAL_RADIUS of the entrance and, for any offer, a home with room within
+ * ARRIVAL_RADIUS of it when the job is within reach; otherwise as v7. */
+export const SHOP_PROFIT_TAX_POLICY_V8 = 'shop-profit-tax-v8' as const;
+export const ARRIVAL_RADIUS = 400;
+export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY_V8 | typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5 | typeof SHOP_PROFIT_TAX_POLICY_V6 | typeof SHOP_PROFIT_TAX_POLICY_V7;
+export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7, SHOP_PROFIT_TAX_POLICY_V8];
+const LATER_THAN_V1 = new Set<PublicFinancePolicy | undefined>([SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7, SHOP_PROFIT_TAX_POLICY_V8]);
 export const MIGRANTS_PER_DAY = 3;
 export const MIGRANT_SAVINGS = 150;
 export const MIGRATION_CAP = 896;
-export const admitsMigrants = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V7;
+export const admitsMigrants = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V7 || policy === SHOP_PROFIT_TAX_POLICY_V8;
+export const settlesArrivalQuarter = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V8;
 /** v2–v5 pay dividends while wages are owed (they stay reserved); v1 and legacy wait for none owed. */
 export const dividendWaitsForPayroll = (policy: PublicFinancePolicy | undefined) => !LATER_THAN_V1.has(policy);
 export const PRIVATE_WAGE_BASE = 32, PRIVATE_WAGE_BASE_V3 = 40;
 /** Daily private shop wage base under a declared policy. */
 export const privateWageBase = (policy: PublicFinancePolicy | undefined) => LATER_THAN_V1.has(policy) && policy !== SHOP_PROFIT_TAX_POLICY_V2 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
 /** Staff profit sharing (v4 and later). */
-export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7;
+export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7 || policy === SHOP_PROFIT_TAX_POLICY_V8;
 /** Study grant and student bursary (v5 and later). */
-export const fundsStudents = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7;
+export const fundsStudents = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7 || policy === SHOP_PROFIT_TAX_POLICY_V8;
 /** Shop staff may leave a shop that cannot fund a day's wage (v6). */
-export const shopStaffMayMove = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7;
+export const shopStaffMayMove = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7 || policy === SHOP_PROFIT_TAX_POLICY_V8;
 export const STUDY_GRANT_PER_MINUTE = .25, STUDY_GRANT_CEILING = 120, STUDENT_BURSARY = 20;
 /** Daily bursaries (v5 only): STUDENT_BURSARY to each student below the ceiling, poorest first, within the available cash. */
 export function studentBursaries(policy: PublicFinancePolicy | undefined, students: ReliefClaim[], available: number): { id: string; amount: number }[] {

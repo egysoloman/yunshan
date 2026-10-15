@@ -11,7 +11,7 @@ import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmI
 import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
 import { BANK_ACTION_NAMES, RELATION_NAMES, SOCIAL_ACTION_NAMES } from './simulation/player-names';
-import { admitsMigrants, closeFiscalDay, councilTaxRate, MIGRANT_SAVINGS, MIGRANTS_PER_DAY, MIGRATION_CAP, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
+import { admitsMigrants, ARRIVAL_RADIUS, settlesArrivalQuarter, closeFiscalDay, councilTaxRate, MIGRANT_SAVINGS, MIGRANTS_PER_DAY, MIGRATION_CAP, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
@@ -2304,12 +2304,16 @@ export class Simulation implements SimulationAPI {
     // Shops are closed at the night close: a hiring shop is one that may operate and pay new staff, and sold recently.
     const offers = this.state.shops.filter(shop => shopLifecycleAllowsOperation(this.state, shop.id) && shopLifecycleAllowsNewPayroll(this.state, shop.id) && !this.shopInsolvent(shop) && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && tradeSignals(this, shop.id).sold > 0 && spare(shop) >= salary(this.buildings.get(shop.buildingId)!.districtId))
       .sort((a, b) => spare(b) - spare(a) || a.id.localeCompare(b.id));
+    // v8 arrival quarter: shops and homes near the city entrance come first.
+    const quarter = settlesArrivalQuarter(this.runtime.publicFinancePolicyId), spawn = this.world.spawn;
+    const nearEntrance = (b: Building) => quarter && Math.hypot(b.door.x - spawn.x, b.door.z - spawn.z) <= ARRIVAL_RADIUS ? 1 : 0;
+    if (quarter) offers.sort((a, b) => nearEntrance(this.buildings.get(b.buildingId)!) - nearEntrance(this.buildings.get(a.buildingId)!));
     let admitted = 0, alive = living.length;
     for (const shop of offers) {
       if (admitted >= MIGRANTS_PER_DAY || alive >= MIGRATION_CAP || this.state.citizens.length + f.pregnancies.length >= 1024) break;
       const fill = (home: Building) => (occupants.get(home.id) ?? 0) / home.capacity;
       const home = homes.filter(h => (occupants.get(h.id) ?? 0) < h.capacity && this.buildingTravelDistance(h.id, shop.buildingId) <= 500)
-        .sort((a, b) => fill(a) - fill(b) || this.buildingTravelDistance(a.id, shop.buildingId) - this.buildingTravelDistance(b.id, shop.buildingId) || a.id.localeCompare(b.id))[0];
+        .sort((a, b) => nearEntrance(b) - nearEntrance(a) || fill(a) - fill(b) || this.buildingTravelDistance(a.id, shop.buildingId) - this.buildingTravelDistance(b.id, shop.buildingId) || a.id.localeCompare(b.id))[0];
       const work = this.buildings.get(shop.buildingId)!, wage = home && salary(home.districtId);
       if (!home || spare(shop) < wage!) continue;
       const n = f.nextResidentId++, id = `resident-${n}`, arrivalAge = 20 + n * 7 % 21;
