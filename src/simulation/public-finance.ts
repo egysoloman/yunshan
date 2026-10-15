@@ -29,12 +29,14 @@ export const SHOP_PROFIT_TAX_POLICY_V3 = 'shop-profit-tax-v3' as const;
  * shop's living adult staff (none: the owner keeps it). Same tax, reserve,
  * wages and prices. */
 export const SHOP_PROFIT_TAX_POLICY_V4 = 'shop-profit-tax-v4' as const;
-/** v5 (2026-10-15). v4 plus a public study grant: after v4, 58 of 64
- * students were still poor; they have no income but their guardians'
- * support. A student studying at a school is paid STUDY_GRANT_PER_MINUTE of
- * the minutes actually spent there from the public budget's available cash
- * (never its payroll or operating reserves); school hours (7–19) bound it to
- * about 29 coins a day. The council prices it into the tax rate. */
+/** v5 (2026-10-15). v4 plus a need-based public study grant: after v4, 58 of
+ * 64 students were still poor; they have no income but their guardians'
+ * support. A student studying at a school below STUDY_GRANT_CEILING coins is
+ * paid STUDY_GRANT_PER_MINUTE of the minutes actually spent there, never past
+ * the ceiling, from the public budget's available cash (never its payroll or
+ * operating reserves). A first rate of .04/min paid only 3.5 coins a student
+ * a day: students study about 90 minutes a day at school. The council prices
+ * the grant into the tax rate. */
 export const SHOP_PROFIT_TAX_POLICY_V5 = 'shop-profit-tax-v5' as const;
 export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5;
 export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5];
@@ -46,10 +48,10 @@ export const PRIVATE_WAGE_BASE = 32, PRIVATE_WAGE_BASE_V3 = 40;
 export const privateWageBase = (policy: PublicFinancePolicy | undefined) => LATER_THAN_V1.has(policy) && policy !== SHOP_PROFIT_TAX_POLICY_V2 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
 /** Staff profit sharing (v4 and later). */
 export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5;
-export const STUDY_GRANT_PER_MINUTE = .04;
-/** The study grant for minutes studied at a school (v5 only), within the available public cash. */
-export function studyGrant(policy: PublicFinancePolicy | undefined, minutes: number, available: number): number {
-  return policy === SHOP_PROFIT_TAX_POLICY_V5 && minutes > 0 ? Math.max(0, Math.min(minutes * STUDY_GRANT_PER_MINUTE, available)) : 0;
+export const STUDY_GRANT_PER_MINUTE = .25, STUDY_GRANT_CEILING = 120;
+/** The study grant for minutes studied at a school (v5 only): up to the ceiling, within the available public cash. */
+export function studyGrant(policy: PublicFinancePolicy | undefined, minutes: number, available: number, money = 0): number {
+  return policy === SHOP_PROFIT_TAX_POLICY_V5 && minutes > 0 ? Math.max(0, Math.min(minutes * STUDY_GRANT_PER_MINUTE, STUDY_GRANT_CEILING - money, available)) : 0;
 }
 export const STAFF_PROFIT_SHARE = .3;
 /** Splits an owner dividend between the owner and the staff (v4 only). */

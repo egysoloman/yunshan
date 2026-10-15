@@ -2247,9 +2247,9 @@ export class Simulation implements SimulationAPI {
   /** v5: a student's grant for minutes studied at school, from available public cash (one budget read per tick). */
   private studyBudget?: { at: number; available: number };
   private payStudyGrant(citizen: Citizen, minutes: number): void {
-    const policy = this.runtime.publicFinancePolicyId; if (!studyGrant(policy, minutes, Infinity)) return;
+    const policy = this.runtime.publicFinancePolicyId; if (!studyGrant(policy, minutes, Infinity, citizen.money)) return;
     if (this.studyBudget?.at !== this.now) this.studyBudget = { at: this.now, available: this.publicBudgetSnapshot().available };
-    const amount = studyGrant(policy, minutes, this.studyBudget.available); if (amount <= 1e-9) return;
+    const amount = studyGrant(policy, minutes, this.studyBudget.available, citizen.money); if (amount <= 1e-9) return;
     this.studyBudget.available -= amount; this.state.treasury -= amount; citizen.money += amount;
     this.bus.emit({ type: 'study-grant', citizenId: citizen.id, districtId: citizen.districtId, amount });
   }
