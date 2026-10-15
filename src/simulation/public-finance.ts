@@ -53,20 +53,31 @@ export const SHOP_PROFIT_TAX_POLICY_V5 = 'shop-profit-tax-v5' as const;
  * staff were each promised a few funded minutes a day, which also blocked
  * them; only a promise of half a day or more now does. */
 export const SHOP_PROFIT_TAX_POLICY_V6 = 'shop-profit-tax-v6' as const;
-export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5 | typeof SHOP_PROFIT_TAX_POLICY_V6;
-export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6];
-const LATER_THAN_V1 = new Set<PublicFinancePolicy | undefined>([SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6]);
+/** v7 (2026-10-15). v6 plus an exit for owners of loss-making shops: 26 of 58
+ * poor merchants owned a market whose loss (100–265) and remaining stock kept
+ * it below the economic suspension rule (profit <= -600, no stock), so they
+ * kept a shop that could not pay a day's wage. Under v7 an owner may suspend a
+ * market that has lost OWNER_CLOSE_LOSS or more and cannot fund a day's wage;
+ * the existing lifecycle then lists it for lease or sale. Once a shop is
+ * suspended, its owner and staff may take a funded shop offer as v6 staff do. */
+export const SHOP_PROFIT_TAX_POLICY_V7 = 'shop-profit-tax-v7' as const;
+export const OWNER_CLOSE_LOSS = 150;
+export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5 | typeof SHOP_PROFIT_TAX_POLICY_V6 | typeof SHOP_PROFIT_TAX_POLICY_V7;
+export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7];
+const LATER_THAN_V1 = new Set<PublicFinancePolicy | undefined>([SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7]);
 /** v2–v5 pay dividends while wages are owed (they stay reserved); v1 and legacy wait for none owed. */
 export const dividendWaitsForPayroll = (policy: PublicFinancePolicy | undefined) => !LATER_THAN_V1.has(policy);
 export const PRIVATE_WAGE_BASE = 32, PRIVATE_WAGE_BASE_V3 = 40;
 /** Daily private shop wage base under a declared policy. */
 export const privateWageBase = (policy: PublicFinancePolicy | undefined) => LATER_THAN_V1.has(policy) && policy !== SHOP_PROFIT_TAX_POLICY_V2 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
 /** Staff profit sharing (v4 and later). */
-export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6;
+export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7;
 /** Study grant and student bursary (v5 and later). */
-export const fundsStudents = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6;
+export const fundsStudents = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7;
 /** Shop staff may leave a shop that cannot fund a day's wage (v6). */
-export const shopStaffMayMove = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V6;
+export const shopStaffMayMove = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V6 || policy === SHOP_PROFIT_TAX_POLICY_V7;
+/** Owners may close a loss-making market and leave a suspended shop (v7). */
+export const ownersMayClose = (policy: PublicFinancePolicy | undefined | 'legacy') => policy === SHOP_PROFIT_TAX_POLICY_V7;
 export const STUDY_GRANT_PER_MINUTE = .25, STUDY_GRANT_CEILING = 120, STUDENT_BURSARY = 20;
 /** Daily bursaries (v5 only): STUDENT_BURSARY to each student below the ceiling, poorest first, within the available cash. */
 export function studentBursaries(policy: PublicFinancePolicy | undefined, students: ReliefClaim[], available: number): { id: string; amount: number }[] {

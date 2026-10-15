@@ -1,3 +1,4 @@
+import { OWNER_CLOSE_LOSS, ownersMayClose, privateWageBase, SHOP_PROFIT_TAX_POLICY_V7 } from './public-finance';
 import { isCanonicalNpcWage, type Simulation } from '../simulation';
 import type { Building, Citizen, Company, Command, CommandResult, Player, Role, Shop, SimState, WorldDefinition } from '../types';
 import { homeRestPointBlockedByVoxels } from './home-rest';
@@ -391,6 +392,10 @@ function canChooseEconomicSuspension(simulation: Simulation, shop: Shop, citizen
   if (operatorId(state, shop) !== citizenId) return false;
   if (title && !(simulation.effectiveRuleset === 'civic-local-v1' && title.state === 'operating'
     && title.assetOwnerId === citizenId && shopLifecycleCanDispose(state, shop.id))) return false;
+  // v7: a market that has lost OWNER_CLOSE_LOSS and cannot fund a day's wage may close.
+  const policy = simulation.publicFinancePolicyId;
+  if (ownersMayClose(policy)) return shop.profit <= -OWNER_CLOSE_LOSS
+    && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < privateWageBase(SHOP_PROFIT_TAX_POLICY_V7) * (.7 + (state.districts.find(d => d.id === shop.districtId)?.prosperity ?? 0) / 100);
   return shop.profit <= -600 && shop.inventory < EPS
     && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24;
 }

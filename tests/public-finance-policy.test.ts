@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
-import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, shopStaffMayMove, STAFF_PROFIT_SHARE, STUDENT_BURSARY, STUDY_GRANT_CEILING, STUDY_GRANT_PER_MINUTE, staffProfitShare, studentBursaries, studyGrant, validatePublicFinancePolicy } from '../src/simulation/public-finance';
+import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7, ownersMayClose, OWNER_CLOSE_LOSS, shopStaffMayMove, STAFF_PROFIT_SHARE, STUDENT_BURSARY, STUDY_GRANT_CEILING, STUDY_GRANT_PER_MINUTE, staffProfitShare, studentBursaries, studyGrant, validatePublicFinancePolicy } from '../src/simulation/public-finance';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -34,8 +34,8 @@ test('the profit tax takes its share of the distributable amount and the owner r
 
 test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V6);
-  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V6); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V6);
+  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V7);
+  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V7); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V7);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
@@ -195,5 +195,29 @@ test('v6 keeps v5 and lets a poor worker leave a shop that cannot fund a day\'s 
     else assert.equal(moved.filter(c => sim.state.shops.some(shop => shop.buildingId === c.workId)).length, 0, 'an archived city keeps shop staff where they are');
     const reader = policy ? createCurrentProductCity(world) : createArchivedProductCity(world), saved = sim.exportSave(), read = reader.importSave(saved);
     assert.ok(read.ok, read.message); assert.equal(reader.exportSave(), saved, 'the city after moves saves and reads back exactly');
+  }
+});
+
+test('v7 keeps v6 and lets the owner of a loss-making market close it; the city still saves and reads back', () => {
+  assert.equal(ownersMayClose(SHOP_PROFIT_TAX_POLICY_V7), true);
+  for (const policy of [SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V5, undefined]) assert.equal(ownersMayClose(policy), false);
+  assert.equal(shopStaffMayMove(SHOP_PROFIT_TAX_POLICY_V7), true);
+  assert.equal(studyGrant(SHOP_PROFIT_TAX_POLICY_V7, 60, 1e6), 60 * STUDY_GRANT_PER_MINUTE);
+  const world = createProductWorld();
+  for (const [current, closes] of [[true, true], [false, false]] as const) {
+    const sim = current ? createCurrentProductCity(world) : createArchivedProductCity(world);
+    sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
+    const companies = new Set(sim.state.extension!.companies.filter(c => c.shopBindingReleasedAt === undefined).map(c => c.buildingId));
+    const markets = new Set(world.buildings.filter(b => b.kind === 'market' && !b.facility).map(b => b.id));
+    // Controlled: a few NPC-owned markets have lost more than the v7 threshold (but far less than 600) and hold no spare cash.
+    const shops = sim.state.shops.filter(shop => shop.ownerId && shop.ownerId !== 'player' && markets.has(shop.buildingId) && !companies.has(shop.buildingId)).slice(0, 6);
+    for (const shop of shops) { shop.profit = -(OWNER_CLOSE_LOSS + 50); shop.cash = 0; }
+    for (let tick = 0; tick < 900; tick++) sim.step(.25);
+    const titles = (sim.state as unknown as { shopLifecycle?: { titles: Record<string, { state: string }> } }).shopLifecycle?.titles ?? {};
+    const closed = shops.filter(shop => titles[shop.id]?.state === 'suspended' || titles[shop.id]?.state === 'reopening');
+    if (closes) assert.ok(closed.length > 0, `owners closed ${closed.length} of ${shops.length} loss-making markets`);
+    else assert.equal(closed.length, 0, 'an archived city keeps the original suspension rule (loss of 600 and no stock)');
+    const reader = current ? createCurrentProductCity(world) : createArchivedProductCity(world), saved = sim.exportSave(), read = reader.importSave(saved);
+    assert.ok(read.ok, read.message); assert.equal(reader.exportSave(), saved);
   }
 });
