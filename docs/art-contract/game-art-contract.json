@@ -267,7 +267,25 @@
           "height": 0.2,
           "length": 4.675,
           "color": "#3f6f73"
-        }
+        },
+        "wheels": [
+          {
+            "x": -1.2,
+            "z": -1.8
+          },
+          {
+            "x": -1.2,
+            "z": 1.8
+          },
+          {
+            "x": 1.2,
+            "z": -1.8
+          },
+          {
+            "x": 1.2,
+            "z": 1.8
+          }
+        ]
       },
       "maglev": {
         "length": 16,
@@ -293,7 +311,8 @@
           "height": 0.2,
           "length": 13.6,
           "color": "#3f6f73"
-        }
+        },
+        "wheels": []
       },
       "lightRail": {
         "length": 16,
@@ -319,7 +338,8 @@
           "height": 0.2,
           "length": 13.6,
           "color": "#3f6f73"
-        }
+        },
+        "wheels": []
       },
       "cable": {
         "length": 3.5,
@@ -345,7 +365,8 @@
           "height": 1.5,
           "length": 0.25,
           "color": "#3f6f73"
-        }
+        },
+        "wheels": []
       },
       "ferry": {
         "length": 11,
@@ -371,7 +392,8 @@
           "height": 0.2,
           "length": 9.35,
           "color": "#3f6f73"
-        }
+        },
+        "wheels": []
       },
       "flight": {
         "length": 17,
@@ -397,7 +419,8 @@
           "height": 0.2,
           "length": 14.45,
           "color": "#3f6f73"
-        }
+        },
+        "wheels": []
       }
     },
     "rejected": [

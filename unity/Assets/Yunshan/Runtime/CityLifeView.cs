@@ -161,6 +161,13 @@ namespace Yunshan.Runtime
                 bodies.Add(Space.ToUnity(p.X, p.Y + 2.1 + lift, p.Z), rotation, new Vector3((float)(flight ? 3 : width * .85), flight ? 1.8f : .8f, (float)(length * .68)), Space.Hex("#517f82"));
                 if (cable) { double roof = 2.1 + lift + .4, rope = 8.6; bodies.Add(Space.ToUnity(p.X, p.Y + (roof + rope) / 2, p.Z), rotation, new Vector3(.25f, (float)(rope - roof), .25f), Space.Hex("#3f6f73")); }
                 else bodies.Add(Space.ToUnity(p.X, p.Y + .6 + lift, p.Z), rotation, new Vector3((float)(width + .25), .2f, (float)(length * .85)), Space.Hex("#3f6f73"));
+                // Web vehicle-shapes.ts: a road vehicle stands on four wheels (local x across, z along).
+                if (v.Kind == "road" || v.Kind == "bridge")
+                    foreach (var side in new[] { -1.0, 1.0 }) foreach (var end in new[] { -1.0, 1.0 })
+                    {
+                        double lx = side * (width / 2 - .05), lz = end * (length / 2 - .95), c = Math.Cos(direction), s = Math.Sin(direction);
+                        bodies.Add(Space.ToUnity(p.X + lx * c + lz * s, p.Y + .35, p.Z - lx * s + lz * c), rotation, new Vector3(.5f, .7f, .7f), Space.Hex("#2b2b2b"));
+                    }
             }
         }
 

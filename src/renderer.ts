@@ -31,7 +31,7 @@ import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
-import { vehicleShape } from './rendering/vehicle-shapes';
+import { VEHICLE_WHEEL, vehicleShape } from './rendering/vehicle-shapes';
 import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
@@ -200,6 +200,7 @@ export class CityRenderer implements CityRendererAPI {
   private signalRed: THREE.InstancedMesh;
   private signalGreen: THREE.InstancedMesh;
   private vehiclePools = new Map<string, MovingPool>();
+  private wheels?: THREE.InstancedMesh;
   private matrix = new THREE.Matrix4();
   private position = new THREE.Vector3();
   private scale = new THREE.Vector3();
@@ -491,6 +492,9 @@ export class CityRenderer implements CityRendererAPI {
       const capacity = Math.max(32, this.world.edges.filter(edge => edge.mode === kind).length * 3);
       this.vehiclePools.set(kind, this.makePool(capacity, this.materials.roof, this.materials.glass, this.materials.cyan));
     }
+    // Road vehicles' wheels: one shared draw, four per vehicle.
+    this.wheels = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: VEHICLE_WHEEL.color, roughness: .9 }), (this.vehiclePools.get('road')?.capacity ?? 0) * 4 + (this.vehiclePools.get('bridge')?.capacity ?? 0) * 4);
+    this.wheels.name = '载具 · 车轮'; this.wheels.count = 0; this.wheels.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.wheels.frustumCulled = false; this.scene.add(this.wheels);
     this.camera.position.set(world.spawn.x, world.spawn.y + 1.72, world.spawn.z);
     const look = arrivalLook(world, world.spawn); this.camera.lookAt(look.x, look.y, look.z);
     this.resize();
@@ -1119,18 +1123,23 @@ export class CityRenderer implements CityRendererAPI {
     this.studioProps.update(this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), { id: this.insideId, floor: this.insideFloor }, this.quality === 'low' ? 45 : 90);
     this.marketShopfront.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 4 : 8);
     this.stationWayfinding.update(state, this.camera.position, this.quality === 'low' ? 3 : 8);
-    const counts = new Map<string, number>();
+    const counts = new Map<string, number>(); let wheels = 0;
     for (const vehicle of state.vehicles) {
       const pool = this.vehiclePools.get(vehicle.kind); if (!pool) continue; const n = counts.get(vehicle.kind) ?? 0; if (n >= pool.capacity) continue;
       if (vehicle.id === state.player.vehicleId && Math.hypot(vehicle.position.x - this.camera.position.x, vehicle.position.y - this.camera.position.y, vehicle.position.z - this.camera.position.z) < 25) continue;
       if (Math.hypot(vehicle.position.x - this.camera.position.x, vehicle.position.z - this.camera.position.z) > this.distance + 600) continue;
       const edge = this.edges.get(vehicle.edgeId); let direction = 0;
       if (edge && edge.points.length > 1) { const t = Math.max(0, Math.min(.99999, vehicle.progress)), i = Math.min(edge.points.length - 2, Math.floor(t * (edge.points.length - 1))), a = edge.points[i], b = edge.points[i + 1]; direction = Math.atan2(b.x - a.x, b.z - a.z) + (vehicle.direction < 0 ? Math.PI : 0); }
-      const p = vehicle.position, { body, head, trim } = vehicleShape(vehicle.kind);
+      const p = vehicle.position, { body, head, trim, wheels: wheelSpots } = vehicleShape(vehicle.kind);
+      if (this.wheels) for (const spot of wheelSpots) if (wheels < this.wheels.instanceMatrix.count) {
+        const c = Math.cos(direction), s = Math.sin(direction);
+        this.put(this.wheels, wheels++, p.x + spot.x * c + spot.z * s, p.y + VEHICLE_WHEEL.y, p.z - spot.x * s + spot.z * c, VEHICLE_WHEEL.width, VEHICLE_WHEEL.size, VEHICLE_WHEEL.size, direction);
+      }
       this.put(pool.body, n, p.x, p.y + body.y, p.z, body.width, body.height, body.length, direction, body.color);
       this.put(pool.head, n, p.x, p.y + head.y, p.z, head.width, head.height, head.length, direction, head.color);
       this.put(pool.trim, n, p.x, p.y + trim.y, p.z, trim.width, trim.height, trim.length, direction); counts.set(vehicle.kind, n + 1);
     }
+    if (this.wheels) { this.wheels.count = wheels; this.wheels.instanceMatrix.needsUpdate = true; }
     for (const [kind, pool] of this.vehiclePools) for (const mesh of [pool.body, pool.head, pool.trim]) { mesh.count = counts.get(kind) ?? 0; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
   }
 
