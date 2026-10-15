@@ -67,9 +67,13 @@ export const SHOP_PROFIT_TAX_POLICY_V7 = 'shop-profit-tax-v7' as const;
  * within 300 m of the city entrance (the player's arrival point), so its
  * lantern streets stayed empty. Migrants first take offers from shops within
  * ARRIVAL_RADIUS of the entrance and, for any offer, a home with room within
- * ARRIVAL_RADIUS of it when the job is within reach; otherwise as v7. */
+ * ARRIVAL_RADIUS of it when the job is within reach; otherwise as v7. A first
+ * version (one migrant per shop a day, as v7) raised residents within 400 m of
+ * the entrance only 27 -> 37 in 14 days: few entrance shops hire on a given
+ * day. Such a shop may now take up to ARRIVAL_SLOTS a day, round robin, while
+ * its spare cash still funds each newcomer's day wage. */
 export const SHOP_PROFIT_TAX_POLICY_V8 = 'shop-profit-tax-v8' as const;
-export const ARRIVAL_RADIUS = 400;
+export const ARRIVAL_RADIUS = 400, ARRIVAL_SLOTS = 3;
 export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY_V8 | typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5 | typeof SHOP_PROFIT_TAX_POLICY_V6 | typeof SHOP_PROFIT_TAX_POLICY_V7;
 export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7, SHOP_PROFIT_TAX_POLICY_V8];
 const LATER_THAN_V1 = new Set<PublicFinancePolicy | undefined>([SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, SHOP_PROFIT_TAX_POLICY_V7, SHOP_PROFIT_TAX_POLICY_V8]);
