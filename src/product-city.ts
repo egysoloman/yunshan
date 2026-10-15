@@ -4,7 +4,7 @@ import { createWorld } from './world';
 import type { WorldDefinition } from './types';
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY } from './simulation/reference-collision';
 import { ROAD_FOOD_PICKUP_POLICY } from './simulation/freight-access';
-import { NEARBY_EVENING_ROUTE_POLICY } from './simulation/meal-route';
+import { STREET_BROWSE_ROUTE_POLICY } from './simulation/meal-route';
 import { STAFFED_FARM_YIELD_POLICY_V4 } from './simulation/farm-yield';
 import { SHOP_PROFIT_TAX_POLICY_V7 } from './simulation/public-finance';
 import { FOREIGN_TRADE_POLICY_V2 } from './simulation/foreign-trade';
@@ -32,7 +32,7 @@ export function createArchivedProductCity(world: WorldDefinition): Simulation {
 /** New cities select continuous ordinary reference legs; imports retain their
  * existing history, motion and collision contracts. */
 export function createCurrentProductCity(world: WorldDefinition): Simulation {
-  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: NEARBY_EVENING_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V3, publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V7, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, npcMotionPolicyId: NPC_MOTION_COARSE_POLICY });
+  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: STREET_BROWSE_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V3, publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V7, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, npcMotionPolicyId: NPC_MOTION_COARSE_POLICY });
 }
 
 /** Fresh city-life recipe for both graphical and headless hosts. The policy's

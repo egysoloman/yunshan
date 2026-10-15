@@ -6,7 +6,7 @@ import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, va
 import { createCivicHistory, freezeCivicHistory } from './simulation/civic-history';
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
-import { chooseNearestTiedMeal, eveningBonus, lunchBonus, MEAL_ROUTE_POLICIES, nearestMealPolicy, type MealRoutePolicy } from './simulation/meal-route';
+import { BROWSE_MAX, BROWSE_MIN, browsesOnStreet, routeShortOfDoor, chooseNearestTiedMeal, eveningBonus, lunchBonus, MEAL_ROUTE_POLICIES, nearestMealPolicy, type MealRoutePolicy } from './simulation/meal-route';
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
@@ -1327,6 +1327,15 @@ export class Simulation implements SimulationAPI {
       && this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route ?? [], citizen.routeIndex ?? 0, citizen.position)) rebuild = true;
     this.citizenRoadRevisions.set(citizen, this.ensureRoadRouting());
     if (!rebuild && citizen.destinationId === destination.id && destination.floorPlanProfile !== FLOOR_PLAN_PROFILE) return;
+    if (this.streetBrowse(citizen, destination) && !this.floorPlanPresence(destination, citizen.position)) {
+      // v4: the evening outing ends on the street before the market door, on its own walking route.
+      const outside = this.routeFromCitizen(citizen, destination);
+      const route = outside.length > 1 ? routeShortOfDoor(outside, BROWSE_MIN + hash(`${citizen.id}:${destination.id}`) % (BROWSE_MAX - BROWSE_MIN + 1)) : outside;
+      citizen.destinationId = destination.id; citizen.routeIndex = 1;
+      if (outside.length > 1 && (route.length < 2 || distance(citizen.position, route.at(-1)!) < .5)) { citizen.route = [copy(citizen.position)]; citizen.state = 'moving'; return; }
+      citizen.route = outside.length > 1 ? route : [copy(citizen.position)];
+      citizen.state = outside.length > 1 ? 'moving' : this.world.edges.some(edge => !isRoadOpen(this.state, edge.id)) ? 'roadWaiting' : 'unreachable'; return;
+    }
     if (destination.floorPlanProfile === FLOOR_PLAN_PROFILE) {
       const action = this.runtime.activities[citizen.id], purpose = this.activityPointPurpose(action, destination);
       const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
@@ -1375,6 +1384,10 @@ export class Simulation implements SimulationAPI {
     const roomPoint = { x: destination.position.x + row * Math.min(1.8, dimensions.width / 12), y: stair.y, z: destination.position.z + Math.min(1.2, dimensions.depth / 10) };
     const interior: Vec3[] = floor > 0 ? [getStairPosition(destination, 0), stair, roomPoint] : [roomPoint];
     const outside = this.routeFromCitizen(citizen, destination); citizen.destinationId = destination.id; citizen.route = outside.length > 1 ? [...outside, ...interior] : outside; citizen.routeIndex = 1; citizen.state = outside.length > 1 ? 'moving' : this.world.edges.some(edge => !isRoadOpen(this.state, edge.id)) ? 'roadWaiting' : 'unreachable';
+  }
+  /** v4 street browsing: an evening social outing to a market. */
+  private streetBrowse(citizen: Citizen, destination: Building): boolean {
+    return browsesOnStreet(this.runtime.mealRoutePolicyId) && destination.kind === 'market' && this.runtime.activities[citizen.id] === 'social';
   }
   private foodHiringApplicantAvailable(citizen: Citizen): boolean {
     const profile = this.state.extension?.actorProfiles[citizen.id], time = this.state.extension?.lastUpdate ?? this.now, day = Math.floor(time / 1440);
@@ -1910,7 +1923,8 @@ export class Simulation implements SimulationAPI {
       const atActivityPoint = destination.kind === 'home' && activity === 'rest'
         ? !!homeRestPointAt(destination, citizen.position, person) && !homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)
         : this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity, destination), person);
-      if (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !atActivityPoint) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
+      const browsing = this.streetBrowse(citizen, destination) && !this.floorPlanPresence(destination, citizen.position) && distance(citizen.position, destination.door) <= BROWSE_MAX + 1;
+      if (!browsing && (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !atActivityPoint)) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
       // A clinic observer receives only a real completed walking/arrival leg.
       // This optional source event changes no movement, needs or attendance.
       if (destination.kind === 'clinic' && arrivedElapsed > 0) {

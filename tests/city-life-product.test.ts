@@ -9,7 +9,7 @@ test('fresh city-life recipe records its actual original save and preserves all 
   const world = civicFixtureWorld(), original = createCurrentProductCity(world).exportSave();
   const city = await createCityLifeProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
   assert.equal(city.referenceCollisionPolicyId, 'continuous-upright-v1');
-  assert.equal(city.mealRoutePolicyId, 'nearby-food-v3');
+  assert.equal(city.mealRoutePolicyId, 'nearby-food-v4');
   assert.equal(doc.state.serviceMaterialScheduling.policyId, 'authorized-service-materials-v1');
   assert.equal(doc.state.serviceMaterialScheduling.sourceSave.sha256, createHash('sha256').update(original).digest('hex'));
   delete doc.state.serviceMaterialScheduling; delete doc.runtime.serviceMaterialSchedulingVersion;

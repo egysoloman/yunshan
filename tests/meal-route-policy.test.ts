@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createHash } from 'node:crypto';
-import { chooseNearestTiedMeal, EVENING_BONUS, eveningBonus, LUNCH_BONUS, lunchBonus, NEARBY_EVENING_ROUTE_POLICY, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, validateMealRoutePolicy } from '../src/simulation/meal-route';
-import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
+import { chooseNearestTiedMeal, EVENING_BONUS, eveningBonus, LUNCH_BONUS, lunchBonus, NEARBY_EVENING_ROUTE_POLICY, STREET_BROWSE_ROUTE_POLICY, routeShortOfDoor, BROWSE_MAX, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, validateMealRoutePolicy } from '../src/simulation/meal-route';
+import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
 import { upgradeMealRoute } from '../src/host/upgrade-meal-route';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -52,7 +52,7 @@ test('meal policy preserves source actors at cutover and cannot disappear in ful
   assert.equal(sim.exportSave(), original);
   assert.equal(sim.mealRoutePolicyId, 'legacy');
   const current = createCurrentProductCity(world);
-  assert.equal(current.mealRoutePolicyId, 'nearby-food-v3', 'new cities declare the lunch and evening outing policy');
+  assert.equal(current.mealRoutePolicyId, 'nearby-food-v4', 'new cities declare the lunch and evening outing policy');
   assert.equal(current.referenceCollisionPolicyId, 'continuous-upright-v1');
   assert.equal(current.importSave(original).ok, true);
   assert.equal(current.exportSave(), original, 'loading a new factory does not activate either policy');
@@ -67,7 +67,7 @@ test('v2 adds a midday lunch preference for residents who are not full; v1 and l
   validateMealRoutePolicy(declared);
   assert.throws(() => validateMealRoutePolicy({ ...declared, runtime: { ...declared.runtime, mealRoutePolicyId: NEARBY_MEAL_ROUTE_POLICY } }), /meal route policy pair/, 'envelope and runtime name the same version');
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave();
-  assert.equal(JSON.parse(saved).mealRoutePolicyId, NEARBY_EVENING_ROUTE_POLICY);
+  assert.equal(JSON.parse(saved).mealRoutePolicyId, STREET_BROWSE_ROUTE_POLICY);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
 });
@@ -79,4 +79,24 @@ test('v3 keeps the lunch break and adds an evening outing for rested, fed reside
   for (const policy of [NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, undefined]) assert.equal(eveningBonus(policy, 19.5, 60, 60), 0, `${policy} has no evening outing`);
   const declared = { version: 4, motionVersion: 2, mealRoutePolicyId: NEARBY_EVENING_ROUTE_POLICY, runtime: { npcMotionVersion: 2, mealRoutePolicyId: NEARBY_EVENING_ROUTE_POLICY } };
   validateMealRoutePolicy(declared);
+});
+
+test('v4 keeps v3 and ends an evening market outing on the street before the door, on its own route', () => {
+  assert.equal(eveningBonus(STREET_BROWSE_ROUTE_POLICY, 19.5, 70, 60), EVENING_BONUS);
+  assert.equal(lunchBonus(STREET_BROWSE_ROUTE_POLICY, 12, 70), LUNCH_BONUS);
+  const route = [{ x: 0, y: 0, z: 0 }, { x: 10, y: 0, z: 0 }, { x: 10, y: 0, z: 4 }];
+  assert.deepEqual(routeShortOfDoor(route, 3), [{ x: 0, y: 0, z: 0 }, { x: 10, y: 0, z: 0 }, { x: 10, y: 0, z: 1 }]);
+  assert.deepEqual(routeShortOfDoor(route, 6), [{ x: 0, y: 0, z: 0 }, { x: 8, y: 0, z: 0 }]);
+  assert.deepEqual(routeShortOfDoor(route, 99), [{ x: 0, y: 0, z: 0 }]);
+  const declared = { version: 4, motionVersion: 2, mealRoutePolicyId: STREET_BROWSE_ROUTE_POLICY, runtime: { npcMotionVersion: 2, mealRoutePolicyId: STREET_BROWSE_ROUTE_POLICY } };
+  validateMealRoutePolicy(declared);
+  const world = createProductWorld(), sim = createCurrentProductCity(world) as unknown as { state: any; step(dt: number): void; command(c: unknown): void; setFocus(p: unknown, m: string): void; floorPlanPresence(b: unknown, p: unknown): unknown; exportSave(): string };
+  sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
+  while (sim.state.hour < 20) sim.step(.25);
+  const markets = new Map(world.buildings.filter(b => b.kind === 'market').map(b => [b.id, b]));
+  const street = sim.state.citizens.filter((c: any) => c.state === 'socializing' && markets.has(c.destinationId) && !sim.floorPlanPresence(markets.get(c.destinationId), c.position));
+  assert.ok(street.length >= 10, `${street.length} residents browse on the street`);
+  for (const c of street) { const door = markets.get(c.destinationId)!.door; assert.ok(Math.hypot(c.position.x - door.x, c.position.y - door.y, c.position.z - door.z) <= BROWSE_MAX + 1); }
+  const saved = sim.exportSave(), reader = createCurrentProductCity(world), read = reader.importSave(saved);
+  assert.ok(read.ok, read.message); assert.equal(reader.exportSave(), saved, 'street browsers save and read back exactly');
 });
