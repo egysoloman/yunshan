@@ -1497,7 +1497,7 @@ export class Simulation implements SimulationAPI {
     if (this.shopFunds(current) - this.shopProtectedFunds(current) >= dailySalary) return;
     const day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440), today = this.runtime.privateLabor?.shifts[current.id];
     if (today?.day === day && today.assignments.some(item => item.citizenId === citizen.id && item.minutesCap > 0)) return;
-    if ([...(this.runtime.wageArrears ?? []), ...this.runtime.wages, ...(this.runtime.wageAccruals ?? [])].some(wage => wage.citizenId === citizen.id && wage.shopId === current.id && wage.amount > 1e-9)) return;
+    // Wages already earned there stay payable after the move (accruals are keyed by worker and workplace).
     const offers = this.state.shops.filter(shop => shop !== current && shop.open && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && tradeSignals(this, shop.id).sold > 0).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)) || a.id.localeCompare(b.id));
     const offer = offers[0]; if (!offer) return;
     const plan = this.preparePrivateAcceptance(offer, day);

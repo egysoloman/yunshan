@@ -44,10 +44,12 @@ export const SHOP_PROFIT_TAX_POLICY_V5 = 'shop-profit-tax-v5' as const;
  * merchants were still poor, most of them staff of loss-making shops that
  * cannot fund a day's wage (one shop held 17 staff at a loss while 65 shops
  * had none); shop staff could never leave. A poor worker (below
- * STUDY_GRANT_CEILING coins) of such a shop, not its owner, not promised
- * minutes today and owed nothing there, may take the same kind of offer the
- * public-to-private move takes: an open shop within 500 m that sells and can
- * fund a day's wage. */
+ * STUDY_GRANT_CEILING coins) of such a shop, not its owner and not promised
+ * minutes today, may take the same kind of offer the public-to-private move
+ * takes: an open shop within 500 m that sells and can fund a day's wage.
+ * Wages already earned at the old shop stay payable (as for any job change);
+ * a first version also required nothing owed there, which kept 17 staff in
+ * one loss-making shop (22 moves in 14 days). */
 export const SHOP_PROFIT_TAX_POLICY_V6 = 'shop-profit-tax-v6' as const;
 export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5 | typeof SHOP_PROFIT_TAX_POLICY_V6;
 export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6];
