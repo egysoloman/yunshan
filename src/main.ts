@@ -11,6 +11,8 @@ import { canAccessFloor } from './access';
 import { JourneyNavigation } from './journey';
 import type { JourneyNavigationPlan, TransitJourney, WalkingJourney } from './journey';
 import { releaseRoadExitPermit } from './roads';
+import { Ambience, ambienceLevels } from './audio/ambience';
+import { getWaterfallPath, terrainHeight } from './world';
 import { readSavedGame, writeSavedGame } from './persistence';
 import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-layout';
 import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, ViewState } from './types';
@@ -47,7 +49,7 @@ try {
   throw error;
 }
 
-const settings = { quality: 'balanced' as Quality, renderDistance: 5700, fpsCap: 60, dynamicResolution: true, simulationDetail: 1 };
+const settings = { quality: 'balanced' as Quality, renderDistance: 5700, fpsCap: 60, dynamicResolution: true, simulationDetail: 1, volume: .6 };
 try {
   const stored = JSON.parse(localStorage.getItem(PREF_KEY) ?? 'null');
   if (stored && ['low', 'balanced', 'high'].includes(stored.quality)) settings.quality = stored.quality;
@@ -55,6 +57,7 @@ try {
   if (stored && [30, 60, 120].includes(stored.fpsCap)) settings.fpsCap = stored.fpsCap;
   if (stored && typeof stored.dynamicResolution === 'boolean') settings.dynamicResolution = stored.dynamicResolution;
   if (stored && Number.isFinite(stored.simulationDetail)) settings.simulationDetail = THREE.MathUtils.clamp(stored.simulationDetail, 0.5, 2);
+  if (stored && Number.isFinite(stored.volume)) settings.volume = THREE.MathUtils.clamp(stored.volume, 0, 1);
 } catch { /* Storage may be unavailable in a private or restricted browser. */ }
 city.setQuality(settings.quality);
 city.setRenderDistance(settings.renderDistance);
@@ -152,6 +155,7 @@ const actions: UIActions = {
       settings.dynamicResolution = value;
       city.setDynamicResolution(value);
     } else if (key === 'simulationDetail' && typeof value === 'number') settings.simulationDetail = THREE.MathUtils.clamp(value, 0.5, 2);
+    else if (key === 'volume' && typeof value === 'number') { settings.volume = THREE.MathUtils.clamp(value, 0, 1); ambience.setVolume(settings.volume); }
     persistPreferences();
   },
   resetView() { controller.resetView(); showNotice('已调整当前人物的视线；可步行登临观景处，或到租赁点登机俯瞰山城。'); },
@@ -183,6 +187,20 @@ let renderedFrames = 0;
 let autosaveAccumulator = 0;
 let elapsed = 0;
 let raf = 0;
+// Ambience (procedural, display only) starts on the first user gesture, as browsers require.
+const ambience = new Ambience(settings.volume), waterfall = getWaterfallPath(world);
+for (const type of ['pointerdown', 'keydown'] as const) window.addEventListener(type, () => { if (settings.volume > 0) ambience.start(); }, { capture: true });
+let ambiencePosition: Vec3 | null = null;
+function segmentDistanceXZ(p: Vec3, a: Vec3, b: Vec3): number { const dx = b.x - a.x, dz = b.z - a.z, n = dx * dx + dz * dz, t = n ? Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.z - a.z) * dz) / n)) : 0; return Math.hypot(p.x - a.x - dx * t, p.z - a.z - dz * t); }
+function updateAmbience(state: SimState, seconds: number): void {
+  if (!ambience.started) return;
+  const p = controller.position, profiles = state.extension?.actorProfiles;
+  let water = Infinity;
+  for (const line of [world.river, waterfall]) for (let i = 1; i < line.length; i++) water = Math.min(water, segmentDistanceXZ(p, line[i - 1], line[i]));
+  const speed = ambiencePosition && seconds > 0 ? Math.hypot(p.x - ambiencePosition.x, p.z - ambiencePosition.z) / seconds : 0; ambiencePosition = { ...p };
+  const nearbyPeople = state.citizens.filter(c => c.state !== 'riding' && profiles?.[c.id]?.alive !== false && Math.hypot(c.position.x - p.x, c.position.y - p.y, c.position.z - p.z) < 25).length;
+  ambience.update(ambienceLevels({ hour: state.hour, position: p, ground: terrainHeight(world, p.x, p.z), waterDistance: water, nearbyPeople, walkingSpeed: controller.mode === 'walk' ? speed : 0, inside: !!controller.inside, weather: state.weather, paused: state.paused }));
+}
 function frame(now: number): void {
   raf = requestAnimationFrame(frame);
   const rawDelta = Math.max((now - last) / 1000, 0);
@@ -232,6 +250,7 @@ function frame(now: number): void {
   if (uiAccumulator >= 0.2) {
     view = getView();
     ui.update(simulation.state, view);
+    updateAmbience(simulation.state, uiAccumulator);
     uiAccumulator = 0;
   }
   autosaveAccumulator += delta;
@@ -416,6 +435,6 @@ function updateBlocks(): void {
 
 // Opt-in diagnostics aid local verification. No network, credentials or remote writes.
 if (new URLSearchParams(location.search).has('debug')) {
-  const diagnostics = { world, simulation, city, controller, actions, getView, canAccessBuilding, storage: { read: readSavedGame, write: (json: string) => writeSavedGame(json, world) }, dispose() { cancelAnimationFrame(raf); controller.dispose(); ui.dispose(); aviationRenderer.dispose(); city.dispose(); } };
+  const diagnostics = { world, simulation, city, controller, actions, getView, canAccessBuilding, ambience, storage: { read: readSavedGame, write: (json: string) => writeSavedGame(json, world) }, dispose() { cancelAnimationFrame(raf); controller.dispose(); ui.dispose(); aviationRenderer.dispose(); city.dispose(); } };
   Object.assign(window, { __YUNSHAN__: diagnostics });
 }
