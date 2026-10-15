@@ -21,6 +21,7 @@ namespace Yunshan.Core
         static Vec3 V(double x, double y, double z) => new Vec3(x, y, z);
         const string Paving = "#8a8170";
         public const double CableTowerSpacing = 120;
+        public const double StairGrade = .06, StairTread = 1.6;
 
         public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false, bool dressesRoadDeck = false, bool dressesRailKerb = false, bool dressesRailPierCaps = false)
         {
@@ -92,11 +93,18 @@ namespace Yunshan.Core
                                 sink.Segment("wood", V(span.A.X + nx * offset * side, span.A.Y, span.A.Z + nz * offset * side), V(span.B.X + nx * offset * side, span.B.Y, span.B.Z + nz * offset * side), TransportGeometry.GuardrailThickness, .2, 1.1, "#6b7771");
                     }
                     if (paved)
-                        foreach (var t in new[] { .25, .5, .75 })
+                    {
+                        // Steep stone streets read as stair streets (network-structures.ts).
+                        double grade = Math.Abs(b.Y - a.Y) / JsMath.Max(.01, horizontal);
+                        int steps = grade >= StairGrade ? (int)JsMath.Max(1, JsMath.Round(horizontal / StairTread)) : 0;
+                        var cuts = new List<double>();
+                        if (steps > 0) for (int k = 0; k < Math.Max(0, steps - 1); k++) cuts.Add((double)(k + 1) / steps); else cuts.AddRange(new[] { .25, .5, .75 });
+                        foreach (var t in cuts)
                         {
-                            var m = V(a.X + (b.X - a.X) * t, a.Y + (b.Y - a.Y) * t + .02, a.Z + (b.Z - a.Z) * t);
-                            sink.Segment("stone", V(m.X - nx * 4.6, m.Y, m.Z - nz * 4.6), V(m.X + nx * 4.6, m.Y, m.Z + nz * 4.6), .14, .05, 0, "#6d675a");
+                            var m = V(a.X + (b.X - a.X) * t, a.Y + (b.Y - a.Y) * t + (steps > 0 ? .06 : .02), a.Z + (b.Z - a.Z) * t);
+                            sink.Segment("stone", V(m.X - nx * 4.6, m.Y, m.Z - nz * 4.6), V(m.X + nx * 4.6, m.Y, m.Z + nz * 4.6), steps > 0 ? .3 : .14, steps > 0 ? .14 : .05, 0, steps > 0 ? "#5f594d" : "#6d675a");
                         }
+                    }
                     else if (edge.Mode == "road" && !edge.Id.Contains("runway"))
                     {
                         var middle = V((a.X + b.X) / 2, (a.Y + b.Y) / 2 + .04, (a.Z + b.Z) / 2);

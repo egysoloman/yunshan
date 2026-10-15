@@ -17,6 +17,8 @@ export interface NetworkStructureOptions { dressesStations: boolean; dressesRunw
 const PAVING = '#8a8170';
 /** Spacing of current-v8 ropeway towers (m). */
 export const CABLE_TOWER_SPACING = 120;
+/** Paved streets this steep (rise per run) show stair step edges every STAIR_TREAD m. */
+export const STAIR_GRADE = .06, STAIR_TREAD = 1.6;
 
 /** Roads, rails, bridges, lifts, cables, supports, guardrails, station
  * platforms and junction poles, as the renderer has always drawn them. */
@@ -80,7 +82,11 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
           if (edge.mode === 'bridge' || rail || elevated && edge.mode === 'road') for (const span of guardrailSpans(world, edge, i)) sink.segment('wood', { x: span.a.x + nx * offset * side, y: span.a.y, z: span.a.z + nz * offset * side }, { x: span.b.x + nx * offset * side, y: span.b.y, z: span.b.z + nz * offset * side }, GUARDRAIL_THICKNESS, .2, 1.1, '#6b7771');
         }
         // Paving seams across the stone street every quarter segment (rows step every 8m).
-        if (paved) for (const t of [.25, .5, .75]) { const m = { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t + .02, z: a.z + (b.z - a.z) * t }; sink.segment('stone', { ...m, x: m.x - nx * 4.6, z: m.z - nz * 4.6 }, { ...m, x: m.x + nx * 4.6, z: m.z + nz * 4.6 }, .14, .05, 0, '#6d675a'); }
+        // Steep stone streets read as stair streets: a step edge every STAIR_TREAD m (walking still follows the deck).
+        if (paved) {
+          const grade = Math.abs(b.y - a.y) / Math.max(.01, horizontal), steps = grade >= STAIR_GRADE ? Math.max(1, Math.round(horizontal / STAIR_TREAD)) : 0;
+          for (const t of steps ? Array.from({ length: Math.max(0, steps - 1) }, (_, k) => (k + 1) / steps) : [.25, .5, .75]) { const m = { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t + (steps ? .06 : .02), z: a.z + (b.z - a.z) * t }; sink.segment('stone', { ...m, x: m.x - nx * 4.6, z: m.z - nz * 4.6 }, { ...m, x: m.x + nx * 4.6, z: m.z + nz * 4.6 }, steps ? .3 : .14, steps ? .14 : .05, 0, steps ? '#5f594d' : '#6d675a'); }
+        }
         else if (edge.mode === 'road' && !edge.id.includes('runway')) { const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 + .04, z: (a.z + b.z) / 2 }; sink.segment('stone', { ...middle, x: middle.x - nx * 3.5, z: middle.z - nz * 3.5 }, { ...middle, x: middle.x + nx * 3.5, z: middle.z + nz * 3.5 }, .08, .04, 0, '#757e73'); }
         // current-v8 terrace streets stand on stone embankments where they ride
         // above the ground (fill): a retaining wall from the lowest ground under
