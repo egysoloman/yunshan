@@ -186,11 +186,14 @@ test('v6 keeps v5 and lets a poor worker leave a shop that cannot fund a day\'s 
     // Controlled: every shop with staff but no owner among them is drained; its staff are made poor.
     const drained = sim.state.shops.filter(shop => sim.state.citizens.some(c => c.workId === shop.buildingId && c.id !== shop.ownerId && c.role !== '学生')).slice(0, 12);
     const staff = new Map(drained.flatMap(shop => sim.state.citizens.filter(c => c.workId === shop.buildingId && c.id !== shop.ownerId && c.role !== '学生').map(c => [c.id, shop.buildingId] as const)));
-    for (const shop of drained) { shop.cash = 0; }
+    // Below a day's wage but not empty: owners can still sign a few funded minutes, as summit-b8 did.
+    for (const shop of drained) { shop.cash = 30; }
     for (const c of sim.state.citizens) if (staff.has(c.id)) c.money = 20;
     for (let tick = 0; tick < 600; tick++) sim.step(.25);
     const moved = sim.state.citizens.filter(c => staff.has(c.id) && c.workId !== staff.get(c.id));
     if (moves) assert.ok(moved.length > 0 && moved.every(c => sim.state.shops.some(shop => shop.buildingId === c.workId)), `${moved.length} of ${staff.size} moved to another shop`);
     else assert.equal(moved.filter(c => sim.state.shops.some(shop => shop.buildingId === c.workId)).length, 0, 'an archived city keeps shop staff where they are');
+    const reader = policy ? createCurrentProductCity(world) : createArchivedProductCity(world), saved = sim.exportSave(), read = reader.importSave(saved);
+    assert.ok(read.ok, read.message); assert.equal(reader.exportSave(), saved, 'the city after moves saves and reads back exactly');
   }
 });

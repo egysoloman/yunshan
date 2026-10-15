@@ -1506,7 +1506,8 @@ export class Simulation implements SimulationAPI {
       const firstUnpromised = plan.assignments.findIndex(item => item.minutesCap === 0);
       plan.assignments.splice(firstUnpromised < 0 ? plan.assignments.length : firstUnpromised, 0, { citizenId: citizen.id, ratePerMinute: dailySalary / 480, minutesCap: 0, workedMinutes: 0 });
     }
-    if (today?.day === day) today.assignments = today.assignments.filter(item => item.citizenId !== citizen.id);
+    // A funded promise stays in today's plan (it balances the owner's signed funding and lapses at day end); only an unfunded name is dropped.
+    if (today?.day === day) today.assignments = today.assignments.filter(item => item.citizenId !== citizen.id || item.minutesCap > 0);
     current.employees = Math.max(0, current.employees - 1); offer.employees++; citizen.workId = offer.buildingId; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
     this.refreshWorkforce();
     citizen.historyTags = [...new Set([...(citizen.historyTags ?? []), '离开无力支薪店铺另就现金岗位'])];
