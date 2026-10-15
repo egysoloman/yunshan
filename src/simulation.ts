@@ -10,6 +10,7 @@ import { chooseNearestTiedMeal, eveningBonus, lunchBonus, MEAL_ROUTE_POLICIES, n
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
+import { BANK_ACTION_NAMES, RELATION_NAMES, SOCIAL_ACTION_NAMES } from './simulation/player-names';
 import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
@@ -2531,7 +2532,7 @@ export class Simulation implements SimulationAPI {
       if (command.type === 'loan') { const credit = 300 + p.reputation * 20 + p.experience * 30; if (this.state.loan + amount > credit) return fail(`贷款超过信用额度${credit.toFixed(0)}。`); this.state.loan += amount; p.money += amount; }
       if (command.type === 'repay') { if (amount > this.state.loan || amount > p.money) return fail('偿还金额超过贷款或现金。'); this.state.loan -= amount; p.money -= amount; p.reputation += .2; }
       if (command.type === 'invest') { if (p.money < amount) return fail('投资现金不足。'); p.money -= amount; this.runtime.investment += amount; p.inventory.investment = this.runtime.investment; }
-      return success(`${building.name}已办理${command.type}，金额${amount.toFixed(1)}云币。`);
+      return success(`${building.name}已办理${BANK_ACTION_NAMES[command.type] ?? '业务'}，金额${amount.toFixed(1)}云币。`);
     }
     if (command.type === 'business') {
       const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock'], 'work'); if (!building) return fail('请到商业设施入口洽谈经营。'); if (!this.hasIdentity('merchant')) return fail('取得商人经营资格后可承包店铺。');
@@ -2636,7 +2637,7 @@ export class Simulation implements SimulationAPI {
         const canRepair = hostileRank <= 2 || hostileRank === 3 && (relation.reconciliations ?? 0) >= 2 || hostileRank >= 4 && elapsedConflict >= 1440 - 1e-7 && (relation.reconciliations ?? 0) >= 2 && relation.affection > -60 && relation.trust > -50;
         this.updateHostility(relation, canRepair); p.reputation += .4;
       }
-      return success(`${citizen.name}记住了这次${command.type}，关系：${relation.type}，好感${relation.affection.toFixed(0)}。`);
+      return success(`与${citizen.name}${SOCIAL_ACTION_NAMES[command.type] ?? '交往'}。${citizen.name}记住了这次相处，你们现在是${RELATION_NAMES[relation.type] ?? relation.type}，好感 ${relation.affection.toFixed(0)}。`);
     }
     if (command.type === 'ride' || command.type === 'drive') {
       const vehicle = this.state.vehicles.find(v => v.id === command.targetId); if (!vehicle || distance(p.position, vehicle.position) > 35) return fail('请到车辆或站点附近上车。'); if (p.vehicleId) return fail('请先离开当前载具。'); if (!isRoadOpen(this.state, vehicle.edgeId) || vehicle.state === 'roadClosed') return fail('此路段已关闭，请等候真实改道或修复后上车。'); if (vehicle.state === 'moving') return fail('请等车辆进站停稳后上车。');

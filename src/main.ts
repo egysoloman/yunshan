@@ -344,7 +344,7 @@ function interact(): void {
     const command: Record<string, Command['type']> = { market: 'purchase', home: 'rest', workshop: 'work', school: 'work', farm: 'work', core: 'energy' };
     if (command[building.kind]) return execute({ type: command[building.kind], targetId: building.id });
   }
-  showNotice('靠近南侧入口、人物或交通站点后按 E。');
+  showNotice('靠近建筑入口、居民或交通站点后按 E。');
 }
 
 function canAccessBuilding(building: Building, floor: number): boolean {
