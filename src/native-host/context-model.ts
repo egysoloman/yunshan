@@ -185,7 +185,7 @@ export class ContextRules {
       const voxel = state.voxels.filter(v => spatialDistance(v.position, position) <= 4).sort((a, b) => spatialDistance(a.position, position) - spatialDistance(b.position, position))[0];
       actions.push({ label: '回收附近体素 · X', command: { type: 'demolish', targetId: building.id, ...(voxel ? { position: { ...voxel.position } } : {}) }, disabled: siteDisabled || !voxel });
     }
-    if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) notes.push('请进入可使用的房间，站到对应功能点 2 米内；门外、庭院和房间远角不能办理。');
+    if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) notes.push('走进室内，站到柜台或工位旁（2 米内）即可办理。');
     if (building.publicFloors !== undefined) notes.push('公共服务楼层可自由进入；其余空间按各楼层权限开放，持有多个身份可使用对应设施。');
     return { actions, notes };
   }

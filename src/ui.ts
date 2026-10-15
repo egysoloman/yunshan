@@ -293,13 +293,16 @@ export class CityUI {
     const basements = building.basements ?? 0;
     const points = (building.functionPoints ?? Array.from({ length: building.floors + basements }, (_, index) => getBuildingUsePoints(building, index - basements)).flat()).filter(point => canAccessFloor(building, point.floor, this.state!.player));
     const names = { work: '工作', service: '服务', sale: '购物' };
+    // Player language: which floor and how far, not raw coordinates.
+    let ready = false;
     const targets = purposes.map(purpose => {
       const point = points.filter(point => point.purpose === purpose).sort((a, b) => spatialDistance(a.position, this.state!.player.position) - spatialDistance(b.position, this.state!.player.position))[0];
       if (!point) return null;
       const floor = point.floor >= 0 ? `${point.floor + 1} 层` : `地下 ${Math.abs(point.floor)} 层`;
-      return `${names[purpose]}：${floor}（${point.position.x.toFixed(1)}, ${point.position.y.toFixed(1)}, ${point.position.z.toFixed(1)}）${this.atBuilding(building.id, purpose) ? ' · 位置到位' : ''}`;
+      if (this.atBuilding(building.id, purpose)) { ready = true; return `${names[purpose]} · 已到位`; }
+      return `${names[purpose]} · ${floor}，约 ${Math.max(1, Math.round(spatialDistance(point.position, this.state!.player.position)))} 米`;
     }).filter((text): text is string => text !== null);
-    hint.textContent = targets.length ? `请进入可使用的房间，站到对应功能点 2 米内；门外、庭院和房间远角不能办理。${targets.join('；')}。身份、营业、余额和身体条件仍须满足。` : '当前身份没有可办理的功能点，请查看楼层权限与空间导览。';
+    hint.textContent = targets.length ? `${ready ? '已站到办理位置，可以直接办理。' : '走进室内，站到柜台或工位旁（2 米内）即可办理。'}${targets.join('；')}。` : '你当前的身份在这里没有可办理的事项，可查看楼层权限与空间导览。';
     if (building.kind === 'clinic') hint.textContent += '诊疗另须医馆公共层、医患共同在场与合资格医生实际出勤。';
     return hint;
   }
