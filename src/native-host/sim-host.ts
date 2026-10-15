@@ -1,3 +1,4 @@
+import { displayMoney } from '../ui-text';
 import { arrivalLook } from '../rendering/arrival-view';
 /**
  * Native host for the authoritative simulation. The Unity client starts this
@@ -92,7 +93,8 @@ export class SimHost {
         const sim = this.requireSim(), command = request.command as Command;
         if (!command || typeof command !== 'object' || typeof command.type !== 'string') throw new Error('命令格式无效。');
         const result = sim.command(command);
-        return { result, frame: this.frame(request, 0, 0) };
+        // Shown to the player: amounts read in 云币 (as the web UI shows them).
+        return { result: { ...result, message: displayMoney(result.message) }, frame: this.frame(request, 0, 0) };
       }
       case 'context': return contextModel(this.requireSim(), this.world!, request.view as ContextView);
       case 'panes': return panesModel(this.requireSim(), this.world!, request.view as ContextView);
@@ -184,7 +186,7 @@ export class SimHost {
       citizens,
       vehicles: state.vehicles.map(v => [v.id, v.kind, round(v.position.x), round(v.position.y), round(v.position.z), v.edgeId, round(v.progress), v.direction, v.state]),
       signals,
-      events: state.events.filter(e => e.id > since).map(e => ({ id: e.id, tick: e.tick, type: e.type, text: e.text })),
+      events: state.events.filter(e => e.id > since).map(e => ({ id: e.id, tick: e.tick, type: e.type, text: displayMoney(e.text) })),
       lastEventId,
       navigation: plan.destination || plan.unavailable ? { destination: plan.destination?.name ?? null, points: navPoints.map(point), unavailable: plan.unavailable } : null,
       marketUnits,

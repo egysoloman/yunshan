@@ -1,4 +1,5 @@
 import { isRoadOpen, roadClosure } from './roads';
+import { displayMoney } from './ui-text';
 import { roadworksStatus, roadworkActorId } from './simulation/roadworks';
 import { aircraftBoardingBlockedReason, getAviationPads } from './aviation';
 import { researchPlayerContextReason, researchProgressInfo } from './simulation/extensions';
@@ -581,7 +582,7 @@ export class CityUI {
     this.ref('inventory').replaceChildren(...(items.length ? items.map(([item, amount]) => field(itemName(item), item === 'investment' ? money(amount) : `× ${rounded(amount)}`)) : [element('p', 'note', '行囊尚空。市集购买的食物和礼物会放在这里。')]));
     this.ref('events').replaceChildren(...state.events.slice(-8).reverse().map(event => {
       const item = element('li');
-      item.append(element('span', 'event-tick', `#${event.tick}`), element('p', '', event.text));
+      item.append(element('span', 'event-tick', `#${event.tick}`), element('p', '', displayMoney(event.text)));
       return item;
     }));
     this.renderLifeSystems();
@@ -1159,7 +1160,7 @@ export class CityUI {
     if (rel.tags.length) section.append(element('p', 'relationship-tags', rel.tags.join(' · ')));
     const memories = element('ol', 'event-list memory-list');
     for (const memory of rel.memories.slice(-8).reverse()) {
-      const item = element('li'); item.append(element('span', 'event-tick', `#${memory.tick}`), element('p', '', memory.text), element('span', `memory-impact${memory.impact < 0 ? ' negative' : ''}`, `${memory.impact > 0 ? '+' : ''}${memory.impact}`)); memories.append(item);
+      const item = element('li'); item.append(element('span', 'event-tick', `#${memory.tick}`), element('p', '', displayMoney(memory.text)), element('span', `memory-impact${memory.impact < 0 ? ' negative' : ''}`, `${memory.impact > 0 ? '+' : ''}${memory.impact}`)); memories.append(item);
     }
     if (!rel.memories.length) section.append(element('p', 'note', '尚无详细记忆。'));
     section.append(memories); detail.replaceChildren(section);
@@ -1588,7 +1589,7 @@ export class CityUI {
   }
   notify(message: string, ok = true): void {
     const toast = this.ref('toast');
-    toast.textContent = message; toast.hidden = false; toast.classList.toggle('toast-error', !ok);
+    toast.textContent = displayMoney(message); toast.hidden = false; toast.classList.toggle('toast-error', !ok);
     if (this.toastTimer) clearTimeout(this.toastTimer);
     this.toastTimer = setTimeout(() => { toast.hidden = true; }, ok ? 5000 : 7000);
     this.contextSignature = '';
