@@ -40,20 +40,33 @@ export const SHOP_PROFIT_TAX_POLICY_V4 = 'shop-profit-tax-v4' as const;
  * ceiling also receives STUDENT_BURSARY, poorest first, within the same
  * available cash. The council prices both into the tax rate. */
 export const SHOP_PROFIT_TAX_POLICY_V5 = 'shop-profit-tax-v5' as const;
-export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5;
-export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5];
-const LATER_THAN_V1 = new Set<PublicFinancePolicy | undefined>([SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5]);
+/** v6 (2026-10-15). v5 plus private job mobility: after v5, 58 of 170
+ * merchants were still poor, most of them staff of loss-making shops that
+ * cannot fund a day's wage (one shop held 17 staff at a loss while 65 shops
+ * had none); shop staff could never leave. A poor worker (below
+ * STUDY_GRANT_CEILING coins) of such a shop, not its owner, not promised
+ * minutes today and owed nothing there, may take the same kind of offer the
+ * public-to-private move takes: an open shop within 500 m that sells and can
+ * fund a day's wage. */
+export const SHOP_PROFIT_TAX_POLICY_V6 = 'shop-profit-tax-v6' as const;
+export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5 | typeof SHOP_PROFIT_TAX_POLICY_V6;
+export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6];
+const LATER_THAN_V1 = new Set<PublicFinancePolicy | undefined>([SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6]);
 /** v2–v5 pay dividends while wages are owed (they stay reserved); v1 and legacy wait for none owed. */
 export const dividendWaitsForPayroll = (policy: PublicFinancePolicy | undefined) => !LATER_THAN_V1.has(policy);
 export const PRIVATE_WAGE_BASE = 32, PRIVATE_WAGE_BASE_V3 = 40;
 /** Daily private shop wage base under a declared policy. */
 export const privateWageBase = (policy: PublicFinancePolicy | undefined) => LATER_THAN_V1.has(policy) && policy !== SHOP_PROFIT_TAX_POLICY_V2 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
 /** Staff profit sharing (v4 and later). */
-export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5;
+export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6;
+/** Study grant and student bursary (v5 and later). */
+export const fundsStudents = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V5 || policy === SHOP_PROFIT_TAX_POLICY_V6;
+/** Shop staff may leave a shop that cannot fund a day's wage (v6). */
+export const shopStaffMayMove = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V6;
 export const STUDY_GRANT_PER_MINUTE = .25, STUDY_GRANT_CEILING = 120, STUDENT_BURSARY = 20;
 /** Daily bursaries (v5 only): STUDENT_BURSARY to each student below the ceiling, poorest first, within the available cash. */
 export function studentBursaries(policy: PublicFinancePolicy | undefined, students: ReliefClaim[], available: number): { id: string; amount: number }[] {
-  if (policy !== SHOP_PROFIT_TAX_POLICY_V5) return [];
+  if (!fundsStudents(policy)) return [];
   const out: { id: string; amount: number }[] = []; let budget = Math.max(0, available);
   for (const s of [...students].sort((a, b) => a.money - b.money || a.id.localeCompare(b.id))) {
     const amount = Math.min(STUDENT_BURSARY, Math.max(0, STUDY_GRANT_CEILING - s.money), budget);
@@ -63,7 +76,7 @@ export function studentBursaries(policy: PublicFinancePolicy | undefined, studen
 }
 /** The study grant for minutes studied at a school (v5 only): up to the ceiling, within the available public cash. */
 export function studyGrant(policy: PublicFinancePolicy | undefined, minutes: number, available: number, money = 0): number {
-  return policy === SHOP_PROFIT_TAX_POLICY_V5 && minutes > 0 ? Math.max(0, Math.min(minutes * STUDY_GRANT_PER_MINUTE, STUDY_GRANT_CEILING - money, available)) : 0;
+  return fundsStudents(policy) && minutes > 0 ? Math.max(0, Math.min(minutes * STUDY_GRANT_PER_MINUTE, STUDY_GRANT_CEILING - money, available)) : 0;
 }
 export const STAFF_PROFIT_SHARE = .3;
 /** Splits an owner dividend between the owner and the staff (v4 only). */

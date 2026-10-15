@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
-import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, STAFF_PROFIT_SHARE, STUDENT_BURSARY, STUDY_GRANT_CEILING, STUDY_GRANT_PER_MINUTE, staffProfitShare, studentBursaries, studyGrant, validatePublicFinancePolicy } from '../src/simulation/public-finance';
+import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V6, shopStaffMayMove, STAFF_PROFIT_SHARE, STUDENT_BURSARY, STUDY_GRANT_CEILING, STUDY_GRANT_PER_MINUTE, staffProfitShare, studentBursaries, studyGrant, validatePublicFinancePolicy } from '../src/simulation/public-finance';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -34,8 +34,8 @@ test('the profit tax takes its share of the distributable amount and the owner r
 
 test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
-  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V5);
-  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V5); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V5);
+  assert.equal(city.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V6);
+  assert.equal(doc.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V6); assert.equal(doc.runtime.publicFinancePolicyId, SHOP_PROFIT_TAX_POLICY_V6);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
@@ -170,4 +170,27 @@ test('v5 pays each student below the ceiling a daily bursary, poorest first, nev
   assert.deepEqual(studentBursaries(SHOP_PROFIT_TAX_POLICY_V5, students, 1e6), [{ id: 'b', amount: STUDENT_BURSARY }, { id: 'a', amount: STUDY_GRANT_CEILING - 110 }]);
   assert.deepEqual(studentBursaries(SHOP_PROFIT_TAX_POLICY_V5, students, 7), [{ id: 'b', amount: 7 }]);
   for (const policy of [SHOP_PROFIT_TAX_POLICY_V4, undefined]) assert.deepEqual(studentBursaries(policy, students, 1e6), []);
+});
+
+test('v6 keeps v5 and lets a poor worker leave a shop that cannot fund a day\'s wage for a funded offer', () => {
+  assert.equal(privateWageBase(SHOP_PROFIT_TAX_POLICY_V6), 40);
+  assert.equal(staffProfitShare(SHOP_PROFIT_TAX_POLICY_V6, 100, 2).each, 100 * STAFF_PROFIT_SHARE / 2);
+  assert.equal(studyGrant(SHOP_PROFIT_TAX_POLICY_V6, 60, 1e6), 60 * STUDY_GRANT_PER_MINUTE);
+  assert.equal(studentBursaries(SHOP_PROFIT_TAX_POLICY_V6, [{ id: 'a', money: 0 }], 1e6)[0].amount, STUDENT_BURSARY);
+  assert.equal(shopStaffMayMove(SHOP_PROFIT_TAX_POLICY_V6), true);
+  for (const policy of [SHOP_PROFIT_TAX_POLICY_V5, SHOP_PROFIT_TAX_POLICY_V4, undefined]) assert.equal(shopStaffMayMove(policy), false);
+  const world = createProductWorld();
+  for (const [policy, moves] of [[true, true], [false, false]] as const) {
+    const sim = policy ? createCurrentProductCity(world) : createArchivedProductCity(world);
+    sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
+    // Controlled: every shop with staff but no owner among them is drained; its staff are made poor.
+    const drained = sim.state.shops.filter(shop => sim.state.citizens.some(c => c.workId === shop.buildingId && c.id !== shop.ownerId && c.role !== '学生')).slice(0, 12);
+    const staff = new Map(drained.flatMap(shop => sim.state.citizens.filter(c => c.workId === shop.buildingId && c.id !== shop.ownerId && c.role !== '学生').map(c => [c.id, shop.buildingId] as const)));
+    for (const shop of drained) { shop.cash = 0; }
+    for (const c of sim.state.citizens) if (staff.has(c.id)) c.money = 20;
+    for (let tick = 0; tick < 600; tick++) sim.step(.25);
+    const moved = sim.state.citizens.filter(c => staff.has(c.id) && c.workId !== staff.get(c.id));
+    if (moves) assert.ok(moved.length > 0 && moved.every(c => sim.state.shops.some(shop => shop.buildingId === c.workId)), `${moved.length} of ${staff.size} moved to another shop`);
+    else assert.equal(moved.filter(c => sim.state.shops.some(shop => shop.buildingId === c.workId)).length, 0, 'an archived city keeps shop staff where they are');
+  }
 });

@@ -10,7 +10,7 @@ import { chooseNearestTiedMeal, eveningBonus, lunchBonus, MEAL_ROUTE_POLICIES, n
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
-import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, staffProfitShare, studentBursaries, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
+import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
@@ -1488,6 +1488,28 @@ export class Simulation implements SimulationAPI {
     }
     return plan;
   }
+  /** v6: a poor worker of a shop that cannot fund a day's wage takes a funded offer elsewhere. */
+  private considerShopMove(citizen: Citizen): void {
+    if (!shopStaffMayMove(this.runtime.publicFinancePolicyId) || citizen.money >= STUDY_GRANT_CEILING || this.state.hour < 8 || this.state.hour >= 17 || citizen.needs.hunger < 45 || citizen.needs.fatigue < 40 || (this.runtime.decisionAt[citizen.id] ?? 0) > this.now) return;
+    const current = this.state.shops.find(shop => shop.buildingId === citizen.workId);
+    if (!current || this.shopOwnerId(current) === citizen.id || citizen.role === '学生') return;
+    const dailySalary = privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
+    if (this.shopFunds(current) - this.shopProtectedFunds(current) >= dailySalary) return;
+    const day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440), today = this.runtime.privateLabor?.shifts[current.id];
+    if (today?.day === day && today.assignments.some(item => item.citizenId === citizen.id && item.minutesCap > 0)) return;
+    if ([...(this.runtime.wageArrears ?? []), ...this.runtime.wages, ...(this.runtime.wageAccruals ?? [])].some(wage => wage.citizenId === citizen.id && wage.shopId === current.id && wage.amount > 1e-9)) return;
+    const offers = this.state.shops.filter(shop => shop !== current && shop.open && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && tradeSignals(this, shop.id).sold > 0).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)) || a.id.localeCompare(b.id));
+    const offer = offers[0]; if (!offer) return;
+    const plan = this.preparePrivateAcceptance(offer, day);
+    if (!plan.assignments.some(item => item.citizenId === citizen.id)) {
+      const firstUnpromised = plan.assignments.findIndex(item => item.minutesCap === 0);
+      plan.assignments.splice(firstUnpromised < 0 ? plan.assignments.length : firstUnpromised, 0, { citizenId: citizen.id, ratePerMinute: dailySalary / 480, minutesCap: 0, workedMinutes: 0 });
+    }
+    if (today?.day === day) today.assignments = today.assignments.filter(item => item.citizenId !== citizen.id);
+    current.employees = Math.max(0, current.employees - 1); offer.employees++; citizen.workId = offer.buildingId; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
+    this.refreshWorkforce();
+    citizen.historyTags = [...new Set([...(citizen.historyTags ?? []), '离开无力支薪店铺另就现金岗位'])];
+  }
   private considerPrivateOpportunity(citizen: Citizen): void {
     const labor = this.runtime.publicLabor;
     if (!labor || !publicEmploymentSite(labor,citizen.id) || this.state.hour < 8 || this.state.hour >= 17 || citizen.needs.hunger < 45 || citizen.needs.fatigue < 40 || (citizen.skills?.craft ?? 0) < 20 || (this.runtime.decisionAt[citizen.id] ?? 0) > this.now) return;
@@ -1799,7 +1821,7 @@ export class Simulation implements SimulationAPI {
           continue;
         }
       }
-      if (!roadTask && citizen.state !== 'roadWaiting') this.considerPrivateOpportunity(citizen);
+      if (!roadTask && citizen.state !== 'roadWaiting') { this.considerPrivateOpportunity(citizen); this.considerShopMove(citizen); }
       const home = this.buildings.get(citizen.homeId)!; const work = this.buildings.get(citizen.workId)!;
       let availableMinutes = elapsed;
       const riding = this.runtime.riders[citizen.id];
