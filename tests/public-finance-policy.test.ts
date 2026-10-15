@@ -101,8 +101,12 @@ test('at the day boundary a declared city pays relief to a resident below two me
     const sim = make(civicFixtureWorld()), flows: { citizenId?: string; amount?: number }[] = [];
     (sim as unknown as { bus: { on(type: string, f: (e: { citizenId?: string; amount?: number }) => void): void } }).bus.on('public-relief', e => flows.push(e));
     sim.command({ type: 'speed', value: 8 });
-    const person = sim.state.citizens.find(c => c.role !== '学生')!; person.money = 1; // controlled poverty; the rest is the simulator's own
+    const person = sim.state.citizens.find(c => c.role !== '学生')!;
+    // Controlled poverty just before the day boundary (a wage earned during the day would lift the
+    // resident above the relief floor); the rest is the simulator's own.
     const day = sim.state.day;
+    for (let tick = 0; tick < 900 && sim.state.day === day && sim.state.hour < 23.75; tick++) sim.step(.25);
+    person.money = 1;
     for (let tick = 0; tick < 900 && sim.state.day === day; tick++) sim.step(.25);
     const paid = flows.filter(f => f.citizenId === person.id).reduce((n, f) => n + (f.amount ?? 0), 0);
     if (declared) assert.ok(paid > 0, 'the poor resident received relief'); else assert.equal(flows.length, 0);
