@@ -20,6 +20,7 @@ namespace Yunshan.Core
     {
         static Vec3 V(double x, double y, double z) => new Vec3(x, y, z);
         const string Paving = "#8a8170";
+        public const double CableTowerSpacing = 120;
 
         public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false, bool dressesRoadDeck = false, bool dressesRailKerb = false, bool dressesRailPierCaps = false)
         {
@@ -38,12 +39,27 @@ namespace Yunshan.Core
                     double width = TransportGeometry.DeckWidth(edge) - .04, yaw = JsMath.Atan2(b.X - a.X, b.Z - a.Z);
                     sink.Box("stone", p.X, p.Y - .28, p.Z, width, .5, width, paved ? Paving : "#555f61", yaw);
                 }
-                double supportRemainder = 0;
+                double supportRemainder = 0, towerRemainder = 0;
                 for (int i = 1; i < edge.Points.Count; i++)
                 {
                     Vec3 a = edge.Points[i - 1], b = edge.Points[i];
                     if (edge.Mode == "ferry") continue;
-                    if (edge.Mode == "cable") { sink.Segment("wood", a, b, .45, .45, 9); sink.Segment("cyan", a, b, .15, .15, 8.5); continue; }
+                    if (edge.Mode == "cable")
+                    {
+                        sink.Segment("wood", a, b, .45, .45, 9); sink.Segment("cyan", a, b, .15, .15, 8.5);
+                        // current-v8 ropeway towers (network-structures.ts).
+                        if (anyAngleStreets)
+                        {
+                            double span = JsMath.Hypot(b.X - a.X, b.Z - a.Z), yaw = JsMath.Atan2(b.X - a.X, b.Z - a.Z);
+                            for (double along = CableTowerSpacing - towerRemainder; along <= span; along += CableTowerSpacing)
+                            {
+                                double t = along / JsMath.Max(.01, span), x = a.X + (b.X - a.X) * t, z = a.Z + (b.Z - a.Z) * t, top = a.Y + (b.Y - a.Y) * t + 9, ground = World.TerrainHeight(world, x, z), tall = top - ground;
+                                if (tall > 6 && tall < 240) { sink.Box("stone", x, ground + tall / 2, z, 1.4, tall, 1.4, "#6f7a74"); sink.Box("wood", x, top + .5, z, 5.2, .6, .6, "#5b4a3a", yaw); }
+                            }
+                            towerRemainder = (towerRemainder + span) % CableTowerSpacing;
+                        }
+                        continue;
+                    }
                     if (edge.Mode == "lift")
                     {
                         foreach (var x in new[] { -2.5, 2.5 }) foreach (var z in new[] { -2.5, 2.5 }) sink.Segment("stone", V(a.X + x, a.Y, a.Z + z), V(b.X + x, b.Y, b.Z + z), .6, .6, 0, "#a4b0a2");

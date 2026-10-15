@@ -15,6 +15,8 @@ export interface NetworkSink {
 export interface NetworkStructureOptions { dressesStations: boolean; dressesRunway: boolean; dressesRailDeck?: boolean; dressesBridgeDeck?: boolean; dressesRoadDeck?: boolean; dressesRailKerb?: boolean; dressesRailPierCaps?: boolean }
 
 const PAVING = '#8a8170';
+/** Spacing of current-v8 ropeway towers (m). */
+export const CABLE_TOWER_SPACING = 120;
 
 /** Roads, rails, bridges, lifts, cables, supports, guardrails, station
  * platforms and junction poles, as the renderer has always drawn them. */
@@ -32,11 +34,23 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
         const yaw = Math.atan2(b.x - a.x, b.z - a.z);
         sink.box('stone', p.x, p.y - .28, p.z, width, .5, width, paved ? PAVING : '#555f61', yaw);
       }
-      let supportRemainder = 0;
+      let supportRemainder = 0, towerRemainder = 0;
       for (let i = 1; i < edge.points.length; i++) {
         const a = edge.points[i - 1], b = edge.points[i];
         if (edge.mode === 'ferry') continue;
-        if (edge.mode === 'cable') { sink.segment('wood', a, b, .45, .45, 9); sink.segment('cyan', a, b, .15, .15, 8.5); continue; }
+        if (edge.mode === 'cable') {
+          sink.segment('wood', a, b, .45, .45, 9); sink.segment('cyan', a, b, .15, .15, 8.5);
+          // current-v8 ropeways stand on lattice towers every CABLE_TOWER_SPACING m where the rope runs above the ground, as the concept's cable car.
+          if (anyAngleStreets) {
+            const length = Math.hypot(b.x - a.x, b.z - a.z), yaw = Math.atan2(b.x - a.x, b.z - a.z);
+            for (let along = CABLE_TOWER_SPACING - towerRemainder; along <= length; along += CABLE_TOWER_SPACING) {
+              const t = along / Math.max(.01, length), x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, top = a.y + (b.y - a.y) * t + 9, ground = terrainHeight(world, x, z), tall = top - ground;
+              if (tall > 6 && tall < 240) { sink.box('stone', x, ground + tall / 2, z, 1.4, tall, 1.4, '#6f7a74'); sink.box('wood', x, top + .5, z, 5.2, .6, .6, '#5b4a3a', yaw); }
+            }
+            towerRemainder = (towerRemainder + length) % CABLE_TOWER_SPACING;
+          }
+          continue;
+        }
         if (edge.mode === 'lift') {
           // An open four-post lift cage preserves the real central travel axis
           // while allowing the adjacent waterfall to remain visible through it.
