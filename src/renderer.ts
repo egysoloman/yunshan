@@ -25,6 +25,7 @@ import { StudioSkyModels } from './rendering/sky-models';
 import { faunaDressing, groundDressing } from './rendering/woodland-layout';
 const studioGroundAndFauna = (world: WorldDefinition, trees: Parameters<typeof groundDressing>[1]) => { const ground = groundDressing(world, trees); return [...ground, ...faunaDressing(world, trees, ground)]; };
 import { emitNetworkStructures } from './rendering/network-structures';
+import { arrivalLook } from './rendering/arrival-view';
 import { RAIL_PIER_CAP_ASSET, RUNWAY_LIGHT_ASSET, studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
@@ -490,9 +491,8 @@ export class CityRenderer implements CityRendererAPI {
       const capacity = Math.max(32, this.world.edges.filter(edge => edge.mode === kind).length * 3);
       this.vehiclePools.set(kind, this.makePool(capacity, this.materials.roof, this.materials.glass, this.materials.cyan));
     }
-    const arrivalShop = this.world.buildings.filter(b => b.kind === 'market' && b.districtId === 'market').sort((a, b) => Math.hypot(a.door.x - world.spawn.x, a.door.z - world.spawn.z) - Math.hypot(b.door.x - world.spawn.x, b.door.z - world.spawn.z))[0];
     this.camera.position.set(world.spawn.x, world.spawn.y + 1.72, world.spawn.z);
-    this.camera.lookAt(arrivalShop?.door.x ?? world.spawn.x, world.spawn.y + 1.2, arrivalShop?.door.z ?? world.spawn.z - 60);
+    const look = arrivalLook(world, world.spawn); this.camera.lookAt(look.x, look.y, look.z);
     this.resize();
   }
 
