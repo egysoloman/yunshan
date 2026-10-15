@@ -1496,7 +1496,8 @@ export class Simulation implements SimulationAPI {
     const dailySalary = privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
     if (this.shopFunds(current) - this.shopProtectedFunds(current) >= dailySalary) return;
     const day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440), today = this.runtime.privateLabor?.shifts[current.id];
-    if (today?.day === day && today.assignments.some(item => item.citizenId === citizen.id && item.minutesCap > 0)) return;
+    // A substantial promise for today (half a day or more) keeps the worker; a few funded minutes do not.
+    if (today?.day === day && today.assignments.some(item => item.citizenId === citizen.id && item.minutesCap >= 240)) return;
     // Wages already earned there stay payable after the move (accruals are keyed by worker and workplace).
     const offers = this.state.shops.filter(shop => shop !== current && shop.open && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && tradeSignals(this, shop.id).sold > 0).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)) || a.id.localeCompare(b.id));
     const offer = offers[0]; if (!offer) return;
