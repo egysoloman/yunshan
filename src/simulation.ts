@@ -10,7 +10,7 @@ import { chooseNearestTiedMeal, eveningBonus, lunchBonus, MEAL_ROUTE_POLICIES, n
 import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
 import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
 import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
-import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, staffProfitShare, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
+import { closeFiscalDay, councilTaxRate, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, staffProfitShare, studentBursaries, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
 import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
@@ -2254,9 +2254,15 @@ export class Simulation implements SimulationAPI {
     this.bus.emit({ type: 'study-grant', citizenId: citizen.id, districtId: citizen.districtId, amount });
   }
   private payPublicRelief(): void {
+    const profiles = this.state.extension?.actorProfiles, students = this.state.citizens.filter(c => c.role === '学生' && profiles?.[c.id]?.alive !== false);
+    for (const payment of studentBursaries(this.runtime.publicFinancePolicyId, students.map(c => ({ id: c.id, money: c.money })), students.length ? this.publicBudgetSnapshot().available : 0)) {
+      const citizen = this.state.citizens.find(c => c.id === payment.id)!;
+      this.state.treasury -= payment.amount; citizen.money += payment.amount;
+      this.bus.emit({ type: 'study-grant', citizenId: citizen.id, districtId: citizen.districtId, amount: payment.amount });
+    }
     const prices = this.state.shops.filter(shop => this.shopCommodity(shop) === 'food' && shop.inventory >= 1).map(shop => shop.price);
     if (!prices.length) return;
-    const floor = RELIEF_MEALS * Math.min(...prices), profiles = this.state.extension?.actorProfiles;
+    const floor = RELIEF_MEALS * Math.min(...prices);
     const claims = this.state.citizens.filter(c => profiles?.[c.id]?.alive !== false && c.money < floor).map(c => ({ id: c.id, money: c.money }));
     for (const payment of reliefPayments(claims, floor, this.publicBudgetSnapshot().available)) {
       const citizen = this.state.citizens.find(c => c.id === payment.id)!;

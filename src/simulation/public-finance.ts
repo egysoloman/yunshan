@@ -35,8 +35,10 @@ export const SHOP_PROFIT_TAX_POLICY_V4 = 'shop-profit-tax-v4' as const;
  * paid STUDY_GRANT_PER_MINUTE of the minutes actually spent there, never past
  * the ceiling, from the public budget's available cash (never its payroll or
  * operating reserves). A first rate of .04/min paid only 3.5 coins a student
- * a day: students study about 90 minutes a day at school. The council prices
- * the grant into the tax rate. */
+ * a day: students study about 90 minutes a day at school. Students are adults
+ * (20–59) who may not take jobs, so once a day each living student below the
+ * ceiling also receives STUDENT_BURSARY, poorest first, within the same
+ * available cash. The council prices both into the tax rate. */
 export const SHOP_PROFIT_TAX_POLICY_V5 = 'shop-profit-tax-v5' as const;
 export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5;
 export const PUBLIC_FINANCE_POLICIES: readonly PublicFinancePolicy[] = [SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5];
@@ -48,7 +50,17 @@ export const PRIVATE_WAGE_BASE = 32, PRIVATE_WAGE_BASE_V3 = 40;
 export const privateWageBase = (policy: PublicFinancePolicy | undefined) => LATER_THAN_V1.has(policy) && policy !== SHOP_PROFIT_TAX_POLICY_V2 ? PRIVATE_WAGE_BASE_V3 : PRIVATE_WAGE_BASE;
 /** Staff profit sharing (v4 and later). */
 export const sharesProfitWithStaff = (policy: PublicFinancePolicy | undefined) => policy === SHOP_PROFIT_TAX_POLICY_V4 || policy === SHOP_PROFIT_TAX_POLICY_V5;
-export const STUDY_GRANT_PER_MINUTE = .25, STUDY_GRANT_CEILING = 120;
+export const STUDY_GRANT_PER_MINUTE = .25, STUDY_GRANT_CEILING = 120, STUDENT_BURSARY = 20;
+/** Daily bursaries (v5 only): STUDENT_BURSARY to each student below the ceiling, poorest first, within the available cash. */
+export function studentBursaries(policy: PublicFinancePolicy | undefined, students: ReliefClaim[], available: number): { id: string; amount: number }[] {
+  if (policy !== SHOP_PROFIT_TAX_POLICY_V5) return [];
+  const out: { id: string; amount: number }[] = []; let budget = Math.max(0, available);
+  for (const s of [...students].sort((a, b) => a.money - b.money || a.id.localeCompare(b.id))) {
+    const amount = Math.min(STUDENT_BURSARY, Math.max(0, STUDY_GRANT_CEILING - s.money), budget);
+    if (amount <= 1e-9) continue; out.push({ id: s.id, amount }); budget -= amount;
+  }
+  return out;
+}
 /** The study grant for minutes studied at a school (v5 only): up to the ceiling, within the available public cash. */
 export function studyGrant(policy: PublicFinancePolicy | undefined, minutes: number, available: number, money = 0): number {
   return policy === SHOP_PROFIT_TAX_POLICY_V5 && minutes > 0 ? Math.max(0, Math.min(minutes * STUDY_GRANT_PER_MINUTE, STUDY_GRANT_CEILING - money, available)) : 0;

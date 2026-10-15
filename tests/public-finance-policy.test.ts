@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
-import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, STAFF_PROFIT_SHARE, STUDY_GRANT_CEILING, STUDY_GRANT_PER_MINUTE, staffProfitShare, studyGrant, validatePublicFinancePolicy } from '../src/simulation/public-finance';
+import { closeFiscalDay, COUNCIL_TAX_CEILING, COUNCIL_TAX_FLOOR, councilTaxRate, PROFIT_TAX_SHARE, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, reliefPayments, SHOP_PROFIT_TAX_POLICY, SHOP_PROFIT_TAX_POLICY_V2, SHOP_PROFIT_TAX_POLICY_V3, SHOP_PROFIT_TAX_POLICY_V4, SHOP_PROFIT_TAX_POLICY_V5, STAFF_PROFIT_SHARE, STUDENT_BURSARY, STUDY_GRANT_CEILING, STUDY_GRANT_PER_MINUTE, staffProfitShare, studentBursaries, studyGrant, validatePublicFinancePolicy } from '../src/simulation/public-finance';
 import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { civicFixtureWorld } from './civic-staffing-fixture';
@@ -163,4 +163,11 @@ test('v5 keeps v4 and pays students below the ceiling a grant for minutes studie
   assert.ok(grants.length > 0, 'a student studying at school received a grant');
   assert.ok(grants.every(g => sim.state.citizens.find(c => c.id === g.citizenId)?.role === '学生'), 'only students');
   assert.ok(Number.isFinite(sim.state.treasury) && treasury > 0);
+});
+
+test('v5 pays each student below the ceiling a daily bursary, poorest first, never past the ceiling or the available cash', () => {
+  const students = [{ id: 'a', money: 110 }, { id: 'b', money: 5 }, { id: 'c', money: 200 }];
+  assert.deepEqual(studentBursaries(SHOP_PROFIT_TAX_POLICY_V5, students, 1e6), [{ id: 'b', amount: STUDENT_BURSARY }, { id: 'a', amount: STUDY_GRANT_CEILING - 110 }]);
+  assert.deepEqual(studentBursaries(SHOP_PROFIT_TAX_POLICY_V5, students, 7), [{ id: 'b', amount: 7 }]);
+  for (const policy of [SHOP_PROFIT_TAX_POLICY_V4, undefined]) assert.deepEqual(studentBursaries(policy, students, 1e6), []);
 });
