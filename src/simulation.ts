@@ -2309,8 +2309,8 @@ export class Simulation implements SimulationAPI {
     const nearEntrance = (b: Building) => quarter && Math.hypot(b.door.x - spawn.x, b.door.z - spawn.z) <= ARRIVAL_RADIUS ? 1 : 0;
     if (quarter) offers.sort((a, b) => nearEntrance(this.buildings.get(b.buildingId)!) - nearEntrance(this.buildings.get(a.buildingId)!));
     let admitted = 0, alive = living.length;
-    // v8: a shop near the entrance may hire up to ARRIVAL_SLOTS migrants a day (round robin), each wage still funded.
-    const near = offers.filter(shop => nearEntrance(this.buildings.get(shop.buildingId)!)), committed = new Map<string, number>();
+    // v8: a shop near the entrance may hire up to ARRIVAL_SLOTS migrants a day (round robin).
+    const near = offers.filter(shop => nearEntrance(this.buildings.get(shop.buildingId)!));
     // Without the quarter no shop is near, so the order is v7's.
     for (const shop of [...Array.from({ length: ARRIVAL_SLOTS }, () => near).flat(), ...offers.slice(near.length)]) {
       if (admitted >= MIGRANTS_PER_DAY || alive >= MIGRATION_CAP || this.state.citizens.length + f.pregnancies.length >= 1024) break;
@@ -2318,8 +2318,9 @@ export class Simulation implements SimulationAPI {
       const home = homes.filter(h => (occupants.get(h.id) ?? 0) < h.capacity && this.buildingTravelDistance(h.id, shop.buildingId) <= 500)
         .sort((a, b) => nearEntrance(b) - nearEntrance(a) || fill(a) - fill(b) || this.buildingTravelDistance(a.id, shop.buildingId) - this.buildingTravelDistance(b.id, shop.buildingId) || a.id.localeCompare(b.id))[0];
       const work = this.buildings.get(shop.buildingId)!, wage = home && salary(home.districtId);
-      if (!home || spare(shop) - (committed.get(shop.id) ?? 0) < wage!) continue;
-      committed.set(shop.id, (committed.get(shop.id) ?? 0) + wage!);
+      // v8: the spare cash funds a day's wage for every migrant the shop already employs, and this one.
+      const employed = quarter ? this.state.citizens.filter(c => f.migrants?.[c.id] && c.workId === shop.buildingId && profiles[c.id]?.alive !== false).length : 0;
+      if (!home || spare(shop) < wage! * (1 + employed)) continue;
       const n = f.nextResidentId++, id = `resident-${n}`, arrivalAge = 20 + n * 7 % 21;
       const name = `${'沈云林白苏陆江顾温叶程许'[n % 12]}${'溪岚青舟遥宁竹澄川月星禾'[n * 5 % 12]}${'安和远新来歌晴望山岳帆乐'[n * 7 % 12]}`;
       const role = ({ market: '商人', workshop: '工人', farm: '农民' } as Record<string, string>)[work.kind] ?? '工人';

@@ -70,8 +70,10 @@ export const SHOP_PROFIT_TAX_POLICY_V7 = 'shop-profit-tax-v7' as const;
  * ARRIVAL_RADIUS of it when the job is within reach; otherwise as v7. A first
  * version (one migrant per shop a day, as v7) raised residents within 400 m of
  * the entrance only 27 -> 37 in 14 days: few entrance shops hire on a given
- * day. Such a shop may now take up to ARRIVAL_SLOTS a day, round robin, while
- * its spare cash still funds each newcomer's day wage. */
+ * day. Such a shop may now take up to ARRIVAL_SLOTS a day, round robin. That
+ * run put 30 of 42 migrants into one rich shop (31 of them poor): its spare
+ * cash recovers daily. Under v8 a shop hires another migrant only while its
+ * spare cash funds a day's wage for every migrant it employs and the newcomer. */
 export const SHOP_PROFIT_TAX_POLICY_V8 = 'shop-profit-tax-v8' as const;
 export const ARRIVAL_RADIUS = 400, ARRIVAL_SLOTS = 3;
 export type PublicFinancePolicy = typeof SHOP_PROFIT_TAX_POLICY_V8 | typeof SHOP_PROFIT_TAX_POLICY | typeof SHOP_PROFIT_TAX_POLICY_V2 | typeof SHOP_PROFIT_TAX_POLICY_V3 | typeof SHOP_PROFIT_TAX_POLICY_V4 | typeof SHOP_PROFIT_TAX_POLICY_V5 | typeof SHOP_PROFIT_TAX_POLICY_V6 | typeof SHOP_PROFIT_TAX_POLICY_V7;
