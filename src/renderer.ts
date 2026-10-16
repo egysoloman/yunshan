@@ -28,6 +28,7 @@ import { emitNetworkStructures } from './rendering/network-structures';
 import { arrivalLook } from './rendering/arrival-view';
 import { RAIL_PIER_CAP_ASSET, RUNWAY_LIGHT_ASSET, studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
+import { DoorwayGlowPool } from './rendering/doorway-glow';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
@@ -195,6 +196,7 @@ export class CityRenderer implements CityRendererAPI {
   private marketGoods: MarketGoodsPool;
   private studioProps: StudioPropPool;
   private marketShopfront: MarketShopfrontPool;
+  private doorwayGlow: DoorwayGlowPool;
   private stationWayfinding: StationWayfindingPool;
   private roadClosures: RoadClosureOverlay;
   private signalRed: THREE.InstancedMesh;
@@ -487,6 +489,7 @@ export class CityRenderer implements CityRendererAPI {
     this.firstPersonArms = new FirstPersonArms(this.camera); void this.firstPersonArms.load();
     this.marketGoods = new MarketGoodsPool(this.scene, world);
     this.marketShopfront = new MarketShopfrontPool(this.scene, world);
+    this.doorwayGlow = new DoorwayGlowPool(this.scene, world);
     this.stationWayfinding = new StationWayfindingPool(this.scene, world);
     for (const kind of ['road', 'maglev', 'lightRail', 'cable', 'lift', 'ferry', 'bridge', 'flight']) {
       const capacity = Math.max(32, this.world.edges.filter(edge => edge.mode === kind).length * 3);
@@ -1123,6 +1126,7 @@ export class CityRenderer implements CityRendererAPI {
     this.studioProps.update(this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), { id: this.insideId, floor: this.insideFloor }, this.quality === 'low' ? 45 : 90);
     this.marketShopfront.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 4 : 8);
     this.stationWayfinding.update(state, this.camera.position, this.quality === 'low' ? 3 : 8);
+    this.doorwayGlow.update(state, this.camera.position, daylight);
     const counts = new Map<string, number>(); let wheels = 0;
     for (const vehicle of state.vehicles) {
       const pool = this.vehiclePools.get(vehicle.kind); if (!pool) continue; const n = counts.get(vehicle.kind) ?? 0; if (n >= pool.capacity) continue;
@@ -1188,7 +1192,7 @@ export class CityRenderer implements CityRendererAPI {
   dispose() {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
-    this.marketGoods.dispose();
+    this.marketGoods.dispose(); this.doorwayGlow.dispose();
     this.studioProps?.dispose();
     this.marketShopfront.dispose();
     this.stationWayfinding?.dispose();

@@ -38,6 +38,7 @@ namespace Yunshan.Runtime
         readonly Dictionary<string, (TextMesh text, Building building)> shopSigns = new Dictionary<string, (TextMesh, Building)>();
         Font signFont;
         StationSignPool stationSigns; float nextStationSigns;
+        DoorwayGlowView doorwayGlow; float lastDaylight = 1;
         WoodlandView woodland;
         Vector2 contextScroll, panesScroll;
         CityMapImage mapImage; Texture2D mapTexture; string mapSelection;
@@ -151,6 +152,7 @@ namespace Yunshan.Runtime
                 if (arms != null) { firstPersonArms = Instantiate(arms, view.transform, false); firstPersonArms.SetActive(true); firstPersonArms.transform.localPosition = new Vector3(0, -.17f, .22f); firstPersonArms.transform.localRotation = Quaternion.Euler(0, 180, 0); }
                 if (signFont == null) signFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
                 stationSigns = new StationSignPool(stationRoot, world, signFont);
+                doorwayGlow = new DoorwayGlowView(stationRoot, world);
                 status = null;
                 _ = BuildMapAsync();
                 StartCoroutine(NearDetailLoop());
@@ -394,7 +396,7 @@ namespace Yunshan.Runtime
             if (sun == null) return;
             double hour = session?.Frame?.Hour ?? 10;
             float angle = (float)((hour - 6) / 24 * Math.PI * 2), altitude = Mathf.Sin(angle);
-            float daylight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.12f, .28f, altitude));
+            float daylight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.12f, .28f, altitude)); lastDaylight = daylight;
             var sunGame = new Vector3(-Mathf.Cos(angle) * 2500, altitude * 2500, altitude * 1400); // already mirrored X
             sun.transform.rotation = Quaternion.LookRotation(-sunGame.normalized);
             float energy = (float)((session?.Frame?.Energy ?? 100) / 100);
@@ -696,7 +698,7 @@ namespace Yunshan.Runtime
                 var line = $"{building.Name}\n{(shop.Open ? "营业中" : "已打烊")} · {shop.Price:0.#} 云币/份 · 库存 {shop.Inventory:0}";
                 if (text.text != line) text.text = line;
             }
-            if (stationSigns != null && Time.unscaledTime >= nextStationSigns) { nextStationSigns = Time.unscaledTime + .25f; stationSigns.Update(frame, view.transform.position); }
+            if (stationSigns != null && Time.unscaledTime >= nextStationSigns) { nextStationSigns = Time.unscaledTime + .25f; stationSigns.Update(frame, view.transform.position); doorwayGlow?.Update(frame, view.transform.position, lastDaylight); }
             foreach (var sign in signs) sign.rotation = Quaternion.LookRotation(sign.position - view.transform.position);
         }
 
