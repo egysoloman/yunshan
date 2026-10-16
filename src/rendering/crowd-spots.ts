@@ -18,3 +18,11 @@ export function crowdSpots(people: readonly CrowdPerson[]): CrowdSpot[] {
   return [...cells.values()].filter(cell => cell.count >= CROWD_MIN).map(cell => ({ x: cell.x / cell.count, z: cell.z / cell.count, count: cell.count }))
     .sort((a, b) => b.count - a.count || a.x - b.x || a.z - b.z).slice(0, CROWD_LIMIT);
 }
+
+/** A crowd spot is visited at the nearest public venue's door (any building when none). */
+export const CROWD_TARGET_KINDS: readonly string[] = ['market', 'pavilion', 'station', 'dock', 'hall', 'school', 'clinic', 'bank'];
+export function crowdSpotTarget(buildings: readonly { id: string; kind: string; door: { x: number; z: number } }[], spot: { x: number; z: number }): string | null {
+  const far = (b: { door: { x: number; z: number } }) => (b.door.x - spot.x) * (b.door.x - spot.x) + (b.door.z - spot.z) * (b.door.z - spot.z);
+  const pick = (list: readonly { id: string; door: { x: number; z: number } }[]) => list.reduce<typeof list[number] | null>((best, b) => !best || far(b) < far(best) || far(b) === far(best) && b.id < best.id ? b : best, null);
+  return (pick(buildings.filter(b => CROWD_TARGET_KINDS.includes(b.kind))) ?? pick(buildings))?.id ?? null;
+}

@@ -27,5 +27,15 @@ namespace Yunshan.Core
             spots.Sort((a, b) => b.Count != a.Count ? b.Count.CompareTo(a.Count) : a.X != b.X ? a.X.CompareTo(b.X) : a.Z.CompareTo(b.Z));
             return spots.Take(Limit).ToList();
         }
+
+        public static readonly string[] TargetKinds = { "market", "pavilion", "station", "dock", "hall", "school", "clinic", "bank" };
+
+        /// <summary>The nearest public venue's id (any building when none).</summary>
+        public static string Target(IReadOnlyList<Building> buildings, double x, double z)
+        {
+            double Far(Building b) => (b.Door.X - x) * (b.Door.X - x) + (b.Door.Z - z) * (b.Door.Z - z);
+            Building Pick(IEnumerable<Building> list) { Building best = null; foreach (var b in list) if (best == null || Far(b) < Far(best) || Far(b) == Far(best) && string.CompareOrdinal(b.Id, best.Id) < 0) best = b; return best; }
+            return (Pick(buildings.Where(b => TargetKinds.Contains(b.Kind))) ?? Pick(buildings))?.Id;
+        }
     }
 }

@@ -624,7 +624,9 @@ namespace Yunshan.Runtime
                 double Near(double px, double pz) => Math.Sqrt((px - x) * (px - x) + (pz - z) * (pz - z));
                 var building = world.Buildings.OrderBy(b => Near(b.Door.X, b.Door.Z)).First();
                 var district = world.Districts.OrderBy(d => Near(d.Center.X, d.Center.Z)).First();
-                mapSelection = Near(building.Door.X, building.Door.Z) * side / mapImage.Span < 6 ? building.Id : district.Id;
+                // A crowd halo selects the nearest public venue there (CrowdSpots.Target, as on the web map).
+                var halo = crowd.FirstOrDefault(c => Vector2.Distance(At(c.X, c.Z), e.mousePosition) <= 4 + Mathf.Sqrt(c.Count) * 1.6f + 6);
+                mapSelection = halo.Count > 0 ? CrowdSpots.Target(world.Buildings, halo.X, halo.Z) : Near(building.Door.X, building.Door.Z) * side / mapImage.Span < 6 ? building.Id : district.Id;
                 e.Use();
             }
             var below = new UnityEngine.Rect(area.x, map.yMax + 6, area.width, 80);
@@ -640,7 +642,7 @@ namespace Yunshan.Runtime
                 GUILayout.EndHorizontal();
             }
             else GUILayout.Label("点击地图上的城区或建筑，规划步行或公共交通行程。", small);
-            if (crowd.Count > 0) { var top = crowd[0]; var near = world.Districts.OrderBy(d => (d.Center.X - top.X) * (d.Center.X - top.X) + (d.Center.Z - top.Z) * (d.Center.Z - top.Z)).First(); GUILayout.Label($"此刻最热闹：{near.Name}一带 · {top.Count} 人在外", small); }
+            if (crowd.Count > 0) { var top = crowd[0]; var near = world.Districts.OrderBy(d => (d.Center.X - top.X) * (d.Center.X - top.X) + (d.Center.Z - top.Z) * (d.Center.Z - top.Z)).First(); GUILayout.Label($"此刻最热闹：{near.Name}一带 · {top.Count} 人在外（点光圈选中）", small); }
             else GUILayout.Label("此刻城中多在家中歇息", small);
             GUILayout.EndArea();
         }

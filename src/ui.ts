@@ -20,7 +20,7 @@ import { hygieneContent, hygieneSignature } from './hygiene-ui';
 import { HOME_REST_MINUTES, homeRestBlockedReason, homeRestPoints } from './simulation/home-rest';
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
-import { crowdSpots } from './rendering/crowd-spots';
+import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
 const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
@@ -147,6 +147,7 @@ export class CityUI {
   private mapBounds: { minX: number; minZ: number; width: number; height: number };
   private mapCanvas: HTMLCanvasElement;
   private mapPoints: { id: string; x: number; y: number }[] = [];
+  private crowdPoints: { x: number; y: number; r: number; spot: CrowdSpot }[] = [];
 
   constructor(container: HTMLElement, world: WorldDefinition, actions: UIActions) {
     this.world = world;
@@ -488,6 +489,10 @@ export class CityUI {
     const bounds = this.mapCanvas.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / bounds.width * this.mapCanvas.width;
     const y = (event.clientY - bounds.top) / bounds.height * this.mapCanvas.height;
+    // A crowd halo leads to the nearest public venue there.
+    const crowd = this.crowdPoints.find(point => Math.hypot(point.x - x, point.y - y) <= point.r + 6);
+    const crowdTarget = crowd && crowdSpotTarget(this.world.buildings, crowd.spot);
+    if (crowdTarget) { this.actions.travel(crowdTarget); return; }
     let nearest = this.mapPoints[0];
     for (const point of this.mapPoints) if (Math.hypot(point.x - x, point.y - y) < Math.hypot(nearest.x - x, nearest.y - y)) nearest = point;
     if (nearest && Math.hypot(nearest.x - x, nearest.y - y) < 35) this.actions.travel(nearest.id);
@@ -1585,12 +1590,13 @@ export class CityUI {
     }
     // Where people actually are now: warm halos sized by the real count.
     const profiles = this.state.extension?.actorProfiles, spots = crowdSpots(this.state.citizens.map(c => ({ position: c.position, state: c.state, alive: profiles?.[c.id]?.alive !== false })));
+    this.crowdPoints = [];
     for (const spot of spots) {
-      const p = project(spot), r = 4 + Math.sqrt(spot.count) * 1.6;
+      const p = project(spot), r = 4 + Math.sqrt(spot.count) * 1.6; this.crowdPoints.push({ ...p, r, spot });
       ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = 'rgba(214, 120, 52, .26)'; ctx.fill(); ctx.strokeStyle = 'rgba(214, 120, 52, .7)'; ctx.lineWidth = 1; ctx.stroke();
     }
     const busiest = spots[0];
-    this.setText('map-crowd', busiest ? `此刻最热闹：${this.nearestDistrict(busiest).name}一带 · ${busiest.count} 人在外` : '此刻城中多在家中歇息');
+    this.setText('map-crowd', busiest ? `此刻最热闹：${this.nearestDistrict(busiest).name}一带 · ${busiest.count} 人在外（点光圈前往）` : '此刻城中多在家中歇息');
     const player = project(this.state.player.position);
     ctx.beginPath(); ctx.arc(player.x, player.y, 6, 0, Math.PI * 2); ctx.fillStyle = '#cf9148'; ctx.fill(); ctx.strokeStyle = '#fff9e9'; ctx.lineWidth = 2; ctx.stroke();
     const view = project(this.view.position); ctx.beginPath(); ctx.moveTo(view.x, view.y - 7); ctx.lineTo(view.x - 5, view.y + 4); ctx.lineTo(view.x + 5, view.y + 4); ctx.closePath(); ctx.fillStyle = '#faf8ee'; ctx.fill(); ctx.strokeStyle = '#355447'; ctx.lineWidth = 1.3; ctx.stroke();
