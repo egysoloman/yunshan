@@ -1,3 +1,4 @@
+import { clearsCamera } from './near-camera';
 import * as THREE from 'three';
 import type { Citizen, LifeProfile, Quality, SimState, Vec3 } from '../types';
 
@@ -132,7 +133,7 @@ export class CitizenAppearancePool {
       const yaw=travel>.001&&travel<50?Math.atan2(dx,dz):previous?.yaw??initialYaw;
       const phase=(previous?.phase??0)+(walking&&!state.paused&&travel<50?travel*Math.PI/1.1:0);
       this.motion.set(citizen.id,{position:{...citizen.position},yaw,phase});
-      if(residents>=this.capacity||buried.has(citizen.id)||range>(dead?faceRange:visibleDistance)||!dead&&citizen.tier==='statistical'||modelled.has(citizen.id))continue;
+      if(residents>=this.capacity||buried.has(citizen.id)||range>(dead?faceRange:visibleDistance)||!dead&&citizen.tier==='statistical'||modelled.has(citizen.id)||!clearsCamera(cameraPosition,citizen.position))continue;
       const pose={yaw,phase,walking,seated,dead},detail=!dead&&range<=fullRange?'near':'far',appearance=describeCitizen(citizen,profile,pose,detail);
       this.yawRotation.setFromAxisAngle(this.upAxis,yaw);
       for(const part of appearance.parts){

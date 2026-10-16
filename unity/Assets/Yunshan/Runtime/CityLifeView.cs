@@ -104,6 +104,7 @@ namespace Yunshan.Runtime
                 motion[c.Id] = new Motion { Position = position, Yaw = yaw, Phase = phase };
                 double range = Distance(position, camera);
                 if (Modelled.Contains(c.Id)) { Residents++; continue; }
+                if (!NearCamera.Clears(camera, position)) continue;
                 bool near = !dead && range <= 110;
                 // Parts are cached per appearance; a walking stride only scales the
                 // template's swing (taken at phase π/2) by sin(phase).

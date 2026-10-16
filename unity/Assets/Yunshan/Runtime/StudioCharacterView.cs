@@ -42,7 +42,7 @@ namespace Yunshan.Runtime
             {
                 if (!life.TryMotion(c.Id, out var p, out var yaw, out var phase)) continue;
                 double d = System.Math.Sqrt((p.X - camera.X) * (p.X - camera.X) + (p.Y - camera.Y) * (p.Y - camera.Y) + (p.Z - camera.Z) * (p.Z - camera.Z));
-                if (d <= Range) near.Add((c, p, yaw, phase, d));
+                if (d <= Range && NearCamera.Clears(camera, p)) near.Add((c, p, yaw, phase, d));
             }
             near = near.OrderBy(e => e.D).ThenBy(e => e.C.Id, System.StringComparer.Ordinal).Take(Count).ToList();
             var next = new HashSet<string>(); int built = 0;

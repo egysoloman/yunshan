@@ -1,3 +1,4 @@
+import { clearsCamera } from './near-camera';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Quality, SimState, Vec3 } from '../types';
@@ -66,7 +67,7 @@ export class StudioCharacterPool {
     if (this.disposed || !this.ready) return;
     const range = STUDIO_CHARACTER_RANGE[quality];
     const buried = new Set((state.family?.ceremonies ?? []).filter(c => c.kind === 'funeral' && c.completedAt !== null).map(c => c.subjectId));
-    const near = state.citizens.filter(c => c.tier !== 'statistical' && !buried.has(c.id))
+    const near = state.citizens.filter(c => c.tier !== 'statistical' && !buried.has(c.id) && clearsCamera(camera, c.position))
       .map(c => ({ c, d: Math.hypot(c.position.x - camera.x, c.position.y - camera.y, c.position.z - camera.z) })).filter(e => e.d <= range.distance)
       .sort((a, b) => a.d - b.d || (a.c.id < b.c.id ? -1 : 1)).slice(0, range.count);
     const next = new Set<string>();
