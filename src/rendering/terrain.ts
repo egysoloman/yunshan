@@ -3,10 +3,11 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { Quality, Vec3, WorldDefinition } from '../types';
 import { getWaterfallPath, terrainHeight } from '../world';
 import { riverDressing, woodlandLayout, type WoodlandShrub, type WoodlandTree } from './woodland-layout';
+import { terraceMasonry, MASONRY_COLOR } from './terrace-masonry';
 
 interface Block { x: number; y: number; z: number; w: number; h: number; d: number; color: THREE.Color; id?: number }
 interface Segment { a: Vec3; b: Vec3; width: number; cutting?: boolean; bridge?: boolean }
-interface Surface { positions: number[]; colors: number[]; indices: number[] }
+interface Surface { positions: number[]; colors: number[]; indices: number[]; masonry: number[] }
 interface TerrainTile { x: number; z: number; coarse: THREE.Mesh; fine?: THREE.Group; fineStep?: number; used: number; indexStart: number; originalIndices: number[]; hidden: boolean }
 const TILE = 96;
 const quantize = (value: number) => Math.round(value / .2) * .2;
@@ -66,9 +67,9 @@ export function buildLandscape(world: WorldDefinition): {
   // Fine pigment and horizontal sediment continue across proxy boundaries; the
   // grain is tied to world coordinates rather than a repeated tile texture.
   earth.onBeforeCompile = shader => {
-    shader.vertexShader = 'varying vec3 vLandPosition; varying vec3 vLandNormal;\n' + shader.vertexShader;
-    shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvLandPosition = position; vLandNormal = normal;');
-    shader.fragmentShader = `varying vec3 vLandPosition; varying vec3 vLandNormal;
+    shader.vertexShader = 'attribute float landMasonry; varying vec3 vLandPosition; varying vec3 vLandNormal; varying float vMasonry;\n' + shader.vertexShader;
+    shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvLandPosition = position; vLandNormal = normal; vMasonry = landMasonry;');
+    shader.fragmentShader = `varying vec3 vLandPosition; varying vec3 vLandNormal; varying float vMasonry;
       float landPatch(vec2 p){
         vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
         vec4 n=fract(sin(vec4(dot(i,vec2(12.9898,78.233)),dot(i+vec2(1,0),vec2(12.9898,78.233)),dot(i+vec2(0,1),vec2(12.9898,78.233)),dot(i+vec2(1,1),vec2(12.9898,78.233))))*43758.5453);
@@ -93,7 +94,16 @@ export function buildLandscape(world: WorldDefinition): {
       diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.15,.235,.11),moss*.22);
       float meadow=1.0-cliff;
       float grassPatch=landPatch(vLandPosition.xz*.043);
-      diffuseColor.rgb*=mix(1.0,.93+grassPatch*.12,meadow);`);
+      diffuseColor.rgb*=mix(1.0,.93+grassPatch*.12,meadow);
+      // Dressed-stone retaining walls (terrace-masonry.ts): 0.6 m courses of
+      // 1.2 m blocks, joints staggered by half a block, each block toned apart.
+      if (vMasonry > .5) {
+        float along = abs(vLandNormal.x) > abs(vLandNormal.z) ? vLandPosition.z : vLandPosition.x;
+        float course = vLandPosition.y / .6, row = floor(course), run = along / 1.2 + mod(row, 2.0) * .5;
+        float block = fract(sin(dot(vec2(row, floor(run)), vec2(12.9898, 78.233))) * 43758.5453);
+        float joint = max(1.0 - smoothstep(.0, .07, min(fract(course), 1.0 - fract(course))), 1.0 - smoothstep(.0, .035, min(fract(run), 1.0 - fract(run))));
+        diffuseColor.rgb = vColor.rgb * (.9 + block * .16) * mix(1.0, .62, joint * landMicro);
+      }`);
   };
   const transform = new THREE.Object3D();
   function batch(name: string, blocks: Block[], material: THREE.Material, parent = group, geometry: THREE.BufferGeometry = cube) {
@@ -143,15 +153,16 @@ export function buildLandscape(world: WorldDefinition): {
     return color.multiplyScalar(.96 + broad * .06);
   }
   function mesh(name: string, data: Surface, parent: THREE.Group) {
-    const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(data.positions, 3)); geometry.setAttribute('color', new THREE.Float32BufferAttribute(data.colors, 3)); geometry.setIndex(data.indices); geometry.computeVertexNormals(); geometry.computeBoundingSphere(); geometries.add(geometry);
+    const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(data.positions, 3)); geometry.setAttribute('color', new THREE.Float32BufferAttribute(data.colors, 3)); geometry.setAttribute('landMasonry', new THREE.Float32BufferAttribute(data.masonry, 1)); geometry.setIndex(data.indices); geometry.computeVertexNormals(); geometry.computeBoundingSphere(); geometries.add(geometry);
     const result = new THREE.Mesh(geometry, earth); result.name = name; result.receiveShadow = true; parent.add(result); return result;
   }
-  function quad(data: Surface, vertices: number[], color: THREE.Color) {
-    const start = data.positions.length / 3; data.positions.push(...vertices); for (let i = 0; i < 4; i++) data.colors.push(color.r, color.g, color.b); data.indices.push(start, start + 1, start + 2, start, start + 2, start + 3);
+  function quad(data: Surface, vertices: number[], color: THREE.Color, masonry = 0) {
+    const start = data.positions.length / 3; data.positions.push(...vertices); for (let i = 0; i < 4; i++) { data.colors.push(color.r, color.g, color.b); data.masonry.push(masonry); } data.indices.push(start, start + 1, start + 2, start, start + 2, start + 3);
   }
+  const masonryAt = terraceMasonry(world), masonryStone = new THREE.Color(MASONRY_COLOR);
   const proxySteps = new Map<string, number>();
   function shell(tx: number, tz: number, step: number, stepped: boolean, parent: THREE.Group) {
-    const data: Surface = { positions: [], colors: [], indices: [] };
+    const data: Surface = { positions: [], colors: [], indices: [], masonry: [] };
     const hangingLeaves: Block[] = [];
     const nearbyBuildings = buildings.get(`${tx}:${tz}`) ?? [];
     const half = step / 2;
@@ -178,7 +189,10 @@ export function buildLandscape(world: WorldDefinition): {
           const side = groundColor(mx, mz, top, slope, true), west = height(a - localHalf, mz), east = height(b + localHalf, mz), north = height(mx, c - localHalf), south = height(mx, d + localHalf);
           const wall = (vertices: number[], low: number, faceX: number, faceZ: number, nx: number, nz: number) => {
             if (low >= top) return;
-            quad(data, vertices, side);
+            // A terrace edge in town is a dressed-stone retaining wall (terrace-masonry.ts).
+            const masoned = masonryAt(faceX, faceZ, top, top - low);
+            quad(data, vertices, masoned ? masonryStone.clone().multiplyScalar(.94 + hash(mx, mz, world.seed + 7) * .1) : side, masoned ? 1 : 0);
+            if (masoned) return;
             if (hangingLeaves.length >= 360 || top - low < 4 || hash(mx, mz, world.seed) < .74 || !clearGround(mx, mz, .4)) return;
             for (let layer = 0; layer < Math.min(12, Math.floor((top - low) / 1.2)) && hangingLeaves.length < 360; layer++) {
               const spread = (hash(mx + layer, mz, world.seed) - .5) * Math.min(1.2, localStep * .6), yy = quantize(top - .6 - layer * 1.2);
@@ -212,7 +226,7 @@ export function buildLandscape(world: WorldDefinition): {
             // interior edge and creating another unmatched T-junction.
             const start = data.positions.length / 3;
             data.positions.push(mx, height(mx, mz), mz, ...ring.flat());
-            for (let i = 0; i <= ring.length; i++) data.colors.push(color.r, color.g, color.b);
+            for (let i = 0; i <= ring.length; i++) { data.colors.push(color.r, color.g, color.b); data.masonry.push(0); }
             for (let i = 0; i < ring.length; i++) data.indices.push(start, start + 1 + i, start + 1 + (i + 1) % ring.length);
           }
         }
@@ -259,7 +273,7 @@ export function buildLandscape(world: WorldDefinition): {
   const farExtent = extent * TILE + 1536;
   const peaks = Array.from({ length: 23 }, (_, i) => { const angle = i / 23 * Math.PI * 2 + (hash(i, 201, world.seed) - .5) * .42, radius = extent * TILE + 470 + hash(i, 202, world.seed) * 1050, rotation = angle + .5 + hash(i, 203, world.seed) * 1.4; return { x: Math.cos(angle) * radius, z: Math.sin(angle) * radius, height: 260 + hash(i, 204, world.seed) * 235, long: 540 + hash(i, 205, world.seed) * 560, short: 290 + hash(i, 206, world.seed) * 330, cos: Math.cos(rotation), sin: Math.sin(rotation) }; });
   function ridgeHeight(x: number, z: number) { let first = 0, second = 0; for (const peak of peaks) { const dx = x - peak.x, dz = z - peak.z, a = (dx * peak.cos + dz * peak.sin) / peak.long, b = (-dx * peak.sin + dz * peak.cos) / peak.short, h = peak.height * Math.exp(-1.8 * (a * a + b * b)); if (h > first) { second = first; first = h; } else if (h > second) second = h; } const distance = Math.max(Math.abs(x), Math.abs(z)); return -24 + (first + second * .16) * THREE.MathUtils.smoothstep(distance, extent * TILE - 32, extent * TILE + 300) * (1 - THREE.MathUtils.smoothstep(distance, farExtent - 480, farExtent)); }
-  const distant: Surface = { positions: [], colors: [], indices: [] };
+  const distant: Surface = { positions: [], colors: [], indices: [], masonry: [] };
   for (let x = -farExtent; x < farExtent; x += 48) for (let z = -farExtent; z < farExtent; z += 48) { if (Math.abs(x + 24) < extent * TILE && Math.abs(z + 24) < extent * TILE) continue; const h = ridgeHeight(x + 24, z + 24); if (h < -20) continue; quad(distant, [x, ridgeHeight(x, z), z, x, ridgeHeight(x, z + 48), z + 48, x + 48, ridgeHeight(x + 48, z + 48), z + 48, x + 48, ridgeHeight(x + 48, z), z], new THREE.Color('#758e96').lerp(new THREE.Color('#859a9b'), h / 1500)); }
   mesh('远山 · 叠嶂岩脊代理', distant, group);
 
