@@ -38,7 +38,7 @@ namespace Yunshan.Runtime
         readonly Dictionary<string, (TextMesh text, Building building)> shopSigns = new Dictionary<string, (TextMesh, Building)>();
         Font signFont;
         StationSignPool stationSigns; float nextStationSigns;
-        DoorwayGlowView doorwayGlow; float lastDaylight = 1;
+        DoorwayGlowView doorwayGlow; LanternGlowView lanternGlow; float lastDaylight = 1;
         WoodlandView woodland;
         Vector2 contextScroll, panesScroll;
         CityMapImage mapImage; Texture2D mapTexture; string mapSelection;
@@ -153,6 +153,7 @@ namespace Yunshan.Runtime
                 if (signFont == null) signFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
                 stationSigns = new StationSignPool(stationRoot, world, signFont);
                 doorwayGlow = new DoorwayGlowView(stationRoot, world);
+                lanternGlow = new LanternGlowView(stationRoot, world);
                 status = null;
                 _ = BuildMapAsync();
                 StartCoroutine(NearDetailLoop());
@@ -396,7 +397,7 @@ namespace Yunshan.Runtime
             if (sun == null) return;
             double hour = session?.Frame?.Hour ?? 10;
             float angle = (float)((hour - 6) / 24 * Math.PI * 2), altitude = Mathf.Sin(angle);
-            float daylight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.12f, .28f, altitude)); lastDaylight = daylight;
+            float daylight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.12f, .28f, altitude)); lastDaylight = daylight; lanternGlow?.Update(daylight);
             var sunGame = new Vector3(-Mathf.Cos(angle) * 2500, altitude * 2500, altitude * 1400); // already mirrored X
             sun.transform.rotation = Quaternion.LookRotation(-sunGame.normalized);
             float energy = (float)((session?.Frame?.Energy ?? 100) / 100);
