@@ -2467,3 +2467,5 @@ canvas {
 .welcome-note .first-day b { font-weight: 600; }
 .welcome-note .first-day i { font-style: normal; }
 .welcome-note .first-day i.done { opacity: .5; }
+.welcome-note .first-day .first-day-step { font: inherit; color: #a2632c; background: none; border: 0; padding: 0 0 0 4px; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
+.welcome-note .first-day .first-day-step:hover, .welcome-note .first-day .first-day-step:focus-visible { color: #7d4519; }

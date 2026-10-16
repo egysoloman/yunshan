@@ -21,6 +21,7 @@ import { HOME_REST_MINUTES, homeRestBlockedReason, homeRestPoints } from './simu
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
+import { firstDayTarget, type FirstDayStep } from './first-day';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
 const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
@@ -304,7 +305,11 @@ export class CityUI {
     const signature = steps.map(([id]) => this.firstDay.has(id) ? '1' : '0').join('');
     if (list.dataset.signature === signature) return;
     list.dataset.signature = signature;
-    list.replaceChildren(element('b', '', '第一天'), ...steps.map(([id, label, hint]) => { const item = element('i', this.firstDay.has(id) ? 'done' : '', ` · ${this.firstDay.has(id) ? '✓' : ''}${label}`); item.setAttribute('role', 'listitem'); item.title = hint; item.dataset.step = id; return item; }));
+    list.replaceChildren(element('b', '', '第一天'), ...steps.map(([id, label, hint]) => {
+      // An open step that a place serves is a one-click walk there (first-day.ts).
+      if (!this.firstDay.has(id) && id !== 'walk') { const item = element('button', 'first-day-step', `· ${label}`) as HTMLButtonElement; item.type = 'button'; item.title = `${hint}（点击前往）`; item.dataset.step = id; item.dataset.firstDay = id; return item; }
+      const item = element('i', this.firstDay.has(id) ? 'done' : '', ` · ${this.firstDay.has(id) ? '✓' : ''}${label}`); item.setAttribute('role', 'listitem'); item.title = hint; item.dataset.step = id; return item;
+    }));
     if (steps.every(([id]) => this.firstDay.has(id))) { this.ref('welcome').hidden = true; try { localStorage.setItem('yunshan.ui.welcomeSeen.v1', '1'); } catch { /* storage restricted */ } }
   }
   private atKind(...kinds: BuildingKind[]): boolean { return this.world.buildings.some(b => kinds.includes(b.kind) && this.atBuilding(b.id)); }
@@ -402,6 +407,11 @@ export class CityUI {
     if (button.dataset.context) { this.contextKind = button.dataset.context as ContextKind; this.contextSignature = ''; this.refreshContext(); return; }
     if (button.dataset.citizen) { this.selectedCitizen = button.dataset.citizen; this.refreshPanel(); return; }
     if (button.dataset.company) { this.selectedCompany = button.dataset.company; this.refreshPanel(); return; }
+    if (button.dataset.firstDay && this.state) {
+      const target = firstDayTarget(this.state, this.world, this.state.player.position, button.dataset.firstDay as FirstDayStep);
+      if (target) this.actions.travel(target, 'auto'); else this.notify(button.dataset.firstDay === 'meet' ? '此刻街上人少，稍晚再出门走走看。' : '附近的店铺此刻都已打烊，白天再来。', false);
+      return;
+    }
     if (button.dataset.destination) { this.actions.travel(button.dataset.destination,this.ref<HTMLSelectElement>('journey-preference').value as 'walk'|'transit'); return; }
     if (button.dataset.navigation) { if (this.actions.navigateTarget) this.actions.navigateTarget(button.dataset.navigation,this.ref<HTMLSelectElement>('journey-preference').value as 'walk'|'transit'); else this.actions.travel(button.dataset.navigation); return; }
     if (button.dataset.command) {
