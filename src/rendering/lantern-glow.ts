@@ -1,5 +1,5 @@
 import type { WorldDefinition } from '../types';
-import { lanternStrings } from './lantern-strings';
+import { lanternStrings, terraceLanternStrings } from './lantern-strings';
 
 /** R1 W5 (docs/设计/美术与渲染改造方案.md §2.5, S6): display-only far glow of
  * lanterns. Near the camera the modelled lanterns are visible; at drone
@@ -29,6 +29,6 @@ export function lanternGlows(world: WorldDefinition, streetSpacing = 36): Lanter
       carry -= seg;
     }
   }
-  for (const string of lanternStrings(world)) for (const lantern of string.lanterns) out.push({ ...lantern, kind: 'string' });
+  for (const string of [...lanternStrings(world), ...terraceLanternStrings(world)]) for (const lantern of string.lanterns) out.push({ ...lantern, kind: 'string' });
   return out;
 }

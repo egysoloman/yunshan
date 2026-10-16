@@ -6,7 +6,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { mixHex, timeOfDayGrade } from './rendering/time-of-day-grade';
 import { cloudBanks } from './rendering/cloud-banks';
 import { lanternGlows } from './rendering/lantern-glow';
-import { lanternStrings } from './rendering/lantern-strings';
+import { lanternStrings, terraceLanternStrings } from './rendering/lantern-strings';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
 import { samplePolyline, terrainHeight } from './world';
 import { RoadClosureOverlay } from './rendering/road-closures';
@@ -854,7 +854,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const edge of this.world.edges) this.edges.set(edge.id, edge);
     emitNetworkStructures(this.world, batch, { dressesStations: !!this.studioProps?.dressesStations, dressesRunway: !!this.studioProps?.dressesLandmark('runway'), dressesRailDeck: !!this.studioProps?.dressesDeck('rail'), dressesBridgeDeck: !!this.studioProps?.dressesDeck('bridge'), dressesRoadDeck: this.roadTiles.some(t => t.asset === 'BUILT-131'), dressesRailKerb: this.roadTiles.some(t => t.asset === 'BUILT-142'), dressesRailPierCaps: !!this.studioProps?.dressesNetworkDetail(RAIL_PIER_CAP_ASSET) });
     // 千灯市集 lantern strings across the v8 market streets (display only).
-    for (const string of lanternStrings(this.world)) {
+    for (const string of [...lanternStrings(this.world), ...terraceLanternStrings(this.world)]) {
       for (const pole of string.poles) { batch.box('wood', pole.x, pole.y + 2.9, pole.z, .3, 5.8, .3, '#5a3a26'); batch.box('wood', pole.x, pole.y + 5.85, pole.z, .5, .2, .5, '#3d2a1d'); }
       const [a, b] = string.poles; batch.segment('wood', { x: a.x, y: a.y + 5.75, z: a.z }, { x: b.x, y: b.y + 5.75, z: b.z }, .05, .05, 0, '#2f2a24');
       for (const l of string.lanterns) { batch.box('lantern', l.x, l.y, l.z, .55, .7, .55, '#b8432f'); batch.box('wood', l.x, l.y + .42, l.z, .35, .12, .35, '#3d2a1d'); }

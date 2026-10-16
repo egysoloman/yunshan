@@ -4,11 +4,12 @@
 import { writeFileSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { createWorld } from '../../src/world';
-import { lanternStrings } from '../../src/rendering/lantern-strings';
+import { lanternStrings, terraceLanternStrings } from '../../src/rendering/lantern-strings';
 
 const calls: unknown[] = [];
 const box = (key: string, x: number, y: number, z: number, sx: number, sy: number, sz: number, color: string) => calls.push(['b', key, x, y, z, sx, sy, sz, color, 0, false]);
-for (const string of lanternStrings(createWorld(20261001, 'current-v8'))) {
+const world = createWorld(20261001, 'current-v8');
+for (const string of [...lanternStrings(world), ...terraceLanternStrings(world)]) {
   for (const pole of string.poles) { box('wood', pole.x, pole.y + 2.9, pole.z, .3, 5.8, .3, '#5a3a26'); box('wood', pole.x, pole.y + 5.85, pole.z, .5, .2, .5, '#3d2a1d'); }
   const [a, b] = string.poles; calls.push(['s', 'wood', a.x, a.y + 5.75, a.z, b.x, b.y + 5.75, b.z, .05, .05, 0, '#2f2a24']);
   for (const l of string.lanterns) { box('lantern', l.x, l.y, l.z, .55, .7, .55, '#b8432f'); box('wood', l.x, l.y + .42, l.z, .35, .12, .35, '#3d2a1d'); }
