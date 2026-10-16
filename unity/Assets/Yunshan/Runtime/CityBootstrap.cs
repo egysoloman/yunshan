@@ -635,6 +635,8 @@ namespace Yunshan.Runtime
             {
                 var name = world.Buildings.FirstOrDefault(b => b.Id == mapSelection)?.Name ?? world.Districts.FirstOrDefault(d => d.Id == mapSelection)?.Name ?? mapSelection;
                 GUILayout.Label("已选：" + name, label);
+                var picked = world.Buildings.FirstOrDefault(b => b.Id == mapSelection);
+                if (picked != null) { var f = walker.Feet; var metres = Math.Sqrt((picked.Door.X - f.X) * (picked.Door.X - f.X) + (picked.Door.Z - f.Z) * (picked.Door.Z - f.Z)); if (metres > 1200) GUILayout.Label($"直线约 {Math.Round(metres)} 米，较远，建议乘公共交通。", small); }
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button("步行导航")) Execute(new Dictionary<string, object> { ["type"] = "planJourney", ["targetId"] = mapSelection, ["value"] = 0d });
                 if (GUILayout.Button("公共交通")) Execute(new Dictionary<string, object> { ["type"] = "planJourney", ["targetId"] = mapSelection, ["value"] = 1d });

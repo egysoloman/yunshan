@@ -18,6 +18,8 @@ import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-lay
 import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, ViewState } from './types';
 
 const PREF_KEY = 'yunshan.preferences.v1';
+/** A map crowd halo farther than this (straight line) is reached by public transport when a service exists. */
+const AUTO_TRANSIT_METRES = 1200;
 const app = document.querySelector<HTMLElement>('#app')!;
 const stage = document.createElement('main');
 stage.className = 'world-stage';
@@ -115,7 +117,16 @@ const actions: UIActions = {
     city.setQuality(quality);
     persistPreferences();
   },
-  travel(targetId, preference = 'walk') {
+  travel(targetId, preference: 'walk' | 'transit' | 'auto' = 'walk') {
+    // 'auto' (a map crowd halo): public transport for a far venue when a service exists, otherwise walking.
+    if (preference === 'auto') {
+      const site = world.buildings.find(b => b.id === targetId), feet = simulation.state.player.position, metres = site ? Math.round(Math.hypot(site.door.x - feet.x, site.door.z - feet.z)) : 0;
+      if (metres > AUTO_TRANSIT_METRES && simulation.command({ type: 'planJourney', targetId, value: 1 }).ok) {
+        syncNavigation();
+        if (!navigationPlan?.unavailable) return showNotice(`目的地较远（直线约 ${metres} 米），已规划公共交通至${navigationPlan!.destination!.name}；请先步行到首段乘车点，现场查看当前班次与票款。`);
+      }
+      preference = 'walk';
+    }
     const planned = simulation.command({ type: 'planJourney', targetId, value: preference === 'transit' ? 1 : 0 });
     if (!planned.ok) return showNotice(planned.message, false);
     syncNavigation();

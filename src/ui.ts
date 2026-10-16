@@ -492,7 +492,7 @@ export class CityUI {
     // A crowd halo leads to the nearest public venue there.
     const crowd = this.crowdPoints.find(point => Math.hypot(point.x - x, point.y - y) <= point.r + 6);
     const crowdTarget = crowd && crowdSpotTarget(this.world.buildings, crowd.spot);
-    if (crowdTarget) { this.actions.travel(crowdTarget); return; }
+    if (crowdTarget) { this.actions.travel(crowdTarget, 'auto'); return; }
     let nearest = this.mapPoints[0];
     for (const point of this.mapPoints) if (Math.hypot(point.x - x, point.y - y) < Math.hypot(nearest.x - x, nearest.y - y)) nearest = point;
     if (nearest && Math.hypot(nearest.x - x, nearest.y - y) < 35) this.actions.travel(nearest.id);
