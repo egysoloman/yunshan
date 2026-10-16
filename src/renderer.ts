@@ -135,7 +135,7 @@ class BoxBatch {
       // Only existing building panes receive lattice/illumination. Transport
       // windscreens share the glass material but carry a zero surface flag.
       if (key === 'glass') mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? part.windowStyle ?? 1 : 0)), 1));
-      if (key === 'glass') mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? BoxBatch.buildingIndex.get(part.building) ?? -1 : -1)), 1));
+      if (key === 'glass' || key === 'amber') mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? BoxBatch.buildingIndex.get(part.building) ?? -1 : -1)), 1));
       mesh.name = `batch-${key}-${cell}`;
       parts.forEach((part, index) => {
         mesh.setMatrixAt(index, part.matrix); mesh.setColorAt(index, part.color);
@@ -359,6 +359,20 @@ export class CityRenderer implements CityRendererAPI {
       }
     }; }
     this.materials.glass.roughness = .42; this.materials.glass.metalness = .12;
+    // Room lamps inside a building (amber) glow by the building's real occupied share, lamp by lamp;
+    // amber outside buildings (stations, runway, signs) carries no building and keeps its glow.
+    this.materials.amber.customProgramCacheKey = () => 'yunshan-occupied-lamps-v1';
+    this.materials.amber.onBeforeCompile = shader => {
+      shader.uniforms.windowLight = this.windowLightUniform; shader.uniforms.windowLightCount = this.windowLightCount;
+      shader.vertexShader = 'uniform sampler2D windowLight;uniform float windowLightCount;attribute float instanceWindowBuilding;varying float vLampLit;\n' + shader.vertexShader;
+      shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
+        vLampLit=1.0;
+        #ifdef USE_INSTANCING
+        if(instanceWindowBuilding>=0.0){float light=texture2D(windowLight,vec2((instanceWindowBuilding+.5)/windowLightCount,.5)).r;float seed=fract(sin(dot(instanceMatrix[3].xyz,vec3(12.9898,78.233,39.425)))*43758.5453);vLampLit=mix(.08,1.0,1.0-step(light,seed));}
+        #endif`);
+      shader.fragmentShader = 'varying float vLampLit;\n' + shader.fragmentShader;
+      shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance*=vLampLit;');
+    };
     this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v4';
     this.materials.glass.onBeforeCompile = shader => {
       shader.uniforms.facadeNight = this.facadeNight; shader.uniforms.windowLight = this.windowLightUniform; shader.uniforms.windowLightCount = this.windowLightCount;
@@ -1048,7 +1062,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const mesh of [body, head, trim]) {
       if (mesh.material === this.materials.roof) mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
       if (mesh.material === this.materials.glass) mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
-      if (mesh.material === this.materials.glass) mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(capacity).fill(-1), 1));
+      if (mesh.material === this.materials.glass || mesh.material === this.materials.amber) mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(capacity).fill(-1), 1));
       mesh.count = 0; mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); mesh.frustumCulled = false; this.scene.add(mesh);
     }
     return { body, head, trim, capacity };
