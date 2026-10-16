@@ -1256,6 +1256,7 @@ export class CityUI {
     if (this.contextKind === 'aircraft' && aircraft) {
       body.append(this.aircraftContent(aircraft));
     } else if (this.contextKind === 'building' && building) {
+      const notes: HTMLElement[] = [];
       body.append(element('span', 'eyebrow', `${kindNames[building.kind]} · ${view.inside ? '已进入' : '附近场所'}`), element('h3', '', building.name));
       const currentFloor = floor >= 0 ? `${floor + 1} 层` : `地下 ${Math.abs(floor)} 层`;
       const floorUse = floor >= 0 ? building.floorUses?.[floor] : building.basementUses?.[Math.abs(floor) - 1];
@@ -1265,6 +1266,29 @@ export class CityUI {
       this.buildingActions(controls, building, !walk);
       if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) body.append(this.functionPointHint(building));
       if (controls.childElementCount) body.append(controls);
+      if (state.playerLabor?.job) body.append(this.laborContent());
+      if (building.kind === 'clinic') body.append(this.clinicalContent());
+      if (building.kind === 'school') body.append(this.educationContent(), this.familyEducationContent(building));
+      if (building.kind === 'home' && building.floorPlanProfile === FLOOR_PLAN_PROFILE) body.append(this.homeRestContent(building));
+      if (shop) body.append(element('p', 'note', `${building.kind === 'workshop' ? '工业物料' : '食物'} ${money(shop.price)} / 份 · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`), );
+      if (shop) notes.push(element('p', 'note', building.kind === 'workshop' ? '工业物料进入背包，用于真实建设或材料用途。' : '购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。'));
+      if (['school', 'pavilion'].includes(building.kind)) { const link = element('button', 'text-button full-width', '创作与阅读作品 ↗'); link.type = 'button'; link.dataset.action = 'life'; body.append(link); }
+      if (building.kind === 'bank') this.renderBank(body, building, !walk);
+      if (building.kind === 'school') notes.push(element('p', 'note', '普通自习增长学习技能；正式学历需要完成有教师、教材和实际教学的课程。' ));
+      if (building.publicFloors !== undefined) notes.push(element('p', 'note', '公共服务楼层可自由进入；其余空间按各楼层权限开放，持有多个身份可使用对应设施。'));
+      if (building.floorUses?.length) {
+        const guide = element('details', 'relationship-choices'); guide.append(element('summary', '', '楼层与空间导览'));
+        for (let index = 0; index < building.floorUses.length; index++) {
+          const permission = building.floorPermissions?.[index];
+          guide.append(field(`${index + 1} 层 · ${building.floorUses[index]}`, permission === 'public' || !permission ? '公共' : roleNames[permission] ?? '受限空间'));
+        }
+        building.basementUses?.forEach((use, index) => guide.append(field(`地下 ${index + 1} 层`, use)));
+        body.append(guide);
+      }
+      if (!walk) body.append(element('p', 'context-hint', '切换步行并接近入口，参与这里的生活。'));
+      else if (!view.inside) notes.push(element('p', 'context-hint', '走近门口按 E 进入，楼梯处按 E 换层。'));
+      // Explanations stay one click away so the panel leads with the place and its actions.
+      if (notes.length) { const help = element('details', 'relationship-choices'); help.append(element('summary', '', '办理说明'), ...notes); body.append(help); }
       if (this.actions.inspectBuildingAlteration) {
         const inspect = element('button', 'text-button full-width', '检查整栋改造影响');
         inspect.type = 'button'; inspect.dataset.action = 'building-impact'; body.append(inspect);
@@ -1278,26 +1302,6 @@ export class CityUI {
           body.append(details);
         }
       }
-      if (state.playerLabor?.job) body.append(this.laborContent());
-      if (building.kind === 'clinic') body.append(this.clinicalContent());
-      if (building.kind === 'school') body.append(this.educationContent(), this.familyEducationContent(building));
-      if (building.kind === 'home' && building.floorPlanProfile === FLOOR_PLAN_PROFILE) body.append(this.homeRestContent(building));
-      if (shop) body.append(element('p', 'note', `${building.kind === 'workshop' ? '工业物料' : '食物'} ${money(shop.price)} / 份 · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`), element('p', 'note', building.kind === 'workshop' ? '工业物料进入背包，用于真实建设或材料用途。' : '购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。'));
-      if (['school', 'pavilion'].includes(building.kind)) { const link = element('button', 'text-button full-width', '创作与阅读作品 ↗'); link.type = 'button'; link.dataset.action = 'life'; body.append(link); }
-      if (building.kind === 'bank') this.renderBank(body, building, !walk);
-      if (building.kind === 'school') body.append(element('p', 'note', '普通自习增长学习技能；正式学历需要完成有教师、教材和实际教学的课程。' ));
-      if (building.publicFloors !== undefined) body.append(element('p', 'note', '公共服务楼层可自由进入；其余空间按各楼层权限开放，持有多个身份可使用对应设施。'));
-      if (building.floorUses?.length) {
-        const guide = element('details', 'relationship-choices'); guide.append(element('summary', '', '楼层与空间导览'));
-        for (let index = 0; index < building.floorUses.length; index++) {
-          const permission = building.floorPermissions?.[index];
-          guide.append(field(`${index + 1} 层 · ${building.floorUses[index]}`, permission === 'public' || !permission ? '公共' : roleNames[permission] ?? '受限空间'));
-        }
-        building.basementUses?.forEach((use, index) => guide.append(field(`地下 ${index + 1} 层`, use)));
-        body.append(guide);
-      }
-      if (!walk) body.append(element('p', 'context-hint', '切换步行并接近入口，参与这里的生活。'));
-      else if (!view.inside) body.append(element('p', 'context-hint', '走近门口按 E 进入，楼梯处按 E 换层。'));
     } else if (this.contextKind === 'citizen' && citizen) {
       body.append(element('span', 'eyebrow', `${roleNames[citizen.role as Role] ?? citizen.role} · ${activity(citizen.state)}`), element('h3', '', citizen.name), element('p', 'context-subtitle', rel ? `${relationshipTitle(rel)} · 好感 ${Math.round(rel.affection)} · 信任 ${Math.round(rel.trust)}` : '初次相逢 · 尚未认识'));
       const controls = element('div', 'button-grid context-actions');
