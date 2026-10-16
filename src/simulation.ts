@@ -1331,6 +1331,11 @@ export class Simulation implements SimulationAPI {
     this.citizenRoadRevisions.set(citizen, this.ensureRoadRouting());
     if (!rebuild && citizen.destinationId === destination.id && destination.floorPlanProfile !== FLOOR_PLAN_PROFILE) return;
     if (streetBrowse(this.runtime, citizen, destination) && !this.floorPlanPresence(destination, citizen.position)) {
+      // v5 keeps a street route already bound for this market's stall, as the counter
+      // branch keeps its route: replanning mid-street turned walkers back to a node behind them.
+      const kept = citizen.route?.at(-1);
+      if (eatsOnStreet(this.runtime.mealRoutePolicyId) && !rebuild && citizen.destinationId === destination.id && kept && citizen.state === 'moving'
+        && !this.floorPlanPresence(destination, kept) && distance(kept, destination.door) <= BROWSE_MAX + 1e-6) return;
       // v4: the evening outing ends on the street before the market door, on its own walking route.
       const outside = this.routeFromCitizen(citizen, destination);
       const route = outside.length > 1 ? routeShortOfDoor(outside, BROWSE_MIN + hash(`${citizen.id}:${destination.id}`) % (BROWSE_MAX - BROWSE_MIN + 1)) : outside;
