@@ -157,6 +157,7 @@ namespace Yunshan.Runtime
                 // Web vehicle-shapes.ts: a cable cabin hangs from the 8.6 m haul rope on a grip arm.
                 bool cable = v.Kind == "cable";
                 double length = flight ? 17 : train ? 16 : boat ? 11 : cable ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = cable ? 4.6 : 0;
+                if (!NearCamera.VehicleClears(camera, p, direction, length, width, lift)) continue;
                 var rotation = Space.Yaw(direction);
                 bodies.Add(Space.ToUnity(p.X, p.Y + 1.1 + lift, p.Z), rotation, new Vector3((float)width, flight ? .8f : 1.5f, (float)length), Space.Hex(flight ? "#d5c7aa" : train ? "#d0b985" : "#a77851"));
                 bodies.Add(Space.ToUnity(p.X, p.Y + 2.1 + lift, p.Z), rotation, new Vector3((float)(flight ? 3 : width * .85), flight ? 1.8f : .8f, (float)(length * .68)), Space.Hex("#517f82"));

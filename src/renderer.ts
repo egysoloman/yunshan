@@ -29,6 +29,8 @@ import { arrivalLook } from './rendering/arrival-view';
 import { RAIL_PIER_CAP_ASSET, RUNWAY_LIGHT_ASSET, studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { DoorwayGlowPool } from './rendering/doorway-glow';
+import { windowLightLevels } from './rendering/window-occupancy';
+import { vehicleClearsCamera } from './rendering/near-camera';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
@@ -85,6 +87,8 @@ function offsetBox(box: LocalBox, x: number, z: number): LocalBox {
 
 /** Static geometry is grouped by material; long networks are also spatially split. */
 class BoxBatch {
+  /** world.buildings index by id, for window panes' real occupancy lighting (window-occupancy.ts). */
+  static buildingIndex = new Map<string, number>();
   private parts = new Map<MaterialKey, Part[]>();
   constructor(private materials: Record<MaterialKey, THREE.MeshStandardMaterial>) {}
   box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
@@ -130,6 +134,7 @@ class BoxBatch {
       // Only existing building panes receive lattice/illumination. Transport
       // windscreens share the glass material but carry a zero surface flag.
       if (key === 'glass') mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? part.windowStyle ?? 1 : 0)), 1));
+      if (key === 'glass') mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? BoxBatch.buildingIndex.get(part.building) ?? -1 : -1)), 1));
       mesh.name = `batch-${key}-${cell}`;
       parts.forEach((part, index) => {
         mesh.setMatrixAt(index, part.matrix); mesh.setColorAt(index, part.color);
@@ -185,6 +190,11 @@ export class CityRenderer implements CityRendererAPI {
   private shadowAt = -Infinity;
   private shadowPosition = new THREE.Vector3(Infinity, Infinity, Infinity);
   private facadeNight = { value: 0 };
+  /** Lit share of each building's windows (window-occupancy.ts), refreshed about once a second. */
+  private windowLight = new THREE.DataTexture(new Uint8Array(4), 1, 1, THREE.RedFormat);
+  private windowLightUniform = { value: this.windowLight as THREE.Texture };
+  private windowLightCount = { value: 1 };
+  private windowLightAt = -Infinity;
   private sky: THREE.Mesh;
   private skyMaterial: THREE.ShaderMaterial;
   private citizens: CitizenAppearancePool;
@@ -213,6 +223,9 @@ export class CityRenderer implements CityRendererAPI {
   private labels: { building: Building; sprite: THREE.Sprite; floor?: number }[] = [];
 
   constructor(private container: HTMLElement, private world: WorldDefinition) {
+    BoxBatch.buildingIndex = new Map(world.buildings.map((b, index) => [b.id, index]));
+    this.windowLight = new THREE.DataTexture(new Uint8Array(Math.max(1, world.buildings.length)).fill(255), Math.max(1, world.buildings.length), 1, THREE.RedFormat);
+    this.windowLight.needsUpdate = true; this.windowLightUniform.value = this.windowLight; this.windowLightCount.value = Math.max(1, world.buildings.length);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
     this.renderer.setClearColor('#a9ccd1');
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -342,10 +355,10 @@ export class CityRenderer implements CityRendererAPI {
       }
     }; }
     this.materials.glass.roughness = .42; this.materials.glass.metalness = .12;
-    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v3';
+    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v4';
     this.materials.glass.onBeforeCompile = shader => {
-      shader.uniforms.facadeNight = this.facadeNight;
-      shader.vertexShader = 'attribute float instanceWindowSurface;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.vertexShader;
+      shader.uniforms.facadeNight = this.facadeNight; shader.uniforms.windowLight = this.windowLightUniform; shader.uniforms.windowLightCount = this.windowLightCount;
+      shader.vertexShader = 'uniform sampler2D windowLight;uniform float windowLightCount;attribute float instanceWindowBuilding;varying float vWindowLight;attribute float instanceWindowSurface;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
         vec3 windowScale=vec3(1.0);vec3 windowOrigin=vec3(0.0);
         #ifdef USE_INSTANCING
@@ -353,8 +366,9 @@ export class CityRenderer implements CityRendererAPI {
         windowOrigin=instanceMatrix[3].xyz;
         #endif
         vWindowMetric=(position+.5)*windowScale;vWindowExtent=windowScale;vWindowNormal=normal;vWindowSurface=instanceWindowSurface;
-        vWindowSeed=fract(sin(dot(windowOrigin,vec3(12.9898,78.233,39.425)))*43758.5453);`);
-      shader.fragmentShader = 'uniform float facadeNight;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.fragmentShader;
+        vWindowSeed=fract(sin(dot(windowOrigin,vec3(12.9898,78.233,39.425)))*43758.5453);
+        vWindowLight=instanceWindowBuilding<0.0?1.0:texture2D(windowLight,vec2((instanceWindowBuilding+.5)/windowLightCount,.5)).r;`);
+      shader.fragmentShader = 'uniform float facadeNight;varying float vWindowLight;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
         float windowPane=0.0,windowWarmth=0.0,windowRoughness=roughness;
         if(vWindowSurface>.5 && abs(vWindowNormal.y)<.5 && min(vWindowExtent.x,vWindowExtent.z)<.5){
@@ -373,7 +387,8 @@ export class CityRenderer implements CityRendererAPI {
           float timber=max(frame,lattice)*paneDetail;
           windowPane=1.0-timber;
           windowRoughness=mix(commercialWindow?.44:.68,commercialWindow?.16:.22,windowPane);
-          windowWarmth=mix(.24,1.0,step(.34,vWindowSeed));
+          // A pane is lit when its seed falls under the building's real occupied share.
+          windowWarmth=mix(.12,1.0,1.0-step(vWindowLight,vWindowSeed));
           diffuseColor.rgb=mix(diffuseColor.rgb,commercialWindow?vec3(.34,.32,.25):vec3(.23,.14,.073),timber*.92);
           // Broad commercial panes have alloy mullions and a restrained sky
           // tint; homes keep timber lattice. Both retain their real openings.
@@ -382,8 +397,8 @@ export class CityRenderer implements CityRendererAPI {
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.21,.40,.46),upperSky*windowPane*.2);
           }
           diffuseColor.rgb*=1.0-(1.0-paneMetric.y/max(.2,paneExtent.y))*.18*windowPane;
-          // Illumination follows existing night/energy state. Its static per
-          // pane variation is decorative; it does not invent room occupancy.
+          // Illumination follows night/energy state and, per building, the share
+          // of its rooms actually in use (residents awake at home, an open shop).
           diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.46,.30,.13),facadeNight*windowWarmth*windowPane*.34);
         }`);
       shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=windowPane*windowWarmth*facadeNight*vec3(1.0,.52,.17)*1.2;');
@@ -1029,6 +1044,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const mesh of [body, head, trim]) {
       if (mesh.material === this.materials.roof) mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
       if (mesh.material === this.materials.glass) mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
+      if (mesh.material === this.materials.glass) mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(capacity).fill(-1), 1));
       mesh.count = 0; mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); mesh.frustumCulled = false; this.scene.add(mesh);
     }
     return { body, head, trim, capacity };
@@ -1127,6 +1143,13 @@ export class CityRenderer implements CityRendererAPI {
     this.marketShopfront.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 4 : 8);
     this.stationWayfinding.update(state, this.camera.position, this.quality === 'low' ? 3 : 8);
     this.doorwayGlow.update(state, this.camera.position, daylight);
+    // Lit windows follow who is actually in each building, refreshed about once a second.
+    const clockNow = performance.now();
+    if (clockNow - this.windowLightAt > 1000) {
+      this.windowLightAt = clockNow; const levels = windowLightLevels(state, this.world), data = this.windowLight.image.data as Uint8Array;
+      for (let i = 0; i < levels.length; i++) data[i] = Math.round(levels[i] * 255);
+      this.windowLight.needsUpdate = true;
+    }
     const counts = new Map<string, number>(); let wheels = 0;
     for (const vehicle of state.vehicles) {
       const pool = this.vehiclePools.get(vehicle.kind); if (!pool) continue; const n = counts.get(vehicle.kind) ?? 0; if (n >= pool.capacity) continue;
@@ -1134,7 +1157,8 @@ export class CityRenderer implements CityRendererAPI {
       if (Math.hypot(vehicle.position.x - this.camera.position.x, vehicle.position.z - this.camera.position.z) > this.distance + 600) continue;
       const edge = this.edges.get(vehicle.edgeId); let direction = 0;
       if (edge && edge.points.length > 1) { const t = Math.max(0, Math.min(.99999, vehicle.progress)), i = Math.min(edge.points.length - 2, Math.floor(t * (edge.points.length - 1))), a = edge.points[i], b = edge.points[i + 1]; direction = Math.atan2(b.x - a.x, b.z - a.z) + (vehicle.direction < 0 ? Math.PI : 0); }
-      const p = vehicle.position, { body, head, trim, wheels: wheelSpots } = vehicleShape(vehicle.kind);
+      const p = vehicle.position, shape = vehicleShape(vehicle.kind), { body, head, trim, wheels: wheelSpots } = shape;
+      if (!vehicleClearsCamera(this.camera.position, p, direction, shape.length, shape.width, shape.lift)) continue;
       if (this.wheels) for (const spot of wheelSpots) if (wheels < this.wheels.instanceMatrix.count) {
         const c = Math.cos(direction), s = Math.sin(direction);
         this.put(this.wheels, wheels++, p.x + spot.x * c + spot.z * s, p.y + VEHICLE_WHEEL.y, p.z - spot.x * s + spot.z * c, VEHICLE_WHEEL.width, VEHICLE_WHEEL.size, VEHICLE_WHEEL.size, direction);
@@ -1192,7 +1216,7 @@ export class CityRenderer implements CityRendererAPI {
   dispose() {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
-    this.marketGoods.dispose(); this.doorwayGlow.dispose();
+    this.marketGoods.dispose(); this.doorwayGlow.dispose(); this.windowLight?.dispose();
     this.studioProps?.dispose();
     this.marketShopfront.dispose();
     this.stationWayfinding?.dispose();
