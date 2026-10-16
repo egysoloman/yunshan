@@ -6,6 +6,13 @@ import { studioBuildingPlacements, studioDeckTilePlacements, studioLandmarkPlace
 import { deckWidth } from '../../src/transport-geometry';
 import { canonical } from './world';
 
+// With a second argument (a layout such as current-v8) only that world's road tiles are written:
+// the paved-street kerb modules (studio-roads-v8.json.gz).
+if (process.argv[3]) {
+  const v8 = createWorld(20261001, process.argv[3] as Parameters<typeof createWorld>[1]), tiles = studioRoadTilePlacements(v8, deckWidth);
+  const out = JSON.stringify(canonical({ roads: { count: tiles.length, sample: tiles.filter((_, i) => i % 41 === 0) } }));
+  writeFileSync(process.argv[2], gzipSync(out, { level: 9 })); console.log(`${tiles.length} road tiles, ${out.length} bytes`); process.exit(0);
+}
 const world = createWorld(), roads = studioRoadTilePlacements(world, deckWidth);
 const json = JSON.stringify(canonical({
   buildings: world.buildings.map(b => ({ id: b.id, placements: studioBuildingPlacements(b) })),

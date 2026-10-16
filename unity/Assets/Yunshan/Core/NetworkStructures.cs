@@ -5,6 +5,7 @@
 // poles. Display only. Parity-tested call by call (scripts/parity/network.ts).
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Yunshan.Core
 {
@@ -23,12 +24,64 @@ namespace Yunshan.Core
         public const double CableTowerSpacing = 120;
         public const double StairGrade = .06, StairTread = 1.6;
 
+        public sealed class PavedDeck { public string Id; public double Half, MinX, MaxX, MinZ, MaxZ; public List<Vec3> Points; }
+
+        /// <summary>Port of pavedDecks: each paved street's deck, for clipping other paved streets' kerbs.</summary>
+        public static List<PavedDeck> PavedDecks(WorldDefinition world)
+        {
+            var output = new List<PavedDeck>();
+            foreach (var edge in world.Edges)
+            {
+                if (!TransportGeometry.PavedStreet(world, edge)) continue;
+                double half = TransportGeometry.DeckWidth(edge) / 2;
+                output.Add(new PavedDeck { Id = edge.Id, Half = half, Points = edge.Points, MinX = edge.Points.Min(p => p.X) - half, MaxX = edge.Points.Max(p => p.X) + half, MinZ = edge.Points.Min(p => p.Z) - half, MaxZ = edge.Points.Max(p => p.Z) + half });
+            }
+            return output;
+        }
+
+        /// <summary>Port of insidePavedDeck: whether a point lies on another paved street's deck.</summary>
+        public static bool InsidePavedDeck(Vec3 p, List<PavedDeck> decks, string selfId)
+        {
+            foreach (var d in decks)
+            {
+                if (d.Id == selfId || p.X < d.MinX || p.X > d.MaxX || p.Z < d.MinZ || p.Z > d.MaxZ) continue;
+                for (int i = 1; i < d.Points.Count; i++)
+                {
+                    Vec3 a = d.Points[i - 1], b = d.Points[i]; double dx = b.X - a.X, dz = b.Z - a.Z, n = dx * dx + dz * dz, t = n > 0 ? Math.Max(0, Math.Min(1, ((p.X - a.X) * dx + (p.Z - a.Z) * dz) / n)) : 0;
+                    double ex = p.X - a.X - dx * t, ez = p.Z - a.Z - dz * t, limit = d.Half - .05;
+                    if (ex * ex + ez * ez < limit * limit && Math.Abs(p.Y - (a.Y + (b.Y - a.Y) * t)) < 1.5) return true;
+                }
+            }
+            return false;
+        }
+
+        public const double KerbSample = .5;
+
+        /// <summary>Port of kerbRuns: the runs of a kerb outside every other paved deck.</summary>
+        public static List<(Vec3, Vec3)> KerbRuns(Vec3 aa, Vec3 bb, List<PavedDeck> decks, string selfId)
+        {
+            var near = decks.Where(d => d.Id != selfId && Math.Max(aa.X, bb.X) >= d.MinX && Math.Min(aa.X, bb.X) <= d.MaxX && Math.Max(aa.Z, bb.Z) >= d.MinZ && Math.Min(aa.Z, bb.Z) <= d.MaxZ).ToList();
+            if (near.Count == 0) return new List<(Vec3, Vec3)> { (aa, bb) };
+            bool Inside(Vec3 p) => InsidePavedDeck(p, near, selfId);
+            int count = Math.Max(1, (int)Math.Ceiling(JsMath.Hypot(bb.X - aa.X, bb.Z - aa.Z) / KerbSample));
+            Vec3 At(int k) => k == 0 ? aa : k == count ? bb : V(aa.X + (bb.X - aa.X) * k / count, aa.Y + (bb.Y - aa.Y) * k / count, aa.Z + (bb.Z - aa.Z) * k / count);
+            var runs = new List<(Vec3, Vec3)>(); int start = -1;
+            for (int k = 0; k <= count; k++)
+            {
+                bool outside = !Inside(At(k));
+                if (outside && start < 0) start = k;
+                if ((!outside || k == count) && start >= 0) { int end = outside ? k : k - 1; if (end > start) runs.Add((At(start), At(end))); start = -1; }
+            }
+            return runs;
+        }
+
         public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false, bool dressesRoadDeck = false, bool dressesRailKerb = false, bool dressesRailPierCaps = false)
         {
             // current-v8 streets bend at any angle: a square deck at each interior
             // vertex (on the bisector) closes the wedge between rigid segment boxes,
             // and a pad covers every street junction. Older layouts keep their boxes.
             bool anyAngleStreets = world.LayoutVersion == "current-v8";
+            var decks = anyAngleStreets ? PavedDecks(world) : new List<PavedDeck>();
             foreach (var edge in world.Edges)
             {
                 if (edge.Mode == "flight") continue;
@@ -86,7 +139,7 @@ namespace Yunshan.Core
                         double offset = TransportGeometry.GuardrailOffset(edge);
                         var aa = V(a.X + nx * offset * side, a.Y, a.Z + nz * offset * side); var bb = V(b.X + nx * offset * side, b.Y, b.Z + nz * offset * side);
                         bool railKerbTiled = rail && dressesRailKerb;
-                        sink.Segment("stone", aa, bb, rail ? railKerbTiled ? .31 : .35 : roadTiled ? .36 : .4, rail ? railKerbTiled ? .46 : .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, "#c0c2ac");
+                        foreach (var (ka, kb) in paved ? KerbRuns(aa, bb, decks, edge.Id) : new List<(Vec3, Vec3)> { (aa, bb) }) sink.Segment("stone", ka, kb, rail ? railKerbTiled ? .31 : .35 : roadTiled ? .36 : .4, rail ? railKerbTiled ? .46 : .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, "#c0c2ac");
                         bool elevated = (a.Y + b.Y) / 2 - World.TerrainHeight(world, (a.X + b.X) / 2, (a.Z + b.Z) / 2) > 4;
                         if (edge.Mode == "bridge" || rail || elevated && edge.Mode == "road")
                             foreach (var span in TransportGeometry.GuardrailSpans(world, edge, i))
@@ -102,7 +155,7 @@ namespace Yunshan.Core
                         foreach (var t in cuts)
                         {
                             var m = V(a.X + (b.X - a.X) * t, a.Y + (b.Y - a.Y) * t + (steps > 0 ? .06 : .02), a.Z + (b.Z - a.Z) * t);
-                            sink.Segment("stone", V(m.X - nx * 4.6, m.Y, m.Z - nz * 4.6), V(m.X + nx * 4.6, m.Y, m.Z + nz * 4.6), steps > 0 ? .3 : .14, steps > 0 ? .14 : .05, 0, steps > 0 ? "#5f594d" : "#6d675a");
+                            foreach (var (sa, sb) in KerbRuns(V(m.X - nx * 4.6, m.Y, m.Z - nz * 4.6), V(m.X + nx * 4.6, m.Y, m.Z + nz * 4.6), decks, edge.Id)) sink.Segment("stone", sa, sb, steps > 0 ? .3 : .14, steps > 0 ? .14 : .05, 0, steps > 0 ? "#5f594d" : "#6d675a");
                         }
                     }
                     else if (edge.Mode == "road" && !edge.Id.Contains("runway"))

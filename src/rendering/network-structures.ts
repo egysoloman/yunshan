@@ -20,6 +20,45 @@ export const CABLE_TOWER_SPACING = 120;
 /** Paved streets this steep (rise per run) show stair step edges every STAIR_TREAD m. */
 export const STAIR_GRADE = .06, STAIR_TREAD = 1.6;
 
+/** A paved street's deck, for clipping other paved streets' kerbs (current-v8). */
+export interface PavedDeck { id: string; half: number; points: Vec3[]; minX: number; maxX: number; minZ: number; maxZ: number }
+export function pavedDecks(world: WorldDefinition): PavedDeck[] {
+  return world.edges.filter(edge => pavedStreet(world, edge)).map(edge => {
+    const half = deckWidth(edge) / 2, xs = edge.points.map(p => p.x), zs = edge.points.map(p => p.z);
+    return { id: edge.id, half, points: edge.points, minX: Math.min(...xs) - half, maxX: Math.max(...xs) + half, minZ: Math.min(...zs) - half, maxZ: Math.max(...zs) + half };
+  });
+}
+/** Whether a point lies on another paved street's deck (within 1.5 m of its height). */
+export function insidePavedDeck(p: Vec3, decks: readonly PavedDeck[], selfId: string): boolean {
+  return decks.some(d => {
+    if (d.id === selfId || p.x < d.minX || p.x > d.maxX || p.z < d.minZ || p.z > d.maxZ) return false;
+    for (let i = 1; i < d.points.length; i++) {
+      const a = d.points[i - 1], b = d.points[i], dx = b.x - a.x, dz = b.z - a.z, n = dx * dx + dz * dz, t = n > 0 ? Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.z - a.z) * dz) / n)) : 0;
+      const ex = p.x - a.x - dx * t, ez = p.z - a.z - dz * t, limit = d.half - .05;
+      if (ex * ex + ez * ez < limit * limit && Math.abs(p.y - (a.y + (b.y - a.y) * t)) < 1.5) return true;
+    }
+    return false;
+  });
+}
+/** The runs of a kerb, seam or stair edge from aa to bb that lie outside every
+ * other paved deck (a short junction link's stair edges used to cross the
+ * terrace street it joins as a raised strip). Sampled every
+ * KERB_SAMPLE m; a kerb clear of every deck is returned whole and unchanged. */
+export const KERB_SAMPLE = .5;
+export function kerbRuns(aa: Vec3, bb: Vec3, decks: readonly PavedDeck[], selfId: string): [Vec3, Vec3][] {
+  const near = decks.filter(d => d.id !== selfId && Math.max(aa.x, bb.x) >= d.minX && Math.min(aa.x, bb.x) <= d.maxX && Math.max(aa.z, bb.z) >= d.minZ && Math.min(aa.z, bb.z) <= d.maxZ);
+  if (!near.length) return [[aa, bb]];
+  const inside = (p: Vec3) => insidePavedDeck(p, near, selfId);
+  const n = Math.max(1, Math.ceil(Math.hypot(bb.x - aa.x, bb.z - aa.z) / KERB_SAMPLE)), at = (k: number): Vec3 => k === 0 ? aa : k === n ? bb : { x: aa.x + (bb.x - aa.x) * k / n, y: aa.y + (bb.y - aa.y) * k / n, z: aa.z + (bb.z - aa.z) * k / n };
+  const runs: [Vec3, Vec3][] = []; let start = -1;
+  for (let k = 0; k <= n; k++) {
+    const out = !inside(at(k));
+    if (out && start < 0) start = k;
+    if ((!out || k === n) && start >= 0) { const end = out ? k : k - 1; if (end > start) runs.push([at(start), at(end)]); start = -1; }
+  }
+  return runs;
+}
+
 /** Roads, rails, bridges, lifts, cables, supports, guardrails, station
  * platforms and junction poles, as the renderer has always drawn them. */
 export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink, options: NetworkStructureOptions): void {
@@ -27,6 +66,7 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
     // vertex (on the bisector) closes the wedge between rigid segment boxes,
     // and a pad covers every street junction. Older layouts keep their boxes.
     const anyAngleStreets = (world as WorldDefinition & { layoutVersion?: string }).layoutVersion === 'current-v8';
+    const decks = anyAngleStreets ? pavedDecks(world) : [];
     for (const edge of world.edges) {
       if (edge.mode === 'flight') continue;
       // Terrace streets and door paths are stone paving (PAVING), not slate road.
@@ -77,7 +117,7 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
         for (const side of [-1, 1]) {
           const offset = guardrailOffset(edge), aa = { x: a.x + nx * offset * side, y: a.y, z: a.z + nz * offset * side }, bb = { x: b.x + nx * offset * side, y: b.y, z: b.z + nz * offset * side };
           const railKerbTiled = rail && !!options.dressesRailKerb;
-          sink.segment('stone', aa, bb, rail ? railKerbTiled ? .31 : .35 : roadTiled ? .36 : .4, rail ? railKerbTiled ? .46 : .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, '#c0c2ac');
+          for (const [ka, kb] of paved ? kerbRuns(aa, bb, decks, edge.id) : [[aa, bb]]) sink.segment('stone', ka, kb, rail ? railKerbTiled ? .31 : .35 : roadTiled ? .36 : .4, rail ? railKerbTiled ? .46 : .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, '#c0c2ac');
           const elevated = (a.y + b.y) / 2 - terrainHeight(world, (a.x + b.x) / 2, (a.z + b.z) / 2) > 4;
           if (edge.mode === 'bridge' || rail || elevated && edge.mode === 'road') for (const span of guardrailSpans(world, edge, i)) sink.segment('wood', { x: span.a.x + nx * offset * side, y: span.a.y, z: span.a.z + nz * offset * side }, { x: span.b.x + nx * offset * side, y: span.b.y, z: span.b.z + nz * offset * side }, GUARDRAIL_THICKNESS, .2, 1.1, '#6b7771');
         }
@@ -85,7 +125,7 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
         // Steep stone streets read as stair streets: a step edge every STAIR_TREAD m (walking still follows the deck).
         if (paved) {
           const grade = Math.abs(b.y - a.y) / Math.max(.01, horizontal), steps = grade >= STAIR_GRADE ? Math.max(1, Math.round(horizontal / STAIR_TREAD)) : 0;
-          for (const t of steps ? Array.from({ length: Math.max(0, steps - 1) }, (_, k) => (k + 1) / steps) : [.25, .5, .75]) { const m = { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t + (steps ? .06 : .02), z: a.z + (b.z - a.z) * t }; sink.segment('stone', { ...m, x: m.x - nx * 4.6, z: m.z - nz * 4.6 }, { ...m, x: m.x + nx * 4.6, z: m.z + nz * 4.6 }, steps ? .3 : .14, steps ? .14 : .05, 0, steps ? '#5f594d' : '#6d675a'); }
+          for (const t of steps ? Array.from({ length: Math.max(0, steps - 1) }, (_, k) => (k + 1) / steps) : [.25, .5, .75]) { const m = { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t + (steps ? .06 : .02), z: a.z + (b.z - a.z) * t }; for (const [sa, sb] of kerbRuns({ ...m, x: m.x - nx * 4.6, z: m.z - nz * 4.6 }, { ...m, x: m.x + nx * 4.6, z: m.z + nz * 4.6 }, decks, edge.id)) sink.segment('stone', sa, sb, steps ? .3 : .14, steps ? .14 : .05, 0, steps ? '#5f594d' : '#6d675a'); }
         }
         else if (edge.mode === 'road' && !edge.id.includes('runway')) { const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 + .04, z: (a.z + b.z) / 2 }; sink.segment('stone', { ...middle, x: middle.x - nx * 3.5, z: middle.z - nz * 3.5 }, { ...middle, x: middle.x + nx * 3.5, z: middle.z + nz * 3.5 }, .08, .04, 0, '#757e73'); }
         // current-v8 terrace streets stand on stone embankments where they ride

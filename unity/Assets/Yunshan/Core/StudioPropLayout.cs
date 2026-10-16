@@ -192,15 +192,17 @@ namespace Yunshan.Core
         public static List<StudioStaticPlacement> RoadTilePlacements(WorldDefinition world, IReadOnlyDictionary<string, StudioAssetBounds> assets)
         {
             var result = new List<StudioStaticPlacement>();
+            // A paved street's kerb module is not laid where its section lies on another paved street (studio-prop-layout.ts).
+            List<NetworkStructures.PavedDeck> cached = null; List<NetworkStructures.PavedDeck> Decks() => cached ??= NetworkStructures.PavedDecks(world);
             foreach (var tile in RoadTiles)
             {
                 if (!assets.TryGetValue(tile.Asset, out var asset)) continue;
-                foreach (var edge in world.Edges) if (tile.Modes.Contains(edge.Mode) && !edge.Id.Contains("runway") && TransportGeometry.DeckWidth(edge) == tile.Deck && !(tile.Kind != "road-kerb" && TransportGeometry.PavedStreet(world, edge))) TileEdgePath(edge, tile.Kind, tile.Asset, asset, tile.Height, tile.Lift, tile.Width, result);
+                foreach (var edge in world.Edges) if (tile.Modes.Contains(edge.Mode) && !edge.Id.Contains("runway") && TransportGeometry.DeckWidth(edge) == tile.Deck && !(tile.Kind != "road-kerb" && TransportGeometry.PavedStreet(world, edge))) { bool paved = TransportGeometry.PavedStreet(world, edge); TileEdgePath(edge, tile.Kind, tile.Asset, asset, tile.Height, tile.Lift, tile.Width, result, paved ? (Func<Vec3, bool>)(c => !NetworkStructures.InsidePavedDeck(c, Decks(), edge.Id)) : null); }
             }
             return result;
         }
 
-        static void TileEdgePath(NetworkEdge edge, string kind, string assetId, StudioAssetBounds asset, double tileHeight, double lift, double crossWidth, List<StudioStaticPlacement> result)
+        static void TileEdgePath(NetworkEdge edge, string kind, string assetId, StudioAssetBounds asset, double tileHeight, double lift, double crossWidth, List<StudioStaticPlacement> result, Func<Vec3, bool> keep = null)
         {
             double[] min = asset.Min, max = asset.Max; double width = max[0] - min[0], height = max[1] - min[1], length = max[2] - min[2];
             double cx = (min[0] + max[0]) / 2, cy = (min[1] + max[1]) / 2, cz = (min[2] + max[2]) / 2;
@@ -220,6 +222,7 @@ namespace Yunshan.Core
                 double cosY = JsMath.Cos(yaw), sinY = JsMath.Sin(yaw), cosP = JsMath.Cos(pitch), sinP = JsMath.Sin(pitch);
                 double r1y = cy * cosP - cz * sinP, r1z = cy * sinP + cz * cosP, rcx = cx * cosY + r1z * sinY, rcy = r1y, rcz = -cx * sinY + r1z * cosY;
                 double x = a.X + dx * t, y = a.Y + dy * t + lift, z = a.Z + dz * t;
+                if (keep != null && !keep(new Vec3(x, y, z))) continue;
                 result.Add(new StudioStaticPlacement { Asset = assetId, Id = $"{edge.Id}:{kind}-deck:{k}", Position = new Vec3(x - rcx, y - rcy, z - rcz), Yaw = yaw, Pitch = pitch });
             }
         }

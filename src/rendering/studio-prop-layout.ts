@@ -1,5 +1,6 @@
-import type { Building, BuildingKind } from '../types';
+import type { Building, BuildingKind, WorldDefinition } from '../types';
 import { pavedStreet } from '../transport-geometry';
+import { insidePavedDeck, pavedDecks, type PavedDeck } from './network-structures';
 import { contains, getBuildingBody, getFloorPlanFixtures, getFloorPlanSlabRegions, wallPanels, type FloorFixture, type Rect } from '../architecture-floor-plan';
 import manifest from './studio-assets.json';
 
@@ -185,16 +186,19 @@ export const ROAD_TILES = [
 ] as const;
 export function studioRoadTilePlacements(world: { edges: readonly { id: string; mode: string; from: string; to: string; points: readonly { x: number; y: number; z: number }[] }[] }, deckWidth: (edge: any) => number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
   const placements: StudioStaticPlacement[] = [];
+  // A paved street's kerb module is not laid where its section lies on another paved street (a door path crossing the terrace street).
+  let cached: PavedDeck[] | null = null; const decks = () => cached ??= pavedDecks(world as unknown as WorldDefinition);
   for (const tile of ROAD_TILES) {
     const asset = assets.get(tile.asset); if (!asset) continue;
     // Each module is checked against its own part of the deck section. Paved
     // stone streets keep only their kerbs: no slate surface or centre line.
-    for (const edge of world.edges) if ((tile.modes as readonly string[]).includes(edge.mode) && !edge.id.includes('runway') && deckWidth(edge) === tile.deck && !(tile.kind !== 'road-kerb' && pavedStreet(world, edge))) tileEdgePath(edge, tile.kind, asset, tile.height, tile.lift, tile.width, placements);
+    for (const edge of world.edges) if ((tile.modes as readonly string[]).includes(edge.mode) && !edge.id.includes('runway') && deckWidth(edge) === tile.deck && !(tile.kind !== 'road-kerb' && pavedStreet(world, edge))) { const paved = pavedStreet(world, edge); tileEdgePath(edge, tile.kind, asset, tile.height, tile.lift, tile.width, placements, paved ? (centre: Vec3Like) => !insidePavedDeck(centre, decks(), edge.id) : undefined); }
   }
   return placements;
 }
 
-function tileEdgePath(edge: { id: string; points: readonly { x: number; y: number; z: number }[] }, kind: string, asset: StudioAsset, tileHeight: number, lift: number, deck: number, placements: StudioStaticPlacement[]): void {
+type Vec3Like = { x: number; y: number; z: number };
+function tileEdgePath(edge: { id: string; points: readonly { x: number; y: number; z: number }[] }, kind: string, asset: StudioAsset, tileHeight: number, lift: number, deck: number, placements: StudioStaticPlacement[], keep?: (centre: Vec3Like) => boolean): void {
   const { min, max } = asset.boundsM, width = max[0] - min[0], height = max[1] - min[1], length = max[2] - min[2];
   const cx = (min[0] + max[0]) / 2, cy = (min[1] + max[1]) / 2, cz = (min[2] + max[2]) / 2;
   // Only an exact cross-section is dressed; anything else keeps its deck box.
@@ -216,6 +220,7 @@ function tileEdgePath(edge: { id: string; points: readonly { x: number; y: numbe
     // R·c for R = rotY(yaw)·rotX(pitch), so the model's centre lands on the deck centre.
     const r1y = cy * cosP - cz * sinP, r1z = cy * sinP + cz * cosP, rcx = cx * cosY + r1z * sinY, rcy = r1y, rcz = -cx * sinY + r1z * cosY;
     const centre = { x: a.x + dx * t, y: a.y + dy * t + lift, z: a.z + dz * t };
+    if (keep && !keep(centre)) continue;
     placements.push({ asset: asset.id, id: `${edge.id}:${kind}-deck:${k}`, position: { x: centre.x - rcx, y: centre.y - rcy, z: centre.z - rcz }, yaw, pitch });
   }
 }

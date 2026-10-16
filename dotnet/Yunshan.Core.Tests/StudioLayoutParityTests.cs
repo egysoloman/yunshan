@@ -40,4 +40,27 @@ public class StudioLayoutParityTests
         Assert.Equal(expected.Length, actual.Length);
         Assert.True(expected == actual, "studio placements differ from TypeScript");
     }
+
+    /// <summary>Replays scripts/parity/studio.ts current-v8: road tiles of the street-first world,
+    /// where paved kerb modules are not laid on another paved street.</summary>
+    [Fact]
+    public void V8RoadTilesMatchTypeScript()
+    {
+        string expected;
+        using (var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", "studio-roads-v8.json.gz")))
+        using (var gzip = new GZipStream(file, CompressionMode.Decompress))
+        using (var reader = new StreamReader(gzip, Encoding.UTF8)) expected = reader.ReadToEnd();
+        var world = Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(GunzipParity("world-current-v8.json.gz")));
+        var roads = StudioPropLayout.RoadTilePlacements(world, Manifest());
+        var tree = new Obj().Put("roads", new Obj().Put("count", (double)roads.Count).Put("sample", roads.Where((_, i) => i % 41 == 0).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("pitch", s.Pitch).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList()));
+        var actual = Write(tree);
+        Assert.True(expected == actual, "v8 road tiles differ from TypeScript");
+    }
+
+    static string GunzipParity(string name)
+    {
+        using var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", name));
+        using var gzip = new GZipStream(file, CompressionMode.Decompress);
+        using var reader = new StreamReader(gzip, Encoding.UTF8); return reader.ReadToEnd();
+    }
 }
