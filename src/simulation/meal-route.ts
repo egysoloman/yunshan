@@ -20,10 +20,21 @@ export const NEARBY_EVENING_ROUTE_POLICY = 'nearby-food-v3' as const;
  * outing ends on its own walking route, BROWSE_MIN–BROWSE_MAX m short of the
  * door (spread per resident). Scores, needs, prices and speeds are v3's. */
 export const STREET_BROWSE_ROUTE_POLICY = 'nearby-food-v4' as const;
-export type MealRoutePolicy = typeof NEARBY_MEAL_ROUTE_POLICY | typeof NEARBY_LUNCH_MEAL_ROUTE_POLICY | typeof NEARBY_EVENING_ROUTE_POLICY | typeof STREET_BROWSE_ROUTE_POLICY;
-export const MEAL_ROUTE_POLICIES: readonly MealRoutePolicy[] = [NEARBY_MEAL_ROUTE_POLICY, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_EVENING_ROUTE_POLICY, STREET_BROWSE_ROUTE_POLICY];
+/** v5 (2026-10-17, outdoor routines, step 4: market street stalls). v4 plus
+ * street food: a resident who is not already inside a market buys a meal at
+ * the stall on the street in front of it — the same BROWSE_MIN–BROWSE_MAX m
+ * point on their own walking route that v4 browsers use — instead of walking
+ * in to the indoor counter, and stays there until their next decision. A
+ * probe counted 30–38 of ~650 residents outdoors between 10:30 and 17:00.
+ * Price, quantity, stock, consignment, tax and every other v4 rule are
+ * unchanged; only where the purchase happens moves. */
+export const STREET_FOOD_ROUTE_POLICY = 'nearby-food-v5' as const;
+export type MealRoutePolicy = typeof NEARBY_MEAL_ROUTE_POLICY | typeof NEARBY_LUNCH_MEAL_ROUTE_POLICY | typeof NEARBY_EVENING_ROUTE_POLICY | typeof STREET_BROWSE_ROUTE_POLICY | typeof STREET_FOOD_ROUTE_POLICY;
+export const MEAL_ROUTE_POLICIES: readonly MealRoutePolicy[] = [NEARBY_MEAL_ROUTE_POLICY, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_EVENING_ROUTE_POLICY, STREET_BROWSE_ROUTE_POLICY, STREET_FOOD_ROUTE_POLICY];
 export const BROWSE_MIN = 2, BROWSE_MAX = 5;
-export const browsesOnStreet = (policy: MealRoutePolicy | undefined) => policy === STREET_BROWSE_ROUTE_POLICY;
+export const browsesOnStreet = (policy: MealRoutePolicy | undefined) => policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY;
+/** v5: market meals are bought at the street stall in front of the door. */
+export const eatsOnStreet = (policy: MealRoutePolicy | undefined) => policy === STREET_FOOD_ROUTE_POLICY;
 /** The route ending `back` metres before its last point (the door), along the route itself. */
 export function routeShortOfDoor<P extends { x: number; y: number; z: number }>(route: readonly P[], back: number): P[] {
   let left = back;
@@ -40,11 +51,11 @@ export const LUNCH_BONUS = 90;
 export const nearestMealPolicy = (policy: MealRoutePolicy | undefined) => policy !== undefined && MEAL_ROUTE_POLICIES.includes(policy);
 /** v2/v3 lunch preference for one food offer. */
 export function lunchBonus(policy: MealRoutePolicy | undefined, hour: number, hunger: number): number {
-  return (policy === NEARBY_LUNCH_MEAL_ROUTE_POLICY || policy === NEARBY_EVENING_ROUTE_POLICY || policy === STREET_BROWSE_ROUTE_POLICY) && hour >= 11.5 && hour < 13 && hunger < 80 ? LUNCH_BONUS : 0;
+  return (policy === NEARBY_LUNCH_MEAL_ROUTE_POLICY || policy === NEARBY_EVENING_ROUTE_POLICY || policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY) && hour >= 11.5 && hour < 13 && hunger < 80 ? LUNCH_BONUS : 0;
 }
 /** v3 evening preference for one outing offer (0 outside the window). */
 export function eveningBonus(policy: MealRoutePolicy | undefined, hour: number, hunger: number, fatigue: number): number {
-  return (policy === NEARBY_EVENING_ROUTE_POLICY || policy === STREET_BROWSE_ROUTE_POLICY) && hour >= 18.5 && hour < 21 && hunger >= 65 && fatigue >= 45 ? EVENING_BONUS : 0;
+  return (policy === NEARBY_EVENING_ROUTE_POLICY || policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY) && hour >= 18.5 && hour < 21 && hunger >= 65 && fatigue >= 45 ? EVENING_BONUS : 0;
 }
 
 /** Preserve the original highest-score activity. Only when its winner is food

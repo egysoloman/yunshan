@@ -85,7 +85,7 @@ if (requestedRuleset === 'civic-local-v1') {
   assert.equal(world.layoutVersion, PRODUCT_CITY_LAYOUT, 'new product audit must use its declared layout');
   if (productRecipe === 'city-life-v1') {
     assert.equal(sim.referenceCollisionPolicyId, 'continuous-upright-v1', 'audit must run the actual city-life collision policy');
-    assert.equal(sim.mealRoutePolicyId, 'nearby-food-v4', 'audit must run the actual city-life meal policy');
+    assert.equal(sim.mealRoutePolicyId, 'nearby-food-v5', 'audit must run the actual city-life meal policy');
     assert.equal(sim.state.serviceMaterialScheduling?.policyId, 'authorized-service-materials-v1', 'audit must run the actual city-life service policy');
   } else {
     assert.equal(sim.referenceCollisionPolicyId, 'legacy', 'archived product audit must retain its original collision contract');
