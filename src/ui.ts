@@ -21,7 +21,7 @@ import { HOME_REST_MINUTES, homeRestBlockedReason, homeRestPoints } from './simu
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
-import { firstDayTarget, type FirstDayStep } from './first-day';
+import { FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, type FirstDayStep } from './first-day';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
 const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
@@ -293,12 +293,8 @@ export class CityUI {
   /** A short first-day list in the welcome note (display only), ticked from the player's own state. */
   private updateFirstDay(state: SimState, view: ViewState): void {
     const list = this.refs.get('first-day'); if (!list) return;
-    const steps: [string, string, string, boolean][] = [
-      ['walk', '走走看看', '沿街走走，看看千灯市集', spatialDistance(view.position, this.world.spawn) > 30],
-      ['eat', '买份吃的', '走进商肆，在柜台买一份吃的', this.purchaseMoney !== null && state.player.money < this.purchaseMoney - 1e-9],
-      ['work', '做次工班', '在店里做一次 60 分钟现场工班', !!state.playerLabor?.job || (state.playerLabor?.history.length ?? 0) > 0],
-      ['meet', '认识居民', '靠近一位居民，按 E 聊聊', state.relationships.some(r => r.encounters > 0)],
-    ];
+    const done = firstDayDone(state, this.world, view.position, this.purchaseMoney !== null && state.player.money < this.purchaseMoney - 1e-9);
+    const steps = FIRST_DAY_STEPS.map(([id, label, hint]) => [id, label, hint, done[id]] as const);
     let changed = false;
     for (const [id, , , done] of steps) if (done && !this.firstDay.has(id)) { this.firstDay.add(id); changed = true; }
     if (changed) try { localStorage.setItem('yunshan.ui.firstDay.v1', JSON.stringify([...this.firstDay])); } catch { /* storage restricted */ }
@@ -409,7 +405,7 @@ export class CityUI {
     if (button.dataset.company) { this.selectedCompany = button.dataset.company; this.refreshPanel(); return; }
     if (button.dataset.firstDay && this.state) {
       const target = firstDayTarget(this.state, this.world, this.state.player.position, button.dataset.firstDay as FirstDayStep);
-      if (target) this.actions.travel(target, 'auto'); else this.notify(button.dataset.firstDay === 'meet' ? '此刻街上人少，稍晚再出门走走看。' : '附近的店铺此刻都已打烊，白天再来。', false);
+      if (target) this.actions.travel(target, 'auto'); else this.notify(firstDayUnavailable(button.dataset.firstDay as FirstDayStep), false);
       return;
     }
     if (button.dataset.destination) { this.actions.travel(button.dataset.destination,this.ref<HTMLSelectElement>('journey-preference').value as 'walk'|'transit'); return; }

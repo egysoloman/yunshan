@@ -32,6 +32,11 @@ namespace Yunshan.Runtime
         /// <summary>Overview panes; refreshed about once a second while <see cref="PanesOpen"/>.</summary>
         public List<Pane> Panes { get; private set; } = new List<Pane>();
         public bool PanesOpen;
+        /// <summary>The welcome note's first-day list (host firstDay); null until received or once dismissed.</summary>
+        public FirstDay FirstDay { get; private set; }
+        /// <summary>The welcome note shows until it is dismissed or its first-day list is done (web ui.ts).</summary>
+        public bool WelcomeOpen { get; private set; } = PlayerPrefs.GetInt(WelcomeSeenKey, 0) == 0;
+        const string WelcomeSeenKey = "yunshan.ui.welcomeSeen.v1", FirstDayKey = "yunshan.ui.firstDay.v1";
         public readonly List<SimFrame.Event> EventLog = new List<SimFrame.Event>();
         public string Notice; public bool NoticeOk = true; public float NoticeAt;
         public List<Vec3> Voxels = new List<Vec3>();
@@ -46,8 +51,8 @@ namespace Yunshan.Runtime
         static string SavePath => Path.Combine(Application.persistentDataPath, "yunshan-save.json");
         readonly ConcurrentQueue<Action> mainThread = new ConcurrentQueue<Action>();
         SimClient client;
-        bool stepPending, contextPending, panesPending;
-        float panesAt;
+        bool stepPending, contextPending, panesPending, firstDayPending;
+        float panesAt, firstDayAt;
         double accumulated, lastEventId;
         float contextAt, autosaveAt;
         string voxelKey = "";
@@ -133,6 +138,17 @@ namespace Yunshan.Runtime
                 panesPending = true; panesAt = Time.unscaledTime;
                 Run(client.Panes(mode, insideBuildingId), panes => { panesPending = false; Panes = panes; }, () => panesPending = false);
             }
+            if (WelcomeOpen && !firstDayPending && Time.unscaledTime - firstDayAt > 1f)
+            {
+                firstDayPending = true; firstDayAt = Time.unscaledTime;
+                var stored = PlayerPrefs.GetString(FirstDayKey, "").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                Run(client.FirstDaySteps(stored), list =>
+                {
+                    firstDayPending = false; FirstDay = list;
+                    PlayerPrefs.SetString(FirstDayKey, string.Join(",", list.Steps.FindAll(step => step.Done).ConvertAll(step => step.Id)));
+                    if (list.Complete) DismissWelcome();
+                }, () => firstDayPending = false);
+            }
             if (Time.unscaledTime - autosaveAt > 30) { autosaveAt = Time.unscaledTime; Save(false); }
         }
 
@@ -156,6 +172,15 @@ namespace Yunshan.Runtime
                 contextAt = 0; panesAt = 0;
             }, null);
         }
+
+        /// <summary>One click on an open first-day step: the host plans the route to where it can be done now.</summary>
+        public void FirstDayGo(string step)
+        {
+            if (State != Phase.Ready) return;
+            Run(client.FirstDayGo(step, lastEventId), result => { Say(result.message, result.ok); Accept(result.frame, false); panesAt = 0; }, null);
+        }
+
+        public void DismissWelcome() { WelcomeOpen = false; PlayerPrefs.SetInt(WelcomeSeenKey, 1); PlayerPrefs.Save(); }
 
         public void Save(bool explicitSave)
         {

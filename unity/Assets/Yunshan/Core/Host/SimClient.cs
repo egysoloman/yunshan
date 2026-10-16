@@ -138,6 +138,17 @@ namespace Yunshan.Core.Host
         public async Task<List<Pane>> Panes(string mode, string insideBuildingId)
             => Pane.ListFrom(await Request("panes", new Dictionary<string, object> { ["view"] = new Dictionary<string, object> { ["mode"] = mode, ["inside"] = insideBuildingId } }).ConfigureAwait(false));
 
+        /// <summary>The first-day list; <paramref name="done"/> are steps the client stored as done earlier.</summary>
+        public async Task<FirstDay> FirstDaySteps(IEnumerable<string> done)
+            => FirstDay.From(await Request("firstDay", new Dictionary<string, object> { ["done"] = new List<object>(done) }).ConfigureAwait(false));
+
+        /// <summary>Plans the route to where an open first-day step can be done now; returns (ok, message, frame).</summary>
+        public async Task<(bool ok, string message, SimFrame frame)> FirstDayGo(string step, double sinceEventId)
+        {
+            var reply = await Request("firstDayGo", new Dictionary<string, object> { ["step"] = step, ["radius"] = 260, ["sinceEventId"] = sinceEventId }).ConfigureAwait(false);
+            return (Json.Bool(reply, "ok"), Json.Str(reply, "message", ""), SimFrame.From(Json.Obj(reply, "frame")));
+        }
+
         public async Task<string> Save() => Json.Str(await Request("save").ConfigureAwait(false), "save");
         /// <summary>Where a new player first looks (src/rendering/arrival-view.ts, computed by the host
         /// from the fleet plan it does not send); null before World() or from an older host.</summary>

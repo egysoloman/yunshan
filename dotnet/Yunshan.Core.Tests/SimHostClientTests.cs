@@ -69,6 +69,16 @@ public class SimHostClientTests
         var sections = await client.Context("walk", null);
         Assert.All(sections, s => Assert.All(s.Actions, a => Assert.True(a.Client == "interact" || a.Command != null)));
 
+        // The first-day list and its one-click route come from the host (sim-host.ts firstDayList / firstDayGo).
+        var firstDay = await client.FirstDaySteps(new[] { "work" });
+        Assert.Equal(new[] { "走走看看", "买份吃的", "做次工班", "认识居民" }, firstDay.Steps.ConvertAll(s => s.Label));
+        Assert.Equal(new[] { "work" }, firstDay.Steps.FindAll(s => s.Done).ConvertAll(s => s.Id));
+        Assert.Equal(new[] { "eat", "meet" }, firstDay.Steps.FindAll(s => s.Go).ConvertAll(s => s.Id));
+        var (went, wentMessage, routed) = await client.FirstDayGo("eat", paused.LastEventId);
+        Assert.True(went, wentMessage);
+        Assert.StartsWith("步行导航至", wentMessage);
+        Assert.NotNull(routed.NavigationDestination);
+
         var save = await client.Save();
         Assert.Contains("\"format\":\"yunshan-save\"", save);
         await Assert.ThrowsAsync<SimHostException>(() => client.Request("teleport"));

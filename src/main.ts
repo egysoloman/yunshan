@@ -18,9 +18,9 @@ import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-lay
 import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, ViewState } from './types';
 
 import { nearbyResident } from './social-reach';
+import { AUTO_TRANSIT_METRES } from './first-day';
 const PREF_KEY = 'yunshan.preferences.v1';
 /** A map crowd halo farther than this (straight line) is reached by public transport when a service exists. */
-const AUTO_TRANSIT_METRES = 1200;
 /** The resident the player last met (see social-reach): kept while within talking reach. */
 let metCitizenId: string | null = null;
 const app = document.querySelector<HTMLElement>('#app')!;

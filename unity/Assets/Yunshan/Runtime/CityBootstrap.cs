@@ -473,6 +473,7 @@ namespace Yunshan.Runtime
             if (GUI.Button(new UnityEngine.Rect(x + 284, 14, 66, 28), "保存")) session.Save(true);
             if (GUI.Button(new UnityEngine.Rect(x + 354, 14, 66, 28), "读档")) session.Load();
 
+            DrawWelcome();
             DrawContext(frame);
             if (GUI.Button(new UnityEngine.Rect(x - 100, 14, 92, 28), session.PanesOpen ? "收起 · Tab" : "总览 · Tab")) session.PanesOpen = !session.PanesOpen;
             if (session.PanesOpen) DrawPanes();
@@ -489,6 +490,35 @@ namespace Yunshan.Runtime
             GUI.Box(new UnityEngine.Rect(12, Screen.height - 20 - events.Count * 20 - 12, 560, events.Count * 20 + 16), GUIContent.none, box);
             for (int i = 0; i < events.Count; i++) GUI.Label(new UnityEngine.Rect(22, Screen.height - 24 - (events.Count - i) * 20, 548, 20), events[i].Text, small);
             if (showHelp) GUI.Label(new UnityEngine.Rect(Screen.width / 2f - 360, Screen.height - 34, 760, 24), "拖动或双击锁定鼠标环顾 · WASD 行走 · Shift 冲刺 · E 门/楼梯/上下车 · F 暂停 · B/X 放置/回收体素 · V 航空器返航 · Tab 城市总览 · H 隐藏提示 · Esc 释放鼠标", small);
+        }
+
+        /// <summary>The welcome note and its first-day list (web ui.ts welcome-note); an open
+        /// step a place serves is a one-click route there, planned by the host.</summary>
+        void DrawWelcome()
+        {
+            var list = session.FirstDay;
+            if (!session.WelcomeOpen || list == null) return;
+            const float left = 12, top = 160, width = 520;
+            GUI.Box(new UnityEngine.Rect(left, top, width, 96), GUIContent.none, box);
+            GUI.Label(new UnityEngine.Rect(left + 12, top + 6, width - 60, 24), "初抵云山，天地皆可游。", title);
+            GUI.Label(new UnityEngine.Rect(left + 12, top + 32, width - 24, 22), "你已抵达城中 · WASD 步行，E 使用设施 · 航空器需在停机位取得", small);
+            if (GUI.Button(new UnityEngine.Rect(left + width - 36, top + 6, 26, 24), new GUIContent("×", "关闭欢迎提示"))) session.DismissWelcome();
+            float x = left + 12;
+            GUI.Label(new UnityEngine.Rect(x, top + 62, 44, 24), "第一天", label); x += 50;
+            foreach (var step in list.Steps)
+            {
+                if (step.Go)
+                {
+                    if (GUI.Button(new UnityEngine.Rect(x, top + 60, 100, 26), new GUIContent(step.Label + " ↗", step.Hint + "（点击前往）"))) session.FirstDayGo(step.Id);
+                }
+                else
+                {
+                    var color = GUI.color; if (step.Done) GUI.color = new Color(.7f, 1f, .75f);
+                    GUI.Label(new UnityEngine.Rect(x + 6, top + 62, 94, 24), new GUIContent((step.Done ? "✓ " : "· ") + step.Label, step.Hint), label);
+                    GUI.color = color;
+                }
+                x += 106;
+            }
         }
 
         void DrawContext(SimFrame frame)

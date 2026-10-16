@@ -23,6 +23,7 @@ import { marketDisplayUnits } from '../site-fixtures';
 import { shopLifecycleAllowsOperation } from '../simulation/shop_lifecycle';
 import { contextModel, type ContextView } from './context-model';
 import { panesModel } from './panes-model';
+import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
 
 export const HOST_PROTOCOL = 1;
@@ -76,6 +77,10 @@ export class SimHost {
   private navigation: JourneyNavigation | null = null;
   private layout = '';
   private marketIds: Set<string> | null = null;
+  /** First-day steps already done this session (the client may add its stored ones). */
+  private firstDay = new Set<string>();
+  /** Set when a purchase or meal command sent here actually took money (web ui.ts purchaseMoney rule). */
+  private purchased = false;
 
   async handle(request: HostRequest): Promise<HostResponse> {
     const id = request.id;
@@ -94,7 +99,8 @@ export class SimHost {
       case 'command': {
         const sim = this.requireSim(), command = request.command as Command;
         if (!command || typeof command !== 'object' || typeof command.type !== 'string') throw new Error('命令格式无效。');
-        const result = sim.command(command);
+        const money = sim.state.player.money, result = sim.command(command);
+        if (result.ok && (command.type === 'purchase' || command.type === 'eat') && sim.state.player.money < money - 1e-9) this.purchased = true;
         // Shown to the player: amounts read in 云币 (as the web UI shows them).
         return { result: { ...result, message: displayMoney(result.message) }, frame: this.frame(request, 0, 0) };
       }
@@ -103,6 +109,8 @@ export class SimHost {
         this.metCitizenId = model.sections.find(section => section.kind === 'citizen')?.id ?? null;
         return model;
       }
+      case 'firstDay': return this.firstDayList(request.done);
+      case 'firstDayGo': return this.firstDayGo(request);
       case 'panes': return panesModel(this.requireSim(), this.world!, request.view as ContextView);
       case 'save': return { save: this.requireSim().exportSave() };
       // The running city, canonical JSON (sorted keys) of the world the host
@@ -128,6 +136,36 @@ export class SimHost {
     this.sim = sim; this.world = world; this.layout = selection.layout; this.navigation = new JourneyNavigation(world);
     this.marketIds = new Set(world.buildings.filter(b => b.kind === 'market').map(b => b.id));
     return { layout: this.layout, seed: world.seed, fingerprint: savedWorldFingerprint(world), buildings: world.buildings.length, nodes: world.nodes.length, edges: world.edges.length, citizens: sim.state.citizens.length, vehicles: sim.state.vehicles.length };
+  }
+
+  /** The welcome note's first-day list (web ui.ts updateFirstDay), ticked from the player's own state. */
+  private firstDayList(done: unknown) {
+    const sim = this.requireSim();
+    if (Array.isArray(done)) for (const id of done) if (FIRST_DAY_STEPS.some(([step]) => step === id)) this.firstDay.add(id);
+    const now = firstDayDone(sim.state, this.world!, sim.state.player.position, this.purchased);
+    for (const [id] of FIRST_DAY_STEPS) if (now[id]) this.firstDay.add(id);
+    const steps = FIRST_DAY_STEPS.map(([id, label, hint]) => ({ id, label, hint, done: this.firstDay.has(id), go: id !== 'walk' && !this.firstDay.has(id) }));
+    return { steps, complete: steps.every(step => step.done) };
+  }
+
+  /** One click on an open first-day step: plan the route to where it can be done now
+   * (first-day.ts), by public transport beyond AUTO_TRANSIT_METRES when a service exists (web main.ts travel 'auto'). */
+  private firstDayGo(request: HostRequest) {
+    const sim = this.requireSim(), state = sim.state, world = this.world!, step = request.step as FirstDayStep;
+    if (!['eat', 'work', 'meet'].includes(step)) throw new Error('未知的第一天事项。');
+    const reply = (ok: boolean, message: string) => ({ ok, message, frame: this.frame(request, 0, 0) });
+    const targetId = firstDayTarget(state, world, state.player.position, step);
+    if (!targetId) return reply(false, firstDayUnavailable(step));
+    const site = world.buildings.find(b => b.id === targetId)!, feet = state.player.position, metres = Math.round(Math.hypot(site.door.x - feet.x, site.door.z - feet.z));
+    if (metres > AUTO_TRANSIT_METRES && sim.command({ type: 'planJourney', targetId, value: 1 }).ok) {
+      const plan = this.navigation!.read(state);
+      if (!plan.unavailable && plan.destination) return reply(true, `目的地较远（直线约 ${metres} 米），已规划公共交通至${plan.destination.name}；请先步行到首段乘车点，现场查看当前班次与票款。`);
+    }
+    const planned = sim.command({ type: 'planJourney', targetId, value: 0 });
+    if (!planned.ok) return reply(false, displayMoney(planned.message));
+    const plan = this.navigation!.read(state);
+    if (plan.unavailable || !plan.walking) return reply(false, plan.unavailable ?? '暂时无法规划步行路线。');
+    return reply(true, `步行导航至${plan.walking.destination.name}，道路与桥面路线约 ${Math.round(plan.walking.metres)} 米。${plan.walking.stairsFromFloor !== null ? '请先在楼梯处按 E 回到一层。' : '金线通往实际入口或停靠点。'}`);
   }
 
   private step(request: HostRequest) {

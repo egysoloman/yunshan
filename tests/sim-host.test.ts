@@ -134,3 +134,21 @@ test('native host answers one JSON line per request over stdio', async () => {
   const code = await exited;
   assert.equal(code, 0);
 });
+
+test('native host serves the first-day list and plans a one-click walk to where a step can be done', async () => {
+  const host = new SimHost();
+  assert.equal((await host.handle({ op: 'open' })).ok, true);
+  type List = { steps: { id: string; label: string; done: boolean; go: boolean }[]; complete: boolean };
+  const list = (await host.handle({ op: 'firstDay' })).result as List;
+  assert.deepEqual(list.steps.map(s => s.label), ['走走看看', '买份吃的', '做次工班', '认识居民']);
+  assert.ok(list.steps.every(s => !s.done), 'nothing is done at the spawn');
+  assert.deepEqual(list.steps.filter(s => s.go).map(s => s.id), ['eat', 'work', 'meet'], 'walking needs no click');
+  const go = (await host.handle({ op: 'firstDayGo', step: 'eat' })).result as { ok: boolean; message: string; frame: HostFrame };
+  assert.equal(go.ok, true, go.message);
+  assert.match(go.message, /^步行导航至千灯市集/);
+  assert.ok(go.frame.navigation?.destination && go.frame.navigation.points.length > 1, 'a real route is drawn');
+  // Steps the client stored stay ticked; unknown ids are ignored.
+  const restored = (await host.handle({ op: 'firstDay', done: ['work', 'teleport'] })).result as List;
+  assert.deepEqual(restored.steps.filter(s => s.done).map(s => s.id), ['work']);
+  assert.equal((await host.handle({ op: 'firstDayGo', step: 'walk' })).ok, false);
+});
