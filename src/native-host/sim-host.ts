@@ -71,6 +71,8 @@ function canonicalWorld(value: unknown): unknown {
 export class SimHost {
   private sim: Simulation | null = null;
   private world: WorldDefinition | null = null;
+  /** The resident last shown in the context (kept while within talking reach). */
+  private metCitizenId: string | null = null;
   private navigation: JourneyNavigation | null = null;
   private layout = '';
   private marketIds: Set<string> | null = null;
@@ -96,7 +98,11 @@ export class SimHost {
         // Shown to the player: amounts read in 云币 (as the web UI shows them).
         return { result: { ...result, message: displayMoney(result.message) }, frame: this.frame(request, 0, 0) };
       }
-      case 'context': return contextModel(this.requireSim(), this.world!, request.view as ContextView);
+      case 'context': {
+        const model = contextModel(this.requireSim(), this.world!, { ...(request.view as ContextView), keepCitizenId: this.metCitizenId });
+        this.metCitizenId = model.sections.find(section => section.kind === 'citizen')?.id ?? null;
+        return model;
+      }
       case 'panes': return panesModel(this.requireSim(), this.world!, request.view as ContextView);
       case 'save': return { save: this.requireSim().exportSave() };
       // The running city, canonical JSON (sorted keys) of the world the host

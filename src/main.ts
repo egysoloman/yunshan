@@ -17,9 +17,12 @@ import { readSavedGame, writeSavedGame } from './persistence';
 import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-layout';
 import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, ViewState } from './types';
 
+import { nearbyResident } from './social-reach';
 const PREF_KEY = 'yunshan.preferences.v1';
 /** A map crowd halo farther than this (straight line) is reached by public transport when a service exists. */
 const AUTO_TRANSIT_METRES = 1200;
+/** The resident the player last met (see social-reach): kept while within talking reach. */
+let metCitizenId: string | null = null;
 const app = document.querySelector<HTMLElement>('#app')!;
 const stage = document.createElement('main');
 stage.className = 'world-stage';
@@ -277,7 +280,7 @@ window.addEventListener('pagehide', () => save(false));
 function getView(): ViewState {
   const position = controller.position;
   const building = controller.inside ?? world.buildings.filter(b => distance(position, b.door) < 18).sort((a, b) => distance(position, a.door) - distance(position, b.door))[0] ?? null;
-  const citizen = simulation.state.citizens.filter(n => n.tier !== 'statistical' && distance(position, n.position) < 8).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
+  const citizen = nearbyResident(simulation.state, position, metCitizenId); metCitizenId = citizen?.id ?? null;
   const vehicle = simulation.state.vehicles.filter(v => distance(position, v.position) < 24).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
   const aircraft = activeAircraft(simulation.state) ?? simulation.state.aviation?.aircraft.filter(a => distance(position, a.position) < 18).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
   return { navigationUnavailable: navigationPlan?.unavailable ?? null, transitJourney, journey: navigationJourney, nearbyAircraft: aircraft, mode: controller.mode, ...settings, fps, drawCalls: city.renderer.info.render.calls, triangles: city.renderer.info.render.triangles, position, nearbyBuilding: building, nearbyCitizen: citizen, nearbyVehicle: vehicle, targetDistrict, inside: Boolean(controller.inside), notice };

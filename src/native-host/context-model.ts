@@ -5,6 +5,7 @@
  * button is still only a request; Simulation.command remains the authority.
  */
 import type { Simulation } from '../simulation';
+import { nearbyResident } from '../social-reach';
 import { FLOOR_PLAN_PROFILE } from '../architecture-floor-plan';
 import { aircraftBoardingBlockedReason, activeAircraft, getAviationPads } from '../aviation';
 import { HOME_REST_MINUTES, homeRestBlockedReason } from '../simulation/home-rest';
@@ -15,7 +16,7 @@ import { powerBinding } from '../simulation/power';
 import { governanceSupported } from '../simulation/governance';
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, Vec3, Vehicle, ViewMode, WorldDefinition } from '../types';
 
-export interface ContextView { mode?: ViewMode; inside?: string | null; bankAmount?: number }
+export interface ContextView { mode?: ViewMode; inside?: string | null; bankAmount?: number; keepCitizenId?: string | null }
 /** `interact` asks the client to run its door/stair/vehicle interaction (E). */
 export interface ContextAction { label: string; command?: Command; client?: 'interact'; disabled: boolean }
 export interface ContextSection { kind: 'building' | 'citizen' | 'vehicle' | 'aircraft'; id: string; eyebrow: string; title: string; subtitle: string; actions: ContextAction[]; notes: string[] }
@@ -249,14 +250,14 @@ export class ContextRules {
   }
 }
 
-/** Nearby targets use the web App's radii: doors 18 m, residents 8 m,
+/** Nearby targets use the web App's radii: doors 18 m, residents 8 m (kept within 24 m once met),
  * vehicles 24 m, aircraft 18 m, measured from the player's actual body. */
 export function contextModel(sim: Simulation, world: WorldDefinition, view: ContextView = {}): ContextModelResult {
   const rules = new ContextRules(sim, world, { mode: view.mode ?? 'walk', inside: view.inside ?? null, bankAmount: view.bankAmount });
   const state = sim.state, position = state.player.position;
   const insideBuilding = view.inside ? world.buildings.find(b => b.id === view.inside) : undefined;
   const building = insideBuilding ?? world.buildings.filter(b => spatialDistance(position, b.door) < 18).sort((a, b) => spatialDistance(position, a.door) - spatialDistance(position, b.door))[0];
-  const citizen = state.citizens.filter(n => n.tier !== 'statistical' && spatialDistance(position, n.position) < 8).sort((a, b) => spatialDistance(position, a.position) - spatialDistance(position, b.position))[0];
+  const citizen = nearbyResident(state, position, view.keepCitizenId) ?? undefined;
   const vehicle = state.vehicles.find(v => v.id === state.player.vehicleId) ?? state.vehicles.filter(v => spatialDistance(position, v.position) < 24).sort((a, b) => spatialDistance(position, a.position) - spatialDistance(position, b.position))[0];
   const aircraft = activeAircraft(state) ?? state.aviation?.aircraft.filter(a => spatialDistance(position, a.position) < 18).sort((a, b) => spatialDistance(position, a.position) - spatialDistance(position, b.position))[0];
   const flying = !!state.aviation?.activeAircraftId, sections: ContextSection[] = [];
