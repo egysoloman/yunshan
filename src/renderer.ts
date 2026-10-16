@@ -125,6 +125,7 @@ class BoxBatch {
       }
       const mesh = new THREE.InstancedMesh(geometry, this.materials[key], parts.length);
       if (key === 'wall' || key === 'wood') mesh.geometry.setAttribute('instanceFacade', new THREE.InstancedBufferAttribute(new Float32Array(parts.flatMap(part => [...part.facade ?? [0, 0, 0, 0]])), 4));
+      if (key === 'wall' || key === 'wood') mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? BoxBatch.buildingIndex.get(part.building) ?? -1 : -1)), 1));
       if (key === 'wall' || key === 'wood' || key === 'stone' || key === 'fabric' || key === 'metal') mesh.geometry.setAttribute('instanceBuildingFinish', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
       // The same material also paints transport and old furniture. Only the
       // authoritative roof tag enables tile relief. 2 denotes architecture,
@@ -242,7 +243,7 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.domElement.setAttribute('aria-label', '云山巨城实时三维世界');
     this.container.appendChild(this.renderer.domElement);
     this.materials = Object.fromEntries(Object.keys(PALETTE).filter(key => key !== 'metal' || this.world.buildings.some(site => site.commercialGeometryRevision === 1)).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : key === 'metal' ? .42 : .83, metalness: key === 'glass' ? .32 : key === 'metal' ? .72 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : key === 'lantern' ? '#ff5a28' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : key === 'lantern' ? .05 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
-    for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v5`; this.materials[key].onBeforeCompile = shader => {
+    for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v6`; this.materials[key].onBeforeCompile = shader => {
       shader.vertexShader = 'varying vec3 vArchitecture;varying vec3 vArchitectureNormal;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
         vec4 architecture=vec4(transformed,1.0);
@@ -324,11 +325,12 @@ export class CityRenderer implements CityRendererAPI {
       }
       if (key === 'wall') {
         shader.uniforms.facadeNight = this.facadeNight;
-        shader.vertexShader = 'attribute vec4 instanceFacade;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.vertexShader;
-        shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvFacade=instanceFacade;vProxyPosition=position;vProxyNormal=normal;');
-        shader.fragmentShader = 'uniform float facadeNight;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.fragmentShader;
+        shader.uniforms.windowLight = this.windowLightUniform; shader.uniforms.windowLightCount = this.windowLightCount;
+        shader.vertexShader = 'uniform sampler2D windowLight;uniform float windowLightCount;attribute float instanceWindowBuilding;varying float vProxyLight;attribute vec4 instanceFacade;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.vertexShader;
+        shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvFacade=instanceFacade;vProxyPosition=position;vProxyNormal=normal;vProxyLight=instanceWindowBuilding<0.0?1.0:texture2D(windowLight,vec2((instanceWindowBuilding+.5)/windowLightCount,.5)).r;');
+        shader.fragmentShader = 'uniform float facadeNight;varying float vProxyLight;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.fragmentShader;
         shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
-          float proxyWindow=0.0;
+          float proxyWindow=0.0,proxyLit=1.0;
           if(vFacade.y>0.0 && abs(vProxyNormal.y)<.5){
             bool front=vProxyNormal.z>.5;bool side=abs(vProxyNormal.x)>.5;
             vec2 uv=vec2(front?vProxyPosition.x:vProxyPosition.z,vProxyPosition.y)+.5;
@@ -339,6 +341,8 @@ export class CityRenderer implements CityRendererAPI {
             float origin=front?(broad?.27:.1):.2;
             float n=clamp(floor((uv.x-origin)/spacing+.5),0.0,front?vFacade.x-1.0:2.0);
             float centre=origin+n*spacing;
+            // A proxy pane is lit when its seed falls under the building's occupied share (window-occupancy.ts).
+            float proxySeed=fract(sin(n*12.9898+floor(uv.y*rows)*78.233+(front?0.0:41.7))*43758.5453);proxyLit=mix(.12,1.0,1.0-step(vProxyLight,proxySeed));
             float ww=front?vFacade.z:vFacade.w;
             float xx=abs(uv.x-centre),yy=abs(row-(front&&broad?.52:.57));
             float permitted=(front||side)?1.0:0.0;
@@ -351,7 +355,7 @@ export class CityRenderer implements CityRendererAPI {
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.14,.10,.063),max(frame,beam)*.9);
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.115,.245,.255),proxyWindow*(1.0-max(lattice,crossbar)*.6));
           }`);
-        shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=proxyWindow*facadeNight*vec3(1.0,.52,.17)*1.1;');
+        shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=proxyWindow*proxyLit*facadeNight*vec3(1.0,.52,.17)*1.1;');
       }
     }; }
     this.materials.glass.roughness = .42; this.materials.glass.metalness = .12;
