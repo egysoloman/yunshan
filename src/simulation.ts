@@ -56,6 +56,7 @@ const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'marr
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
 const clamp = (n: number, min = 0, max = 100) => Math.max(min, Math.min(max, n));
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+const sameVec = (a: Vec3, b: Vec3 | undefined) => !!b && a.x === b.x && a.y === b.y && a.z === b.z;
 const copy = (p: Vec3): Vec3 => ({ x: p.x, y: p.y, z: p.z });
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
 /** v4 street browsing: an evening social outing to a market. */
@@ -3028,7 +3029,10 @@ export class Simulation implements SimulationAPI {
         for (const citizen of s.citizens as Citizen[]) {
           if (s.extension?.actorProfiles[citizen.id]?.alive === false || r.riders[citizen.id] || !citizen.route || !citizen.routeIndex || citizen.routeIndex >= citizen.route.length || r.npcStairCursors[citizen.id]) continue;
           const description = this.npcStairMotion.describe(citizen.route, citizen.routeIndex);
-          ensure(description.kind !== 'blocked' || this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex, citizen.position), 'native route geometry');
+          // A live resident whose next leg is blocked waits at that leg's start (moveCitizenPhysical
+          // wait) until its re-plan; a save taken in that window holds exactly this state.
+          const waitingAtBlockedLeg = citizen.state === 'physicalWaiting' && sameVec(citizen.position, citizen.route[citizen.routeIndex - 1]);
+          ensure(description.kind !== 'blocked' || waitingAtBlockedLeg || this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex, citizen.position), 'native route geometry');
           if (description.kind === 'physical') this.npcStairMotion.validate(citizen.route, this.npcStairMotion.opening(citizen.route, citizen.routeIndex)!, citizen.position);
         }
       }
