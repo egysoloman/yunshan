@@ -21,6 +21,7 @@ import { HOME_REST_MINUTES, homeRestBlockedReason, homeRestPoints } from './simu
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
+import { routeDistanceLabel } from './navigation-label';
 import { FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, type FirstDayStep } from './first-day';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
@@ -535,7 +536,7 @@ export class CityUI {
       const goal = view.transitJourney?.destination ?? view.journey?.destination;
       this.setText('destination', goal?.name ?? target.name);
       const meters = goal ? spatialDistance(view.position,goal.position) : distance(view.position,target.center);
-      this.setText('route-distance', goal ? meters < 8 && !state.player.vehicleId ? '已到实际入口' : `${rounded(meters)} m 至入口` : meters < target.radius ? '已抵达城区' : meters >= 1000 ? `${(meters / 1000).toFixed(1)} km` : `${rounded(meters)} m`);
+      this.setText('route-distance', routeDistanceLabel({ goal: !!goal, metres: meters, inVehicle: !!state.player.vehicleId, insideGoal: !!goal && view.inside && view.nearbyBuilding?.id === goal.id, districtRadius: target.radius }));
     }
     this.refreshContext();
     this.drawMap();
