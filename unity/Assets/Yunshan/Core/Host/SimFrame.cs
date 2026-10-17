@@ -20,7 +20,7 @@ namespace Yunshan.Core.Host
         }
         public sealed class Vehicle
         {
-            public string Id, Kind, EdgeId, State; public Vec3 Position; public double Progress, Direction;
+            public string Id, Kind, EdgeId, State; public Vec3 Position; public double Progress, Direction, Cargo;
         }
         public sealed class Aircraft { public string Id, Kind, Status; public Vec3 Position; public double Yaw, Pitch; public bool Active; }
         public sealed class Event { public double Id, Tick; public string Type, Text; }
@@ -83,7 +83,7 @@ namespace Yunshan.Core.Host
             foreach (var v in Json.Arr(o, "vehicles") ?? new List<object>())
             {
                 var a = (List<object>)v;
-                f.Vehicles.Add(new Vehicle { Id = (string)a[0], Kind = (string)a[1], Position = new Vec3((double)a[2], (double)a[3], (double)a[4]), EdgeId = (string)a[5], Progress = (double)a[6], Direction = (double)a[7], State = a[8] as string });
+                f.Vehicles.Add(new Vehicle { Id = (string)a[0], Kind = (string)a[1], Position = new Vec3((double)a[2], (double)a[3], (double)a[4]), EdgeId = (string)a[5], Progress = (double)a[6], Direction = (double)a[7], State = a[8] as string, Cargo = a.Count > 9 && a[9] is double cargo ? cargo : 0 });
             }
             foreach (var a in Json.Arr(o, "aircraft") ?? new List<object>())
             {

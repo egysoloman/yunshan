@@ -39,7 +39,7 @@ export interface HostFrame {
   player: { position: Vec3; role: string; identities: string[]; money: number; reputation: number; needs: SimState['player']['needs']; inventory: Record<string, number>; homeId: string | null; vehicleId: string | null; education: number; driving: boolean; alive: boolean };
   aircraft: { id: string; kind: string; position: Vec3; yaw: number; pitch: number; status: string; active: boolean }[];
   citizens: HostFrameCitizen[];
-  /** [id, kind, x, y, z, edgeId, progress, direction, state] */
+  /** [id, kind, x, y, z, edgeId, progress, direction, state, cargo] */
   vehicles: (string | number)[][];
   signals: Record<string, number>;
   events: { id: number; tick: number; type: string; text: string }[];
@@ -230,7 +230,7 @@ export class SimHost {
       player: { position: point(state.player.position), role: state.player.role, identities: state.player.identities ?? [state.player.role], money: round(state.player.money), reputation: state.player.reputation, needs: state.player.needs, inventory: state.player.inventory, homeId: state.player.homeId, vehicleId: state.player.vehicleId, education: state.player.education, driving: !!(sim as Simulation & { isDriving?: () => boolean }).isDriving?.(), alive: profiles.player?.alive !== false },
       aircraft: (state.aviation?.aircraft ?? []).map(a => ({ id: a.id, kind: a.kind, position: point(a.position), yaw: round(a.yaw), pitch: round(a.pitch), status: a.status, active: state.aviation?.activeAircraftId === a.id })),
       citizens,
-      vehicles: state.vehicles.map(v => [v.id, v.kind, round(v.position.x), round(v.position.y), round(v.position.z), v.edgeId, round(v.progress), v.direction, v.state]),
+      vehicles: state.vehicles.map(v => [v.id, v.kind, round(v.position.x), round(v.position.y), round(v.position.z), v.edgeId, round(v.progress), v.direction, v.state, v.cargo]),
       signals,
       events: state.events.filter(e => e.id > since).map(e => ({ id: e.id, tick: e.tick, type: e.type, text: displayMoney(e.text) })),
       lastEventId,

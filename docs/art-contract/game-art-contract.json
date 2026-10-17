@@ -248,18 +248,19 @@
         "width": 2.5,
         "lift": 0,
         "body": {
-          "y": 1.1,
-          "width": 2.5,
-          "height": 1.5,
+          "y": 0.85,
+          "width": 2.4,
+          "height": 0.5,
           "length": 5.5,
-          "color": "#a77851"
+          "color": "#7a5a3c"
         },
         "head": {
-          "y": 2.1,
-          "width": 2.125,
-          "height": 0.8,
-          "length": 3.74,
-          "color": "#517f82"
+          "y": 1.85,
+          "width": 2.3,
+          "height": 1.5,
+          "length": 1.9,
+          "color": "#517f82",
+          "z": 1.75
         },
         "trim": {
           "y": 0.6,
@@ -285,7 +286,15 @@
             "x": 1.2,
             "z": 1.8
           }
-        ]
+        ],
+        "load": {
+          "y": 1.65,
+          "width": 2.2,
+          "height": 1.1,
+          "length": 3.2,
+          "color": "#b48a57",
+          "z": -0.95
+        }
       },
       "maglev": {
         "length": 16,

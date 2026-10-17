@@ -159,17 +159,26 @@ namespace Yunshan.Runtime
                 double length = flight ? 17 : train ? 16 : boat ? 11 : cable ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = cable ? 4.6 : 0;
                 if (!NearCamera.VehicleClears(camera, p, direction, length, width, lift)) continue;
                 var rotation = Space.Yaw(direction);
+                if (v.Kind == "road" || v.Kind == "bridge")
+                {
+                    // Web vehicle-shapes.ts: a small truck — timber bed, cab at the front, crates while it carries cargo.
+                    double c0 = Math.Cos(direction), s0 = Math.Sin(direction);
+                    Vector3 Along(double z, double y) => Space.ToUnity(p.X + s0 * z, p.Y + y, p.Z + c0 * z);
+                    bodies.Add(Along(0, .85), rotation, new Vector3((float)(width - .1), .5f, (float)length), Space.Hex("#7a5a3c"));
+                    bodies.Add(Along(length / 2 - 1, 1.85), rotation, new Vector3((float)(width - .2), 1.5f, 1.9f), Space.Hex("#517f82"));
+                    bodies.Add(Along(0, .6), rotation, new Vector3((float)(width + .25), .2f, (float)(length * .85)), Space.Hex("#3f6f73"));
+                    if (v.Cargo > 0) bodies.Add(Along(-.95, 1.65), rotation, new Vector3((float)(width - .3), 1.1f, 3.2f), Space.Hex("#b48a57"));
+                    foreach (var side in new[] { -1.0, 1.0 }) foreach (var end in new[] { -1.0, 1.0 })
+                    {
+                        double lx = side * (width / 2 - .05), lz = end * (length / 2 - .95);
+                        bodies.Add(Space.ToUnity(p.X + lx * c0 + lz * s0, p.Y + .35, p.Z - lx * s0 + lz * c0), rotation, new Vector3(.5f, .7f, .7f), Space.Hex("#2b2b2b"));
+                    }
+                    continue;
+                }
                 bodies.Add(Space.ToUnity(p.X, p.Y + 1.1 + lift, p.Z), rotation, new Vector3((float)width, flight ? .8f : 1.5f, (float)length), Space.Hex(flight ? "#d5c7aa" : train ? "#d0b985" : "#a77851"));
                 bodies.Add(Space.ToUnity(p.X, p.Y + 2.1 + lift, p.Z), rotation, new Vector3((float)(flight ? 3 : width * .85), flight ? 1.8f : .8f, (float)(length * .68)), Space.Hex("#517f82"));
                 if (cable) { double roof = 2.1 + lift + .4, rope = 8.6; bodies.Add(Space.ToUnity(p.X, p.Y + (roof + rope) / 2, p.Z), rotation, new Vector3(.25f, (float)(rope - roof), .25f), Space.Hex("#3f6f73")); }
                 else bodies.Add(Space.ToUnity(p.X, p.Y + .6 + lift, p.Z), rotation, new Vector3((float)(width + .25), .2f, (float)(length * .85)), Space.Hex("#3f6f73"));
-                // Web vehicle-shapes.ts: a road vehicle stands on four wheels (local x across, z along).
-                if (v.Kind == "road" || v.Kind == "bridge")
-                    foreach (var side in new[] { -1.0, 1.0 }) foreach (var end in new[] { -1.0, 1.0 })
-                    {
-                        double lx = side * (width / 2 - .05), lz = end * (length / 2 - .95), c = Math.Cos(direction), s = Math.Sin(direction);
-                        bodies.Add(Space.ToUnity(p.X + lx * c + lz * s, p.Y + .35, p.Z - lx * s + lz * c), rotation, new Vector3(.5f, .7f, .7f), Space.Hex("#2b2b2b"));
-                    }
             }
         }
 

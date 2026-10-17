@@ -214,6 +214,10 @@ export class CityRenderer implements CityRendererAPI {
   private signalGreen: THREE.InstancedMesh;
   private vehiclePools = new Map<string, MovingPool>();
   private wheels?: THREE.InstancedMesh;
+  /** Crates on road vehicles that carry real cargo (vehicle-shapes.ts load). */
+  private loads?: THREE.InstancedMesh;
+  /** Opaque truck cabs (the shared glass head material reads as a see-through box on a road vehicle). */
+  private cabs?: THREE.InstancedMesh;
   private matrix = new THREE.Matrix4();
   private position = new THREE.Vector3();
   private scale = new THREE.Vector3();
@@ -531,6 +535,10 @@ export class CityRenderer implements CityRendererAPI {
     // Road vehicles' wheels: one shared draw, four per vehicle.
     this.wheels = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: VEHICLE_WHEEL.color, roughness: .9 }), (this.vehiclePools.get('road')?.capacity ?? 0) * 4 + (this.vehiclePools.get('bridge')?.capacity ?? 0) * 4);
     this.wheels.name = '载具 · 车轮'; this.wheels.count = 0; this.wheels.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.wheels.frustumCulled = false; this.scene.add(this.wheels);
+    this.loads = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .85 }), (this.vehiclePools.get('road')?.capacity ?? 0) + (this.vehiclePools.get('bridge')?.capacity ?? 0));
+    this.cabs = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .55, metalness: .1 }), (this.vehiclePools.get('road')?.capacity ?? 0) + (this.vehiclePools.get('bridge')?.capacity ?? 0));
+    this.cabs.name = '载具 · 车头'; this.cabs.count = 0; this.cabs.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.cabs.frustumCulled = false; this.scene.add(this.cabs);
+    this.loads.name = '载具 · 车载货箱'; this.loads.count = 0; this.loads.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.loads.frustumCulled = false; this.scene.add(this.loads);
     this.camera.position.set(world.spawn.x, world.spawn.y + 1.72, world.spawn.z);
     const look = arrivalLook(world, world.spawn); this.camera.lookAt(look.x, look.y, look.z);
     this.resize();
@@ -1168,7 +1176,7 @@ export class CityRenderer implements CityRendererAPI {
       for (let i = 0; i < levels.length; i++) data[i] = Math.round(levels[i] * 255);
       this.windowLight.needsUpdate = true;
     }
-    const counts = new Map<string, number>(); let wheels = 0;
+    const counts = new Map<string, number>(); let wheels = 0, loads = 0, cabs = 0;
     for (const vehicle of state.vehicles) {
       const pool = this.vehiclePools.get(vehicle.kind); if (!pool) continue; const n = counts.get(vehicle.kind) ?? 0; if (n >= pool.capacity) continue;
       if (vehicle.id === state.player.vehicleId && Math.hypot(vehicle.position.x - this.camera.position.x, vehicle.position.y - this.camera.position.y, vehicle.position.z - this.camera.position.z) < 25) continue;
@@ -1181,11 +1189,19 @@ export class CityRenderer implements CityRendererAPI {
         const c = Math.cos(direction), s = Math.sin(direction);
         this.put(this.wheels, wheels++, p.x + spot.x * c + spot.z * s, p.y + VEHICLE_WHEEL.y, p.z - spot.x * s + spot.z * c, VEHICLE_WHEEL.width, VEHICLE_WHEEL.size, VEHICLE_WHEEL.size, direction);
       }
-      this.put(pool.body, n, p.x, p.y + body.y, p.z, body.width, body.height, body.length, direction, body.color);
-      this.put(pool.head, n, p.x, p.y + head.y, p.z, head.width, head.height, head.length, direction, head.color);
+      // A box offset along travel (z) moves with the heading.
+      const along = (box: { z?: number }) => ({ x: p.x + Math.sin(direction) * (box.z ?? 0), z: p.z + Math.cos(direction) * (box.z ?? 0) });
+      const at = along(body), cab = along(head);
+      this.put(pool.body, n, at.x, p.y + body.y, at.z, body.width, body.height, body.length, direction, body.color);
+      // A truck's cab is opaque; other vehicles keep the glass head.
+      if (shape.load && this.cabs) { this.put(this.cabs, cabs++, cab.x, p.y + head.y, cab.z, head.width, head.height, head.length, direction, head.color); this.put(pool.head, n, cab.x, p.y + head.y, cab.z, 0, 0, 0, direction); }
+      else this.put(pool.head, n, cab.x, p.y + head.y, cab.z, head.width, head.height, head.length, direction, head.color);
       this.put(pool.trim, n, p.x, p.y + trim.y, p.z, trim.width, trim.height, trim.length, direction); counts.set(vehicle.kind, n + 1);
+      if (shape.load && vehicle.cargo > 0 && this.loads && loads < this.loads.instanceMatrix.count) { const bed = along(shape.load); this.put(this.loads, loads++, bed.x, p.y + shape.load.y, bed.z, shape.load.width, shape.load.height, shape.load.length, direction, shape.load.color); }
     }
     if (this.wheels) { this.wheels.count = wheels; this.wheels.instanceMatrix.needsUpdate = true; }
+    if (this.cabs) { this.cabs.count = cabs; this.cabs.instanceMatrix.needsUpdate = true; if (this.cabs.instanceColor) this.cabs.instanceColor.needsUpdate = true; }
+    if (this.loads) { this.loads.count = loads; this.loads.instanceMatrix.needsUpdate = true; if (this.loads.instanceColor) this.loads.instanceColor.needsUpdate = true; }
     for (const [kind, pool] of this.vehiclePools) for (const mesh of [pool.body, pool.head, pool.trim]) { mesh.count = counts.get(kind) ?? 0; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
   }
 

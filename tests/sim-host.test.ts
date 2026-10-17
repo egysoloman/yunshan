@@ -25,7 +25,7 @@ test('native host drives the authoritative simulation through requests', async (
   assert.equal(stepped.ok, true, stepped.error);
   const frame = stepped.result as HostFrame;
   assert.equal(frame.ticks, 1); assert.equal(frame.tick, 1);
-  assert(frame.vehicles.length > 100 && frame.vehicles.every(v => v.length === 9));
+  assert(frame.vehicles.length > 100 && frame.vehicles.every(v => v.length === 10 && typeof v[9] === 'number'));
   assert(frame.events.some(e => e.type === 'arrival'), 'first frame carries the arrival notice');
   assert(Object.values(frame.signals).every(p => p === 0 || p === 1));
   assert.equal(frame.player.alive, true);
