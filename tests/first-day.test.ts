@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { firstDayTarget } from '../src/first-day';
+import { firstDayNext, firstDayTarget } from '../src/first-day';
 import type { SimState, WorldDefinition } from '../src/types';
 
 test('first-day steps lead to the nearest open market with food, the nearest open market, and the busiest public venue', () => {
@@ -27,4 +27,9 @@ test('the meet step names a resident out on foot nearby instead of planning a cr
   assert.deepEqual(nearbyStranger(city([person('far', 300, 'moving'), person('near', 40, 'moving'), person('nearer', 20, 'atHome')]), at), { name: 'near', role: '学生', metres: 40 }, 'the nearest one out on foot; indoors does not count');
   assert.equal(nearbyStranger(city([person('dead', 5, 'moving', false), person('far', MEET_NEARBY_METRES + 1, 'socializing')]), at), null);
   assert.equal(nearbyStrangerNotice({ name: '云溪', role: '学生', metres: 3.4 }), '附近约 3 米处就有居民云溪（学生）。走到身旁，在左侧面板的“居民”页点“聊聊近况”。');
+});
+
+test('after the first day the note names what to do next, from the player\'s own home', () => {
+  assert.match(firstDayNext({ player: { homeId: null } } as never), /到住宅租一处落脚的住所/);
+  assert.match(firstDayNext({ player: { homeId: 'river-b3' } } as never), /回住处床旁歇一歇/);
 });

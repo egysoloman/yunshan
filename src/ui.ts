@@ -28,7 +28,7 @@ import { freshLaborSettlement } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
 const HEADER_DARK_SKY = .35;
-import { FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from './first-day';
+import { FIRST_DAY_STEPS, firstDayDone, firstDayNext, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from './first-day';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
 const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
@@ -300,6 +300,7 @@ export class CityUI {
   private rideSeen: RideSeen | null = null;
   private autoVehicleTab: string | null = null;
   private purchaseMoney: number | null = null;
+  private firstDayNextPending: string | null = null;
   /** A short first-day list in the welcome note (display only), ticked from the player's own state. */
   private updateFirstDay(state: SimState, view: ViewState): void {
     const list = this.refs.get('first-day'); if (!list) return;
@@ -309,6 +310,7 @@ export class CityUI {
     for (const [id, , , done] of steps) if (done && !this.firstDay.has(id)) { this.firstDay.add(id); changed = true; }
     if (changed) try { localStorage.setItem('yunshan.ui.firstDay.v1', JSON.stringify([...this.firstDay])); } catch { /* storage restricted */ }
     const signature = steps.map(([id]) => this.firstDay.has(id) ? '1' : '0').join('');
+    if (this.firstDayNextPending && this.ref('toast').hidden) { this.notify(this.firstDayNextPending, true); this.firstDayNextPending = null; }
     if (list.dataset.signature === signature) return;
     list.dataset.signature = signature;
     list.replaceChildren(element('b', '', '第一天'), ...steps.map(([id, label, hint]) => {
@@ -316,6 +318,9 @@ export class CityUI {
       if (!this.firstDay.has(id) && id !== 'walk') { const item = element('button', 'first-day-step', `· ${label}`) as HTMLButtonElement; item.type = 'button'; item.title = `${hint}（点击前往）`; item.dataset.step = id; item.dataset.firstDay = id; return item; }
       const item = element('i', this.firstDay.has(id) ? 'done' : '', ` · ${this.firstDay.has(id) ? '✓' : ''}${label}`); item.setAttribute('role', 'listitem'); item.title = hint; item.dataset.step = id; return item;
     }));
+    // The step that completes the day says so once, with what to do next (first-day.ts), after that
+    // step's own feedback has had its turn on screen.
+    if (changed && steps.every(([id]) => this.firstDay.has(id))) this.firstDayNextPending = firstDayNext(state);
     if (steps.every(([id]) => this.firstDay.has(id))) { this.ref('welcome').hidden = true; try { localStorage.setItem('yunshan.ui.welcomeSeen.v1', '1'); } catch { /* storage restricted */ } }
   }
   private atKind(...kinds: BuildingKind[]): boolean { return this.world.buildings.some(b => kinds.includes(b.kind) && this.atBuilding(b.id)); }

@@ -220,11 +220,11 @@ namespace Yunshan.Core.Host
     public sealed class FirstDay
     {
         public sealed class Step { public string Id, Label, Hint; public bool Done, Go; }
-        public List<Step> Steps = new List<Step>(); public bool Complete;
+        public List<Step> Steps = new List<Step>(); public bool Complete; public string Next;
 
         public static FirstDay From(object o)
         {
-            var list = new FirstDay { Complete = Json.Bool(o, "complete") };
+            var list = new FirstDay { Complete = Json.Bool(o, "complete"), Next = Json.Str(o, "next") };
             foreach (var s in Json.Arr(o, "steps") ?? new List<object>()) list.Steps.Add(new Step { Id = Json.Str(s, "id"), Label = Json.Str(s, "label", ""), Hint = Json.Str(s, "hint", ""), Done = Json.Bool(s, "done"), Go = Json.Bool(s, "go") });
             return list;
         }

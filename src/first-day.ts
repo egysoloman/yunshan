@@ -63,3 +63,10 @@ export function nearbyStranger(state: SimState, position: Vec3): { name: string;
 export function nearbyStrangerNotice(stranger: { name: string; role: string; metres: number }): string {
   return `附近约 ${Math.max(1, Math.round(stranger.metres))} 米处就有居民${stranger.name}（${stranger.role}）。走到身旁，在左侧面板的“居民”页点“聊聊近况”。`;
 }
+
+/** Said once when the last first-day step is ticked (web toast, native host `next`): what the city
+ * offers after the first day, from the player's own state. Display only. */
+export function firstDayNext(state: Pick<SimState, 'player'>): string {
+  const home = state.player.homeId ? '回住处床旁歇一歇' : '到住宅租一处落脚的住所';
+  return `第一天的四件事都做完了。接下来可以：${home}；去书院自习，学些本事；坐车去别的城区看看（舆图上点光圈即可前往）。`;
+}

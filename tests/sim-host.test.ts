@@ -151,4 +151,8 @@ test('native host serves the first-day list and plans a one-click walk to where 
   const restored = (await host.handle({ op: 'firstDay', done: ['work', 'teleport'] })).result as List;
   assert.deepEqual(restored.steps.filter(s => s.done).map(s => s.id), ['work']);
   assert.equal((await host.handle({ op: 'firstDayGo', step: 'walk' })).ok, false);
+  assert.equal((restored as List & { next?: string }).next, undefined, 'no next step while the day is open');
+  const all = (await host.handle({ op: 'firstDay', done: ['walk', 'eat', 'work', 'meet'] })).result as List & { next?: string };
+  assert.equal(all.complete, true);
+  assert.match(all.next ?? '', /^第一天的四件事都做完了。接下来可以：到住宅租一处落脚的住所；/);
 });

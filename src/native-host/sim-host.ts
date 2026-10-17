@@ -26,7 +26,7 @@ import { panesModel } from './panes-model';
 import { mealFeedback } from '../meal-feedback';
 import { freshLaborSettlement } from '../labor-feedback';
 import { freshRideStop, type RideSeen } from '../transit-label';
-import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from '../first-day';
+import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayNext, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
 
 export const HOST_PROTOCOL = 1;
@@ -154,7 +154,8 @@ export class SimHost {
     const now = firstDayDone(sim.state, this.world!, sim.state.player.position, this.purchased);
     for (const [id] of FIRST_DAY_STEPS) if (now[id]) this.firstDay.add(id);
     const steps = FIRST_DAY_STEPS.map(([id, label, hint]) => ({ id, label, hint, done: this.firstDay.has(id), go: id !== 'walk' && !this.firstDay.has(id) }));
-    return { steps, complete: steps.every(step => step.done) };
+    const complete = steps.every(step => step.done);
+    return { steps, complete, ...(complete ? { next: firstDayNext(sim.state) } : {}) };
   }
 
   /** One click on an open first-day step: plan the route to where it can be done now

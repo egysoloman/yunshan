@@ -39,6 +39,7 @@ namespace Yunshan.Runtime
         const string WelcomeSeenKey = "yunshan.ui.welcomeSeen.v1", FirstDayKey = "yunshan.ui.firstDay.v1";
         public readonly List<SimFrame.Event> EventLog = new List<SimFrame.Event>();
         public string Notice; public bool NoticeOk = true; public float NoticeAt;
+        string firstDayNext; // said after the completing step's own notice has had its 8 s on screen
         public List<Vec3> Voxels = new List<Vec3>();
         public double BankAmount = 100;
         /// <summary>Game minutes advanced per real second over the last few seconds.</summary>
@@ -139,12 +140,15 @@ namespace Yunshan.Runtime
                 panesPending = true; panesAt = Time.unscaledTime;
                 Run(client.Panes(mode, insideBuildingId), panes => { panesPending = false; Panes = panes; }, () => panesPending = false);
             }
+            if (firstDayNext != null && (Notice == null || Time.unscaledTime - NoticeAt >= 8)) { Say(firstDayNext, true); firstDayNext = null; }
             if (WelcomeOpen && !firstDayPending && Time.unscaledTime - firstDayAt > 1f)
             {
                 firstDayPending = true; firstDayAt = Time.unscaledTime;
                 var stored = PlayerPrefs.GetString(FirstDayKey, "").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 Run(client.FirstDaySteps(stored), list =>
                 {
+                    // The step that completes the day says so once, with what to do next (web first-day.ts firstDayNext).
+                    if (list.Complete && FirstDay != null && !FirstDay.Complete && list.Next != null) firstDayNext = list.Next;
                     firstDayPending = false; FirstDay = list;
                     PlayerPrefs.SetString(FirstDayKey, string.Join(",", list.Steps.FindAll(step => step.Done).ConvertAll(step => step.Id)));
                     if (list.Complete) DismissWelcome();
