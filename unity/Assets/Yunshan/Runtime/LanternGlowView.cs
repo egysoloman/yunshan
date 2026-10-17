@@ -8,7 +8,7 @@ namespace Yunshan.Runtime
     /// web renderer buildLanternGlow): one mesh of screen-facing quads, sized in the shader.</summary>
     public sealed class LanternGlowView
     {
-        readonly MeshRenderer renderer; readonly Material material;
+        readonly MeshRenderer renderer, pools; readonly Material material, poolMaterial;
         public int Count { get; }
 
         public LanternGlowView(Transform parent, WorldDefinition world)
@@ -33,6 +33,22 @@ namespace Yunshan.Runtime
             var shader = Shader.Find("Yunshan/LanternGlow"); material = new Material(shader != null ? shader : Shader.Find("Standard")) { name = "灯笼远景发光" };
             renderer.sharedMaterial = material; renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; renderer.receiveShadows = false; renderer.enabled = false;
             Count = glows.Count;
+            // Warm pools on the ground under street and door lamps (Core/GroundGlow, web buildGroundGlow).
+            var pv = new List<Vector3>(); var pc = new List<Vector2>(); var pi = new List<int>();
+            foreach (var p in GroundGlow.Pools(world))
+            {
+                double ux = p.Along?[0] ?? 1, uy = p.Along?[1] ?? 0, uz = p.Along?[2] ?? 0, h = System.Math.Sqrt(ux * ux + uz * uz); if (h == 0) h = 1;
+                double sx = -uz / h, sz = ux / h; int start = pv.Count;
+                foreach (var (cu, cs) in new[] { (-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0) })
+                { pv.Add(Space.ToUnity(p.X + (ux * cu + sx * cs) * p.Radius, p.Y + uy * cu * p.Radius, p.Z + (uz * cu + sz * cs) * p.Radius)); pc.Add(new Vector2((float)cu, (float)cs)); }
+                pi.AddRange(new[] { start, start + 2, start + 1, start, start + 3, start + 2 });
+            }
+            var poolMesh = new Mesh { name = "灯下地面暖光", indexFormat = UnityEngine.Rendering.IndexFormat.UInt32 };
+            poolMesh.SetVertices(pv); poolMesh.SetUVs(0, pc); poolMesh.SetTriangles(pi, 0); poolMesh.RecalculateBounds();
+            var pgo = new GameObject("灯下地面暖光"); pgo.transform.SetParent(parent, false); pgo.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+            pgo.AddComponent<MeshFilter>().sharedMesh = poolMesh; pools = pgo.AddComponent<MeshRenderer>();
+            var poolShader = Shader.Find("Yunshan/GroundGlow"); poolMaterial = new Material(poolShader != null ? poolShader : Shader.Find("Standard")) { name = "灯下地面暖光" };
+            pools.sharedMaterial = poolMaterial; pools.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; pools.receiveShadows = false; pools.enabled = false;
         }
 
         /// <summary>Lights only after dusk: night = max(0, 1 − daylight × 1.6), as on the web.</summary>
@@ -40,6 +56,7 @@ namespace Yunshan.Runtime
         {
             float night = (float)LanternGlow.Night(daylight);
             material.SetFloat("_Night", night); renderer.enabled = night > .01f;
+            poolMaterial.SetFloat("_Night", night); pools.enabled = night > .01f;
         }
     }
 }

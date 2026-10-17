@@ -6,6 +6,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { mixHex, timeOfDayGrade } from './rendering/time-of-day-grade';
 import { cloudBanks } from './rendering/cloud-banks';
 import { lanternGlows } from './rendering/lantern-glow';
+import { groundPools } from './rendering/ground-glow';
 import { lanternStrings, terraceLanternStrings } from './rendering/lantern-strings';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
 import { samplePolyline, terrainHeight } from './world';
@@ -509,6 +510,7 @@ export class CityRenderer implements CityRendererAPI {
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.clouds = this.buildCloudBanks(); this.scene.add(this.clouds);
     this.lanterns = this.buildLanternGlow(); this.scene.add(this.lanterns);
+    this.groundGlow = this.buildGroundGlow(); this.scene.add(this.groundGlow);
     this.silhouettes = this.buildSilhouetteRing(); this.scene.add(this.silhouettes);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
@@ -1001,6 +1003,29 @@ export class CityRenderer implements CityRendererAPI {
     return group;
   }
   private lanterns!: THREE.Points;
+  private groundGlow!: THREE.Mesh;
+  /** Warm pools of light on the ground under street and door lamps after dusk (ground-glow.ts). */
+  private buildGroundGlow() {
+    const pools = groundPools(this.world), positions: number[] = [], corners: number[] = [], indices: number[] = [];
+    for (const p of pools) {
+      const u = p.along ?? [1, 0, 0], h = Math.hypot(u[0], u[2]) || 1, side = [-u[2] / h, 0, u[0] / h], start = positions.length / 3;
+      for (const [cu, cs] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+        positions.push(p.x + (u[0] * cu + side[0] * cs) * p.radius, p.y + u[1] * cu * p.radius, p.z + (u[2] * cu + side[2] * cs) * p.radius);
+        corners.push(cu, cs);
+      }
+      indices.push(start, start + 2, start + 1, start, start + 3, start + 2);
+    }
+    const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); geometry.setAttribute('corner', new THREE.Float32BufferAttribute(corners, 2)); geometry.setIndex(indices); geometry.computeBoundingSphere();
+    const material = new THREE.ShaderMaterial({
+      uniforms: { night: { value: 0 } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2,
+      vertexShader: `attribute vec2 corner; varying vec2 vCorner; varying float vFade;
+        void main() { vCorner = corner; vec4 mv = modelViewMatrix * vec4(position, 1.0); vFade = 1.0 - smoothstep(180.0, 320.0, -mv.z); gl_Position = projectionMatrix * mv; }`,
+      fragmentShader: `uniform float night; varying vec2 vCorner; varying float vFade;
+        void main() { float r = length(vCorner); if (r > 1.0) discard; float pool = pow(1.0 - r, 2.0);
+          gl_FragColor = vec4(vec3(1.0, .62, .3) * pool * .55 * night * vFade, 1.0); }`,
+    });
+    const mesh = new THREE.Mesh(geometry, material); mesh.name = '灯下地面暖光'; mesh.frustumCulled = false; mesh.renderOrder = 2; mesh.visible = false; return mesh;
+  }
   private buildLanternGlow() {
     // Additive warm glow with a minimum on-screen size, so lanterns still read
     // as points of light at drone distance; it only lights after dusk.
@@ -1116,6 +1141,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const ring of this.silhouettes.children as THREE.Mesh[]) (ring.material as THREE.MeshBasicMaterial).color.set(grade.fogColor).lerp(new THREE.Color(mixHex('#3d5a5a', grade.skyTop, .25)), [.62, .42, .24][ring.userData.silhouetteLayer as number]);
     this.silhouettes.position.set(this.camera.position.x * .6, 0, this.camera.position.z * .6);
     const glow = this.lanterns.material as THREE.ShaderMaterial; glow.uniforms.night.value = Math.max(0, 1 - daylight * 1.6); this.lanterns.visible = glow.uniforms.night.value > .01;
+    const pools = this.groundGlow.material as THREE.ShaderMaterial; pools.uniforms.night.value = glow.uniforms.night.value; this.groundGlow.visible = this.lanterns.visible;
     glow.uniforms.scale.value = this.renderer.domElement.height / (2 * Math.tan(THREE.MathUtils.degToRad(this.camera.fov) / 2));
     this.clouds.position.x = Math.sin(elapsed * .011) * 18; this.clouds.position.z = Math.cos(elapsed * .008) * 14;
     const sprayMaterial = this.spray.material as THREE.PointsMaterial; sprayMaterial.color.copy(horizon).lerp(new THREE.Color('#eef6ed'), .8); sprayMaterial.opacity = .13 + daylight * .12; this.spray.position.x = Math.sin(elapsed * .24) * 2.8;
