@@ -489,6 +489,11 @@ canvas {
   background:#689487
 }
 
+.legend-crowd {
+  background:rgba(214,120,52,.26);
+  box-shadow:0 0 0 1px rgba(214,120,52,.7)
+}
+
 .map-crowd {
   margin-top:4px;
   font-size:10px;
