@@ -1,4 +1,5 @@
 import { installPowerGrid, gridBuildingSupplyRatio, gridVehicleSupplyRatio, gridPoweredWorkMinutes, validatePowerGridDefinition } from './simulation/power-grid';
+import { BOARDING_HOLD_METRES, BOARDING_HOLD_MINUTES, BOARDING_HOLD_POLICIES, holdsForPlayer, type BoardingHoldPolicy } from './simulation/boarding-hold';
 import { runScheduledServiceProcurement } from './simulation/service-material-scheduling';
 import { giftContactReason } from './simulation/gift-contact';
 import { createBudgetAuthorityState, installBudgetAuthority, isSupplementalPurpose, authorizeCivicSupplementalBudget as authorizeNaturalSupplementalBudget, validateBudgetAuthority, type BudgetAuthorization, type LegacyBudgetAuthorization } from './simulation/budget-authority';
@@ -127,6 +128,9 @@ interface Runtime {
   publicFinancePolicyId?: PublicFinancePolicy;
   foreignTradePolicyId?: ForeignTradePolicy;
   npcMotionPolicyId?: NpcMotionPolicy;
+  boardingHoldPolicyId?: BoardingHoldPolicy;
+  /** Vehicles holding this stop for the player (boarding-hold.ts), cleared when they move off. */
+  boardingHolds?: Record<string, true>;
   foreignTrade?: ForeignTradeState;
   /** Council budget rule: the open fiscal day and its smoothed predecessors. */
   fiscalDay?: FiscalDay;
@@ -186,7 +190,7 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId', 'npcMotionPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId', 'npcMotionPolicyId', 'boardingHoldPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (!MEAL_ROUTE_POLICIES.includes(options.mealRoutePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
@@ -194,7 +198,8 @@ export class Simulation implements SimulationAPI {
       || options.foodFreightPolicyId !== undefined && (!FOOD_FREIGHT_POLICIES.includes(options.foodFreightPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.publicFinancePolicyId !== undefined && (!PUBLIC_FINANCE_POLICIES.includes(options.publicFinancePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.foreignTradePolicyId !== undefined && (!FOREIGN_TRADE_POLICIES.includes(options.foreignTradePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.npcMotionPolicyId !== undefined && (!NPC_MOTION_POLICIES.includes(options.npcMotionPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.npcMotionPolicyId !== undefined && (!NPC_MOTION_POLICIES.includes(options.npcMotionPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.boardingHoldPolicyId !== undefined && (!BOARDING_HOLD_POLICIES.includes(options.boardingHoldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
@@ -217,6 +222,7 @@ export class Simulation implements SimulationAPI {
     if (options?.farmYieldPolicyId) { this.runtime.farmYieldPolicyId = options.farmYieldPolicyId; if (farmInputsUsed(options.farmYieldPolicyId)) this.runtime.farmInputs = {}; }
     if (options?.foodFreightPolicyId) { this.runtime.foodFreightPolicyId = options.foodFreightPolicyId; this.runtime.cargoDestinations = {}; }
     if (options?.npcMotionPolicyId) this.runtime.npcMotionPolicyId = options.npcMotionPolicyId;
+    if (options?.boardingHoldPolicyId) this.runtime.boardingHoldPolicyId = options.boardingHoldPolicyId;
     if (options?.foreignTradePolicyId) { this.runtime.foreignTradePolicyId = options.foreignTradePolicyId; this.runtime.foreignTrade = { enabled: true, exportedUnits: 0, exportGross: 0 }; }
     if (options?.publicFinancePolicyId) { this.runtime.publicFinancePolicyId = options.publicFinancePolicyId; this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net: 0, base: 0 }; }
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
@@ -1006,7 +1012,12 @@ export class Simulation implements SimulationAPI {
       if (energy < .18 && vehicle.kind !== 'bridge') { vehicle.state = 'noPower'; continue; }
       if (vehicle.kind === 'flight' && (vehicle.progress === 0 || vehicle.progress === 1) && (this.state.hour < 6 || this.state.hour >= 23 || this.state.visibility < .6)) { vehicle.state = 'grounded'; continue; }
       const manual = this.isDriving(vehicle.id);
+      // A stop holds once for the player walking up to board (boarding-hold.ts, declared new cities).
+      if (!manual && holdsForPlayer(this.runtime.boardingHoldPolicyId) && this.now + 1e-7 >= vehicle.nextDeparture && (vehicle.state === 'waiting' || vehicle.state === 'boarding')
+        && (vehicle.progress === 0 || vehicle.progress === 1) && !this.runtime.boardingHolds?.[vehicle.id] && !this.state.player.vehicleId && !this.state.aviation?.activeAircraftId
+        && distance(this.state.player.position, vehicle.position) <= BOARDING_HOLD_METRES) { (this.runtime.boardingHolds ??= {})[vehicle.id] = true; vehicle.nextDeparture = this.now + BOARDING_HOLD_MINUTES; }
       if (!manual && this.now + 1e-7 < vehicle.nextDeparture) { vehicle.state = vehicle.state === 'redLight' ? 'redLight' : 'waiting'; continue; }
+      if (this.runtime.boardingHolds?.[vehicle.id]) { delete this.runtime.boardingHolds[vehicle.id]; if (!Object.keys(this.runtime.boardingHolds).length) delete this.runtime.boardingHolds; }
       if (manual) { const control = this.runtime.driving; const acceleration = control.brake ? -14 : control.throttle >= 0 ? control.throttle * 6 - .65 : control.throttle * 9 - .65; control.speed = clamp(control.speed + acceleration * TICK_SECONDS * this.state.speed, 0, vehicle.kind === 'flight' ? 180 : 38); if (control.speed < .01) { control.speed = 0; vehicle.state = 'parked'; continue; } }
       vehicle.state = 'moving';
       const congestion = vehicle.kind === 'road' ? .8 + (this.state.hour >= 7 && this.state.hour < 9 || this.state.hour >= 17 && this.state.hour < 19 ? -.22 : .1) : 1;
@@ -2757,10 +2768,11 @@ export class Simulation implements SimulationAPI {
   get publicFinancePolicyId(): PublicFinancePolicy | 'legacy' { return this.runtime.publicFinancePolicyId ?? 'legacy'; }
   get foreignTradePolicyId(): ForeignTradePolicy | 'legacy' { return this.runtime.foreignTradePolicyId ?? 'legacy'; }
   get npcMotionPolicyId(): NpcMotionPolicy | 'legacy' { return this.runtime.npcMotionPolicyId ?? 'legacy'; }
+  get boardingHoldPolicyId(): BoardingHoldPolicy | 'legacy' { return this.runtime.boardingHoldPolicyId ?? 'legacy'; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), ...(this.runtime.npcMotionPolicyId ? { npcMotionPolicyId: this.runtime.npcMotionPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), ...(this.runtime.npcMotionPolicyId ? { npcMotionPolicyId: this.runtime.npcMotionPolicyId } : {}), ...(this.runtime.boardingHoldPolicyId ? { boardingHoldPolicyId: this.runtime.boardingHoldPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }
