@@ -24,6 +24,7 @@ import { shopLifecycleAllowsOperation } from '../simulation/shop_lifecycle';
 import { contextModel, type ContextView } from './context-model';
 import { panesModel } from './panes-model';
 import { mealFeedback } from '../meal-feedback';
+import { freshLaborSettlement } from '../labor-feedback';
 import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
 
@@ -55,6 +56,8 @@ export interface HostFrame {
   voxels: number[][] | null; voxelKey: string;
   /** Set when the requested walking position crossed a closed road. */
   rejected?: string | null;
+  /** Set once when the player's shift has just settled (labor-feedback.ts). */
+  notice?: string;
   stepMs: number; ticks: number;
 }
 
@@ -82,6 +85,8 @@ export class SimHost {
   private firstDay = new Set<string>();
   /** Set when a purchase or meal command sent here actually took money (web ui.ts purchaseMoney rule). */
   private purchased = false;
+  /** Shift history length the client has been told about (labor-feedback.ts). */
+  private laborSeen: number | null = null;
 
   async handle(request: HostRequest): Promise<HostResponse> {
     const id = request.id;
@@ -194,7 +199,8 @@ export class SimHost {
     if (drive.isDriving?.()) drive.driveInput?.(Number(driving?.throttle ?? 0), Number(driving?.turn ?? 0), driving?.brake ?? true);
     const before = state.tick, started = performance.now();
     sim.step(seconds);
-    return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected };
+    const settled = freshLaborSettlement(state, this.laborSeen, id => this.world!.buildings.find(b => b.id === id)?.name ?? ''); this.laborSeen = settled.seen;
+    return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected, ...(settled.notice ? { notice: settled.notice } : {}) };
   }
 
   frame(request: HostRequest, stepMs: number, ticks: number): HostFrame {

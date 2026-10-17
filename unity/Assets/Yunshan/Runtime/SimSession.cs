@@ -110,6 +110,7 @@ namespace Yunshan.Runtime
             lastEventId = Math.Max(lastEventId, frame.LastEventId);
             if (frame.Voxels != null) { Voxels = frame.Voxels; voxelKey = frame.VoxelKey ?? ""; }
             if (frame.Rejected != null) Say(frame.Rejected, false);
+            if (frame.Notice != null) Say(frame.Notice, true);
             if (moved || frame.Rejected != null || frame.Player.VehicleId != null || frame.AircraftList.Exists(a => a.Active)) PlayerMovedBySimulation?.Invoke(frame);
         }
 

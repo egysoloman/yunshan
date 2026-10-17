@@ -45,6 +45,8 @@ namespace Yunshan.Core.Host
         public List<string> ClosedEdges = new List<string>();
         /// <summary>Refusal of the requested walking position (closed road), else null.</summary>
         public string Rejected;
+        /// <summary>Set once when the player's shift has just settled (host labor-feedback.ts).</summary>
+        public string Notice;
 
         public static SimFrame From(object o)
         {
@@ -102,7 +104,7 @@ namespace Yunshan.Core.Host
             }
             var voxels = Json.Arr(o, "voxels");
             if (voxels != null) { f.Voxels = new List<Vec3>(); foreach (var v in voxels) { var a = (List<object>)v; f.Voxels.Add(new Vec3((double)a[0], (double)a[1], (double)a[2])); } }
-            f.VoxelKey = Json.Str(o, "voxelKey"); f.Rejected = Json.Str(o, "rejected");
+            f.VoxelKey = Json.Str(o, "voxelKey"); f.Rejected = Json.Str(o, "rejected"); f.Notice = Json.Str(o, "notice");
             foreach (var id in Json.Arr(o, "closedEdges") ?? new List<object>()) if (id is string edgeId) f.ClosedEdges.Add(edgeId);
             foreach (var row in Json.Arr(o, "shops") ?? new List<object>())
             {

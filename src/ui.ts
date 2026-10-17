@@ -22,6 +22,7 @@ import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citi
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 import { routeDistanceLabel } from './navigation-label';
+import { freshLaborSettlement } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
 const HEADER_DARK_SKY = .35;
@@ -293,6 +294,7 @@ export class CityUI {
     return Math.hypot(p.x - building.door.x, p.y - building.door.y, p.z - building.door.z) <= 32;
   }
   private firstDay = new Set<string>();
+  private laborSeen: number | null = null;
   private purchaseMoney: number | null = null;
   /** A short first-day list in the welcome note (display only), ticked from the player's own state. */
   private updateFirstDay(state: SimState, view: ViewState): void {
@@ -512,6 +514,9 @@ export class CityUI {
     this.state = state;
     this.view = view;
     this.updateFirstDay(state, view);
+    // A shift that just settled is announced once (labor-feedback.ts).
+    const settled = freshLaborSettlement(state, this.laborSeen, id => this.world.buildings.find(b => b.id === id)?.name ?? '');
+    this.laborSeen = settled.seen; if (settled.notice) this.notify(settled.notice, true);
     this.setText('day', `第 ${state.day + 1} 日`);
     this.setText('clock', clock(state.hour));
     // After dusk the header sits on a dark sky: it switches to light ink (the renderer's own daylight grade).
