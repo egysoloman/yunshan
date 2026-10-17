@@ -208,7 +208,9 @@ test('v7 keeps v6 and admits registered adult migrants at the day close into fun
   assert.equal(admitsMigrants(SHOP_PROFIT_TAX_POLICY_V8), true); assert.equal(settlesArrivalQuarter(SHOP_PROFIT_TAX_POLICY_V8), true); assert.equal(settlesArrivalQuarter(SHOP_PROFIT_TAX_POLICY_V7), false);
   const world = createProductWorld();
   for (const declared of [true, false]) {
-    const sim = declared ? createCurrentProductCity(world) : createArchivedProductCity(world), arrived: { citizenId?: string; amount?: number }[] = [];
+    // The product city's policies with the meal policy this finance rule was measured under (v4): under v5 street
+    // stalls the few first-day sales near the entrance land elsewhere by chance; 14-day entrance settlement is unchanged.
+    const sim = declared ? new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: 'continuous-upright-v1', mealRoutePolicyId: 'nearby-food-v4', freightPickupPolicyId: 'road-food-pickup-v1', farmYieldPolicyId: 'staffed-farm-yield-v4', foodFreightPolicyId: 'demand-food-freight-v3', publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V8, foreignTradePolicyId: 'foreign-trade-v2', npcMotionPolicyId: 'npc-motion-coarse-v1' } as ConstructorParameters<typeof Simulation>[1]) : createArchivedProductCity(world), arrived: { citizenId?: string; amount?: number }[] = [];
     (sim as unknown as { bus: { on(type: string, f: (e: { citizenId?: string; amount?: number }) => void): void } }).bus.on('resident-arrived', e => arrived.push(e));
     sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
     const before = sim.state.citizens.length, day = sim.state.day;
