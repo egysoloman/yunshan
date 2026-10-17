@@ -29,12 +29,21 @@ export const STREET_BROWSE_ROUTE_POLICY = 'nearby-food-v4' as const;
  * Price, quantity, stock, consignment, tax and every other v4 rule are
  * unchanged; only where the purchase happens moves. */
 export const STREET_FOOD_ROUTE_POLICY = 'nearby-food-v5' as const;
-export type MealRoutePolicy = typeof NEARBY_MEAL_ROUTE_POLICY | typeof NEARBY_LUNCH_MEAL_ROUTE_POLICY | typeof NEARBY_EVENING_ROUTE_POLICY | typeof STREET_BROWSE_ROUTE_POLICY | typeof STREET_FOOD_ROUTE_POLICY;
-export const MEAL_ROUTE_POLICIES: readonly MealRoutePolicy[] = [NEARBY_MEAL_ROUTE_POLICY, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_EVENING_ROUTE_POLICY, STREET_BROWSE_ROUTE_POLICY, STREET_FOOD_ROUTE_POLICY];
+/** v6 (2026-10-17, outdoor routines, step 5). v5 plus a short stall meal: a
+ * 14-day audit of v5 kept GDP and sales but cost 4.8% of private working time
+ * and 8.7% of production, because a resident who bought at a stall stood
+ * there until their next decision (25–60 min). Under v6 the next decision
+ * comes at most STALL_LINGER minutes after the stall sale. Everything else is v5's. */
+export const SHORT_STALL_ROUTE_POLICY = 'nearby-food-v6' as const;
+export const STALL_LINGER = 15;
+export type MealRoutePolicy = typeof NEARBY_MEAL_ROUTE_POLICY | typeof NEARBY_LUNCH_MEAL_ROUTE_POLICY | typeof NEARBY_EVENING_ROUTE_POLICY | typeof STREET_BROWSE_ROUTE_POLICY | typeof STREET_FOOD_ROUTE_POLICY | typeof SHORT_STALL_ROUTE_POLICY;
+export const MEAL_ROUTE_POLICIES: readonly MealRoutePolicy[] = [NEARBY_MEAL_ROUTE_POLICY, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_EVENING_ROUTE_POLICY, STREET_BROWSE_ROUTE_POLICY, STREET_FOOD_ROUTE_POLICY, SHORT_STALL_ROUTE_POLICY];
 export const BROWSE_MIN = 2, BROWSE_MAX = 5;
-export const browsesOnStreet = (policy: MealRoutePolicy | undefined) => policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY;
+export const browsesOnStreet = (policy: MealRoutePolicy | undefined) => policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY || policy === SHORT_STALL_ROUTE_POLICY;
 /** v5: market meals are bought at the street stall in front of the door. */
-export const eatsOnStreet = (policy: MealRoutePolicy | undefined) => policy === STREET_FOOD_ROUTE_POLICY;
+export const eatsOnStreet = (policy: MealRoutePolicy | undefined) => policy === STREET_FOOD_ROUTE_POLICY || policy === SHORT_STALL_ROUTE_POLICY;
+/** v6: the stall meal ends within STALL_LINGER minutes of the sale. */
+export const shortStallMeal = (policy: MealRoutePolicy | undefined) => policy === SHORT_STALL_ROUTE_POLICY;
 /** The route ending `back` metres before its last point (the door), along the route itself. */
 export function routeShortOfDoor<P extends { x: number; y: number; z: number }>(route: readonly P[], back: number): P[] {
   let left = back;
@@ -51,11 +60,11 @@ export const LUNCH_BONUS = 90;
 export const nearestMealPolicy = (policy: MealRoutePolicy | undefined) => policy !== undefined && MEAL_ROUTE_POLICIES.includes(policy);
 /** v2/v3 lunch preference for one food offer. */
 export function lunchBonus(policy: MealRoutePolicy | undefined, hour: number, hunger: number): number {
-  return (policy === NEARBY_LUNCH_MEAL_ROUTE_POLICY || policy === NEARBY_EVENING_ROUTE_POLICY || policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY) && hour >= 11.5 && hour < 13 && hunger < 80 ? LUNCH_BONUS : 0;
+  return (policy === NEARBY_LUNCH_MEAL_ROUTE_POLICY || policy === NEARBY_EVENING_ROUTE_POLICY || policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY || policy === SHORT_STALL_ROUTE_POLICY) && hour >= 11.5 && hour < 13 && hunger < 80 ? LUNCH_BONUS : 0;
 }
 /** v3 evening preference for one outing offer (0 outside the window). */
 export function eveningBonus(policy: MealRoutePolicy | undefined, hour: number, hunger: number, fatigue: number): number {
-  return (policy === NEARBY_EVENING_ROUTE_POLICY || policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY) && hour >= 18.5 && hour < 21 && hunger >= 65 && fatigue >= 45 ? EVENING_BONUS : 0;
+  return (policy === NEARBY_EVENING_ROUTE_POLICY || policy === STREET_BROWSE_ROUTE_POLICY || policy === STREET_FOOD_ROUTE_POLICY || policy === SHORT_STALL_ROUTE_POLICY) && hour >= 18.5 && hour < 21 && hunger >= 65 && fatigue >= 45 ? EVENING_BONUS : 0;
 }
 
 /** Preserve the original highest-score activity. Only when its winner is food
