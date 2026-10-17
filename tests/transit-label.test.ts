@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { BOARDING_REACH, departureLabel, rideFare, stoppedVehicleFirst } from '../src/transit-label';
+import { BOARDING_REACH, departureLabel, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
 import type { Vehicle } from '../src/types';
 import { createCurrentProductCity, createProductWorld } from '../src/product-city';
 
@@ -29,4 +29,24 @@ test('a stopped vehicle within reach and nearer than the door comes first', () =
   assert.equal(stoppedVehicleFirst(p, at(5), { x: 3, y: 0, z: 0 }), false);
   assert.equal(stoppedVehicleFirst(p, at(BOARDING_REACH + 0.5), null), false);
   assert.equal(stoppedVehicleFirst(p, null, null), false);
+});
+
+test('the next stop a stopped vehicle shows is where the simulation next brings it', () => {
+  const world = createProductWorld(), sim = createCurrentProductCity(world);
+  sim.command({ type: 'speed', value: 8 });
+  // Arrivals are announced only from mid-edge (a short spur crossed in one step is silent), so each
+  // prediction is checked against the arrival that ends the leg it was read from.
+  const predicted = new Map<string, { edgeId: string; stop: string }>(), checked: boolean[] = [];
+  sim.onEvent('vehicle-arrived', event => {
+    const { vehicleId, nodeId, fromEdgeId } = event as unknown as { vehicleId: string; nodeId: string; fromEdgeId: string };
+    const p = predicted.get(vehicleId); predicted.delete(vehicleId);
+    if (p?.edgeId === fromEdgeId) checked.push(world.nodes.find(n => n.id === nodeId)!.name === p.stop);
+  });
+  for (let i = 0; i < 400 && checked.length < 30; i++) {
+    for (const v of sim.state.vehicles) if ((v.state === 'boarding' || v.state === 'waiting') && !predicted.has(v.id)) { const stop = nextStopName(v, world, sim.state); if (stop) predicted.set(v.id, { edgeId: v.edgeId, stop }); }
+    sim.step(.25);
+  }
+  assert.ok(checked.length >= 30, `checked ${checked.length} arrivals`);
+  assert.ok(checked.every(Boolean), `${checked.filter(x => !x).length} of ${checked.length} arrivals went elsewhere`);
+  assert.equal(nextStopTitle({ edgeId: world.edges[0].id, direction: 1, progress: 1 }, world, sim.state), null, 'at the end it was heading for, the next leg is not chosen yet');
 });

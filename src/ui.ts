@@ -22,7 +22,7 @@ import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citi
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 import { routeDistanceLabel } from './navigation-label';
-import { departureLabel, rideFare, stoppedVehicleFirst } from './transit-label';
+import { departureLabel, nextStopTitle, rideFare, stoppedVehicleFirst } from './transit-label';
 import { freshLaborSettlement } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
@@ -1364,7 +1364,7 @@ export class CityUI {
       const inspect = element('button', 'text-button full-width', '查看身份、住处与共同记忆 ↗'); inspect.type = 'button'; inspect.dataset.action = 'relations'; body.append(inspect);
       if (!walk) body.append(element('p', 'context-hint', '步行走近居民后，可以交谈与互动。'));
     } else if (vehicle) {
-      body.append(element('span', 'eyebrow', `${modeNames[vehicle.kind]} · ${activity(vehicle.state)}${departureLabel(vehicle, state)}`), element('h3', '', state.player.vehicleId ? '同行于山城' : `附近${modeNames[vehicle.kind]}载具`), element('p', 'context-subtitle', `${vehicle.passengers} 位乘客 · 货物 ${Math.round(vehicle.cargo)} · ${Math.round(vehicle.speed)} m/s`));
+      body.append(element('span', 'eyebrow', `${modeNames[vehicle.kind]} · ${activity(vehicle.state)}${departureLabel(vehicle, state)}`), element('h3', '', nextStopTitle(vehicle, this.world, state) ?? (state.player.vehicleId ? '同行于山城' : `附近${modeNames[vehicle.kind]}载具`)), element('p', 'context-subtitle', `${vehicle.passengers} 位乘客 · 货物 ${Math.round(vehicle.cargo)} · ${Math.round(vehicle.speed)} m/s`));
       const controls = element('div', 'button-grid context-actions');
       if (state.player.vehicleId) controls.append(commandButton('下车 / 离开载具', 'leaveVehicle', vehicle.id));
       else {

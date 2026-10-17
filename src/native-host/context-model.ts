@@ -4,7 +4,7 @@
  * refreshContext/buildingActions/aircraftContent), returned as data. Every
  * button is still only a request; Simulation.command remains the authority.
  */
-import { departureLabel, rideFare } from '../transit-label';
+import { departureLabel, nextStopTitle, rideFare } from '../transit-label';
 import type { Simulation } from '../simulation';
 import { nearbyResident } from '../social-reach';
 import { FLOOR_PLAN_PROFILE } from '../architecture-floor-plan';
@@ -230,7 +230,7 @@ export class ContextRules {
       if (vehicle.kind === 'road' || vehicle.kind === 'flight' && this.hasRole('driver')) actions.push(button(vehicle.kind === 'flight' ? '驾驶航班' : '驾驶载具', 'drive', vehicle.id, undefined, !walk || vehicle.state === 'moving' || !this.hasRole('driver', 'police', 'soldier')));
     }
     const note = state.player.vehicleId && state.player.inventory.driving === 1 ? 'W / S 油门与减速 · A / D 路口转向 · 空格刹车。抵达停靠点后可下车。' : state.player.vehicleId ? '玩家随真实载具前行；抵达站点并停稳后，可下车继续游览。' : '候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。';
-    return { kind: 'vehicle', id: vehicle.id, eyebrow: `${modeNames[vehicle.kind]} · ${activity(vehicle.state)}${departureLabel(vehicle, state)}`, title: state.player.vehicleId ? '同行于山城' : `附近${modeNames[vehicle.kind]}载具`, subtitle: `${vehicle.passengers} 位乘客 · 货物 ${Math.round(vehicle.cargo)} · ${Math.round(vehicle.speed)} m/s`, actions, notes: [note] };
+    return { kind: 'vehicle', id: vehicle.id, eyebrow: `${modeNames[vehicle.kind]} · ${activity(vehicle.state)}${departureLabel(vehicle, state)}`, title: nextStopTitle(vehicle, this.world, state) ?? (state.player.vehicleId ? '同行于山城' : `附近${modeNames[vehicle.kind]}载具`), subtitle: `${vehicle.passengers} 位乘客 · 货物 ${Math.round(vehicle.cargo)} · ${Math.round(vehicle.speed)} m/s`, actions, notes: [note] };
   }
 
   aircraft(craft: AerialVehicle): ContextSection {
