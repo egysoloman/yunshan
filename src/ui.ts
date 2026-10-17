@@ -22,7 +22,7 @@ import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citi
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 import { routeDistanceLabel } from './navigation-label';
-import { departureLabel, nextStopTitle, rideFare, stoppedVehicleFirst } from './transit-label';
+import { departureLabel, freshRideStop, nextStopTitle, rideFare, stoppedVehicleFirst, type RideSeen } from './transit-label';
 import { placeServicesSummary } from './place-services';
 import { freshLaborSettlement } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
@@ -297,6 +297,7 @@ export class CityUI {
   }
   private firstDay = new Set<string>();
   private laborSeen: number | null = null;
+  private rideSeen: RideSeen | null = null;
   private autoVehicleTab: string | null = null;
   private purchaseMoney: number | null = null;
   /** A short first-day list in the welcome note (display only), ticked from the player's own state. */
@@ -522,6 +523,8 @@ export class CityUI {
     // A shift that just settled is announced once (labor-feedback.ts).
     const settled = freshLaborSettlement(state, this.laborSeen, id => this.world.buildings.find(b => b.id === id)?.name ?? '');
     this.laborSeen = settled.seen; if (settled.notice) this.notify(settled.notice, true);
+    // A ride that just pulled in to a stop says where, and how to get off (transit-label.ts).
+    const ride = freshRideStop(state, this.world, this.rideSeen); this.rideSeen = ride.seen; if (ride.notice) this.notify(ride.notice, true);
     this.setText('day', `第 ${state.day + 1} 日`);
     this.setText('clock', clock(state.hour));
     // After dusk the header sits on a dark sky: it switches to light ink (the renderer's own daylight grade).

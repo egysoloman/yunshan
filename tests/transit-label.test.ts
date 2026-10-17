@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { BOARDING_REACH, departureLabel, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
+import { BOARDING_REACH, departureLabel, freshRideStop, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
 import type { Vehicle } from '../src/types';
 import { createCurrentProductCity, createProductWorld } from '../src/product-city';
 
@@ -49,4 +49,24 @@ test('the next stop a stopped vehicle shows is where the simulation next brings 
   assert.ok(checked.length >= 30, `checked ${checked.length} arrivals`);
   assert.ok(checked.every(Boolean), `${checked.filter(x => !x).length} of ${checked.length} arrivals went elsewhere`);
   assert.equal(nextStopTitle({ edgeId: world.edges[0].id, direction: 1, progress: 1 }, world, sim.state), null, 'at the end it was heading for, the next leg is not chosen yet');
+});
+
+test('a ride that pulls in to a stop says once which stop it is and how to get off', () => {
+  const world = createProductWorld(), sim = createCurrentProductCity(world);
+  sim.command({ type: 'speed', value: 8 });
+  let vehicle = sim.state.vehicles.find(v => v.kind === 'road' && (v.state === 'boarding' || v.state === 'waiting'));
+  for (let i = 0; i < 200 && !vehicle; i++) { sim.step(.25); vehicle = sim.state.vehicles.find(v => v.kind === 'road' && (v.state === 'boarding' || v.state === 'waiting')); }
+  sim.state.player.position = { ...vehicle!.position };
+  assert.ok(sim.command({ type: 'ride', targetId: vehicle!.id }).ok);
+  let seen = freshRideStop(sim.state, world, null).seen;
+  assert.equal(freshRideStop(sim.state, world, seen).notice, null, 'boarding a stopped vehicle is not news');
+  const arrivals: string[] = []; sim.onEvent('vehicle-arrived', event => { const e = event as unknown as { vehicleId: string; nodeId: string }; if (e.vehicleId === vehicle!.id) arrivals.push(world.nodes.find(n => n.id === e.nodeId)!.name); });
+  const notices: string[] = [];
+  for (let i = 0; i < 800 && notices.length < 2; i++) { sim.step(.25); const r = freshRideStop(sim.state, world, seen); seen = r.seen; if (r.notice) notices.push(r.notice); }
+  assert.ok(notices.length >= 1, 'the ride reached a stop');
+  assert.match(notices[0], /^到站：.+。按 E 下车/);
+  assert.ok(arrivals.some(name => notices[0].startsWith(`到站：${name}。`)), `${notices[0]} names a stop the vehicle really arrived at (${arrivals.join(', ')})`);
+  assert.equal(freshRideStop(sim.state, world, seen).notice, null, 'said once per stop');
+  const left = sim.command({ type: 'leaveVehicle' }); assert.ok(left.ok, left.message);
+  assert.deepEqual(freshRideStop(sim.state, world, seen), { seen: { vehicleId: null, stopped: false }, notice: null });
 });

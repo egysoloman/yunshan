@@ -36,3 +36,27 @@ export function nextStopTitle(vehicle: Pick<Vehicle, 'edgeId' | 'direction' | 'p
   const stop = nextStopName(vehicle, world, state);
   return stop ? `开往 ${stop}` : null;
 }
+
+/** The stop a vehicle standing at an endpoint is at (its new leg starts there), or null mid-edge. */
+export function currentStopName(vehicle: Pick<Vehicle, 'edgeId' | 'direction' | 'progress'>, world: Pick<WorldDefinition, 'edges' | 'nodes'>): string | null {
+  if (vehicle.progress !== 0 && vehicle.progress !== 1) return null;
+  const edge = world.edges.find(e => e.id === vehicle.edgeId); if (!edge) return null;
+  const id = vehicle.progress === 0 ? edge.from : edge.to;
+  return world.nodes.find(n => n.id === id)?.name ?? null;
+}
+
+/** What a client last saw of the vehicle the player rides. */
+export interface RideSeen { vehicleId: string | null; stopped: boolean }
+
+/** Display only (web toast and native host notice): one sentence when the vehicle the player
+ * rides as a passenger comes to a stop to board, naming the stop and how to get off. Boarding a
+ * vehicle that is already stopped, or driving one, is not news. */
+export function freshRideStop(state: Pick<SimState, 'vehicles' | 'player' | 'roadNetwork'>, world: Pick<WorldDefinition, 'edges' | 'nodes'>, seen: RideSeen | null): { seen: RideSeen; notice: string | null } {
+  const vehicle = state.player.vehicleId ? state.vehicles.find(v => v.id === state.player.vehicleId) : undefined;
+  if (!vehicle) return { seen: { vehicleId: null, stopped: false }, notice: null };
+  const stopped = vehicle.state === 'waiting' || vehicle.state === 'boarding', next = { vehicleId: vehicle.id, stopped };
+  if (!stopped || seen?.vehicleId !== vehicle.id || seen.stopped || (state.player.inventory.driving ?? 0) === 1) return { seen: next, notice: null };
+  const here = currentStopName(vehicle, world); if (!here) return { seen: next, notice: null };
+  const onward = nextStopName(vehicle, world, state);
+  return { seen: next, notice: `到站：${here}。按 E 下车${onward && onward !== here ? `，或继续乘坐开往 ${onward}` : ''}。` };
+}

@@ -25,6 +25,7 @@ import { contextModel, type ContextView } from './context-model';
 import { panesModel } from './panes-model';
 import { mealFeedback } from '../meal-feedback';
 import { freshLaborSettlement } from '../labor-feedback';
+import { freshRideStop, type RideSeen } from '../transit-label';
 import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
 
@@ -56,7 +57,7 @@ export interface HostFrame {
   voxels: number[][] | null; voxelKey: string;
   /** Set when the requested walking position crossed a closed road. */
   rejected?: string | null;
-  /** Set once when the player's shift has just settled (labor-feedback.ts). */
+  /** Set once when the player's shift has just settled (labor-feedback.ts) or their ride pulled in to a stop (transit-label.ts). */
   notice?: string;
   stepMs: number; ticks: number;
 }
@@ -87,6 +88,7 @@ export class SimHost {
   private purchased = false;
   /** Shift history length the client has been told about (labor-feedback.ts). */
   private laborSeen: number | null = null;
+  private rideSeen: RideSeen | null = null;
 
   async handle(request: HostRequest): Promise<HostResponse> {
     const id = request.id;
@@ -202,7 +204,9 @@ export class SimHost {
     const before = state.tick, started = performance.now();
     sim.step(seconds);
     const settled = freshLaborSettlement(state, this.laborSeen, id => this.world!.buildings.find(b => b.id === id)?.name ?? ''); this.laborSeen = settled.seen;
-    return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected, ...(settled.notice ? { notice: settled.notice } : {}) };
+    const ride = freshRideStop(state, this.world!, this.rideSeen); this.rideSeen = ride.seen;
+    const notice = [settled.notice, ride.notice].filter(Boolean).join(' ');
+    return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected, ...(notice ? { notice } : {}) };
   }
 
   frame(request: HostRequest, stepMs: number, ticks: number): HostFrame {
