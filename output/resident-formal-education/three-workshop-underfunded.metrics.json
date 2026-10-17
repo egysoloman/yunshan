@@ -1,0 +1,31 @@
+{
+  "initialPopulation": 384,
+  "workshopCount": 3,
+  "orderId": "service-2",
+  "authorizedCap": 40,
+  "spent": 40,
+  "receivedUnits": 4.069175991861648,
+  "consumedUnits": 0,
+  "childFormalMinutes": 60,
+  "childEducation": 0,
+  "receipts": [
+    {
+      "paid": 40,
+      "quantity": 4.069175991861648,
+      "tax": 3.1999999999999957,
+      "lots": [
+        {
+          "shopId": "shop-education-workshop-2",
+          "quantity": 4.069175991861648,
+          "gross": 40,
+          "net": 36.800000000000004,
+          "unitPrice": 9.83
+        }
+      ],
+      "reason": "budget",
+      "procurementId": "service-2:receipt-1",
+      "budgetId": "service-2",
+      "purchasedAt": 3558232
+    }
+  ]
+}

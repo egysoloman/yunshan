@@ -89,14 +89,20 @@ canvas {
   justify-content:space-between;
   padding:26px 30px 20px;
   gap:20px;
-  background:linear-gradient(180deg,rgba(244,241,225,.86),rgba(245,242,231,.32) 70%,transparent);
-  color:var(--ink)
+  background:linear-gradient(180deg,rgba(244,241,225,.62),rgba(245,242,231,.14) 62%,transparent);
+  color:var(--ink);
+  text-shadow:0 0 3px rgba(250,247,236,.85)
 }
 
 .city-brand {
   display:flex;
   align-items:center;
   gap:13px
+}
+
+/* Photo mode hides every overlay element; the canvas stays interactive. */
+.city-ui.photo-mode > * {
+  visibility:hidden
 }
 
 .brand-seal {
@@ -109,9 +115,10 @@ canvas {
   background:#547360;
   border:1px solid #f0ebd8;
   outline:1px solid #547360;
+  flex:0 0 auto;
   font-family:var(--serif);
   font-size:25px;
-  writing-mode:vertical-rl
+  line-height:1
 }
 
 .city-brand h1 {
@@ -177,6 +184,38 @@ canvas {
   border-radius:50%;
   background:#64876c;
   box-shadow:0 0 0 3px rgba(93,126,92,.1)
+}
+
+/* The status line sits on whatever the camera sees (sky, eaves, walls): a soft
+   panel like the manual button keeps it readable; darker after dusk. */
+.world-status {
+  background:rgba(247,246,235,.62);
+  border:1px solid rgba(60,80,64,.12);
+  border-radius:4px;
+  padding:6px 10px 6px 12px;
+  backdrop-filter:blur(3px)
+}
+.city-ui[data-dark-sky] .world-status {
+  background:rgba(14,26,30,.42);
+  border-color:rgba(240,232,208,.18)
+}
+
+/* After dusk the header text sits on a dark sky (ui.ts data-dark-sky). */
+.city-ui[data-dark-sky] .city-brand h1,.city-ui[data-dark-sky] .world-status strong {
+  color:#f3ecd6;
+  text-shadow:0 1px 4px rgba(8,16,20,.6)
+}
+.city-ui[data-dark-sky] .city-brand p,.city-ui[data-dark-sky] .brand-caption,.city-ui[data-dark-sky] .world-status,.city-ui[data-dark-sky] .live-marker {
+  color:#d9d0b4;
+  opacity:1;
+  text-shadow:0 1px 3px rgba(8,16,20,.6)
+}
+.city-ui[data-dark-sky] .brand-rule {
+  background:rgba(240,232,208,.35)
+}
+.city-ui[data-dark-sky] .world-status .icon-button {
+  color:#e9dfc4;
+  border-color:rgba(240,232,208,.45)
 }
 
 .icon-button {
@@ -448,6 +487,13 @@ canvas {
 
 .legend-transit {
   background:#689487
+}
+
+.map-crowd {
+  margin-top:4px;
+  font-size:10px;
+  color:#a2632c;
+  letter-spacing:.04em
 }
 
 .exploration-dock {
@@ -2448,3 +2494,10 @@ canvas {
     padding:9px 3px
   }
 }
+
+.welcome-note .first-day { margin-top: 4px; font-size: 12px; line-height: 1.5; }
+.welcome-note .first-day b { font-weight: 600; }
+.welcome-note .first-day i { font-style: normal; }
+.welcome-note .first-day i.done { opacity: .5; }
+.welcome-note .first-day .first-day-step { font: inherit; color: #a2632c; background: none; border: 0; padding: 0 0 0 4px; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
+.welcome-note .first-day .first-day-step:hover, .welcome-note .first-day .first-day-step:focus-visible { color: #7d4519; }

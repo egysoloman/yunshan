@@ -3,3 +3,7 @@ dist/
 .DS_Store
 artifacts/
 output/family-fee-education/
+
+# hygiene-transfer.test.ts writes one directory per test process (named by PID)
+evidence/transfer/*
+!evidence/transfer/22143/

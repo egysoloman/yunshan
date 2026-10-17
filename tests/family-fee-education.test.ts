@@ -69,8 +69,11 @@ function syncBirthAges(context: Context): void {
 }
 
 test('course-free pre-module save preserves exact legacy bytes and twenty-four actual 1x continuation ticks', () => {
-  const { sim, controls } = setup(), original = readFileSync(new URL('./fixtures/family-fee/before.save.json', import.meta.url), 'utf8');
-  assert.equal(sim.exportSave(), original, 'fresh old-course-free fixture exactly matches captured original source');
+  const { controls } = setup(), original = readFileSync(new URL('./fixtures/family-fee/before.save.json', import.meta.url), 'utf8');
+  // A fresh city now starts on NPC motion v2 (save version 2), so the captured
+  // version-1 source is replayed from its own bytes rather than from a fresh city.
+  const sim = new Simulation(fixture()), source = sim.importSave(original); assert.equal(source.ok, true, source.message);
+  assert.equal(sim.exportSave(), original, 'old course-free source imports to exactly its captured bytes'); attachControls(sim, controls);
   assert.equal(sim.state.familyEducation, undefined); assert.equal(runtime(sim).familyEducationVersion, undefined);
   const loaded = new Simulation(fixture()), result = loaded.importSave(original); assert.equal(result.ok, true, result.message);
   assert.equal(loaded.exportSave(), original); attachControls(loaded, controls);

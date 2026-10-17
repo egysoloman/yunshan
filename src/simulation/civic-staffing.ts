@@ -653,7 +653,7 @@ export function validateCivicStaffing(state: SimState, world: WorldDefinition): 
     }
     // Core citizen IDs existing at opening are retained; later real children
     // may join only through their already-validated family birth source.
-    for (const person of state.citizens) if (!censusIds.has(person.id)) need((state.family?.children[person.id]?.bornAt ?? -1) > poll.openedAt, 'cannot omit existing census citizen');
+    for (const person of state.citizens) if (!censusIds.has(person.id)) need((state.family?.children[person.id]?.bornAt ?? state.family?.migrants?.[person.id]?.arrivedAt ?? -1) > poll.openedAt, 'cannot omit existing census citizen');
     const eligible = rows<CivicEligibleVoter>(poll.eligible, 896, 'frozen adult local voters');
     const derived = census.filter(resident => resident.aliveAtOpening && resident.ageAtOpening >= 18 && resident.districtId === poll.districtId);
     need(eligible.length === derived.length && eligible.every((resident, index) => {

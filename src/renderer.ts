@@ -1,24 +1,82 @@
 import * as THREE from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
+import { mixHex, timeOfDayGrade } from './rendering/time-of-day-grade';
+import { cloudBanks } from './rendering/cloud-banks';
+import { lanternGlows } from './rendering/lantern-glow';
+import { lanternStrings, terraceLanternStrings } from './rendering/lantern-strings';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
 import { samplePolyline, terrainHeight } from './world';
 import { RoadClosureOverlay } from './rendering/road-closures';
 import { getFloorDimensions, getStairPosition } from './access';
 import { buildLandscape } from './rendering/terrain';
-import { createRoofGeometry, type RoofProfile } from './rendering/architecture-layout';
+import { createRoofGeometry, roofHeightAt, type RoofProfile } from './rendering/architecture-layout';
 import { buildProgramArchitecture, type ArchitectureTemplate } from './rendering/architecture-bodies';
 import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floor-plan';
 import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering/architecture-detail';
 import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
+import { StudioPropPool } from './rendering/studio-props';
+import { WoodlandModelPool } from './rendering/woodland-models';
+import { FirstPersonArms, StudioCharacterPool } from './rendering/studio-characters';
+import { StudioSkyModels } from './rendering/sky-models';
+import { faunaDressing, groundDressing } from './rendering/woodland-layout';
+const studioGroundAndFauna = (world: WorldDefinition, trees: Parameters<typeof groundDressing>[1]) => { const ground = groundDressing(world, trees); return [...ground, ...faunaDressing(world, trees, ground)]; };
+import { emitNetworkStructures } from './rendering/network-structures';
+import { arrivalLook } from './rendering/arrival-view';
+import { RAIL_PIER_CAP_ASSET, RUNWAY_LIGHT_ASSET, studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
+import { DoorwayGlowPool } from './rendering/doorway-glow';
+import { windowLightLevels } from './rendering/window-occupancy';
+import { vehicleClearsCamera } from './rendering/near-camera';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
+import { VEHICLE_WHEEL, loadCrates, vehicleShape } from './rendering/vehicle-shapes';
 import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
 
-const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad' };
+/** R1 W4 (docs/设计/美术与渲染改造方案.md §4.2): one merged pitched display roof per
+ * floor-plan building, on the top floor's footprint, so drone-distance blocks
+ * read as roofed halls instead of flat slabs. Display only: collision, rooms and
+ * function points are untouched; viewing roofs and transport/landmark bodies keep
+ * their own tops. Halls take a hip roof, everyday buildings an overhanging gable. */
+const HIP_ROOF_KINDS = new Set(['school', 'hall', 'clinic', 'bank', 'police', 'temple']);
+const BARE_ROOF_KINDS = new Set(['station', 'airport', 'starport', 'core', 'pavilion']);
+/** R3 first step: a hall of two or more storeys gets a second, lower eave
+ * (重檐) — a hip ring one storey below the top, wrapped around the walls. */
+export interface RoofSkirt { width: number; depth: number; rise: number; position: Vec3; floor: number; hole: [number, number, number, number] }
+export function programRoofShell(b: Building, parts: readonly { position: Vec3; size: Vec3; floor: number; roof: boolean }[]): { form: 'hip' | 'gable'; width: number; depth: number; rise: number; color: string; position: Vec3; floor: number; skirt?: RoofSkirt } | null {
+  if (BARE_ROOF_KINDS.has(b.kind) || b.id === 'core-main' || b.facility || b.floors > 7) return null;
+  // The shell sits on the body's actual top roof (local frame), never on the plot.
+  const roofs = parts.filter(p => p.roof), top = Math.max(...roofs.map(p => p.position.y + p.size.y / 2));
+  if (!roofs.length || !Number.isFinite(top)) return null;
+  const highest = roofs.filter(p => p.position.y + p.size.y / 2 > top - .6), floor = Math.max(...highest.map(p => p.floor));
+  if (b.floorUses?.[floor]?.includes('观景')) return null;
+  let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity, area = 0;
+  for (const p of highest) { x0 = Math.min(x0, p.position.x - p.size.x / 2); x1 = Math.max(x1, p.position.x + p.size.x / 2); z0 = Math.min(z0, p.position.z - p.size.z / 2); z1 = Math.max(z1, p.position.z + p.size.z / 2); area += p.size.x * p.size.z; }
+  const w = x1 - x0, d = z1 - z0;
+  // A loose cluster of small tops (courtyard compounds) is left as it is: one roof over it would float.
+  if (!(w > 2 && d > 2) || area / (w * d) < .7) return null;
+  const overhang = Math.min(3, Math.max(.8, Math.min(w, d) * .08)), rise = Math.min(11, Math.max(1.8, Math.min(w, d) * .4)), hip = HIP_ROOF_KINDS.has(b.kind);
+  const centre = { x: (x0 + x1) / 2, y: top, z: (z0 + z1) / 2 }, storey = b.height / Math.max(1, b.floors);
+  let skirt: RoofSkirt | undefined;
+  if (hip && floor >= 1 && top - storey > 2.5) {
+    // The ring's inner edge meets the wall; its outer eave reaches 2.2× the main overhang.
+    const reach = overhang * 2.2, W = w + reach * 2, D = d + reach * 2, ringRise = Math.min(4, Math.max(1.2, reach * .9));
+    // Scale the hip profile so the eave sits ringRise below where the ring meets the wall.
+    const inner = Math.min(roofHeightAt('hip', w / 2 / W, 0), roofHeightAt('hip', 0, d / 2 / D)), eave = roofHeightAt('hip', 0, .5), scale = ringRise / Math.max(.05, inner - eave);
+    skirt = { width: W, depth: D, rise: scale, position: { ...centre, y: top - storey + .3 - scale * inner }, floor: Math.max(0, floor - 1), hole: [-w / 2 / W, w / 2 / W, -d / 2 / D, d / 2 / D] };
+  }
+  return { form: hip ? 'hip' : 'gable', width: w + overhang * 2, depth: d + overhang * 2, rise, color: hip ? '#2c4d48' : '#38504c', position: centre, floor: Math.max(0, floor), skirt };
+}
+/** Night glow of the cyan accents (rail strips, screens). At 2 the elevated rail strips
+ * bloomed into bright blue-white bands that outshone the lanterns at dusk. */
+const CYAN_NIGHT_GLOW = .9;
+const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad', lantern: '#b8432f' };
 type MaterialKey = keyof typeof PALETTE;
 interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
 interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean; ceiling?: boolean }
@@ -32,6 +90,8 @@ function offsetBox(box: LocalBox, x: number, z: number): LocalBox {
 
 /** Static geometry is grouped by material; long networks are also spatially split. */
 class BoxBatch {
+  /** world.buildings index by id, for window panes' real occupancy lighting (window-occupancy.ts). */
+  static buildingIndex = new Map<string, number>();
   private parts = new Map<MaterialKey, Part[]>();
   constructor(private materials: Record<MaterialKey, THREE.MeshStandardMaterial>) {}
   box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
@@ -68,6 +128,7 @@ class BoxBatch {
       }
       const mesh = new THREE.InstancedMesh(geometry, this.materials[key], parts.length);
       if (key === 'wall' || key === 'wood') mesh.geometry.setAttribute('instanceFacade', new THREE.InstancedBufferAttribute(new Float32Array(parts.flatMap(part => [...part.facade ?? [0, 0, 0, 0]])), 4));
+      if (key === 'wall' || key === 'wood') mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? BoxBatch.buildingIndex.get(part.building) ?? -1 : -1)), 1));
       if (key === 'wall' || key === 'wood' || key === 'stone' || key === 'fabric' || key === 'metal') mesh.geometry.setAttribute('instanceBuildingFinish', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
       // The same material also paints transport and old furniture. Only the
       // authoritative roof tag enables tile relief. 2 denotes architecture,
@@ -77,6 +138,7 @@ class BoxBatch {
       // Only existing building panes receive lattice/illumination. Transport
       // windscreens share the glass material but carry a zero surface flag.
       if (key === 'glass') mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? part.windowStyle ?? 1 : 0)), 1));
+      if (key === 'glass' || key === 'amber') mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? BoxBatch.buildingIndex.get(part.building) ?? -1 : -1)), 1));
       mesh.name = `batch-${key}-${cell}`;
       parts.forEach((part, index) => {
         mesh.setMatrixAt(index, part.matrix); mesh.setColorAt(index, part.color);
@@ -100,6 +162,10 @@ export class CityRenderer implements CityRendererAPI {
   readonly renderer: THREE.WebGLRenderer;
   private materials: Record<MaterialKey, THREE.MeshStandardMaterial>;
   private landscape: ReturnType<typeof buildLandscape>;
+  private woodlandModels: WoodlandModelPool;
+  /** BUILT-131 road surface along every road; the woodland pool draws the near ones. */
+  private roadTileCache?: ReturnType<typeof studioRoadTilePlacements>;
+  private get roadTiles() { return this.roadTileCache ??= studioRoadTilePlacements(this.world, deckWidth); }
   private architectureDetail: ArchitectureDetailManager;
   private chunks: CityChunk[] = [];
   private nearChunks!: NearChunkResidency<NearCityResource>;
@@ -128,16 +194,33 @@ export class CityRenderer implements CityRendererAPI {
   private shadowAt = -Infinity;
   private shadowPosition = new THREE.Vector3(Infinity, Infinity, Infinity);
   private facadeNight = { value: 0 };
+  /** Lit share of each building's windows (window-occupancy.ts), refreshed about once a second. */
+  private windowLight = new THREE.DataTexture(new Uint8Array(4), 1, 1, THREE.RedFormat);
+  private windowLightUniform = { value: this.windowLight as THREE.Texture };
+  private windowLightCount = { value: 1 };
+  private windowLightAt = -Infinity;
   private sky: THREE.Mesh;
   private skyMaterial: THREE.ShaderMaterial;
   private citizens: CitizenAppearancePool;
+  private studioCharacters?: StudioCharacterPool;
+  private firstPersonArms?: FirstPersonArms;
+  private skyModels?: StudioSkyModels;
+  /** The player's studio forearms (CHAR-075) while walking on foot. */
+  setFirstPersonArms(visible: boolean): void { if (this.firstPersonArms) this.firstPersonArms.visible = visible; }
   private marketGoods: MarketGoodsPool;
+  private studioProps: StudioPropPool;
   private marketShopfront: MarketShopfrontPool;
+  private doorwayGlow: DoorwayGlowPool;
   private stationWayfinding: StationWayfindingPool;
   private roadClosures: RoadClosureOverlay;
   private signalRed: THREE.InstancedMesh;
   private signalGreen: THREE.InstancedMesh;
   private vehiclePools = new Map<string, MovingPool>();
+  private wheels?: THREE.InstancedMesh;
+  /** Crates on road vehicles that carry real cargo (vehicle-shapes.ts load). */
+  private loads?: THREE.InstancedMesh;
+  /** Opaque truck cabs (the shared glass head material reads as a see-through box on a road vehicle). */
+  private cabs?: THREE.InstancedMesh;
   private matrix = new THREE.Matrix4();
   private position = new THREE.Vector3();
   private scale = new THREE.Vector3();
@@ -148,6 +231,9 @@ export class CityRenderer implements CityRendererAPI {
   private labels: { building: Building; sprite: THREE.Sprite; floor?: number }[] = [];
 
   constructor(private container: HTMLElement, private world: WorldDefinition) {
+    BoxBatch.buildingIndex = new Map(world.buildings.map((b, index) => [b.id, index]));
+    this.windowLight = new THREE.DataTexture(new Uint8Array(Math.max(1, world.buildings.length)).fill(255), Math.max(1, world.buildings.length), 1, THREE.RedFormat);
+    this.windowLight.needsUpdate = true; this.windowLightUniform.value = this.windowLight; this.windowLightCount.value = Math.max(1, world.buildings.length);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
     this.renderer.setClearColor('#a9ccd1');
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -163,8 +249,8 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     this.renderer.domElement.setAttribute('aria-label', '云山巨城实时三维世界');
     this.container.appendChild(this.renderer.domElement);
-    this.materials = Object.fromEntries(Object.keys(PALETTE).filter(key => key !== 'metal' || this.world.buildings.some(site => site.commercialGeometryRevision === 1)).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : key === 'metal' ? .42 : .83, metalness: key === 'glass' ? .32 : key === 'metal' ? .72 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
-    for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v5`; this.materials[key].onBeforeCompile = shader => {
+    this.materials = Object.fromEntries(Object.keys(PALETTE).filter(key => key !== 'metal' || this.world.buildings.some(site => site.commercialGeometryRevision === 1)).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : key === 'metal' ? .42 : .83, metalness: key === 'glass' ? .32 : key === 'metal' ? .72 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : key === 'lantern' ? '#ff5a28' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : key === 'lantern' ? .05 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
+    for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v6`; this.materials[key].onBeforeCompile = shader => {
       shader.vertexShader = 'varying vec3 vArchitecture;varying vec3 vArchitectureNormal;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
         vec4 architecture=vec4(transformed,1.0);
@@ -246,11 +332,12 @@ export class CityRenderer implements CityRendererAPI {
       }
       if (key === 'wall') {
         shader.uniforms.facadeNight = this.facadeNight;
-        shader.vertexShader = 'attribute vec4 instanceFacade;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.vertexShader;
-        shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvFacade=instanceFacade;vProxyPosition=position;vProxyNormal=normal;');
-        shader.fragmentShader = 'uniform float facadeNight;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.fragmentShader;
+        shader.uniforms.windowLight = this.windowLightUniform; shader.uniforms.windowLightCount = this.windowLightCount;
+        shader.vertexShader = 'uniform sampler2D windowLight;uniform float windowLightCount;attribute float instanceWindowBuilding;varying float vProxyLight;attribute vec4 instanceFacade;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.vertexShader;
+        shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvFacade=instanceFacade;vProxyPosition=position;vProxyNormal=normal;vProxyLight=instanceWindowBuilding<0.0?1.0:texture2D(windowLight,vec2((instanceWindowBuilding+.5)/windowLightCount,.5)).r;');
+        shader.fragmentShader = 'uniform float facadeNight;varying float vProxyLight;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.fragmentShader;
         shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
-          float proxyWindow=0.0;
+          float proxyWindow=0.0,proxyLit=1.0;
           if(vFacade.y>0.0 && abs(vProxyNormal.y)<.5){
             bool front=vProxyNormal.z>.5;bool side=abs(vProxyNormal.x)>.5;
             vec2 uv=vec2(front?vProxyPosition.x:vProxyPosition.z,vProxyPosition.y)+.5;
@@ -261,6 +348,8 @@ export class CityRenderer implements CityRendererAPI {
             float origin=front?(broad?.27:.1):.2;
             float n=clamp(floor((uv.x-origin)/spacing+.5),0.0,front?vFacade.x-1.0:2.0);
             float centre=origin+n*spacing;
+            // A proxy pane is lit when its seed falls under the building's occupied share (window-occupancy.ts).
+            float proxySeed=fract(sin(n*12.9898+floor(uv.y*rows)*78.233+(front?0.0:41.7))*43758.5453);proxyLit=mix(.12,1.0,1.0-step(vProxyLight,proxySeed));
             float ww=front?vFacade.z:vFacade.w;
             float xx=abs(uv.x-centre),yy=abs(row-(front&&broad?.52:.57));
             float permitted=(front||side)?1.0:0.0;
@@ -273,14 +362,28 @@ export class CityRenderer implements CityRendererAPI {
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.14,.10,.063),max(frame,beam)*.9);
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.115,.245,.255),proxyWindow*(1.0-max(lattice,crossbar)*.6));
           }`);
-        shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=proxyWindow*facadeNight*vec3(.40,.27,.13);');
+        shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=proxyWindow*proxyLit*facadeNight*vec3(1.0,.52,.17)*1.1;');
       }
     }; }
     this.materials.glass.roughness = .42; this.materials.glass.metalness = .12;
-    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v3';
+    // Room lamps inside a building (amber) glow by the building's real occupied share, lamp by lamp;
+    // amber outside buildings (stations, runway, signs) carries no building and keeps its glow.
+    this.materials.amber.customProgramCacheKey = () => 'yunshan-occupied-lamps-v1';
+    this.materials.amber.onBeforeCompile = shader => {
+      shader.uniforms.windowLight = this.windowLightUniform; shader.uniforms.windowLightCount = this.windowLightCount;
+      shader.vertexShader = 'uniform sampler2D windowLight;uniform float windowLightCount;attribute float instanceWindowBuilding;varying float vLampLit;\n' + shader.vertexShader;
+      shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
+        vLampLit=1.0;
+        #ifdef USE_INSTANCING
+        if(instanceWindowBuilding>=0.0){float light=texture2D(windowLight,vec2((instanceWindowBuilding+.5)/windowLightCount,.5)).r;float seed=fract(sin(dot(instanceMatrix[3].xyz,vec3(12.9898,78.233,39.425)))*43758.5453);vLampLit=mix(.08,1.0,1.0-step(light,seed));}
+        #endif`);
+      shader.fragmentShader = 'varying float vLampLit;\n' + shader.fragmentShader;
+      shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance*=vLampLit;');
+    };
+    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v4';
     this.materials.glass.onBeforeCompile = shader => {
-      shader.uniforms.facadeNight = this.facadeNight;
-      shader.vertexShader = 'attribute float instanceWindowSurface;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.vertexShader;
+      shader.uniforms.facadeNight = this.facadeNight; shader.uniforms.windowLight = this.windowLightUniform; shader.uniforms.windowLightCount = this.windowLightCount;
+      shader.vertexShader = 'uniform sampler2D windowLight;uniform float windowLightCount;attribute float instanceWindowBuilding;varying float vWindowLight;attribute float instanceWindowSurface;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
         vec3 windowScale=vec3(1.0);vec3 windowOrigin=vec3(0.0);
         #ifdef USE_INSTANCING
@@ -288,8 +391,9 @@ export class CityRenderer implements CityRendererAPI {
         windowOrigin=instanceMatrix[3].xyz;
         #endif
         vWindowMetric=(position+.5)*windowScale;vWindowExtent=windowScale;vWindowNormal=normal;vWindowSurface=instanceWindowSurface;
-        vWindowSeed=fract(sin(dot(windowOrigin,vec3(12.9898,78.233,39.425)))*43758.5453);`);
-      shader.fragmentShader = 'uniform float facadeNight;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.fragmentShader;
+        vWindowSeed=fract(sin(dot(windowOrigin,vec3(12.9898,78.233,39.425)))*43758.5453);
+        vWindowLight=instanceWindowBuilding<0.0?1.0:texture2D(windowLight,vec2((instanceWindowBuilding+.5)/windowLightCount,.5)).r;`);
+      shader.fragmentShader = 'uniform float facadeNight;varying float vWindowLight;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
         float windowPane=0.0,windowWarmth=0.0,windowRoughness=roughness;
         if(vWindowSurface>.5 && abs(vWindowNormal.y)<.5 && min(vWindowExtent.x,vWindowExtent.z)<.5){
@@ -308,7 +412,8 @@ export class CityRenderer implements CityRendererAPI {
           float timber=max(frame,lattice)*paneDetail;
           windowPane=1.0-timber;
           windowRoughness=mix(commercialWindow?.44:.68,commercialWindow?.16:.22,windowPane);
-          windowWarmth=mix(.24,1.0,step(.34,vWindowSeed));
+          // A pane is lit when its seed falls under the building's real occupied share.
+          windowWarmth=mix(.12,1.0,1.0-step(vWindowLight,vWindowSeed));
           diffuseColor.rgb=mix(diffuseColor.rgb,commercialWindow?vec3(.34,.32,.25):vec3(.23,.14,.073),timber*.92);
           // Broad commercial panes have alloy mullions and a restrained sky
           // tint; homes keep timber lattice. Both retain their real openings.
@@ -317,11 +422,11 @@ export class CityRenderer implements CityRendererAPI {
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.21,.40,.46),upperSky*windowPane*.2);
           }
           diffuseColor.rgb*=1.0-(1.0-paneMetric.y/max(.2,paneExtent.y))*.18*windowPane;
-          // Illumination follows existing night/energy state. Its static per
-          // pane variation is decorative; it does not invent room occupancy.
+          // Illumination follows night/energy state and, per building, the share
+          // of its rooms actually in use (residents awake at home, an open shop).
           diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.46,.30,.13),facadeNight*windowWarmth*windowPane*.34);
         }`);
-      shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=windowPane*windowWarmth*facadeNight*vec3(.48,.27,.095);');
+      shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=windowPane*windowWarmth*facadeNight*vec3(1.0,.52,.17)*1.2;');
       shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nif(vWindowSurface>.5)roughnessFactor=windowRoughness;');
     };
     this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v5';
@@ -400,10 +505,18 @@ export class CityRenderer implements CityRendererAPI {
     this.moonOrb = new THREE.Mesh(new THREE.SphereGeometry(38, 12, 8), new THREE.MeshBasicMaterial({ color: '#d6e5e0' }));
     this.scene.add(this.sunOrb, this.moonOrb);
     this.stars = this.buildStars(); this.scene.add(this.stars);
+    this.skyModels = new StudioSkyModels(this.scene, this.sky, this.sunOrb, this.moonOrb, this.stars); void this.skyModels.load();
     this.mist = this.buildMist(); this.scene.add(this.mist);
+    this.clouds = this.buildCloudBanks(); this.scene.add(this.clouds);
+    this.lanterns = this.buildLanternGlow(); this.scene.add(this.lanterns);
+    this.silhouettes = this.buildSilhouetteRing(); this.scene.add(this.silhouettes);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
+    this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled, studioGroundAndFauna(world, this.landscape.woodland.trees), this.roadTiles.map((t, id) => ({ id, asset: t.asset, ...t.position, yaw: t.yaw, pitch: t.pitch ?? 0 })));
+    void this.woodlandModels.load();
     this.roadClosures = new RoadClosureOverlay(world); this.scene.add(this.roadClosures.group);
+    this.studioProps = new StudioPropPool(this.scene, world);
+    void this.studioProps.load();
     this.buildCity(); this.buildNetwork(); this.buildGateways(); this.buildCoreLabels();
     this.architectureDetail = new ArchitectureDetailManager(world.buildings); this.scene.add(this.architectureDetail.group);
     const signalCount = this.world.nodes.filter(node => node.station).length;
@@ -411,16 +524,26 @@ export class CityRenderer implements CityRendererAPI {
     this.signalGreen = new THREE.InstancedMesh(new THREE.BoxGeometry(.7, .55, .35), new THREE.MeshBasicMaterial({ color: '#ffffff' }), signalCount);
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.setUsage(THREE.DynamicDrawUsage); signal.frustumCulled = false; this.scene.add(signal); }
     this.citizens = new CitizenAppearancePool(this.scene, 1024);
+    this.studioCharacters = new StudioCharacterPool(this.scene); void this.studioCharacters.load();
+    if (!this.camera.parent) this.scene.add(this.camera);
+    this.firstPersonArms = new FirstPersonArms(this.camera); void this.firstPersonArms.load();
     this.marketGoods = new MarketGoodsPool(this.scene, world);
     this.marketShopfront = new MarketShopfrontPool(this.scene, world);
+    this.doorwayGlow = new DoorwayGlowPool(this.scene, world);
     this.stationWayfinding = new StationWayfindingPool(this.scene, world);
     for (const kind of ['road', 'maglev', 'lightRail', 'cable', 'lift', 'ferry', 'bridge', 'flight']) {
       const capacity = Math.max(32, this.world.edges.filter(edge => edge.mode === kind).length * 3);
       this.vehiclePools.set(kind, this.makePool(capacity, this.materials.roof, this.materials.glass, this.materials.cyan));
     }
-    const arrivalShop = this.world.buildings.filter(b => b.kind === 'market' && b.districtId === 'market').sort((a, b) => Math.hypot(a.door.x - world.spawn.x, a.door.z - world.spawn.z) - Math.hypot(b.door.x - world.spawn.x, b.door.z - world.spawn.z))[0];
+    // Road vehicles' wheels: one shared draw, four per vehicle.
+    this.wheels = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: VEHICLE_WHEEL.color, roughness: .9 }), (this.vehiclePools.get('road')?.capacity ?? 0) * 4 + (this.vehiclePools.get('bridge')?.capacity ?? 0) * 4);
+    this.wheels.name = '载具 · 车轮'; this.wheels.count = 0; this.wheels.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.wheels.frustumCulled = false; this.scene.add(this.wheels);
+    this.loads = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .85 }), ((this.vehiclePools.get('road')?.capacity ?? 0) + (this.vehiclePools.get('bridge')?.capacity ?? 0)) * 2);
+    this.cabs = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .55, metalness: .1 }), (this.vehiclePools.get('road')?.capacity ?? 0) + (this.vehiclePools.get('bridge')?.capacity ?? 0));
+    this.cabs.name = '载具 · 车头'; this.cabs.count = 0; this.cabs.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.cabs.frustumCulled = false; this.scene.add(this.cabs);
+    this.loads.name = '载具 · 车载货箱'; this.loads.count = 0; this.loads.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.loads.frustumCulled = false; this.scene.add(this.loads);
     this.camera.position.set(world.spawn.x, world.spawn.y + 1.72, world.spawn.z);
-    this.camera.lookAt(arrivalShop?.door.x ?? world.spawn.x, world.spawn.y + 1.2, arrivalShop?.door.z ?? world.spawn.z - 60);
+    const look = arrivalLook(world, world.spawn); this.camera.lookAt(look.x, look.y, look.z);
     this.resize();
   }
 
@@ -452,13 +575,19 @@ export class CityRenderer implements CityRendererAPI {
   }
 
   private buildHouse(b: Building, batch: BoxBatch, far: boolean) {
-    const programParts = buildProgramArchitecture(b, far ? 'far' : 'near');
+    const programParts = buildProgramArchitecture(b, far ? 'far' : 'near', this.studioProps ? { skipFixture: fixture => studioDressesFixture(fixture, b.kind) } : {});
     if (programParts) {
       for (const part of programParts) {
         const position = buildingWorldPosition(b, part.position);
         batch.box(part.material, position.x, position.y, position.z, part.size.x, part.size.y, part.size.z,
           part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof, ceiling: part.purpose === 'floor' || part.purpose === 'roof', windowStyle: b.commercialGeometryRevision === 1 ? 2 : 1 }, undefined, part.facade, part.template);
       }
+      // One roof profile in both levels of detail: switching LOD never changes a roof.
+      const shell = programRoofShell(b, programParts);
+      if (shell) { const at = buildingWorldPosition(b, shell.position);
+        batch.box('roof', at.x, at.y + .12, at.z, shell.width, shell.rise, shell.depth, shell.color, b.rotation, { building: b.id, floor: shell.floor, roof: true }, { form: shell.form, simple: true });
+        if (shell.skirt) { const ring = buildingWorldPosition(b, shell.skirt.position);
+          batch.box('roof', ring.x, ring.y, ring.z, shell.skirt.width, shell.skirt.rise, shell.skirt.depth, shell.color, b.rotation, { building: b.id, floor: shell.skirt.floor, roof: true }, { form: 'hip', simple: true, innerHole: shell.skirt.hole }); } }
       return;
     }
     const w = b.width, d = b.depth, height = b.height, base = b.position.y + .6, floors = Math.max(1, b.floors), fh = height / floors, basements = Math.max(0, b.basements ?? 0);
@@ -766,86 +895,24 @@ export class CityRenderer implements CityRendererAPI {
 
   private buildNetwork() {
     const batch = new BoxBatch(this.materials);
-    for (const edge of this.world.edges) {
-      this.edges.set(edge.id, edge); if (edge.mode === 'flight') continue;
-      let supportRemainder = 0;
-      for (let i = 1; i < edge.points.length; i++) {
-        const a = edge.points[i - 1], b = edge.points[i];
-        if (edge.mode === 'ferry') continue;
-        if (edge.mode === 'cable') { batch.segment('wood', a, b, .45, .45, 9); batch.segment('cyan', a, b, .15, .15, 8.5); continue; }
-        if (edge.mode === 'lift') {
-          // An open four-post lift cage preserves the real central travel axis
-          // while allowing the adjacent waterfall to remain visible through it.
-          for (const x of [-2.5, 2.5]) for (const z of [-2.5, 2.5]) batch.segment('stone', { ...a, x: a.x + x, z: a.z + z }, { ...b, x: b.x + x, z: b.z + z }, .6, .6, 0, '#a4b0a2');
-          for (let y = Math.min(a.y, b.y); y <= Math.max(a.y, b.y); y += 12) { for (const x of [-2.5, 2.5]) batch.box('wood', a.x + x, y, a.z, .6, .6, 5.6, '#698780'); for (const z of [-2.5, 2.5]) batch.box('wood', a.x, y, a.z + z, 5.6, .6, .6, '#698780'); }
-          batch.segment('cyan', { ...a, x: a.x + 3.2 }, { ...b, x: b.x + 3.2 }, .3, .3); continue;
-        }
-        const rail = edge.mode === 'maglev' || edge.mode === 'lightRail';
-        const width = deckWidth(edge);
-        batch.segment('stone', a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : '#969987');
-        if (rail) { batch.segment('cyan', { ...a, x: a.x - 1.8 }, { ...b, x: b.x - 1.8 }, .28, .24, .16); batch.segment('cyan', { ...a, x: a.x + 1.8 }, { ...b, x: b.x + 1.8 }, .28, .24, .16); }
-        else if (edge.mode !== 'bridge') batch.segment('stone', a, b, .16, .08, .07, '#d1c6a1');
-        // Curbs, paving seams and separate shoulders make the travelled deck
-        // legible at body height without widening the shared collision surface.
-        const dx = b.x - a.x, dz = b.z - a.z, horizontal = Math.hypot(dx, dz) || 1, nx = -dz / horizontal, nz = dx / horizontal;
-        for (const side of [-1, 1]) {
-          const offset = guardrailOffset(edge), aa = { x: a.x + nx * offset * side, y: a.y, z: a.z + nz * offset * side }, bb = { x: b.x + nx * offset * side, y: b.y, z: b.z + nz * offset * side };
-          batch.segment('stone', aa, bb, rail ? .35 : .4, rail ? .5 : .2, rail ? -.1 : .12, '#c0c2ac');
-          const elevated = (a.y + b.y) / 2 - terrainHeight(this.world, (a.x + b.x) / 2, (a.z + b.z) / 2) > 4;
-          if (edge.mode === 'bridge' || rail || elevated && edge.mode === 'road') for (const span of guardrailSpans(this.world, edge, i)) batch.segment('wood', { x: span.a.x + nx * offset * side, y: span.a.y, z: span.a.z + nz * offset * side }, { x: span.b.x + nx * offset * side, y: span.b.y, z: span.b.z + nz * offset * side }, GUARDRAIL_THICKNESS, .2, 1.1, '#6b7771');
-        }
-        if (edge.mode === 'road' && !edge.id.includes('runway')) { const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 + .04, z: (a.z + b.z) / 2 }; batch.segment('stone', { ...middle, x: middle.x - nx * 3.5, z: middle.z - nz * 3.5 }, { ...middle, x: middle.x + nx * 3.5, z: middle.z + nz * 3.5 }, .08, .04, 0, '#757e73'); }
-        const length = Math.hypot(b.x - a.x, b.z - a.z), interval = rail ? 80 : 70;
-        // Spacing spans all samples of the same edge, including the world's 4m rails.
-        for (let along = interval - supportRemainder; along <= length; along += interval) { const t = along / Math.max(.01, length), x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, y = a.y + (b.y - a.y) * t, ground = terrainHeight(this.world, x, z); if (y - ground > 5 && edge.mode !== 'bridge') { const tall = y - ground; batch.box('stone', x, ground + 1, z, rail ? 7 : 8, 2, rail ? 7 : 8, '#939e91'); batch.box('stone', x, ground + tall / 2, z, rail ? 3 : 4, tall, rail ? 3 : 4, '#a0aaa0'); batch.box('stone', x, y - 1.3, z, width + 1, 1.8, 4, '#929d92'); if (tall > 25) for (let tie = ground + 12; tie < y - 5; tie += 16) batch.box('wood', x, tie, z, rail ? 4 : 5, .6, rail ? 4 : 5); } }
-        supportRemainder = (supportRemainder + length) % interval;
-      }
-      if (edge.mode === 'bridge') this.buildBridge(edge, batch);
-    }
-    for (const node of this.world.nodes) {
-      const p = node.position;
-      if (node.station) { batch.box('stone', p.x, p.y - .6, p.z, 22, 1, 18); batch.box('cyan', p.x, p.y + .1, p.z + 8, 20, .2, .35); for (const x of [-8, 8]) { batch.box('wood', p.x + x, p.y + 3, p.z, .8, 6, .8); batch.box('amber', p.x + x, p.y + 5.7, p.z, 1.5, .35, 1.5); } batch.box('roof', p.x, p.y + 6.4, p.z, 23, .65, 11, undefined, 0, { roof: true }); batch.box('wood', p.x + 12, p.y + 1.8, p.z + 11, .35, 3.6, .35); batch.box('wood', p.x + 12, p.y + 3.5, p.z + 11, 1, 1.6, .65); }
-      else if (node.id.includes('junction') || node.id.includes('road')) { batch.box('wood', p.x + 4, p.y + 2.2, p.z + 4, .4, 4.4, .4); }
+    for (const edge of this.world.edges) this.edges.set(edge.id, edge);
+    emitNetworkStructures(this.world, batch, { dressesStations: !!this.studioProps?.dressesStations, dressesRunway: !!this.studioProps?.dressesLandmark('runway'), dressesRailDeck: !!this.studioProps?.dressesDeck('rail'), dressesBridgeDeck: !!this.studioProps?.dressesDeck('bridge'), dressesRoadDeck: this.roadTiles.some(t => t.asset === 'BUILT-131'), dressesRailKerb: this.roadTiles.some(t => t.asset === 'BUILT-142'), dressesRailPierCaps: !!this.studioProps?.dressesNetworkDetail(RAIL_PIER_CAP_ASSET) });
+    // 千灯市集 lantern strings across the v8 market streets (display only).
+    for (const string of [...lanternStrings(this.world), ...terraceLanternStrings(this.world)]) {
+      for (const pole of string.poles) { batch.box('wood', pole.x, pole.y + 2.9, pole.z, .3, 5.8, .3, '#5a3a26'); batch.box('wood', pole.x, pole.y + 5.85, pole.z, .5, .2, .5, '#3d2a1d'); }
+      const [a, b] = string.poles; batch.segment('wood', { x: a.x, y: a.y + 5.75, z: a.z }, { x: b.x, y: b.y + 5.75, z: b.z }, .05, .05, 0, '#2f2a24');
+      for (const l of string.lanterns) { batch.box('lantern', l.x, l.y, l.z, .55, .7, .55, '#b8432f'); batch.box('wood', l.x, l.y + .42, l.z, .35, .12, .35, '#3d2a1d'); }
     }
     const group = batch.build(undefined, 384);
     group.traverse(object => { if (object instanceof THREE.InstancedMesh && object.userData.distanceDetail) this.distanceDetails.push(object); });
     this.scene.add(group);
   }
 
-  private buildBridge(edge: NetworkEdge, batch: BoxBatch) {
-    if (edge.points.length < 2) return;
-    const length = edge.points.slice(1).reduce((sum, p, i) => sum + Math.hypot(p.x - edge.points[i].x, p.z - edge.points[i].z), 0);
-    const arcLength = edge.points.slice(1).reduce((sum, p, i) => sum + Math.hypot(p.x - edge.points[i].x, p.y - edge.points[i].y, p.z - edge.points[i].z), 0);
-    const samples = Math.max(8, Math.ceil(length / 8));
-    const point = (t: number, side: number, lift: number) => { const p = samplePolyline(edge.points, t), a = samplePolyline(edge.points, Math.max(0, t - .01)), b = samplePolyline(edge.points, Math.min(1, t + .01)), dx = b.x - a.x, dz = b.z - a.z, l = Math.hypot(dx, dz) || 1; return { x: p.x - dz / l * side * 4.1, y: p.y + lift, z: p.z + dx / l * side * 4.1 }; };
-    const suspension = length > 140;
-    for (const side of [-1, 1]) {
-      for (let i = 0; i <= samples; i++) {
-        const t = i / samples, deck = point(t, side, 0);
-        const guarded = hasGuardrailAt(this.world, edge, t * arcLength);
-        if (guarded) batch.box('wood', deck.x, deck.y + .55, deck.z, .4, 1.1, .4, '#6c7871');
-        if (suspension) {
-          const lift = t < .16 ? 3 + t / .16 * 27 : t > .84 ? 3 + (1 - t) / .16 * 27 : 30 - 21 * Math.sin((t - .16) / .68 * Math.PI);
-          const cable = point(t, side, lift);
-          if (i) { const previousT = (i - 1) / samples, previousLift = previousT < .16 ? 3 + previousT / .16 * 27 : previousT > .84 ? 3 + (1 - previousT) / .16 * 27 : 30 - 21 * Math.sin((previousT - .16) / .68 * Math.PI); batch.segment('wood', point(previousT, side, previousLift), cable, .5, .5, 0, '#627d7c'); }
-          if (guarded) batch.segment('stone', { ...deck, y: deck.y + 1.1 }, cable, .2, .2, 0, '#9eb1a7');
-        }
-      }
-      for (const t of suspension ? [.16, .84] : [0, 1]) {
-        if (suspension && !hasGuardrailAt(this.world, edge, t * arcLength)) continue;
-        const offset = suspension ? 6 : 6.5, deck = point(t, side * offset / 4.1, 0), ground = Math.min(terrainHeight(this.world, deck.x, deck.z), deck.y - 2.6), height = deck.y - ground + (suspension ? 32 : 2.4);
-        batch.box('stone', deck.x, ground + .8, deck.z, 9, 1.6, 9, '#a4aa9b');
-        batch.box('stone', deck.x, ground + height / 2, deck.z, 2, height, 2, '#8c9b95');
-        if (suspension) { const across = point(t, -side * offset / 4.1, 28); batch.segment('stone', { ...deck, y: deck.y + 28 }, across, 1.6, 1.6, 0, '#8b9b95'); this.roof((key, x, y, z, sx, sy, sz) => batch.box(key, deck.x + x, deck.y + y, deck.z + z, sx, sy, sz), 5, 5, 32, 0, .35, true); }
-      }
-    }
-    for (const t of [0, 1]) { const p = samplePolyline(edge.points, t), ground = terrainHeight(this.world, p.x, p.z); batch.box('stone', p.x, (p.y + ground) / 2, p.z, 12, Math.max(1, p.y - ground), 10, '#a2a88f'); }
-  }
-
   private buildGateways() {
     const batch = new BoxBatch(this.materials);
     const civic = this.world.buildings.find(b => b.kind === 'core');
-    if (civic) {
+    // The studio forecourt (BUILT-092) carries the same paving, lamps and flags.
+    if (civic && !this.studioProps?.dressesLandmark('forecourt')) {
       const x = civic.position.x, z = civic.door.z + 67, y = civic.position.y;
       batch.box('stone', x, y + .04, z, 96, .12, 84, '#82958a');
       for (const side of [-1, 1]) for (const offset of [-30, 0, 30]) {
@@ -859,7 +926,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const b of this.world.buildings) {
       if (b.kind === 'airport') {
         const runway = this.world.edges.find(edge => edge.id === 'road-airport-runway-strip');
-        if (runway && runway.points.length > 1) for (let i = 1; i < runway.points.length; i++) { const a = runway.points[i - 1], next = runway.points[i], center = { x: (a.x + next.x) / 2, y: (a.y + next.y) / 2 + .18, z: (a.z + next.z) / 2 }; batch.box('amber', center.x, center.y, center.z, 6, .07, 1); for (const side of [-1, 1]) batch.box('cyan', center.x, center.y + .12, center.z + side * 16.5, .9, .3, .9); }
+        if (runway && runway.points.length > 1) for (let i = 1; i < runway.points.length; i++) { const a = runway.points[i - 1], next = runway.points[i], center = { x: (a.x + next.x) / 2, y: (a.y + next.y) / 2 + .18, z: (a.z + next.z) / 2 }; batch.box('amber', center.x, center.y, center.z, 6, .07, 1); if (!this.studioProps?.dressesNetworkDetail(RUNWAY_LIGHT_ASSET)) for (const side of [-1, 1]) batch.box('cyan', center.x, center.y + .12, center.z + side * 16.5, .9, .3, .9); }
       }
       if (b.kind === 'starport') {
         const ring = new THREE.Mesh(new THREE.TorusGeometry(Math.max(42, b.width * .6), 2.2, 4, 32), this.materials.cyan); ring.rotation.x = Math.PI / 2; ring.position.set(b.position.x, b.position.y + b.height + 12, b.position.z); this.scene.add(ring);
@@ -879,6 +946,79 @@ export class CityRenderer implements CityRendererAPI {
     return new THREE.Points(geo, new THREE.PointsMaterial({ size: 26, color: '#d3e9e1', transparent: true, opacity: 0, depthWrite: false, fog: false }));
   }
 
+  private clouds!: THREE.Group;
+  private buildCloudBanks() {
+    // Soft irregular blob: overlapping radial lobes, faded to zero at the edge.
+    const canvas = document.createElement('canvas'); canvas.width = canvas.height = 256;
+    const context = canvas.getContext('2d');
+    if (context) { for (let i = 0; i < 14; i++) { const a = i * 2.39996, r = 30 + (i % 4) * 14, x = 128 + Math.cos(a) * (18 + (i % 5) * 9), y = 128 + Math.sin(a) * (12 + (i % 3) * 8);
+      const g = context.createRadialGradient(x, y, 0, x, y, r + 40); g.addColorStop(0, 'rgba(255,255,255,.36)'); g.addColorStop(.55, 'rgba(255,255,255,.12)'); g.addColorStop(1, 'rgba(255,255,255,0)'); context.fillStyle = g; context.fillRect(0, 0, 256, 256); } }
+    const texture = new THREE.CanvasTexture(canvas), group = new THREE.Group(); group.name = '云海 · 谷间云带';
+    const puffs = cloudBanks(this.world), sea = puffs.filter(p => p.layer === 'sea'), valley = puffs.filter(p => p.layer === 'valley');
+    // The sea is a deck of large horizontal soft planes, overlapping into one layer seen from above.
+    const deckMaterial = new THREE.MeshBasicMaterial({ map: texture, color: '#eef0ea', transparent: true, opacity: .5, depthWrite: false, fog: true, side: THREE.DoubleSide });
+    const deck = new THREE.InstancedMesh(new THREE.PlaneGeometry(1, 1), deckMaterial, sea.length), m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler();
+    sea.forEach((p, i) => { e.set(-Math.PI / 2, 0, (p.x * 13 + p.z * 7) % (Math.PI * 2)); q.setFromEuler(e); m.compose(new THREE.Vector3(p.x, p.y, p.z), q, new THREE.Vector3(p.size * 2.2, p.size * 1.6, 1)); deck.setMatrixAt(i, m); });
+    deck.userData.cloudLayer = 'sea'; deck.renderOrder = 2; deck.frustumCulled = false; group.add(deck);
+    if (valley.length) {
+      const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(valley.flatMap(p => [p.x, p.y, p.z]), 3));
+      const bands = new THREE.Points(geometry, new THREE.PointsMaterial({ map: texture, size: valley.reduce((n, p) => n + p.size, 0) / valley.length * 1.8, color: '#eef0ea', transparent: true, opacity: .3, depthWrite: false, fog: true }));
+      bands.userData.cloudLayer = 'valley'; bands.renderOrder = 2; group.add(bands);
+    }
+    return group;
+  }
+  private silhouettes!: THREE.Group;
+  private buildSilhouetteRing() {
+    // R1 W6a: distant mountain-city silhouette cards (design §2.3, asset #20
+    // low-cost version). Three rings beyond the world edge; the nearer rings
+    // carry stepped roofs and towers on the ridges, the farthest is bare
+    // ridge. Bases sink below the cloud sea. Display only.
+    const group = new THREE.Group(); group.name = '远景山城剪影';
+    const layers = [{ radius: 4300, height: 760, city: 1, seed: 11 }, { radius: 5800, height: 1050, city: .5, seed: 23 }, { radius: 7600, height: 1400, city: 0, seed: 37 }];
+    for (const [index, layer] of layers.entries()) {
+      const canvas = document.createElement('canvas'); canvas.width = 2048; canvas.height = 256;
+      const context = canvas.getContext('2d');
+      if (context) {
+        const rand = (i: number) => { const x = Math.sin(i * 127.1 + layer.seed * 311.7) * 43758.5453; return x - Math.floor(x); };
+        const ridge = (x: number) => { const t = x / 2048 * Math.PI * 2; return .5 + .22 * Math.sin(t * 3 + layer.seed) + .12 * Math.sin(t * 7 + layer.seed * 2) + .06 * Math.sin(t * 17 + layer.seed * 3); };
+        context.fillStyle = '#fff'; context.beginPath(); context.moveTo(0, 256);
+        for (let x = 0; x <= 2048; x += 8) context.lineTo(x, 256 - ridge(x) * 230);
+        context.lineTo(2048, 256); context.closePath(); context.fill();
+        // Stepped halls and towers on the upper slopes.
+        for (let i = 0; i < 160 * layer.city; i++) {
+          const x = rand(i) * 2048, top = 256 - ridge(x) * 230, w = 6 + rand(i + 500) * 16, h = 6 + rand(i + 900) * (rand(i + 1300) > .85 ? 40 : 14);
+          if (ridge(x) < .45) continue;
+          context.fillRect(x - w / 2, top - h, w, h + 6); context.beginPath(); context.moveTo(x - w / 2 - 4, top - h); context.lineTo(x, top - h - 5 - w * .25); context.lineTo(x + w / 2 + 4, top - h); context.fill();
+        }
+      }
+      const texture = new THREE.CanvasTexture(canvas); texture.wrapS = THREE.RepeatWrapping;
+      const material = new THREE.MeshBasicMaterial({ map: texture, color: '#9aa9a8', transparent: true, alphaTest: .4, depthWrite: false, fog: false, side: THREE.BackSide });
+      const ring = new THREE.Mesh(new THREE.CylinderGeometry(layer.radius, layer.radius, layer.height, 96, 1, true), material);
+      ring.position.y = layer.height / 2 - 40; ring.rotation.y = layer.seed; ring.renderOrder = -6 + index; ring.userData.silhouetteLayer = index; ring.frustumCulled = false;
+      // Only alpha from the texture: colour comes from the material.
+      group.add(ring);
+    }
+    return group;
+  }
+  private lanterns!: THREE.Points;
+  private buildLanternGlow() {
+    // Additive warm glow with a minimum on-screen size, so lanterns still read
+    // as points of light at drone distance; it only lights after dusk.
+    const glows = lanternGlows(this.world), geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(glows.flatMap(g => [g.x, g.y, g.z]), 3));
+    geometry.setAttribute('glowSize', new THREE.Float32BufferAttribute(glows.map(g => g.kind === 'street' ? 3.6 : g.kind === 'eave' || g.kind === 'string' ? 2.8 : 3.2), 1));
+    const material = new THREE.ShaderMaterial({
+      uniforms: { night: { value: 0 }, scale: { value: 400 } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      vertexShader: `attribute float glowSize; uniform float scale; varying float vFade;
+        void main() { vec4 mv = modelViewMatrix * vec4(position, 1.0); float d = -mv.z; gl_Position = projectionMatrix * mv;
+          gl_PointSize = clamp(glowSize * scale / max(d, 1.0), 6.0, 18.0); vFade = clamp(1.4 - d / 4200.0, .25, 1.0); }`,
+      fragmentShader: `uniform float night; varying float vFade;
+        void main() { vec2 c = gl_PointCoord - .5; float r = length(c) * 2.0; if (r > 1.0) discard;
+          float core = smoothstep(.42, .0, r), halo = pow(1.0 - r, 1.4);
+          gl_FragColor = vec4(vec3(1.0, .48, .14) * (core * 1.1 + halo * .7) * night * vFade, 1.0); }`,
+    });
+    const points = new THREE.Points(geometry, material); points.name = '灯笼远景发光'; points.frustumCulled = false; points.renderOrder = 3; return points;
+  }
   private buildMist() {
     const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128;
     const context = canvas.getContext('2d');
@@ -917,7 +1057,7 @@ export class CityRenderer implements CityRendererAPI {
     };
     const signed = new Set<string>();
     for (const building of this.world.buildings.filter(b => { if (b.districtId === 'core') return true; if (b.kind === 'home' || b.kind === 'farm') return false; const key = `${b.districtId}:${b.kind}`; if (signed.has(key)) return false; signed.add(key); return true; })) {
-      const sprite = make(building.name); if (sprite) { sprite.position.set(building.door.x, building.position.y + Math.min(5.2, building.height / building.floors * .8), building.door.z + .8); sprite.scale.set(Math.min(18, Math.max(8, building.width * .35)), 2.4, 1); this.labels.push({ building, sprite }); }
+      const sprite = make(building.name); if (sprite) { sprite.position.set(building.door.x + Math.round(Math.sin(building.rotation)) * .8, building.position.y + Math.min(5.2, building.height / building.floors * .8), building.door.z + Math.round(Math.cos(building.rotation)) * .8); sprite.scale.set(Math.min(18, Math.max(8, building.width * .35)), 2.4, 1); this.labels.push({ building, sprite }); }
       if (building.kind === 'core') {
         const uses = building.floorUses;
         for (let floor = -(building.basements ?? 0); floor < building.floors; floor++) {
@@ -933,6 +1073,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const mesh of [body, head, trim]) {
       if (mesh.material === this.materials.roof) mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
       if (mesh.material === this.materials.glass) mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
+      if (mesh.material === this.materials.glass || mesh.material === this.materials.amber) mesh.geometry.setAttribute('instanceWindowBuilding', new THREE.InstancedBufferAttribute(new Float32Array(capacity).fill(-1), 1));
       mesh.count = 0; mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); mesh.frustumCulled = false; this.scene.add(mesh);
     }
     return { body, head, trim, capacity };
@@ -949,29 +1090,37 @@ export class CityRenderer implements CityRendererAPI {
     this.chunks = residents.map(({ chunk, resource }) => ({ center: { ...chunk.center }, radius: chunk.radius, detail: resource.group, near: true, buildingIds: new Set(chunk.buildingIds) }));
     this.scene.userData.buildingResidency = this.nearChunks.getStats();
     this.landscape.update(this.camera.position, this.quality);
+    this.woodlandModels.update(this.camera.position, this.quality);
     for (const mesh of this.distanceDetails) { const bounds = mesh.boundingSphere!; mesh.visible = bounds.center.distanceTo(this.camera.position) < bounds.radius + (this.quality === 'high' ? 300 : this.quality === 'low' ? 90 : 180); }
     this.architectureDetail.update(this.camera.position, { buildingId: this.insideId, floor: this.insideFloor }, this.quality);
     for (const material of this.landscape.water) if (material.uniforms.time) material.uniforms.time.value = elapsed;
-    const angle = (state.hour - 6) / 24 * Math.PI * 2, altitude = Math.sin(angle), daylight = THREE.MathUtils.smoothstep(altitude, -.12, .28), twilight = Math.max(0, 1 - Math.abs(altitude) * 4);
+    // Display grade (docs/设计/美术与渲染改造方案.md §2.2): golden low sun, cool fill, warm haze.
+    const grade = timeOfDayGrade(state.hour, state.visibility), daylight = grade.daylight, altitude = grade.sunDirection[1];
     for (const material of this.landscape.water) if (material.uniforms.light) material.uniforms.light.value = daylight;
-    this.sun.position.set(Math.cos(angle) * 2500, altitude * 2500, altitude * 1400); this.moon.position.copy(this.sun.position).multiplyScalar(-1);
-    this.sun.intensity = daylight * 2.9; this.moon.intensity = (1 - daylight) * .72; this.fill.intensity = .68 + daylight * .45;
-    this.fill.color.set('#89aec3').lerp(new THREE.Color('#bed5dd'), daylight); this.fill.groundColor.set('#405953').lerp(new THREE.Color('#7e8c7b'), daylight);
+    this.sun.position.set(grade.sunDirection[0] * 2500, grade.sunDirection[1] * 2500, grade.sunDirection[2] * 2500); this.moon.position.copy(this.sun.position).multiplyScalar(-1);
+    this.sun.color.set(grade.sunColor); this.sun.intensity = grade.sunIntensity; this.moon.intensity = grade.moonIntensity; this.fill.intensity = grade.fillIntensity;
+    this.fill.color.set(grade.fillSky); this.fill.groundColor.set(grade.fillGround);
     // A shadow-free low-angle bounce approximation lights actual opaque soffits
     // and bridge undersides. It follows daylight, adds no hidden geometry, and
     // leaves sun shadows and the original road/roof solids intact.
-    this.groundBounce.intensity = .035 + daylight * .44;
-    this.groundBounce.color.set('#8296a0').lerp(new THREE.Color('#dfcfac'), daylight);
+    this.groundBounce.intensity = grade.bounceIntensity;
+    this.groundBounce.color.set(grade.bounceColor);
     this.groundBounce.position.set(this.camera.position.x - 700, this.camera.position.y - 700, this.camera.position.z + 300);
     this.groundBounce.target.position.copy(this.camera.position);
-    const horizon = new THREE.Color('#203b4c').lerp(new THREE.Color('#bdd7dd'), daylight).lerp(new THREE.Color('#e2af86'), twilight * .35);
-    const top = new THREE.Color('#071822').lerp(new THREE.Color('#418daf'), daylight);
+    const horizon = new THREE.Color(grade.skyHorizon), top = new THREE.Color(grade.skyTop);
+    this.renderer.toneMappingExposure = grade.exposure;
     this.skyMaterial.uniforms.top.value.copy(top); this.skyMaterial.uniforms.horizon.value.copy(horizon);
     this.skyMaterial.uniforms.daylight.value = daylight;
     const mistMaterial = this.mist.material as THREE.PointsMaterial; mistMaterial.color.copy(horizon).lerp(new THREE.Color('#e0e8df'), .25 + daylight * .35); mistMaterial.opacity = .13 + (1 - state.visibility) * .13; this.mist.position.x = Math.sin(elapsed * .015) * 24;
+    for (const layer of this.clouds.children as (THREE.Mesh | THREE.Points)[]) { const m = layer.material as THREE.MeshBasicMaterial | THREE.PointsMaterial; m.color.set(grade.fogColor).lerp(new THREE.Color('#fbf6ec'), .35 + daylight * .45); m.opacity = (layer.userData.cloudLayer === 'sea' ? .5 : .3) * (.45 + daylight * .55); }
+    for (const ring of this.silhouettes.children as THREE.Mesh[]) (ring.material as THREE.MeshBasicMaterial).color.set(grade.fogColor).lerp(new THREE.Color(mixHex('#3d5a5a', grade.skyTop, .25)), [.62, .42, .24][ring.userData.silhouetteLayer as number]);
+    this.silhouettes.position.set(this.camera.position.x * .6, 0, this.camera.position.z * .6);
+    const glow = this.lanterns.material as THREE.ShaderMaterial; glow.uniforms.night.value = Math.max(0, 1 - daylight * 1.6); this.lanterns.visible = glow.uniforms.night.value > .01;
+    glow.uniforms.scale.value = this.renderer.domElement.height / (2 * Math.tan(THREE.MathUtils.degToRad(this.camera.fov) / 2));
+    this.clouds.position.x = Math.sin(elapsed * .011) * 18; this.clouds.position.z = Math.cos(elapsed * .008) * 14;
     const sprayMaterial = this.spray.material as THREE.PointsMaterial; sprayMaterial.color.copy(horizon).lerp(new THREE.Color('#eef6ed'), .8); sprayMaterial.opacity = .13 + daylight * .12; this.spray.position.x = Math.sin(elapsed * .24) * 2.8;
-    this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.copy(horizon); fog.density = (.00022 + (1 - state.visibility) * .0002) * (6500 / this.distance);
-    this.sky.position.copy(this.camera.position); this.stars.position.copy(this.camera.position); (this.stars.material as THREE.PointsMaterial).opacity = (1 - daylight) * .8;
+    this.scene.background = horizon; const fog = this.scene.fog as THREE.FogExp2; fog.color.set(grade.fogColor); fog.density = (.00022 + (1 - state.visibility) * .0002) * grade.fogDensityScale * (6500 / this.distance);
+    this.sky.position.copy(this.camera.position); this.stars.position.copy(this.camera.position); (this.stars.material as THREE.PointsMaterial).opacity = (1 - daylight) * .8; this.skyModels?.update(this.camera.position, (1 - daylight) * .8);
     this.sunOrb.position.copy(this.sun.position).multiplyScalar(3.6).add(this.camera.position); this.sunOrb.visible = altitude > -.08;
     this.moonOrb.position.copy(this.moon.position).multiplyScalar(3.6).add(this.camera.position); this.moonOrb.visible = altitude < .08;
     this.sun.target.position.copy(this.camera.position);
@@ -985,9 +1134,12 @@ export class CityRenderer implements CityRendererAPI {
     // city and terrain proxies remain a single colour/depth pass.
     for (const chunk of this.chunks) { const casts = Math.hypot(chunk.center.x - this.camera.position.x, chunk.center.z - this.camera.position.z) < 140; chunk.detail.traverse(object => { if (object instanceof THREE.Mesh) object.castShadow = casts; }); }
     this.architectureDetail.group.traverse(object => { if (object instanceof THREE.Mesh) { object.castShadow = true; object.receiveShadow = true; } });
-    const energy = Math.max(.18, state.energy / 100); this.materials.cyan.emissiveIntensity = (.22 + (1 - daylight) * 2) * energy; this.materials.amber.emissiveIntensity = .45 + (1 - daylight) * 3;
+    const energy = Math.max(.18, state.energy / 100); this.materials.cyan.emissiveIntensity = (.22 + (1 - daylight) * CYAN_NIGHT_GLOW) * energy; this.materials.amber.emissiveIntensity = .45 + (1 - daylight) * 3;
+    // Candle-lit paper lanterns: off the grid, faint by day, glowing at night.
+    this.materials.lantern.emissiveIntensity = .05 + (1 - daylight) * 1.2;
     this.facadeNight.value = (1 - daylight) * Math.max(0, state.energy / 100) * .8;
     this.architectureDetail.setLighting(daylight, state.energy / 100);
+    this.studioProps?.setLighting(daylight, state.energy / 100);
     const room = this.insideId ? this.world.buildings.find(b => b.id === this.insideId) : undefined;
     const roomLights = room ? getInteriorLightConfigurations(room, this.insideFloor, this.camera.position, daylight, state.energy / 100) : [];
     for (let i = 0; i < this.interiorLights.length; i++) {
@@ -1009,22 +1161,50 @@ export class CityRenderer implements CityRendererAPI {
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.needsUpdate = true; if (signal.instanceColor) signal.instanceColor.needsUpdate = true; }
     const detailedSigns = new Set<string>(this.architectureDetail.group.userData.activeBuildingIds ?? []);
     for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id && !detailedSigns.has(label.building.id) : this.insideId === label.building.id && this.insideFloor === label.floor;
-    this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality);
+    this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality, this.studioCharacters?.modelled);
+    this.studioCharacters?.update(state, this.camera.position, this.quality, id => {
+      const m = this.citizens.motionOf(id), c = state.citizens.find(x => x.id === id); if (!m || !c) return undefined;
+      const dead = state.extension?.actorProfiles[id]?.alive === false || c.state === 'dead', seated = c.state === 'riding';
+      return { ...m, seated, dead, walking: c.state === 'moving' && !seated && !dead };
+    });
     this.marketGoods.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 65 : 110);
+    this.studioProps.update(this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), { id: this.insideId, floor: this.insideFloor }, this.quality === 'low' ? 45 : 90);
     this.marketShopfront.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 4 : 8);
     this.stationWayfinding.update(state, this.camera.position, this.quality === 'low' ? 3 : 8);
-    const counts = new Map<string, number>();
+    this.doorwayGlow.update(state, this.camera.position, daylight);
+    // Lit windows follow who is actually in each building, refreshed about once a second.
+    const clockNow = performance.now();
+    if (clockNow - this.windowLightAt > 1000) {
+      this.windowLightAt = clockNow; const levels = windowLightLevels(state, this.world), data = this.windowLight.image.data as Uint8Array;
+      for (let i = 0; i < levels.length; i++) data[i] = Math.round(levels[i] * 255);
+      this.windowLight.needsUpdate = true;
+    }
+    const counts = new Map<string, number>(); let wheels = 0, loads = 0, cabs = 0;
     for (const vehicle of state.vehicles) {
       const pool = this.vehiclePools.get(vehicle.kind); if (!pool) continue; const n = counts.get(vehicle.kind) ?? 0; if (n >= pool.capacity) continue;
       if (vehicle.id === state.player.vehicleId && Math.hypot(vehicle.position.x - this.camera.position.x, vehicle.position.y - this.camera.position.y, vehicle.position.z - this.camera.position.z) < 25) continue;
       if (Math.hypot(vehicle.position.x - this.camera.position.x, vehicle.position.z - this.camera.position.z) > this.distance + 600) continue;
       const edge = this.edges.get(vehicle.edgeId); let direction = 0;
       if (edge && edge.points.length > 1) { const t = Math.max(0, Math.min(.99999, vehicle.progress)), i = Math.min(edge.points.length - 2, Math.floor(t * (edge.points.length - 1))), a = edge.points[i], b = edge.points[i + 1]; direction = Math.atan2(b.x - a.x, b.z - a.z) + (vehicle.direction < 0 ? Math.PI : 0); }
-      const p = vehicle.position, flight = vehicle.kind === 'flight', train = vehicle.kind === 'maglev' || vehicle.kind === 'lightRail', boat = vehicle.kind === 'ferry', length = flight ? 17 : train ? 16 : boat ? 11 : vehicle.kind === 'cable' ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = vehicle.kind === 'cable' ? 2.5 : 0;
-      this.put(pool.body, n, p.x, p.y + 1.1 + lift, p.z, width, flight ? .8 : 1.5, length, direction, flight ? '#d5c7aa' : train ? '#d0b985' : '#a77851');
-      this.put(pool.head, n, p.x, p.y + 2.1 + lift, p.z, flight ? 3 : width * .85, flight ? 1.8 : .8, length * .68, direction, '#517f82');
-      this.put(pool.trim, n, p.x, p.y + .6 + lift, p.z, width + .25, .2, length * .85, direction); counts.set(vehicle.kind, n + 1);
+      const p = vehicle.position, shape = vehicleShape(vehicle.kind), { body, head, trim, wheels: wheelSpots } = shape;
+      if (!vehicleClearsCamera(this.camera.position, p, direction, shape.length, shape.width, shape.lift)) continue;
+      if (this.wheels) for (const spot of wheelSpots) if (wheels < this.wheels.instanceMatrix.count) {
+        const c = Math.cos(direction), s = Math.sin(direction);
+        this.put(this.wheels, wheels++, p.x + spot.x * c + spot.z * s, p.y + VEHICLE_WHEEL.y, p.z - spot.x * s + spot.z * c, VEHICLE_WHEEL.width, VEHICLE_WHEEL.size, VEHICLE_WHEEL.size, direction);
+      }
+      // A box offset along travel (z) moves with the heading.
+      const along = (box: { z?: number }) => ({ x: p.x + Math.sin(direction) * (box.z ?? 0), z: p.z + Math.cos(direction) * (box.z ?? 0) });
+      const at = along(body), cab = along(head);
+      this.put(pool.body, n, at.x, p.y + body.y, at.z, body.width, body.height, body.length, direction, body.color);
+      // A truck's cab is opaque; other vehicles keep the glass head.
+      if (shape.load && this.cabs) { this.put(this.cabs, cabs++, cab.x, p.y + head.y, cab.z, head.width, head.height, head.length, direction, head.color); this.put(pool.head, n, cab.x, p.y + head.y, cab.z, 0, 0, 0, direction); }
+      else this.put(pool.head, n, cab.x, p.y + head.y, cab.z, head.width, head.height, head.length, direction, head.color);
+      this.put(pool.trim, n, p.x, p.y + trim.y, p.z, trim.width, trim.height, trim.length, direction); counts.set(vehicle.kind, n + 1);
+      if (shape.load && vehicle.cargo > 0 && this.loads) for (const crate of loadCrates(shape.load)) if (loads < this.loads.instanceMatrix.count) { const bed = along(crate); this.put(this.loads, loads++, bed.x, p.y + crate.y, bed.z, crate.width, crate.height, crate.length, direction, crate.color); }
     }
+    if (this.wheels) { this.wheels.count = wheels; this.wheels.instanceMatrix.needsUpdate = true; }
+    if (this.cabs) { this.cabs.count = cabs; this.cabs.instanceMatrix.needsUpdate = true; if (this.cabs.instanceColor) this.cabs.instanceColor.needsUpdate = true; }
+    if (this.loads) { this.loads.count = loads; this.loads.instanceMatrix.needsUpdate = true; if (this.loads.instanceColor) this.loads.instanceColor.needsUpdate = true; }
     for (const [kind, pool] of this.vehiclePools) for (const mesh of [pool.body, pool.head, pool.trim]) { mesh.count = counts.get(kind) ?? 0; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
   }
 
@@ -1050,21 +1230,36 @@ export class CityRenderer implements CityRendererAPI {
     if (this.lastRender) { const delta = Math.min(100, now - this.lastRender); this.frameAverage = this.frameAverage * .97 + delta * .03; }
     this.lastRender = now;
     if (this.dynamicResolution && now - this.adaptAt > 2500) { const previous = this.resolutionScale; if (this.frameAverage > 37) this.resolutionScale = Math.max(.65, this.resolutionScale - .08); else if (this.frameAverage < 21) this.resolutionScale = Math.min(1, this.resolutionScale + .04); if (previous !== this.resolutionScale) this.resize(); this.adaptAt = now; }
-    this.renderer.render(this.scene, this.camera);
+    // R1 W3: bloom only at "high" quality; a high threshold lets only lanterns,
+    // lit windows and water highlights spill. Other qualities render directly.
+    // Draw statistics cover every pass of the frame, not only the last full-screen quad.
+    if (this.quality === 'high') { const composer = this.bloomComposer(); this.renderer.info.autoReset = false; this.renderer.info.reset(); composer.render(); }
+    else { this.renderer.info.autoReset = true; this.renderer.render(this.scene, this.camera); }
   }
-  resize() { const width = Math.max(1, this.container.clientWidth), height = Math.max(1, this.container.clientHeight); this.camera.aspect = width / height; this.camera.updateProjectionMatrix(); const base = this.quality === 'high' ? 1.8 : this.quality === 'low' ? 1 : 1.35; this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, base) * this.resolutionScale); this.renderer.setSize(width, height); }
+  private composer?: EffectComposer;
+  private bloomComposer(): EffectComposer {
+    if (this.composer) return this.composer;
+    const size = this.renderer.getSize(new THREE.Vector2()), composer = new EffectComposer(this.renderer);
+    composer.addPass(new RenderPass(this.scene, this.camera));
+    composer.addPass(new UnrealBloomPass(size, .32, .45, .92));
+    composer.addPass(new OutputPass());
+    composer.setPixelRatio(this.renderer.getPixelRatio()); composer.setSize(size.x, size.y);
+    return this.composer = composer;
+  }
+  resize() { const width = Math.max(1, this.container.clientWidth), height = Math.max(1, this.container.clientHeight); this.camera.aspect = width / height; this.camera.updateProjectionMatrix(); const base = this.quality === 'high' ? 1.8 : this.quality === 'low' ? 1 : 1.35; this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, base) * this.resolutionScale); this.renderer.setSize(width, height); if (this.composer) { this.composer.setPixelRatio(this.renderer.getPixelRatio()); this.composer.setSize(width, height); } }
   setQuality(quality: Quality) { this.quality = quality; this.resolutionScale = 1; this.landscape.vegetation.visible = quality !== 'low'; this.resize(); }
   setRenderDistance(distance: number) { this.distance = THREE.MathUtils.clamp(distance, 800, 6000); this.camera.far = Math.max(15000, this.distance * 1.6); this.camera.updateProjectionMatrix(); }
   setDynamicResolution(enabled: boolean) { this.dynamicResolution = enabled; if (!enabled) { this.resolutionScale = 1; this.resize(); } }
   dispose() {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
-    this.marketGoods.dispose();
+    this.marketGoods.dispose(); this.doorwayGlow.dispose(); this.windowLight?.dispose();
+    this.studioProps?.dispose();
     this.marketShopfront.dispose();
     this.stationWayfinding?.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
-    this.scene.remove(this.landscape.group); this.landscape.dispose();
+    this.woodlandModels?.dispose(); this.studioCharacters?.dispose(); this.firstPersonArms?.dispose(); this.skyModels?.dispose(); this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
     // Palette materials are renderer-owned even after every near chunk using
     // one of them has been evicted. Dispose them once with attached materials.

@@ -92,5 +92,10 @@ test('actual public education attendance and funded research cannot spend the sa
   const clock = extension(sim).lastUpdate, order: ServiceOrder = { id: 'service-controlled', petitionId: 'controlled-approved-prerequisite', topic: 'education', siteId: lab.id, state: 'active', scheduledAt: clock, approvedAt: clock, approvedBy: ['player'], authorizedCap: 200, spent: receipt.paid, receivedUnits: receipt.quantity, consumedUnits: 0, targetUnits: 6, requiredMinutes: 60, servedIds: [], serviceMinutes: {}, staffIds: [], receipts: [], retryAt: clock + 60, completedAt: null, lastReason: 'Controlled approved dependency; supply is an actual conserved receipt.' };
   sim.state.culture!.orders.push(order); const beforeResearch = job.workedMinutes; sim.step(.25);
   const research = job.workedMinutes - beforeResearch, education = order.serviceMinutes[actor.id] ?? 0;
-  assert(education > 0, 'real eligible public education phase must include this actual onsite nonstaff researcher'); assert.equal(research, 0); assert.equal(education, 4); assert(research + education <= 4 + 1e-7, 'one actor has one4-minute time budget across research and public class');
+  // Public tuition counts only an observed learner arrival (studying/attending after a real
+  // walking leg, education.ts observePublicEducationArrival); a researcher working at the
+  // same station is not a class arrival, so the class cannot take the research minutes.
+  assert.equal(education, 0, 'presence at the station while working is not classroom time');
+  assert(research > 0, 'the researcher keeps the research minutes');
+  assert(research + education <= 4 + 1e-7, 'one actor has one 4-minute time budget across research and public class');
 });

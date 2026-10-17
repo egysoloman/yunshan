@@ -1,0 +1,59 @@
+using System;
+using UnityEngine;
+using Yunshan.Core;
+
+namespace Yunshan.Runtime
+{
+    /// <summary>Procedural ambience for the native client (web src/audio/ambience.ts): filtered
+    /// noise beds for wind, water, crowd and insects, sine chirps for birds and short noise
+    /// bursts for steps, synthesised on the audio thread. No audio assets. Levels come from
+    /// Core/Ambience.Levels, i.e. from the city's own state.</summary>
+    [RequireComponent(typeof(AudioSource))]
+    public sealed class AmbienceAudio : MonoBehaviour
+    {
+        public float Volume = .6f;
+        volatile float wind, water, crowd, birds, insects, steps;
+        int sampleRate; uint seed = 0x9E3779B9u;
+        double windLp, waterLp1, waterLp2, crowdLp1, crowdLp2, insectLp1, insectLp2;
+        double chirpPhase, chirpFreq, chirpLeft, chirpWait, stepLeft, stepWait, insectPhase;
+
+        void Awake()
+        {
+            sampleRate = AudioSettings.outputSampleRate;
+            var source = GetComponent<AudioSource>(); source.playOnAwake = true; source.loop = true; source.spatialBlend = 0; source.Play();
+        }
+
+        public void Apply(AmbienceLevels levels)
+        {
+            wind = (float)levels.Wind; water = (float)levels.Water; crowd = (float)levels.Crowd;
+            birds = (float)levels.Birds; insects = (float)levels.Insects; steps = (float)levels.Steps;
+        }
+
+        float Noise() { seed ^= seed << 13; seed ^= seed >> 17; seed ^= seed << 5; return seed / (float)uint.MaxValue * 2 - 1; }
+        static double Lp(ref double state, double input, double alpha) => state += alpha * (input - state);
+
+        void OnAudioFilterRead(float[] data, int channels)
+        {
+            if (sampleRate <= 0) return;
+            double dt = 1.0 / sampleRate, aWind = 1 - Math.Exp(-2 * Math.PI * 420 * dt), aWaterLo = 1 - Math.Exp(-2 * Math.PI * 1600 * dt), aWaterHi = 1 - Math.Exp(-2 * Math.PI * 700 * dt);
+            double aCrowdLo = 1 - Math.Exp(-2 * Math.PI * 800 * dt), aCrowdHi = 1 - Math.Exp(-2 * Math.PI * 300 * dt), aInsLo = 1 - Math.Exp(-2 * Math.PI * 6000 * dt), aInsHi = 1 - Math.Exp(-2 * Math.PI * 4500 * dt);
+            float gWind = wind * .18f, gWater = water * .22f, gCrowd = crowd * .2f, gIns = insects * .05f, b = birds, s = steps;
+            for (int n = 0; n < data.Length; n += channels)
+            {
+                float w = Noise();
+                double sample = Lp(ref windLp, w, aWind) * gWind * 3;
+                sample += (Lp(ref waterLp1, w, aWaterLo) - Lp(ref waterLp2, w, aWaterHi)) * gWater * 4;
+                sample += (Lp(ref crowdLp1, w, aCrowdLo) - Lp(ref crowdLp2, w, aCrowdHi)) * gCrowd * 5;
+                insectPhase += 30 * dt; sample += (Lp(ref insectLp1, w, aInsLo) - Lp(ref insectLp2, w, aInsHi)) * gIns * 6 * (.5 + .5 * Math.Sin(2 * Math.PI * insectPhase));
+                // Birds: a short rising chirp every few seconds while birds are heard.
+                if (chirpLeft > 0) { chirpPhase += chirpFreq * dt; chirpFreq *= 1 + 4 * dt; sample += Math.Sin(2 * Math.PI * chirpPhase) * .05 * b * Math.Min(1, chirpLeft / .02); chirpLeft -= dt; }
+                else if (b > .05 && (chirpWait -= dt) <= 0) { chirpLeft = .08; chirpFreq = 2400 + (Noise() + 1) * 900; chirpWait = 1.5 + (Noise() + 1) * 2.5 / b; }
+                // Steps: a soft thump every 0.45 s while walking.
+                if (stepLeft > 0) { sample += w * .25 * s * Math.Pow(stepLeft / .06, 3); stepLeft -= dt; }
+                else if (s > 0 && (stepWait -= dt) <= 0) { stepLeft = .06; stepWait = .45; }
+                float v = (float)(sample * Volume);
+                for (int c = 0; c < channels; c++) data[n + c] = v;
+            }
+        }
+    }
+}
