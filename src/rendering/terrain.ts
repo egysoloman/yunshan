@@ -180,6 +180,8 @@ export function buildLandscape(world: WorldDefinition): {
   const proxySteps = new Map<string, number>();
   function shell(tx: number, tz: number, step: number, stepped: boolean, parent: THREE.Group) {
     const data: Surface = { positions: [], colors: [], indices: [], masonry: [] };
+    // Capstones are not ground: their own mesh keeps the ground shell on the 0.2 m lattice.
+    const capstones: Surface = { positions: [], colors: [], indices: [], masonry: [] };
     const hangingLeaves: Block[] = [];
     const nearbyBuildings = buildings.get(`${tx}:${tz}`) ?? [];
     const half = step / 2;
@@ -209,7 +211,7 @@ export function buildLandscape(world: WorldDefinition): {
             // A terrace edge in town is a dressed-stone retaining wall (terrace-masonry.ts).
             const masoned = masonryAt(faceX, faceZ, top, top - low);
             quad(data, vertices, masoned ? masonryStone.clone().multiplyScalar(.94 + hash(mx, mz, world.seed + 7) * .1) : side, masoned ? 1 : 0);
-            if (masoned) { coping(data, vertices, top, nx, nz); return; }
+            if (masoned) { coping(capstones, vertices, top, nx, nz); return; }
             if (hangingLeaves.length >= 360 || top - low < 4 || hash(mx, mz, world.seed) < .74 || !clearGround(mx, mz, .4)) return;
             for (let layer = 0; layer < Math.min(12, Math.floor((top - low) / 1.2)) && hangingLeaves.length < 360; layer++) {
               const spread = (hash(mx + layer, mz, world.seed) - .5) * Math.min(1.2, localStep * .6), yy = quantize(top - .6 - layer * 1.2);
@@ -251,6 +253,7 @@ export function buildLandscape(world: WorldDefinition): {
     }
     const result = mesh(stepped ? `近景岩土壳 ${tx}:${tz}` : `山形表面代理 ${tx}:${tz}`, data, parent);
     if (stepped) batch('真实岩壁 · 附壁垂藤', hangingLeaves, leaf, parent);
+    if (capstones.positions.length) mesh(`挡土墙 · 压顶石 ${tx}:${tz}`, capstones, parent);
     return result;
   }
   const tiles: TerrainTile[] = [];
