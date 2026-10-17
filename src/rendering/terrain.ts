@@ -3,7 +3,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { Quality, Vec3, WorldDefinition } from '../types';
 import { getWaterfallPath, terrainHeight } from '../world';
 import { riverDressing, woodlandLayout, type WoodlandShrub, type WoodlandTree } from './woodland-layout';
-import { terraceMasonry, MASONRY_COLOR } from './terrace-masonry';
+import { terraceMasonry, MASONRY_COLOR, COPING_COLOR, COPING_DEPTH, COPING_LIP, COPING_RISE, COPING_WIDTH } from './terrace-masonry';
 
 interface Block { x: number; y: number; z: number; w: number; h: number; d: number; color: THREE.Color; id?: number }
 interface Segment { a: Vec3; b: Vec3; width: number; cutting?: boolean; bridge?: boolean }
@@ -159,7 +159,24 @@ export function buildLandscape(world: WorldDefinition): {
   function quad(data: Surface, vertices: number[], color: THREE.Color, masonry = 0) {
     const start = data.positions.length / 3; data.positions.push(...vertices); for (let i = 0; i < 4; i++) { data.colors.push(color.r, color.g, color.b); data.masonry.push(masonry); } data.indices.push(start, start + 1, start + 2, start, start + 2, start + 3);
   }
-  const masonryAt = terraceMasonry(world), masonryStone = new THREE.Color(MASONRY_COLOR);
+  const masonryAt = terraceMasonry(world), masonryStone = new THREE.Color(MASONRY_COLOR), copingStone = new THREE.Color(COPING_COLOR);
+  /** A quad wound so that its face normal points along want (front side outward). */
+  function facing(data: Surface, p: number[][], want: number[], color: THREE.Color) {
+    const u = [p[1][0] - p[0][0], p[1][1] - p[0][1], p[1][2] - p[0][2]], v = [p[2][0] - p[0][0], p[2][1] - p[0][1], p[2][2] - p[0][2]];
+    const n = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]];
+    quad(data, (n[0] * want[0] + n[1] * want[1] + n[2] * want[2] >= 0 ? p : [...p].reverse()).flat(), color);
+  }
+  /** The capstone line along a masoned wall's top edge (terrace-masonry.ts COPING_*): a strip
+   * COPING_RISE above the ground reaching COPING_WIDTH inward and COPING_LIP out over the face,
+   * with its front lip. Display only; 2.5 cm needs no collision. */
+  function coping(data: Surface, vertices: number[], top: number, nx: number, nz: number) {
+    const ends: number[][] = []; for (let i = 0; i < 12; i += 3) if (vertices[i + 1] === top) ends.push([vertices[i], vertices[i + 2]]);
+    if (ends.length !== 2) return;
+    const y = top + COPING_RISE, [a, b] = ends, out = (e: number[]) => [e[0] + nx * COPING_LIP, e[1] + nz * COPING_LIP], inn = (e: number[]) => [e[0] - nx * COPING_WIDTH, e[1] - nz * COPING_WIDTH];
+    const ao = out(a), bo = out(b), ai = inn(a), bi = inn(b);
+    facing(data, [[ao[0], y, ao[1]], [bo[0], y, bo[1]], [bi[0], y, bi[1]], [ai[0], y, ai[1]]], [0, 1, 0], copingStone);
+    facing(data, [[ao[0], y - COPING_DEPTH, ao[1]], [bo[0], y - COPING_DEPTH, bo[1]], [bo[0], y, bo[1]], [ao[0], y, ao[1]]], [nx, 0, nz], copingStone.clone().multiplyScalar(.86));
+  }
   const proxySteps = new Map<string, number>();
   function shell(tx: number, tz: number, step: number, stepped: boolean, parent: THREE.Group) {
     const data: Surface = { positions: [], colors: [], indices: [], masonry: [] };
@@ -192,7 +209,7 @@ export function buildLandscape(world: WorldDefinition): {
             // A terrace edge in town is a dressed-stone retaining wall (terrace-masonry.ts).
             const masoned = masonryAt(faceX, faceZ, top, top - low);
             quad(data, vertices, masoned ? masonryStone.clone().multiplyScalar(.94 + hash(mx, mz, world.seed + 7) * .1) : side, masoned ? 1 : 0);
-            if (masoned) return;
+            if (masoned) { coping(data, vertices, top, nx, nz); return; }
             if (hangingLeaves.length >= 360 || top - low < 4 || hash(mx, mz, world.seed) < .74 || !clearGround(mx, mz, .4)) return;
             for (let layer = 0; layer < Math.min(12, Math.floor((top - low) / 1.2)) && hangingLeaves.length < 360; layer++) {
               const spread = (hash(mx + layer, mz, world.seed) - .5) * Math.min(1.2, localStep * .6), yy = quantize(top - .6 - layer * 1.2);
