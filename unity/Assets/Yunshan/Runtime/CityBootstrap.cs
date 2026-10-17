@@ -43,7 +43,7 @@ namespace Yunshan.Runtime
         Vector2 contextScroll, panesScroll;
         CityMapImage mapImage; Texture2D mapTexture; string mapSelection;
         int paneTab;
-        int contextTab;
+        int contextTab; string autoVehicleTab, servicesFor; bool servicesOpen;
         bool showHelp = true;
 
         static bool subscribed;
@@ -388,8 +388,8 @@ namespace Yunshan.Runtime
             if (walker.Walker.BlockedAccess != null) { session.Say(walker.Walker.BlockedAccess, false); walker.Walker.BlockedAccess = null; return; }
             var building = walker.Walker.Inside ?? world.Buildings.Where(b => D(feet, b.Door) < 18).OrderBy(b => D(feet, b.Door)).FirstOrDefault();
             // A vehicle stopped to board within 8 m, nearer than the door, is boarded first (web transit-label.ts stoppedVehicleFirst).
-            var stopped = walker.Walker.Inside != null ? null : frame.Vehicles.Where(v => D(feet, v.Position) < 24).OrderBy(v => D(feet, v.Position)).FirstOrDefault();
-            if (stopped != null && (stopped.State == "waiting" || stopped.State == "boarding") && D(feet, stopped.Position) <= 8 && (building == null || D(feet, stopped.Position) < D(feet, building.Door)))
+            var stopped = walker.Walker.Inside != null ? null : NearestVehicle(frame, feet);
+            if (stopped != null && ContextLayout.StoppedVehicleFirst(feet, stopped.State, stopped.Position, building?.Door))
             { Execute(Cmd("ride", target: stopped.Id)); return; }
             if (building != null && walker.Walker.UseDoor(building))
                 session.Say(walker.Walker.Inside != null ? $"进入{building.Name}，可在右侧面板使用设施。楼内左后角为楼梯。" : $"走出{building.Name}。", true);
@@ -526,12 +526,22 @@ namespace Yunshan.Runtime
             }
         }
 
+        static double Dist(Vec3 a, Vec3 b) => Math.Sqrt((a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y) + (a.Z - b.Z) * (a.Z - b.Z));
+        static SimFrame.Vehicle NearestVehicle(SimFrame frame, Vec3 feet) => frame.Vehicles.Where(v => Dist(feet, v.Position) < 24).OrderBy(v => Dist(feet, v.Position)).FirstOrDefault();
+
         void DrawContext(SimFrame frame)
         {
             var sections = session.Context;
             if (sections.Count == 0) return;
             float width = 400, left = Screen.width - width - 12, top = 52, height = Mathf.Min(Screen.height - 220, 560);
             GUI.Box(new UnityEngine.Rect(left, top, width, height), GUIContent.none, box);
+            // A stopped vehicle within reach opens its own tab once (web ui.ts refreshContext); the player may switch back.
+            var feet = walker.Feet; var near = walker.Walker.Inside != null || frame.Player.VehicleId != null ? null : NearestVehicle(frame, feet);
+            var door = world.Buildings.Where(b => Dist(feet, b.Door) < 18).OrderBy(b => Dist(feet, b.Door)).FirstOrDefault()?.Door;
+            string boardable = near != null && ContextLayout.StoppedVehicleFirst(feet, near.State, near.Position, door) ? near.Id : null;
+            int vehicleTab = boardable == null ? -1 : sections.FindIndex(x => x.Kind == "vehicle" && x.Id == boardable);
+            if (boardable != null && boardable != autoVehicleTab && vehicleTab >= 0) contextTab = vehicleTab;
+            if (vehicleTab >= 0 || boardable == null) autoVehicleTab = boardable;
             contextTab = Mathf.Clamp(contextTab, 0, sections.Count - 1);
             for (int i = 0; i < sections.Count; i++)
             {
@@ -544,7 +554,16 @@ namespace Yunshan.Runtime
             GUILayout.Label(section.Eyebrow, small);
             GUILayout.Label(section.Title, title);
             if (!string.IsNullOrEmpty(section.Subtitle)) GUILayout.Label(section.Subtitle, small);
-            foreach (var action in section.Actions) ActionButton(action);
+            if (section.Id != servicesFor) { servicesFor = section.Id; servicesOpen = false; }
+            if (ContextLayout.FoldsServices(section, walker.Walker.Inside != null))
+            {
+                // From the street nothing here can be done yet: the services fold into one line (web place-services.ts).
+                foreach (var action in section.Actions.Where(a => a.Client == "interact")) ActionButton(action);
+                var services = section.Actions.Where(a => a.Client != "interact").ToList();
+                servicesOpen = GUILayout.Toggle(servicesOpen, (servicesOpen ? "▼ " : "▶ ") + ContextLayout.PlaceServicesSummary(services.Select(a => a.Label)), small);
+                if (servicesOpen) foreach (var action in services) ActionButton(action);
+            }
+            else foreach (var action in section.Actions) ActionButton(action);
             if (section.Kind == "building" && section.Actions.Any(a => a.Command != null && (string)a.Command["type"] == "deposit"))
             {
                 GUILayout.BeginHorizontal();
