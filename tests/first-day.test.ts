@@ -18,3 +18,13 @@ test('first-day steps lead to the nearest open market with food, the nearest ope
   state.citizens.length = 0;
   assert.equal(firstDayTarget(state, world, at, 'meet'), null);
 });
+
+test('the meet step names a resident out on foot nearby instead of planning a cross-city trip', async () => {
+  const { nearbyStranger, nearbyStrangerNotice, MEET_NEARBY_METRES } = await import('../src/first-day');
+  const person = (id: string, x: number, state: string, alive = true) => ({ id, name: id, role: '学生', state, position: { x, y: 0, z: 0 }, alive });
+  const city = (people: ReturnType<typeof person>[]) => ({ citizens: people, extension: { actorProfiles: Object.fromEntries(people.map(p => [p.id, { alive: p.alive }])) } }) as unknown as SimState;
+  const at = { x: 0, y: 0, z: 0 };
+  assert.deepEqual(nearbyStranger(city([person('far', 300, 'moving'), person('near', 40, 'moving'), person('nearer', 20, 'atHome')]), at), { name: 'near', role: '学生', metres: 40 }, 'the nearest one out on foot; indoors does not count');
+  assert.equal(nearbyStranger(city([person('dead', 5, 'moving', false), person('far', MEET_NEARBY_METRES + 1, 'socializing')]), at), null);
+  assert.equal(nearbyStrangerNotice({ name: '云溪', role: '学生', metres: 3.4 }), '附近约 3 米处就有居民云溪（学生）。走到身旁，在左侧面板的“居民”页点“聊聊近况”。');
+});

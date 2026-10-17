@@ -45,3 +45,21 @@ export function firstDayTarget(state: SimState, world: WorldDefinition, position
   const open = state.shops.filter(shop => shop.open && buildings.get(shop.buildingId)?.kind === 'market' && (step === 'work' || shop.inventory >= 1));
   return open.map(shop => shop.buildingId).sort((a, b) => far(a) - far(b) || (a < b ? -1 : 1))[0] ?? null;
 }
+
+/** A first meeting should not need a cross-city trip: the nearest living resident who is
+ * out on foot (walking or socialising) within MEET_NEARBY_METRES of the player, if any. */
+export const MEET_NEARBY_METRES = 120;
+export function nearbyStranger(state: SimState, position: Vec3): { name: string; role: string; metres: number } | null {
+  const profiles = state.extension?.actorProfiles;
+  let best: { name: string; role: string; metres: number } | null = null;
+  for (const c of state.citizens) {
+    if (profiles?.[c.id]?.alive === false || (c.state !== 'moving' && c.state !== 'socializing')) continue;
+    const metres = Math.hypot(c.position.x - position.x, c.position.y - position.y, c.position.z - position.z);
+    if (metres <= MEET_NEARBY_METRES && (!best || metres < best.metres)) best = { name: c.name, role: c.role, metres };
+  }
+  return best;
+}
+/** What the meet step says instead of planning a route when someone is near. */
+export function nearbyStrangerNotice(stranger: { name: string; role: string; metres: number }): string {
+  return `附近约 ${Math.max(1, Math.round(stranger.metres))} 米处就有居民${stranger.name}（${stranger.role}）。走到身旁，在左侧面板的“居民”页点“聊聊近况”。`;
+}

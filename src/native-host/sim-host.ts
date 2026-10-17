@@ -25,7 +25,7 @@ import { contextModel, type ContextView } from './context-model';
 import { panesModel } from './panes-model';
 import { mealFeedback } from '../meal-feedback';
 import { freshLaborSettlement } from '../labor-feedback';
-import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, type FirstDayStep } from '../first-day';
+import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
 
 export const HOST_PROTOCOL = 1;
@@ -161,6 +161,8 @@ export class SimHost {
     const sim = this.requireSim(), state = sim.state, world = this.world!, step = request.step as FirstDayStep;
     if (!['eat', 'work', 'meet'].includes(step)) throw new Error('未知的第一天事项。');
     const reply = (ok: boolean, message: string) => ({ ok, message, frame: this.frame(request, 0, 0) });
+    const stranger = step === 'meet' ? nearbyStranger(state, state.player.position) : null;
+    if (stranger) return reply(true, nearbyStrangerNotice(stranger).replace('在左侧面板的“居民”页点“聊聊近况”', '在右侧面板的“居民”页点“聊聊近况”'));
     const targetId = firstDayTarget(state, world, state.player.position, step);
     if (!targetId) return reply(false, firstDayUnavailable(step));
     const site = world.buildings.find(b => b.id === targetId)!, feet = state.player.position, metres = Math.round(Math.hypot(site.door.x - feet.x, site.door.z - feet.z));

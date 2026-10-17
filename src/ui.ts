@@ -26,7 +26,7 @@ import { freshLaborSettlement } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
 const HEADER_DARK_SKY = .35;
-import { FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, type FirstDayStep } from './first-day';
+import { FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from './first-day';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
 const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
@@ -410,6 +410,8 @@ export class CityUI {
     if (button.dataset.citizen) { this.selectedCitizen = button.dataset.citizen; this.refreshPanel(); return; }
     if (button.dataset.company) { this.selectedCompany = button.dataset.company; this.refreshPanel(); return; }
     if (button.dataset.firstDay && this.state) {
+      const stranger = button.dataset.firstDay === 'meet' ? nearbyStranger(this.state, this.state.player.position) : null;
+      if (stranger) { this.notify(nearbyStrangerNotice(stranger), true); return; }
       const target = firstDayTarget(this.state, this.world, this.state.player.position, button.dataset.firstDay as FirstDayStep);
       if (target) this.actions.travel(target, 'auto'); else this.notify(firstDayUnavailable(button.dataset.firstDay as FirstDayStep), false);
       return;
