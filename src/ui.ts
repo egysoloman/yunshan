@@ -22,7 +22,7 @@ import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citi
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 import { routeDistanceLabel } from './navigation-label';
-import { departureLabel, rideFare } from './transit-label';
+import { departureLabel, rideFare, stoppedVehicleFirst } from './transit-label';
 import { freshLaborSettlement } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
@@ -296,6 +296,7 @@ export class CityUI {
   }
   private firstDay = new Set<string>();
   private laborSeen: number | null = null;
+  private autoVehicleTab: string | null = null;
   private purchaseMoney: number | null = null;
   /** A short first-day list in the welcome note (display only), ticked from the player's own state. */
   private updateFirstDay(state: SimState, view: ViewState): void {
@@ -1247,6 +1248,10 @@ export class CityUI {
     this.root.classList.toggle('has-context', available.length > 0);
     if (!available.length) { this.contextSignature = ''; return; }
     if (!available.includes(this.contextKind)) this.contextKind = available[0];
+    // A stopped vehicle within reach opens its own tab once (the player may still switch back).
+    const boardable = !state.player.vehicleId && stoppedVehicleFirst(view.position, view.nearbyVehicle, view.nearbyBuilding?.door) ? view.nearbyVehicle!.id : null;
+    if (boardable && boardable !== this.autoVehicleTab) { this.contextKind = 'vehicle'; this.contextSignature = ''; }
+    this.autoVehicleTab = boardable;
     const tabs=this.ref('context-tabs'),existingTabs=new Map(Array.from(tabs.querySelectorAll<HTMLButtonElement>('[data-context]')).map(button=>[button.dataset.context!,button]));
     for(const kind of available){let button=existingTabs.get(kind);if(!button){button=element('button');button.type='button';button.dataset.context=kind;tabs.append(button);}const label=kind==='building'?'场所':kind==='citizen'?'居民':kind==='aircraft'?'航空器':'载具';if(button.textContent!==label)button.textContent=label;button.classList.toggle('selected',kind===this.contextKind);button.setAttribute('aria-pressed',String(kind===this.contextKind));}
     for(const [kind,button]of existingTabs)if(!available.includes(kind as ContextKind))button.remove();

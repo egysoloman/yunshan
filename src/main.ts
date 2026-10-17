@@ -20,6 +20,7 @@ import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, V
 import { nearbyResident } from './social-reach';
 import { AUTO_TRANSIT_METRES } from './first-day';
 import { mealFeedback } from './meal-feedback';
+import { stoppedVehicleFirst } from './transit-label';
 const PREF_KEY = 'yunshan.preferences.v1';
 /** A map crowd halo farther than this (straight line) is reached by public transport when a service exists. */
 /** The resident the player last met (see social-reach): kept while within talking reach. */
@@ -366,6 +367,8 @@ function interact(): void {
   if (controller.blockedAccess) { showNotice(controller.blockedAccess, false); controller.blockedAccess = null; return; }
   const nearby = getView();
   const building = nearby.nearbyBuilding;
+  // A vehicle stopped to board right here comes before the door (transit-label.ts).
+  if (!controller.inside && stoppedVehicleFirst(controller.position, nearby.nearbyVehicle, building?.door)) return execute({ type: 'ride', targetId: nearby.nearbyVehicle!.id });
   if (building && controller.useDoor(building)) {
     simulation.state.player.position = controller.walkingPosition;
     releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);

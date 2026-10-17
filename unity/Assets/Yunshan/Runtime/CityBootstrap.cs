@@ -387,6 +387,10 @@ namespace Yunshan.Runtime
             }
             if (walker.Walker.BlockedAccess != null) { session.Say(walker.Walker.BlockedAccess, false); walker.Walker.BlockedAccess = null; return; }
             var building = walker.Walker.Inside ?? world.Buildings.Where(b => D(feet, b.Door) < 18).OrderBy(b => D(feet, b.Door)).FirstOrDefault();
+            // A vehicle stopped to board within 8 m, nearer than the door, is boarded first (web transit-label.ts stoppedVehicleFirst).
+            var stopped = walker.Walker.Inside != null ? null : frame.Vehicles.Where(v => D(feet, v.Position) < 24).OrderBy(v => D(feet, v.Position)).FirstOrDefault();
+            if (stopped != null && (stopped.State == "waiting" || stopped.State == "boarding") && D(feet, stopped.Position) <= 8 && (building == null || D(feet, stopped.Position) < D(feet, building.Door)))
+            { Execute(Cmd("ride", target: stopped.Id)); return; }
             if (building != null && walker.Walker.UseDoor(building))
                 session.Say(walker.Walker.Inside != null ? $"进入{building.Name}，可在右侧面板使用设施。楼内左后角为楼梯。" : $"走出{building.Name}。", true);
             else if (walker.Walker.BlockedAccess != null) { session.Say(walker.Walker.BlockedAccess, false); walker.Walker.BlockedAccess = null; }
