@@ -186,6 +186,20 @@ canvas {
   box-shadow:0 0 0 3px rgba(93,126,92,.1)
 }
 
+/* The status line sits on whatever the camera sees (sky, eaves, walls): a soft
+   panel like the manual button keeps it readable; darker after dusk. */
+.world-status {
+  background:rgba(247,246,235,.62);
+  border:1px solid rgba(60,80,64,.12);
+  border-radius:4px;
+  padding:6px 10px 6px 12px;
+  backdrop-filter:blur(3px)
+}
+.city-ui[data-dark-sky] .world-status {
+  background:rgba(14,26,30,.42);
+  border-color:rgba(240,232,208,.18)
+}
+
 /* After dusk the header text sits on a dark sky (ui.ts data-dark-sky). */
 .city-ui[data-dark-sky] .city-brand h1,.city-ui[data-dark-sky] .world-status strong {
   color:#f3ecd6;
