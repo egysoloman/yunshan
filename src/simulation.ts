@@ -3029,9 +3029,12 @@ export class Simulation implements SimulationAPI {
         for (const citizen of s.citizens as Citizen[]) {
           if (s.extension?.actorProfiles[citizen.id]?.alive === false || r.riders[citizen.id] || !citizen.route || !citizen.routeIndex || citizen.routeIndex >= citizen.route.length || r.npcStairCursors[citizen.id]) continue;
           const description = this.npcStairMotion.describe(citizen.route, citizen.routeIndex);
-          // A live resident whose next leg is blocked waits at that leg's start (moveCitizenPhysical
-          // wait) until its re-plan; a save taken in that window holds exactly this state.
-          const waitingAtBlockedLeg = citizen.state === 'physicalWaiting' && sameVec(citizen.position, citizen.route[citizen.routeIndex - 1]);
+          // A live resident who walked a real leg and then met a blocked one waits at the blocked
+          // leg's start (moveCitizenPhysical wait) until its re-plan; a save taken in that window holds
+          // exactly this state. A pending intent (first leg) keeps the exterior-door rule below.
+          const walked = citizen.routeIndex >= 2 && !sameVec(citizen.route[citizen.routeIndex - 2], citizen.route[citizen.routeIndex - 1])
+            && this.npcStairMotion.describe(citizen.route, citizen.routeIndex - 1).kind !== 'blocked';
+          const waitingAtBlockedLeg = citizen.state === 'physicalWaiting' && walked && sameVec(citizen.position, citizen.route[citizen.routeIndex - 1]);
           ensure(description.kind !== 'blocked' || waitingAtBlockedLeg || this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex, citizen.position), 'native route geometry');
           if (description.kind === 'physical') this.npcStairMotion.validate(citizen.route, this.npcStairMotion.opening(citizen.route, citizen.routeIndex)!, citizen.position);
         }
