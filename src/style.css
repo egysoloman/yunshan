@@ -186,6 +186,24 @@ canvas {
   box-shadow:0 0 0 3px rgba(93,126,92,.1)
 }
 
+/* After dusk the header text sits on a dark sky (ui.ts data-dark-sky). */
+.city-ui[data-dark-sky] .city-brand h1,.city-ui[data-dark-sky] .world-status strong {
+  color:#f3ecd6;
+  text-shadow:0 1px 4px rgba(8,16,20,.6)
+}
+.city-ui[data-dark-sky] .city-brand p,.city-ui[data-dark-sky] .brand-caption,.city-ui[data-dark-sky] .world-status,.city-ui[data-dark-sky] .live-marker {
+  color:#d9d0b4;
+  opacity:1;
+  text-shadow:0 1px 3px rgba(8,16,20,.6)
+}
+.city-ui[data-dark-sky] .brand-rule {
+  background:rgba(240,232,208,.35)
+}
+.city-ui[data-dark-sky] .world-status .icon-button {
+  color:#e9dfc4;
+  border-color:rgba(240,232,208,.45)
+}
+
 .icon-button {
   display:inline-flex;
   align-items:center;

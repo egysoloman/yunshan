@@ -22,6 +22,9 @@ import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citi
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 import { routeDistanceLabel } from './navigation-label';
+import { timeOfDayGrade } from './rendering/time-of-day-grade';
+/** Below this daylight the sky behind the header is dark enough to need light ink. */
+const HEADER_DARK_SKY = .35;
 import { FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, type FirstDayStep } from './first-day';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
@@ -511,6 +514,9 @@ export class CityUI {
     this.updateFirstDay(state, view);
     this.setText('day', `第 ${state.day + 1} 日`);
     this.setText('clock', clock(state.hour));
+    // After dusk the header sits on a dark sky: it switches to light ink (the renderer's own daylight grade).
+    const dark = timeOfDayGrade(state.hour, state.visibility).daylight < HEADER_DARK_SKY;
+    if (this.root.hasAttribute('data-dark-sky') !== dark) this.root.toggleAttribute('data-dark-sky', dark);
     this.setText('weather', state.weather);
     this.setText('time-label', clock(state.hour));
     this.setInput('time', String(state.hour));
