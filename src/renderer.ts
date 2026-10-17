@@ -34,7 +34,7 @@ import { vehicleClearsCamera } from './rendering/near-camera';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
-import { VEHICLE_WHEEL, vehicleShape } from './rendering/vehicle-shapes';
+import { VEHICLE_WHEEL, loadCrates, vehicleShape } from './rendering/vehicle-shapes';
 import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
@@ -535,7 +535,7 @@ export class CityRenderer implements CityRendererAPI {
     // Road vehicles' wheels: one shared draw, four per vehicle.
     this.wheels = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: VEHICLE_WHEEL.color, roughness: .9 }), (this.vehiclePools.get('road')?.capacity ?? 0) * 4 + (this.vehiclePools.get('bridge')?.capacity ?? 0) * 4);
     this.wheels.name = '载具 · 车轮'; this.wheels.count = 0; this.wheels.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.wheels.frustumCulled = false; this.scene.add(this.wheels);
-    this.loads = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .85 }), (this.vehiclePools.get('road')?.capacity ?? 0) + (this.vehiclePools.get('bridge')?.capacity ?? 0));
+    this.loads = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .85 }), ((this.vehiclePools.get('road')?.capacity ?? 0) + (this.vehiclePools.get('bridge')?.capacity ?? 0)) * 2);
     this.cabs = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .55, metalness: .1 }), (this.vehiclePools.get('road')?.capacity ?? 0) + (this.vehiclePools.get('bridge')?.capacity ?? 0));
     this.cabs.name = '载具 · 车头'; this.cabs.count = 0; this.cabs.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.cabs.frustumCulled = false; this.scene.add(this.cabs);
     this.loads.name = '载具 · 车载货箱'; this.loads.count = 0; this.loads.instanceMatrix.setUsage(THREE.DynamicDrawUsage); this.loads.frustumCulled = false; this.scene.add(this.loads);
@@ -1197,7 +1197,7 @@ export class CityRenderer implements CityRendererAPI {
       if (shape.load && this.cabs) { this.put(this.cabs, cabs++, cab.x, p.y + head.y, cab.z, head.width, head.height, head.length, direction, head.color); this.put(pool.head, n, cab.x, p.y + head.y, cab.z, 0, 0, 0, direction); }
       else this.put(pool.head, n, cab.x, p.y + head.y, cab.z, head.width, head.height, head.length, direction, head.color);
       this.put(pool.trim, n, p.x, p.y + trim.y, p.z, trim.width, trim.height, trim.length, direction); counts.set(vehicle.kind, n + 1);
-      if (shape.load && vehicle.cargo > 0 && this.loads && loads < this.loads.instanceMatrix.count) { const bed = along(shape.load); this.put(this.loads, loads++, bed.x, p.y + shape.load.y, bed.z, shape.load.width, shape.load.height, shape.load.length, direction, shape.load.color); }
+      if (shape.load && vehicle.cargo > 0 && this.loads) for (const crate of loadCrates(shape.load)) if (loads < this.loads.instanceMatrix.count) { const bed = along(crate); this.put(this.loads, loads++, bed.x, p.y + crate.y, bed.z, crate.width, crate.height, crate.length, direction, crate.color); }
     }
     if (this.wheels) { this.wheels.count = wheels; this.wheels.instanceMatrix.needsUpdate = true; }
     if (this.cabs) { this.cabs.count = cabs; this.cabs.instanceMatrix.needsUpdate = true; if (this.cabs.instanceColor) this.cabs.instanceColor.needsUpdate = true; }

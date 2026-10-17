@@ -34,3 +34,12 @@ export function vehicleShape(kind: TransportMode): VehicleShape {
     wheels: [],
   };
 }
+
+/** The load drawn as two crates with a 0.2 m gap, the rear one 0.2 m lower (web and Unity). */
+export function loadCrates(load: VehicleBox): VehicleBox[] {
+  const length = (load.length - .2) / 2, offset = length / 2 + .1, z = load.z ?? 0;
+  return [
+    { ...load, length, z: z + offset },
+    { ...load, length, height: load.height - .2, y: load.y - .1, z: z - offset },
+  ];
+}

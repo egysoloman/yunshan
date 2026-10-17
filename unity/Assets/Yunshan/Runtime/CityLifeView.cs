@@ -167,7 +167,8 @@ namespace Yunshan.Runtime
                     bodies.Add(Along(0, .85), rotation, new Vector3((float)(width - .1), .5f, (float)length), Space.Hex("#7a5a3c"));
                     bodies.Add(Along(length / 2 - 1, 1.85), rotation, new Vector3((float)(width - .2), 1.5f, 1.9f), Space.Hex("#517f82"));
                     bodies.Add(Along(0, .6), rotation, new Vector3((float)(width + .25), .2f, (float)(length * .85)), Space.Hex("#3f6f73"));
-                    if (v.Cargo > 0) bodies.Add(Along(-.95, 1.65), rotation, new Vector3((float)(width - .3), 1.1f, 3.2f), Space.Hex("#b48a57"));
+                    // Web vehicle-shapes.ts loadCrates: two 1.5 m crates with a 0.2 m gap, the rear one 0.2 m lower.
+                    if (v.Cargo > 0) { bodies.Add(Along(-.95 + .85, 1.65), rotation, new Vector3((float)(width - .3), 1.1f, 1.5f), Space.Hex("#b48a57")); bodies.Add(Along(-.95 - .85, 1.55), rotation, new Vector3((float)(width - .3), .9f, 1.5f), Space.Hex("#b48a57")); }
                     foreach (var side in new[] { -1.0, 1.0 }) foreach (var end in new[] { -1.0, 1.0 })
                     {
                         double lx = side * (width / 2 - .05), lz = end * (length / 2 - .95);
