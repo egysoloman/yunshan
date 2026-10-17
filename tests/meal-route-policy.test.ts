@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createHash } from 'node:crypto';
-import { chooseNearestTiedMeal, EVENING_BONUS, eveningBonus, LUNCH_BONUS, lunchBonus, NEARBY_EVENING_ROUTE_POLICY, STREET_BROWSE_ROUTE_POLICY, STREET_FOOD_ROUTE_POLICY, SHORT_STALL_ROUTE_POLICY, STALL_LINGER, routeShortOfDoor, BROWSE_MAX, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, validateMealRoutePolicy } from '../src/simulation/meal-route';
+import { chooseNearestTiedMeal, EVENING_BONUS, eveningBonus, LUNCH_BONUS, lunchBonus, NEARBY_EVENING_ROUTE_POLICY, STREET_BROWSE_ROUTE_POLICY, STREET_FOOD_ROUTE_POLICY, SHORT_STALL_ROUTE_POLICY, WORKING_LUNCH_ROUTE_POLICY, STALL_LINGER, stallLinger, routeShortOfDoor, BROWSE_MAX, NEARBY_LUNCH_MEAL_ROUTE_POLICY, NEARBY_MEAL_ROUTE_POLICY, validateMealRoutePolicy } from '../src/simulation/meal-route';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
 import { upgradeMealRoute } from '../src/host/upgrade-meal-route';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
@@ -52,7 +52,7 @@ test('meal policy preserves source actors at cutover and cannot disappear in ful
   assert.equal(sim.exportSave(), original);
   assert.equal(sim.mealRoutePolicyId, 'legacy');
   const current = createCurrentProductCity(world);
-  assert.equal(current.mealRoutePolicyId, 'nearby-food-v6', 'new cities declare the lunch and evening outing policy');
+  assert.equal(current.mealRoutePolicyId, 'nearby-food-v7', 'new cities declare the lunch and evening outing policy');
   assert.equal(current.referenceCollisionPolicyId, 'continuous-upright-v1');
   assert.equal(current.importSave(original).ok, true);
   assert.equal(current.exportSave(), original, 'loading a new factory does not activate either policy');
@@ -67,7 +67,7 @@ test('v2 adds a midday lunch preference for residents who are not full; v1 and l
   validateMealRoutePolicy(declared);
   assert.throws(() => validateMealRoutePolicy({ ...declared, runtime: { ...declared.runtime, mealRoutePolicyId: NEARBY_MEAL_ROUTE_POLICY } }), /meal route policy pair/, 'envelope and runtime name the same version');
   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave();
-  assert.equal(JSON.parse(saved).mealRoutePolicyId, SHORT_STALL_ROUTE_POLICY);
+  assert.equal(JSON.parse(saved).mealRoutePolicyId, WORKING_LUNCH_ROUTE_POLICY);
   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
   assert.equal(assembleSave(partitionSave(saved, world)), saved);
 });
@@ -141,4 +141,14 @@ test('v6 keeps v5 street stalls and ends a stall meal within STALL_LINGER minute
   sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
   while (sim.state.hour < 13) sim.step(.25);
   assert.ok(checked >= 10, `${checked} stall sales checked`);
+});
+
+test('v7 keeps v6 and sends an employed resident back to work at once after a stall meal before 17:00', () => {
+  assert.equal(stallLinger(WORKING_LUNCH_ROUTE_POLICY, true, 12.5), 0, 'a working lunch');
+  assert.equal(stallLinger(WORKING_LUNCH_ROUTE_POLICY, true, 18), STALL_LINGER, 'after work the evening linger stays');
+  assert.equal(stallLinger(WORKING_LUNCH_ROUTE_POLICY, false, 12.5), STALL_LINGER, 'without a job the linger stays');
+  assert.equal(stallLinger(SHORT_STALL_ROUTE_POLICY, true, 12.5), STALL_LINGER, 'v6 is unchanged');
+  assert.equal(lunchBonus(WORKING_LUNCH_ROUTE_POLICY, 12, 70), LUNCH_BONUS);
+  assert.equal(eveningBonus(WORKING_LUNCH_ROUTE_POLICY, 19.5, 70, 60), EVENING_BONUS);
+  validateMealRoutePolicy({ version: 4, motionVersion: 2, mealRoutePolicyId: WORKING_LUNCH_ROUTE_POLICY, runtime: { npcMotionVersion: 2, mealRoutePolicyId: WORKING_LUNCH_ROUTE_POLICY } });
 });
