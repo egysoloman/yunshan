@@ -73,6 +73,9 @@ export function programRoofShell(b: Building, parts: readonly { position: Vec3; 
   }
   return { form: hip ? 'hip' : 'gable', width: w + overhang * 2, depth: d + overhang * 2, rise, color: hip ? '#2c4d48' : '#38504c', position: centre, floor: Math.max(0, floor), skirt };
 }
+/** Night glow of the cyan accents (rail strips, screens). At 2 the elevated rail strips
+ * bloomed into bright blue-white bands that outshone the lanterns at dusk. */
+const CYAN_NIGHT_GLOW = .9;
 const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad', lantern: '#b8432f' };
 type MaterialKey = keyof typeof PALETTE;
 interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
@@ -1131,7 +1134,7 @@ export class CityRenderer implements CityRendererAPI {
     // city and terrain proxies remain a single colour/depth pass.
     for (const chunk of this.chunks) { const casts = Math.hypot(chunk.center.x - this.camera.position.x, chunk.center.z - this.camera.position.z) < 140; chunk.detail.traverse(object => { if (object instanceof THREE.Mesh) object.castShadow = casts; }); }
     this.architectureDetail.group.traverse(object => { if (object instanceof THREE.Mesh) { object.castShadow = true; object.receiveShadow = true; } });
-    const energy = Math.max(.18, state.energy / 100); this.materials.cyan.emissiveIntensity = (.22 + (1 - daylight) * 2) * energy; this.materials.amber.emissiveIntensity = .45 + (1 - daylight) * 3;
+    const energy = Math.max(.18, state.energy / 100); this.materials.cyan.emissiveIntensity = (.22 + (1 - daylight) * CYAN_NIGHT_GLOW) * energy; this.materials.amber.emissiveIntensity = .45 + (1 - daylight) * 3;
     // Candle-lit paper lanterns: off the grid, faint by day, glowing at night.
     this.materials.lantern.emissiveIntensity = .05 + (1 - daylight) * 1.2;
     this.facadeNight.value = (1 - daylight) * Math.max(0, state.energy / 100) * .8;
