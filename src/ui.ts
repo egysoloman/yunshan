@@ -23,6 +23,7 @@ import { buildingAlterationSummary, type BuildingAlterationReport } from './simu
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 import { routeDistanceLabel } from './navigation-label';
 import { departureLabel, nextStopTitle, rideFare, stoppedVehicleFirst } from './transit-label';
+import { placeServicesSummary } from './place-services';
 import { freshLaborSettlement } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
@@ -1290,8 +1291,17 @@ export class CityUI {
       const enter = element('button', 'action-button primary full-width', view.inside ? '离开建筑 / 使用楼梯 · E' : '进入 / 使用建筑 · E'); enter.type = 'button'; enter.dataset.action = 'interact'; enter.disabled = !walk; body.append(enter);
       const controls = element('div', 'button-grid context-actions');
       this.buildingActions(controls, building, !walk);
-      if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) body.append(this.functionPointHint(building));
-      if (controls.childElementCount) body.append(controls);
+      const hint = building.floorPlanProfile === FLOOR_PLAN_PROFILE ? this.functionPointHint(building) : null;
+      const usable = Array.from(controls.querySelectorAll<HTMLButtonElement>('button')).some(button => !button.disabled);
+      if (!view.inside && controls.childElementCount && !usable) {
+        // From the street nothing here can be done yet: the services fold into one line so the panel leads with the place and its door.
+        const services = element('details', 'relationship-choices context-services'); services.dataset.services = building.id;
+        services.append(element('summary', '', placeServicesSummary(Array.from(controls.querySelectorAll('button'), button => button.textContent ?? ''))), ...(hint ? [hint] : []), controls);
+        body.append(services);
+      } else {
+        if (hint) body.append(hint);
+        if (controls.childElementCount) body.append(controls);
+      }
       if (state.playerLabor?.job) body.append(this.laborContent());
       if (building.kind === 'clinic') body.append(this.clinicalContent());
       if (building.kind === 'school') body.append(this.educationContent(), this.familyEducationContent(building));
