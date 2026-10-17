@@ -23,6 +23,7 @@ import { marketDisplayUnits } from '../site-fixtures';
 import { shopLifecycleAllowsOperation } from '../simulation/shop_lifecycle';
 import { contextModel, type ContextView } from './context-model';
 import { panesModel } from './panes-model';
+import { mealFeedback } from '../meal-feedback';
 import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayTarget, firstDayUnavailable, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
 
@@ -99,10 +100,11 @@ export class SimHost {
       case 'command': {
         const sim = this.requireSim(), command = request.command as Command;
         if (!command || typeof command !== 'object' || typeof command.type !== 'string') throw new Error('命令格式无效。');
+        const body = () => ({ hunger: sim.state.player.needs.hunger, food: sim.state.player.inventory.food ?? 0 }), before = body();
         const money = sim.state.player.money, result = sim.command(command);
         if (result.ok && (command.type === 'purchase' || command.type === 'eat') && sim.state.player.money < money - 1e-9) this.purchased = true;
         // Shown to the player: amounts read in 云币 (as the web UI shows them).
-        return { result: { ...result, message: displayMoney(result.message) }, frame: this.frame(request, 0, 0) };
+        return { result: { ...result, message: displayMoney(result.message) + (result.ok ? mealFeedback(command.type, before, body()) : '') }, frame: this.frame(request, 0, 0) };
       }
       case 'context': {
         const model = contextModel(this.requireSim(), this.world!, { ...(request.view as ContextView), keepCitizenId: this.metCitizenId });

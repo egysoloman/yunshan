@@ -19,6 +19,7 @@ import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, V
 
 import { nearbyResident } from './social-reach';
 import { AUTO_TRANSIT_METRES } from './first-day';
+import { mealFeedback } from './meal-feedback';
 const PREF_KEY = 'yunshan.preferences.v1';
 /** A map crowd halo farther than this (straight line) is reached by public transport when a service exists. */
 /** The resident the player last met (see social-reach): kept while within talking reach. */
@@ -291,8 +292,9 @@ function execute(command: Command): void {
     showNotice('请先安全落地并退出机舱，走近人物、建筑或站点后操作。', false);
     return;
   }
+  const body = () => ({ hunger: simulation.state.player.needs.hunger, food: simulation.state.player.inventory.food ?? 0 }), before = body();
   const result = simulation.command(command);
-  showNotice(result.message, result.ok);
+  showNotice(result.ok ? result.message + mealFeedback(command.type, before, body()) : result.message, result.ok);
   if (result.ok && ['boardAircraft', 'leaveAircraft'].includes(command.type)) syncPlayerView();
   if (result.ok && ['leaveVehicle', 'ride', 'drive'].includes(command.type)) controller.syncPassenger(simulation.state.player.position);
   if (result.ok && ['planJourney', 'cancelJourney', 'leaveVehicle'].includes(command.type)) syncNavigation();
