@@ -394,6 +394,15 @@ namespace Yunshan.Runtime
             if (building != null && walker.Walker.UseDoor(building))
                 session.Say(walker.Walker.Inside != null ? $"进入{building.Name}，可在右侧面板使用设施。楼内左后角为楼梯。" : $"走出{building.Name}。", true);
             else if (walker.Walker.BlockedAccess != null) { session.Say(walker.Walker.BlockedAccess, false); walker.Walker.BlockedAccess = null; }
+            else if (walker.Walker.Inside == null)
+            {
+                // As web main.ts interact(): a resident within 6 m (the host's own nearby choice) is greeted, else a nearby vehicle is boarded.
+                var met = session.Context.FirstOrDefault(s => s.Kind == "citizen");
+                var person = met == null ? null : frame.Citizens.FirstOrDefault(c => c.Id == met.Id);
+                if (person != null && D(feet, person.Position) < 6) { Execute(Cmd("socialize", target: person.Id)); return; }
+                var vehicle = NearestVehicle(frame, feet);
+                if (vehicle != null) Execute(Cmd("ride", target: vehicle.Id));
+            }
         }
 
         void UpdateSky()
@@ -494,7 +503,7 @@ namespace Yunshan.Runtime
             var events = session.EventLog.Skip(Math.Max(0, session.EventLog.Count - 6)).ToList();
             GUI.Box(new UnityEngine.Rect(12, Screen.height - 20 - events.Count * 20 - 12, 560, events.Count * 20 + 16), GUIContent.none, box);
             for (int i = 0; i < events.Count; i++) GUI.Label(new UnityEngine.Rect(22, Screen.height - 24 - (events.Count - i) * 20, 548, 20), events[i].Text, small);
-            if (showHelp) GUI.Label(new UnityEngine.Rect(Screen.width / 2f - 360, Screen.height - 34, 760, 24), "拖动或双击锁定鼠标环顾 · WASD 行走 · Shift 冲刺 · E 门/楼梯/上下车 · F 暂停 · B/X 放置/回收体素 · V 航空器返航 · Tab 城市总览 · H 隐藏提示 · Esc 释放鼠标", small);
+            if (showHelp) GUI.Label(new UnityEngine.Rect(Screen.width / 2f - 360, Screen.height - 34, 760, 24), "拖动或双击锁定鼠标环顾 · WASD 行走 · Shift 冲刺 · E 门/楼梯/上下车/交谈 · F 暂停 · B/X 放置/回收体素 · V 航空器返航 · Tab 城市总览 · H 隐藏提示 · Esc 释放鼠标", small);
         }
 
         /// <summary>The welcome note and its first-day list (web ui.ts welcome-note); an open
