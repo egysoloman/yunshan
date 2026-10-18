@@ -25,7 +25,7 @@ namespace Yunshan.Runtime
         GameObject firstPersonArms;
         StudioSky studioSky;
         FirstPersonController walker;
-        AmbienceAudio ambience; List<Vec3> waterfall; Vec3 ambienceFeet; float ambienceClock;
+        RainView rain; AmbienceAudio ambience; List<Vec3> waterfall; Vec3 ambienceFeet; float ambienceClock;
         SimSession session;
         CityLifeView life;
         Light sun;
@@ -154,6 +154,7 @@ namespace Yunshan.Runtime
                 stationSigns = new StationSignPool(stationRoot, world, signFont);
                 doorwayGlow = new DoorwayGlowView(stationRoot, world);
                 lanternGlow = new LanternGlowView(stationRoot, world);
+                rain = new RainView(stationRoot);
                 status = null;
                 _ = BuildMapAsync();
                 StartCoroutine(NearDetailLoop());
@@ -412,6 +413,7 @@ namespace Yunshan.Runtime
             double hour = session?.Frame?.Hour ?? 10;
             float angle = (float)((hour - 6) / 24 * Math.PI * 2), altitude = Mathf.Sin(angle);
             float daylight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.12f, .28f, altitude)); lastDaylight = daylight; lanternGlow?.Update(daylight);
+            if (rain != null && view != null) rain.Update(session?.Frame?.Weather ?? "晴", walker?.Walker.Inside != null, view.transform.position, daylight);
             var sunGame = new Vector3(-Mathf.Cos(angle) * 2500, altitude * 2500, altitude * 1400); // already mirrored X
             sun.transform.rotation = Quaternion.LookRotation(-sunGame.normalized);
             float energy = (float)((session?.Frame?.Energy ?? 100) / 100);

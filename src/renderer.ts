@@ -13,6 +13,7 @@ import { samplePolyline, terrainHeight } from './world';
 import { RoadClosureOverlay } from './rendering/road-closures';
 import { getFloorDimensions, getStairPosition } from './access';
 import { buildLandscape } from './rendering/terrain';
+import { RAIN, rainActive, rainDrop } from './rendering/rain';
 import { createRoofGeometry, roofHeightAt, type RoofProfile } from './rendering/architecture-layout';
 import { buildProgramArchitecture, type ArchitectureTemplate } from './rendering/architecture-bodies';
 import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floor-plan';
@@ -191,6 +192,8 @@ export class CityRenderer implements CityRendererAPI {
   private moonOrb: THREE.Mesh;
   private stars: THREE.Points;
   private mist: THREE.Points;
+  /** Display-only rain streaks around the camera while it rains outdoors (rendering/rain.ts). */
+  private rain: THREE.LineSegments;
   private spray: THREE.Points;
   private shadowAt = -Infinity;
   private shadowPosition = new THREE.Vector3(Infinity, Infinity, Infinity);
@@ -508,6 +511,9 @@ export class CityRenderer implements CityRendererAPI {
     this.stars = this.buildStars(); this.scene.add(this.stars);
     this.skyModels = new StudioSkyModels(this.scene, this.sky, this.sunOrb, this.moonOrb, this.stars); void this.skyModels.load();
     this.mist = this.buildMist(); this.scene.add(this.mist);
+    { const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(RAIN.count * 6), 3).setUsage(THREE.DynamicDrawUsage));
+      this.rain = new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({ color: '#8fa3ae', transparent: true, opacity: .5, depthWrite: false, fog: true }));
+      this.rain.name = '雨丝'; this.rain.frustumCulled = false; this.rain.visible = false; this.scene.add(this.rain); }
     this.clouds = this.buildCloudBanks(); this.scene.add(this.clouds);
     this.lanterns = this.buildLanternGlow(); this.scene.add(this.lanterns);
     this.groundGlow = this.buildGroundGlow(); this.scene.add(this.groundGlow);
@@ -1136,6 +1142,12 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.toneMappingExposure = grade.exposure;
     this.skyMaterial.uniforms.top.value.copy(top); this.skyMaterial.uniforms.horizon.value.copy(horizon);
     this.skyMaterial.uniforms.daylight.value = daylight;
+    this.rain.visible = rainActive(state.weather, !!this.insideId);
+    if (this.rain.visible) {
+      const attribute = this.rain.geometry.getAttribute('position') as THREE.BufferAttribute, array = attribute.array as Float32Array, camera = this.camera.position;
+      for (let i = 0; i < RAIN.count; i++) { const top = rainDrop(i, elapsed, camera), k = i * 6; array[k] = top.x; array[k + 1] = top.y; array[k + 2] = top.z; array[k + 3] = top.x - RAIN.slantX * RAIN.length; array[k + 4] = top.y - RAIN.length; array[k + 5] = top.z - RAIN.slantZ * RAIN.length; }
+      attribute.needsUpdate = true; (this.rain.material as THREE.LineBasicMaterial).opacity = .3 + daylight * .3;
+    }
     const mistMaterial = this.mist.material as THREE.PointsMaterial; mistMaterial.color.copy(horizon).lerp(new THREE.Color('#e0e8df'), .25 + daylight * .35); mistMaterial.opacity = .13 + (1 - state.visibility) * .13; this.mist.position.x = Math.sin(elapsed * .015) * 24;
     for (const layer of this.clouds.children as (THREE.Mesh | THREE.Points)[]) { const m = layer.material as THREE.MeshBasicMaterial | THREE.PointsMaterial; m.color.set(grade.fogColor).lerp(new THREE.Color('#fbf6ec'), .35 + daylight * .45); m.opacity = (layer.userData.cloudLayer === 'sea' ? .5 : .3) * (.45 + daylight * .55); }
     for (const ring of this.silhouettes.children as THREE.Mesh[]) (ring.material as THREE.MeshBasicMaterial).color.set(grade.fogColor).lerp(new THREE.Color(mixHex('#3d5a5a', grade.skyTop, .25)), [.62, .42, .24][ring.userData.silhouetteLayer as number]);
@@ -1279,6 +1291,7 @@ export class CityRenderer implements CityRendererAPI {
   dispose() {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
+    this.rain.geometry.dispose(); (this.rain.material as THREE.Material).dispose();
     this.marketGoods.dispose(); this.doorwayGlow.dispose(); this.windowLight?.dispose();
     this.studioProps?.dispose();
     this.marketShopfront.dispose();
