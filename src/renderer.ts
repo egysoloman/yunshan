@@ -1291,7 +1291,6 @@ export class CityRenderer implements CityRendererAPI {
   dispose() {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
-    this.rain.geometry.dispose(); (this.rain.material as THREE.Material).dispose();
     this.marketGoods.dispose(); this.doorwayGlow.dispose(); this.windowLight?.dispose();
     this.studioProps?.dispose();
     this.marketShopfront.dispose();
