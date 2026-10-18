@@ -223,6 +223,8 @@ namespace Yunshan.Core.Host
     {
         public sealed class Step { public string Id, Label, Hint; public bool Done, Go; }
         public List<Step> Steps = new List<Step>(); public bool Complete; public string Next;
+        /// <summary>Web first-day.ts WELCOME_COMPACT_FROM_DAY: from this day an unfinished note keeps only its list.</summary>
+        public const int CompactFromDay = 1;
 
         public static FirstDay From(object o)
         {

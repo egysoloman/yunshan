@@ -283,6 +283,12 @@ canvas {
   animation:arrive .8s ease both
 }
 
+/* From the second day the note keeps only its first-day list (first-day.ts welcomeCompact). */
+.welcome-note.welcome-compact > div > strong,
+.welcome-note.welcome-compact > div > span:not(.first-day) {
+  display:none
+}
+
 .welcome-note strong {
   display:block;
   font-family:var(--serif);

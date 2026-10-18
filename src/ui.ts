@@ -30,7 +30,7 @@ import { freshLaborSettlement, freshLaborPause, type LaborSeen } from './labor-f
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
 const HEADER_DARK_SKY = .35;
-import { FIRST_DAY_STEPS, firstDayDone, firstDayNext, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from './first-day';
+import { FIRST_DAY_STEPS, firstDayDone, firstDayNext, welcomeCompact, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from './first-day';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
 const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
@@ -309,6 +309,7 @@ export class CityUI {
   /** A short first-day list in the welcome note (display only), ticked from the player's own state. */
   private updateFirstDay(state: SimState, view: ViewState): void {
     const list = this.refs.get('first-day'); if (!list) return;
+    const welcome = this.ref('welcome'), compact = welcomeCompact(state.day); if (welcome.classList.contains('welcome-compact') !== compact) welcome.classList.toggle('welcome-compact', compact);
     const done = firstDayDone(state, this.world, view.position, this.purchaseMoney !== null && state.player.money < this.purchaseMoney - 1e-9);
     const steps = FIRST_DAY_STEPS.map(([id, label, hint]) => [id, label, hint, done[id]] as const);
     let changed = false;

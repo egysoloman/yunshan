@@ -33,3 +33,10 @@ test('after the first day the note names what to do next, from the player\'s own
   assert.match(firstDayNext({ player: { homeId: null } } as never), /到住宅租一处落脚的住所/);
   assert.match(firstDayNext({ player: { homeId: 'river-b3' } } as never), /回住处床旁歇一歇/);
 });
+
+test('from the second day an unfinished welcome note keeps only its first-day list', async () => {
+  const { welcomeCompact } = await import('../src/first-day');
+  assert.equal(welcomeCompact(0), false);
+  assert.equal(welcomeCompact(1), true);
+  assert.equal(welcomeCompact(5), true);
+});

@@ -520,22 +520,27 @@ namespace Yunshan.Runtime
             var list = session.FirstDay;
             if (!session.WelcomeOpen || list == null) return;
             const float left = 12, top = 160, width = 520;
-            GUI.Box(new UnityEngine.Rect(left, top, width, 96), GUIContent.none, box);
-            GUI.Label(new UnityEngine.Rect(left + 12, top + 6, width - 60, 24), "初抵云山，天地皆可游。", title);
-            GUI.Label(new UnityEngine.Rect(left + 12, top + 32, width - 24, 22), "你已抵达城中 · WASD 步行，E 使用设施 · 航空器需在停机位取得", small);
+            // From the second day only the first-day list remains (web welcomeCompact).
+            bool compact = (session.Frame?.Day ?? 0) >= FirstDay.CompactFromDay; float row = compact ? top + 6 : top + 60;
+            GUI.Box(new UnityEngine.Rect(left, top, width, compact ? 40 : 96), GUIContent.none, box);
+            if (!compact)
+            {
+                GUI.Label(new UnityEngine.Rect(left + 12, top + 6, width - 60, 24), "初抵云山，天地皆可游。", title);
+                GUI.Label(new UnityEngine.Rect(left + 12, top + 32, width - 24, 22), "你已抵达城中 · WASD 步行，E 使用设施 · 航空器需在停机位取得", small);
+            }
             if (GUI.Button(new UnityEngine.Rect(left + width - 36, top + 6, 26, 24), new GUIContent("×", "关闭欢迎提示"))) session.DismissWelcome();
             float x = left + 12;
-            GUI.Label(new UnityEngine.Rect(x, top + 62, 44, 24), "第一天", label); x += 50;
+            GUI.Label(new UnityEngine.Rect(x, row + 2, 44, 24), "第一天", label); x += 50;
             foreach (var step in list.Steps)
             {
                 if (step.Go)
                 {
-                    if (GUI.Button(new UnityEngine.Rect(x, top + 60, 100, 26), new GUIContent(step.Label + " ↗", step.Hint + "（点击前往）"))) session.FirstDayGo(step.Id);
+                    if (GUI.Button(new UnityEngine.Rect(x, row, 100, 26), new GUIContent(step.Label + " ↗", step.Hint + "（点击前往）"))) session.FirstDayGo(step.Id);
                 }
                 else
                 {
                     var color = GUI.color; if (step.Done) GUI.color = new Color(.7f, 1f, .75f);
-                    GUI.Label(new UnityEngine.Rect(x + 6, top + 62, 94, 24), new GUIContent((step.Done ? "✓ " : "· ") + step.Label, step.Hint), label);
+                    GUI.Label(new UnityEngine.Rect(x + 6, row + 2, 94, 24), new GUIContent((step.Done ? "✓ " : "· ") + step.Label, step.Hint), label);
                     GUI.color = color;
                 }
                 x += 106;

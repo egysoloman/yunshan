@@ -70,3 +70,8 @@ export function firstDayNext(state: Pick<SimState, 'player'>): string {
   const home = state.player.homeId ? '回住处床旁歇一歇' : '到住宅租一处落脚的住所';
   return `第一天的四件事都做完了。接下来可以：${home}；去书院自习，学些本事；坐车去别的城区看看（舆图上点光圈即可前往）。`;
 }
+
+/** From the second day an unfinished welcome note shrinks to its one-line first-day list (the
+ * greeting and controls are no longer news); shared with Unity (FirstDay.CompactFromDay). */
+export const WELCOME_COMPACT_FROM_DAY = 1;
+export const welcomeCompact = (day: number): boolean => day >= WELCOME_COMPACT_FROM_DAY;
