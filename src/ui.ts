@@ -26,7 +26,7 @@ import { departureLabel, freshRideStop, nextStopTitle, rideFare, stoppedVehicleF
 import { placeServicesSummary } from './place-services';
 import { freshNeedNotice, type NeedSeen } from './need-feedback';
 import { freshDaySummary, type DaySnapshot } from './day-summary';
-import { freshLaborSettlement } from './labor-feedback';
+import { freshLaborSettlement, freshLaborPause, type LaborSeen } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
 const HEADER_DARK_SKY = .35;
@@ -302,6 +302,7 @@ export class CityUI {
   private rideSeen: RideSeen | null = null;
   private needSeen: NeedSeen | null = null;
   private daySeen: DaySnapshot | null = null;
+  private laborPauseSeen: LaborSeen | null = null;
   private autoVehicleTab: string | null = null;
   private purchaseMoney: number | null = null;
   private firstDayNextPending: string | null = null;
@@ -532,6 +533,8 @@ export class CityUI {
     // A shift that just settled is announced once (labor-feedback.ts).
     const settled = freshLaborSettlement(state, this.laborSeen, id => this.world.buildings.find(b => b.id === id)?.name ?? '');
     this.laborSeen = settled.seen; if (settled.notice) this.notify(settled.notice, true);
+    // An open shift that pauses (or resumes) says so (labor-feedback.ts).
+    const shift = freshLaborPause(state, this.laborPauseSeen, id => this.world.buildings.find(b => b.id === id)?.name ?? ''); this.laborPauseSeen = shift.seen; if (shift.notice) this.notify(shift.notice, true);
     // A ride that just pulled in to a stop says where, and how to get off (transit-label.ts).
     const ride = freshRideStop(state, this.world, this.rideSeen); this.rideSeen = ride.seen; if (ride.notice) { this.notify(ride.notice, true); this.actions.cue?.('arrive'); }
     // The player's own hunger or energy falling low is said once, with where to go (need-feedback.ts).

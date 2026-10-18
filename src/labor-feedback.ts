@@ -18,3 +18,21 @@ export function freshLaborSettlement(state: SimState, seen: number | null, siteN
   const job = history[length - 1], clock = state.day * 1440 + state.hour * 60;
   return { seen: length, notice: job.endedAt !== null && clock - job.endedAt <= 30 ? laborSettlementNotice(job, siteName(job.siteId)) : null };
 }
+
+/** What a client last saw of the player's open shift. */
+export interface LaborSeen { id: string | null; status: string | null; reason: string }
+
+/** Display only (web toast and native host notice): an open shift that pauses says why, once per
+ * reason (leaving the site, riding, needing food or rest, closing time), and says so again when it
+ * resumes — a player who steps outside mid-shift otherwise does not know the clock stopped. */
+export function freshLaborPause(state: SimState, seen: LaborSeen | null, siteName: (id: string) => string): { seen: LaborSeen; notice: string | null } {
+  const job = state.playerLabor?.job;
+  if (!job) return { seen: { id: null, status: null, reason: '' }, notice: null };
+  const next = { id: job.id, status: job.status, reason: job.pauseReason };
+  if (!seen || seen.id !== job.id) return { seen: next, notice: null };
+  const done = `已做 ${Math.floor(job.workedMinutes)}/${job.requiredMinutes} 分钟`, site = siteName(job.siteId);
+  if (job.status === 'paused' && (seen.status !== 'paused' || seen.reason !== job.pauseReason))
+    return { seen: next, notice: `${site}的工班暂停（${done}）：${job.pauseReason.replace(/，?工班暂停。$/, '。')}` };
+  if (job.status === 'working' && seen.status === 'paused') return { seen: next, notice: `${site}的工班继续，${done}。` };
+  return { seen: next, notice: null };
+}

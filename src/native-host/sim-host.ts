@@ -24,7 +24,7 @@ import { shopLifecycleAllowsOperation } from '../simulation/shop_lifecycle';
 import { contextModel, type ContextView } from './context-model';
 import { panesModel } from './panes-model';
 import { mealFeedback } from '../meal-feedback';
-import { freshLaborSettlement } from '../labor-feedback';
+import { freshLaborPause, freshLaborSettlement, type LaborSeen } from '../labor-feedback';
 import { freshRideStop, type RideSeen } from '../transit-label';
 import { freshNeedNotice, type NeedSeen } from '../need-feedback';
 import { freshDaySummary, type DaySnapshot } from '../day-summary';
@@ -95,6 +95,7 @@ export class SimHost {
   private rideSeen: RideSeen | null = null;
   private needSeen: NeedSeen | null = null;
   private daySeen: DaySnapshot | null = null;
+  private laborPauseSeen: LaborSeen | null = null;
 
   async handle(request: HostRequest): Promise<HostResponse> {
     const id = request.id;
@@ -214,7 +215,8 @@ export class SimHost {
     const ride = freshRideStop(state, this.world!, this.rideSeen); this.rideSeen = ride.seen;
     const need = freshNeedNotice(state, this.world!, state.player.position, this.needSeen); this.needSeen = need.seen;
     const day = freshDaySummary(state, this.daySeen); this.daySeen = day.seen;
-    const notice = [day.notice, settled.notice, ride.notice, need.notice].filter(Boolean).join(' ');
+    const pause = freshLaborPause(state, this.laborPauseSeen, id => this.world!.buildings.find(b => b.id === id)?.name ?? ''); this.laborPauseSeen = pause.seen;
+    const notice = [day.notice, settled.notice, pause.notice, ride.notice, need.notice].filter(Boolean).join(' ');
     return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected, ...(notice ? { notice } : {}), ...(ride.notice ? { cue: 'arrive' } : {}) };
   }
 
