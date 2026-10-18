@@ -1191,7 +1191,7 @@ export class CityRenderer implements CityRendererAPI {
     this.studioCharacters?.update(state, this.camera.position, this.quality, id => {
       const m = this.citizens.motionOf(id), c = state.citizens.find(x => x.id === id); if (!m || !c) return undefined;
       const dead = state.extension?.actorProfiles[id]?.alive === false || c.state === 'dead', seated = c.state === 'riding';
-      return { ...m, seated, dead, walking: c.state === 'moving' && !seated && !dead };
+      return { yaw: m.yaw, phase: m.phase, seated, dead, walking: this.citizens.strides(id, c.state === 'moving' && !seated && !dead) };
     });
     this.marketGoods.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 65 : 110);
     this.studioProps.update(this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), { id: this.insideId, floor: this.insideFloor }, this.quality === 'low' ? 45 : 90);

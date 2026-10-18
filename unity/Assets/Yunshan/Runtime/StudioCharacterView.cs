@@ -60,7 +60,7 @@ namespace Yunshan.Runtime
                     built++; characters[c.Id] = character;
                 }
                 next.Add(c.Id);
-                bool dead = !c.Alive, seated = c.Seated, walking = c.State == "moving" && !seated && !dead;
+                bool dead = !c.Alive, seated = c.Seated, walking = life.Strides(c.Id, c.State == "moving" && !seated && !dead);
                 var pose = StudioCharacterLook.Pose(e.Phase, walking, seated, dead);
                 foreach (var joint in StudioCharacterLook.Joints)
                 {

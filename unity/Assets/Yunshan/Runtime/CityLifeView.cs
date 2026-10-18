@@ -12,7 +12,7 @@ namespace Yunshan.Runtime
     /// walk clock), as src/rendering/citizen-appearance.ts does.</summary>
     public sealed class CityLifeView
     {
-        sealed class Motion { public Vec3 Position; public double Yaw, Phase; }
+        sealed class Motion { public Vec3 Position; public double Yaw, Phase; public double? MovedAt; }
         readonly WorldDefinition world;
         readonly Dictionary<string, NetworkEdge> edges = new Dictionary<string, NetworkEdge>();
         readonly List<NetworkNode> stations = new List<NetworkNode>();
@@ -28,6 +28,9 @@ namespace Yunshan.Runtime
         /// <summary>Residents drawn by StudioCharacterView (left out of the box residents).</summary>
         public HashSet<string> Modelled = new HashSet<string>();
         /// <summary>The interpolated position, yaw and displacement-driven walk phase of a resident.</summary>
+        /// <summary>Whether a resident in the "moving" state is actually striding now (CitizenAppearance.Striding).</summary>
+        public bool Strides(string id, bool moving) => CitizenAppearance.Striding(moving, motion.TryGetValue(id, out var m) ? m.MovedAt : null, Time.time);
+
         public bool TryMotion(string id, out Vec3 position, out double yaw, out double phase)
         {
             if (motion.TryGetValue(id, out var m)) { position = m.Position; yaw = m.Yaw; phase = m.Phase; return true; }
@@ -95,13 +98,15 @@ namespace Yunshan.Runtime
             {
                 seen.Add(c.Id);
                 var position = previousCitizens.TryGetValue(c.Id, out var before) && Distance(before.Position, c.Position) < 30 ? Lerp(before.Position, c.Position, t) : c.Position;
-                bool dead = !c.Alive, seated = c.Seated, walking = c.State == "moving" && !seated && !dead;
+                bool dead = !c.Alive, seated = c.Seated;
                 motion.TryGetValue(c.Id, out var previous);
                 double dx = previous != null ? position.X - previous.Position.X : 0, dz = previous != null ? position.Z - previous.Position.Z : 0, travel = Math.Sqrt(dx * dx + dz * dz);
+                double? movedAt = travel > .001 && travel < 50 ? Time.time : previous?.MovedAt;
+                bool walking = CitizenAppearance.Striding(c.State == "moving" && !seated && !dead, movedAt, Time.time);
                 double initialYaw = c.Next != null ? Math.Atan2(c.Next.X - c.Position.X, c.Next.Z - c.Position.Z) : CitizenAppearance.Hash(c.Id) % 628 / 100.0;
                 double yaw = travel > .001 && travel < 50 ? Math.Atan2(dx, dz) : previous?.Yaw ?? initialYaw;
                 double phase = (previous?.Phase ?? 0) + (walking && !frame.Paused && travel < 50 ? travel * Math.PI / 1.1 : 0);
-                motion[c.Id] = new Motion { Position = position, Yaw = yaw, Phase = phase };
+                motion[c.Id] = new Motion { Position = position, Yaw = yaw, Phase = phase, MovedAt = movedAt };
                 double range = Distance(position, camera);
                 if (Modelled.Contains(c.Id)) { Residents++; continue; }
                 if (!NearCamera.Clears(camera, position)) continue;

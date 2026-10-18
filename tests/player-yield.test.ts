@@ -10,10 +10,13 @@ test('a resident waits rather than step into the player, and only when approachi
   assert.equal(yieldsToPlayer(PLAYER_YIELD_POLICY, p, at(1), at(.6)), true);
   assert.equal(yieldsToPlayer(PLAYER_YIELD_POLICY, p, at(.5), at(.6)), false, 'stepping away is free');
   assert.equal(yieldsToPlayer(PLAYER_YIELD_POLICY, p, at(2), at(1)), false, 'outside the body disks');
+  assert.equal(yieldsToPlayer(PLAYER_YIELD_POLICY, p, at(-1.6), at(2.6)), true, 'a long step cannot jump through the player');
+  assert.equal(yieldsToPlayer(PLAYER_YIELD_POLICY, p, { x: -2, y: 10, z: 1 }, { x: 2, y: 10, z: 1 }), false, 'passing 1 m to the side is free');
   assert.equal(yieldsToPlayer(PLAYER_YIELD_POLICY, p, at(1, 14), at(.6, 14)), false, 'another level');
   assert.equal(yieldsToPlayer(PLAYER_YIELD_POLICY, null, at(1), at(.6)), false, 'the player is not on foot');
   assert.equal(yieldsToPlayer(undefined, p, at(1), at(.6)), false, 'undeclared cities walk through');
-  const stop = yieldStop(p, at(5), at(-5));
+  const stop = yieldStop(p, at(5), at(-5)), jump = yieldStop(p, at(-1.6), at(2.6));
+  assert.ok(Math.abs(jump.x + PLAYER_YIELD_METRES) < 1e-12, 'a long step stops where it would enter the body disks');
   assert.ok(Math.abs(stop.x - PLAYER_YIELD_METRES) < 1e-12 && stop.z === 0, 'it walks up to the edge of the body disks');
   assert.deepEqual(yieldStop(p, at(.5), at(-5)), at(.5), 'already inside: it stays');
 });

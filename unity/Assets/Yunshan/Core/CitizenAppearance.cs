@@ -21,6 +21,11 @@ namespace Yunshan.Core
         static readonly Regex Police = new Regex("警|police"), Soldier = new Regex("卫|soldier"), Official = new Regex("官|official"), Teacher = new Regex("师|teacher"), Merchant = new Regex("商|merchant");
 
         /// <summary>FNV-1a over code points' first UTF-16 unit, as the TS hash.</summary>
+        /// <summary>Web citizen-appearance.ts STRIDE_STILL_SECONDS / striding: a resident in the
+        /// "moving" state who has not moved for this long stands instead of freezing mid-stride.</summary>
+        public const double StrideStillSeconds = .5;
+        public static bool Striding(bool moving, double? movedAt, double now) => moving && movedAt.HasValue && now - movedAt.Value < StrideStillSeconds;
+
         public static uint Hash(string text)
         {
             uint value = 2166136261;
