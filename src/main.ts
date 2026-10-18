@@ -13,6 +13,7 @@ import type { JourneyNavigationPlan, TransitJourney, WalkingJourney } from './jo
 import { releaseRoadExitPermit } from './roads';
 import { Ambience, ambienceLevels } from './audio/ambience';
 import { cueFor } from './audio/cues';
+import { entranceHint } from './entrance-hint';
 import { getWaterfallPath, terrainHeight } from './world';
 import { readSavedGame, writeSavedGame } from './persistence';
 import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-layout';
@@ -385,7 +386,9 @@ function interact(): void {
     const command: Record<string, Command['type']> = { market: 'purchase', home: 'rest', workshop: 'work', school: 'work', farm: 'work', core: 'energy' };
     if (command[building.kind]) return execute({ type: command[building.kind], targetId: building.id });
   }
-  showNotice('靠近建筑入口、居民或交通站点后按 E。');
+  // Nothing here: point to the nearest entrance relative to the way the player faces (entrance-hint.ts).
+  const facing = city.camera.getWorldDirection(new THREE.Vector3()), hint = !controller.inside && entranceHint(controller.position, { x: facing.x, z: facing.z }, world.buildings);
+  showNotice(hint ? `${hint}走近后按 E。` : '靠近建筑入口、居民或交通站点后按 E。');
 }
 
 function canAccessBuilding(building: Building, floor: number): boolean {

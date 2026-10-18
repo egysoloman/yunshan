@@ -403,7 +403,11 @@ namespace Yunshan.Runtime
                 var person = met == null ? null : frame.Citizens.FirstOrDefault(c => c.Id == met.Id);
                 if (person != null && D(feet, person.Position) < 6) { Execute(Cmd("socialize", target: person.Id)); return; }
                 var vehicle = NearestVehicle(frame, feet);
-                if (vehicle != null) Execute(Cmd("ride", target: vehicle.Id));
+                if (vehicle != null) { Execute(Cmd("ride", target: vehicle.Id)); return; }
+                // Nothing here: point to the nearest entrance relative to the way the player faces (Core/EntranceHint.cs).
+                var facing = view != null ? Space.ToGame(view.transform.forward) : new Vec3(0, 0, -1);
+                var hint = EntranceHint.Hint(feet, facing.X, facing.Z, world.Buildings);
+                session.Say(hint != null ? hint + "走近后按 E。" : "靠近建筑入口、居民或交通站点后按 E。", true);
             }
         }
 
