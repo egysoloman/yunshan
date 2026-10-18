@@ -26,6 +26,7 @@ import { panesModel } from './panes-model';
 import { mealFeedback } from '../meal-feedback';
 import { freshLaborSettlement } from '../labor-feedback';
 import { freshRideStop, type RideSeen } from '../transit-label';
+import { freshNeedNotice, type NeedSeen } from '../need-feedback';
 import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayNext, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
 
@@ -91,6 +92,7 @@ export class SimHost {
   /** Shift history length the client has been told about (labor-feedback.ts). */
   private laborSeen: number | null = null;
   private rideSeen: RideSeen | null = null;
+  private needSeen: NeedSeen | null = null;
 
   async handle(request: HostRequest): Promise<HostResponse> {
     const id = request.id;
@@ -208,7 +210,8 @@ export class SimHost {
     sim.step(seconds);
     const settled = freshLaborSettlement(state, this.laborSeen, id => this.world!.buildings.find(b => b.id === id)?.name ?? ''); this.laborSeen = settled.seen;
     const ride = freshRideStop(state, this.world!, this.rideSeen); this.rideSeen = ride.seen;
-    const notice = [settled.notice, ride.notice].filter(Boolean).join(' ');
+    const need = freshNeedNotice(state, this.world!, state.player.position, this.needSeen); this.needSeen = need.seen;
+    const notice = [settled.notice, ride.notice, need.notice].filter(Boolean).join(' ');
     return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected, ...(notice ? { notice } : {}), ...(ride.notice ? { cue: 'arrive' } : {}) };
   }
 

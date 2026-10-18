@@ -24,6 +24,7 @@ import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-s
 import { routeDistanceLabel } from './navigation-label';
 import { departureLabel, freshRideStop, nextStopTitle, rideFare, stoppedVehicleFirst, type RideSeen } from './transit-label';
 import { placeServicesSummary } from './place-services';
+import { freshNeedNotice, type NeedSeen } from './need-feedback';
 import { freshLaborSettlement } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
@@ -298,6 +299,7 @@ export class CityUI {
   private firstDay = new Set<string>();
   private laborSeen: number | null = null;
   private rideSeen: RideSeen | null = null;
+  private needSeen: NeedSeen | null = null;
   private autoVehicleTab: string | null = null;
   private purchaseMoney: number | null = null;
   private firstDayNextPending: string | null = null;
@@ -530,6 +532,8 @@ export class CityUI {
     this.laborSeen = settled.seen; if (settled.notice) this.notify(settled.notice, true);
     // A ride that just pulled in to a stop says where, and how to get off (transit-label.ts).
     const ride = freshRideStop(state, this.world, this.rideSeen); this.rideSeen = ride.seen; if (ride.notice) { this.notify(ride.notice, true); this.actions.cue?.('arrive'); }
+    // The player's own hunger or energy falling low is said once, with where to go (need-feedback.ts).
+    const need = freshNeedNotice(state, this.world, view.position, this.needSeen); this.needSeen = need.seen; if (need.notice) this.notify(need.notice, true);
     this.setText('day', `第 ${state.day + 1} 日`);
     this.setText('clock', clock(state.hour));
     // After dusk the header sits on a dark sky: it switches to light ink (the renderer's own daylight grade).
