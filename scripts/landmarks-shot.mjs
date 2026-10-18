@@ -31,7 +31,7 @@ try {
       const { world, controller, simulation, actions } = window.__YUNSHAN__;
       actions.command({ type: 'setTime', value: 11 });
       let feet, look;
-      if (name === 'forecourt') { const core = world.buildings.find(b => b.kind === 'core'); feet = { x: core.position.x + 25, y: core.position.y, z: core.door.z + 100 }; look = { x: core.position.x - 10, y: core.position.y + 2, z: core.door.z + 50 }; }
+      if (name === 'forecourt') { const core = world.buildings.find(b => b.kind === 'core'), dx = core.door.x - core.position.x, dz = core.door.z - core.position.z, len = Math.hypot(dx, dz) || 1; /* 40 m out from the real door along its own facing (the v8 layout moved the old fixed spot into a wall), looking back at the door. */ feet = { x: core.door.x + dx / len * 40, y: core.door.y, z: core.door.z + dz / len * 40 }; look = { x: core.door.x, y: core.door.y + 4, z: core.door.z }; }
       else if (name === 'rail' || name === 'bridge') {
         const modes = name === 'rail' ? ['lightRail', 'maglev'] : ['bridge'];
         const edge = world.edges.filter(e => modes.includes(e.mode) && e.points.length >= 2).sort((a, b) => b.points.length - a.points.length)[0];
