@@ -12,6 +12,7 @@ import { JourneyNavigation } from './journey';
 import type { JourneyNavigationPlan, TransitJourney, WalkingJourney } from './journey';
 import { releaseRoadExitPermit } from './roads';
 import { Ambience, ambienceLevels } from './audio/ambience';
+import { cueFor } from './audio/cues';
 import { getWaterfallPath, terrainHeight } from './world';
 import { readSavedGame, writeSavedGame } from './persistence';
 import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-layout';
@@ -107,6 +108,7 @@ let blocksVersion = '';
 const matrix = new THREE.Matrix4();
 
 const actions: UIActions = {
+  cue: name => ambience.cue(name),
   inspectBuildingAlteration: buildingId => simulation.inspectBuildingAlteration({ buildingId }),
   publicEmploymentStatus: () => simulation.publicServiceCoverage().transferReview ?? null,
   isAtBuildingFunctionPoint(buildingId, purpose) {
@@ -296,6 +298,7 @@ function execute(command: Command): void {
   const body = () => ({ hunger: simulation.state.player.needs.hunger, food: simulation.state.player.inventory.food ?? 0 }), before = body();
   const result = simulation.command(command);
   showNotice(result.ok ? result.message + mealFeedback(command.type, before, body()) : result.message, result.ok);
+  ambience.cue(cueFor(command.type, result.ok));
   if (result.ok && ['boardAircraft', 'leaveAircraft'].includes(command.type)) syncPlayerView();
   if (result.ok && ['leaveVehicle', 'ride', 'drive'].includes(command.type)) controller.syncPassenger(simulation.state.player.position);
   if (result.ok && ['planJourney', 'cancelJourney', 'leaveVehicle'].includes(command.type)) syncNavigation();

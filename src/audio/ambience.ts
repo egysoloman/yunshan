@@ -1,4 +1,5 @@
 import type { Vec3 } from '../types';
+import { CUE_TONES, type Cue } from './cues';
 
 /** Procedural ambience (no audio assets). Every level is read from the city's
  * own state: the crowd murmur follows the real residents near the player, the
@@ -30,11 +31,11 @@ export class Ambience {
   private master: GainNode | null = null;
   private channels = new Map<keyof AmbienceLevels, Channel>();
   private levels: AmbienceLevels = { wind: 0, water: 0, crowd: 0, birds: 0, insects: 0, steps: 0 };
-  private nextChirp = 0; private nextStep = 0;
+  private nextChirp = 0; private nextStep = 0; private lastCue: Cue | null = null;
   constructor(private volume = .6) {}
   get started(): boolean { return this.context !== null; }
   /** Last applied levels and the audio clock state (diagnostics). */
-  get snapshot(): { levels: AmbienceLevels; state: string | null } { return { levels: { ...this.levels }, state: this.context?.state ?? null }; }
+  get snapshot(): { levels: AmbienceLevels; state: string | null; lastCue: Cue | null } { return { levels: { ...this.levels }, state: this.context?.state ?? null, lastCue: this.lastCue }; }
   setVolume(volume: number): void { this.volume = clamp01(volume); if (this.master && this.context) this.master.gain.setTargetAtTime(this.volume, this.context.currentTime, .2); }
   start(): void {
     if (this.context) { void this.context.resume?.(); return; }
@@ -80,6 +81,18 @@ export class Ambience {
     const source = context.createBufferSource(), filter = context.createBiquadFilter(), gain = context.createGain();
     source.buffer = buffer; filter.type = 'lowpass'; filter.frequency.value = 900; gain.gain.value = .25 * level;
     source.connect(filter).connect(gain).connect(out); source.start(t);
+  }
+  /** A short action cue (cues.ts) over the ambience, at the master volume; silent until audio has started. */
+  cue(name: Cue | null): void {
+    if (!name) return; this.lastCue = name;
+    const context = this.context, master = this.master; if (!context || !master) return;
+    const t = context.currentTime;
+    for (const tone of CUE_TONES[name]) {
+      const osc = context.createOscillator(), gain = context.createGain(), at = t + tone.at, end = at + tone.duration;
+      osc.type = tone.wave; osc.frequency.setValueAtTime(tone.frequency, at);
+      gain.gain.setValueAtTime(0, at); gain.gain.linearRampToValueAtTime(tone.gain, at + .01); gain.gain.exponentialRampToValueAtTime(.0001, end);
+      osc.connect(gain).connect(master); osc.start(at); osc.stop(end + .02);
+    }
   }
   dispose(): void { void this.context?.close(); this.context = null; this.channels.clear(); }
 }

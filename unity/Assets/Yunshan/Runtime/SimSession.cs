@@ -39,6 +39,8 @@ namespace Yunshan.Runtime
         const string WelcomeSeenKey = "yunshan.ui.welcomeSeen.v1", FirstDayKey = "yunshan.ui.firstDay.v1";
         public readonly List<SimFrame.Event> EventLog = new List<SimFrame.Event>();
         public string Notice; public bool NoticeOk = true; public float NoticeAt;
+        /// <summary>An action cue (Core/ActionCues.cs) waiting to be played; the view takes it.</summary>
+        public string PendingCue;
         string firstDayNext; // said after the completing step's own notice has had its 8 s on screen
         public List<Vec3> Voxels = new List<Vec3>();
         public double BankAmount = 100;
@@ -112,6 +114,7 @@ namespace Yunshan.Runtime
             if (frame.Voxels != null) { Voxels = frame.Voxels; voxelKey = frame.VoxelKey ?? ""; }
             if (frame.Rejected != null) Say(frame.Rejected, false);
             if (frame.Notice != null) Say(frame.Notice, true);
+            if (frame.Cue != null) PendingCue = frame.Cue;
             if (moved || frame.Rejected != null || frame.Player.VehicleId != null || frame.AircraftList.Exists(a => a.Active)) PlayerMovedBySimulation?.Invoke(frame);
         }
 
@@ -172,7 +175,7 @@ namespace Yunshan.Runtime
             if (State != Phase.Ready) return;
             Run(client.Command(command, null, 260, lastEventId), result =>
             {
-                Say(result.message, result.ok); Accept(result.frame, result.ok);
+                Say(result.message, result.ok); PendingCue = ActionCues.CueFor(command.TryGetValue("type", out var type) ? type as string : null, result.ok); Accept(result.frame, result.ok);
                 after?.Invoke(result.ok);
                 contextAt = 0; panesAt = 0;
             }, null);

@@ -59,6 +59,8 @@ export interface HostFrame {
   rejected?: string | null;
   /** Set once when the player's shift has just settled (labor-feedback.ts) or their ride pulled in to a stop (transit-label.ts). */
   notice?: string;
+  /** The action cue for that notice (audio/cues.ts), e.g. 'arrive' when the ride pulled in to a stop. */
+  cue?: string;
   stepMs: number; ticks: number;
 }
 
@@ -207,7 +209,7 @@ export class SimHost {
     const settled = freshLaborSettlement(state, this.laborSeen, id => this.world!.buildings.find(b => b.id === id)?.name ?? ''); this.laborSeen = settled.seen;
     const ride = freshRideStop(state, this.world!, this.rideSeen); this.rideSeen = ride.seen;
     const notice = [settled.notice, ride.notice].filter(Boolean).join(' ');
-    return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected, ...(notice ? { notice } : {}) };
+    return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected, ...(notice ? { notice } : {}), ...(ride.notice ? { cue: 'arrive' } : {}) };
   }
 
   frame(request: HostRequest, stepMs: number, ticks: number): HostFrame {

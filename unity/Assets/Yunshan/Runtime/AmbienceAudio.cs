@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using Yunshan.Core;
 
@@ -16,6 +17,27 @@ namespace Yunshan.Runtime
         int sampleRate; uint seed = 0x9E3779B9u;
         double windLp, waterLp1, waterLp2, crowdLp1, crowdLp2, insectLp1, insectLp2;
         double chirpPhase, chirpFreq, chirpLeft, chirpWait, stepLeft, stepWait, insectPhase;
+        volatile string pendingCue; Tone[] cue; double cueClock, cueEnd;
+
+        /// <summary>A short action cue (Core/ActionCues.cs, web src/audio/cues.ts) over the ambience.</summary>
+        public void Play(string name) { if (name != null && ActionCues.Tones.ContainsKey(name)) pendingCue = name; }
+
+        double CueSample(double dt)
+        {
+            var next = pendingCue; if (next != null) { pendingCue = null; cue = ActionCues.Tones[next]; cueClock = 0; cueEnd = cue.Max(t => t.At + t.Duration); }
+            if (cue == null) return 0;
+            double sum = 0;
+            foreach (var tone in cue)
+            {
+                double local = cueClock - tone.At; if (local < 0 || local >= tone.Duration) continue;
+                // Same envelope as the web cue: 10 ms linear attack, then exponential decay to 1e-4 at the tone's end.
+                double envelope = local < .01 ? tone.Gain * local / .01 : tone.Gain * Math.Exp(Math.Log(.0001 / tone.Gain) * (local - .01) / (tone.Duration - .01));
+                double phase = 2 * Math.PI * tone.Frequency * local;
+                sum += envelope * (tone.Wave == "sine" ? Math.Sin(phase) : 2 / Math.PI * Math.Asin(Math.Sin(phase)));
+            }
+            cueClock += dt; if (cueClock > cueEnd) cue = null;
+            return sum;
+        }
 
         void Awake()
         {
@@ -51,6 +73,7 @@ namespace Yunshan.Runtime
                 // Steps: a soft thump every 0.45 s while walking.
                 if (stepLeft > 0) { sample += w * .25 * s * Math.Pow(stepLeft / .06, 3); stepLeft -= dt; }
                 else if (s > 0 && (stepWait -= dt) <= 0) { stepLeft = .06; stepWait = .45; }
+                sample += CueSample(dt);
                 float v = (float)(sample * Volume);
                 for (int c = 0; c < channels; c++) data[n + c] = v;
             }

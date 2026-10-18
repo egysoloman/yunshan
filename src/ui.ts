@@ -529,7 +529,7 @@ export class CityUI {
     const settled = freshLaborSettlement(state, this.laborSeen, id => this.world.buildings.find(b => b.id === id)?.name ?? '');
     this.laborSeen = settled.seen; if (settled.notice) this.notify(settled.notice, true);
     // A ride that just pulled in to a stop says where, and how to get off (transit-label.ts).
-    const ride = freshRideStop(state, this.world, this.rideSeen); this.rideSeen = ride.seen; if (ride.notice) this.notify(ride.notice, true);
+    const ride = freshRideStop(state, this.world, this.rideSeen); this.rideSeen = ride.seen; if (ride.notice) { this.notify(ride.notice, true); this.actions.cue?.('arrive'); }
     this.setText('day', `第 ${state.day + 1} 日`);
     this.setText('clock', clock(state.hour));
     // After dusk the header sits on a dark sky: it switches to light ink (the renderer's own daylight grade).

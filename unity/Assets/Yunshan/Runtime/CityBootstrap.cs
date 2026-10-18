@@ -293,7 +293,8 @@ namespace Yunshan.Runtime
             foreach (var line in new[] { world.River, waterfall }) if (line != null) for (int i = 1; i < line.Count; i++) water = Math.Min(water, SegmentDistanceXZ(feet, line[i - 1], line[i]));
             double speed = ambienceFeet != null && seconds > 0 ? Math.Sqrt(Math.Pow(feet.X - ambienceFeet.X, 2) + Math.Pow(feet.Z - ambienceFeet.Z, 2)) / seconds : 0; ambienceFeet = new Vec3(feet.X, feet.Y, feet.Z);
             int people = 0; foreach (var c in session.Frame.Citizens) if (c.Alive && c.State != "riding" && Math.Sqrt(Math.Pow(c.Position.X - feet.X, 2) + Math.Pow(c.Position.Y - feet.Y, 2) + Math.Pow(c.Position.Z - feet.Z, 2)) < 25) people++;
-            ambience.Apply(Ambience.Levels(new AmbienceInput { Hour = session.Frame.Hour, Position = feet, Ground = World.TerrainHeight(world, feet.X, feet.Z), WaterDistance = water, NearbyPeople = people, WalkingSpeed = mode == "walk" ? speed : 0, Inside = walker?.Walker.Inside != null, Weather = session.Frame.Weather ?? "晴", Paused = session.Frame.Paused }));
+            if (session.PendingCue != null) { ambience.Play(session.PendingCue); session.PendingCue = null; }
+                        ambience.Apply(Ambience.Levels(new AmbienceInput { Hour = session.Frame.Hour, Position = feet, Ground = World.TerrainHeight(world, feet.X, feet.Z), WaterDistance = water, NearbyPeople = people, WalkingSpeed = mode == "walk" ? speed : 0, Inside = walker?.Walker.Inside != null, Weather = session.Frame.Weather ?? "晴", Paused = session.Frame.Paused }));
         }
         static double SegmentDistanceXZ(Vec3 p, Vec3 a, Vec3 b)
         {
