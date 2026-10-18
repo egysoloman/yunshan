@@ -16,7 +16,7 @@ public class AmbienceParityTests
             var i = (Dictionary<string, object>)row["input"]; var p = (Dictionary<string, object>)i["position"]; var want = (Dictionary<string, object>)row["levels"];
             var got = Ambience.Levels(new AmbienceInput { Hour = (double)i["hour"], Position = new Vec3((double)p["x"], (double)p["y"], (double)p["z"]), Ground = (double)i["ground"], WaterDistance = (double)i["waterDistance"], NearbyPeople = (int)(double)i["nearbyPeople"], WalkingSpeed = (double)i["walkingSpeed"], Inside = (bool)i["inside"], Weather = (string)i["weather"], Paused = (bool)i["paused"] });
             Assert.Equal((double)want["wind"], got.Wind); Assert.Equal((double)want["water"], got.Water); Assert.Equal((double)want["crowd"], got.Crowd);
-            Assert.Equal((double)want["birds"], got.Birds); Assert.Equal((double)want["insects"], got.Insects); Assert.Equal((double)want["steps"], got.Steps);
+            Assert.Equal((double)want["birds"], got.Birds); Assert.Equal((double)want["insects"], got.Insects); Assert.Equal((double)want["steps"], got.Steps); Assert.Equal((double)want["rain"], got.Rain);
         }
     }
 }

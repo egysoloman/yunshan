@@ -5,7 +5,7 @@ import { CUE_TONES, type Cue } from './cues';
  * own state: the crowd murmur follows the real residents near the player, the
  * water follows the real river and waterfall, birds and insects the clock. */
 export interface AmbienceInput { hour: number; position: Vec3; ground: number; waterDistance: number; nearbyPeople: number; walkingSpeed: number; inside: boolean; weather: string; paused: boolean }
-export interface AmbienceLevels { wind: number; water: number; crowd: number; birds: number; insects: number; steps: number }
+export interface AmbienceLevels { wind: number; water: number; crowd: number; birds: number; insects: number; steps: number; rain: number }
 
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 /** 0 at night, 1 by day, eased over dawn (5–7) and dusk (18–20). */
@@ -21,6 +21,8 @@ export function ambienceLevels(i: AmbienceInput): AmbienceLevels {
     birds: indoor ? 0 : day * (1 - crowd) * .35 * (rain ? .2 : 1),
     insects: indoor ? 0 : (1 - day) * .3 * (rain ? .3 : 1),
     steps: i.paused || i.walkingSpeed < .5 ? 0 : clamp01(i.walkingSpeed / 6) * .5,
+    // Rain hiss while the simulation's weather is rain, muffled indoors.
+    rain: rain ? (indoor ? .25 : .8) : 0,
   };
 }
 
@@ -30,7 +32,7 @@ export class Ambience {
   private context: AudioContext | null = null;
   private master: GainNode | null = null;
   private channels = new Map<keyof AmbienceLevels, Channel>();
-  private levels: AmbienceLevels = { wind: 0, water: 0, crowd: 0, birds: 0, insects: 0, steps: 0 };
+  private levels: AmbienceLevels = { wind: 0, water: 0, crowd: 0, birds: 0, insects: 0, steps: 0, rain: 0 };
   private nextChirp = 0; private nextStep = 0; private lastCue: Cue | null = null;
   constructor(private volume = .6) {}
   get started(): boolean { return this.context !== null; }
@@ -54,14 +56,15 @@ export class Ambience {
       this.channels.set('water', bed('bandpass', 1100, .6));
       this.channels.set('crowd', bed('bandpass', 520, 1.2));
       this.channels.set('insects', bed('bandpass', 5200, 8));
+      this.channels.set('rain', bed('bandpass', 3200, .5));
       for (const key of ['birds', 'steps'] as const) { const gain = context.createGain(); gain.gain.value = 1; gain.connect(master); this.channels.set(key, { gain }); }
       this.context = context; this.master = master;
     } catch { this.context = null; }
   }
   update(levels: AmbienceLevels): void {
     this.levels = levels; const context = this.context; if (!context) return;
-    const t = context.currentTime, scale = { wind: .18, water: .22, crowd: .2, insects: .05 } as const;
-    for (const key of ['wind', 'water', 'crowd', 'insects'] as const) this.channels.get(key)?.gain.gain.setTargetAtTime(levels[key] * scale[key] * (key === 'crowd' ? .8 + Math.random() * .4 : 1), t, .6);
+    const t = context.currentTime, scale = { wind: .18, water: .22, crowd: .2, insects: .05, rain: .12 } as const;
+    for (const key of ['wind', 'water', 'crowd', 'insects', 'rain'] as const) this.channels.get(key)?.gain.gain.setTargetAtTime(levels[key] * scale[key] * (key === 'crowd' ? .8 + Math.random() * .4 : 1), t, .6);
     if (levels.birds > .05 && t >= this.nextChirp) { this.chirp(levels.birds); this.nextChirp = t + 1.5 + Math.random() * 5 / levels.birds; }
     if (levels.steps > 0 && t >= this.nextStep) { this.step(levels.steps); this.nextStep = t + .45; }
   }

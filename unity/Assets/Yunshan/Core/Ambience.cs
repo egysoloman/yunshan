@@ -8,7 +8,7 @@ namespace Yunshan.Core
     {
         public double Hour, Ground, WaterDistance, WalkingSpeed; public Vec3 Position; public int NearbyPeople; public bool Inside, Paused; public string Weather = "晴";
     }
-    public sealed class AmbienceLevels { public double Wind, Water, Crowd, Birds, Insects, Steps; }
+    public sealed class AmbienceLevels { public double Wind, Water, Crowd, Birds, Insects, Steps, Rain; }
 
     public static class Ambience
     {
@@ -33,6 +33,7 @@ namespace Yunshan.Core
                 Birds = indoor ? 0 : day * (1 - crowd) * .35 * (rain ? .2 : 1),
                 Insects = indoor ? 0 : (1 - day) * .3 * (rain ? .3 : 1),
                 Steps = i.Paused || i.WalkingSpeed < .5 ? 0 : Clamp01(i.WalkingSpeed / 6) * .5,
+                Rain = rain ? (indoor ? .25 : .8) : 0,
             };
         }
     }

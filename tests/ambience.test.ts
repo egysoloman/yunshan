@@ -22,3 +22,10 @@ test('the soundscape follows the city: people, water, height, clock, steps and i
   assert.equal(indoors.birds, 0); assert.equal(indoors.insects, 0); assert.ok(indoors.water < .2 && indoors.wind < .1);
   for (const levels of [quiet, busy, night, indoors]) for (const v of Object.values(levels)) assert.ok(v >= 0 && v <= 1);
 });
+
+test('rain is heard while it rains, muffled indoors, and silent otherwise', () => {
+  const base = { hour: 12, position: { x: 0, y: 100, z: 0 }, ground: 100, waterDistance: 500, nearbyPeople: 0, walkingSpeed: 0, inside: false, weather: '雨', paused: false };
+  assert.equal(ambienceLevels(base).rain, .8);
+  assert.equal(ambienceLevels({ ...base, inside: true }).rain, .25);
+  assert.equal(ambienceLevels({ ...base, weather: '晴' }).rain, 0);
+});
