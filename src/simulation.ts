@@ -1,4 +1,5 @@
 import { installPowerGrid, gridBuildingSupplyRatio, gridVehicleSupplyRatio, gridPoweredWorkMinutes, validatePowerGridDefinition } from './simulation/power-grid';
+import { PLAYER_YIELD_POLICIES, yieldStop, yieldsToPlayer, type PlayerYieldPolicy } from './simulation/player-yield';
 import { BOARDING_HOLD_METRES, BOARDING_HOLD_MINUTES, BOARDING_HOLD_POLICIES, holdsForPlayer, type BoardingHoldPolicy } from './simulation/boarding-hold';
 import { runScheduledServiceProcurement } from './simulation/service-material-scheduling';
 import { giftContactReason } from './simulation/gift-contact';
@@ -129,6 +130,7 @@ interface Runtime {
   foreignTradePolicyId?: ForeignTradePolicy;
   npcMotionPolicyId?: NpcMotionPolicy;
   boardingHoldPolicyId?: BoardingHoldPolicy;
+  playerYieldPolicyId?: PlayerYieldPolicy;
   /** Vehicles holding this stop for the player (boarding-hold.ts), cleared when they move off. */
   boardingHolds?: Record<string, true>;
   foreignTrade?: ForeignTradeState;
@@ -190,7 +192,7 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId', 'npcMotionPolicyId', 'boardingHoldPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId', 'npcMotionPolicyId', 'boardingHoldPolicyId', 'playerYieldPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (!MEAL_ROUTE_POLICIES.includes(options.mealRoutePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
@@ -199,7 +201,8 @@ export class Simulation implements SimulationAPI {
       || options.publicFinancePolicyId !== undefined && (!PUBLIC_FINANCE_POLICIES.includes(options.publicFinancePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.foreignTradePolicyId !== undefined && (!FOREIGN_TRADE_POLICIES.includes(options.foreignTradePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.npcMotionPolicyId !== undefined && (!NPC_MOTION_POLICIES.includes(options.npcMotionPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.boardingHoldPolicyId !== undefined && (!BOARDING_HOLD_POLICIES.includes(options.boardingHoldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.boardingHoldPolicyId !== undefined && (!BOARDING_HOLD_POLICIES.includes(options.boardingHoldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.playerYieldPolicyId !== undefined && (!PLAYER_YIELD_POLICIES.includes(options.playerYieldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
@@ -223,6 +226,7 @@ export class Simulation implements SimulationAPI {
     if (options?.foodFreightPolicyId) { this.runtime.foodFreightPolicyId = options.foodFreightPolicyId; this.runtime.cargoDestinations = {}; }
     if (options?.npcMotionPolicyId) this.runtime.npcMotionPolicyId = options.npcMotionPolicyId;
     if (options?.boardingHoldPolicyId) this.runtime.boardingHoldPolicyId = options.boardingHoldPolicyId;
+    if (options?.playerYieldPolicyId) this.runtime.playerYieldPolicyId = options.playerYieldPolicyId;
     if (options?.foreignTradePolicyId) { this.runtime.foreignTradePolicyId = options.foreignTradePolicyId; this.runtime.foreignTrade = { enabled: true, exportedUnits: 0, exportGross: 0 }; }
     if (options?.publicFinancePolicyId) { this.runtime.publicFinancePolicyId = options.publicFinancePolicyId; this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net: 0, base: 0 }; }
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
@@ -1797,6 +1801,8 @@ export class Simulation implements SimulationAPI {
       const proposed = t === 1 ? copy(next) : { x: citizen.position.x + (next.x - citizen.position.x) * t, y: citizen.position.y + (next.y - citizen.position.y) * t, z: citizen.position.z + (next.z - citizen.position.z) * t };
       if (!roadMovementAllowed(this.world, this.state, citizen.id, citizen.position, proposed)) return wait(true);
       if (!this.citizenReferenceSegmentAllowed(citizen, citizen.position, proposed, description.bodies ?? [])) return wait(false);
+      // A declared new city: the resident waits this step rather than walk into the player (player-yield.ts).
+      if (yieldsToPlayer(this.runtime.playerYieldPolicyId, this.yieldPlayerPosition(), citizen.position, proposed)) { citizen.position = yieldStop(this.state.player.position, citizen.position, proposed); break; }
       citizen.position = proposed;
       if (amount > 0 && citizen.state === 'physicalWaiting' && this.runtime.referenceCollisionPolicyId === CONTINUOUS_REFERENCE_COLLISION_POLICY) citizen.state = 'moving';
       movement = Math.max(0, movement - amount); if (t === 1) index++;
@@ -2769,10 +2775,13 @@ export class Simulation implements SimulationAPI {
   get foreignTradePolicyId(): ForeignTradePolicy | 'legacy' { return this.runtime.foreignTradePolicyId ?? 'legacy'; }
   get npcMotionPolicyId(): NpcMotionPolicy | 'legacy' { return this.runtime.npcMotionPolicyId ?? 'legacy'; }
   get boardingHoldPolicyId(): BoardingHoldPolicy | 'legacy' { return this.runtime.boardingHoldPolicyId ?? 'legacy'; }
+  get playerYieldPolicyId(): PlayerYieldPolicy | 'legacy' { return this.runtime.playerYieldPolicyId ?? 'legacy'; }
+  /** The player's body on foot, or null when riding, flying or viewing from the air (player-yield.ts). */
+  private yieldPlayerPosition(): Vec3 | null { return this.state.player.vehicleId || this.state.aviation?.activeAircraftId || (this.runtime.mode ?? 'walk') !== 'walk' ? null : this.state.player.position; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), ...(this.runtime.npcMotionPolicyId ? { npcMotionPolicyId: this.runtime.npcMotionPolicyId } : {}), ...(this.runtime.boardingHoldPolicyId ? { boardingHoldPolicyId: this.runtime.boardingHoldPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), ...(this.runtime.npcMotionPolicyId ? { npcMotionPolicyId: this.runtime.npcMotionPolicyId } : {}), ...(this.runtime.boardingHoldPolicyId ? { boardingHoldPolicyId: this.runtime.boardingHoldPolicyId } : {}), ...(this.runtime.playerYieldPolicyId ? { playerYieldPolicyId: this.runtime.playerYieldPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }

@@ -1,5 +1,6 @@
 import { Simulation } from './simulation';
 import { PLAYER_BOARDING_HOLD_POLICY } from './simulation/boarding-hold';
+import { PLAYER_YIELD_POLICY } from './simulation/player-yield';
 import { cachedWorld } from './persistence/world-cache';
 import { createWorld } from './world';
 import type { WorldDefinition } from './types';
@@ -33,7 +34,7 @@ export function createArchivedProductCity(world: WorldDefinition): Simulation {
 /** New cities select continuous ordinary reference legs; imports retain their
  * existing history, motion and collision contracts. */
 export function createCurrentProductCity(world: WorldDefinition): Simulation {
-  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: WORKING_LUNCH_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V3, publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V8, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, npcMotionPolicyId: NPC_MOTION_COARSE_POLICY, boardingHoldPolicyId: PLAYER_BOARDING_HOLD_POLICY });
+  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: WORKING_LUNCH_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V3, publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V8, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, npcMotionPolicyId: NPC_MOTION_COARSE_POLICY, boardingHoldPolicyId: PLAYER_BOARDING_HOLD_POLICY, playerYieldPolicyId: PLAYER_YIELD_POLICY });
 }
 
 /** Fresh city-life recipe for both graphical and headless hosts. The policy's
