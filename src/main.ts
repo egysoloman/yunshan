@@ -22,7 +22,7 @@ import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, V
 import { nearbyResident } from './social-reach';
 import { AUTO_TRANSIT_METRES } from './first-day';
 import { mealFeedback } from './meal-feedback';
-import { stoppedVehicleFirst } from './transit-label';
+import { eBoardsVehicle } from './transit-label';
 const PREF_KEY = 'yunshan.preferences.v1';
 /** A map crowd halo farther than this (straight line) is reached by public transport when a service exists. */
 /** The resident the player last met (see social-reach): kept while within talking reach. */
@@ -372,8 +372,8 @@ function interact(): void {
   if (controller.blockedAccess) { showNotice(controller.blockedAccess, false); controller.blockedAccess = null; return; }
   const nearby = getView();
   const building = nearby.nearbyBuilding;
-  // A vehicle stopped to board right here comes before the door (transit-label.ts).
-  if (!controller.inside && stoppedVehicleFirst(controller.position, nearby.nearbyVehicle, building?.door)) return execute({ type: 'ride', targetId: nearby.nearbyVehicle!.id });
+  // A vehicle stopped to board right here comes before the door, unless the panel shows the place (transit-label.ts).
+  if (!controller.inside && eBoardsVehicle(controller.position, nearby.nearbyVehicle, building?.door, ui.shownContext)) return execute({ type: 'ride', targetId: nearby.nearbyVehicle!.id });
   if (building && controller.useDoor(building)) {
     simulation.state.player.position = controller.walkingPosition;
     releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
@@ -382,13 +382,19 @@ function interact(): void {
     return;
   }
   if (nearby.nearbyCitizen && distance(controller.position, nearby.nearbyCitizen.position) < 6) return execute({ type: 'socialize', targetId: nearby.nearbyCitizen.id });
-  if (nearby.nearbyVehicle) return execute({ type: 'ride', targetId: nearby.nearbyVehicle.id });
+  if (nearby.nearbyVehicle && ui.shownContext !== 'building') return execute({ type: 'ride', targetId: nearby.nearbyVehicle.id });
+  // The panel names a place whose door is still a few steps away: say where it is rather than try to use it from here.
+  const facing = city.camera.getWorldDirection(new THREE.Vector3());
+  if (building && !controller.inside && Math.hypot(building.door.x - controller.position.x, building.door.z - controller.position.z) > 6) {
+    const hint = entranceHint(controller.position, { x: facing.x, z: facing.z }, [building]);
+    if (hint) return showNotice(`${hint}走到门前按 E。`);
+  }
   if (building) {
     const command: Record<string, Command['type']> = { market: 'purchase', home: 'rest', workshop: 'work', school: 'work', farm: 'work', core: 'energy' };
     if (command[building.kind]) return execute({ type: command[building.kind], targetId: building.id });
   }
   // Nothing here: point to the nearest entrance relative to the way the player faces (entrance-hint.ts).
-  const facing = city.camera.getWorldDirection(new THREE.Vector3()), hint = !controller.inside && entranceHint(controller.position, { x: facing.x, z: facing.z }, world.buildings);
+  const hint = !controller.inside && entranceHint(controller.position, { x: facing.x, z: facing.z }, world.buildings);
   showNotice(hint ? `${hint}走近后按 E。` : '靠近建筑入口、居民或交通站点后按 E。');
 }
 

@@ -146,6 +146,8 @@ export class CityUI {
   private panelOpen = false;
   private pane: Pane = 'life';
   private contextKind: ContextKind = 'building';
+  /** The tab the context panel is showing, or null while it is hidden (E follows it: transit-label.ts eBoardsVehicle). */
+  get shownContext(): ContextKind | null { return this.ref('context').hidden ? null : this.contextKind; }
   private contextSignature = '';
   private buildingInspection: BuildingAlterationReport | null = null;
   private selectedCitizen: string | null = null;

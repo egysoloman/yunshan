@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { BOARDING_REACH, departureLabel, freshRideStop, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
+import { BOARDING_REACH, departureLabel, eBoardsVehicle, freshRideStop, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
 import type { Vehicle } from '../src/types';
 import { createCurrentProductCity, createProductWorld } from '../src/product-city';
 
@@ -29,6 +29,12 @@ test('a stopped vehicle within reach and nearer than the door comes first', () =
   assert.equal(stoppedVehicleFirst(p, at(5), { x: 3, y: 0, z: 0 }), false);
   assert.equal(stoppedVehicleFirst(p, at(BOARDING_REACH + 0.5), null), false);
   assert.equal(stoppedVehicleFirst(p, null, null), false);
+  // E follows the tab the panel shows: never boards on the place tab, boards on the vehicle tab even with the door nearer.
+  assert.equal(eBoardsVehicle(p, at(5), { x: 7, y: 0, z: 0 }, 'building'), false);
+  assert.equal(eBoardsVehicle(p, at(5), { x: 3, y: 0, z: 0 }, 'vehicle'), true);
+  assert.equal(eBoardsVehicle(p, at(5, 'moving'), null, 'vehicle'), false);
+  assert.equal(eBoardsVehicle(p, at(5), { x: 7, y: 0, z: 0 }, null), true);
+  assert.equal(eBoardsVehicle(p, at(5), { x: 3, y: 0, z: 0 }, 'citizen'), false);
 });
 
 test('the next stop a stopped vehicle shows is where the simulation next brings it', () => {

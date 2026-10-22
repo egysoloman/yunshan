@@ -392,9 +392,9 @@ namespace Yunshan.Runtime
             }
             if (walker.Walker.BlockedAccess != null) { session.Say(walker.Walker.BlockedAccess, false); walker.Walker.BlockedAccess = null; return; }
             var building = walker.Walker.Inside ?? world.Buildings.Where(b => D(feet, b.Door) < 18).OrderBy(b => D(feet, b.Door)).FirstOrDefault();
-            // A vehicle stopped to board within 8 m, nearer than the door, is boarded first (web transit-label.ts stoppedVehicleFirst).
-            var stopped = walker.Walker.Inside != null ? null : NearestVehicle(frame, feet);
-            if (stopped != null && ContextLayout.StoppedVehicleFirst(feet, stopped.State, stopped.Position, building?.Door))
+            // A vehicle stopped to board within 8 m, nearer than the door, is boarded first, unless the panel shows the place (web transit-label.ts eBoardsVehicle).
+            var stopped = walker.Walker.Inside != null ? null : NearestVehicle(frame, feet); var shown = ShownContext();
+            if (stopped != null && ContextLayout.EBoardsVehicle(feet, stopped.State, stopped.Position, building?.Door, shown))
             { Execute(Cmd("ride", target: stopped.Id)); return; }
             if (building != null && walker.Walker.UseDoor(building))
                 session.Say(walker.Walker.Inside != null ? $"进入{building.Name}，可在右侧面板使用设施。楼内左后角为楼梯。" : $"走出{building.Name}。", true);
@@ -406,7 +406,7 @@ namespace Yunshan.Runtime
                 var person = met == null ? null : frame.Citizens.FirstOrDefault(c => c.Id == met.Id);
                 if (person != null && D(feet, person.Position) < 6) { Execute(Cmd("socialize", target: person.Id)); return; }
                 var vehicle = NearestVehicle(frame, feet);
-                if (vehicle != null) { Execute(Cmd("ride", target: vehicle.Id)); return; }
+                if (vehicle != null && shown != "building") { Execute(Cmd("ride", target: vehicle.Id)); return; }
                 // Nothing here: point to the nearest entrance relative to the way the player faces (Core/EntranceHint.cs).
                 var facing = view != null ? Space.ToGame(view.transform.forward) : new Vec3(0, 0, -1);
                 var hint = EntranceHint.Hint(feet, facing.X, facing.Z, world.Buildings);
@@ -552,6 +552,9 @@ namespace Yunshan.Runtime
         }
 
         static double Dist(Vec3 a, Vec3 b) => Math.Sqrt((a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y) + (a.Z - b.Z) * (a.Z - b.Z));
+        /// <summary>The kind of the context tab on screen, or null with no panel (E follows it).</summary>
+        string ShownContext() { var sections = session?.Context; return sections == null || sections.Count == 0 ? null : sections[Mathf.Clamp(contextTab, 0, sections.Count - 1)].Kind; }
+
         static SimFrame.Vehicle NearestVehicle(SimFrame frame, Vec3 feet) => frame.Vehicles.Where(v => Dist(feet, v.Position) < 24).OrderBy(v => Dist(feet, v.Position)).FirstOrDefault();
 
         void DrawContext(SimFrame frame)

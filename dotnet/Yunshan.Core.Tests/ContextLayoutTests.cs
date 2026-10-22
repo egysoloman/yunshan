@@ -20,6 +20,17 @@ public class ContextLayoutTests
     }
 
     [Fact]
+    public void EFollowsTheShownTab()
+    {
+        var p = At(0);
+        Assert.False(ContextLayout.EBoardsVehicle(p, "waiting", At(5), At(7), "building"));
+        Assert.True(ContextLayout.EBoardsVehicle(p, "waiting", At(5), At(3), "vehicle"));
+        Assert.False(ContextLayout.EBoardsVehicle(p, "moving", At(5), null, "vehicle"));
+        Assert.True(ContextLayout.EBoardsVehicle(p, "waiting", At(5), At(7), null));
+        Assert.False(ContextLayout.EBoardsVehicle(p, "waiting", At(5), At(3), "citizen"));
+    }
+
+    [Fact]
     public void PlaceServicesSummaryMatchesWeb()
     {
         Assert.Equal("这里可办理：购餐 · 购餐并带 1 份 · 开始 60 分钟现场工班 · 商人考核", ContextLayout.PlaceServicesSummary(new[] { "购餐，吃 1 份 · 11.67 云币", "购餐并带 1 份 · 23.35 云币", "开始 60 分钟现场工班", "商人考核 · 80 云币" }));

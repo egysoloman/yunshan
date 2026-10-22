@@ -21,6 +21,16 @@ namespace Yunshan.Core
             return toVehicle <= BoardingReach && (door == null || toVehicle < Distance(player, door));
         }
 
+        /// <summary>What E does beside a stopped vehicle follows the tab the panel shows (web transit-label.ts
+        /// eBoardsVehicle): never on the place tab, a stopped vehicle within reach on the vehicle tab, otherwise
+        /// StoppedVehicleFirst.</summary>
+        public static bool EBoardsVehicle(Vec3 player, string state, Vec3 vehicle, Vec3 door, string shown)
+        {
+            if (shown == "building") return false;
+            if (shown == "vehicle") return StoppedVehicleFirst(player, state, vehicle, null);
+            return StoppedVehicleFirst(player, state, vehicle, door);
+        }
+
         /// <summary>One line naming what a place offers, seen from the street.</summary>
         public static string PlaceServicesSummary(IEnumerable<string> labels)
         {

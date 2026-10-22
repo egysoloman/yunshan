@@ -21,6 +21,17 @@ export function stoppedVehicleFirst(player: { x: number; y: number; z: number },
   return toVehicle <= BOARDING_REACH && (!door || toVehicle < Math.hypot(door.x - player.x, door.y - player.y, door.z - player.z));
 }
 
+/** What E does next to a stopped vehicle follows the panel the player sees (2026-10-22: at the market
+ * spawn a bus pulled in behind the player between two 0.2 s panel refreshes; the panel still said
+ * "进入 / 使用建筑 · E" and E boarded a bus out of sight, and switching back to the place tab did not
+ * help either). On the place tab E never boards; on the vehicle tab it boards a stopped vehicle within
+ * reach; with neither shown, stoppedVehicleFirst decides. Unity: ContextLayout.EBoardsVehicle. */
+export function eBoardsVehicle(player: { x: number; y: number; z: number }, vehicle: Pick<Vehicle, 'state' | 'position'> | null | undefined, door: { x: number; y: number; z: number } | null | undefined, shown: string | null): boolean {
+  if (shown === 'building') return false;
+  if (shown === 'vehicle') return stoppedVehicleFirst(player, vehicle, null);
+  return stoppedVehicleFirst(player, vehicle, door);
+}
+
 /** Display only: the stop a vehicle is heading for. On arrival the simulation picks the next leg
  * before the vehicle waits, so a stopped vehicle already points at its next stop. A vehicle standing at
  * the very end it was heading for has not picked yet, and one at the end of a closed road picks again
