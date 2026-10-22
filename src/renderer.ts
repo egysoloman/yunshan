@@ -5,7 +5,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { mixHex, timeOfDayGrade } from './rendering/time-of-day-grade';
 import { cloudBanks } from './rendering/cloud-banks';
-import { lanternGlows } from './rendering/lantern-glow';
+import { LANTERN_GLOW_SHADER, lanternGlows } from './rendering/lantern-glow';
 import { groundPools } from './rendering/ground-glow';
 import { lanternStrings, terraceLanternStrings } from './rendering/lantern-strings';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
@@ -1068,15 +1068,20 @@ export class CityRenderer implements CityRendererAPI {
   }
   private buildLanternGlow() {
     // Additive warm glow with a minimum on-screen size, so lanterns still read
-    // as points of light at drone distance; it only lights after dusk.
+    // as points of light at drone distance; it only lights after dusk. A string
+    // lantern (modelled up close) grows into a halo around its lantern; the other
+    // glows have no lamp model and fade out near the camera (lantern-glow.ts).
     const glows = lanternGlows(this.world), geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(glows.flatMap(g => [g.x, g.y, g.z]), 3));
     geometry.setAttribute('glowSize', new THREE.Float32BufferAttribute(glows.map(g => g.kind === 'street' ? 3.6 : g.kind === 'eave' || g.kind === 'string' ? 2.8 : 3.2), 1));
+    geometry.setAttribute('glowModelled', new THREE.Float32BufferAttribute(glows.map(g => g.kind === 'string' ? 1 : 0), 1));
     const material = new THREE.ShaderMaterial({
       uniforms: { night: { value: 0 }, scale: { value: 400 } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-      vertexShader: `attribute float glowSize; uniform float scale; varying float vFade;
+      vertexShader: `attribute float glowSize; attribute float glowModelled; uniform float scale; varying float vFade;
         void main() { vec4 mv = modelViewMatrix * vec4(position, 1.0); float d = -mv.z; gl_Position = projectionMatrix * mv;
-          gl_PointSize = clamp(glowSize * scale / max(d, 1.0), 6.0, 18.0); vFade = clamp(1.4 - d / 4200.0, .25, 1.0); }`,
+          gl_PointSize = clamp(glowSize * scale / max(d, 1.0), 6.0, mix(LANTERN_GLOW_FAR_PX, LANTERN_GLOW_NEAR_PX, glowModelled));
+          vFade = clamp(1.4 - d / 4200.0, .25, 1.0) * max(glowModelled, smoothstep(LANTERN_GLOW_FADE_FROM, LANTERN_GLOW_FADE_TO, d)); }`
+        .replace(/LANTERN_GLOW_(\w+)/g, (_, key: keyof typeof LANTERN_GLOW_SHADER) => LANTERN_GLOW_SHADER[key].toFixed(1)),
       fragmentShader: `uniform float night; varying float vFade;
         void main() { vec2 c = gl_PointCoord - .5; float r = length(c) * 2.0; if (r > 1.0) discard;
           float core = smoothstep(.42, .0, r), halo = pow(1.0 - r, 1.4);

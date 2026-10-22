@@ -7,6 +7,11 @@ import { lanternStrings, terraceLanternStrings } from './lantern-strings';
  * the concept art is strung with warm lights. Glows sit where the city already
  * has lights: a pair beside every door, the eave corners and mid-eaves of low buildings and
  * street lamps along roads. Positions are a pure function of the world. */
+/** On-screen sizing (web shader and Unity Shaders/LanternGlow.shader): every glow is clamp(size × 400 / distance, 6, cap) px.
+ * String lanterns are modelled, so their cap is NEAR_PX and they grow into a halo around the lantern up close (2026-10-22: an
+ * 18 px cap left a street lantern 10 m away larger than its own glow). The other kinds stand where there is no lamp model:
+ * capped at FAR_PX and faded out between FADE_TO and FADE_FROM metres, so none hangs in mid-air in front of the player. */
+export const LANTERN_GLOW_SHADER = { FAR_PX: 18, NEAR_PX: 96, FADE_FROM: 40, FADE_TO: 80 } as const;
 export interface LanternGlow { x: number; y: number; z: number; kind: 'door' | 'eave' | 'street' | 'string' }
 
 const NO_EAVE = new Set(['station', 'airport', 'starport', 'core', 'facility']);

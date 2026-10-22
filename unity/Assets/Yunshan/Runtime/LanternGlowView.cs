@@ -18,10 +18,10 @@ namespace Yunshan.Runtime
             Vector2[] quad = { new Vector2(-1, -1), new Vector2(1, -1), new Vector2(1, 1), new Vector2(-1, 1) };
             foreach (var g in glows)
             {
-                // Sizes as the web: street lamps 3.6, eaves and strings 2.8, doors 3.2.
+                // Sizes as the web: street lamps 3.6, eaves and strings 2.8, doors 3.2; y marks the modelled string lanterns.
                 float size = g.Kind == "street" ? 3.6f : g.Kind == "eave" || g.Kind == "string" ? 2.8f : 3.2f; int start = vertices.Count;
                 var centre = Space.ToUnity(g.X, g.Y, g.Z);
-                foreach (var corner in quad) { vertices.Add(centre); corners.Add(corner); sizes.Add(new Vector2(size, 0)); }
+                foreach (var corner in quad) { vertices.Add(centre); corners.Add(corner); sizes.Add(new Vector2(size, g.Kind == "string" ? 1 : 0)); }
                 indices.AddRange(new[] { start, start + 1, start + 2, start, start + 2, start + 3 });
             }
             var mesh = new Mesh { name = "灯笼远景发光", indexFormat = UnityEngine.Rendering.IndexFormat.UInt32 };
