@@ -27,6 +27,7 @@ import { mealFeedback } from '../meal-feedback';
 import { freshLaborPause, freshLaborSettlement, type LaborSeen } from '../labor-feedback';
 import { freshRideStop, type RideSeen } from '../transit-label';
 import { freshNeedNotice, type NeedSeen } from '../need-feedback';
+import { freshDistrictArrival, type DistrictSeen } from '../district-arrival';
 import { freshDaySummary, type DaySnapshot } from '../day-summary';
 import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayNext, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
@@ -94,6 +95,7 @@ export class SimHost {
   private laborSeen: number | null = null;
   private rideSeen: RideSeen | null = null;
   private needSeen: NeedSeen | null = null;
+  private districtSeen: DistrictSeen | null = null;
   private daySeen: DaySnapshot | null = null;
   private laborPauseSeen: LaborSeen | null = null;
 
@@ -214,9 +216,10 @@ export class SimHost {
     const settled = freshLaborSettlement(state, this.laborSeen, id => this.world!.buildings.find(b => b.id === id)?.name ?? ''); this.laborSeen = settled.seen;
     const ride = freshRideStop(state, this.world!, this.rideSeen); this.rideSeen = ride.seen;
     const need = freshNeedNotice(state, this.world!, state.player.position, this.needSeen); this.needSeen = need.seen;
+    const place = freshDistrictArrival(state, this.world!, state.player.position, this.districtSeen); this.districtSeen = place.seen;
     const day = freshDaySummary(state, this.daySeen); this.daySeen = day.seen;
     const pause = freshLaborPause(state, this.laborPauseSeen, id => this.world!.buildings.find(b => b.id === id)?.name ?? ''); this.laborPauseSeen = pause.seen;
-    const notice = [day.notice, settled.notice, pause.notice, ride.notice, need.notice].filter(Boolean).join(' ');
+    const notice = [day.notice, settled.notice, pause.notice, ride.notice, place.notice, need.notice].filter(Boolean).join(' ');
     return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected, ...(notice ? { notice } : {}), ...(ride.notice ? { cue: 'arrive' } : {}) };
   }
 
