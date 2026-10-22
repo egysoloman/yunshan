@@ -27,6 +27,7 @@ import { placeServicesSummary } from './place-services';
 import { freshNeedNotice, type NeedSeen } from './need-feedback';
 import { freshDistrictArrival, type DistrictSeen } from './district-arrival';
 import { eGreetsResident } from './social-reach';
+import { districtLine } from './district-lines';
 import { freshDaySummary, type DaySnapshot } from './day-summary';
 import { freshLaborSettlement, freshLaborPause, playerLaborLabel, type LaborSeen } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
@@ -588,17 +589,7 @@ export class CityUI {
   }
 
   private nearestDistrict(position: { x: number; z: number }) { return this.world.districts.reduce((a, b) => distance(position, a.center) < distance(position, b.center) ? a : b); }
-  private sceneDescription(districtId: string, hour: number): string {
-    const district = this.world.districts.find(d => d.id === districtId)!;
-    const night = hour < 5 || hour >= 19;
-    const kind = district.kind;
-    if (kind === 'civic') return night ? '天枢灯明，市政与一城生息相连。' : '瀑声入阁，开放的市政大厅迎接每位旅人。';
-    if (/水|岸|港/.test(kind + district.name)) return night ? '水岸灯火，渡船沿溪而行。' : '云影入水，桥与船连接两岸。';
-    if (/山顶|亭|峰/.test(kind + district.name)) return night ? '登临高处，望一城灯火。' : '层峦在足下，山风穿过飞檐。';
-    if (/能源|瀑|中枢/.test(kind + district.name)) return night ? '瀑声不息，能量光带贯穿群山。' : '瀑布穿崖，层楼依水向天。';
-    if (/工|坊/.test(kind + district.name)) return night ? '工坊尚明，货物流向远方。' : '沿山而筑，百工有序，车流不息。';
-    return night ? '夜色入山，万家灯火沿谷而生。' : hour < 9 ? '晨雾渐散，街巷间的一天正在开始。' : hour >= 16 ? '斜阳染檐，山城在暮色中舒展。' : '重峦之间，街巷与轨道连接一城生息。';
-  }
+  private sceneDescription(districtId: string, hour: number): string { return districtLine(districtId, hour); }
   private refreshPanel(): void {
     if (!this.state || !this.view) return;
     const focused = document.activeElement;
