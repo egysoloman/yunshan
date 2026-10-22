@@ -14,6 +14,7 @@ import { RoadClosureOverlay } from './rendering/road-closures';
 import { getFloorDimensions, getStairPosition } from './access';
 import { buildLandscape } from './rendering/terrain';
 import { RAIN, rainActive, rainDrop } from './rendering/rain';
+import { BANNER, districtBanners } from './rendering/district-banners';
 import { createRoofGeometry, roofHeightAt, type RoofProfile } from './rendering/architecture-layout';
 import { buildProgramArchitecture, type ArchitectureTemplate } from './rendering/architecture-bodies';
 import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floor-plan';
@@ -517,6 +518,7 @@ export class CityRenderer implements CityRendererAPI {
     this.clouds = this.buildCloudBanks(); this.scene.add(this.clouds);
     this.lanterns = this.buildLanternGlow(); this.scene.add(this.lanterns);
     this.groundGlow = this.buildGroundGlow(); this.scene.add(this.groundGlow);
+    this.scene.add(this.buildDistrictBanners(world));
     this.silhouettes = this.buildSilhouetteRing(); this.scene.add(this.silhouettes);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
@@ -1011,6 +1013,28 @@ export class CityRenderer implements CityRendererAPI {
   private lanterns!: THREE.Points;
   private groundGlow!: THREE.Mesh;
   /** Warm pools of light on the ground under street and door lamps after dusk (ground-glow.ts). */
+  /** District-name cloth banners on entrance facades (rendering/district-banners.ts): one texture and one instanced draw per district. */
+  private buildDistrictBanners(world: WorldDefinition): THREE.Group {
+    const group = new THREE.Group(); group.name = '城区竖幅';
+    const banners = districtBanners(world), byDistrict = new Map<string, typeof banners>();
+    for (const banner of banners) { const list = byDistrict.get(banner.districtId); if (list) list.push(banner); else byDistrict.set(banner.districtId, [banner]); }
+    const geometry = new THREE.PlaneGeometry(BANNER.width, BANNER.height), matrix = new THREE.Matrix4(), q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0), scale = new THREE.Vector3(1, 1, 1);
+    for (const [districtId, list] of byDistrict) {
+      const canvas = document.createElement('canvas'); canvas.width = 128; canvas.height = 512; const c = canvas.getContext('2d')!;
+      c.fillStyle = '#8e2a22'; c.fillRect(0, 0, 128, 512); c.strokeStyle = '#d8b26a'; c.lineWidth = 6; c.strokeRect(9, 9, 110, 494);
+      c.fillStyle = '#5d1a15'; c.fillRect(0, 0, 128, 22); c.fillRect(0, 490, 128, 22);
+      const chars = [...list[0].text], step = Math.min(110, 440 / chars.length);
+      c.fillStyle = '#f3dfb0'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `600 ${Math.floor(step * .82)}px "Noto Serif CJK SC", serif`;
+      chars.forEach((ch, i) => c.fillText(ch, 64, 256 - (chars.length - 1) * step / 2 + i * step));
+      const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = 4;
+      // A little of its own light keeps the name readable on a facade in shade.
+      const material = new THREE.MeshStandardMaterial({ map: texture, roughness: .9, side: THREE.DoubleSide, emissive: '#ffffff', emissiveMap: texture, emissiveIntensity: .25 });
+      const mesh = new THREE.InstancedMesh(geometry, material, list.length); mesh.name = `城区竖幅 · ${districtId}`;
+      list.forEach((banner, i) => { q.setFromAxisAngle(up, banner.yaw); matrix.compose(new THREE.Vector3(banner.position.x, banner.position.y, banner.position.z), q, scale); mesh.setMatrixAt(i, matrix); });
+      mesh.instanceMatrix.needsUpdate = true; mesh.computeBoundingSphere(); group.add(mesh);
+    }
+    return group;
+  }
   private buildGroundGlow() {
     const pools = groundPools(this.world), positions: number[] = [], corners: number[] = [], indices: number[] = [];
     for (const p of pools) {

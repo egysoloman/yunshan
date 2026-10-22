@@ -155,6 +155,7 @@ namespace Yunshan.Runtime
                 doorwayGlow = new DoorwayGlowView(stationRoot, world);
                 lanternGlow = new LanternGlowView(stationRoot, world);
                 rain = new RainView(stationRoot);
+                _ = new DistrictBannerView(stationRoot, world, signFont);
                 status = null;
                 _ = BuildMapAsync();
                 StartCoroutine(NearDetailLoop());
