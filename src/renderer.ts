@@ -16,6 +16,7 @@ import { buildLandscape } from './rendering/terrain';
 import { RAIN, rainActive, rainDrop } from './rendering/rain';
 import { BANNER, districtBanners } from './rendering/district-banners';
 import { DISTRICT_TAG, districtTagShown, districtTags, type DistrictTag } from './rendering/district-tags';
+import { BIRDS, birdFlocks, birdsAt, type Flock } from './rendering/bird-flocks';
 import { createRoofGeometry, roofHeightAt, type RoofProfile } from './rendering/architecture-layout';
 import { buildProgramArchitecture, type ArchitectureTemplate } from './rendering/architecture-bodies';
 import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floor-plan';
@@ -214,6 +215,8 @@ export class CityRenderer implements CityRendererAPI {
   /** The player's studio forearms (CHAR-075) while walking on foot. */
   setFirstPersonArms(visible: boolean): void { if (this.firstPersonArms) this.firstPersonArms.visible = visible; }
   private districtTagGroup!: THREE.Group;
+  private birds!: THREE.InstancedMesh;
+  private flocks: Flock[] = [];
   private flying = false;
   /** Drone or jet flight: district names hang over the city (district-tags.ts). */
   setFlying(flying: boolean): void { this.flying = flying; }
@@ -525,6 +528,7 @@ export class CityRenderer implements CityRendererAPI {
     this.groundGlow = this.buildGroundGlow(); this.scene.add(this.groundGlow);
     this.scene.add(this.buildDistrictBanners(world));
     this.districtTagGroup = this.buildDistrictTags(world); this.scene.add(this.districtTagGroup);
+    this.birds = this.buildBirds(world); this.scene.add(this.birds);
     this.silhouettes = this.buildSilhouetteRing(); this.scene.add(this.silhouettes);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
@@ -1045,6 +1049,21 @@ export class CityRenderer implements CityRendererAPI {
     }
     return group;
   }
+  private buildBirds(world: WorldDefinition): THREE.InstancedMesh {
+    // Two wings meeting along the body; the per-instance y scale is the flap (−1 down … 1 up), so the wings beat.
+    const half = BIRDS.wingspan / 2, geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, .22, 0, 0, -.22, -half, .35, -.05, 0, 0, -.22, 0, 0, .22, half, .35, -.05], 3));
+    geometry.computeVertexNormals();
+    this.flocks = birdFlocks(world);
+    const mesh = new THREE.InstancedMesh(geometry, new THREE.MeshBasicMaterial({ color: '#33302c', side: THREE.DoubleSide }), this.flocks.length * BIRDS.perFlock);
+    mesh.name = '城区上空的鸟群'; mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); mesh.frustumCulled = false; mesh.visible = false; return mesh;
+  }
+  private updateBirds(seconds: number, daylight: number) {
+    this.birds.visible = daylight >= BIRDS.daylight; if (!this.birds.visible) return;
+    const matrix = new THREE.Matrix4(), q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0), at = new THREE.Vector3(), scale = new THREE.Vector3();
+    birdsAt(this.flocks, seconds).forEach((bird, i) => { q.setFromAxisAngle(up, bird.yaw); matrix.compose(at.set(bird.x, bird.y, bird.z), q, scale.set(1, bird.flap, 1)); this.birds.setMatrixAt(i, matrix); });
+    this.birds.instanceMatrix.needsUpdate = true;
+  }
   private buildGroundGlow() {
     const pools = groundPools(this.world), positions: number[] = [], corners: number[] = [], indices: number[] = [];
     for (const p of pools) {
@@ -1238,6 +1257,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.needsUpdate = true; if (signal.instanceColor) signal.instanceColor.needsUpdate = true; }
     const detailedSigns = new Set<string>(this.architectureDetail.group.userData.activeBuildingIds ?? []);
     for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id && !detailedSigns.has(label.building.id) : this.insideId === label.building.id && this.insideFloor === label.floor;
+    this.updateBirds(elapsed, daylight);
     const tagHeight = DISTRICT_TAG.screen * 2 * Math.tan(THREE.MathUtils.degToRad(this.camera.fov) / 2);
     for (const child of this.districtTagGroup.children) { const sprite = child as THREE.Sprite; sprite.visible = districtTagShown(this.flying, sprite.userData.tag as DistrictTag, this.camera.position); sprite.scale.set(tagHeight / 3, tagHeight, 1); }
     this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality, this.studioCharacters?.modelled);

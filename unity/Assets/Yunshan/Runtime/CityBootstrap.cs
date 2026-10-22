@@ -38,7 +38,7 @@ namespace Yunshan.Runtime
         readonly Dictionary<string, (TextMesh text, Building building)> shopSigns = new Dictionary<string, (TextMesh, Building)>();
         Font signFont;
         StationSignPool stationSigns; float nextStationSigns;
-        DistrictTagView districtTags;
+        DistrictTagView districtTags; BirdFlockView birdFlocks;
         DoorwayGlowView doorwayGlow; LanternGlowView lanternGlow; float lastDaylight = 1;
         WoodlandView woodland;
         Vector2 contextScroll, panesScroll;
@@ -158,6 +158,7 @@ namespace Yunshan.Runtime
                 rain = new RainView(stationRoot);
                 _ = new DistrictBannerView(stationRoot, world, signFont);
                 districtTags = new DistrictTagView(stationRoot, world, signFont);
+                birdFlocks = new BirdFlockView(stationRoot, world);
                 status = null;
                 _ = BuildMapAsync();
                 StartCoroutine(NearDetailLoop());
@@ -419,7 +420,7 @@ namespace Yunshan.Runtime
             if (sun == null) return;
             double hour = session?.Frame?.Hour ?? 10;
             float angle = (float)((hour - 6) / 24 * Math.PI * 2), altitude = Mathf.Sin(angle);
-            float daylight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.12f, .28f, altitude)); lastDaylight = daylight; lanternGlow?.Update(daylight);
+            float daylight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.12f, .28f, altitude)); lastDaylight = daylight; lanternGlow?.Update(daylight); birdFlocks?.Update(Time.time, daylight);
             if (districtTags != null && view != null) districtTags.Update(walker != null && walker.Mode != "walk", view);
             if (rain != null && view != null) rain.Update(session?.Frame?.Weather ?? "晴", walker?.Walker.Inside != null, view.transform.position, daylight);
             var sunGame = new Vector3(-Mathf.Cos(angle) * 2500, altitude * 2500, altitude * 1400); // already mirrored X
