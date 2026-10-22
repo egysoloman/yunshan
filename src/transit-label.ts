@@ -1,4 +1,5 @@
 import { isRoadOpen } from './roads';
+import { gridVehicleSupplyRatio } from './simulation/power-grid';
 import type { SimState, TransportMode, Vehicle, WorldDefinition } from './types';
 
 /** The ticket a passenger pays to board (Simulation command 'ride'). */
@@ -19,6 +20,22 @@ export function stoppedVehicleFirst(player: { x: number; y: number; z: number },
   if (!vehicle || (vehicle.state !== 'waiting' && vehicle.state !== 'boarding')) return false;
   const toVehicle = Math.hypot(vehicle.position.x - player.x, vehicle.position.y - player.y, vehicle.position.z - player.z);
   return toVehicle <= BOARDING_REACH && (!door || toVehicle < Math.hypot(door.x - player.x, door.y - player.y, door.z - player.z));
+}
+
+/** Display only: for the vehicle the player rides, about how long until it reaches the stop it is heading for,
+ * by the simulation's own movement rule (speed in metres per game minute, scaled by its power supply, at least
+ * 0.3, and road congestion), plus any wait before it leaves. Null for another vehicle, without power or on a
+ * closed road (2026-10-22: a cable car ride takes hours of game time and said nothing about how long). */
+export function rideArrivalLabel(vehicle: Vehicle, world: Pick<WorldDefinition, 'edges'>, state: SimState): string | null {
+  if (state.player.vehicleId !== vehicle.id || !isRoadOpen(state, vehicle.edgeId)) return null;
+  const edge = world.edges.find(e => e.id === vehicle.edgeId); if (!edge) return null;
+  const energy = state.powerGrid ? gridVehicleSupplyRatio(state, vehicle.id) : state.energy / 100;
+  if (energy < .18 && vehicle.kind !== 'bridge') return null;
+  const hour = state.hour, congestion = vehicle.kind === 'road' ? .8 + (hour >= 7 && hour < 9 || hour >= 17 && hour < 19 ? -.22 : .1) : 1;
+  const remaining = edge.length * (vehicle.direction > 0 ? 1 - vehicle.progress : vehicle.progress), rate = vehicle.speed * Math.max(.3, energy) * congestion;
+  if (rate <= 0) return null;
+  const wait = Math.max(0, vehicle.nextDeparture - (state.day * 1440 + state.hour * 60)), minutes = Math.ceil(wait + remaining / rate);
+  return minutes < 1 ? '即将到站' : minutes < 60 ? `约 ${minutes} 分钟后到站` : `约 ${Math.floor(minutes / 60)} 小时 ${minutes % 60} 分后到站`;
 }
 
 /** What E does next to a stopped vehicle follows the panel the player sees (2026-10-22: at the market

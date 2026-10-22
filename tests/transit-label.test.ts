@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { BOARDING_REACH, departureLabel, eBoardsVehicle, freshRideStop, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
+import { BOARDING_REACH, departureLabel, eBoardsVehicle, rideArrivalLabel, freshRideStop, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
 import type { Vehicle } from '../src/types';
 import { createCurrentProductCity, createProductWorld } from '../src/product-city';
 
@@ -75,4 +75,17 @@ test('a ride that pulls in to a stop says once which stop it is and how to get o
   assert.equal(freshRideStop(sim.state, world, seen).notice, null, 'said once per stop');
   const left = sim.command({ type: 'leaveVehicle' }); assert.ok(left.ok, left.message);
   assert.deepEqual(freshRideStop(sim.state, world, seen), { seen: { vehicleId: null, stopped: false }, notice: null });
+});
+
+test('the vehicle the player rides says about how long until its stop, by the movement rule', () => {
+  const world = { edges: [{ id: 'cable-a-b', from: 'a', to: 'b', mode: 'cable', length: 1200, capacity: 1, points: [] }] } as any;
+  const ride = (over: Record<string, unknown> = {}) => ({ id: 'cab', kind: 'cable', edgeId: 'cable-a-b', progress: .25, direction: 1, speed: 6, state: 'moving', nextDeparture: 0, passengers: 1, cargo: 0, position: { x: 0, y: 0, z: 0 }, ...over }) as any;
+  const state = (over: Record<string, unknown> = {}) => ({ day: 0, hour: 10, energy: 50, player: { vehicleId: 'cab' }, ...over }) as any;
+  // 900 m left at 6 × 0.5 = 3 m per game minute: 300 minutes.
+  assert.equal(rideArrivalLabel(ride(), world, state()), '约 5 小时 0 分后到站');
+  assert.equal(rideArrivalLabel(ride({ progress: .9 }), world, state({ energy: 100 })), '约 20 分钟后到站');
+  assert.equal(rideArrivalLabel(ride({ progress: .25, direction: -1 }), world, state({ energy: 100 })), '约 50 分钟后到站', 'heading back toward progress 0');
+  assert.equal(rideArrivalLabel(ride({ state: 'waiting', nextDeparture: 10 * 60 + 5, progress: 1, direction: -1 }), world, state({ energy: 100 })), '约 3 小时 25 分后到站', 'the wait before leaving counts too');
+  assert.equal(rideArrivalLabel(ride(), world, state({ player: { vehicleId: 'other' } })), null, 'only for the vehicle the player rides');
+  assert.equal(rideArrivalLabel(ride(), world, state({ energy: 10 })), null, 'without power it says nothing');
 });

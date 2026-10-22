@@ -22,7 +22,7 @@ import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citi
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 import { routeDistanceLabel } from './navigation-label';
-import { departureLabel, freshRideStop, nextStopTitle, rideFare, stoppedVehicleFirst, type RideSeen } from './transit-label';
+import { departureLabel, rideArrivalLabel, freshRideStop, nextStopTitle, rideFare, stoppedVehicleFirst, type RideSeen } from './transit-label';
 import { placeServicesSummary } from './place-services';
 import { freshNeedNotice, type NeedSeen } from './need-feedback';
 import { freshDistrictArrival, type DistrictSeen } from './district-arrival';
@@ -1400,7 +1400,7 @@ export class CityUI {
       const inspect = element('button', 'text-button full-width', '查看身份、住处与共同记忆 ↗'); inspect.type = 'button'; inspect.dataset.action = 'relations'; body.append(inspect);
       if (!walk) body.append(element('p', 'context-hint', '步行走近居民后，可以交谈与互动。'));
     } else if (vehicle) {
-      body.append(element('span', 'eyebrow', `${modeNames[vehicle.kind]} · ${activity(vehicle.state)}${departureLabel(vehicle, state)}`), element('h3', '', nextStopTitle(vehicle, this.world, state) ?? (state.player.vehicleId ? '同行于山城' : `附近${modeNames[vehicle.kind]}载具`)), element('p', 'context-subtitle', `${vehicle.passengers} 位乘客 · 货物 ${Math.round(vehicle.cargo)} · ${Math.round(vehicle.speed)} m/s`));
+      body.append(element('span', 'eyebrow', `${modeNames[vehicle.kind]} · ${activity(vehicle.state)}${departureLabel(vehicle, state)}`), element('h3', '', nextStopTitle(vehicle, this.world, state) ?? (state.player.vehicleId ? '同行于山城' : `附近${modeNames[vehicle.kind]}载具`)), element('p', 'context-subtitle', [rideArrivalLabel(vehicle, this.world, state), `${vehicle.passengers} 位乘客 · 货物 ${Math.round(vehicle.cargo)} · ${Math.round(vehicle.speed)} m/s`].filter(Boolean).join(' · ')));
       const controls = element('div', 'button-grid context-actions');
       if (state.player.vehicleId) controls.append(commandButton('下车 / 离开载具', 'leaveVehicle', vehicle.id));
       else {
