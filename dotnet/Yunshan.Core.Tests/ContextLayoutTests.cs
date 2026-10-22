@@ -31,6 +31,18 @@ public class ContextLayoutTests
     }
 
     [Fact]
+    public void EGreetsByTheShownTab()
+    {
+        var p = At(0);
+        Assert.True(ContextLayout.EGreetsResident(p, At(3), At(10), null));
+        Assert.False(ContextLayout.EGreetsResident(p, At(3), At(5), null));
+        Assert.True(ContextLayout.EGreetsResident(p, At(3), At(5), "citizen"));
+        Assert.False(ContextLayout.EGreetsResident(p, At(3), null, "building"));
+        Assert.False(ContextLayout.EGreetsResident(p, At(6), null, "citizen"));
+        Assert.False(ContextLayout.EGreetsResident(p, null, null, "citizen"));
+    }
+
+    [Fact]
     public void PlaceServicesSummaryMatchesWeb()
     {
         Assert.Equal("这里可办理：购餐 · 购餐并带 1 份 · 开始 60 分钟现场工班 · 商人考核", ContextLayout.PlaceServicesSummary(new[] { "购餐，吃 1 份 · 11.67 云币", "购餐并带 1 份 · 23.35 云币", "开始 60 分钟现场工班", "商人考核 · 80 云币" }));

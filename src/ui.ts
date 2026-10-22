@@ -26,6 +26,7 @@ import { departureLabel, rideArrivalLabel, freshRideStop, nextStopTitle, rideFar
 import { placeServicesSummary } from './place-services';
 import { freshNeedNotice, type NeedSeen } from './need-feedback';
 import { freshDistrictArrival, type DistrictSeen } from './district-arrival';
+import { eGreetsResident } from './social-reach';
 import { freshDaySummary, type DaySnapshot } from './day-summary';
 import { freshLaborSettlement, freshLaborPause, playerLaborLabel, type LaborSeen } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
@@ -145,6 +146,7 @@ export class CityUI {
   private panelOpen = false;
   private pane: Pane = 'life';
   private contextKind: ContextKind = 'building';
+  private autoCitizenTab: string | null = null;
   private readonly siteName = (id: string) => this.world.buildings.find(b => b.id === id)?.name ?? id;
   /** The tab the context panel is showing, or null while it is hidden (E follows it: transit-label.ts eBoardsVehicle). */
   get shownContext(): ContextKind | null { return this.ref('context').hidden ? null : this.contextKind; }
@@ -1279,6 +1281,10 @@ export class CityUI {
     const boardable = !state.player.vehicleId && stoppedVehicleFirst(view.position, view.nearbyVehicle, view.nearbyBuilding?.door) ? view.nearbyVehicle!.id : null;
     if (boardable && boardable !== this.autoVehicleTab) { this.contextKind = 'vehicle'; this.contextSignature = ''; }
     this.autoVehicleTab = boardable;
+    // Likewise a resident E would greet right here opens their tab once (social-reach.ts eGreetsResident).
+    const greeted = !boardable && !state.player.vehicleId && !view.inside && view.nearbyCitizen && eGreetsResident(view.position, view.nearbyCitizen.position, view.nearbyBuilding?.door, null) ? view.nearbyCitizen.id : null;
+    if (greeted && greeted !== this.autoCitizenTab && available.includes('citizen')) { this.contextKind = 'citizen'; this.contextSignature = ''; }
+    this.autoCitizenTab = greeted;
     const tabs=this.ref('context-tabs'),existingTabs=new Map(Array.from(tabs.querySelectorAll<HTMLButtonElement>('[data-context]')).map(button=>[button.dataset.context!,button]));
     for(const kind of available){let button=existingTabs.get(kind);if(!button){button=element('button');button.type='button';button.dataset.context=kind;tabs.append(button);}const label=kind==='building'?'场所':kind==='citizen'?'居民':kind==='aircraft'?'航空器':'载具';if(button.textContent!==label)button.textContent=label;button.classList.toggle('selected',kind===this.contextKind);button.setAttribute('aria-pressed',String(kind===this.contextKind));}
     for(const [kind,button]of existingTabs)if(!available.includes(kind as ContextKind))button.remove();

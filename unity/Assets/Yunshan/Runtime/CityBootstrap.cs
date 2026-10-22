@@ -44,7 +44,7 @@ namespace Yunshan.Runtime
         Vector2 contextScroll, panesScroll;
         CityMapImage mapImage; Texture2D mapTexture; string mapSelection;
         int paneTab;
-        int contextTab; string autoVehicleTab, servicesFor; bool servicesOpen;
+        int contextTab; string autoVehicleTab, autoCitizenTab, servicesFor; bool servicesOpen;
         bool showHelp = true;
 
         static bool subscribed;
@@ -397,6 +397,10 @@ namespace Yunshan.Runtime
             var stopped = walker.Walker.Inside != null ? null : NearestVehicle(frame, feet); var shown = ShownContext();
             if (stopped != null && ContextLayout.EBoardsVehicle(feet, stopped.State, stopped.Position, building?.Door, shown))
             { Execute(Cmd("ride", target: stopped.Id)); return; }
+            // On the resident's tab E greets them before any door (web main.ts, social-reach.ts eGreetsResident).
+            var shownResident = walker.Walker.Inside != null || shown != "citizen" ? null : session.Context.FirstOrDefault(x => x.Kind == "citizen");
+            var greetFirst = shownResident == null ? null : frame.Citizens.FirstOrDefault(c => c.Id == shownResident.Id);
+            if (greetFirst != null && ContextLayout.EGreetsResident(feet, greetFirst.Position, building?.Door, "citizen")) { Execute(Cmd("socialize", target: greetFirst.Id)); return; }
             if (building != null && walker.Walker.UseDoor(building))
                 session.Say(walker.Walker.Inside != null ? $"进入{building.Name}，可在右侧面板使用设施。楼内左后角为楼梯。" : $"走出{building.Name}。", true);
             else if (walker.Walker.BlockedAccess != null) { session.Say(walker.Walker.BlockedAccess, false); walker.Walker.BlockedAccess = null; }
@@ -405,7 +409,7 @@ namespace Yunshan.Runtime
                 // As web main.ts interact(): a resident within 6 m (the host's own nearby choice) is greeted, else a nearby vehicle is boarded.
                 var met = session.Context.FirstOrDefault(s => s.Kind == "citizen");
                 var person = met == null ? null : frame.Citizens.FirstOrDefault(c => c.Id == met.Id);
-                if (person != null && D(feet, person.Position) < 6) { Execute(Cmd("socialize", target: person.Id)); return; }
+                if (person != null && ContextLayout.EGreetsResident(feet, person.Position, null, shown)) { Execute(Cmd("socialize", target: person.Id)); return; }
                 var vehicle = NearestVehicle(frame, feet);
                 if (vehicle != null && shown != "building") { Execute(Cmd("ride", target: vehicle.Id)); return; }
                 // Nothing here: point to the nearest entrance relative to the way the player faces (Core/EntranceHint.cs).
@@ -571,6 +575,13 @@ namespace Yunshan.Runtime
             int vehicleTab = boardable == null ? -1 : sections.FindIndex(x => x.Kind == "vehicle" && x.Id == boardable);
             if (boardable != null && boardable != autoVehicleTab && vehicleTab >= 0) contextTab = vehicleTab;
             if (vehicleTab >= 0 || boardable == null) autoVehicleTab = boardable;
+            // Likewise a resident E would greet right here opens their tab once (web ui.ts).
+            var metSection = boardable != null || frame.Player.VehicleId != null || walker.Walker.Inside != null ? null : sections.FirstOrDefault(x => x.Kind == "citizen");
+            var metResident = metSection == null ? null : frame.Citizens.FirstOrDefault(c => c.Id == metSection.Id);
+            string greeted = metResident != null && ContextLayout.EGreetsResident(feet, metResident.Position, door, null) ? metResident.Id : null;
+            int citizenTab = greeted == null ? -1 : sections.FindIndex(x => x.Kind == "citizen" && x.Id == greeted);
+            if (greeted != null && greeted != autoCitizenTab && citizenTab >= 0) contextTab = citizenTab;
+            autoCitizenTab = greeted;
             contextTab = Mathf.Clamp(contextTab, 0, sections.Count - 1);
             for (int i = 0; i < sections.Count; i++)
             {

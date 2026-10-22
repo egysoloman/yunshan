@@ -19,7 +19,7 @@ import { readSavedGame, writeSavedGame } from './persistence';
 import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-layout';
 import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, ViewState } from './types';
 
-import { nearbyResident } from './social-reach';
+import { eGreetsResident, nearbyResident } from './social-reach';
 import { AUTO_TRANSIT_METRES } from './first-day';
 import { mealFeedback } from './meal-feedback';
 import { eBoardsVehicle } from './transit-label';
@@ -374,6 +374,8 @@ function interact(): void {
   const building = nearby.nearbyBuilding;
   // A vehicle stopped to board right here comes before the door, unless the panel shows the place (transit-label.ts).
   if (!controller.inside && eBoardsVehicle(controller.position, nearby.nearbyVehicle, building?.door, ui.shownContext)) return execute({ type: 'ride', targetId: nearby.nearbyVehicle!.id });
+  // On the resident's tab E greets them before any door (social-reach.ts eGreetsResident).
+  if (!controller.inside && ui.shownContext === 'citizen' && nearby.nearbyCitizen && eGreetsResident(controller.position, nearby.nearbyCitizen.position, building?.door, 'citizen')) return execute({ type: 'socialize', targetId: nearby.nearbyCitizen.id });
   if (building && controller.useDoor(building)) {
     simulation.state.player.position = controller.walkingPosition;
     releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
@@ -381,7 +383,7 @@ function interact(): void {
     showNotice(controller.inside ? `进入${building.name}，可在生活面板使用设施。楼内左后角为楼梯。` : `走出${building.name}。`);
     return;
   }
-  if (nearby.nearbyCitizen && distance(controller.position, nearby.nearbyCitizen.position) < 6) return execute({ type: 'socialize', targetId: nearby.nearbyCitizen.id });
+  if (nearby.nearbyCitizen && eGreetsResident(controller.position, nearby.nearbyCitizen.position, null, ui.shownContext)) return execute({ type: 'socialize', targetId: nearby.nearbyCitizen.id });
   if (nearby.nearbyVehicle && ui.shownContext !== 'building') return execute({ type: 'ride', targetId: nearby.nearbyVehicle.id });
   // The panel names a place whose door is still a few steps away: say where it is rather than try to use it from here.
   const facing = city.camera.getWorldDirection(new THREE.Vector3());

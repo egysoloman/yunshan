@@ -31,6 +31,15 @@ namespace Yunshan.Core
             return StoppedVehicleFirst(player, state, vehicle, door);
         }
 
+        /// <summary>E greets a resident within 6 m when the panel shows them, or when no tab says otherwise and no
+        /// door is within 6 m; never on the place tab (web social-reach.ts eGreetsResident).</summary>
+        public const double GreetReach = 6, DoorReach = 6;
+        public static bool EGreetsResident(Vec3 player, Vec3 resident, Vec3 door, string shown)
+        {
+            if (resident == null || shown == "building" || Distance(player, resident) >= GreetReach) return false;
+            return shown == "citizen" || door == null || JsMath.Hypot(door.X - player.X, door.Z - player.Z) > DoorReach;
+        }
+
         /// <summary>One line naming what a place offers, seen from the street.</summary>
         public static string PlaceServicesSummary(IEnumerable<string> labels)
         {
