@@ -22,7 +22,7 @@ import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citi
 import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 import { crowdSpots, crowdSpotTarget, type CrowdSpot } from './rendering/crowd-spots';
 import { routeDistanceLabel } from './navigation-label';
-import { departureLabel, rideArrivalLabel, freshRideStop, nextStopTitle, rideFare, stoppedVehicleFirst, type RideSeen } from './transit-label';
+import { departureLabel, longRideNote, rideArrivalLabel, freshRideStop, nextStopTitle, rideFare, stoppedVehicleFirst, type RideSeen } from './transit-label';
 import { placeServicesSummary } from './place-services';
 import { freshNeedNotice, type NeedSeen } from './need-feedback';
 import { freshDistrictArrival, type DistrictSeen } from './district-arrival';
@@ -1414,6 +1414,7 @@ export class CityUI {
         if (vehicle.kind === 'road' || vehicle.kind === 'flight' && this.hasRole('driver')) controls.append(commandButton(vehicle.kind === 'flight' ? '驾驶航班' : '驾驶载具', 'drive', vehicle.id, undefined, !walk || vehicle.state === 'moving' || !this.hasRole('driver', 'police', 'soldier')));
       }
       body.append(controls, element('p', 'note', state.player.vehicleId && state.player.inventory.driving === 1 ? 'W / S 油门与减速 · A / D 路口转向 · 空格刹车。抵达停靠点后可下车。' : state.player.vehicleId ? '玩家随真实载具前行；抵达站点并停稳后，可下车继续游览。' : '候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。'));
+      const longRide = longRideNote(vehicle, this.world, state); if (longRide) body.append(element('p', 'note', longRide));
     }
     reconcileContent(this.ref('context-body'), body);
     [...this.ref('context').querySelectorAll('details')].forEach((detail, index) => { detail.open = previousDetails[index] ?? false; });

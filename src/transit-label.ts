@@ -26,7 +26,7 @@ export function stoppedVehicleFirst(player: { x: number; y: number; z: number },
  * by the simulation's own movement rule (speed in metres per game minute, scaled by its power supply, at least
  * 0.3, and road congestion), plus any wait before it leaves. Null for another vehicle, without power or on a
  * closed road (2026-10-22: a cable car ride takes hours of game time and said nothing about how long). */
-export function rideArrivalLabel(vehicle: Vehicle, world: Pick<WorldDefinition, 'edges'>, state: SimState): string | null {
+export function rideArrivalMinutes(vehicle: Vehicle, world: Pick<WorldDefinition, 'edges'>, state: SimState): number | null {
   if (state.player.vehicleId !== vehicle.id || !isRoadOpen(state, vehicle.edgeId)) return null;
   const edge = world.edges.find(e => e.id === vehicle.edgeId); if (!edge) return null;
   const energy = state.powerGrid ? gridVehicleSupplyRatio(state, vehicle.id) : state.energy / 100;
@@ -34,8 +34,18 @@ export function rideArrivalLabel(vehicle: Vehicle, world: Pick<WorldDefinition, 
   const hour = state.hour, congestion = vehicle.kind === 'road' ? .8 + (hour >= 7 && hour < 9 || hour >= 17 && hour < 19 ? -.22 : .1) : 1;
   const remaining = edge.length * (vehicle.direction > 0 ? 1 - vehicle.progress : vehicle.progress), rate = vehicle.speed * Math.max(.3, energy) * congestion;
   if (rate <= 0) return null;
-  const wait = Math.max(0, vehicle.nextDeparture - (state.day * 1440 + state.hour * 60)), minutes = Math.ceil(wait + remaining / rate);
+  const wait = Math.max(0, vehicle.nextDeparture - (state.day * 1440 + state.hour * 60));
+  return Math.ceil(wait + remaining / rate);
+}
+export function rideArrivalLabel(vehicle: Vehicle, world: Pick<WorldDefinition, 'edges'>, state: SimState): string | null {
+  const minutes = rideArrivalMinutes(vehicle, world, state); if (minutes === null) return null;
   return minutes < 1 ? '即将到站' : minutes < 60 ? `约 ${minutes} 分钟后到站` : `约 ${Math.floor(minutes / 60)} 小时 ${minutes % 60} 分后到站`;
+}
+/** A ride with more than LONG_RIDE_MINUTES to go says the clock can be sped up (the arrival is announced). */
+export const LONG_RIDE_MINUTES = 30;
+export function longRideNote(vehicle: Vehicle, world: Pick<WorldDefinition, 'edges'>, state: SimState): string | null {
+  const minutes = rideArrivalMinutes(vehicle, world, state);
+  return minutes !== null && minutes > LONG_RIDE_MINUTES ? '车程较长：可在底部把时间倍率调高，到站时会提示。' : null;
 }
 
 /** What E does next to a stopped vehicle follows the panel the player sees (2026-10-22: at the market

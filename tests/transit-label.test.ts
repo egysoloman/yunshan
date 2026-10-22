@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { BOARDING_REACH, departureLabel, eBoardsVehicle, rideArrivalLabel, freshRideStop, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
+import { BOARDING_REACH, departureLabel, eBoardsVehicle, longRideNote, rideArrivalLabel, freshRideStop, nextStopName, nextStopTitle, rideFare, stoppedVehicleFirst } from '../src/transit-label';
 import type { Vehicle } from '../src/types';
 import { createCurrentProductCity, createProductWorld } from '../src/product-city';
 
@@ -88,4 +88,8 @@ test('the vehicle the player rides says about how long until its stop, by the mo
   assert.equal(rideArrivalLabel(ride({ state: 'waiting', nextDeparture: 10 * 60 + 5, progress: 1, direction: -1 }), world, state({ energy: 100 })), '约 3 小时 25 分后到站', 'the wait before leaving counts too');
   assert.equal(rideArrivalLabel(ride(), world, state({ player: { vehicleId: 'other' } })), null, 'only for the vehicle the player rides');
   assert.equal(rideArrivalLabel(ride(), world, state({ energy: 10 })), null, 'without power it says nothing');
+  // More than half an hour to go: the clock can be sped up; a short hop says nothing more.
+  assert.equal(longRideNote(ride(), world, state()), '车程较长：可在底部把时间倍率调高，到站时会提示。');
+  assert.equal(longRideNote(ride({ progress: .9 }), world, state({ energy: 100 })), null);
+  assert.equal(longRideNote(ride(), world, state({ player: { vehicleId: null } })), null);
 });
