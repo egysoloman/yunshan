@@ -12,6 +12,8 @@ namespace Yunshan.Runtime
     public sealed class StudioSky
     {
         const int SkyLayer = 31;
+        /// <summary>Star opacity at full night (web sky-models.ts STAR_NIGHT_OPACITY).</summary>
+        public const float StarNight = .4f;
         readonly Camera city, sky;
         readonly Transform root, sun, moon, stars;
         readonly Material dome;
@@ -71,7 +73,7 @@ namespace Yunshan.Runtime
             dome.SetColor("_Horizon", horizon); dome.SetColor("_Top", Color.Lerp(new Color32(0x07, 0x18, 0x22, 255), new Color32(0x41, 0x8d, 0xaf, 255), daylight));
             if (sun != null) { sun.position = eye + sunUnity * 3.6f; sun.gameObject.SetActive(altitude > -.08f); }
             if (moon != null) { moon.position = eye - sunUnity * 3.6f; moon.gameObject.SetActive(altitude < .08f); }
-            if (stars != null) { float opacity = (1 - daylight) * .8f; stars.gameObject.SetActive(opacity > .01f); foreach (var m in starMaterials) m.SetFloat("_Opacity", opacity); }
+            if (stars != null) { float opacity = (1 - daylight) * StarNight; stars.gameObject.SetActive(opacity > .01f); foreach (var m in starMaterials) m.SetFloat("_Opacity", opacity); }
         }
     }
 }

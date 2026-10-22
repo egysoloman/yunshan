@@ -11,6 +11,9 @@ import { STUDIO_ASSETS } from './studio-prop-layout';
  * and unfogged, as the procedural sky. Unity: Runtime/StudioSky.cs draws the
  * same masters with a 30km sky camera before the 6km city camera. */
 export const SKY_MODELS = { dome: 'ENV-110', sun: 'ENV-112', moon: 'ENV-113', stars: 'ENV-114' } as const;
+/** Star opacity at full night (2026-10-22: .8 drew ENV-114's soft stars as bright blurs that read as snow
+ * or lens dirt in dusk street shots; at .4 they read as faint starlight). Unity StudioSky.StarNight. */
+export const STAR_NIGHT_OPACITY = .4;
 
 function unlit(object: THREE.Object3D, transparent = false): THREE.Material[] {
   const made: THREE.Material[] = [];
