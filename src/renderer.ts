@@ -1021,14 +1021,15 @@ export class CityRenderer implements CityRendererAPI {
     const geometry = new THREE.PlaneGeometry(BANNER.width, BANNER.height), matrix = new THREE.Matrix4(), q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0), scale = new THREE.Vector3(1, 1, 1);
     for (const [districtId, list] of byDistrict) {
       const canvas = document.createElement('canvas'); canvas.width = 128; canvas.height = 512; const c = canvas.getContext('2d')!;
-      c.fillStyle = '#8e2a22'; c.fillRect(0, 0, 128, 512); c.strokeStyle = '#d8b26a'; c.lineWidth = 6; c.strokeRect(9, 9, 110, 494);
-      c.fillStyle = '#5d1a15'; c.fillRect(0, 0, 128, 22); c.fillRect(0, 490, 128, 22);
+      // As the reference town's hangings: undyed cloth, ink lettering, a thin ink rule and dark wooden rods top and bottom.
+      c.fillStyle = '#e9dfc6'; c.fillRect(0, 0, 128, 512); c.strokeStyle = '#6f5b45'; c.lineWidth = 3; c.strokeRect(12, 30, 104, 452);
+      c.fillStyle = '#5a4130'; c.fillRect(0, 0, 128, 18); c.fillRect(0, 494, 128, 18);
       const chars = [...list[0].text], step = Math.min(110, 440 / chars.length);
-      c.fillStyle = '#f3dfb0'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `600 ${Math.floor(step * .82)}px "Noto Serif CJK SC", serif`;
+      c.fillStyle = '#3a2c22'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `600 ${Math.floor(step * .82)}px "Noto Serif CJK SC", serif`;
       chars.forEach((ch, i) => c.fillText(ch, 64, 256 - (chars.length - 1) * step / 2 + i * step));
       const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = 4;
       // A little of its own light keeps the name readable on a facade in shade.
-      const material = new THREE.MeshStandardMaterial({ map: texture, roughness: .9, side: THREE.DoubleSide, emissive: '#ffffff', emissiveMap: texture, emissiveIntensity: .25 });
+      const material = new THREE.MeshStandardMaterial({ map: texture, roughness: .9, side: THREE.DoubleSide, emissive: '#ffffff', emissiveMap: texture, emissiveIntensity: .12 });
       const mesh = new THREE.InstancedMesh(geometry, material, list.length); mesh.name = `城区竖幅 · ${districtId}`;
       list.forEach((banner, i) => { q.setFromAxisAngle(up, banner.yaw); matrix.compose(new THREE.Vector3(banner.position.x, banner.position.y, banner.position.z), q, scale); mesh.setMatrixAt(i, matrix); });
       mesh.instanceMatrix.needsUpdate = true; mesh.computeBoundingSphere(); group.add(mesh);
