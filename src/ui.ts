@@ -27,7 +27,7 @@ import { placeServicesSummary } from './place-services';
 import { freshNeedNotice, type NeedSeen } from './need-feedback';
 import { freshDistrictArrival, type DistrictSeen } from './district-arrival';
 import { freshDaySummary, type DaySnapshot } from './day-summary';
-import { freshLaborSettlement, freshLaborPause, type LaborSeen } from './labor-feedback';
+import { freshLaborSettlement, freshLaborPause, playerLaborLabel, type LaborSeen } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
 /** Below this daylight the sky behind the header is dark enough to need light ink. */
 const HEADER_DARK_SKY = .35;
@@ -64,7 +64,6 @@ const rounded = (n: number) => Math.round(Number.isFinite(n) ? n : 0).toLocaleSt
 const clock = (hour: number) => `${String(Math.floor(hour) % 24).padStart(2, '0')}:${String(Math.floor((hour % 1) * 60)).padStart(2, '0')}`;
 const distance = (a: { x: number; z: number }, b: { x: number; z: number }) => Math.hypot(a.x - b.x, a.z - b.z);
 const spatialDistance = (a: { x: number; y: number; z: number }, b: { x: number; y: number; z: number }) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
-const playerLaborLabel = (state: SimState): string => state.playerLabor?.job ? '已有工班 · 回到原场所继续' : '开始 60 分钟现场工班';
 function element<K extends keyof HTMLElementTagNameMap>(tag: K, className = '', text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
   node.className = className;
@@ -146,6 +145,7 @@ export class CityUI {
   private panelOpen = false;
   private pane: Pane = 'life';
   private contextKind: ContextKind = 'building';
+  private readonly siteName = (id: string) => this.world.buildings.find(b => b.id === id)?.name ?? id;
   /** The tab the context panel is showing, or null while it is hidden (E follows it: transit-label.ts eBoardsVehicle). */
   get shownContext(): ContextKind | null { return this.ref('context').hidden ? null : this.contextKind; }
   private contextSignature = '';
@@ -627,7 +627,7 @@ export class CityUI {
     const absent = !building || !this.canAct();
     const daily = element('div');
     const homeRest = building?.kind === 'home' && building.floorPlanProfile === FLOOR_PLAN_PROFILE;
-    daily.append(commandButton(playerLaborLabel(state), 'work', building?.id, undefined, absent || !building || !this.canWorkAt(building.kind) || !!state.playerLabor?.job), commandButton(homeRest ? state.homeRest?.session?.state === 'paused' ? '继续床旁休息' : `床旁休息 · ${HOME_REST_MINUTES} 分钟` : '休息片刻', 'rest', building?.id, undefined, absent || !building || !['home', 'clinic', 'pavilion', 'station'].includes(building.kind) || !!homeRest && !this.homeRestAvailable(building!)), commandButton('租住住宅 · 80 云币', 'rent', building?.id, undefined, absent || building?.kind !== 'home'));
+    daily.append(commandButton(playerLaborLabel(state, building?.id, this.siteName), 'work', building?.id, undefined, absent || !building || !this.canWorkAt(building.kind) || !!state.playerLabor?.job), commandButton(homeRest ? state.homeRest?.session?.state === 'paused' ? '继续床旁休息' : `床旁休息 · ${HOME_REST_MINUTES} 分钟` : '休息片刻', 'rest', building?.id, undefined, absent || !building || !['home', 'clinic', 'pavilion', 'station'].includes(building.kind) || !!homeRest && !this.homeRestAvailable(building!)), commandButton('租住住宅 · 80 云币', 'rent', building?.id, undefined, absent || building?.kind !== 'home'));
     if (state.homeRest?.session) daily.append(this.homeRestContent());
     reconcileContent(this.ref('daily-actions'), daily);
     reconcileContent(this.ref('player-labor'), this.laborContent());
@@ -1450,8 +1450,8 @@ export class CityUI {
         carry.disabled = saleDisabled || !shop.open || shop.inventory < 2 || this.state!.player.money < shop.price * 2; controls.append(carry);
       }
     }
-    if (kind === 'market') controls.append(commandButton(playerLaborLabel(this.state!), 'work', building.id, undefined, workDisabled || !!this.state!.playerLabor?.job));
-    if (['workshop', 'farm', 'dock'].includes(kind)) controls.append(commandButton(playerLaborLabel(this.state!), 'work', building.id, undefined, workDisabled || !!this.state!.playerLabor?.job));
+    if (kind === 'market') controls.append(commandButton(playerLaborLabel(this.state!, building.id, this.siteName), 'work', building.id, undefined, workDisabled || !!this.state!.playerLabor?.job));
+    if (['workshop', 'farm', 'dock'].includes(kind)) controls.append(commandButton(playerLaborLabel(this.state!, building.id, this.siteName), 'work', building.id, undefined, workDisabled || !!this.state!.playerLabor?.job));
     if (kind === 'workshop' && !building.facility && this.state!.shops.some(shop => shop.buildingId === building.id) && this.hasRole('merchant')) controls.append(commandButton('承包商铺 · 300 云币', 'business', building.id, undefined, workDisabled));
     if (kind === 'school') controls.append(commandButton(this.state!.education?.course ? '继续原课堂 · 不再收费' : '课堂学习 · 60 分钟 · 40 云币托管', 'exam', 'study', undefined, disabled || !this.studyAvailable(building)), commandButton('教师考核 · 80 云币', 'exam', 'teacher', 3, siteDisabled));
     if (kind === 'police') controls.append(commandButton('警察考核 · 80 云币', 'exam', 'police', 1, siteDisabled), commandButton('卫士考核 · 80 云币', 'exam', 'soldier', 2, siteDisabled));
@@ -1467,7 +1467,7 @@ export class CityUI {
     if (building.facility === 'data' || kind === 'school' || kind === 'core') {
       const research = element('button', 'action-button', '产业与科研'); research.type = 'button'; research.dataset.action = 'industry'; controls.append(research);
     }
-    if (['school', 'station', 'airport', 'police', 'hall', 'core', 'starport'].includes(kind) && this.canWorkAt(kind)) controls.append(commandButton(playerLaborLabel(this.state!), 'work', building.id, undefined, workDisabled || !!this.state!.playerLabor?.job));
+    if (['school', 'station', 'airport', 'police', 'hall', 'core', 'starport'].includes(kind) && this.canWorkAt(kind)) controls.append(commandButton(playerLaborLabel(this.state!, building.id, this.siteName), 'work', building.id, undefined, workDisabled || !!this.state!.playerLabor?.job));
     if (['pavilion', 'clinic', 'station'].includes(kind)) controls.append(commandButton('休息片刻', 'rest', building.id, undefined, serviceDisabled));
     if (kind === 'clinic') controls.append(commandButton('登记诊疗 · 30 云币托管', 'heal', 'player', undefined, !this.canStartTreatment()));
     if (kind === 'core' || building.facility === 'energy') {

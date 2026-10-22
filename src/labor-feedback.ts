@@ -1,6 +1,16 @@
 import type { PlayerLaborJob } from './simulation/player-labor';
 import type { SimState } from './types';
 
+/** Display only: the shift button's label, from where the open shift is and how it stands (2026-10-22: it
+ * said "已有工班 · 回到原场所继续" to a player already standing at that very shift's counter). */
+export function playerLaborLabel(state: Pick<SimState, 'playerLabor'>, buildingId: string | undefined, siteName: (id: string) => string): string {
+  const job = state.playerLabor?.job;
+  if (!job) return '开始 60 分钟现场工班';
+  if (job.siteId !== buildingId) return `已有工班 · 在${siteName(job.siteId)}`;
+  if (job.status === 'paused') return '工班已暂停 · 回到工位继续';
+  return `工班进行中 · ${Math.floor(job.workedMinutes)}/${job.requiredMinutes} 分钟`;
+}
+
 /** Display only: one sentence for a shift that has just moved into the player's
  * history, read from its own settlement record (web toast and native host notice). */
 export function laborSettlementNotice(job: Pick<PlayerLaborJob, 'status' | 'workedMinutes' | 'requiredMinutes' | 'paidNet' | 'paidGross' | 'paidTax' | 'refundedGross'>, siteName: string): string {

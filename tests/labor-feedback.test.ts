@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { laborSettlementNotice } from '../src/labor-feedback';
+import { laborSettlementNotice, playerLaborLabel } from '../src/labor-feedback';
 
 test('a finished shift tells the time worked, the net pay, the gross and the tax', () => {
   const job = { status: 'completed' as const, workedMinutes: 60, requiredMinutes: 60, paidNet: 32.2, paidGross: 35, paidTax: 2.8, refundedGross: 0 };
@@ -34,4 +34,13 @@ test('an open shift that pauses says why once per reason, and says so again when
   assert.equal(r.notice, '商肆4的工班继续，已做 23/60 分钟。');
   assert.equal(freshLaborPause(job('paused', '离开原工作场所，工班暂停。', 0, 'labor-2'), r.seen, name).notice, null, 'a different shift starts a new baseline');
   assert.deepEqual(freshLaborPause({ playerLabor: { job: null, history: [] } } as never, r.seen, name), { seen: { id: null, status: null, reason: '' }, notice: null });
+});
+
+test('the shift button says where the open shift is and how far along it is', () => {
+  const name = (id: string) => ({ a: '甲肆', b: '乙坊' } as Record<string, string>)[id];
+  const job = (siteId: string, status: string, workedMinutes = 12.7) => ({ playerLabor: { job: { siteId, status, workedMinutes, requiredMinutes: 60 } } }) as any;
+  assert.equal(playerLaborLabel({ playerLabor: undefined }, 'a', name), '开始 60 分钟现场工班');
+  assert.equal(playerLaborLabel(job('a', 'working'), 'a', name), '工班进行中 · 12/60 分钟', 'standing at its own counter');
+  assert.equal(playerLaborLabel(job('a', 'paused'), 'a', name), '工班已暂停 · 回到工位继续');
+  assert.equal(playerLaborLabel(job('b', 'working'), 'a', name), '已有工班 · 在乙坊', 'elsewhere, it names where');
 });

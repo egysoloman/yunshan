@@ -5,6 +5,7 @@
  * button is still only a request; Simulation.command remains the authority.
  */
 import { departureLabel, nextStopTitle, rideFare } from '../transit-label';
+import { playerLaborLabel } from '../labor-feedback';
 import type { Simulation } from '../simulation';
 import { nearbyResident } from '../social-reach';
 import { FLOOR_PLAN_PROFILE } from '../architecture-floor-plan';
@@ -41,7 +42,6 @@ export const relationshipTitle = (rel: Relationship): string => {
 export const money = (n: number) => `${(Math.trunc(n * 100) / 100).toLocaleString('zh-CN', { maximumFractionDigits: 2 })} 云币`;
 const rounded = (n: number) => Math.round(Number.isFinite(n) ? n : 0).toLocaleString('zh-CN');
 const spatialDistance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
-const playerLaborLabel = (state: SimState): string => state.playerLabor?.job ? '已有工班 · 回到原场所继续' : '开始 60 分钟现场工班';
 export const button = (label: string, type: Command['type'], targetId?: string, value?: number, disabled = false): ContextAction => ({ label, command: { type, ...(targetId ? { targetId } : {}), ...(value !== undefined ? { value } : {}) }, disabled });
 
 export class ContextRules {
@@ -153,8 +153,8 @@ export class ContextRules {
       if (!materials) actions.push(button(`购餐并带 1 份 · ${money(shop.price * 2)}`, 'purchase', building.id, 2, saleDisabled || !shop.open || shop.inventory < 2 || state.player.money < shop.price * 2));
       notes.push(`${materials ? '工业物料' : '食物'} ${money(shop.price)} / 份 · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`);
     }
-    if (kind === 'market') actions.push(button(playerLaborLabel(state), 'work', building.id, undefined, workDisabled || !!state.playerLabor?.job));
-    if (['workshop', 'farm', 'dock'].includes(kind)) actions.push(button(playerLaborLabel(state), 'work', building.id, undefined, workDisabled || !!state.playerLabor?.job));
+    if (kind === 'market') actions.push(button(playerLaborLabel(state, building.id, id => this.world.buildings.find(b => b.id === id)?.name ?? id), 'work', building.id, undefined, workDisabled || !!state.playerLabor?.job));
+    if (['workshop', 'farm', 'dock'].includes(kind)) actions.push(button(playerLaborLabel(state, building.id, id => this.world.buildings.find(b => b.id === id)?.name ?? id), 'work', building.id, undefined, workDisabled || !!state.playerLabor?.job));
     if (kind === 'workshop' && !building.facility && state.shops.some(s => s.buildingId === building.id) && this.hasRole('merchant')) actions.push(button('承包商铺 · 300 云币', 'business', building.id, undefined, workDisabled));
     if (kind === 'school') actions.push(button(state.education?.course ? '继续原课堂 · 不再收费' : '课堂学习 · 60 分钟 · 40 云币托管', 'exam', 'study', undefined, disabled || !this.studyAvailable(building)), button('教师考核 · 80 云币', 'exam', 'teacher', 3, siteDisabled));
     if (kind === 'police') actions.push(button('警察考核 · 80 云币', 'exam', 'police', 1, siteDisabled), button('卫士考核 · 80 云币', 'exam', 'soldier', 2, siteDisabled));
@@ -162,7 +162,7 @@ export class ContextRules {
     if (kind === 'market') actions.push(button('商人考核 · 80 云币', 'exam', 'merchant', 5, siteDisabled));
     if (['hall', 'core'].includes(kind)) actions.push(button('参加竞选 · 120 云币', 'election', building.id, undefined, siteDisabled));
     if (['hall', 'core'].includes(kind)) this.policyActions(building, actions, notes);
-    if (['school', 'station', 'airport', 'police', 'hall', 'core', 'starport'].includes(kind) && this.canWorkAt(kind)) actions.push(button(playerLaborLabel(state), 'work', building.id, undefined, workDisabled || !!state.playerLabor?.job));
+    if (['school', 'station', 'airport', 'police', 'hall', 'core', 'starport'].includes(kind) && this.canWorkAt(kind)) actions.push(button(playerLaborLabel(state, building.id, id => this.world.buildings.find(b => b.id === id)?.name ?? id), 'work', building.id, undefined, workDisabled || !!state.playerLabor?.job));
     if (state.playerLabor?.job) actions.push(button('结束本人工班', 'cancelWork'));
     if (['pavilion', 'clinic', 'station'].includes(kind)) actions.push(button('休息片刻', 'rest', building.id, undefined, serviceDisabled));
     if (kind === 'clinic') actions.push(button('登记诊疗 · 30 云币托管', 'heal', 'player', undefined, !this.canStartTreatment()));
