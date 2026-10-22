@@ -15,6 +15,7 @@ import { getFloorDimensions, getStairPosition } from './access';
 import { buildLandscape } from './rendering/terrain';
 import { RAIN, rainActive, rainDrop } from './rendering/rain';
 import { BANNER, districtBanners } from './rendering/district-banners';
+import { DISTRICT_TAG, districtTagShown, districtTags, type DistrictTag } from './rendering/district-tags';
 import { createRoofGeometry, roofHeightAt, type RoofProfile } from './rendering/architecture-layout';
 import { buildProgramArchitecture, type ArchitectureTemplate } from './rendering/architecture-bodies';
 import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floor-plan';
@@ -212,6 +213,10 @@ export class CityRenderer implements CityRendererAPI {
   private skyModels?: StudioSkyModels;
   /** The player's studio forearms (CHAR-075) while walking on foot. */
   setFirstPersonArms(visible: boolean): void { if (this.firstPersonArms) this.firstPersonArms.visible = visible; }
+  private districtTagGroup!: THREE.Group;
+  private flying = false;
+  /** Drone or jet flight: district names hang over the city (district-tags.ts). */
+  setFlying(flying: boolean): void { this.flying = flying; }
   private marketGoods: MarketGoodsPool;
   private studioProps: StudioPropPool;
   private marketShopfront: MarketShopfrontPool;
@@ -519,6 +524,7 @@ export class CityRenderer implements CityRendererAPI {
     this.lanterns = this.buildLanternGlow(); this.scene.add(this.lanterns);
     this.groundGlow = this.buildGroundGlow(); this.scene.add(this.groundGlow);
     this.scene.add(this.buildDistrictBanners(world));
+    this.districtTagGroup = this.buildDistrictTags(world); this.scene.add(this.districtTagGroup);
     this.silhouettes = this.buildSilhouetteRing(); this.scene.add(this.silhouettes);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
@@ -1020,19 +1026,22 @@ export class CityRenderer implements CityRendererAPI {
     for (const banner of banners) { const list = byDistrict.get(banner.districtId); if (list) list.push(banner); else byDistrict.set(banner.districtId, [banner]); }
     const geometry = new THREE.PlaneGeometry(BANNER.width, BANNER.height), matrix = new THREE.Matrix4(), q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0), scale = new THREE.Vector3(1, 1, 1);
     for (const [districtId, list] of byDistrict) {
-      const canvas = document.createElement('canvas'); canvas.width = 128; canvas.height = 512; const c = canvas.getContext('2d')!;
-      // As the reference town's hangings: undyed cloth, ink lettering, a thin ink rule and dark wooden rods top and bottom.
-      c.fillStyle = '#e9dfc6'; c.fillRect(0, 0, 128, 512); c.strokeStyle = '#6f5b45'; c.lineWidth = 3; c.strokeRect(12, 30, 104, 452);
-      c.fillStyle = '#5a4130'; c.fillRect(0, 0, 128, 18); c.fillRect(0, 494, 128, 18);
-      const chars = [...list[0].text], step = Math.min(110, 440 / chars.length);
-      c.fillStyle = '#3a2c22'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `600 ${Math.floor(step * .82)}px "Noto Serif CJK SC", serif`;
-      chars.forEach((ch, i) => c.fillText(ch, 64, 256 - (chars.length - 1) * step / 2 + i * step));
-      const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = 4;
+      const texture = clothNameTexture(list[0].text, 512);
       // A little of its own light keeps the name readable on a facade in shade.
       const material = new THREE.MeshStandardMaterial({ map: texture, roughness: .9, side: THREE.DoubleSide, emissive: '#ffffff', emissiveMap: texture, emissiveIntensity: .12 });
       const mesh = new THREE.InstancedMesh(geometry, material, list.length); mesh.name = `城区竖幅 · ${districtId}`;
       list.forEach((banner, i) => { q.setFromAxisAngle(up, banner.yaw); matrix.compose(new THREE.Vector3(banner.position.x, banner.position.y, banner.position.z), q, scale); mesh.setMatrixAt(i, matrix); });
       mesh.instanceMatrix.needsUpdate = true; mesh.computeBoundingSphere(); group.add(mesh);
+    }
+    return group;
+  }
+  private buildDistrictTags(world: WorldDefinition): THREE.Group {
+    const group = new THREE.Group(); group.name = '城区空中名牌';
+    for (const tag of districtTags(world)) {
+      // Constant screen size, drawn over the haze so a far district still reads.
+      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: clothNameTexture(tag.text, 384), sizeAttenuation: false, depthWrite: false, fog: false, transparent: true }));
+      sprite.name = `城区空中名牌 · ${tag.districtId}`; sprite.position.set(tag.position.x, tag.position.y, tag.position.z); sprite.center.set(.5, 0); sprite.visible = false; sprite.userData.tag = tag;
+      group.add(sprite);
     }
     return group;
   }
@@ -1224,6 +1233,8 @@ export class CityRenderer implements CityRendererAPI {
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.needsUpdate = true; if (signal.instanceColor) signal.instanceColor.needsUpdate = true; }
     const detailedSigns = new Set<string>(this.architectureDetail.group.userData.activeBuildingIds ?? []);
     for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id && !detailedSigns.has(label.building.id) : this.insideId === label.building.id && this.insideFloor === label.floor;
+    const tagHeight = DISTRICT_TAG.screen * 2 * Math.tan(THREE.MathUtils.degToRad(this.camera.fov) / 2);
+    for (const child of this.districtTagGroup.children) { const sprite = child as THREE.Sprite; sprite.visible = districtTagShown(this.flying, sprite.userData.tag as DistrictTag, this.camera.position); sprite.scale.set(tagHeight / 3, tagHeight, 1); }
     this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality, this.studioCharacters?.modelled);
     this.studioCharacters?.update(state, this.camera.position, this.quality, id => {
       const m = this.citizens.motionOf(id), c = state.citizens.find(x => x.id === id); if (!m || !c) return undefined;
@@ -1332,4 +1343,15 @@ export class CityRenderer implements CityRendererAPI {
     this.scene.traverse(object => { if (object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line) { geometries.add(object.geometry); for (const material of Array.isArray(object.material) ? object.material : [object.material]) { if ('map' in material && material.map instanceof THREE.Texture) material.map.dispose(); materials.add(material); } if (object instanceof THREE.InstancedMesh) object.dispose(); } else if (object instanceof THREE.Sprite) { object.material.map?.dispose(); materials.add(object.material); } });
     geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose()); this.scene.clear(); this.renderer.dispose(); this.renderer.domElement.remove();
   }
+}
+
+/** A district's name on undyed cloth in ink, top to bottom, with a thin rule and dark rods (the reference town's hangings). */
+function clothNameTexture(text: string, tall: number): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas'); canvas.width = 128; canvas.height = tall; const c = canvas.getContext('2d')!, rod = Math.round(tall * .035);
+  c.fillStyle = '#e9dfc6'; c.fillRect(0, 0, 128, tall); c.strokeStyle = '#6f5b45'; c.lineWidth = 3; c.strokeRect(12, rod + 12, 104, tall - rod * 2 - 24);
+  c.fillStyle = '#5a4130'; c.fillRect(0, 0, 128, rod); c.fillRect(0, tall - rod, 128, rod);
+  const chars = [...text], step = Math.min(104, (tall - rod * 2 - 40) / chars.length);
+  c.fillStyle = '#3a2c22'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `600 ${Math.floor(step * .82)}px "Noto Serif CJK SC", serif`;
+  chars.forEach((ch, i) => c.fillText(ch, 64, tall / 2 - (chars.length - 1) * step / 2 + i * step));
+  const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = 4; return texture;
 }

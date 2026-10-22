@@ -7,7 +7,7 @@ namespace Yunshan.Core.Tests;
 public class DistrictBannersParityTests
 {
     [Fact]
-    public void BannersMatchTypeScript()
+    public void BannersAndTagsMatchTypeScript()
     {
         var root = (Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Parity", "district-banners.json"), Encoding.UTF8));
         Vec3 V(object o) { var d = (Dictionary<string, object>)o; return new Vec3((double)d["x"], (double)d["y"], (double)d["z"]); }
@@ -25,5 +25,16 @@ public class DistrictBannersParityTests
             Assert.Equal((string)row["districtId"], got[i].DistrictId); Assert.Equal((string)row["buildingId"], got[i].BuildingId); Assert.Equal((string)row["text"], got[i].Text);
             Assert.Equal(p.X, got[i].X); Assert.Equal(p.Y, got[i].Y); Assert.Equal(p.Z, got[i].Z); Assert.Equal((double)row["yaw"], got[i].Yaw);
         }
+        var wantTags = (List<object>)root["tags"]; var tags = DistrictTags.Of(world);
+        Assert.Equal(11, wantTags.Count); Assert.Equal(wantTags.Count, tags.Count);
+        for (int i = 0; i < tags.Count; i++)
+        {
+            var row = (Dictionary<string, object>)wantTags[i]; var p = V(row["position"]);
+            Assert.Equal((string)row["districtId"], tags[i].DistrictId); Assert.Equal((string)row["text"], tags[i].Text);
+            Assert.Equal(p.X, tags[i].X); Assert.Equal(p.Y, tags[i].Y); Assert.Equal(p.Z, tags[i].Z);
+        }
+        Assert.False(DistrictTags.Shown(false, tags[0], new Vec3(0, 5000, 0)));
+        Assert.True(DistrictTags.Shown(true, tags[0], new Vec3(tags[0].X, tags[0].Y, tags[0].Z + 221)));
+        Assert.False(DistrictTags.Shown(true, tags[0], new Vec3(tags[0].X, tags[0].Y, tags[0].Z + 219)));
     }
 }
