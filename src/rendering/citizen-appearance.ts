@@ -1,3 +1,4 @@
+import { clearsCamera } from './near-camera';
 import * as THREE from 'three';
 import type { Citizen, LifeProfile, Quality, SimState, Vec3 } from '../types';
 
@@ -68,7 +69,12 @@ export function createCitizenFaceTexture():THREE.DataTexture {
   const texture=new THREE.DataTexture(data,width,height);texture.magFilter=THREE.NearestFilter;texture.minFilter=THREE.NearestFilter;texture.colorSpace=THREE.SRGBColorSpace;texture.needsUpdate=true;return texture;
 }
 export function citizenFaceStyle(age:number,mood=60,stress=20):number{return (age>=62?1:age<18?2:0)+(mood<35||stress>70?3:0);}
-interface Motion { position:Vec3; yaw:number; phase:number }
+interface Motion { position:Vec3; yaw:number; phase:number; movedAt?:number }
+/** A resident in the 'moving' state who has not moved for this long stands instead of
+ * freezing mid-stride (one who waits for the player, player-yield.ts). Display only;
+ * the slack covers frames between simulation steps. Shared with Unity (CitizenAppearance.Striding). */
+export const STRIDE_STILL_SECONDS=.5;
+export const striding=(moving:boolean,movedAt:number|undefined,now:number):boolean=>moving&&movedAt!==undefined&&now-movedAt<STRIDE_STILL_SECONDS;
 
 /** Two shared instanced draws replace a draw per resident. The state is read
  * only: a pose follows physical displacement, with no independent walk clock. */
@@ -115,9 +121,15 @@ export class CitizenAppearancePool {
     this.body.name='居民 · 0.2m人体与衣饰合批';this.faces.name='居民 · 近景面孔彩绘合批';this.group.name='真实居民 · 衣饰步态与生命状态';
     for(const mesh of [this.body,this.faces]){mesh.count=0;mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);mesh.frustumCulled=false;this.group.add(mesh);}parent.add(this.group);
   }
-  update(state:SimState,cameraPosition:Vec3,_elapsed:number,renderDistance:number,quality:Quality='balanced'):void {
+  /** Per-resident displacement-driven motion, for the studio character pool. */
+  motionOf(id:string):{yaw:number;phase:number;movedAt?:number}|undefined{const m=this.motion.get(id);return m&&{yaw:m.yaw,phase:m.phase,movedAt:m.movedAt};}
+  private now=0;
+  /** Whether a resident in the 'moving' state is actually striding now. */
+  strides(id:string,moving:boolean):boolean{return striding(moving,this.motion.get(id)?.movedAt,this.now);}
+  update(state:SimState,cameraPosition:Vec3,elapsed:number,renderDistance:number,quality:Quality='balanced',modelled:ReadonlySet<string>=new Set()):void {
     if(this.disposed)return;
     if(this.stateRef!==state){this.motion.clear();this.stateRef=state;}
+    this.now=elapsed;
     const visibleDistance=Math.min(renderDistance,quality==='low'?1000:1900),faceRange=faceDistance(quality),fullRange=quality==='low'?65:quality==='high'?180:110;
     const buried=new Set((state.family?.ceremonies??[]).filter(c=>c.kind==='funeral'&&c.completedAt!==null).map(c=>c.subjectId));
     let bodyCount=0,faceCount=0,residents=0,corpses=0;
@@ -125,12 +137,12 @@ export class CitizenAppearancePool {
       const profile=state.extension?.actorProfiles[citizen.id],dead=profile?.alive===false||citizen.state==='dead';
       const range=Math.hypot(citizen.position.x-cameraPosition.x,citizen.position.y-cameraPosition.y,citizen.position.z-cameraPosition.z);
       const previous=this.motion.get(citizen.id),dx=previous?citizen.position.x-previous.position.x:0,dz=previous?citizen.position.z-previous.position.z:0,travel=Math.hypot(dx,dz);
-      const seated=citizen.state==='riding',walking=citizen.state==='moving'&&!seated&&!dead;
+      const seated=citizen.state==='riding',movedAt=travel>.001&&travel<50?elapsed:previous?.movedAt,walking=striding(citizen.state==='moving'&&!seated&&!dead,movedAt,elapsed);
       const routePoint=citizen.route?.[citizen.routeIndex??0],initialYaw=routePoint?Math.atan2(routePoint.x-citizen.position.x,routePoint.z-citizen.position.z):hash(citizen.id)%628/100;
       const yaw=travel>.001&&travel<50?Math.atan2(dx,dz):previous?.yaw??initialYaw;
       const phase=(previous?.phase??0)+(walking&&!state.paused&&travel<50?travel*Math.PI/1.1:0);
-      this.motion.set(citizen.id,{position:{...citizen.position},yaw,phase});
-      if(residents>=this.capacity||buried.has(citizen.id)||range>(dead?faceRange:visibleDistance)||!dead&&citizen.tier==='statistical')continue;
+      this.motion.set(citizen.id,{position:{...citizen.position},yaw,phase,movedAt});
+      if(residents>=this.capacity||buried.has(citizen.id)||range>(dead?faceRange:visibleDistance)||!dead&&citizen.tier==='statistical'||modelled.has(citizen.id)||!clearsCamera(cameraPosition,citizen.position))continue;
       const pose={yaw,phase,walking,seated,dead},detail=!dead&&range<=fullRange?'near':'far',appearance=describeCitizen(citizen,profile,pose,detail);
       this.yawRotation.setFromAxisAngle(this.upAxis,yaw);
       for(const part of appearance.parts){

@@ -99,7 +99,7 @@ test('renderer disposes unused palette and app navigation, preserving engine-sha
   const renderer = Object.create(CityRenderer.prototype) as any;
   renderer.scene = new THREE.Scene(); renderer.interiors = new Map();
   const emptyOwner = () => ({ dispose() {} });
-  renderer.nearChunks = emptyOwner(); renderer.citizens = emptyOwner(); renderer.marketGoods = emptyOwner(); renderer.marketShopfront = emptyOwner(); renderer.architectureDetail = emptyOwner();
+  renderer.nearChunks = emptyOwner(); renderer.citizens = emptyOwner(); renderer.marketGoods = emptyOwner(); renderer.marketShopfront = emptyOwner(); renderer.doorwayGlow = emptyOwner(); renderer.architectureDetail = emptyOwner();
   renderer.roadClosures = { ...emptyOwner(), group: new THREE.Group() }; renderer.landscape = { ...emptyOwner(), group: new THREE.Group() };
   const unused = new THREE.MeshStandardMaterial(), attached = new THREE.MeshStandardMaterial(), geometry = new THREE.BoxGeometry(1, 1, 1);
   renderer.materials = { fabric: unused, wood: attached }; renderer.scene.add(new THREE.Mesh(geometry, attached));

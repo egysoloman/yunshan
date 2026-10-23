@@ -1,3 +1,4 @@
+import { BANK_ACTION_NAMES } from './player-names';
 import type { Simulation } from '../simulation';
 import { shopLifecyclePendingEstateAssets } from './shop_lifecycle';
 import { canAccessFloor } from '../access';
@@ -125,7 +126,7 @@ export function installBanking(simulation: Simulation): void {
       return result;
     }
     simulation.emitEvent({ type: 'bank-transaction', citizenId: 'player', amount, districtId: site.districtId });
-    return { ok: true, message: `${site.name}办理完成：${command.type} ${amount.toFixed(1)}云币，账户和现金池已实际结算。` };
+    return { ok: true, message: `${site.name}办理完成：${BANK_ACTION_NAMES[command.type] ?? '业务'} ${amount.toFixed(1)}云币，账户和现金池已实际结算。` };
   });
   simulation.onPhase('people', () => {
     const s = state(), bank = s.banking!, now = clock(s);

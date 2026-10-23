@@ -1,4 +1,5 @@
-import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, ARCHITECTURAL_GEOMETRY_VERSION, createWorld } from '../world';
+import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, ARCHITECTURAL_GEOMETRY_VERSION, LOW_RISE_RECIPE_VERSION, STREET_RECIPE_VERSION, V8_TERRAIN_RECIPE_VERSION, createWorld } from '../world';
+import { cachedWorld, cachedWorldFingerprint } from './world-cache';
 import { MARKET_STATION_APRON_VERSION, MARKET_STATION_APRON_MAX_GRADE, MARKET_STATION_APRON_OFFSETS } from '../market-station-apron';
 import { parseSaveWithinResources } from './save-resource';
 import { validateCityRulesetEnvelope } from '../simulation/city-ruleset';
@@ -20,7 +21,7 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // selectSavedWorld only calls this with regenerated trusted candidates. An
   // imported file's layout/terrain/geometry labels are never used as inputs.
   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-  const terrain = layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || (layout === 'current-v6' || layout === 'current-v7') ? {
+  const terrain = layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || (layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8') ? {
     algorithm: GEOLOGICAL_GEOMETRY_VERSION,
     voxelSize: world.voxelSize, size: world.size, mountains: world.mountains,
     districts: world.districts.map(district => [district.id, district.center, district.radius]),
@@ -30,8 +31,8 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // A v4 identity includes the generated physical rooms, voids, openings and
   // support planes. A marker alone cannot describe their usable geometry.
   // This extra descriptor is deliberately absent from all four old recipes.
-  const architecture = layout === 'current-v4' || layout === 'current-v5' || (layout === 'current-v6' || layout === 'current-v7') ? {
-    algorithm: (layout === 'current-v6' || layout === 'current-v7') ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2:${COMMERCIAL_RECIPE_VERSION}:flight-routes-${COMMERCIAL_ROUTE_REVISION}` : layout === 'current-v5' ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2` : ARCHITECTURAL_GEOMETRY_VERSION,
+  const architecture = layout === 'current-v4' || layout === 'current-v5' || (layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8') ? {
+    algorithm: layout === 'current-v8' ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2:${LOW_RISE_RECIPE_VERSION}` : (layout === 'current-v6' || layout === 'current-v7') ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2:${COMMERCIAL_RECIPE_VERSION}:flight-routes-${COMMERCIAL_ROUTE_REVISION}` : layout === 'current-v5' ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2` : ARCHITECTURAL_GEOMETRY_VERSION,
     buildings: world.buildings.map(site => {
       const body = getBuildingBody(site);
       const inputs = [site.id, site.seed, site.floorPlanProfile, site.functionPoints,
@@ -39,12 +40,12 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
         body ? [body.family, body.roofRhythm, body.floorPlans, getFloorPlanRoofRegions(body)] : null];
       // The descriptor is absent from old recipes, preserving their complete
       // original fingerprint text while binding every v5 stair revision.
-      return (layout === 'current-v6' || layout === 'current-v7') ? [...inputs, site.stairGeometryRevision, site.commercialGeometryRevision, site.commercialRouteRevision] : layout === 'current-v5' ? [...inputs, site.stairGeometryRevision] : inputs;
+      return (layout === 'current-v6' || layout === 'current-v7') ? [...inputs, site.stairGeometryRevision, site.commercialGeometryRevision, site.commercialRouteRevision] : layout === 'current-v5' || layout === 'current-v8' ? [...inputs, site.stairGeometryRevision] : inputs;
     }),
   } : undefined;
   // The new code-owned street recipe binds actual edge coordinates above;
   // these limits identify its authoritative grading contract. Old text is exact.
-  const streets = layout === 'current-v7' ? { algorithm: MARKET_STATION_APRON_VERSION, maximumGrade: MARKET_STATION_APRON_MAX_GRADE, offsets: MARKET_STATION_APRON_OFFSETS } : undefined;
+  const streets = layout === 'current-v8' ? { algorithm: STREET_RECIPE_VERSION, fleet: world.fleetPlan, terrain: V8_TERRAIN_RECIPE_VERSION } : layout === 'current-v7' ? { algorithm: MARKET_STATION_APRON_VERSION, maximumGrade: MARKET_STATION_APRON_MAX_GRADE, offsets: MARKET_STATION_APRON_OFFSETS } : undefined;
   const legacyDescriptor = streets ? { ...geometry, terrain, architecture, streets } : architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry;
   const text = JSON.stringify(world.powerGrid ? { ...legacyDescriptor, powerGrid: world.powerGrid } : legacyDescriptor);
   let hash = 2166136261;
@@ -56,7 +57,7 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
 export function selectSavedWorld(json?: string | null, newCityLayout: CityLayoutVersion = CURRENT_CITY_LAYOUT): { world: WorldDefinition & { layoutVersion: CityLayoutVersion }; layout: CityLayoutVersion } {
   if (json === undefined || json === null || json === '') {
     if (!CITY_LAYOUT_VERSIONS.includes(newCityLayout)) throw new Error('不支持的新城市配方。');
-    return { world: createWorld(20261001, newCityLayout), layout: newCityLayout };
+    return { world: cachedWorld(20261001, newCityLayout) as WorldDefinition & { layoutVersion: CityLayoutVersion }, layout: newCityLayout };
   }
   let data: Record<string, any>;
   try { data = parseSaveWithinResources(json); } catch { throw new Error('保存的旅程格式损坏；原存档已保留。'); }
@@ -68,9 +69,9 @@ export function selectSavedWorld(json?: string | null, newCityLayout: CityLayout
   validateCityRulesetEnvelope(data);
   // A label in an imported file does not authorize a different layout. Rebuild
   // every supported candidate from our code and match the complete fingerprint.
+  // Same candidate order as before; only the matching world is copied out.
   for (const layout of CITY_LAYOUT_VERSIONS) {
-    const world = createWorld(data.worldSeed, layout);
-    if (savedWorldFingerprint(world) === data.worldFingerprint) return { world, layout };
+    if (cachedWorldFingerprint(data.worldSeed, layout, savedWorldFingerprint) === data.worldFingerprint) return { world: cachedWorld(data.worldSeed, layout) as WorldDefinition & { layoutVersion: CityLayoutVersion }, layout };
   }
   throw new Error('此存档的世界布局不属于当前支持的版本；原存档已保留，不能以新城覆盖。');
 }
