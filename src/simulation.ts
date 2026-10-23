@@ -1817,180 +1817,192 @@ export class Simulation implements SimulationAPI {
     return arrived;
   }
   private people() {
+    const ctx = this.peopleSetup();
+    for (let i = 0; i < this.state.citizens.length; i++) this.personStep(i, ctx);
+    this.peopleFinish(ctx);
+  }
+  /** The people phase in three parts (setup, one resident, finish) so a tick can be resumed between
+   * residents; run back to back they are the same loop as before. */
+  private peopleSetup() {
     this.refreshWorkforce();
     this.reviewPrivateShifts();
     const hour = this.state.hour;
     const pendingMinutes = this.runtime.peopleElapsed ??= {};
     const researchActors = researchTaskActorIds(this.state), powerActors = powerTaskActorIds(this.state), clinicalActors = clinicalTaskActorIds(this.state), familyLearners = familyEducationTaskActorIds(this.state);
-    for (let i = 0; i < this.state.citizens.length; i++) {
-      const citizen = this.state.citizens[i];
-      // At most seven persisted new research jobs request fine task processing.
-      // Preserve tier, ordinary actors' frequency, pending needs and real wages.
-      const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
-      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
-      if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
-      // Accumulate actual ticks while a tier defers this actor. Multiplying by
-      // the actor's current tier would lose or duplicate time after a tier or
-      // speed change, and would credit time before a new actor existed.
-      const elapsed = (pendingMinutes[citizen.id] ?? 0) + this.minutes;
-      if ((this.state.tick + i) % frequency) { pendingMinutes[citizen.id] = elapsed; continue; }
-      delete pendingMinutes[citizen.id];
-      citizen.needs.hunger = clamp(citizen.needs.hunger - elapsed * .05);
-      if (citizen.needs.hunger < 48 && (citizen.food ?? 0) >= 1) { citizen.food!--; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); this.bus.emit({ type: 'stored-meal', citizenId: citizen.id, amount: 1 }); }
-      citizen.needs.fatigue = clamp(citizen.needs.fatigue - elapsed * .035);
-      citizen.needs.social = clamp(citizen.needs.social - elapsed * .015);
-      citizen.needs.fun = clamp(citizen.needs.fun - elapsed * .02);
-      if ((this.state.extension?.actorProfiles[citizen.id]?.age ?? 20) < 6) { citizen.state = 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * .12); continue; }
-      this.refreshCitizenRoadRoute(citizen);
-      const dispatch = this.runtime.dispatches[citizen.id];
-      if (dispatch) {
-        const crime = this.state.crimes.find(c => c.id === dispatch.crimeId);
-        const health = this.state.extension?.actorProfiles[citizen.id]?.health ?? 100;
-        if (!crime || crime.status !== 'responding' || this.policeWorkAllowance(citizen) <= 0 || citizen.needs.hunger < 20 || citizen.needs.fatigue < 15 || health < 35) {
-          if (crime?.status === 'responding') { crime.status = 'open'; crime.responseAt = 0; this.bus.emit({ type: 'police-response-withdrawn', citizenId: citizen.id, crimeId: crime.id, districtId: crime.districtId, quantity: this.runtime.policeSupplies?.kits[crime.id]?.receivedUnits ?? 0, purpose: this.policeWorkAllowance(citizen) <= 0 ? 'work-allowance' : 'needs' }); this.notice('dispatch', `${citizen.name}因补给或健康需要退出响应，事件等待有行动能力的巡警接替。`, crime.districtId); }
-          delete this.runtime.dispatches[citizen.id]; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
+    return { hour, pendingMinutes, researchActors, powerActors, clinicalActors, familyLearners };
+  }
+  private personStep(i: number, ctx: ReturnType<Simulation['peopleSetup']>) {
+    const { hour, pendingMinutes, researchActors, powerActors, clinicalActors, familyLearners } = ctx;
+    const citizen = this.state.citizens[i];
+    // At most seven persisted new research jobs request fine task processing.
+    // Preserve tier, ordinary actors' frequency, pending needs and real wages.
+    const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
+    const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+    if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } return; }
+    // Accumulate actual ticks while a tier defers this actor. Multiplying by
+    // the actor's current tier would lose or duplicate time after a tier or
+    // speed change, and would credit time before a new actor existed.
+    const elapsed = (pendingMinutes[citizen.id] ?? 0) + this.minutes;
+    if ((this.state.tick + i) % frequency) { pendingMinutes[citizen.id] = elapsed; return; }
+    delete pendingMinutes[citizen.id];
+    citizen.needs.hunger = clamp(citizen.needs.hunger - elapsed * .05);
+    if (citizen.needs.hunger < 48 && (citizen.food ?? 0) >= 1) { citizen.food!--; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); this.bus.emit({ type: 'stored-meal', citizenId: citizen.id, amount: 1 }); }
+    citizen.needs.fatigue = clamp(citizen.needs.fatigue - elapsed * .035);
+    citizen.needs.social = clamp(citizen.needs.social - elapsed * .015);
+    citizen.needs.fun = clamp(citizen.needs.fun - elapsed * .02);
+    if ((this.state.extension?.actorProfiles[citizen.id]?.age ?? 20) < 6) { citizen.state = 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * .12); return; }
+    this.refreshCitizenRoadRoute(citizen);
+    const dispatch = this.runtime.dispatches[citizen.id];
+    if (dispatch) {
+      const crime = this.state.crimes.find(c => c.id === dispatch.crimeId);
+      const health = this.state.extension?.actorProfiles[citizen.id]?.health ?? 100;
+      if (!crime || crime.status !== 'responding' || this.policeWorkAllowance(citizen) <= 0 || citizen.needs.hunger < 20 || citizen.needs.fatigue < 15 || health < 35) {
+        if (crime?.status === 'responding') { crime.status = 'open'; crime.responseAt = 0; this.bus.emit({ type: 'police-response-withdrawn', citizenId: citizen.id, crimeId: crime.id, districtId: crime.districtId, quantity: this.runtime.policeSupplies?.kits[crime.id]?.receivedUnits ?? 0, purpose: this.policeWorkAllowance(citizen) <= 0 ? 'work-allowance' : 'needs' }); this.notice('dispatch', `${citizen.name}因补给或健康需要退出响应，事件等待有行动能力的巡警接替。`, crime.districtId); }
+        delete this.runtime.dispatches[citizen.id]; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
+      }
+      else {
+        if (citizen.state === 'roadWaiting') return;
+        citizen.state = 'responding'; const arrived = this.moveCitizen(citizen, elapsed), atCrime = arrived && distance(citizen.position, crime.position) <= 3;
+        if (arrived && !atCrime) {
+          // An old imported or shortened route ending at a facility/exit is
+          // not evidence that the officer reached the actual incident.
+          const destination = citizen.destinationId && this.buildings.get(citizen.destinationId);
+          if (destination) this.rebuildDispatchRoute(citizen, crime, destination); else this.roadRouteWaiting(citizen);
         }
-        else {
-          if (citizen.state === 'roadWaiting') continue;
-          citizen.state = 'responding'; const arrived = this.moveCitizen(citizen, elapsed), atCrime = arrived && distance(citizen.position, crime.position) <= 3;
-          if (arrived && !atCrime) {
-            // An old imported or shortened route ending at a facility/exit is
-            // not evidence that the officer reached the actual incident.
-            const destination = citizen.destinationId && this.buildings.get(citizen.destinationId);
-            if (destination) this.rebuildDispatchRoute(citizen, crime, destination); else this.roadRouteWaiting(citizen);
-          }
-          if (String(citizen.state) !== 'roadWaiting' && !this.citizenRoadMovementRejected.has(citizen) && (!arrived || atCrime)) this.registerAttendance(citizen, elapsed);
-          if (atCrime) { citizen.state = 'investigating'; this.bus.emit({ type: 'officer-arrived', citizenId: citizen.id, crimeId: crime.id }); }
-          continue;
-        }
+        if (String(citizen.state) !== 'roadWaiting' && !this.citizenRoadMovementRejected.has(citizen) && (!arrived || atCrime)) this.registerAttendance(citizen, elapsed);
+        if (atCrime) { citizen.state = 'investigating'; this.bus.emit({ type: 'officer-arrived', citizenId: citizen.id, crimeId: crime.id }); }
+        return;
       }
-      if (!roadTask && citizen.state !== 'roadWaiting') { this.considerPrivateOpportunity(citizen); this.considerShopMove(citizen); }
-      const home = this.buildings.get(citizen.homeId)!; const work = this.buildings.get(citizen.workId)!;
-      let availableMinutes = elapsed;
-      const riding = this.runtime.riders[citizen.id];
-      if (riding) {
-        const vehicle = this.state.vehicles.find(v => v.id === riding.vehicleId)!;
-        const stop = this.world.nodes.find(n => n.id === riding.stopNodeId)!;
-        citizen.position = copy(riding.arrived ? stop.position : vehicle.position); citizen.state = 'riding';
-        // Traffic records arrival at its discrete endpoint observation. Deferred
-        // ride minutes still decay needs, but cannot be reused for walking or
-        // onsite recovery. An unobserved legacy arrival starts from this phase.
-        if (!riding.arrived) continue;
-        availableMinutes = Math.min(elapsed, Math.max(0, (this.state.extension?.lastUpdate ?? this.now) - (riding.arrivedAt ?? (this.state.extension?.lastUpdate ?? this.now))));
-        delete this.runtime.riders[citizen.id];
-        citizen.position = copy(stop.position); citizen.route = []; citizen.routeIndex = 0;
-        const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId);
-        if (ongoing) this.setDestination(citizen, ongoing, true);
-      }
-      if (roadTask) { this.advanceRoadworker(citizen, roadTask, availableMinutes); continue; }
-      if (citizen.state.startsWith('roadWork') || citizen.state === 'roadPickup') {
-        const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId); if (ongoing) this.setDestination(citizen, ongoing, true);
-      }
-      let destination: Building;
-      const sleeping = hour >= 22 || hour < 6;
-      const shift = hour >= 7.5 && hour < 17.5;
-
-      const previousActivity = this.runtime.activities[citizen.id];
-      const previousShop = this.state.shops.find(s => s.buildingId === citizen.destinationId);
-      const treatment = this.state.clinical?.orders.find(order => order.patientId === citizen.id && ['awaitingSupply', 'awaitingDoctor', 'inTreatment'].includes(order.state));
-      const committedTreatment = treatment && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25;
-      if (committedTreatment) this.runtime.activities[citizen.id] = 'heal';
-      const reconsiderCivic = this.effectiveRuleset === 'civic-local-v1' && previousActivity === 'work' && civicStaffingOpportunities(this, citizen).length > 0;
-      const reconsiderMeal = nearestMealPolicy(this.runtime.mealRoutePolicyId) && previousActivity === 'eat' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
-      // npc-motion-coarse-v1 cities: a resident still blocked (physicalWaiting)
-      // at a decision point re-plans from where they stand instead of waiting
-      // on the same blocked leg forever (a 14-day audit lost a resident so).
-      const blockedReplan = this.runtime.npcMotionPolicyId === NPC_MOTION_COARSE_POLICY && citizen.state === 'physicalWaiting' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
-      // npc-motion-coarse-v1: a resident part-way up or down a stair flight
-      // finishes it before choosing anew; a route re-planned from mid-flight
-      // can start on a leg the stair planner rejects (found in a 14-day audit).
-      const midFlight = this.runtime.npcMotionPolicyId === NPC_MOTION_COARSE_POLICY && !!citizen.destinationId && !!this.runtime.npcStairCursors?.[citizen.id] && citizen.state !== 'physicalWaiting';
-      const committedNeed = midFlight || !!citizen.destinationId && (citizen.state === 'roadWaiting' || !reconsiderMeal && previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || !reconsiderCivic && previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
-      if (committedTreatment) destination = this.buildings.get(treatment.siteId)!;
-      else if (!committedNeed && (reconsiderCivic || !citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
-        const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
-      } else destination = this.buildings.get(citizen.destinationId!)!;
-      const held = blockedReplan ? { route: citizen.route, routeIndex: citizen.routeIndex, state: citizen.state, destinationId: citizen.destinationId } : null;
-      if (blockedReplan && (this.runtime.decisionAt[citizen.id] ?? 0) <= this.now + 1e-7) this.runtime.decisionAt[citizen.id] = this.now + 25;
-      // A resident mid-flight keeps the exact route and cursor it is following.
-      if (!midFlight) this.setDestination(citizen, destination, blockedReplan);
-      // A re-plan that is itself blocked at once is dropped: the resident keeps
-      // the previous leg and stair cursor, a state the save reader accepts.
-      // A kept re-plan releases a stair cursor that no longer matches its route.
-      if (held && citizen.route !== held.route) {
-        const blocked = !!citizen.route && (citizen.routeIndex ?? 0) < citizen.route.length && this.npcStairMotion.describe(citizen.route, citizen.routeIndex ?? 0).kind === 'blocked'
-          && !this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex ?? 0, citizen.position);
-        if (blocked) Object.assign(citizen, held);
-        else { const cursor = this.runtime.npcStairCursors?.[citizen.id]; if (cursor && !this.nativeCursorMatches(citizen, cursor)) delete this.runtime.npcStairCursors![citizen.id]; }
-      }
-      if (citizen.state === 'roadWaiting') continue;
-      if (citizen.state === 'unreachable') { citizen.destinationId = null; continue; }
-      if (distance(citizen.position, destination.door) > 200) {
-        const walkingSpeed = this.state.weather === '雨' ? 3.1 : 4.2;
-        const walkingTime = this.walkingDistance(citizen, destination) / walkingSpeed;
-        const transit = this.state.vehicles.find(v => {
-          if (!isRoadOpen(this.state, v.edgeId) || v.state === 'roadClosed' || v.state === 'moving' || v.kind === 'flight' || citizen.money < 4 || v.passengers >= this.passengerCapacity(v) || distance(v.position, citizen.position) > 40) return false;
-          const edge = this.edges.get(v.edgeId)!; const end = this.world.nodes.find(n => n.id === (v.direction > 0 ? edge.to : edge.from))!;
-          const target = this.buildingNode(destination), remainingWalk = (this.walkingTree(end.id).costs.get(target.id) ?? Infinity) + distance(target.position, destination.door);
-          const rideTime = Math.max(0, v.nextDeparture - this.now) + edge.length * (v.direction > 0 ? 1 - v.progress : v.progress) / Math.max(1, v.speed * this.state.energy / 100);
-          return rideTime + remainingWalk / walkingSpeed + 15 < walkingTime;
-        });
-        if (transit) { const edge = this.edges.get(transit.edgeId)!; citizen.money -= 4; this.bus.emit({ type: 'transit-fare', amount: 4, citizenId: citizen.id, vehicleId: transit.id, districtId: citizen.districtId }); this.runtime.riders[citizen.id] = { vehicleId: transit.id, stopNodeId: transit.direction > 0 ? edge.to : edge.from }; transit.passengers++; citizen.state = 'riding'; citizen.position = copy(transit.position); this.bus.emit({ type: 'commute', citizenId: citizen.id }); continue; }
-      }
-      let arrivedElapsed = availableMinutes;
-      if ((citizen.routeIndex ?? 0) < (citizen.route?.length ?? 0)) {
-        let remainingDistance = 0, point = citizen.position;
-        for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remainingDistance += distance(point, next); point = next; }
-        if (!this.moveCitizen(citizen, availableMinutes)) continue;
-        arrivedElapsed = this.runtime.npcMotionVersion === 2 ? this.citizenArrivalMinutes.get(citizen) ?? 0 : Math.max(0, availableMinutes - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
-      }
-      const activity = this.runtime.activities[citizen.id];
-      const person = { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] };
-      const atActivityPoint = destination.kind === 'home' && activity === 'rest'
-        ? !!homeRestPointAt(destination, citizen.position, person) && !homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)
-        : this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity, destination), person);
-      const browsing = streetBrowse(this.runtime, citizen, destination) && !this.floorPlanPresence(destination, citizen.position) && distance(citizen.position, destination.door) <= BROWSE_MAX + 1;
-      if (!browsing && (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !atActivityPoint)) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
-      // A clinic observer receives only a real completed walking/arrival leg.
-      // This optional source event changes no movement, needs or attendance.
-      if (destination.kind === 'clinic' && arrivedElapsed > 0) {
-        const observedClock = this.state.extension!.lastUpdate;
-        this.bus.emit({ type: 'clinical-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: this.activityPointPurpose(activity), activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: copy(citizen.position) });
-      }
-      if (destination.id === home.id || activity === 'rest') {
-        citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .08);
-      } else if (activity === 'work') {
-        if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor && publicEmploymentSite(this.runtime.publicLabor,citizen.id) || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; continue; }
-        if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
-      } else if (activity === 'civicRegister' || activity === 'civicVote') {
-        citizen.state = 'attendingCivic';
-        if (this.effectiveRuleset === 'civic-local-v1' && arrivedElapsed > 0) {
-          const observedClock = this.state.extension!.lastUpdate;
-          const event: Event = Object.freeze({ type: 'civic-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: activity, minutes: this.minutes, activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: Object.freeze(copy(citizen.position)) });
-          canonicalCivicPresence.add(event); this.bus.emit(event);
-        }
-      } else if (activity === 'shopLifecycle') {
-        citizen.state = 'reviewingBusiness';
-        this.bus.emit({ type: 'shop-lifecycle-arrived', citizenId: citizen.id, shopId: this.state.shops.find(shop => shop.buildingId === destination.id)?.id });
-      } else if (activity === 'businessReview') {
-        citizen.state = 'reviewingBusiness';
-      } else if (activity === 'study') {
-        citizen.state = 'studying'; if (citizen.skills) citizen.skills.learning = clamp(citizen.skills.learning + arrivedElapsed * .003);
-        if (citizen.role === '学生' && destination.kind === 'school') this.payStudyGrant(citizen, arrivedElapsed); citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .02); recordSchoolSelfStudy(this, citizen, destination, arrivedElapsed); observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
-      } else if (activity === 'budgetReview') {
-        citizen.state = 'reviewingBudget';
-      } else if (activity === 'service') {
-        citizen.state = 'attendingService'; observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
-      } else if (activity === 'social') {
-        citizen.state = 'socializing'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .12); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .09);
-      } else if (activity === 'heal') {
-        citizen.state = 'healing'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * .03);
-      } else if (activity === 'eat') {
-        citizen.state = 'shopping';
-        this.bus.emit({ type: 'customer', citizenId: citizen.id, shopId: this.state.shops.find(s => s.buildingId === destination.id)?.id });
-      }
-      if (destination.kind === 'school') observePublicEducationArrival(this, citizen, destination, arrivedElapsed);
     }
+    if (!roadTask && citizen.state !== 'roadWaiting') { this.considerPrivateOpportunity(citizen); this.considerShopMove(citizen); }
+    const home = this.buildings.get(citizen.homeId)!; const work = this.buildings.get(citizen.workId)!;
+    let availableMinutes = elapsed;
+    const riding = this.runtime.riders[citizen.id];
+    if (riding) {
+      const vehicle = this.state.vehicles.find(v => v.id === riding.vehicleId)!;
+      const stop = this.world.nodes.find(n => n.id === riding.stopNodeId)!;
+      citizen.position = copy(riding.arrived ? stop.position : vehicle.position); citizen.state = 'riding';
+      // Traffic records arrival at its discrete endpoint observation. Deferred
+      // ride minutes still decay needs, but cannot be reused for walking or
+      // onsite recovery. An unobserved legacy arrival starts from this phase.
+      if (!riding.arrived) return;
+      availableMinutes = Math.min(elapsed, Math.max(0, (this.state.extension?.lastUpdate ?? this.now) - (riding.arrivedAt ?? (this.state.extension?.lastUpdate ?? this.now))));
+      delete this.runtime.riders[citizen.id];
+      citizen.position = copy(stop.position); citizen.route = []; citizen.routeIndex = 0;
+      const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId);
+      if (ongoing) this.setDestination(citizen, ongoing, true);
+    }
+    if (roadTask) { this.advanceRoadworker(citizen, roadTask, availableMinutes); return; }
+    if (citizen.state.startsWith('roadWork') || citizen.state === 'roadPickup') {
+      const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId); if (ongoing) this.setDestination(citizen, ongoing, true);
+    }
+    let destination: Building;
+    const sleeping = hour >= 22 || hour < 6;
+    const shift = hour >= 7.5 && hour < 17.5;
+
+    const previousActivity = this.runtime.activities[citizen.id];
+    const previousShop = this.state.shops.find(s => s.buildingId === citizen.destinationId);
+    const treatment = this.state.clinical?.orders.find(order => order.patientId === citizen.id && ['awaitingSupply', 'awaitingDoctor', 'inTreatment'].includes(order.state));
+    const committedTreatment = treatment && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25;
+    if (committedTreatment) this.runtime.activities[citizen.id] = 'heal';
+    const reconsiderCivic = this.effectiveRuleset === 'civic-local-v1' && previousActivity === 'work' && civicStaffingOpportunities(this, citizen).length > 0;
+    const reconsiderMeal = nearestMealPolicy(this.runtime.mealRoutePolicyId) && previousActivity === 'eat' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
+    // npc-motion-coarse-v1 cities: a resident still blocked (physicalWaiting)
+    // at a decision point re-plans from where they stand instead of waiting
+    // on the same blocked leg forever (a 14-day audit lost a resident so).
+    const blockedReplan = this.runtime.npcMotionPolicyId === NPC_MOTION_COARSE_POLICY && citizen.state === 'physicalWaiting' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
+    // npc-motion-coarse-v1: a resident part-way up or down a stair flight
+    // finishes it before choosing anew; a route re-planned from mid-flight
+    // can start on a leg the stair planner rejects (found in a 14-day audit).
+    const midFlight = this.runtime.npcMotionPolicyId === NPC_MOTION_COARSE_POLICY && !!citizen.destinationId && !!this.runtime.npcStairCursors?.[citizen.id] && citizen.state !== 'physicalWaiting';
+    const committedNeed = midFlight || !!citizen.destinationId && (citizen.state === 'roadWaiting' || !reconsiderMeal && previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || !reconsiderCivic && previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
+    if (committedTreatment) destination = this.buildings.get(treatment.siteId)!;
+    else if (!committedNeed && (reconsiderCivic || !citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
+      const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
+    } else destination = this.buildings.get(citizen.destinationId!)!;
+    const held = blockedReplan ? { route: citizen.route, routeIndex: citizen.routeIndex, state: citizen.state, destinationId: citizen.destinationId } : null;
+    if (blockedReplan && (this.runtime.decisionAt[citizen.id] ?? 0) <= this.now + 1e-7) this.runtime.decisionAt[citizen.id] = this.now + 25;
+    // A resident mid-flight keeps the exact route and cursor it is following.
+    if (!midFlight) this.setDestination(citizen, destination, blockedReplan);
+    // A re-plan that is itself blocked at once is dropped: the resident keeps
+    // the previous leg and stair cursor, a state the save reader accepts.
+    // A kept re-plan releases a stair cursor that no longer matches its route.
+    if (held && citizen.route !== held.route) {
+      const blocked = !!citizen.route && (citizen.routeIndex ?? 0) < citizen.route.length && this.npcStairMotion.describe(citizen.route, citizen.routeIndex ?? 0).kind === 'blocked'
+        && !this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex ?? 0, citizen.position);
+      if (blocked) Object.assign(citizen, held);
+      else { const cursor = this.runtime.npcStairCursors?.[citizen.id]; if (cursor && !this.nativeCursorMatches(citizen, cursor)) delete this.runtime.npcStairCursors![citizen.id]; }
+    }
+    if (citizen.state === 'roadWaiting') return;
+    if (citizen.state === 'unreachable') { citizen.destinationId = null; return; }
+    if (distance(citizen.position, destination.door) > 200) {
+      const walkingSpeed = this.state.weather === '雨' ? 3.1 : 4.2;
+      const walkingTime = this.walkingDistance(citizen, destination) / walkingSpeed;
+      const transit = this.state.vehicles.find(v => {
+        if (!isRoadOpen(this.state, v.edgeId) || v.state === 'roadClosed' || v.state === 'moving' || v.kind === 'flight' || citizen.money < 4 || v.passengers >= this.passengerCapacity(v) || distance(v.position, citizen.position) > 40) return false;
+        const edge = this.edges.get(v.edgeId)!; const end = this.world.nodes.find(n => n.id === (v.direction > 0 ? edge.to : edge.from))!;
+        const target = this.buildingNode(destination), remainingWalk = (this.walkingTree(end.id).costs.get(target.id) ?? Infinity) + distance(target.position, destination.door);
+        const rideTime = Math.max(0, v.nextDeparture - this.now) + edge.length * (v.direction > 0 ? 1 - v.progress : v.progress) / Math.max(1, v.speed * this.state.energy / 100);
+        return rideTime + remainingWalk / walkingSpeed + 15 < walkingTime;
+      });
+      if (transit) { const edge = this.edges.get(transit.edgeId)!; citizen.money -= 4; this.bus.emit({ type: 'transit-fare', amount: 4, citizenId: citizen.id, vehicleId: transit.id, districtId: citizen.districtId }); this.runtime.riders[citizen.id] = { vehicleId: transit.id, stopNodeId: transit.direction > 0 ? edge.to : edge.from }; transit.passengers++; citizen.state = 'riding'; citizen.position = copy(transit.position); this.bus.emit({ type: 'commute', citizenId: citizen.id }); return; }
+    }
+    let arrivedElapsed = availableMinutes;
+    if ((citizen.routeIndex ?? 0) < (citizen.route?.length ?? 0)) {
+      let remainingDistance = 0, point = citizen.position;
+      for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remainingDistance += distance(point, next); point = next; }
+      if (!this.moveCitizen(citizen, availableMinutes)) return;
+      arrivedElapsed = this.runtime.npcMotionVersion === 2 ? this.citizenArrivalMinutes.get(citizen) ?? 0 : Math.max(0, availableMinutes - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
+    }
+    const activity = this.runtime.activities[citizen.id];
+    const person = { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] };
+    const atActivityPoint = destination.kind === 'home' && activity === 'rest'
+      ? !!homeRestPointAt(destination, citizen.position, person) && !homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)
+      : this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity, destination), person);
+    const browsing = streetBrowse(this.runtime, citizen, destination) && !this.floorPlanPresence(destination, citizen.position) && distance(citizen.position, destination.door) <= BROWSE_MAX + 1;
+    if (!browsing && (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !atActivityPoint)) { citizen.state = 'unreachable'; citizen.destinationId = null; return; }
+    // A clinic observer receives only a real completed walking/arrival leg.
+    // This optional source event changes no movement, needs or attendance.
+    if (destination.kind === 'clinic' && arrivedElapsed > 0) {
+      const observedClock = this.state.extension!.lastUpdate;
+      this.bus.emit({ type: 'clinical-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: this.activityPointPurpose(activity), activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: copy(citizen.position) });
+    }
+    if (destination.id === home.id || activity === 'rest') {
+      citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .08);
+    } else if (activity === 'work') {
+      if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor && publicEmploymentSite(this.runtime.publicLabor,citizen.id) || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; return; }
+      if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
+    } else if (activity === 'civicRegister' || activity === 'civicVote') {
+      citizen.state = 'attendingCivic';
+      if (this.effectiveRuleset === 'civic-local-v1' && arrivedElapsed > 0) {
+        const observedClock = this.state.extension!.lastUpdate;
+        const event: Event = Object.freeze({ type: 'civic-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: activity, minutes: this.minutes, activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: Object.freeze(copy(citizen.position)) });
+        canonicalCivicPresence.add(event); this.bus.emit(event);
+      }
+    } else if (activity === 'shopLifecycle') {
+      citizen.state = 'reviewingBusiness';
+      this.bus.emit({ type: 'shop-lifecycle-arrived', citizenId: citizen.id, shopId: this.state.shops.find(shop => shop.buildingId === destination.id)?.id });
+    } else if (activity === 'businessReview') {
+      citizen.state = 'reviewingBusiness';
+    } else if (activity === 'study') {
+      citizen.state = 'studying'; if (citizen.skills) citizen.skills.learning = clamp(citizen.skills.learning + arrivedElapsed * .003);
+      if (citizen.role === '学生' && destination.kind === 'school') this.payStudyGrant(citizen, arrivedElapsed); citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .02); recordSchoolSelfStudy(this, citizen, destination, arrivedElapsed); observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
+    } else if (activity === 'budgetReview') {
+      citizen.state = 'reviewingBudget';
+    } else if (activity === 'service') {
+      citizen.state = 'attendingService'; observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
+    } else if (activity === 'social') {
+      citizen.state = 'socializing'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .12); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .09);
+    } else if (activity === 'heal') {
+      citizen.state = 'healing'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * .03);
+    } else if (activity === 'eat') {
+      citizen.state = 'shopping';
+      this.bus.emit({ type: 'customer', citizenId: citizen.id, shopId: this.state.shops.find(s => s.buildingId === destination.id)?.id });
+    }
+    if (destination.kind === 'school') observePublicEducationArrival(this, citizen, destination, arrivedElapsed);
+  }
+  private peopleFinish(ctx: ReturnType<Simulation['peopleSetup']>) {
+    const { hour } = ctx;
     const player = this.state.player; player.needs.hunger = clamp(player.needs.hunger - this.minutes * .035); player.needs.fatigue = clamp(player.needs.fatigue - this.minutes * .018); player.needs.social = clamp(player.needs.social - this.minutes * .012); player.needs.fun = clamp(player.needs.fun - this.minutes * .009);
     if (this.now + 1e-7 >= this.runtime.payrollAt) {
       // Earned labour remains payable even after a job change, closure or death.
