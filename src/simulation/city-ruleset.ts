@@ -11,12 +11,13 @@ import { validateForeignTradePolicy, type ForeignTradePolicy } from './foreign-t
 import { validateNpcMotionPolicy, type NpcMotionPolicy } from './npc-motion-coarse';
 import { validateBoardingHoldPolicy, type BoardingHoldPolicy } from './boarding-hold';
 import { validatePlayerYieldPolicy, type PlayerYieldPolicy } from './player-yield';
+import { validateCableSpeedPolicy, type CableSpeedPolicy } from './cable-speed';
 import { hasServiceMaterialRequestEstimate, validateServiceMaterialSchedulingEnvelope } from './service-material-scheduling';
 
 export const PRODUCT_RULESET = 'civic-local-v1' as const;
 export type EffectiveRuleset = 'legacy' | typeof PRODUCT_RULESET;
 export const CIVIC_HISTORY_POLICY = 'civic-history-pages-v1' as const;
-export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; referenceCollisionPolicyId?: ReferenceCollisionPolicy; mealRoutePolicyId?: MealRoutePolicy; freightPickupPolicyId?: FreightPickupPolicy; farmYieldPolicyId?: FarmYieldPolicy; foodFreightPolicyId?: FoodFreightPolicy; publicFinancePolicyId?: PublicFinancePolicy; foreignTradePolicyId?: ForeignTradePolicy; npcMotionPolicyId?: NpcMotionPolicy; boardingHoldPolicyId?: BoardingHoldPolicy; playerYieldPolicyId?: PlayerYieldPolicy }
+export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; referenceCollisionPolicyId?: ReferenceCollisionPolicy; mealRoutePolicyId?: MealRoutePolicy; freightPickupPolicyId?: FreightPickupPolicy; farmYieldPolicyId?: FarmYieldPolicy; foodFreightPolicyId?: FoodFreightPolicy; publicFinancePolicyId?: PublicFinancePolicy; foreignTradePolicyId?: ForeignTradePolicy; npcMotionPolicyId?: NpcMotionPolicy; boardingHoldPolicyId?: BoardingHoldPolicy; playerYieldPolicyId?: PlayerYieldPolicy; cableSpeedPolicyId?: CableSpeedPolicy }
 type Document = Record<string, any>;
 export type CivicInitialProfession = Pick<Citizen, 'id' | 'role' | 'workId' | 'districtId' | 'education'>;
 const object = (value: unknown): value is Document => !!value && typeof value === 'object' && !Array.isArray(value);
@@ -38,6 +39,7 @@ export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
   validateNpcMotionPolicy(data);
   validateBoardingHoldPolicy(data);
   validatePlayerYieldPolicy(data);
+  validateCableSpeedPolicy(data);
   validateServiceMaterialSchedulingEnvelope(data);
   const state = data.state, runtime = data.runtime;
   const listed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('civicStaffing');
