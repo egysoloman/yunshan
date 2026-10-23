@@ -28,6 +28,7 @@ import { freshLaborPause, freshLaborSettlement, type LaborSeen } from '../labor-
 import { freshRideStop, type RideSeen } from '../transit-label';
 import { freshNeedNotice, type NeedSeen } from '../need-feedback';
 import { freshDistrictArrival, type DistrictSeen } from '../district-arrival';
+import { FAST_RIDE_SPEED, fastRideEnd, startFastRide, type FastRide } from '../fast-ride';
 import { freshDaySummary, type DaySnapshot } from '../day-summary';
 import { AUTO_TRANSIT_METRES, FIRST_DAY_STEPS, firstDayDone, firstDayNext, firstDayTarget, firstDayUnavailable, nearbyStranger, nearbyStrangerNotice, type FirstDayStep } from '../first-day';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
@@ -95,6 +96,7 @@ export class SimHost {
   private laborSeen: number | null = null;
   private rideSeen: RideSeen | null = null;
   private needSeen: NeedSeen | null = null;
+  private fastRide: FastRide | null = null;
   private districtSeen: DistrictSeen | null = null;
   private daySeen: DaySnapshot | null = null;
   private laborPauseSeen: LaborSeen | null = null;
@@ -117,13 +119,16 @@ export class SimHost {
         const sim = this.requireSim(), command = request.command as Command;
         if (!command || typeof command !== 'object' || typeof command.type !== 'string') throw new Error('命令格式无效。');
         const body = () => ({ hunger: sim.state.player.needs.hunger, food: sim.state.player.inventory.food ?? 0 }), before = body();
+        // The panel's 快进至到站 is the player's own speed command naming the vehicle ridden (fast-ride.ts).
+        const fast = command.type === 'speed' && command.value === FAST_RIDE_SPEED && !!command.targetId && command.targetId === sim.state.player.vehicleId ? startFastRide(sim.state) : null;
         const money = sim.state.player.money, result = sim.command(command);
+        if (result.ok && fast) this.fastRide = fast;
         if (result.ok && (command.type === 'purchase' || command.type === 'eat') && sim.state.player.money < money - 1e-9) this.purchased = true;
         // Shown to the player: amounts read in 云币 (as the web UI shows them).
         return { result: { ...result, message: displayMoney(result.message) + (result.ok ? mealFeedback(command.type, before, body()) : '') }, frame: this.frame(request, 0, 0) };
       }
       case 'context': {
-        const model = contextModel(this.requireSim(), this.world!, { ...(request.view as ContextView), keepCitizenId: this.metCitizenId });
+        const model = contextModel(this.requireSim(), this.world!, { ...(request.view as ContextView), keepCitizenId: this.metCitizenId, fastRideVehicleId: this.fastRide?.vehicleId ?? null });
         this.metCitizenId = model.sections.find(section => section.kind === 'citizen')?.id ?? null;
         return model;
       }
@@ -215,6 +220,7 @@ export class SimHost {
     sim.step(seconds);
     const settled = freshLaborSettlement(state, this.laborSeen, id => this.world!.buildings.find(b => b.id === id)?.name ?? ''); this.laborSeen = settled.seen;
     const ride = freshRideStop(state, this.world!, this.rideSeen); this.rideSeen = ride.seen;
+    const fastEnd = fastRideEnd(this.fastRide, state, !!ride.notice); if (fastEnd.done) { this.fastRide = null; if (fastEnd.restore !== null) sim.command({ type: 'speed', value: fastEnd.restore }); }
     const need = freshNeedNotice(state, this.world!, state.player.position, this.needSeen); this.needSeen = need.seen;
     const place = freshDistrictArrival(state, this.world!, state.player.position, this.districtSeen); this.districtSeen = place.seen;
     const day = freshDaySummary(state, this.daySeen); this.daySeen = day.seen;

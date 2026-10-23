@@ -6,6 +6,7 @@
  */
 import { departureLabel, longRideNote, rideArrivalLabel, nextStopTitle, rideFare } from '../transit-label';
 import { playerLaborLabel } from '../labor-feedback';
+import { FAST_RIDE_SPEED } from '../fast-ride';
 import type { Simulation } from '../simulation';
 import { nearbyResident } from '../social-reach';
 import { FLOOR_PLAN_PROFILE } from '../architecture-floor-plan';
@@ -18,7 +19,7 @@ import { powerBinding } from '../simulation/power';
 import { governanceSupported } from '../simulation/governance';
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, Vec3, Vehicle, ViewMode, WorldDefinition } from '../types';
 
-export interface ContextView { mode?: ViewMode; inside?: string | null; bankAmount?: number; keepCitizenId?: string | null }
+export interface ContextView { mode?: ViewMode; inside?: string | null; bankAmount?: number; keepCitizenId?: string | null; fastRideVehicleId?: string | null }
 /** `interact` asks the client to run its door/stair/vehicle interaction (E). */
 export interface ContextAction { label: string; command?: Command; client?: 'interact'; disabled: boolean }
 export interface ContextSection { kind: 'building' | 'citizen' | 'vehicle' | 'aircraft'; id: string; eyebrow: string; title: string; subtitle: string; actions: ContextAction[]; notes: string[] }
@@ -230,7 +231,11 @@ export class ContextRules {
       if (vehicle.kind === 'road' || vehicle.kind === 'flight' && this.hasRole('driver')) actions.push(button(vehicle.kind === 'flight' ? '驾驶航班' : '驾驶载具', 'drive', vehicle.id, undefined, !walk || vehicle.state === 'moving' || !this.hasRole('driver', 'police', 'soldier')));
     }
     const note = state.player.vehicleId && state.player.inventory.driving === 1 ? 'W / S 油门与减速 · A / D 路口转向 · 空格刹车。抵达停靠点后可下车。' : state.player.vehicleId ? '玩家随真实载具前行；抵达站点并停稳后，可下车继续游览。' : '候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。';
-    return { kind: 'vehicle', id: vehicle.id, eyebrow: `${modeNames[vehicle.kind]} · ${activity(vehicle.state)}${departureLabel(vehicle, state)}`, title: nextStopTitle(vehicle, this.world, state) ?? (state.player.vehicleId ? '同行于山城' : `附近${modeNames[vehicle.kind]}载具`), subtitle: [rideArrivalLabel(vehicle, this.world, state), `${vehicle.passengers} 位乘客 · 货物 ${Math.round(vehicle.cargo)} · ${Math.round(vehicle.speed)} m/s`].filter(Boolean).join(' · '), actions, notes: [note, longRideNote(vehicle, this.world, state)].filter((n): n is string => !!n) };
+    // A long ride offers 快进至到站 (fast-ride.ts): the player's own speed command, naming the vehicle ridden.
+    const fasting = this.view.fastRideVehicleId === vehicle.id, longNote = fasting ? null : longRideNote(vehicle, this.world, state);
+    const fastNote = fasting ? `快进中（${FAST_RIDE_SPEED}×）：到站或下车时恢复原来的时间倍率。` : null;
+    if (longNote) actions.push(button(`快进至到站 · ${FAST_RIDE_SPEED}×`, 'speed', vehicle.id, FAST_RIDE_SPEED));
+    return { kind: 'vehicle', id: vehicle.id, eyebrow: `${modeNames[vehicle.kind]} · ${activity(vehicle.state)}${departureLabel(vehicle, state)}`, title: nextStopTitle(vehicle, this.world, state) ?? (state.player.vehicleId ? '同行于山城' : `附近${modeNames[vehicle.kind]}载具`), subtitle: [rideArrivalLabel(vehicle, this.world, state), `${vehicle.passengers} 位乘客 · 货物 ${Math.round(vehicle.cargo)} · ${Math.round(vehicle.speed)} m/s`].filter(Boolean).join(' · '), actions, notes: [note, fastNote ?? longNote].filter((n): n is string => !!n) };
   }
 
   aircraft(craft: AerialVehicle): ContextSection {
@@ -254,7 +259,7 @@ export class ContextRules {
 /** Nearby targets use the web App's radii: doors 18 m, residents 8 m (kept within 24 m once met),
  * vehicles 24 m, aircraft 18 m, measured from the player's actual body. */
 export function contextModel(sim: Simulation, world: WorldDefinition, view: ContextView = {}): ContextModelResult {
-  const rules = new ContextRules(sim, world, { mode: view.mode ?? 'walk', inside: view.inside ?? null, bankAmount: view.bankAmount });
+  const rules = new ContextRules(sim, world, { mode: view.mode ?? 'walk', inside: view.inside ?? null, bankAmount: view.bankAmount, fastRideVehicleId: view.fastRideVehicleId ?? null });
   const state = sim.state, position = state.player.position;
   const insideBuilding = view.inside ? world.buildings.find(b => b.id === view.inside) : undefined;
   const building = insideBuilding ?? world.buildings.filter(b => spatialDistance(position, b.door) < 18).sort((a, b) => spatialDistance(position, a.door) - spatialDistance(position, b.door))[0];

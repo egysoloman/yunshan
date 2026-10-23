@@ -156,3 +156,25 @@ test('native host serves the first-day list and plans a one-click walk to where 
   assert.equal(all.complete, true);
   assert.match(all.next ?? '', /^第一天的四件事都做完了。接下来可以：到住宅租一处落脚的住所；/);
 });
+
+test('a long ride offers 快进至到站; the host sets the clock back at the stop', async () => {
+  const host = new SimHost();
+  assert.equal((await host.handle({ id: 1, op: 'open' })).ok, true);
+  const sim = (host as unknown as { requireSim(): Simulation }).requireSim(), s = sim.state;
+  const bus = s.vehicles.find(v => v.kind === 'road' && (v.state === 'waiting' || v.state === 'boarding'))!;
+  s.player.position = { ...bus.position };
+  const rode = await host.handle({ id: 2, op: 'command', command: { type: 'ride', targetId: bus.id } });
+  assert.equal((rode.result as { result: { ok: boolean } }).result.ok, true);
+  const panel = async (id: number) => ((await host.handle({ id, op: 'context', view: { mode: 'walk' } })).result as ContextModelResult).sections.find(x => x.kind === 'vehicle')!;
+  const fast = (await panel(3)).actions.find(a => a.label.startsWith('快进至到站'));
+  assert.ok(fast?.command, 'a ride of more than half an hour offers it');
+  assert.deepEqual(fast.command, { type: 'speed', targetId: bus.id, value: 10 });
+  await host.handle({ id: 4, op: 'command', command: fast.command });
+  assert.equal(s.speed, 10);
+  assert.ok((await panel(5)).notes.some(n => n.startsWith('快进中')), 'the panel says it is speeding');
+  let notice = '';
+  for (let i = 0; i < 4000 && s.speed === 10; i++) { const frame = (await host.handle({ id: 10 + i, op: 'step', seconds: .25, mode: 'walk' })).result as HostFrame & { notice?: string }; notice = frame.notice ?? notice; }
+  assert.equal(s.speed, 1, 'the multiplier the player had comes back at the stop');
+  assert.equal(s.player.vehicleId, bus.id, 'still aboard');
+  assert.match(notice, /到站：/);
+});
