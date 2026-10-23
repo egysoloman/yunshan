@@ -28,6 +28,9 @@ import { freshNeedNotice, type NeedSeen } from './need-feedback';
 import { freshDistrictArrival, type DistrictSeen } from './district-arrival';
 import { eGreetsResident } from './social-reach';
 import { districtLine } from './district-lines';
+
+/** The multiplier the riding panel's 快进至到站 sets (one of the speed menu's own choices). */
+const FAST_RIDE_SPEED = 10;
 import { freshDaySummary, type DaySnapshot } from './day-summary';
 import { freshLaborSettlement, freshLaborPause, playerLaborLabel, type LaborSeen } from './labor-feedback';
 import { timeOfDayGrade } from './rendering/time-of-day-grade';
@@ -148,6 +151,8 @@ export class CityUI {
   private pane: Pane = 'life';
   private contextKind: ContextKind = 'building';
   private autoCitizenTab: string | null = null;
+  /** A long ride sped up from its panel: the multiplier to restore at the next stop or on getting off. */
+  private fastRide: { vehicleId: string; previous: number } | null = null;
   private readonly siteName = (id: string) => this.world.buildings.find(b => b.id === id)?.name ?? id;
   /** The tab the context panel is showing, or null while it is hidden (E follows it: transit-label.ts eBoardsVehicle). */
   get shownContext(): ContextKind | null { return this.ref('context').hidden ? null : this.contextKind; }
@@ -476,6 +481,7 @@ export class CityUI {
       case 'study': this.actions.command({ type: 'exam', targetId: 'study' }); break;
       case 'policy': this.policyDirty = false; this.actions.command({ type: 'policy', taxRate: Number(this.ref<HTMLInputElement>('tax').value) / 100, policeBudget: Number(this.ref<HTMLInputElement>('police').value) / 100, targetId: building?.id }); break;
       case 'signal': this.actions.command({ type: 'signal', value: Number(button.dataset.value), position: state?.player.position }); break;
+      case 'ride-fast': if (state?.player.vehicleId) { this.fastRide = { vehicleId: state.player.vehicleId, previous: state.speed }; this.actions.command({ type: 'speed', value: FAST_RIDE_SPEED }); this.contextSignature = ''; } break;
       case 'purchase-carry': this.actions.command({ type: 'purchase', targetId: button.dataset.target, value: 2 }); break;
       case 'bank': this.actions.command({ type: button.dataset.bank as Command['type'], targetId: building?.id, value: Number(this.root.querySelector<HTMLSelectElement>('#bank-amount')?.value ?? 100) }); break;
       case 'relations': this.setPanel(true, 'relations'); this.selectedCitizen = this.view?.nearbyCitizen?.id ?? null; this.renderRelationships(); break;
@@ -544,7 +550,11 @@ export class CityUI {
     // An open shift that pauses (or resumes) says so (labor-feedback.ts).
     const shift = freshLaborPause(state, this.laborPauseSeen, id => this.world.buildings.find(b => b.id === id)?.name ?? ''); this.laborPauseSeen = shift.seen; if (shift.notice) this.notify(shift.notice, true);
     // A ride that just pulled in to a stop says where, and how to get off (transit-label.ts).
-    const ride = freshRideStop(state, this.world, this.rideSeen); this.rideSeen = ride.seen; if (ride.notice) { this.notify(ride.notice, true); this.actions.cue?.('arrive'); }
+    const ride = freshRideStop(state, this.world, this.rideSeen); this.rideSeen = ride.seen;
+    // A sped-up ride slows back down at its stop, or when the player has left that vehicle; the stop's own
+    // notice is said after the multiplier's, so it is the one left on screen.
+    if (this.fastRide && (ride.notice || state.player.vehicleId !== this.fastRide.vehicleId)) { const previous = this.fastRide.previous; this.fastRide = null; if (state.speed === FAST_RIDE_SPEED) this.actions.command({ type: 'speed', value: previous }); }
+    if (ride.notice) { this.notify(ride.notice, true); this.actions.cue?.('arrive'); }
     // The player's own hunger or energy falling low is said once, with where to go (need-feedback.ts).
     const need = freshNeedNotice(state, this.world, view.position, this.needSeen); this.needSeen = need.seen; if (need.notice) this.notify(need.notice, true);
     // Crossing into another district names it once, with how lively it is now (district-arrival.ts).
@@ -1405,7 +1415,9 @@ export class CityUI {
         if (vehicle.kind === 'road' || vehicle.kind === 'flight' && this.hasRole('driver')) controls.append(commandButton(vehicle.kind === 'flight' ? '驾驶航班' : '驾驶载具', 'drive', vehicle.id, undefined, !walk || vehicle.state === 'moving' || !this.hasRole('driver', 'police', 'soldier')));
       }
       body.append(controls, element('p', 'note', state.player.vehicleId && state.player.inventory.driving === 1 ? 'W / S 油门与减速 · A / D 路口转向 · 空格刹车。抵达停靠点后可下车。' : state.player.vehicleId ? '玩家随真实载具前行；抵达站点并停稳后，可下车继续游览。' : '候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。'));
-      const longRide = longRideNote(vehicle, this.world, state); if (longRide) body.append(element('p', 'note', longRide));
+      const longRide = longRideNote(vehicle, this.world, state);
+      if (this.fastRide?.vehicleId === vehicle.id) body.append(element('p', 'note', `快进中（${FAST_RIDE_SPEED}×）：到站或下车时恢复原来的时间倍率。`));
+      else if (longRide) { body.append(element('p', 'note', longRide)); const fast = element('button', 'action-button full-width', `快进至到站 · ${FAST_RIDE_SPEED}×`); fast.type = 'button'; fast.dataset.action = 'ride-fast'; body.append(fast); }
     }
     reconcileContent(this.ref('context-body'), body);
     [...this.ref('context').querySelectorAll('details')].forEach((detail, index) => { detail.open = previousDetails[index] ?? false; });
