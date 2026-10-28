@@ -234,9 +234,11 @@ function frame(now: number): void {
   // Preserve real held-key intervals and small collision steps on slow frames.
   controller.stepWalkingFrame(now, rawDelta, Boolean(simulation.state.player.vehicleId), simulation.state.paused);
   if (controller.blockedAccess) { showNotice(controller.blockedAccess, false); controller.blockedAccess = null; }
-  // The player's own inputs reach the city between ticks; a tick part-way through (stepSliced) reads them
-  // when it starts, as step() did, so they wait for it to end.
-  if (!simulation.tickOpen) {
+  // The player's own inputs reach the city just before a tick starts, once a frame (as step() took them
+  // before its ticks); a tick part-way through (stepSliced) has read them already.
+  let inputsApplied = false;
+  const applyInputs = () => {
+    if (inputsApplied) return; inputsApplied = true;
     if (controller.mode === 'walk' && !simulation.state.player.vehicleId && !activeAircraft(simulation.state)) {
       simulation.state.player.position = controller.walkingPosition;
       releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
@@ -250,11 +252,13 @@ function frame(now: number): void {
     }
     const detailAPI = simulation as Simulation & { setDetail?: (detail: number) => void };
     detailAPI.setDetail?.(settings.simulationDetail);
-  }
+  };
   // A tick is spread over frames, at most about TICK_FRAME_BUDGET_MS of it per frame (results are those of step()),
   // unless it has fallen behind (a slow frame rate): then it finishes now, so the city never runs slower than before.
   const sliceStart = performance.now();
-  simulation.stepSliced(delta, () => performance.now() - sliceStart < TICK_FRAME_BUDGET_MS || simulation.tickBehind);
+  simulation.stepSliced(delta, () => performance.now() - sliceStart < TICK_FRAME_BUDGET_MS || simulation.tickBehind, applyInputs);
+  // A paused or idle frame still hands the city the player's position and focus, as before.
+  if (!simulation.tickOpen) applyInputs();
   // Rebuild the gold line after canonical closures/reopening and after state
   // replacement. The original journey remains the authority for its target.
   syncNavigation(false);

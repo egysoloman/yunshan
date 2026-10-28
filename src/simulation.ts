@@ -924,14 +924,18 @@ export class Simulation implements SimulationAPI {
   /** step() spread over calls: the same ticks, phases, handlers and residents in the same order, but it stops
    * between handlers and between residents of the people phase whenever `more()` says so, and a later call
    * carries on from there. Between calls nothing may change the state except through the entry points that
-   * finish the tick first; with that, every tick ends exactly as step() would end it. */
-  stepSliced(realSeconds: number, more: () => boolean): void {
+   * finish the tick first; with that, every tick ends exactly as step() would end it. `beforeTick` runs just
+   * before each new tick starts, where a caller applies its inputs. */
+  stepSliced(realSeconds: number, more: () => boolean, beforeTick?: () => void): void {
     if (!finite(realSeconds) || realSeconds < 0 || realSeconds > 120) return;
     if (!this.slice) { if (this.state.paused) return; this.runtime.accumulator += realSeconds; }
     else this.runtime.accumulator += realSeconds;
     for (;;) {
       if (!this.slice) {
         if (this.state.paused || this.runtime.accumulator + 1e-10 < TICK_SECONDS) return;
+        // The caller's inputs (the player's walk, focus, controls) reach the city just before a tick starts.
+        beforeTick?.();
+        if (this.state.paused) return;
         this.runtime.accumulator = Math.max(0, this.runtime.accumulator - TICK_SECONDS);
         this.minutes = .25 * this.state.speed;
         this.state.lastSystemOrder = [];
