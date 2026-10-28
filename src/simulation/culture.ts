@@ -101,6 +101,8 @@ export function installCulture(simulation: Simulation): void {
     simulation.emitEvent({ type: 'relationship-change', citizenId: citizen.id, amount: affection });
   };
   const readersAt = (site: Building) => state().citizens.filter(citizen => {
+    // The distance test first: it rejects exactly what isNearBuilding below would, and the checks it skips are pure.
+    if (!simulation.couldBeNearBuilding(site, citizen.position, 2)) return false;
     if (!alive(citizen.id) || state().extension!.actorProfiles[citizen.id].age < 6 || civicStaffingActorReservedThisTick(simulation, citizen.id) || !simulation.isNearBuilding(site, citizen.position, 2)) return false;
     const role = (['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'].includes(citizen.role) ? citizen.role : 'traveler') as Role;
     const identity = { role, identities: [role] };
