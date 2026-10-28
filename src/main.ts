@@ -76,6 +76,8 @@ const aviationRenderer = new AviationRenderer(city.scene, world);
 
 let ui: CityUI;
 let targetDistrict: string | null = null;
+/** How much of a simulation tick runs per frame before the rest waits for the next (Simulation.stepSliced). */
+const TICK_FRAME_BUDGET_MS = 6;
 let view: ViewState;
 let notice = '';
 let fps = 0;
@@ -232,20 +234,27 @@ function frame(now: number): void {
   // Preserve real held-key intervals and small collision steps on slow frames.
   controller.stepWalkingFrame(now, rawDelta, Boolean(simulation.state.player.vehicleId), simulation.state.paused);
   if (controller.blockedAccess) { showNotice(controller.blockedAccess, false); controller.blockedAccess = null; }
-  if (controller.mode === 'walk' && !simulation.state.player.vehicleId && !activeAircraft(simulation.state)) {
-    simulation.state.player.position = controller.walkingPosition;
-    releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
+  // The player's own inputs reach the city between ticks; a tick part-way through (stepSliced) reads them
+  // when it starts, as step() did, so they wait for it to end.
+  if (!simulation.tickOpen) {
+    if (controller.mode === 'walk' && !simulation.state.player.vehicleId && !activeAircraft(simulation.state)) {
+      simulation.state.player.position = controller.walkingPosition;
+      releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
+    }
+    if (activeAircraft(simulation.state)) setAircraftControls(simulation.state, controller.aviationControls);
+    simulation.setFocus(controller.position, controller.mode);
+    const driveAPI = simulation as Simulation & { isDriving?: (id?: string) => boolean; driveInput?: (throttle: number, turn: number, brake: boolean) => void };
+    if (driveAPI.isDriving?.()) {
+      const input = controller.mode === 'walk' ? controller.drivingControls : { throttle: 0, turn: 0, brake: true };
+      driveAPI.driveInput?.(input.throttle, input.turn, input.brake);
+    }
+    const detailAPI = simulation as Simulation & { setDetail?: (detail: number) => void };
+    detailAPI.setDetail?.(settings.simulationDetail);
   }
-  if (activeAircraft(simulation.state)) setAircraftControls(simulation.state, controller.aviationControls);
-  simulation.setFocus(controller.position, controller.mode);
-  const driveAPI = simulation as Simulation & { isDriving?: (id?: string) => boolean; driveInput?: (throttle: number, turn: number, brake: boolean) => void };
-  if (driveAPI.isDriving?.()) {
-    const input = controller.mode === 'walk' ? controller.drivingControls : { throttle: 0, turn: 0, brake: true };
-    driveAPI.driveInput?.(input.throttle, input.turn, input.brake);
-  }
-  const detailAPI = simulation as Simulation & { setDetail?: (detail: number) => void };
-  detailAPI.setDetail?.(settings.simulationDetail);
-  simulation.step(delta);
+  // A tick is spread over frames, at most about TICK_FRAME_BUDGET_MS of it per frame (results are those of step()),
+  // unless it has fallen behind (a slow frame rate): then it finishes now, so the city never runs slower than before.
+  const sliceStart = performance.now();
+  simulation.stepSliced(delta, () => performance.now() - sliceStart < TICK_FRAME_BUDGET_MS || simulation.tickBehind);
   // Rebuild the gold line after canonical closures/reopening and after state
   // replacement. The original journey remains the authority for its target.
   syncNavigation(false);
@@ -293,6 +302,7 @@ function getView(): ViewState {
 }
 
 function execute(command: Command): void {
+  simulation.finishTick();
   if (!['setTime', 'pause', 'speed'].includes(command.type) && !AIRCRAFT_COMMANDS.has(command.type) && controller.mode !== 'walk') {
     showNotice('请先安全落地并退出机舱，走近人物、建筑或站点后操作。', false);
     return;
@@ -334,6 +344,7 @@ function syncNavigation(force = true): void {
 }
 
 function setMode(mode: ViewMode, aircraftId?: string): void {
+  simulation.finishTick();
   const active = activeAircraft(simulation.state);
   if (mode === 'walk') {
     if (active) return execute({ type: 'leaveAircraft', targetId: active.id });
@@ -354,6 +365,7 @@ function setMode(mode: ViewMode, aircraftId?: string): void {
 }
 
 function interact(): void {
+  simulation.finishTick();
   const aircraft = activeAircraft(simulation.state);
   if (aircraft) return execute({ type: aircraft.status === 'parked' ? 'leaveAircraft' : 'landAircraft', targetId: aircraft.id });
   if (simulation.state.player.vehicleId) return execute({ type: 'leaveVehicle' });
@@ -405,6 +417,7 @@ function canAccessBuilding(building: Building, floor: number): boolean {
 }
 
 function onKey(key: string): void {
+  simulation.finishTick();
   if (!ui) return;
   if (key === 'KeyV') { const craft = activeAircraft(simulation.state); if (craft) execute({ type: craft.status === 'parked' ? 'leaveAircraft' : 'landAircraft', targetId: craft.id }); else setMode('drone'); }
   else if (key === 'KeyE') interact();

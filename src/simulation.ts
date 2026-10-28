@@ -90,6 +90,8 @@ class EventBus {
   private handlers = new Map<string, ((event: Event) => void)[]>();
   on(type: string, handler: (event: Event) => void) { const list = this.handlers.get(type) ?? []; list.push(handler); this.handlers.set(type, list); }
   emit(event: Event) { for (const handler of this.handlers.get(event.type) ?? []) handler(event); }
+  /** The live handler list emit walks, for a tick resumed between handlers (Simulation.stepSliced). */
+  listeners(type: string): readonly ((event: Event) => void)[] { return this.handlers.get(type) ?? []; }
 }
 export interface PublicPurchaseRequest { supplierShopIds?: string[]; requestedGross: number; requestedQuantity?: number; districtId?: string; siteId?: string; purpose?: string; procurementId?: string; budgetId?: string; reserveCash?: number; eventType?: string }
 export interface PublicPurchaseReceipt { reason?: 'budget' | 'supply' | 'authorization'; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; gross: number; net: number; unitPrice: number }[] }
@@ -855,7 +857,7 @@ export class Simulation implements SimulationAPI {
     for (const d of this.world.districts) this.runtime.districtRelationMeans[d.id] = 30;
   }
   private connectSystems() {
-    for (const phase of ORDER) this.bus.on(`system:${phase}`, () => this[phase]());
+    for (const phase of ORDER) { const core = () => this[phase](); this.phaseCore.set(phase, core); this.bus.on(`system:${phase}`, core); }
     const refreshRoadRoutes = (event: Event) => {
       // Capture the original ordinary journey before the old pure revision
       // overwrites it. Only actual failed replans submit a named request.
@@ -907,7 +909,63 @@ export class Simulation implements SimulationAPI {
       }
     });
   }
+  /** Each phase's own system handler (connectSystems), told apart from extension handlers. */
+  private readonly phaseCore = new Map<string, (event: Event) => void>();
+  /** Where an unfinished tick of stepSliced stopped: phase, handler within it, and the people phase's resident. */
+  private slice: { minutes: number; phase: number; handler: number; started: boolean; people: { ctx: ReturnType<Simulation['peopleSetup']>; i: number } | null } | null = null;
+  /** A tick of stepSliced is under way: the state is part-way through a tick. */
+  get tickOpen(): boolean { return this.slice !== null; }
+  /** The city is behind: another tick is already due beyond the one under way. Spreading ticks further would
+   * slow the city below real time on a slow frame rate, so the caller's budget should let them run now. */
+  get tickBehind(): boolean { return this.runtime.accumulator + 1e-10 >= TICK_SECONDS; }
+  /** Runs the rest of an unfinished tick at once. Every entry point that changes or reads the whole state calls
+   * it first, so a command, save or focus change never lands inside a tick, as with step(). */
+  finishTick(): void { if (this.slice) this.runSlice(() => true); }
+  /** step() spread over calls: the same ticks, phases, handlers and residents in the same order, but it stops
+   * between handlers and between residents of the people phase whenever `more()` says so, and a later call
+   * carries on from there. Between calls nothing may change the state except through the entry points that
+   * finish the tick first; with that, every tick ends exactly as step() would end it. */
+  stepSliced(realSeconds: number, more: () => boolean): void {
+    if (!finite(realSeconds) || realSeconds < 0 || realSeconds > 120) return;
+    if (!this.slice) { if (this.state.paused) return; this.runtime.accumulator += realSeconds; }
+    else this.runtime.accumulator += realSeconds;
+    for (;;) {
+      if (!this.slice) {
+        if (this.state.paused || this.runtime.accumulator + 1e-10 < TICK_SECONDS) return;
+        this.runtime.accumulator = Math.max(0, this.runtime.accumulator - TICK_SECONDS);
+        this.minutes = .25 * this.state.speed;
+        this.state.lastSystemOrder = [];
+        this.slice = { minutes: this.minutes, phase: 0, handler: 0, started: false, people: null };
+      }
+      if (!this.runSlice(more) || !more()) return;
+    }
+  }
+  /** Carries the open tick forward; true once it has ended. */
+  private runSlice(more: () => boolean): boolean {
+    const slice = this.slice!; this.minutes = slice.minutes;
+    let done = false;
+    this.npcStairMotion.withinTick(() => withFixedFloorPlans(() => {
+      for (; slice.phase < ORDER.length; slice.phase++, slice.handler = 0, slice.started = false) {
+        const phase = ORDER[slice.phase], type = `system:${phase}`, event = { type, minutes: this.minutes };
+        if (!slice.started) { this.state.lastSystemOrder.push(phase); slice.started = true; }
+        const handlers = this.bus.listeners(type), core = this.phaseCore.get(phase);
+        for (; slice.handler < handlers.length; slice.handler++) {
+          const handler = handlers[slice.handler];
+          if (phase === 'people' && handler === core) {
+            const people = slice.people ??= { ctx: this.peopleSetup(), i: 0 };
+            while (people.i < this.state.citizens.length) { this.personStep(people.i, people.ctx); people.i++; if (!more()) return; }
+            this.peopleFinish(people.ctx); slice.people = null;
+          } else handler(event);
+          if (!more()) { slice.handler++; if (slice.handler >= handlers.length) { slice.phase++; slice.handler = 0; slice.started = false; } return; }
+        }
+      }
+      this.pruneNpcStairCursors(); done = true;
+    }));
+    if (done) this.slice = null;
+    return done;
+  }
   step(realSeconds: number) {
+    this.finishTick();
     if (!finite(realSeconds) || realSeconds < 0 || realSeconds > 120 || this.state.paused) return;
     this.runtime.accumulator += realSeconds;
     while (this.runtime.accumulator + 1e-10 >= TICK_SECONDS) {
@@ -921,17 +979,18 @@ export class Simulation implements SimulationAPI {
     }
   }
   setFocus(position: Vec3, mode: ViewMode) {
+    this.finishTick();
     if (!this.validPosition(position) || !['walk', 'drone', 'jet'].includes(mode)) return;
     this.runtime.focus = copy(position); this.runtime.mode = mode;
     if (mode === 'walk' && !this.state.player.vehicleId) this.state.player.position = copy(position);
     this.updateTiers();
   }
-  setDetail(value: number) { if (finite(value)) this.runtime.detail = clamp(value, .5, 2); }
+  setDetail(value: number) { this.finishTick(); if (finite(value)) this.runtime.detail = clamp(value, .5, 2); }
   get worldDefinition(): WorldDefinition { return this.world; }
   appendNotice(type: string, text: string, districtId?: string): number { return this.notice(type, text, districtId); }
   nextRandom(): number { return this.random(); }
   isDriving(vehicleId?: string): boolean { return !!this.state.player.vehicleId && this.runtime.driving.vehicleId === this.state.player.vehicleId && (vehicleId === undefined || vehicleId === this.state.player.vehicleId); }
-  driveInput(throttle: number, turn: number, brake: boolean): void { if (!this.isDriving() || !finite(throttle) || !finite(turn) || typeof brake !== 'boolean') return; this.runtime.driving.throttle = clamp(throttle, -1, 1); this.runtime.driving.turn = clamp(turn, -1, 1); this.runtime.driving.brake = brake; }
+  driveInput(throttle: number, turn: number, brake: boolean): void { this.finishTick(); if (!this.isDriving() || !finite(throttle) || !finite(turn) || typeof brake !== 'boolean') return; this.runtime.driving.throttle = clamp(throttle, -1, 1); this.runtime.driving.turn = clamp(turn, -1, 1); this.runtime.driving.brake = brake; }
   hasIdentity(role: Role): boolean { return this.state.player.role === role || (this.state.player.identities ?? []).includes(role); }
   private addIdentity(role: Role) { const p = this.state.player; p.identities = [...new Set([...(p.identities ?? ['traveler']), p.role, role])]; p.role = role; }
   onPhase(phase: typeof ORDER[number], handler: (state: SimState, minutes: number) => void) { this.bus.on(`system:${phase}`, () => handler(this.state, this.minutes)); }
@@ -2582,6 +2641,7 @@ export class Simulation implements SimulationAPI {
     this.bus.emit({ type: 'relationship-change', citizenId: relation.npcId, amount: impact });
   }
   command(command: Command): CommandResult {
+    this.finishTick();
     const fail = (message: string): CommandResult => ({ ok: false, message });
     const success = (message: string): CommandResult => { this.notice(command.type, message); return { ok: true, message }; };
     if (!command || typeof command !== 'object' || typeof command.type !== 'string') return fail('无法识别操作。');
@@ -2796,13 +2856,14 @@ export class Simulation implements SimulationAPI {
   /** The player's body on foot, or null when riding, flying or viewing from the air (player-yield.ts). */
   private yieldPlayerPosition(): Vec3 | null { return this.state.player.vehicleId || this.state.aviation?.activeAircraftId || (this.runtime.mode ?? 'walk') !== 'walk' ? null : this.state.player.position; }
   exportSave(): string {
+    this.finishTick();
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
     return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), ...(this.runtime.npcMotionPolicyId ? { npcMotionPolicyId: this.runtime.npcMotionPolicyId } : {}), ...(this.runtime.boardingHoldPolicyId ? { boardingHoldPolicyId: this.runtime.boardingHoldPolicyId } : {}), ...(this.runtime.playerYieldPolicyId ? { playerYieldPolicyId: this.runtime.playerYieldPolicyId } : {}), ...(this.runtime.cableSpeedPolicyId ? { cableSpeedPolicyId: this.runtime.cableSpeedPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }
-  importSave(json: string): CommandResult { return this.readSave(json, false); }
+  importSave(json: string): CommandResult { this.finishTick(); return this.readSave(json, false); }
   private readSave(json: string, validateOnly: boolean): CommandResult {
     try {
       const data = parseSaveWithinResources(json);
