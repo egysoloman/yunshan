@@ -13,22 +13,30 @@ namespace Yunshan.Runtime
     {
         public const double TerrainChunk = 256, TerrainStep = 8;
 
-        public sealed class TerrainChunkData { public int Cx, Cz, N; public double X0, Z0; public float[] Heights; }
+        public sealed class TerrainChunkData { public int Cx, Cz, N; public double X0, Z0; public float[] Heights; public bool[] Paved; }
 
         /// <summary>Samples World.TerrainHeight on a regular grid (pure; safe on a worker thread).</summary>
         public static TerrainChunkData SampleTerrain(WorldDefinition world, int cx, int cz)
         {
             int n = (int)(TerrainChunk / TerrainStep) + 1;
-            var data = new TerrainChunkData { Cx = cx, Cz = cz, N = n, X0 = cx * TerrainChunk, Z0 = cz * TerrainChunk, Heights = new float[n * n] };
+            var data = new TerrainChunkData { Cx = cx, Cz = cz, N = n, X0 = cx * TerrainChunk, Z0 = cz * TerrainChunk, Heights = new float[n * n], Paved = new bool[n * n] };
+            // current-v9 (terrain.ts): the dense market town's ground within 11 m of a market building is flagstone paving.
+            var markets = StreetLayouts.IsDenseMarketLayout(world.LayoutVersion)
+                ? world.Buildings.Where(b => b.DistrictId == "market" && b.Position.X + b.Width / 2 + 11 >= data.X0 && b.Position.X - b.Width / 2 - 11 <= data.X0 + TerrainChunk && b.Position.Z + b.Depth / 2 + 11 >= data.Z0 && b.Position.Z - b.Depth / 2 - 11 <= data.Z0 + TerrainChunk).ToList()
+                : new List<Building>();
             for (int j = 0; j < n; j++) for (int i = 0; i < n; i++)
-                    data.Heights[j * n + i] = (float)World.TerrainHeight(world, data.X0 + i * TerrainStep, data.Z0 + j * TerrainStep);
+                {
+                    double x = data.X0 + i * TerrainStep, z = data.Z0 + j * TerrainStep;
+                    data.Heights[j * n + i] = (float)World.TerrainHeight(world, x, z);
+                    data.Paved[j * n + i] = data.Heights[j * n + i] < 465 && markets.Any(b => Math.Abs(x - b.Position.X) < b.Width / 2 + 11 && Math.Abs(z - b.Position.Z) < b.Depth / 2 + 11);
+                }
             return data;
         }
 
         public static Mesh TerrainMesh(TerrainChunkData data)
         {
             var builder = new GameMeshBuilder(); int n = data.N;
-            Color grass = Space.Hex("#7f9466"), meadow = Space.Hex("#a5a77a"), rock = Space.Hex("#8c877b"), high = Space.Hex("#b9b6ad"), bank = Space.Hex("#9a8c6c");
+            Color grass = Space.Hex("#7f9466"), meadow = Space.Hex("#a5a77a"), rock = Space.Hex("#8c877b"), high = Space.Hex("#b9b6ad"), bank = Space.Hex("#9a8c6c"), paving = Space.Hex("#a29d8d");
             Vector3 P(int i, int j) => new Vector3((float)(data.X0 + i * TerrainStep), data.Heights[j * n + i], (float)(data.Z0 + j * TerrainStep));
             for (int j = 0; j < n - 1; j++) for (int i = 0; i < n - 1; i++)
                 {
@@ -37,6 +45,7 @@ namespace Yunshan.Runtime
                     float y = (a.y + b.y + c.y + d.y) / 4;
                     Color color = y < 20 ? bank : y > 420 ? high : Color.Lerp(grass, meadow, Mathf.PerlinNoise(a.x * .01f, a.z * .01f));
                     color = Color.Lerp(color, rock, Mathf.SmoothStep(0, 1, (slope - .45f) / .5f));
+                    if (data.Paved != null && data.Paved[j * n + i] && data.Paved[j * n + i + 1] && data.Paved[(j + 1) * n + i] && data.Paved[(j + 1) * n + i + 1]) color = paving * (.95f + Mathf.PerlinNoise(a.x * .11f, a.z * .11f) * .08f);
                     // Counter-clockwise seen from above (+Y) in right-handed game space.
                     builder.Quad(a, d, c, b, color);
                 }
@@ -115,15 +124,17 @@ namespace Yunshan.Runtime
             return builder.Build("水系 · 溪流瀑布潭");
         }
 
+        /// <summary>As buildProgramArchitecture: homes, shops and low (≤ 5 storey) banks share the timber-and-plaster finish.</summary>
+        static bool TimberFinish(Building b) => b.Kind == "home" || b.Kind == "market" || b.Kind == "bank" && b.Floors <= 5;
         static string WallColor(Building b) => b.CommercialGeometryRevision == 1 ? "#adb5b3"
-            : b.Kind == "home" || b.Kind == "market" ? (b.Kind == "market" ? "#d2c3a4" : new[] { "#dbd1b9", "#cfc5ab", "#e0d6bf", "#d3ccb9" }[(int)b.Seed % 4])
+            : TimberFinish(b) ? (b.Kind == "market" ? "#d2c3a4" : new[] { "#e7e1d1", "#dfd8c6", "#ebe5d6", "#e2dccb" }[(int)b.Seed % 4])
             : b.Kind == "clinic" ? "#d8d7c4" : b.Kind == "bank" ? "#c3b9a3" : b.Kind == "workshop" ? "#b4a086" : b.Kind == "school" ? "#d8c9a7" : new[] { "#d3c09d", "#c1b498", "#d8c6a6", "#c8b18e" }[(int)b.Seed % 4];
 
         /// <summary>Distant envelope: one box per run of floors sharing an interior.</summary>
         public static Mesh FarBuildingMesh(Building b)
         {
             var builder = new GameMeshBuilder(); var frame = GameMeshBuilder.GameFrame(b.Position.X, b.Position.Y + .6, b.Position.Z, b.Rotation);
-            Color wall = Space.Hex(WallColor(b)), roof = Space.Hex(b.CommercialGeometryRevision == 1 ? "#344f51" : "#3f4f4c"), plinth = Space.Hex("#939487");
+            Color wall = Space.Hex(WallColor(b)), roof = Space.Hex(b.CommercialGeometryRevision == 1 ? "#344f51" : TimberFinish(b) ? "#4f8a72" : "#3f4f4c"), plinth = Space.Hex("#939487");
             var body = ArchitectureFloorPlan.GetBuildingBody(b);
             if (body != null)
             {
@@ -138,7 +149,7 @@ namespace Yunshan.Runtime
                 }
                 var roofs = ArchitectureFloorPlan.GetFloorPlanRoofRegions(body);
                 foreach (var region in roofs) builder.LocalBox(frame, region.Rect.X0, region.Bottom, region.Rect.Z0, region.Rect.X1, region.Top, region.Rect.Z1, roof);
-                PitchedRoof(builder, frame, RoofShell.Of(b, roofs));
+                PitchedRoof(builder, frame, RoofShell.Of(b, roofs), b);
             }
             else LegacyBuilding(builder, b, wall, roof);
             return builder.Build(b.Name + " · 远景");
@@ -175,10 +186,10 @@ namespace Yunshan.Runtime
         {
             var solid = new GameMeshBuilder(); var glass = new GameMeshBuilder();
             var frame = GameMeshBuilder.GameFrame(b.Position.X, b.Position.Y + .6, b.Position.Z, b.Rotation);
-            Color wall = Space.Hex(WallColor(b)), stone = Space.Hex("#aaa38b"), wood = Space.Hex("#98704d"), roof = Space.Hex(b.CommercialGeometryRevision == 1 ? "#344f51" : "#3f4f4c"), pane = Space.Hex("#7fa3a6"), stair = Space.Hex("#a39a83"), furniture = Space.Hex("#846346"), linen = Space.Hex("#d7d0b9");
+            Color wall = Space.Hex(WallColor(b)), stone = Space.Hex("#aaa38b"), wood = Space.Hex("#98704d"), roof = Space.Hex(b.CommercialGeometryRevision == 1 ? "#344f51" : TimberFinish(b) ? "#4f8a72" : "#3f4f4c"), pane = Space.Hex("#7fa3a6"), stair = Space.Hex("#a39a83"), furniture = Space.Hex("#846346"), linen = Space.Hex("#d7d0b9");
             var body = ArchitectureFloorPlan.GetBuildingBody(b);
             if (body == null) { LegacyBuilding(solid, b, wall, roof); return new NearBuildingMeshes { Solid = solid.Build(b.Name), Glass = null }; }
-            bool timberFinish = b.Kind == "home" || b.Kind == "market"; int finishedPanels = 0; var timberColor = Space.Hex("#76482f");
+            bool timberFinish = TimberFinish(b); int finishedPanels = 0; Color timberColor = Space.Hex("#4b2f1e"), boardColor = Space.Hex("#835a39");
             foreach (var plan in body.FloorPlans)
             {
                 foreach (var r in ArchitectureFloorPlan.GetFloorPlanSlabRegions(plan)) solid.LocalBox(frame, r.X0, plan.Y - .2, r.Z0, r.X1, plan.Y, r.Z1, plan.Floor <= 0 ? stone : wood, bottom: true);
@@ -197,7 +208,8 @@ namespace Yunshan.Runtime
                     if (finish != null && finish.Count > 1)
                     {
                         finishedPanels++;
-                        foreach (var (q, bottom, top, timber) in finish) solid.LocalBox(frame, q.X0, plan.Y + bottom, q.Z0, q.X1, plan.Y + top, q.Z1, timber ? timberColor : wall);
+                        // Shophouses are boarded timber between the posts; homes and banks keep plaster infill.
+                        foreach (var (q, bottom, top, timber) in finish) solid.LocalBox(frame, q.X0, plan.Y + bottom, q.Z0, q.X1, plan.Y + top, q.Z1, timber ? timberColor : b.Kind == "market" ? boardColor : wall);
                     }
                     else solid.LocalBox(frame, r.X0, plan.Y + low, r.Z0, r.X1, plan.Y + panel.Top, r.Z1, wall);
                 }
@@ -222,7 +234,7 @@ namespace Yunshan.Runtime
             }
             var roofRegions = ArchitectureFloorPlan.GetFloorPlanRoofRegions(body);
             // One roof profile in both levels of detail, as the web renderer.
-            PitchedRoof(solid, frame, RoofShell.Of(b, roofRegions));
+            PitchedRoof(solid, frame, RoofShell.Of(b, roofRegions), b);
             foreach (var region in roofRegions)
             {
                 var r = region.Rect;
@@ -233,7 +245,7 @@ namespace Yunshan.Runtime
             return new NearBuildingMeshes { Solid = solid.Build(b.Name), Glass = glass.VertexCount > 0 ? glass.Build(b.Name + " · 玻璃") : null };
         }
 
-        public const int ProgramWallFinishPanelBudget = 128;
+        public const int ProgramWallFinishPanelBudget = 128, ProgramWallFinishMaxBays = 6;
         /// <summary>Port of partitionProgramWallFinish (src/rendering/architecture-bodies.ts).</summary>
         public static List<(CoreRect Rect, double Bottom, double Top, bool Timber)> PartitionWallFinish(WallPanel panel, double bottom, double top)
         {
@@ -242,20 +254,39 @@ namespace Yunshan.Runtime
             if (panel.Kind != "solid") return result;
             if (hi - lo < .8 - 1e-7 || top - bottom < .4 - 1e-7) { result.Add((r, bottom, top, false)); return result; }
             CoreRect Slice(double from, double to) => alongX ? new CoreRect(from, to, r.Z0, r.Z1) : new CoreRect(r.X0, r.X1, from, to);
+            // Posts stand at both ends and about every 2.4 m between (on the 0.2 m lattice); infill fills the bays.
+            int bays = (int)Math.Min(ProgramWallFinishMaxBays, Math.Max(1, JsMath.Round((hi - lo - .2) / 2.4)));
+            var posts = new List<double> { lo };
+            for (int i = 1; i < bays; i++) posts.Add(lo + JsMath.Round((hi - lo - .2) * i / bays / .2) * .2);
+            posts.Add(hi - .2);
             result.Add((r, top - .2, top, true));
-            result.Add((Slice(lo, lo + .2), bottom, top - .2, true));
-            result.Add((Slice(hi - .2, hi), bottom, top - .2, true));
-            result.Add((Slice(lo + .2, hi - .2), bottom, top - .2, false));
+            for (int i = 0; i < posts.Count; i++)
+            {
+                result.Add((Slice(posts[i], posts[i] + .2), bottom, top - .2, true));
+                if (i + 1 < posts.Count && posts[i + 1] - posts[i] - .2 > 1e-7) result.Add((Slice(posts[i] + .2, posts[i + 1]), bottom, top - .2, false));
+            }
             return result;
         }
 
         /// <summary>Pitched shell over the body's top and, on halls, its lower eave
         /// ring: the far-proxy grid of createRoofGeometry, a tiled top over a
         /// soffit 4% of the rise lower, with the open edges closed.</summary>
-        static void PitchedRoof(GameMeshBuilder builder, Matrix4x4 frame, RoofShellSpec shell)
+        static void PitchedRoof(GameMeshBuilder builder, Matrix4x4 frame, RoofShellSpec shell, Building building)
         {
             if (shell == null) return;
             var color = Space.Hex(shell.Color);
+            // A long gable shell is drawn as its row of shophouse bays (RoofShell.Bays, as the web renderer).
+            var bays = RoofShell.Bays(building, shell);
+            if (bays != null)
+            {
+                foreach (var bay in bays)
+                {
+                    // A gable is symmetric, so a quarter turn either way puts its span on the building's other axis.
+                    var at = frame * GameMeshBuilder.GameFrame(bay.Position.X, bay.Position.Y + .12, bay.Position.Z, bay.Turned ? Math.PI / 2 : 0);
+                    RoofProfile(builder, at, "gable", 0, 0, 0, bay.Width, bay.Rise, bay.Depth, null, Space.Hex(bay.Color));
+                }
+                return;
+            }
             RoofProfile(builder, frame, shell.Form, shell.Position.X, shell.Position.Y + .12, shell.Position.Z, shell.Width, shell.Rise, shell.Depth, null, color);
             if (shell.Skirt != null) RoofProfile(builder, frame, "hip", shell.Skirt.Position.X, shell.Skirt.Position.Y, shell.Skirt.Position.Z, shell.Skirt.Width, shell.Skirt.Rise, shell.Skirt.Depth, shell.Skirt.Hole, color);
         }

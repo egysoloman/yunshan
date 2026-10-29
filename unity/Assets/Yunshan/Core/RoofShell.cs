@@ -8,6 +8,7 @@ namespace Yunshan.Core
     public sealed class RoofSkirt { public double Width, Depth, Rise; public Vec3 Position; public int Floor; public double[] Hole; }
 
     /// <summary>One pitched roof over a program body's top (display only).</summary>
+    public sealed class RoofBaySpec { public double Width, Depth, Rise; public bool Turned; public Vec3 Position; public string Color; }
     public sealed class RoofShellSpec { public string Form, Color; public double Width, Depth, Rise; public Vec3 Position; public int Floor; public RoofSkirt Skirt; }
 
     /// <summary>Port of programRoofShell and roofHeightAt (src/renderer.ts,
@@ -29,6 +30,25 @@ namespace Yunshan.Core
             // 翼角 (architecture-layout.ts ROOF_CORNER_LIFT): the eave corners curl up.
             double Edge(double v) { double t = Math.Max(0, Math.Min(1, (Math.Abs(v * 2) - .62) / .38)); return t * t * (3 - 2 * t); }
             return 1 - Math.Pow(slope, .67) + .04 * Math.Pow(slope, 8) + CornerLift * Edge(x) * Edge(z);
+        }
+
+        /// <summary>Port of programRoofBays (src/renderer.ts): a long gable shell read as a row of shophouses,
+        /// cut along its long side into bays of about 9 m, ridges a little higher or lower in turn.</summary>
+        public static List<RoofBaySpec> Bays(Building b, RoofShellSpec shell)
+        {
+            if (shell == null || shell.Form != "gable" || shell.Skirt != null) return null;
+            bool alongX = shell.Width >= shell.Depth; double longSide = alongX ? shell.Width : shell.Depth, shortSide = alongX ? shell.Depth : shell.Width;
+            if (longSide < 18) return null;
+            int count = (int)Math.Max(2, JsMath.Round(longSide / 9)); double span = longSide / count;
+            uint seed = 7; foreach (char c in b.Id) seed = unchecked(seed * 31 + c);
+            var bays = new List<RoofBaySpec>();
+            for (int i = 0; i < count; i++)
+            {
+                double offset = -longSide / 2 + span * (i + .5), tall = ((((int)seed) >> i) & 1) != 0 ? 1.16 : .94;
+                bays.Add(new RoofBaySpec { Width = span + .25, Depth = shortSide, Rise = Math.Min(9, Math.Max(2.4, span * .42)) * tall, Turned = !alongX,
+                    Position = new Vec3(shell.Position.X + (alongX ? offset : 0), shell.Position.Y, shell.Position.Z + (alongX ? 0 : offset)), Color = i % 2 != 0 ? "#4a8169" : "#548f76" });
+            }
+            return bays;
         }
 
         public static RoofShellSpec Of(Building b, IEnumerable<RoofRegion> regions)

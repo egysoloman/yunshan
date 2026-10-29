@@ -43,6 +43,29 @@ public class RoofShellParityTests
     }
 
     [Fact]
+    public void BaysMatchTypeScript()
+    {
+        var world = Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v9.json.gz")));
+        var rows = (List<object>)Yunshan.Core.Host.Json.Parse(Gunzip("roof-bays-v9.json.gz"));
+        var byId = world.Buildings.ToDictionary(b => b.Id); int with = 0;
+        foreach (List<object> row in rows)
+        {
+            var b = byId[(string)row[0]]; var body = ArchitectureFloorPlan.GetBuildingBody(b);
+            var bays = RoofShell.Bays(b, RoofShell.Of(b, ArchitectureFloorPlan.GetFloorPlanRoofRegions(body)));
+            if (row[1] == null) { Assert.Null(bays); continue; }
+            var want = (List<object>)row[1]; Assert.NotNull(bays); Assert.Equal(want.Count, bays.Count); with++;
+            for (int i = 0; i < want.Count; i++)
+            {
+                var w = (List<object>)want[i]; var g = bays[i];
+                var actual = new[] { g.Width, g.Depth, g.Rise };
+                for (int k = 0; k < 3; k++) Assert.Equal((double)w[k], actual[k]);
+                Assert.Equal((bool)w[3], g.Turned); Assert.Equal((double)w[4], g.Position.X); Assert.Equal((double)w[5], g.Position.Y); Assert.Equal((double)w[6], g.Position.Z); Assert.Equal((string)w[7], g.Color);
+            }
+        }
+        Assert.True(with > 50, $"{with} bodies with bays");
+    }
+
+    [Fact]
     public void HipProfileMatchesWebSamples()
     {
         Assert.Equal(1, RoofShell.HeightAt("hip", 0, 0));
