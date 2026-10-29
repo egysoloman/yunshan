@@ -10,6 +10,7 @@ import { STUDENT_DORM_POLICY } from './simulation/student-dorm';
 import { LOSS_SHOP_MOVE_POLICY } from './simulation/loss-shop-move';
 import { TINY_LEG_POLICY } from './simulation/tiny-leg';
 import { JUNCTION_DWELL_POLICY } from './simulation/junction-dwell';
+import { UNDERPAID_MOVE_POLICY } from './simulation/underpaid-move';
 import { cachedWorld } from './persistence/world-cache';
 import { createWorld } from './world';
 import type { WorldDefinition } from './types';
@@ -43,7 +44,7 @@ export function createArchivedProductCity(world: WorldDefinition): Simulation {
 /** New cities select continuous ordinary reference legs; imports retain their
  * existing history, motion and collision contracts. */
 /** Every rule a new city declares (createCurrentProductCity). */
-export const CURRENT_PRODUCT_OPTIONS = { rulesetId: 'civic-local-v1' as const, historyPolicyId: 'civic-history-pages-v1' as const, referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: WORKING_LUNCH_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V3, publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V8, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, npcMotionPolicyId: NPC_MOTION_COARSE_POLICY, boardingHoldPolicyId: PLAYER_BOARDING_HOLD_POLICY, playerYieldPolicyId: PLAYER_YIELD_POLICY, cableSpeedPolicyId: CABLE_SPEED_POLICY, closureTrafficPolicyId: CLOSURE_TRAFFIC_POLICY, arrivalHomesPolicyId: ARRIVAL_HOMES_POLICY, municipalRepairPolicyId: MUNICIPAL_REPAIR_POLICY, companyDividendPolicyId: COMPANY_DIVIDEND_POLICY, studentDormPolicyId: STUDENT_DORM_POLICY, lossShopMovePolicyId: LOSS_SHOP_MOVE_POLICY, tinyLegPolicyId: TINY_LEG_POLICY, junctionDwellPolicyId: JUNCTION_DWELL_POLICY } satisfies ConstructorParameters<typeof Simulation>[1];
+export const CURRENT_PRODUCT_OPTIONS = { rulesetId: 'civic-local-v1' as const, historyPolicyId: 'civic-history-pages-v1' as const, referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: WORKING_LUNCH_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V3, publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V8, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, npcMotionPolicyId: NPC_MOTION_COARSE_POLICY, boardingHoldPolicyId: PLAYER_BOARDING_HOLD_POLICY, playerYieldPolicyId: PLAYER_YIELD_POLICY, cableSpeedPolicyId: CABLE_SPEED_POLICY, closureTrafficPolicyId: CLOSURE_TRAFFIC_POLICY, arrivalHomesPolicyId: ARRIVAL_HOMES_POLICY, municipalRepairPolicyId: MUNICIPAL_REPAIR_POLICY, companyDividendPolicyId: COMPANY_DIVIDEND_POLICY, studentDormPolicyId: STUDENT_DORM_POLICY, lossShopMovePolicyId: LOSS_SHOP_MOVE_POLICY, tinyLegPolicyId: TINY_LEG_POLICY, junctionDwellPolicyId: JUNCTION_DWELL_POLICY, underpaidMovePolicyId: UNDERPAID_MOVE_POLICY } satisfies ConstructorParameters<typeof Simulation>[1];
 
 export function createCurrentProductCity(world: WorldDefinition): Simulation {
   return new Simulation(world, CURRENT_PRODUCT_OPTIONS);
