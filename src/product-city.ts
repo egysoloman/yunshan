@@ -6,6 +6,7 @@ import { CLOSURE_TRAFFIC_POLICY } from './simulation/closure-traffic';
 import { ARRIVAL_HOMES_POLICY } from './simulation/arrival-homes';
 import { MUNICIPAL_REPAIR_POLICY } from './simulation/municipal-repair';
 import { COMPANY_DIVIDEND_POLICY } from './simulation/company-dividend';
+import { STUDENT_DORM_POLICY } from './simulation/student-dorm';
 import { cachedWorld } from './persistence/world-cache';
 import { createWorld } from './world';
 import type { WorldDefinition } from './types';
@@ -39,7 +40,7 @@ export function createArchivedProductCity(world: WorldDefinition): Simulation {
 /** New cities select continuous ordinary reference legs; imports retain their
  * existing history, motion and collision contracts. */
 export function createCurrentProductCity(world: WorldDefinition): Simulation {
-  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: WORKING_LUNCH_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V3, publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V8, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, npcMotionPolicyId: NPC_MOTION_COARSE_POLICY, boardingHoldPolicyId: PLAYER_BOARDING_HOLD_POLICY, playerYieldPolicyId: PLAYER_YIELD_POLICY, cableSpeedPolicyId: CABLE_SPEED_POLICY, closureTrafficPolicyId: CLOSURE_TRAFFIC_POLICY, arrivalHomesPolicyId: ARRIVAL_HOMES_POLICY, municipalRepairPolicyId: MUNICIPAL_REPAIR_POLICY, companyDividendPolicyId: COMPANY_DIVIDEND_POLICY });
+  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: WORKING_LUNCH_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V4, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V3, publicFinancePolicyId: SHOP_PROFIT_TAX_POLICY_V8, foreignTradePolicyId: FOREIGN_TRADE_POLICY_V2, npcMotionPolicyId: NPC_MOTION_COARSE_POLICY, boardingHoldPolicyId: PLAYER_BOARDING_HOLD_POLICY, playerYieldPolicyId: PLAYER_YIELD_POLICY, cableSpeedPolicyId: CABLE_SPEED_POLICY, closureTrafficPolicyId: CLOSURE_TRAFFIC_POLICY, arrivalHomesPolicyId: ARRIVAL_HOMES_POLICY, municipalRepairPolicyId: MUNICIPAL_REPAIR_POLICY, companyDividendPolicyId: COMPANY_DIVIDEND_POLICY, studentDormPolicyId: STUDENT_DORM_POLICY });
 }
 
 /** Fresh city-life recipe for both graphical and headless hosts. The policy's
