@@ -1320,9 +1320,11 @@ export class Simulation implements SimulationAPI {
       // A discarded doorway prefix may have hidden the actor's occupied street
       // segment. Match the actual 3D layer, then keep each real polyline tail.
       // No body projection, nearest-door guess or straight endpoint shortcut.
-      for (const edge of this.world.edges) {
-        if (!['road', 'bridge'].includes(edge.mode) || !isRoadOpen(this.state, edge.id)) continue;
-        for (let i = 1; i < edge.points.length; i++) {
+      // Only segments whose box holds the actor can hold it; they come in world order (streetSegmentsAt).
+      for (const [edgeIndex, i] of this.streetSegmentsAt(citizen.position)) {
+        const edge = this.world.edges[edgeIndex];
+        if (!isRoadOpen(this.state, edge.id)) continue;
+        {
           const a = edge.points[i - 1], b = edge.points[i], dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z;
           const squared = dx * dx + dy * dy + dz * dz;
           const t = squared ? Math.max(0, Math.min(1, ((citizen.position.x - a.x) * dx + (citizen.position.y - a.y) * dy + (citizen.position.z - a.z) * dz) / squared)) : 0;
@@ -1341,6 +1343,28 @@ export class Simulation implements SimulationAPI {
     }
     const node = this.nearestNode(citizen.position), points = [copy(citizen.position), copy(node.position)];
     return this.walkingPrefixAllowed(citizen, points) ? [{ node: node.id, cost: distance(citizen.position, node.position), points }] : [];
+  }
+  /** Road and bridge segments as [edge index, segment index], bucketed by the cells their XZ box (widened by
+   * 1e-6) covers; each cell lists them in world order. A point within 1e-7 of a segment lies in its box, so
+   * the cell of a point holds every segment that can hold the point. */
+  private streetSegments?: { edges: NetworkEdge[]; count: number; cells: Map<string, [number, number][]> };
+  private streetSegmentsAt(position: Vec3): readonly [number, number][] {
+    const size = 16, cell = (x: number, z: number) => `${x},${z}`;
+    if (this.streetSegments?.edges !== this.world.edges || this.streetSegments.count !== this.world.edges.length) {
+      const cells = new Map<string, [number, number][]>();
+      this.world.edges.forEach((edge, index) => {
+        if (!['road', 'bridge'].includes(edge.mode)) return;
+        for (let i = 1; i < edge.points.length; i++) {
+          const a = edge.points[i - 1], b = edge.points[i];
+          for (let x = Math.floor((Math.min(a.x, b.x) - 1e-6) / size); x <= Math.floor((Math.max(a.x, b.x) + 1e-6) / size); x++)
+            for (let z = Math.floor((Math.min(a.z, b.z) - 1e-6) / size); z <= Math.floor((Math.max(a.z, b.z) + 1e-6) / size); z++) {
+              const key = cell(x, z), list = cells.get(key); if (list) list.push([index, i]); else cells.set(key, [[index, i]]);
+            }
+        }
+      });
+      this.streetSegments = { edges: this.world.edges, count: this.world.edges.length, cells };
+    }
+    return this.streetSegments.cells.get(cell(Math.floor(position.x / size), Math.floor(position.z / size))) ?? [];
   }
   private routeFromCitizen(citizen: Citizen, destination: Building, anchors = this.walkingAnchors(citizen)): Vec3[] {
     const target = this.buildingNode(destination);
