@@ -2572,10 +2572,14 @@ export class Simulation implements SimulationAPI {
     // Every true answer of isNearBuilding is either within doorRadius of the door or
     // inside the floorPlanPresence reach (largest footprint diagonal + 24m),
     // which also contains every legacy floor rectangle; anything beyond both is false.
+    const cx = position.x - building.position.x, cz = position.z - building.position.z, reach = this.buildingReach(building);
+    return !(cx * cx + cz * cz > reach * reach && distance(position, building.door) > doorRadius);
+  }
+  /** Horizontal radius around a building's centre beyond which only its door can still be near (couldBeNearBuilding). */
+  buildingReach(building: Building): number {
     let width = building.width, depth = building.depth;
     for (const footprint of building.floorFootprints ?? []) { if (footprint && footprint.width > width) width = footprint.width; if (footprint && footprint.depth > depth) depth = footprint.depth; }
-    const cx = position.x - building.position.x, cz = position.z - building.position.z, reach = Math.hypot(width, depth) + 24;
-    return !(cx * cx + cz * cz > reach * reach && distance(position, building.door) > doorRadius);
+    return Math.hypot(width, depth) + 24;
   }
   isNearBuilding(building: Building, position: Vec3 = this.state.player.position, doorRadius = 32): boolean {
     if (!this.couldBeNearBuilding(building, position, doorRadius)) return false;

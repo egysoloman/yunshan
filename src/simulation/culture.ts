@@ -100,7 +100,23 @@ export function installCulture(simulation: Simulation): void {
     r.memories.push({ tick: state().tick, text, impact: affection }); if (r.memories.length > 12) r.memories.shift();
     simulation.emitEvent({ type: 'relationship-change', citizenId: citizen.id, amount: affection });
   };
-  const readersAt = (site: Building) => state().citizens.filter(citizen => {
+  /** Citizens' indices by 16 m cell, for one handler call in which nobody moves; each cell keeps citizen order. */
+  const CELL = 16, cellKey = (x: number, z: number) => `${x},${z}`;
+  const citizenCells = () => {
+    const cells = new Map<string, number[]>();
+    state().citizens.forEach((citizen, index) => { const key = cellKey(Math.floor(citizen.position.x / CELL), Math.floor(citizen.position.z / CELL)), list = cells.get(key); if (list) list.push(index); else cells.set(key, [index]); });
+    return cells;
+  };
+  /** The citizens couldBeNearBuilding(site, ·, 2) can accept, in citizen order: those in cells meeting the site's reach
+   * circle or the 2 m door circle. Everyone else is rejected by that first test anyway. */
+  const nearSite = (site: Building, cells: Map<string, number[]>) => {
+    const found = new Set<number>(), citizens = state().citizens;
+    for (const [x, z, radius] of [[site.position.x, site.position.z, simulation.buildingReach(site)], [site.door.x, site.door.z, 2]])
+      for (let i = Math.floor((x - radius) / CELL); i <= Math.floor((x + radius) / CELL); i++)
+        for (let j = Math.floor((z - radius) / CELL); j <= Math.floor((z + radius) / CELL); j++) for (const index of cells.get(cellKey(i, j)) ?? []) found.add(index);
+    return [...found].sort((a, b) => a - b).map(index => citizens[index]);
+  };
+  const readersAt = (site: Building, cells?: Map<string, number[]>) => (cells ? nearSite(site, cells) : state().citizens).filter(citizen => {
     // The distance test first: it rejects exactly what isNearBuilding below would, and the checks it skips are pure.
     if (!simulation.couldBeNearBuilding(site, citizen.position, 2)) return false;
     if (!alive(citizen.id) || state().extension!.actorProfiles[citizen.id].age < 6 || civicStaffingActorReservedThisTick(simulation, citizen.id) || !simulation.isNearBuilding(site, citizen.position, 2)) return false;
@@ -109,11 +125,11 @@ export function installCulture(simulation: Simulation): void {
     return publicFloor(site, floor(site, citizen.position)) && canAccessFloor(site, floor(site, citizen.position), identity)
       && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, citizen.position, undefined, identity));
   });
-  const residentPetitions = () => {
+  const residentPetitions = (cells?: Map<string, number[]>) => {
     const s = state(), c = culture();
     if (c.version !== 2 || s.hour < 8 || s.hour >= 17 || c.petitions.length >= PETITION_LIMIT || s.treasury > 1e9 - 10) return;
     for (const site of world.buildings.filter(civicSite)) {
-      for (const person of readersAt(site).sort((a, b) => a.id.localeCompare(b.id))) {
+      for (const person of readersAt(site, cells).sort((a, b) => a.id.localeCompare(b.id))) {
         if (c.petitions.length >= PETITION_LIMIT) return;
         const profile = s.extension!.actorProfiles[person.id];
         if (profile.age < 18 || profile.mood < 65 || profile.stress > 50 || person.needs.hunger < 40 || person.needs.fatigue < 35 || person.needs.social < 30 || person.money < 110 || person.money > 1e9) continue;
@@ -226,8 +242,8 @@ export function installCulture(simulation: Simulation): void {
   };
   simulation.onPhase('time', () => { culture().lastUpdate = now(); });
   simulation.onPhase('people', (_s, minutes) => {
-    const c = culture(), project = c.project, player = state().player;
-    residentPetitions();
+    const c = culture(), project = c.project, player = state().player, cells = citizenCells();
+    residentPetitions(cells);
     if (project && alive('player') && atSite(sites.get(project.siteId)!) && player.needs.hunger >= 40 && player.needs.fatigue >= 40 && state().hour >= 7 && state().hour < 22) {
       const work = Math.min(minutes, project.requiredMinutes - project.workedMinutes);
       project.workedMinutes += work; player.needs.fatigue = clamp(player.needs.fatigue - work * .03); player.needs.fun = clamp(player.needs.fun + work * .02);
@@ -240,7 +256,7 @@ export function installCulture(simulation: Simulation): void {
     }
     for (const work of c.works) {
       if (!work.siteId || work.publishedAt === null) continue;
-      for (const citizen of readersAt(sites.get(work.siteId)!)) {
+      for (const citizen of readersAt(sites.get(work.siteId)!, cells)) {
         if (work.readIds.includes(citizen.id) || citizen.needs.hunger < 40 || citizen.needs.fatigue < 35 || work.genre === 'literature' && (citizen.education ?? 0) < 1) continue;
         work.readingMinutes[citizen.id] = Math.min(15, (work.readingMinutes[citizen.id] ?? 0) + minutes);
         if (work.readingMinutes[citizen.id] < 15 - 1e-7) continue;
@@ -254,7 +270,7 @@ export function installCulture(simulation: Simulation): void {
     }
     for (const report of c.reports) {
       const site = sites.get(report.siteId)!;
-      for (const citizen of readersAt(site)) {
+      for (const citizen of readersAt(site, cells)) {
         if ((citizen.education ?? 0) < 1 || citizen.needs.hunger < 35 || citizen.needs.fatigue < 30) continue;
         if (!report.readIds.includes(citizen.id)) {
           report.readingMinutes[citizen.id] = Math.min(10, (report.readingMinutes[citizen.id] ?? 0) + minutes);
@@ -288,7 +304,7 @@ export function installCulture(simulation: Simulation): void {
     }
     for (const petition of c.petitions) {
       if (petition.status !== 'open') continue;
-      for (const citizen of readersAt(sites.get(petition.siteId)!)) {
+      for (const citizen of readersAt(sites.get(petition.siteId)!, cells)) {
         if (state().extension!.actorProfiles[citizen.id].age < 18 || petition.signerIds.includes(citizen.id) || citizen.needs.social < 30) continue;
         const institution = petition.topic === 'education' ? state().extension!.institutions.education : petition.topic === 'health' ? state().extension!.institutions.medical : state().energy;
         if (institution >= 80 && citizen.needs.fun >= 60) continue;
