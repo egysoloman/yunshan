@@ -17,12 +17,13 @@ import { validateArrivalHomesPolicy, type ArrivalHomesPolicy } from './arrival-h
 import { validateMunicipalRepairPolicy, type MunicipalRepairPolicy } from './municipal-repair';
 import { validateCompanyDividendPolicy, type CompanyDividendPolicy } from './company-dividend';
 import { validateStudentDormPolicy, type StudentDormPolicy } from './student-dorm';
+import { validateLossShopMovePolicy, type LossShopMovePolicy } from './loss-shop-move';
 import { hasServiceMaterialRequestEstimate, validateServiceMaterialSchedulingEnvelope } from './service-material-scheduling';
 
 export const PRODUCT_RULESET = 'civic-local-v1' as const;
 export type EffectiveRuleset = 'legacy' | typeof PRODUCT_RULESET;
 export const CIVIC_HISTORY_POLICY = 'civic-history-pages-v1' as const;
-export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; referenceCollisionPolicyId?: ReferenceCollisionPolicy; mealRoutePolicyId?: MealRoutePolicy; freightPickupPolicyId?: FreightPickupPolicy; farmYieldPolicyId?: FarmYieldPolicy; foodFreightPolicyId?: FoodFreightPolicy; publicFinancePolicyId?: PublicFinancePolicy; foreignTradePolicyId?: ForeignTradePolicy; npcMotionPolicyId?: NpcMotionPolicy; boardingHoldPolicyId?: BoardingHoldPolicy; playerYieldPolicyId?: PlayerYieldPolicy; cableSpeedPolicyId?: CableSpeedPolicy; closureTrafficPolicyId?: ClosureTrafficPolicy; arrivalHomesPolicyId?: ArrivalHomesPolicy; municipalRepairPolicyId?: MunicipalRepairPolicy; companyDividendPolicyId?: CompanyDividendPolicy; studentDormPolicyId?: StudentDormPolicy }
+export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; referenceCollisionPolicyId?: ReferenceCollisionPolicy; mealRoutePolicyId?: MealRoutePolicy; freightPickupPolicyId?: FreightPickupPolicy; farmYieldPolicyId?: FarmYieldPolicy; foodFreightPolicyId?: FoodFreightPolicy; publicFinancePolicyId?: PublicFinancePolicy; foreignTradePolicyId?: ForeignTradePolicy; npcMotionPolicyId?: NpcMotionPolicy; boardingHoldPolicyId?: BoardingHoldPolicy; playerYieldPolicyId?: PlayerYieldPolicy; cableSpeedPolicyId?: CableSpeedPolicy; closureTrafficPolicyId?: ClosureTrafficPolicy; arrivalHomesPolicyId?: ArrivalHomesPolicy; municipalRepairPolicyId?: MunicipalRepairPolicy; companyDividendPolicyId?: CompanyDividendPolicy; studentDormPolicyId?: StudentDormPolicy; lossShopMovePolicyId?: LossShopMovePolicy }
 type Document = Record<string, any>;
 export type CivicInitialProfession = Pick<Citizen, 'id' | 'role' | 'workId' | 'districtId' | 'education'>;
 const object = (value: unknown): value is Document => !!value && typeof value === 'object' && !Array.isArray(value);
@@ -50,6 +51,7 @@ export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
   validateMunicipalRepairPolicy(data);
   validateCompanyDividendPolicy(data);
   validateStudentDormPolicy(data);
+  validateLossShopMovePolicy(data);
   validateServiceMaterialSchedulingEnvelope(data);
   const state = data.state, runtime = data.runtime;
   const listed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('civicStaffing');

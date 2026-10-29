@@ -3,6 +3,7 @@ import { PLAYER_YIELD_POLICIES, yieldStop, yieldsToPlayer, type PlayerYieldPolic
 import { CABLE_SPEED_POLICIES, cableSpeed, type CableSpeedPolicy } from './simulation/cable-speed';
 import { CLOSURE_TRAFFIC_POLICIES, closureTestsVehicle, type ClosureTrafficPolicy } from './simulation/closure-traffic';
 import { MUNICIPAL_REPAIR_POLICIES, type MunicipalRepairPolicy } from './simulation/municipal-repair';
+import { LOSS_SHOP_MOVE_POLICIES, LOSS_SHOP_MOVE_POLICY, type LossShopMovePolicy } from './simulation/loss-shop-move';
 import { STUDENT_DORM_POLICIES, dormHomes, type StudentDormPolicy } from './simulation/student-dorm';
 import { COMPANY_DIVIDEND_POLICIES, COMPANY_DIVIDEND_POLICY, shareholderParts, type CompanyDividendPolicy } from './simulation/company-dividend';
 import { ARRIVAL_HOMES_POLICIES, arrivalHomes, type ArrivalHomesPolicy } from './simulation/arrival-homes';
@@ -144,6 +145,7 @@ interface Runtime {
   municipalRepairPolicyId?: MunicipalRepairPolicy;
   companyDividendPolicyId?: CompanyDividendPolicy;
   studentDormPolicyId?: StudentDormPolicy;
+  lossShopMovePolicyId?: LossShopMovePolicy;
   arrivalHomesPolicyId?: ArrivalHomesPolicy;
   /** Vehicles holding this stop for the player (boarding-hold.ts), cleared when they move off. */
   boardingHolds?: Record<string, true>;
@@ -206,7 +208,7 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId', 'npcMotionPolicyId', 'boardingHoldPolicyId', 'playerYieldPolicyId', 'cableSpeedPolicyId', 'closureTrafficPolicyId', 'arrivalHomesPolicyId', 'municipalRepairPolicyId', 'companyDividendPolicyId', 'studentDormPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId', 'npcMotionPolicyId', 'boardingHoldPolicyId', 'playerYieldPolicyId', 'cableSpeedPolicyId', 'closureTrafficPolicyId', 'arrivalHomesPolicyId', 'municipalRepairPolicyId', 'companyDividendPolicyId', 'studentDormPolicyId', 'lossShopMovePolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (!MEAL_ROUTE_POLICIES.includes(options.mealRoutePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
@@ -222,7 +224,8 @@ export class Simulation implements SimulationAPI {
       || options.arrivalHomesPolicyId !== undefined && (!ARRIVAL_HOMES_POLICIES.includes(options.arrivalHomesPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.municipalRepairPolicyId !== undefined && (!MUNICIPAL_REPAIR_POLICIES.includes(options.municipalRepairPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.companyDividendPolicyId !== undefined && (!COMPANY_DIVIDEND_POLICIES.includes(options.companyDividendPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.studentDormPolicyId !== undefined && (!STUDENT_DORM_POLICIES.includes(options.studentDormPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.studentDormPolicyId !== undefined && (!STUDENT_DORM_POLICIES.includes(options.studentDormPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.lossShopMovePolicyId !== undefined && (!LOSS_SHOP_MOVE_POLICIES.includes(options.lossShopMovePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
@@ -252,6 +255,7 @@ export class Simulation implements SimulationAPI {
     if (options?.municipalRepairPolicyId) this.runtime.municipalRepairPolicyId = options.municipalRepairPolicyId;
     if (options?.companyDividendPolicyId) this.runtime.companyDividendPolicyId = options.companyDividendPolicyId;
     if (options?.studentDormPolicyId) this.runtime.studentDormPolicyId = options.studentDormPolicyId;
+    if (options?.lossShopMovePolicyId) this.runtime.lossShopMovePolicyId = options.lossShopMovePolicyId;
     if (options?.arrivalHomesPolicyId) this.runtime.arrivalHomesPolicyId = options.arrivalHomesPolicyId;
     if (options?.foreignTradePolicyId) { this.runtime.foreignTradePolicyId = options.foreignTradePolicyId; this.runtime.foreignTrade = { enabled: true, exportedUnits: 0, exportGross: 0 }; }
     if (options?.publicFinancePolicyId) { this.runtime.publicFinancePolicyId = options.publicFinancePolicyId; this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net: 0, base: 0 }; }
@@ -1650,7 +1654,8 @@ export class Simulation implements SimulationAPI {
     const current = this.state.shops.find(shop => shop.buildingId === citizen.workId);
     if (!current || this.shopOwnerId(current) === citizen.id || citizen.role === '学生') return;
     const dailySalary = privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
-    if (this.shopFunds(current) - this.shopProtectedFunds(current) >= dailySalary) return;
+    // loss-shop-move-v1: a losing shop lets its poor staff go even while it can still fund a day.
+    if (this.shopFunds(current) - this.shopProtectedFunds(current) >= dailySalary && !(this.runtime.lossShopMovePolicyId === LOSS_SHOP_MOVE_POLICY && current.profit < 0)) return;
     const day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440), today = this.runtime.privateLabor?.shifts[current.id];
     // A substantial promise for today (half a day or more) keeps the worker; a few funded minutes do not.
     if (today?.day === day && today.assignments.some(item => item.citizenId === citizen.id && item.minutesCap >= 240)) return;
@@ -2952,13 +2957,14 @@ export class Simulation implements SimulationAPI {
   get municipalRepairPolicyId(): MunicipalRepairPolicy | undefined { return this.runtime.municipalRepairPolicyId; }
   get companyDividendPolicyId(): CompanyDividendPolicy | undefined { return this.runtime.companyDividendPolicyId; }
   get studentDormPolicyId(): StudentDormPolicy | undefined { return this.runtime.studentDormPolicyId; }
+  get lossShopMovePolicyId(): LossShopMovePolicy | undefined { return this.runtime.lossShopMovePolicyId; }
   /** The player's body on foot, or null when riding, flying or viewing from the air (player-yield.ts). */
   private yieldPlayerPosition(): Vec3 | null { return this.state.player.vehicleId || this.state.aviation?.activeAircraftId || (this.runtime.mode ?? 'walk') !== 'walk' ? null : this.state.player.position; }
   exportSave(): string {
     this.finishTick();
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), ...(this.runtime.npcMotionPolicyId ? { npcMotionPolicyId: this.runtime.npcMotionPolicyId } : {}), ...(this.runtime.boardingHoldPolicyId ? { boardingHoldPolicyId: this.runtime.boardingHoldPolicyId } : {}), ...(this.runtime.playerYieldPolicyId ? { playerYieldPolicyId: this.runtime.playerYieldPolicyId } : {}), ...(this.runtime.cableSpeedPolicyId ? { cableSpeedPolicyId: this.runtime.cableSpeedPolicyId } : {}), ...(this.runtime.closureTrafficPolicyId ? { closureTrafficPolicyId: this.runtime.closureTrafficPolicyId } : {}), ...(this.runtime.arrivalHomesPolicyId ? { arrivalHomesPolicyId: this.runtime.arrivalHomesPolicyId } : {}), ...(this.runtime.municipalRepairPolicyId ? { municipalRepairPolicyId: this.runtime.municipalRepairPolicyId } : {}), ...(this.runtime.companyDividendPolicyId ? { companyDividendPolicyId: this.runtime.companyDividendPolicyId } : {}), ...(this.runtime.studentDormPolicyId ? { studentDormPolicyId: this.runtime.studentDormPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), ...(this.runtime.npcMotionPolicyId ? { npcMotionPolicyId: this.runtime.npcMotionPolicyId } : {}), ...(this.runtime.boardingHoldPolicyId ? { boardingHoldPolicyId: this.runtime.boardingHoldPolicyId } : {}), ...(this.runtime.playerYieldPolicyId ? { playerYieldPolicyId: this.runtime.playerYieldPolicyId } : {}), ...(this.runtime.cableSpeedPolicyId ? { cableSpeedPolicyId: this.runtime.cableSpeedPolicyId } : {}), ...(this.runtime.closureTrafficPolicyId ? { closureTrafficPolicyId: this.runtime.closureTrafficPolicyId } : {}), ...(this.runtime.arrivalHomesPolicyId ? { arrivalHomesPolicyId: this.runtime.arrivalHomesPolicyId } : {}), ...(this.runtime.municipalRepairPolicyId ? { municipalRepairPolicyId: this.runtime.municipalRepairPolicyId } : {}), ...(this.runtime.companyDividendPolicyId ? { companyDividendPolicyId: this.runtime.companyDividendPolicyId } : {}), ...(this.runtime.studentDormPolicyId ? { studentDormPolicyId: this.runtime.studentDormPolicyId } : {}), ...(this.runtime.lossShopMovePolicyId ? { lossShopMovePolicyId: this.runtime.lossShopMovePolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }
