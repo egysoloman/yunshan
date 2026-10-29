@@ -3245,9 +3245,9 @@ export class Simulation implements SimulationAPI {
           // exactly this state. A pending intent (first leg) keeps the exterior-door rule below.
           const walked = citizen.routeIndex >= 2 && !sameVec(citizen.route[citizen.routeIndex - 2], citizen.route[citizen.routeIndex - 1])
             && this.npcStairMotion.describe(citizen.route, citizen.routeIndex - 1).kind !== 'blocked';
-          // A resident whose very first leg is blocked waits at its start the same way (2026-10-29: a first leg
-          // 2e-15 m long inside a home reads as blocked; audit v9e's final save held one such official).
-          const waitingAtBlockedLeg = citizen.state === 'physicalWaiting' && (walked || citizen.routeIndex === 1) && sameVec(citizen.position, citizen.route[citizen.routeIndex - 1]);
+          // A resident whose very first leg is a rounding error long (tiny-leg.ts) waits at its start the same way
+          // (2026-10-29: a 2e-15 m first leg inside a home reads as blocked; audit v9e's final save held one).
+          const waitingAtBlockedLeg = citizen.state === 'physicalWaiting' && (walked || citizen.routeIndex === 1 && tinyLeg(citizen.route[0], citizen.route[1])) && sameVec(citizen.position, citizen.route[citizen.routeIndex - 1]);
           ensure(description.kind !== 'blocked' || waitingAtBlockedLeg || this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex, citizen.position), 'native route geometry');
           if (description.kind === 'physical') this.npcStairMotion.validate(citizen.route, this.npcStairMotion.opening(citizen.route, citizen.routeIndex)!, citizen.position);
         }

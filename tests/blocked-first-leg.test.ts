@@ -15,4 +15,10 @@ test('a resident waiting at the start of a blocked first leg saves and reads bac
   // Only a waiting resident at that start is accepted: one standing elsewhere on the blocked leg is still refused.
   Object.assign(citizen, { position: { ...c } });
   assert.equal(createCurrentProductCity(world).importSave(sim.exportSave()).ok, false);
+  // A blocked first leg of real length is still refused (forged routes, native-live-reader.test.ts).
+  const d = { x: a.x + .5, y: a.y, z: a.z };
+  if (sim.npcStairMotion.describe([a, d, c], 1).kind === 'blocked') {
+    Object.assign(citizen, { position: { ...a }, route: [a, d, c], routeIndex: 1 });
+    assert.equal(createCurrentProductCity(world).importSave(sim.exportSave()).ok, false);
+  }
 });
