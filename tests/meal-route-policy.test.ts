@@ -115,10 +115,16 @@ test('v5 keeps v4 and sells market meals at the street stall before the door, pa
     emit(e);
   };
   sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
-  while (sim.state.hour < 14) sim.step(.25);
-  const stall = sim.state.citizens.filter((c: any) => c.state === 'shopping' && markets.has(c.destinationId) && outside(c));
-  assert.ok(stall.length >= 8, `${stall.length} residents at street stalls`);
-  for (const c of stall) { const door = markets.get(c.destinationId)!.door; assert.ok(Math.hypot(c.position.x - door.x, c.position.y - door.y, c.position.z - door.z) <= BROWSE_MAX + 1); }
+  // Residents seen at a street stall over the morning (a snapshot depends on who lingers: employed residents
+  // resume their shift at once under v7, and a student-dorm city's students are in class).
+  const seen = new Set<string>();
+  while (sim.state.hour < 14) {
+    sim.step(.25);
+    for (const c of sim.state.citizens) if (c.state === 'shopping' && markets.has(c.destinationId) && outside(c)) {
+      const door = markets.get(c.destinationId)!.door; assert.ok(Math.hypot(c.position.x - door.x, c.position.y - door.y, c.position.z - door.z) <= BROWSE_MAX + 1); seen.add(c.id);
+    }
+  }
+  assert.ok(seen.size >= 8, `${seen.size} residents at street stalls`);
   assert.ok(stallSales >= 20, `${stallSales} meals sold at street stalls by 14:00`);
   const saved = sim.exportSave(), reader = createCurrentProductCity(world), read = reader.importSave(saved);
   assert.ok(read.ok, read.message); assert.equal(reader.exportSave(), saved, 'stall customers save and read back exactly');
