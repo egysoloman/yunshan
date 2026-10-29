@@ -45,3 +45,16 @@ test('an open tick that has fallen behind says so, so a slow frame rate never sl
   sim.stepSliced(0, () => sim.tickBehind);
   assert.equal(sim.state.tick, 2, 'the first tick ended and the next due one began (its time phase counts it)'); assert.ok(sim.tickOpen, 'and stopped part-way, no longer behind');
 });
+
+test('a save made by the tick itself does not re-enter it (roadworks checks the save size inside a tick)', () => {
+  const world = createProductWorld(), whole = createCurrentProductCity(world), sliced = createCurrentProductCity(world);
+  let inner = 0;
+  for (const sim of [whole, sliced]) { sim.setFocus(world.spawn, 'walk'); sim.onPhase('commerce', () => { inner++; sim.exportSave(); }); }
+  const more = stopping(37);
+  for (let tick = 1; tick <= 6; tick++) {
+    whole.step(.25);
+    sliced.stepSliced(.25, more); while (sliced.tickOpen) sliced.stepSliced(0, more);
+    assert.equal(sha(sliced.exportSave()), sha(whole.exportSave()), `tick ${tick}`);
+  }
+  assert.equal(inner, 12, 'each city saved once inside each tick');
+});

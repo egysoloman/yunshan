@@ -928,9 +928,13 @@ export class Simulation implements SimulationAPI {
   /** The city is behind: another tick is already due beyond the one under way. Spreading ticks further would
    * slow the city below real time on a slow frame rate, so the caller's budget should let them run now. */
   get tickBehind(): boolean { return this.runtime.accumulator + 1e-10 >= TICK_SECONDS; }
+  /** A slice is running: the handlers and residents of the open tick are being executed right now. */
+  private slicing = false;
   /** Runs the rest of an unfinished tick at once. Every entry point that changes or reads the whole state calls
-   * it first, so a command, save or focus change never lands inside a tick, as with step(). */
-  finishTick(): void { if (this.slice) this.runSlice(() => true); }
+   * it first, so a command, save or focus change never lands inside a tick, as with step(). A call made by the
+   * tick itself (roadworks' save-size check runs inside the tick) sees the state part-way through it, also as
+   * with step(), and must not re-enter the slice that is running. */
+  finishTick(): void { if (this.slice && !this.slicing) this.runSlice(() => true); }
   /** step() spread over calls: the same ticks, phases, handlers and residents in the same order, but it stops
    * between handlers and between residents of the people phase whenever `more()` says so, and a later call
    * carries on from there. Between calls nothing may change the state except through the entry points that
@@ -958,7 +962,8 @@ export class Simulation implements SimulationAPI {
   private runSlice(more: () => boolean): boolean {
     const slice = this.slice!; this.minutes = slice.minutes;
     let done = false;
-    this.npcStairMotion.withinTick(() => withFixedFloorPlans(() => {
+    this.slicing = true;
+    try { this.npcStairMotion.withinTick(() => withFixedFloorPlans(() => {
       for (; slice.phase < ORDER.length; slice.phase++, slice.handler = 0, slice.started = false) {
         const phase = ORDER[slice.phase], type = `system:${phase}`, event = { type, minutes: this.minutes };
         if (!slice.started) { this.state.lastSystemOrder.push(phase); slice.started = true; }
@@ -974,7 +979,7 @@ export class Simulation implements SimulationAPI {
         }
       }
       this.pruneNpcStairCursors(); done = true;
-    }));
+    })); } finally { this.slicing = false; }
     if (done) this.slice = null;
     return done;
   }
