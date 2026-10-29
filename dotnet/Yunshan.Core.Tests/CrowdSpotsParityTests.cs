@@ -36,7 +36,7 @@ public class CrowdSpotsParityTests
     [Fact]
     public void TargetsMatchTypeScript()
     {
-        var world = Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v8.json.gz")));
+        var world = Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v9.json.gz")));
         var rows = (List<object>)Yunshan.Core.Host.Json.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Parity", "crowd-targets.json"), Encoding.UTF8));
         Assert.Equal(400, rows.Count);
         foreach (Dictionary<string, object> row in rows) Assert.Equal((string)row["target"], CrowdSpots.Target(world.Buildings, (double)row["x"], (double)row["z"]));

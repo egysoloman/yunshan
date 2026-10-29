@@ -36,7 +36,11 @@ app.append(stage);
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 let previousSave: string | null = null;
 let startupReadFailed = false;
-try { previousSave = await readSavedGame(); } catch { startupReadFailed = true; }
+// 开新城 (settings): the journey was downloaded as a backup; this one start ignores the browser save.
+const NEW_CITY_FLAG = 'yunshan.newCity.v1';
+let freshStart = false;
+try { freshStart = localStorage.getItem(NEW_CITY_FLAG) === '1'; if (freshStart) localStorage.removeItem(NEW_CITY_FLAG); } catch { /* storage restricted */ }
+try { previousSave = freshStart ? null : await readSavedGame(); } catch { startupReadFailed = true; }
 let startupLayoutError = '';
 let selection: ReturnType<typeof selectSavedWorld>;
 try { selection = selectSavedWorld(previousSave, PRODUCT_CITY_LAYOUT); } catch (error) { startupLayoutError = error instanceof Error ? error.message : '未知城市布局'; selection = selectSavedWorld(undefined, PRODUCT_CITY_LAYOUT); }
@@ -163,6 +167,12 @@ const actions: UIActions = {
     setTimeout(() => URL.revokeObjectURL(url), 2000);
     showNotice('存档已导出，保留该文件即可跨浏览器恢复。');
   },
+  startNewCity() {
+    actions.exportSave();
+    try { localStorage.setItem(NEW_CITY_FLAG, '1'); } catch { return showNotice('浏览器存储不可用，无法开新城；备份已下载。', false); }
+    autosaveAllowed = false;
+    setTimeout(() => location.reload(), 800);
+  },
   async importSave(file) {
     if (file.size > 8 * 1024 * 1024) return showNotice('存档超过 8 MB，无法读取。', false);
     try { await loadData(await file.text()); } catch { showNotice('无法读取存档文件。', false); }
@@ -186,7 +196,7 @@ ui = new CityUI(app, world, actions);
 try {
   if (previousSave && !startupLayoutError) {
     const result = simulation.importSave(previousSave);
-    if (result.ok) { syncPlayerView(); ui.notify('已恢复这个浏览器中的上次旅程。'); }
+    if (result.ok) { syncPlayerView(); ui.notify(selection.layout === PRODUCT_CITY_LAYOUT ? '已恢复这个浏览器中的上次旅程。' : '已恢复上次旅程；它建在旧版城市布局上。新版千灯市集只在新城里出现：设置 → 开新城（会先下载当前旅程备份）。'); }
     else { autosaveAllowed = false; ui.notify('上次存档无法恢复，已保留原存档并停止自动覆盖：' + result.message, false); }
   }
 } catch { autosaveAllowed = false; ui.notify('浏览器存储不可用；旅程仍可通过导出 JSON 保存。', false); }

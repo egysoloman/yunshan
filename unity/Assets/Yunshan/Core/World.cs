@@ -86,7 +86,7 @@ namespace Yunshan.Core
                 }
         }
 
-        static bool CurrentMargin(string layout) => layout == "current-v2" || layout == "current-v3" || layout == "current-v4" || layout == "current-v5" || layout == "current-v6" || layout == "current-v7" || layout == "current-v8";
+        static bool CurrentMargin(string layout) => layout == "current-v2" || layout == "current-v3" || layout == "current-v4" || layout == "current-v5" || layout == "current-v6" || layout == "current-v7" || StreetLayouts.IsStreetLayout(layout);
 
         static SpatialIndex IndexFor(WorldDefinition world)
         {
@@ -244,7 +244,7 @@ namespace Yunshan.Core
             return height - (height + 10) * cleft + terrace * .75;
         }
 
-        static bool ReliefLayout(string layout) => layout == "current-v3" || layout == "current-v4" || layout == "current-v5" || layout == "current-v6" || layout == "current-v7" || layout == "current-v8";
+        static bool ReliefLayout(string layout) => layout == "current-v3" || layout == "current-v4" || layout == "current-v5" || layout == "current-v6" || layout == "current-v7" || StreetLayouts.IsStreetLayout(layout);
 
         /// <summary>Authoritative ground after the generated roads are fixed.</summary>
         public static double TerrainHeight(WorldDefinition world, double x, double z, bool includeBasements = true)
@@ -253,17 +253,18 @@ namespace Yunshan.Core
             if (world.LayoutVersion == "legacy-ee3e7a1") return y;
             var index = IndexFor(world); var nearby = index.Buildings.TryGetValue(Key(x, z), out var list) ? list : NoBuildings;
             if (nearby.Any(b => Math.Abs(x - b.Position.X) <= b.Width / 2 + 2 && Math.Abs(z - b.Position.Z) <= b.Depth / 2 + 2)) return y;
-            double roadGap = double.PositiveInfinity, foundationGap = double.PositiveInfinity, foundationY = y;
+            double roadGap = double.PositiveInfinity, foundationGap = double.PositiveInfinity, foundationY = y; bool foundationMarket = false;
             var segments = index.Segments.TryGetValue(Key(x, z), out var segs) ? segs : NoSegments;
             foreach (var s in segments) roadGap = JsMath.Min(roadGap, NearestSegment(s.A, s.B, x, z).Distance);
             if (index.Elevated.TryGetValue(Key(x, z), out var elevated)) foreach (var s in elevated) roadGap = JsMath.Min(roadGap, NearestSegment(s.A, s.B, x, z).Distance);
             foreach (var b in nearby)
             {
                 double dx = JsMath.Max(0, Math.Abs(x - b.Position.X) - b.Width / 2 - 2), dz = JsMath.Max(0, Math.Abs(z - b.Position.Z) - b.Depth / 2 - 2), gap = JsMath.Hypot(dx, dz);
-                if (gap < foundationGap) { foundationGap = gap; foundationY = b.Position.Y; }
+                if (gap < foundationGap) { foundationGap = gap; foundationY = b.Position.Y; foundationMarket = b.DistrictId == "market"; }
             }
-            // current-v8 plinths (TS world.ts PLINTH_SHOULDER): a 6 m step instead of a 54 m shoulder.
-            bool terraced = world.LayoutVersion == "current-v8"; double shoulder = terraced ? 6 : 54;
+            // current-v8 plinths (TS world.ts PLINTH_SHOULDER): a 6 m step instead of a 54 m shoulder;
+            // current-v9 market plinths (DENSE_PLINTH_SHOULDER) end in a 1.8 m, near-vertical step.
+            bool terraced = StreetLayouts.IsStreetLayout(world.LayoutVersion); double shoulder = terraced ? StreetLayouts.IsDenseMarketLayout(world.LayoutVersion) && foundationMarket ? 1.8 : 6 : 54;
             if (roadGap > 9 && foundationGap < shoulder) y += (foundationY - y) * (1 - Smooth(foundationGap / shoulder)) * (terraced ? 1 : .82);
             double reliefWeight = world.Buildings.Count > 0 ? Smooth((foundationGap - 10) / 38) * Smooth((roadGap - 12) / 20) * Smooth((y - 14) / 22) : 0;
             double fracture = JsMath.Sin(x * .036 + JsMath.Sin(z * .012) * 1.7) * JsMath.Cos(z * .027) * 3.2 + JsMath.Sin((x + z * .72) * .081) * 1.1;

@@ -18,12 +18,17 @@ namespace Yunshan.Core
         static readonly HashSet<string> HipKinds = new HashSet<string> { "school", "hall", "clinic", "bank", "police", "temple" };
         static readonly HashSet<string> BareKinds = new HashSet<string> { "station", "airport", "starport", "core", "pavilion" };
 
+        /// <summary>How far an eave corner curls up, as a share of the roof's rise.</summary>
+        public const double CornerLift = .32;
+
         /// <summary>Normalized profile height (0 eave … 1 ridge) at x, z ∈ [-.5, .5].</summary>
         public static double HeightAt(string form, double x, double z)
         {
             double radius = form == "gable" ? Math.Abs(x * 2) : Math.Max(Math.Abs(z * 2), Math.Max(0, (Math.Abs(x * 2) - .46) / .54));
             double slope = Math.Max(0, Math.Min(1, (radius - .12) / .88));
-            return 1 - Math.Pow(slope, .67) + .04 * Math.Pow(slope, 8);
+            // 翼角 (architecture-layout.ts ROOF_CORNER_LIFT): the eave corners curl up.
+            double Edge(double v) { double t = Math.Max(0, Math.Min(1, (Math.Abs(v * 2) - .62) / .38)); return t * t * (3 - 2 * t); }
+            return 1 - Math.Pow(slope, .67) + .04 * Math.Pow(slope, 8) + CornerLift * Edge(x) * Edge(z);
         }
 
         public static RoofShellSpec Of(Building b, IEnumerable<RoofRegion> regions)
@@ -50,7 +55,7 @@ namespace Yunshan.Core
                 double inner = Math.Min(HeightAt("hip", w / 2 / W, 0), HeightAt("hip", 0, d / 2 / D)), eave = HeightAt("hip", 0, .5), scale = ringRise / Math.Max(.05, inner - eave);
                 skirt = new RoofSkirt { Width = W, Depth = D, Rise = scale, Position = new Vec3(centre.X, top - storey + .3 - scale * inner, centre.Z), Floor = Math.Max(0, floor - 1), Hole = new[] { -w / 2 / W, w / 2 / W, -d / 2 / D, d / 2 / D } };
             }
-            return new RoofShellSpec { Form = hip ? "hip" : "gable", Width = w + overhang * 2, Depth = d + overhang * 2, Rise = rise, Color = hip ? "#2c4d48" : "#38504c", Position = centre, Floor = Math.Max(0, floor), Skirt = skirt };
+            return new RoofShellSpec { Form = hip ? "hip" : "gable", Width = w + overhang * 2, Depth = d + overhang * 2, Rise = rise, Color = hip ? "#477f69" : "#4f8a72", Position = centre, Floor = Math.Max(0, floor), Skirt = skirt };
         }
 
         /// <summary>The simple (far-proxy) grid of createRoofGeometry: column and row

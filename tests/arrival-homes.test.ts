@@ -10,7 +10,8 @@ test('a declared city houses the arrival district near the arrival; everything e
   assert.equal(arrival.districtId, 'market'); assert.equal(arrival.homes.length, ARRIVAL_HOME_COUNT);
   const near = new Set(arrival.homes.map(h => h.id)), byId = new Map(world.buildings.map(b => [b.id, b]));
   const within = (sim: typeof current, r: number) => sim.state.citizens.filter(c => Math.hypot(byId.get(c.homeId)!.door.x - spawn.x, byId.get(c.homeId)!.door.z - spawn.z) < r).length;
-  assert.equal(within(archived, 300), 18); assert.equal(within(current, 300), 56, 'the arrival district lives within 300 m');
+  // current-v9's dense market town already houses most of its district near the arrival (18 in current-v8).
+  assert.equal(within(archived, 300), 53); assert.equal(within(current, 300), 56, 'the arrival district lives within 300 m');
   for (const c of current.state.citizens.filter(c => c.districtId === 'market')) assert.ok(near.has(c.homeId), c.id);
   for (const h of arrival.homes) assert.ok(current.state.citizens.filter(c => c.homeId === h.id).length <= h.capacity);
   // Same people, same districts; other districts' homes are untouched.

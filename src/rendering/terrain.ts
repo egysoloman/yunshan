@@ -3,7 +3,8 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { Quality, Vec3, WorldDefinition } from '../types';
 import { getWaterfallPath, terrainHeight } from '../world';
 import { riverDressing, woodlandLayout, type WoodlandShrub, type WoodlandTree } from './woodland-layout';
-import { terraceMasonry, MASONRY_COLOR, COPING_COLOR, COPING_DEPTH, COPING_LIP, COPING_RISE, COPING_WIDTH } from './terrace-masonry';
+import { terraceMasonry, MASONRY_ALPINE, MASONRY_COLOR, COPING_COLOR, COPING_DEPTH, COPING_LIP, COPING_RISE, COPING_WIDTH } from './terrace-masonry';
+import { isDenseMarketLayout } from '../street-layouts';
 
 interface Block { x: number; y: number; z: number; w: number; h: number; d: number; color: THREE.Color; id?: number }
 interface Segment { a: Vec3; b: Vec3; width: number; cutting?: boolean; bridge?: boolean }
@@ -97,7 +98,13 @@ export function buildLandscape(world: WorldDefinition): {
       diffuseColor.rgb*=mix(1.0,.93+grassPatch*.12,meadow);
       // Dressed-stone retaining walls (terrace-masonry.ts): 0.6 m courses of
       // 1.2 m blocks, joints staggered by half a block, each block toned apart.
-      if (vMasonry > .5) {
+      if (vMasonry > 1.5) {
+        // Flagstone courts: 1.2 x 0.8 m slabs in staggered rows, each slab toned apart.
+        float slabRow = vLandPosition.z / .8, slabRun = vLandPosition.x / 1.2 + mod(floor(slabRow), 2.0) * .5;
+        float slab = fract(sin(dot(vec2(floor(slabRow), floor(slabRun)), vec2(12.9898, 78.233))) * 43758.5453);
+        float slabJoint = max(1.0 - smoothstep(.0, .05, min(fract(slabRow), 1.0 - fract(slabRow))), 1.0 - smoothstep(.0, .035, min(fract(slabRun), 1.0 - fract(slabRun))));
+        diffuseColor.rgb = vColor.rgb * (.9 + slab * .16) * mix(1.0, .7, slabJoint * landMicro);
+      } else if (vMasonry > .5) {
         float along = abs(vLandNormal.x) > abs(vLandNormal.z) ? vLandPosition.z : vLandPosition.x;
         float course = vLandPosition.y / .6, row = floor(course), run = along / 1.2 + mod(row, 2.0) * .5;
         float block = fract(sin(dot(vec2(row, floor(run)), vec2(12.9898, 78.233))) * 43758.5453);
@@ -152,6 +159,14 @@ export function buildLandscape(world: WorldDefinition): {
     color.lerp(palette.gravel.clone().lerp(palette.wet, .32 + field * .08), Math.max(wetness, plunge));
     return color.multiplyScalar(.96 + broad * .06);
   }
+  // current-v9: the dense market town's ground (within 11 m of a market building) is flagstone paving.
+  const paving = new THREE.Color('#a29d8d'), denseTown = isDenseMarketLayout((world as WorldDefinition & { layoutVersion?: string }).layoutVersion);
+  function paved(x: number, z: number, y: number) {
+    if (!denseTown || y >= MASONRY_ALPINE) return false;
+    const r = riverAt(x, z); if (r.distance < r.width + 4) return false;
+    if ((buildings.get(bucket(x, z)) ?? []).some(b => b.districtId === 'market' && Math.abs(x - b.position.x) < b.width / 2 + 11 && Math.abs(z - b.position.z) < b.depth / 2 + 11)) return true;
+    return false;
+  }
   function mesh(name: string, data: Surface, parent: THREE.Group) {
     const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(data.positions, 3)); geometry.setAttribute('color', new THREE.Float32BufferAttribute(data.colors, 3)); geometry.setAttribute('landMasonry', new THREE.Float32BufferAttribute(data.masonry, 1)); geometry.setIndex(data.indices); geometry.computeVertexNormals(); geometry.computeBoundingSphere(); geometries.add(geometry);
     const result = new THREE.Mesh(geometry, earth); result.name = name; result.receiveShadow = true; parent.add(result); return result;
@@ -202,14 +217,14 @@ export function buildLandscape(world: WorldDefinition): {
         const a = xs[xi - 1], b = xs[xi], c = zs[zi - 1], d = zs[zi], mx = (a + b) / 2, mz = (c + d) / 2;
         const localStep = Math.max(b - a, d - c), localHalf = localStep / 2;
         const top = height(mx, mz), slope = Math.max(Math.abs(height(mx + localHalf, mz) - height(mx - localHalf, mz)), Math.abs(height(mx, mz + localHalf) - height(mx, mz - localHalf))) / Math.max(1, localStep);
-        const color = groundColor(mx, mz, top, slope);
+        const color = groundColor(mx, mz, top, slope), court = stepped && paved(mx, mz, top);
         if (stepped) {
-          quad(data, [a, top, c, a, top, d, b, top, d, b, top, c], color);
+          quad(data, [a, top, c, a, top, d, b, top, d, b, top, c], court ? paving.clone().multiplyScalar(.95 + hash(Math.floor(mx / 9), Math.floor(mz / 9), world.seed + 3) * .08) : color, court ? 2 : 0);
           const side = groundColor(mx, mz, top, slope, true), west = height(a - localHalf, mz), east = height(b + localHalf, mz), north = height(mx, c - localHalf), south = height(mx, d + localHalf);
           const wall = (vertices: number[], low: number, faceX: number, faceZ: number, nx: number, nz: number) => {
             if (low >= top) return;
             // A terrace edge in town is a dressed-stone retaining wall (terrace-masonry.ts).
-            const masoned = masonryAt(faceX, faceZ, top, top - low);
+            const masoned = masonryAt(faceX, faceZ, top, top - low) || court && top - low >= .4;
             quad(data, vertices, masoned ? masonryStone.clone().multiplyScalar(.94 + hash(mx, mz, world.seed + 7) * .1) : side, masoned ? 1 : 0);
             if (masoned) { coping(capstones, vertices, top, nx, nz); return; }
             if (hangingLeaves.length >= 360 || top - low < 4 || hash(mx, mz, world.seed) < .74 || !clearGround(mx, mz, .4)) return;

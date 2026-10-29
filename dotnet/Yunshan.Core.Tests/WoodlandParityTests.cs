@@ -39,6 +39,11 @@ public class WoodlandParityTests
     [Fact]
     public void V8SlopeGardensMatchTypeScript() =>
         Compare("woodland-v8.json.gz", Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v8.json.gz"))), 9657);
+
+    /// <summary>current-v9 also plants the open ground of its dense market town.</summary>
+    [Fact]
+    public void V9TownGardensMatchTypeScript() =>
+        Compare("woodland-v9.json.gz", Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v9.json.gz"))), 9792);
 }
 
 public class RiverDressingParityTests

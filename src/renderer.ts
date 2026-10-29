@@ -76,7 +76,21 @@ export function programRoofShell(b: Building, parts: readonly { position: Vec3; 
     const inner = Math.min(roofHeightAt('hip', w / 2 / W, 0), roofHeightAt('hip', 0, d / 2 / D)), eave = roofHeightAt('hip', 0, .5), scale = ringRise / Math.max(.05, inner - eave);
     skirt = { width: W, depth: D, rise: scale, position: { ...centre, y: top - storey + .3 - scale * inner }, floor: Math.max(0, floor - 1), hole: [-w / 2 / W, w / 2 / W, -d / 2 / D, d / 2 / D] };
   }
-  return { form: hip ? 'hip' : 'gable', width: w + overhang * 2, depth: d + overhang * 2, rise, color: hip ? '#2c4d48' : '#38504c', position: centre, floor: Math.max(0, floor), skirt };
+  return { form: hip ? 'hip' : 'gable', width: w + overhang * 2, depth: d + overhang * 2, rise, color: hip ? '#477f69' : '#4f8a72', position: centre, floor: Math.max(0, floor), skirt };
+}
+/** A long gable shell reads as a row of shophouses: cut along its long side into bays of about 9 m, each its own
+ * gable with the gable end to the street, ridges a little higher or lower in turn. Display only: every bay sits on
+ * the shell's own eave line over the body's actual top roof. */
+export function programRoofBays(b: Building, shell: NonNullable<ReturnType<typeof programRoofShell>>) {
+  if (shell.form !== 'gable' || shell.skirt) return null;
+  const alongX = shell.width >= shell.depth, long = alongX ? shell.width : shell.depth, short = alongX ? shell.depth : shell.width;
+  if (long < 18) return null;
+  const count = Math.max(2, Math.round(long / 9)), span = long / count, seed = [...b.id].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+  return Array.from({ length: count }, (_, i) => {
+    const offset = -long / 2 + span * (i + .5), tall = ((seed >> i) & 1) ? 1.16 : .94;
+    return { width: span + .25, depth: short, rise: Math.min(9, Math.max(2.4, span * .42)) * tall, turned: !alongX,
+      position: { x: shell.position.x + (alongX ? offset : 0), y: shell.position.y, z: shell.position.z + (alongX ? 0 : offset) }, color: i % 2 ? '#4a8169' : '#548f76' };
+  });
 }
 /** Night glow of the cyan accents (rail strips, screens). At 2 the elevated rail strips
  * bloomed into bright blue-white bands that outshone the lanterns at dusk. */
@@ -604,7 +618,11 @@ export class CityRenderer implements CityRendererAPI {
       }
       // One roof profile in both levels of detail: switching LOD never changes a roof.
       const shell = programRoofShell(b, programParts);
-      if (shell) { const at = buildingWorldPosition(b, shell.position);
+      const bays = shell && programRoofBays(b, shell);
+      if (bays) for (const bay of bays) { const at = buildingWorldPosition(b, bay.position);
+        batch.box('roof', at.x, at.y + .12, at.z, bay.width, bay.rise, bay.depth, bay.color, b.rotation + (bay.turned ? Math.PI / 2 : 0), { building: b.id, floor: shell!.floor, roof: true }, { form: 'gable', simple: far });
+      }
+      else if (shell) { const at = buildingWorldPosition(b, shell.position);
         batch.box('roof', at.x, at.y + .12, at.z, shell.width, shell.rise, shell.depth, shell.color, b.rotation, { building: b.id, floor: shell.floor, roof: true }, { form: shell.form, simple: true });
         if (shell.skirt) { const ring = buildingWorldPosition(b, shell.skirt.position);
           batch.box('roof', ring.x, ring.y, ring.z, shell.skirt.width, shell.skirt.rise, shell.skirt.depth, shell.color, b.rotation, { building: b.id, floor: shell.skirt.floor, roof: true }, { form: 'hip', simple: true, innerHole: shell.skirt.hole }); } }

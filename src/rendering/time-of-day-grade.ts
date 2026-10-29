@@ -56,7 +56,7 @@ export function timeOfDayGrade(hour: number, visibility: number): TimeOfDayGrade
     fillSky: mixHex('#8aa6cf', '#9fb7c9', daylight), fillGround: mixHex('#3d5149', '#6f7a62', daylight), fillIntensity,
     bounceColor: mixHex('#8296a0', '#d8c39c', daylight), bounceIntensity: .03 + daylight * .3,
     skyTop: mixHex('#071822', '#3f86b4', daylight), skyHorizon: horizon,
-    fogColor: mixHex(horizon, '#e8dcc0', daylight * .35), fogDensityScale: .55 + (1 - clear) * .6,
+    fogColor: mixHex(horizon, '#e8dcc0', daylight * .35), fogDensityScale: .32 + (1 - clear) * .8,
     exposure: 1.06 + daylight * .06 + (1 - daylight) * .1,
   };
 }

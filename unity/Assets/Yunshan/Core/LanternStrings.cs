@@ -16,7 +16,7 @@ namespace Yunshan.Core
         public static List<LanternString> Of(WorldDefinition world, string districtId = "market")
         {
             var output = new List<LanternString>();
-            if (world.LayoutVersion != "current-v8") return output;
+            if (!StreetLayouts.IsStreetLayout(world.LayoutVersion)) return output;
             var nodes = new Dictionary<string, NetworkNode>(); foreach (var n in world.Nodes) nodes[n.Id] = n;
             string District(string id) => nodes.TryGetValue(id, out var n) ? n.DistrictId : null;
             foreach (var edge in world.Edges)
@@ -49,7 +49,7 @@ namespace Yunshan.Core
         public static List<LanternString> Terrace(WorldDefinition world)
         {
             var output = new List<LanternString>();
-            if (world.LayoutVersion != "current-v8") return output;
+            if (!StreetLayouts.IsStreetLayout(world.LayoutVersion)) return output;
             var nodes = new Dictionary<string, NetworkNode>(); foreach (var n in world.Nodes) nodes[n.Id] = n;
             string District(string id) => nodes.TryGetValue(id, out var n) ? n.DistrictId : null;
             bool Blocked(Vec3 p)

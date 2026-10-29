@@ -1,5 +1,6 @@
 import type { Vec3, WorldDefinition } from '../types';
 import { deckWidth } from '../transport-geometry';
+import { isStreetLayout } from '../street-layouts';
 
 /** R4 (docs/设计/美术与渲染改造方案.md §2.5): 千灯市集's strings of red
  * lanterns hung across its streets. Every LANTERN_SPAN metres along a market
@@ -10,7 +11,7 @@ export const LANTERN_SPAN = 24;
 export interface LanternString { poles: [Vec3, Vec3]; lanterns: Vec3[] }
 
 export function lanternStrings(world: WorldDefinition, districtId = 'market'): LanternString[] {
-  if ((world as WorldDefinition & { layoutVersion?: string }).layoutVersion !== 'current-v8') return [];
+  if (!isStreetLayout((world as WorldDefinition & { layoutVersion?: string }).layoutVersion)) return [];
   const nodes = new Map(world.nodes.map(n => [n.id, n])), out: LanternString[] = [];
   for (const edge of world.edges) {
     if (edge.mode !== 'road' || edge.id.includes('runway') || nodes.get(edge.from)?.districtId !== districtId || nodes.get(edge.to)?.districtId !== districtId) continue;
@@ -39,7 +40,7 @@ export function lanternStrings(world: WorldDefinition, districtId = 'market'): L
  * footprint (+0.4 m) or within 2.5 m of a door. Display only. */
 export const TERRACE_LANTERN_SPAN = 36;
 export function terraceLanternStrings(world: WorldDefinition): LanternString[] {
-  if ((world as WorldDefinition & { layoutVersion?: string }).layoutVersion !== 'current-v8') return [];
+  if (!isStreetLayout((world as WorldDefinition & { layoutVersion?: string }).layoutVersion)) return [];
   const nodes = new Map(world.nodes.map(n => [n.id, n])), out: LanternString[] = [];
   const blocked = (p: Vec3) => world.buildings.some(b => {
     const dx = p.x - b.position.x, dz = p.z - b.position.z, reach = b.width + b.depth + 8;

@@ -18,7 +18,7 @@ namespace Yunshan.Core
 
         /// <summary>Port of pavedStreet: current-v8 terrace streets and shop door paths are paved in stone.</summary>
         public static bool PavedStreet(WorldDefinition world, NetworkEdge edge) =>
-            world.LayoutVersion == "current-v8" && edge.Mode == "road" && (edge.Id.Contains("-terrace-") || edge.From.EndsWith("-door") || edge.To.EndsWith("-door"));
+            StreetLayouts.IsStreetLayout(world.LayoutVersion) && edge.Mode == "road" && (edge.Id.Contains("-terrace-") || edge.From.EndsWith("-door") || edge.To.EndsWith("-door"));
         public static double DeckWidth(NetworkEdge edge)
         {
             if (edge.Id.Contains("airport-runway-strip")) return 44;

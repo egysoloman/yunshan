@@ -80,7 +80,7 @@ namespace Yunshan.Core
             // current-v8 streets bend at any angle: a square deck at each interior
             // vertex (on the bisector) closes the wedge between rigid segment boxes,
             // and a pad covers every street junction. Older layouts keep their boxes.
-            bool anyAngleStreets = world.LayoutVersion == "current-v8";
+            bool anyAngleStreets = StreetLayouts.IsStreetLayout(world.LayoutVersion);
             var decks = anyAngleStreets ? PavedDecks(world) : new List<PavedDeck>();
             foreach (var edge in world.Edges)
             {

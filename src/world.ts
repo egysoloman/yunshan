@@ -3,9 +3,10 @@ import { applyMarketStationApron } from './market-station-apron';
 import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, SimState, TransportMode, Vec3, WorldDefinition } from './types';
 import { isRoadOpen } from './roads';
 import { getFloorDimensions } from './access';
+import { isDenseMarketLayout, isStreetLayout } from './street-layouts';
 import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
 
-export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6', 'current-v7', 'current-v8'] as const;
+export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6', 'current-v7', 'current-v8', 'current-v9'] as const;
 export type CityLayoutVersion = typeof CITY_LAYOUT_VERSIONS[number];
 export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v6';
 export const GEOLOGICAL_GEOMETRY_VERSION = 'yunshan-geology-v3-terraced-cellular-1';
@@ -14,6 +15,10 @@ export const ARCHITECTURAL_GEOMETRY_VERSION = FLOOR_PLAN_GEOMETRY_VERSION;
 export const STREET_RECIPE_VERSION = 'frontage-terrace-streets-1';
 export const LOW_RISE_RECIPE_VERSION = 'low-rise-town-1';
 export const V8_TERRAIN_RECIPE_VERSION = 'plinth-shoulder-6';
+/** current-v9 recipe identity: the market district as one dense shophouse town on stepped terraces. */
+export const DENSE_MARKET_RECIPE_VERSION = 'dense-market-town-1';
+/** current-v9: the market district's plinths end in a near-vertical step (a retaining wall). */
+const DENSE_PLINTH_SHOULDER = 1.8;
 
 const UNIT = .2;
 /** current-v8: width of the step from a building's plinth down to natural ground. */
@@ -65,7 +70,7 @@ function indexFor(world: WorldDefinition) {
     let land = landHeightCache.get(world); if (!land) { land = new Map(); landHeightCache.set(world, land); }
     index = { segments: new Map(), elevated: new Map(), buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: land };
     const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8' ? 70 : 14;
+    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' || isStreetLayout(layout) ? 70 : 14;
     for (const b of world.buildings) {
       let halfWidth = b.width / 2, halfDepth = b.depth / 2;
       if (b.floorPlanProfile) {
@@ -203,18 +208,18 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
   if ((world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion === 'legacy-ee3e7a1') return y;
   const index = indexFor(world), nearby = index.buildings.get(key(x, z)) ?? [];
   if (nearby.some(b => Math.abs(x - b.position.x) <= b.width / 2 + 2 && Math.abs(z - b.position.z) <= b.depth / 2 + 2)) return y;
-  let roadGap = Infinity, foundationGap = Infinity, foundationY = y;
+  let roadGap = Infinity, foundationGap = Infinity, foundationY = y, foundationMarket = false;
   for (const { a, b } of index.segments.get(key(x, z)) ?? []) roadGap = Math.min(roadGap, nearestSegment([a, b], x, z).distance);
   for (const { a, b } of index.elevated.get(key(x, z)) ?? []) roadGap = Math.min(roadGap, nearestSegment([a, b], x, z).distance);
   for (const b of nearby) {
     const dx = Math.max(0, Math.abs(x - b.position.x) - b.width / 2 - 2), dz = Math.max(0, Math.abs(z - b.position.z) - b.depth / 2 - 2), gap = Math.hypot(dx, dz);
-    if (gap < foundationGap) { foundationGap = gap; foundationY = b.position.y; }
+    if (gap < foundationGap) { foundationGap = gap; foundationY = b.position.y; foundationMarket = b.districtId === 'market'; }
   }
   // Adjacent houses sit on joined shoulders instead of isolated pointed
   // mounds. The wider shoulder ends before the untouched road centreline.
   // current-v8 plinths: each building stands on its own flat terrace that ends
   // in a steep step a few metres beyond the wall, instead of a 54 m soft hill.
-  const terraced = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion === 'current-v8', shoulder = terraced ? PLINTH_SHOULDER : 54;
+  const ownLayout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion, terraced = isStreetLayout(ownLayout), shoulder = terraced ? isDenseMarketLayout(ownLayout) && foundationMarket ? DENSE_PLINTH_SHOULDER : PLINTH_SHOULDER : 54;
   if (roadGap > 9 && foundationGap < shoulder) y += (foundationY - y) * (1 - smooth(foundationGap / shoulder)) * (terraced ? 1 : .82);
   const reliefWeight = world.buildings.length ? smooth((foundationGap - 10) / 38) * smooth((roadGap - 12) / 20) * smooth((y - 14) / 22) : 0;
   // Long fault ridges and smaller fractures share the collision height. This
@@ -222,7 +227,7 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
   const fracture = Math.sin(x * .036 + Math.sin(z * .012) * 1.7) * Math.cos(z * .027) * 3.2 + Math.sin((x + z * .72) * .081) * 1.1;
   y += fracture * reliefWeight;
   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
+  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' || isStreetLayout(layout)) y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
   if (roadGap < 9) for (const { edge, a, b } of index.segments.get(key(x, z)) ?? []) if (edge.mode === 'road' && !edge.id.includes('runway')) {
     const near = nearestSegment([a, b], x, z);
     if (near.distance > 7) continue;
@@ -367,6 +372,8 @@ const civicPlan = [
  * string pulling with an exact swept clearance test, clearance-checked Chaikin
  * corners, then the same lattice resample and grading as the original. */
 let streetRecipe: 'grid4' | 'smooth' = 'grid4';
+/** current-v9 generation only: the market district is built as one dense shophouse town. */
+let denseMarket = false;
 /** Smooth recipe only: extra cost per metre for a street cell (door stubs keep
  * out of other streets' decks unless they meet them at the same height). */
 let deckPenalty: ((x: number, z: number, deckY: number) => number) | null = null;
@@ -696,6 +703,18 @@ export function createStreetWorld(seed = 20261001): WorldDefinition & { layoutVe
 
 export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = CURRENT_CITY_LAYOUT): WorldDefinition & { layoutVersion: CityLayoutVersion } {
   if (!CITY_LAYOUT_VERSIONS.includes(layoutVersion)) throw new Error('Unknown city layout version');
+  if (layoutVersion === 'current-v9') {
+    // current-v8 with the market district gathered into one dense shophouse
+    // town (14 m shops on a 16 m pitch, terrace rows 56 m apart, near-vertical
+    // plinth walls). Every other district keeps the v8 recipe. Own fingerprint.
+    const previous = streetRecipe, previousDense = denseMarket; streetRecipe = 'smooth'; denseMarket = true;
+    try {
+      const base = createWorld(seed, 'current-v5');
+      base.layoutVersion = 'current-v9';
+      indices.delete(base);
+      return base;
+    } finally { streetRecipe = previous; denseMarket = previousDense; }
+  }
   if (layoutVersion === 'current-v8') {
     // R2 rebuilt world: the v5 generator with the smooth street router, shared
     // door streets, an explicit road fleet and the low-rise town (decision 1).
@@ -782,7 +801,9 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     {
       const civic = p.id === 'core' ? civicPlan[i] : undefined;
       const localIndex = p.id === 'core' ? Math.max(0, i - civicPlan.length) : i;
-      const quarter = localIndex % localStops.length, within = Math.floor(localIndex / localStops.length), anchor = localStops[quarter];
+      // current-v9: the whole market district gathers around one quarter stop as a single dense town.
+      const gathered = denseMarket && p.id === 'market';
+      const quarter = gathered ? 3 : localIndex % localStops.length, within = gathered ? localIndex : Math.floor(localIndex / localStops.length), anchor = localStops[quarter];
       const ring = Math.floor(within / 6), angle = within % 6 / 6 * Math.PI * 2 + districtIndex * .31 + quarter * .63 + ring * .45;
       let kind = p.kinds[(within + quarter) % p.kinds.length];
       if (i === 0 && p.id === 'summit') kind = 'pavilion';
@@ -813,9 +834,17 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
           station: 2, airport: 4, starport: 6,
         };
         floors = lowRise[kind] ?? floors;
+        if (denseMarket && p.id === 'market') {
+          // current-v9: shophouse lots for the market district.
+          if (kind === 'market') { designWidth = 14; designDepth = 12.4; floors = 2 + within % 2; }
+          if (kind === 'home') { designWidth = 14; designDepth = 13.2; floors = 2 + (within + quarter) % 2; }
+          if (kind === 'bank') { designWidth = 22; designDepth = 17.6; floors = 3 + within % 2; }
+        }
       }
-      const width = 'width' in (civic ?? {}) ? civic!.width! : Math.round(designWidth * (.94 + rng() * .12) / .4) * .4;
-      const depth = 'depth' in (civic ?? {}) ? civic!.depth! : Math.round(designDepth * (.94 + rng() * .12) / .4) * .4;
+      let width = 'width' in (civic ?? {}) ? civic!.width! : Math.round(designWidth * (.94 + rng() * .12) / .4) * .4;
+      let depth = 'depth' in (civic ?? {}) ? civic!.depth! : Math.round(designDepth * (.94 + rng() * .12) / .4) * .4;
+      // current-v9: shophouse fronts share one 16 m pitch (14 m front, 2 m lane); rng is still drawn.
+      if (denseMarket && p.id === 'market' && !civic) { width = designWidth; depth = designDepth; }
       if (civic && 'floors' in civic) floors = civic.floors!;
       const baseRadius = 88 + ring * 64;
       let x = q(anchor.position.x + Math.cos(angle) * baseRadius), z = q(anchor.position.z + Math.sin(angle) * baseRadius);
@@ -829,7 +858,7 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
       let frontRotation: number | null = null, frontY: number | null = null;
       if (!placed && frontage) {
         // Lots pack outward from the quarter stop: compact terraced clusters, as the concept art.
-        const lot = frontageSite(p.id, { x: anchor.position.x, z: anchor.position.z }, width, depth, ['pavilion', 'core'].includes(kind));
+        const lot = frontageSite(p.id, { x: anchor.position.x, z: anchor.position.z }, width, depth, ['pavilion', 'core'].includes(kind), denseMarket && p.id === 'market' && within % 2 === 1);
         if (lot) { x = lot.x; z = lot.z; frontRotation = lot.rotation; frontY = lot.y; placed = true; frontageLots.set(`${p.id}-b${i}`, lot.street); }
       }
       if (!placed) for (let attempt = 0; attempt < (frontage ? 900 : 300); attempt++) {
@@ -1062,10 +1091,12 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
       addRow(p, stop, stop, `${rowBase}-row-0`);
       for (const sign of [1, -1]) {
         let hub: NetworkNode = stop;
-        for (let tier = 1; tier <= ROW_TIERS; tier++) {
+        // current-v9: the market district stacks its terrace rows closer, back to back.
+        const spacing = denseMarket && p.id === 'market' ? 56 : ROW_SPACING, tiers = denseMarket && p.id === 'market' ? 3 : ROW_TIERS;
+        for (let tier = 1; tier <= tiers; tier++) {
           const own = new Set(world.edges.filter(e => e.from === hub.id || e.to === hub.id));
-          const connector = stepFrom(hub.position, 0, sign * ROW_STEP, Math.round(ROW_SPACING / ROW_STEP), own);
-          if ((connector.length - 1) * ROW_STEP < ROW_SPACING) break;
+          const connector = stepFrom(hub.position, 0, sign * ROW_STEP, Math.round(spacing / ROW_STEP), own);
+          if ((connector.length - 1) * ROW_STEP < spacing) break;
           const label = `${rowBase}-row-${sign > 0 ? 's' : 'n'}${tier}`;
           const next: NetworkNode = { id: label, districtId: p.id, name: `${stop.name.replace('驿', '')}·台街`, position: { ...connector[connector.length - 1] }, station: false };
           world.nodes.push(next); nodeById.set(next.id, next);
@@ -1093,7 +1124,7 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
       for (const s of deckSamples?.get(`${cx},${cz}`) ?? []) if (Math.abs(s.x - x) < hw && Math.abs(s.z - z) < hd) return false;
     return true;
   }
-  function frontageSite(districtId: string, target: { x: number; z: number }, width: number, depth: number, unturned = false): { x: number; z: number; y: number; rotation: number; street: Vec3 } | null {
+  function frontageSite(districtId: string, target: { x: number; z: number }, width: number, depth: number, unturned = false, southFirst = false): { x: number; z: number; y: number; rotation: number; street: Vec3 } | null {
     // Street samples (every ~6 m) do not change while lots are placed.
     let streetPoints = frontageStreets.get(districtId);
     if (!streetPoints) {
@@ -1110,11 +1141,11 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     const samples = streetPoints.map(pt => ({ p: pt, d: Math.hypot(pt.x - target.x, pt.z - target.z) })).sort((a, b) => a.d - b.d);
     const groundAt = (x: number, z: number) => { const k = `${x}:${z}`; let g = frontageGround.get(k); if (g === undefined) { g = naturalHeight(world, x, z); frontageGround.set(k, g); } return g; };
     // Bodies without a floor plan (pavilions) keep the original orientation.
-    for (const { p } of samples) for (const n of unturned ? [1] : [1, -1]) {
+    for (const { p } of samples) for (const n of unturned ? [1] : southFirst ? [-1, 1] : [1, -1]) {
       const x = q(p.x) + 0, z = q(p.z - n * (depth / 2 + FRONTAGE)) + 0, y = q(p.y - .6) + 0;
       if (!clearOfDecks(x, z, width / 2 + 5.5, depth / 2 + 5.5)) continue;
       const ground = groundAt(x, z);
-      if (y < ground - 8 || y > ground + 14 || !safeSite(x, z, width, depth, n, true, FRONTAGE_GAP)) continue;
+      if (y < ground - 8 || y > ground + 14 || !safeSite(x, z, width, depth, n, true, denseMarket && districtId === 'market' ? 1.6 : FRONTAGE_GAP)) continue;
       return { x, z, y, rotation: n > 0 ? 0 : Math.PI, street: { x: q(p.x) + 0, y: q(p.y) + 0, z: q(p.z) + 0 } };
     }
     return null;
@@ -1318,9 +1349,9 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
     let best: { p: Vec3; score: number } | null = null;
     for (const edge of world.edges) if (edge.mode === 'road' && !edge.id.includes('runway')) for (const p of edge.points) {
       const fromStation = Math.hypot(p.x - home.x, p.z - home.z);
-      if (fromStation < 60 || fromStation > 220 || tracks.some(t => nearestSegment(t.points, p.x, p.z).distance < 60)) continue;
+      if (fromStation < 60 || fromStation > (denseMarket ? 400 : 220) || tracks.some(t => nearestSegment(t.points, p.x, p.z).distance < 60)) continue;
       // The arrival view looks north (−z): keep a 20 m wide, 60 m deep street view clear of walls.
-      if (world.buildings.some(b => Math.abs(b.position.x - p.x) < b.width / 2 + 10 && b.position.z + b.depth / 2 > p.z - 60 && b.position.z - b.depth / 2 < p.z + 4)) continue;
+      if (world.buildings.some(b => Math.abs(b.position.x - p.x) < b.width / 2 + (denseMarket ? 3 : 10) && b.position.z + b.depth / 2 > p.z - 60 && b.position.z - b.depth / 2 < p.z + 4)) continue;
       const score = markets.filter(b => Math.hypot(b.door.x - p.x, b.door.z - p.z) < 45).length * 100 - fromStation;
       if (!best || score > best.score) best = { p, score };
     }

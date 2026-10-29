@@ -1,6 +1,7 @@
 import type { NetworkEdge, Vec3, WorldDefinition } from '../types';
 import { samplePolyline, terrainHeight } from '../world';
 import { deckWidth, GUARDRAIL_THICKNESS, guardrailOffset, guardrailSpans, hasGuardrailAt, pavedStreet } from '../transport-geometry';
+import { isStreetLayout } from '../street-layouts';
 
 /** Material keys the network uses (renderer palette). */
 export type NetworkMaterial = 'stone' | 'wood' | 'cyan' | 'amber' | 'roof';
@@ -65,7 +66,7 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
     // current-v8 streets bend at any angle: a square deck at each interior
     // vertex (on the bisector) closes the wedge between rigid segment boxes,
     // and a pad covers every street junction. Older layouts keep their boxes.
-    const anyAngleStreets = (world as WorldDefinition & { layoutVersion?: string }).layoutVersion === 'current-v8';
+    const anyAngleStreets = isStreetLayout((world as WorldDefinition & { layoutVersion?: string }).layoutVersion);
     const decks = anyAngleStreets ? pavedDecks(world) : [];
     for (const edge of world.edges) {
       if (edge.mode === 'flight') continue;

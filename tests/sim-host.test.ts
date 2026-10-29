@@ -16,7 +16,7 @@ test('native host drives the authoritative simulation through requests', async (
   const opened = await host.handle({ id: 2, op: 'open' });
   assert.equal(opened.ok, true, opened.error);
   const info = opened.result as { layout: string; seed: number; fingerprint: string; buildings: number; citizens: number };
-  assert.equal(info.layout, 'current-v8'); assert.equal(info.seed, 20261001); assert.match(info.fingerprint, /^[0-9a-f]{1,8}$/);
+  assert.equal(info.layout, 'current-v9'); assert.equal(info.seed, 20261001); assert.match(info.fingerprint, /^[0-9a-f]{1,8}$/);
   assert(info.buildings > 500 && info.citizens > 300);
 
   const sent = (await host.handle({ id: 21, op: 'world' })).result as { world: WorldDefinition; arrivalLook: { x: number; y: number; z: number } };

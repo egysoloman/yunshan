@@ -41,7 +41,7 @@ public class SimHostClientTests
         Assert.NotNull(launch);
         using var client = launch.Start();
         var opened = await client.Open();
-        Assert.Equal("current-v8", Json.Str(opened, "layout"));
+        Assert.Equal("current-v9", Json.Str(opened, "layout"));
         Assert.Equal(20261001d, Json.Num(opened, "seed"));
 
         // The host sends the city it simulates; C# receives it byte for byte
@@ -49,7 +49,7 @@ public class SimHostClientTests
         var world = await client.World();
         Assert.Equal(world.Buildings.Count, (int)Json.Num(opened, "buildings"));
         Assert.Equal(world.Edges.Count, (int)Json.Num(opened, "edges"));
-        Assert.Equal(WorldReference("current-v8"), CanonicalJson.Write(CanonicalJson.World(world)));
+        Assert.Equal(WorldReference("current-v9"), CanonicalJson.Write(CanonicalJson.World(world)));
         // The host also sends where a new player first looks: 60 m out at the spawn, never straight down.
         Assert.NotNull(client.ArrivalLook);
         Assert.Equal(60, Math.Sqrt(Math.Pow(client.ArrivalLook.X - world.Spawn.X, 2) + Math.Pow(client.ArrivalLook.Z - world.Spawn.Z, 2)), 6);

@@ -13,6 +13,8 @@ namespace Yunshan.Core
         public const int MaxTrees = 5200;
         /// <summary>current-v8 slope gardens: grid spacing (m) and the most plants placed.</summary>
         public const double SlopeGardenSpacing = 12; public const int SlopeGardenMax = 7000;
+        /// <summary>current-v9 town gardens: open ground this far from a market building (nearer is paving) is planted even where flat.</summary>
+        public const double TownGardenNear = 11, TownGardenFar = 40;
         public static readonly string[] SpeciesAssets = { "ENV-057", "ENV-056", "ENV-050", "ENV-054", "ENV-054", "ENV-055", "ENV-055", "ENV-050", "ENV-050" };
         public const string ShrubAsset = "ENV-060";
         public static readonly Dictionary<string, double> AssetHeights = new Dictionary<string, double> { ["ENV-050"] = 16, ["ENV-054"] = 14, ["ENV-055"] = 14, ["ENV-056"] = 8.4, ["ENV-057"] = 10, ["ENV-060"] = 1.8 };
@@ -94,10 +96,13 @@ namespace Yunshan.Core
                     result.Shrubs.Add(new Shrub { Id = i, Asset = ShrubAsset, X = sx, Y = Surface(sx, sz), Z = sz, Yaw = System.Math.Floor(Hash(i, 95, world.Seed) * 4) * System.Math.PI / 2 });
                 }
             }
-            // current-v8 slope gardens (woodland-layout.ts): the stepped hillsides inside each district.
-            if (world.LayoutVersion == "current-v8")
+            // current-v8 slope gardens (woodland-layout.ts): the stepped hillsides inside each district;
+            // current-v9 also plants the open ground of its dense market town.
+            if (StreetLayouts.IsStreetLayout(world.LayoutVersion))
             {
                 int id = 100000, planted = 0;
+                var markets = StreetLayouts.IsDenseMarketLayout(world.LayoutVersion) ? world.Buildings.Where(b => b.DistrictId == "market").ToList() : new List<Building>();
+                double MarketGap(double px, double pz) { double gap = double.PositiveInfinity; foreach (var b in markets) gap = JsMath.Min(gap, JsMath.Max(System.Math.Abs(px - b.Position.X) - b.Width / 2, System.Math.Abs(pz - b.Position.Z) - b.Depth / 2)); return gap; }
                 foreach (var district in world.Districts)
                 {
                     if (district.Kind == "airport" || district.Kind == "starport") continue;
@@ -109,7 +114,8 @@ namespace Yunshan.Core
                         double x = Quantize(ox + (Hash(ox, oz, world.Seed + 7) - .5) * 8), z = Quantize(oz + (Hash(oz, ox, world.Seed + 7) - .5) * 8), y = Surface(x, z);
                         if (y < 8 || y > 630 || Hash(x, z, world.Seed + 11) > .8 || !clear(x, z, 4)) continue;
                         double rise = JsMath.Max(JsMath.Max(System.Math.Abs(Surface(x + 6, z) - y), System.Math.Abs(Surface(x, z + 6) - y)), JsMath.Max(System.Math.Abs(Surface(x - 6, z) - y), System.Math.Abs(Surface(x, z - 6) - y)));
-                        if (rise < 1.4 || rise > 32 || System.Math.Abs(Surface(x + 1, z) - y) > 1.2 || System.Math.Abs(Surface(x, z + 1) - y) > 1.2 || System.Math.Abs(Surface(x - 1, z) - y) > 1.2 || System.Math.Abs(Surface(x, z - 1) - y) > 1.2) continue;
+                        double gap = markets.Count > 0 && district.Id == "market" ? MarketGap(x, z) : double.PositiveInfinity; bool garden = gap >= TownGardenNear && gap <= TownGardenFar;
+                        if ((!garden && rise < 1.4) || rise > 32 || System.Math.Abs(Surface(x + 1, z) - y) > 1.2 || System.Math.Abs(Surface(x, z + 1) - y) > 1.2 || System.Math.Abs(Surface(x - 1, z) - y) > 1.2 || System.Math.Abs(Surface(x, z - 1) - y) > 1.2) continue;
                         double yaw = System.Math.Floor(Hash(x, z, world.Seed + 13) * 4) * System.Math.PI / 2, kind = Hash(z, x, world.Seed + 17);
                         if (kind < .3) result.Shrubs.Add(new Shrub { Id = id++, Asset = ShrubAsset, X = x, Y = y, Z = z, Yaw = yaw });
                         else { var asset = kind < .7 ? "ENV-056" : "ENV-057"; result.Trees.Add(new Tree { Id = id++, Asset = asset, Species = asset == "ENV-056" ? 1 : 0, X = x, Y = y, Z = z, Height = AssetHeights[asset], Yaw = yaw }); }

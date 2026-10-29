@@ -1,5 +1,6 @@
 import type { Vec3, WorldDefinition } from '../types';
 import { getWaterfallPath, terrainHeight } from '../world';
+import { isDenseMarketLayout, isStreetLayout } from '../street-layouts';
 
 /** Shared woodland placement for the web renderer and the Unity client (C#
  * Core/WoodlandLayout.cs, parity-tested). Trees and shrubs are display only:
@@ -12,6 +13,9 @@ export const WOODLAND_TILE = 96;
 export const WOODLAND_MAX_TREES = 5200;
 /** current-v8 slope gardens: grid spacing (m) and the most plants placed. */
 export const SLOPE_GARDEN_SPACING = 12, SLOPE_GARDEN_MAX = 7000;
+/** current-v9 town gardens: open ground between TOWN_GARDEN_NEAR and TOWN_GARDEN_FAR m from a market building
+ * (nearer is the town's paving) is planted even where it is flat. */
+export const TOWN_GARDEN_NEAR = 11, TOWN_GARDEN_FAR = 40;
 /** Species index (0–8, as the original woodland) → studio tree model. */
 export const WOODLAND_SPECIES_ASSETS = ['ENV-057', 'ENV-056', 'ENV-050', 'ENV-054', 'ENV-054', 'ENV-055', 'ENV-055', 'ENV-050', 'ENV-050'] as const;
 export const WOODLAND_SHRUB_ASSET = 'ENV-060';
@@ -80,8 +84,10 @@ export function woodlandLayout(world: WorldDefinition): { trees: WoodlandTree[];
   // current-v8 slope gardens: the stepped hillsides inside each district,
   // which the edge stands never reach, are planted with the small tree models
   // and shrubs (the concept's terrace gardens). Flat ground stays open.
-  if ((world as WorldDefinition & { layoutVersion?: string }).layoutVersion === 'current-v8') {
+  if (isStreetLayout((world as WorldDefinition & { layoutVersion?: string }).layoutVersion)) {
     let id = 100000, planted = 0;
+    const markets = isDenseMarketLayout((world as WorldDefinition & { layoutVersion?: string }).layoutVersion) ? world.buildings.filter(b => b.districtId === 'market') : [];
+    const marketGap = (x: number, z: number) => markets.reduce((gap, b) => Math.min(gap, Math.max(Math.abs(x - b.position.x) - b.width / 2, Math.abs(z - b.position.z) - b.depth / 2)), Infinity);
     for (const district of world.districts) {
       if (['airport', 'starport'].includes(district.kind)) continue;
       const span = Math.floor(district.radius / SLOPE_GARDEN_SPACING);
@@ -92,7 +98,8 @@ export function woodlandLayout(world: WorldDefinition): { trees: WoodlandTree[];
         if (y < 8 || y > 630 || woodlandHash(x, z, world.seed + 11) > .8 || !clear(x, z, 4)) continue;
         const rise = Math.max(Math.abs(surface(x + 6, z) - y), Math.abs(surface(x, z + 6) - y), Math.abs(surface(x - 6, z) - y), Math.abs(surface(x, z - 6) - y));
         // Sloping or stepped ground, but the plant itself stands on a level step.
-        if (rise < 1.4 || rise > 32 || Math.abs(surface(x + 1, z) - y) > 1.2 || Math.abs(surface(x, z + 1) - y) > 1.2 || Math.abs(surface(x - 1, z) - y) > 1.2 || Math.abs(surface(x, z - 1) - y) > 1.2) continue;
+        const gap = markets.length && district.id === 'market' ? marketGap(x, z) : Infinity, garden = gap >= TOWN_GARDEN_NEAR && gap <= TOWN_GARDEN_FAR;
+        if ((!garden && rise < 1.4) || rise > 32 || Math.abs(surface(x + 1, z) - y) > 1.2 || Math.abs(surface(x, z + 1) - y) > 1.2 || Math.abs(surface(x - 1, z) - y) > 1.2 || Math.abs(surface(x, z - 1) - y) > 1.2) continue;
         const yaw = Math.floor(woodlandHash(x, z, world.seed + 13) * 4) * Math.PI / 2, kind = woodlandHash(z, x, world.seed + 17);
         if (kind < .3) shrubs.push({ id: id++, asset: WOODLAND_SHRUB_ASSET, x, y, z, yaw });
         else { const asset = kind < .7 ? 'ENV-056' : 'ENV-057'; trees.push({ id: id++, asset, species: asset === 'ENV-056' ? 1 : 0, x, y, z, height: WOODLAND_ASSET_HEIGHTS[asset], yaw }); }

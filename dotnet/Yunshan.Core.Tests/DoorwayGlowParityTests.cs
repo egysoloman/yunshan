@@ -17,7 +17,7 @@ public class DoorwayGlowParityTests
     [Fact]
     public void PanelsAndLevelsMatchTypeScript()
     {
-        var world = Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v8.json.gz")));
+        var world = Yunshan.Core.Host.WorldJson.FromJson((Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(Gunzip("world-current-v9.json.gz")));
         var doc = (Dictionary<string, object>)Yunshan.Core.Host.Json.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Parity", "doorway-glow.json"), Encoding.UTF8));
         var byId = world.Buildings.ToDictionary(b => b.Id); int lit = 0;
         foreach (Dictionary<string, object> row in (List<object>)doc["panels"])
