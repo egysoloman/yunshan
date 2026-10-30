@@ -4,7 +4,7 @@ import { CABLE_SPEED_POLICIES, cableSpeed, type CableSpeedPolicy } from './simul
 import { CLOSURE_TRAFFIC_POLICIES, closureTestsVehicle, type ClosureTrafficPolicy } from './simulation/closure-traffic';
 import { MUNICIPAL_REPAIR_POLICIES, type MunicipalRepairPolicy } from './simulation/municipal-repair';
 import { REPAIR_ROUTE_POLICIES, REPAIR_ROUTE_POLICY, type RepairRoutePolicy } from './simulation/repair-route';
-import { HOME_MATS_POLICIES, HOME_MATS_POLICY, homeMatPointAt, homeMats, type HomeMatsPolicy } from './simulation/home-mats';
+import { HOME_MATS_POLICIES, HOME_MATS_POLICY, homeMatPointAt, homeMatsView, type HomeMatsPolicy } from './simulation/home-mats';
 import { UNDERPAID_HOUR, UNDERPAID_MOVE_POLICIES, UNDERPAID_MOVE_POLICY, type UnderpaidMovePolicy } from './simulation/underpaid-move';
 import { JUNCTION_DWELL, JUNCTION_DWELL_POLICIES, JUNCTION_DWELL_POLICY, type JunctionDwellPolicy } from './simulation/junction-dwell';
 import { TINY_LEG_POLICIES, TINY_LEG_POLICY, tinyLeg, type TinyLegPolicy } from './simulation/tiny-leg';
@@ -54,7 +54,7 @@ import { installBanking } from './simulation/banking';
 import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
 import { installPlayerLabor, type PlayerLaborEmployer, type PlayerLaborJob } from './simulation/player-labor';
-import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPoints, installHomeRest, voxelEscapeAllowed } from './simulation/home-rest';
+import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPointsView, installHomeRest, voxelEscapeAllowed, type HomeRestPoint } from './simulation/home-rest';
 import { validatePublicDisinfectionBudgetCrossReferences } from './simulation/hygiene-public';
 import { installHygiene, hygieneNeedsContinuousPeople } from './simulation/hygiene';
 import { installPathology } from './simulation/pathology';
@@ -1474,7 +1474,10 @@ export class Simulation implements SimulationAPI {
     const points = network.length ? [copy(from.door), ...network, copy(to.door)] : [];
     this.cacheRoute(key, points); return points;
   }
-  private availableHomeRestPoints(citizen: Citizen, home: Building) {
+  private availableHomeRestPoints(citizen: Citizen, home: Building): HomeRestPoint[];
+  private availableHomeRestPoints(citizen: Citizen, home: Building, anyFree: true): boolean;
+  /** Free sleeping places at home for this resident (copies), or with anyFree only whether there is one. */
+  private availableHomeRestPoints(citizen: Citizen, home: Building, anyFree = false): HomeRestPoint[] | boolean {
     const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
     // A point is usable when every floor up to its own is open to the person (computed once per floor).
     const reachable: boolean[] = []; for (let floor = 0, open = true; floor < home.floors; floor++) reachable.push(open = open && canAccessFloor(home, floor, person));
@@ -1485,15 +1488,16 @@ export class Simulation implements SimulationAPI {
         || this.state.extension?.actorProfiles[other.id]?.alive === false) continue;
       const target = other.route?.at(-1); if (target) targets.push(target);
     }
-    const free = (candidates: ReturnType<typeof homeRestPoints>) => {
+    const free = (candidates: readonly HomeRestPoint[]) => {
       const points = candidates.filter(point => reachable[point.floor] === true), occupiedBeds = new Set<string>();
       for (const target of targets) { const point = points.find(point => distance(point.position, target) < 1e-8); if (point) occupiedBeds.add(point.bedId); }
       return points.filter(point => !homeRestPointBlockedByVoxels(point.position, this.state.voxels)
         && !homeRestBedOccupied(this.state, point.bedId) && !occupiedBeds.has(point.bedId));
     };
-    const beds = free(Array.from({ length: home.floors }, (_, floor) => homeRestPoints(home, floor)).flat());
+    const beds: HomeRestPoint[] = []; for (let floor = 0; floor < home.floors; floor++) beds.push(...homeRestPointsView(home, floor));
     // home-mats-v1: a home with no free bed offers its mats (up to its capacity).
-    return beds.length || this.runtime.homeMatsPolicyId !== HOME_MATS_POLICY ? beds : free(homeMats(home));
+    let result = free(beds); if (!result.length && this.runtime.homeMatsPolicyId === HOME_MATS_POLICY) result = free(homeMatsView(home));
+    return anyFree ? result.length > 0 : result.map(point => ({ ...point, position: { ...point.position } }));
   }
   private setDestination(citizen: Citizen, destination: Building, rebuild = false) {
     // Old native saves can contain a never-started, blocked exterior intent.
@@ -1734,7 +1738,7 @@ export class Simulation implements SimulationAPI {
   private chooseFacility(citizen: Citizen): { destination: Building; activity: string } {
     const hour = this.state.hour, night = hour >= 22 || hour < 6, shift = hour >= 7.5 && hour < 17.5;
     const home = this.buildings.get(citizen.homeId)!, work = this.buildings.get(citizen.workId)!;
-    const homeBedAvailable = home.floorPlanProfile !== FLOOR_PLAN_PROFILE || this.availableHomeRestPoints(citizen, home).length > 0;
+    const homeBedAvailable = home.floorPlanProfile !== FLOOR_PLAN_PROFILE || this.availableHomeRestPoints(citizen, home, true);
     const anchors = this.walkingAnchors(citizen);
     const candidates: { destination: Building; activity: string; score: number; travel: number }[] = [];
     const add = (b: Building, activity: string, score: number) => { const target = this.buildingNode(b); const travel = Math.min(...anchors.map(a => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity))); if (finite(travel)) candidates.push({ destination: b, activity, score: score - Math.min(150, travel / 12), travel }); };

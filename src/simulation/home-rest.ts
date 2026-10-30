@@ -69,6 +69,12 @@ export function homeRestPoints(building: Building, floor: number): HomeRestPoint
   floors.set(floor, points); return copyPoints(points);
 }
 
+/** The cached bed-side points of a floor without copying them (read only; for the simulation's own hot queries). */
+export function homeRestPointsView(building: Building, floor: number): readonly HomeRestPoint[] {
+  const cached = pointCache.get(building)?.get(floor); if (cached) return cached;
+  homeRestPoints(building, floor); return pointCache.get(building)?.get(floor) ?? [];
+}
+
 export function homeRestPointAt(building: Building, position: Vec3, person: Pick<Player, 'role' | 'identities'>, pointId?: string): HomeRestPoint | null {
   const floor = Math.round((position.y - building.position.y - .6) / (building.height / building.floors));
   if (!Number.isInteger(floor) || !canAccessFloor(building, floor, person)) return null;

@@ -30,8 +30,12 @@ const cache = new WeakMap<Building, HomeRestPoint[]>();
 /** A home's mats: free floor spots of its rooms, floor by floor, at most its capacity less its beds (derived
  * once per home; same point shape as a bed side, side 'mat', each mat its own sleeping place). */
 export function homeMats(building: Building): HomeRestPoint[] {
+  return homeMatsView(building).map(p => ({ ...p, position: { ...p.position } }));
+}
+/** The cached mats without copying them (read only; for the simulation's own hot queries). */
+export function homeMatsView(building: Building): readonly HomeRestPoint[] {
   if (building.kind !== 'home') return [];
-  const cached = cache.get(building); if (cached) return cached.map(p => ({ ...p, position: { ...p.position } }));
+  const cached = cache.get(building); if (cached) return cached;
   const beds = Array.from({ length: building.floors }, (_, floor) => homeRestPoints(building, floor)).flat();
   const room = Math.max(0, Math.floor(building.capacity) - new Set(beds.map(b => b.bedId)).size), points: HomeRestPoint[] = [];
   for (let floor = 0; floor < building.floors && points.length < room; floor++) {
@@ -52,12 +56,12 @@ export function homeMats(building: Building): HomeRestPoint[] {
       points.push({ id, bedId: id, buildingId: building.id, floor, fixtureId: 'mat', side: 'mat', position });
     }
   }
-  cache.set(building, points); return points.map(p => ({ ...p, position: { ...p.position } }));
+  cache.set(building, points); return points;
 }
 
 /** The mat a resident stands on, if any (within the bed-side point radius, its floors accessible). */
 export function homeMatPointAt(building: Building, position: Vec3, person: Pick<Player, 'role' | 'identities'>): HomeRestPoint | null {
-  return homeMats(building).filter(p => Array.from({ length: p.floor + 1 }, (_, f) => f).every(f => canAccessFloor(building, f, person)))
+  return homeMatsView(building).filter(p => Array.from({ length: p.floor + 1 }, (_, f) => f).every(f => canAccessFloor(building, f, person)))
     .find(p => distance(p.position, position) <= POINT_RADIUS + EPS) ?? null;
 }
 
