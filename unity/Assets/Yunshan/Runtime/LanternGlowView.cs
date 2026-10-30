@@ -11,9 +11,9 @@ namespace Yunshan.Runtime
         readonly MeshRenderer renderer, pools; readonly Material material, poolMaterial;
         public int Count { get; }
 
-        public LanternGlowView(Transform parent, WorldDefinition world)
+        public LanternGlowView(Transform parent, WorldDefinition world, IReadOnlyDictionary<string, StudioAssetBounds> assets = null)
         {
-            var glows = LanternGlow.Of(world);
+            var glows = LanternGlow.Of(world, 36, assets);
             var vertices = new List<Vector3>(glows.Count * 4); var corners = new List<Vector2>(glows.Count * 4); var sizes = new List<Vector2>(glows.Count * 4); var indices = new List<int>(glows.Count * 6);
             Vector2[] quad = { new Vector2(-1, -1), new Vector2(1, -1), new Vector2(1, 1), new Vector2(-1, 1) };
             foreach (var g in glows)

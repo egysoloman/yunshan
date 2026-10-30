@@ -20,15 +20,16 @@ namespace Yunshan.Runtime
         {
             int n = (int)(TerrainChunk / TerrainStep) + 1;
             var data = new TerrainChunkData { Cx = cx, Cz = cz, N = n, X0 = cx * TerrainChunk, Z0 = cz * TerrainChunk, Heights = new float[n * n], Paved = new bool[n * n] };
-            // current-v9 (terrain.ts): the dense market town's ground within 11 m of a market building is flagstone paving.
+            // current-v9 (terrain.ts): the dense market town's ground within TownPavingMargin of a market building is flagstone paving.
+            const double margin = WoodlandLayout.TownPavingMargin;
             var markets = StreetLayouts.IsDenseMarketLayout(world.LayoutVersion)
-                ? world.Buildings.Where(b => b.DistrictId == "market" && b.Position.X + b.Width / 2 + 11 >= data.X0 && b.Position.X - b.Width / 2 - 11 <= data.X0 + TerrainChunk && b.Position.Z + b.Depth / 2 + 11 >= data.Z0 && b.Position.Z - b.Depth / 2 - 11 <= data.Z0 + TerrainChunk).ToList()
+                ? world.Buildings.Where(b => b.DistrictId == "market" && b.Position.X + b.Width / 2 + margin >= data.X0 && b.Position.X - b.Width / 2 - margin <= data.X0 + TerrainChunk && b.Position.Z + b.Depth / 2 + margin >= data.Z0 && b.Position.Z - b.Depth / 2 - margin <= data.Z0 + TerrainChunk).ToList()
                 : new List<Building>();
             for (int j = 0; j < n; j++) for (int i = 0; i < n; i++)
                 {
                     double x = data.X0 + i * TerrainStep, z = data.Z0 + j * TerrainStep;
                     data.Heights[j * n + i] = (float)World.TerrainHeight(world, x, z);
-                    data.Paved[j * n + i] = data.Heights[j * n + i] < 465 && markets.Any(b => Math.Abs(x - b.Position.X) < b.Width / 2 + 11 && Math.Abs(z - b.Position.Z) < b.Depth / 2 + 11);
+                    data.Paved[j * n + i] = data.Heights[j * n + i] < 465 && markets.Any(b => Math.Abs(x - b.Position.X) < b.Width / 2 + margin && Math.Abs(z - b.Position.Z) < b.Depth / 2 + margin);
                 }
             return data;
         }

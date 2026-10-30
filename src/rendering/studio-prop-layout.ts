@@ -3,6 +3,8 @@ import { pavedStreet } from '../transport-geometry';
 import { insidePavedDeck, pavedDecks, type PavedDeck } from './network-structures';
 import { contains, getBuildingBody, getFloorPlanFixtures, getFloorPlanSlabRegions, wallPanels, type FloorFixture, type Rect } from '../architecture-floor-plan';
 import manifest from './studio-assets.json';
+import { LANTERN_SPAN } from './lantern-strings';
+import { isDenseMarketLayout } from '../street-layouts';
 
 /** One imported voxel-studio GLB. Bounds are measured from the file at import. */
 export interface StudioAsset {
@@ -258,6 +260,82 @@ export function studioNetworkDetailPlacements(world: DetailWorld, deckWidth: (ed
       supportRemainder = (supportRemainder + length) % interval;
     }
   }
+  return placements;
+}
+
+/** current-v9 town street dressing (display only: no collision, stock or
+ * walking surface comes from it). Along the market district's streets a
+ * stone lamp (ENV-104) stands just outside each kerb every LANTERN_SPAN, offset
+ * from the lantern-string poles (at the nearest clear spot within `shift` m, `apart` m from any other lamp), its long side along the street and its
+ * front toward the carriageway; beside each shop door a crate (LIFE-072) with
+ * a goods box on it (LIFE-071) stands against the facade. A piece is left out
+ * when any corner of it would lie inside a building footprint (+0.2 m), on
+ * another paved street's deck, or within 2.5 m of a door. */
+/** `light` is the centre of the lamp's glass box (景观灯罩玻璃) in the model's own space, where its glow is drawn. */
+export const TOWN_STREET_LAMP = { asset: 'ENV-104', kerb: .4, shift: 8, apart: 6, light: [2.2, 3.4, .6] } as const;
+/** World position of a town lamp placement's light. */
+export function townLampLight(p: StudioStaticPlacement) {
+  const [x, y, z] = TOWN_STREET_LAMP.light, c = Math.cos(p.yaw), s = Math.sin(p.yaw);
+  return { x: p.position.x + x * c + z * s, y: p.position.y + y, z: p.position.z - x * s + z * c };
+}
+export const TOWN_DOOR_GOODS = { base: 'LIFE-072', top: 'LIFE-071', along: 5.7, out: .15 } as const;
+type TownWorld = { layoutVersion?: string; buildings: readonly Building[]; nodes: readonly { id: string; districtId: string }[]; edges: readonly { id: string; mode: string; from: string; to: string; points: readonly { x: number; y: number; z: number }[] }[] };
+export function studioTownStreetPlacements(world: TownWorld, deckWidth: (edge: any) => number, groundHeight: (x: number, z: number) => number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
+  if (!isDenseMarketLayout(world.layoutVersion)) return [];
+  const placements: StudioStaticPlacement[] = [], decks = pavedDecks(world as unknown as WorldDefinition);
+  const nodes = new Map(world.nodes.map(n => [n.id, n]));
+  const blocked = (x: number, y: number, z: number, selfId: string) => insidePavedDeck({ x, y, z }, decks, selfId) || world.buildings.some(b => {
+    const dx = x - b.position.x, dz = z - b.position.z, reach = b.width + b.depth + 8;
+    if (dx * dx + dz * dz > reach * reach) return false;
+    const c = Math.cos(b.rotation), s = Math.sin(b.rotation), lx = dx * c - dz * s, lz = dx * s + dz * c, ddx = x - b.door.x, ddz = z - b.door.z;
+    return Math.abs(lx) < b.width / 2 + .2 && Math.abs(lz) < b.depth / 2 + .2 || ddx * ddx + ddz * ddz < 2.5 * 2.5;
+  });
+  /** Stands a model with its min-corner footprint centred at (x, z) on the ground, +Z turned to yaw, if every corner is clear. */
+  const stand = (asset: StudioAsset, id: string, x: number, z: number, yaw: number, selfId: string, lift = 0) => {
+    const { min, max } = asset.boundsM, hw = (max[0] - min[0]) / 2, hd = (max[2] - min[2]) / 2, c = Math.cos(yaw), s = Math.sin(yaw), y = groundHeight(x, z);
+    for (const [u, v] of [[-hw, -hd], [hw, -hd], [hw, hd], [-hw, hd]]) if (blocked(x + u * c + v * s, y, z - u * s + v * c, selfId)) return false;
+    const mx = (min[0] + max[0]) / 2, mz = (min[2] + max[2]) / 2;
+    placements.push({ asset: asset.id, id, position: { x: x - (mx * c + mz * s), y: y + lift - min[1], z: z - (-mx * s + mz * c) }, yaw });
+    return true;
+  };
+  const lamp = assets.get(TOWN_STREET_LAMP.asset), lamps: { x: number; z: number }[] = [];
+  if (lamp) for (const edge of world.edges) {
+    if (edge.mode !== 'road' || edge.id.includes('runway') || nodes.get(edge.from)?.districtId !== 'market' || nodes.get(edge.to)?.districtId !== 'market') continue;
+    const offset = deckWidth(edge) / 2 + TOWN_STREET_LAMP.kerb + (lamp.boundsM.max[2] - lamp.boundsM.min[2]) / 2;
+    // The lantern strings' poles stand at LANTERN_SPAN / 2 + k · LANTERN_SPAN along the edge; lamp slots at k · LANTERN_SPAN
+    // (a town street is cut into one short edge per shop, so most edges have one slot, at their start junction).
+    let carry = 0;
+    for (let i = 1; i < edge.points.length; i++) {
+      const a = edge.points[i - 1], b = edge.points[i], len = Math.hypot(b.x - a.x, b.z - a.z);
+      if (len < 1e-6) continue;
+      const nx = -(b.z - a.z) / len, nz = (b.x - a.x) / len;
+      for (; carry <= len; carry += LANTERN_SPAN) for (const side of [1, -1]) {
+        // Door paths cross most of a shop row's kerb: the lamp takes the nearest clear spot within TOWN_STREET_LAMP.shift of its slot on this segment.
+        for (let k = 0; k <= 2 * TOWN_STREET_LAMP.shift; k++) {
+          const along = carry + (k % 2 ? 1 : -1) * Math.ceil(k / 2); if (along < 0 || along > len) continue;
+          const t = along / len, x = a.x + (b.x - a.x) * t + nx * offset * side, z = a.z + (b.z - a.z) * t + nz * offset * side;
+          if (lamps.some(p => (p.x - x) ** 2 + (p.z - z) ** 2 < TOWN_STREET_LAMP.apart ** 2)) continue;
+          if (stand(lamp, `${edge.id}:town-lamp:${i}:${Math.round(carry * 1000)}:${side}`, x, z, Math.atan2(-side * nx, -side * nz), edge.id)) { lamps.push({ x, z }); break; }
+        }
+      }
+      carry -= len;
+    }
+  }
+  const base = assets.get(TOWN_DOOR_GOODS.base), top = assets.get(TOWN_DOOR_GOODS.top);
+  if (base && top && top.boundsM.max[0] - top.boundsM.min[0] <= base.boundsM.max[0] - base.boundsM.min[0] && top.boundsM.max[2] - top.boundsM.min[2] <= base.boundsM.max[2] - base.boundsM.min[2])
+    for (const b of world.buildings) {
+      if (b.kind !== 'market' || b.districtId !== 'market') continue;
+      // The door's outward normal in the building frame: the footprint side it lies on.
+      const c = Math.cos(b.rotation), s = Math.sin(b.rotation), dx = b.door.x - b.position.x, dz = b.door.z - b.position.z, lx = dx * c - dz * s, lz = dx * s + dz * c;
+      const onX = Math.abs(Math.abs(lx) - b.width / 2) < Math.abs(Math.abs(lz) - b.depth / 2), ox = onX ? Math.sign(lx) : 0, oz = onX ? 0 : Math.sign(lz);
+      // Back to world: local (u, v) → world (u·c + v·s, −u·s + v·c).
+      const nwx = ox * c + oz * s, nwz = -ox * s + oz * c, twx = -nwz, twz = nwx, face = onX ? b.width / 2 : b.depth / 2;
+      const wall = { x: b.position.x + (onX ? ox * face : lx) * c + (onX ? lz : oz * face) * s, z: b.position.z - (onX ? ox * face : lx) * s + (onX ? lz : oz * face) * c };
+      const depth = base.boundsM.max[2] - base.boundsM.min[2], yaw = Math.atan2(nwx, nwz), side = studioDecorSeed(b.id) % 2 ? 1 : -1;
+      // Just beyond the footprint margin, against the shop front, to one side of the door.
+      const x = wall.x + nwx * (.2 + TOWN_DOOR_GOODS.out + depth / 2) + twx * TOWN_DOOR_GOODS.along * side, z = wall.z + nwz * (.2 + TOWN_DOOR_GOODS.out + depth / 2) + twz * TOWN_DOOR_GOODS.along * side;
+      if (stand(base, `${b.id}:door-goods:base`, x, z, yaw, '')) stand(top, `${b.id}:door-goods:top`, x, z, yaw, '', base.boundsM.max[1] - base.boundsM.min[1]);
+    }
   return placements;
 }
 

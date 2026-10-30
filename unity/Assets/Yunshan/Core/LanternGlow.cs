@@ -1,6 +1,6 @@
 // Port of src/rendering/lantern-glow.ts: where the city's lanterns glow after
 // dusk (a pair beside every door, eave corners and mid-eaves of low buildings,
-// street lamps along roads, and the lantern strings). Display only; a pure
+// street lamps along roads, the lantern strings and current-v9's town lamps). Display only; a pure
 // function of the world.
 using System.Collections.Generic;
 
@@ -12,7 +12,8 @@ namespace Yunshan.Core
     {
         static readonly HashSet<string> NoEave = new HashSet<string> { "station", "airport", "starport", "core", "facility" };
 
-        public static List<LanternGlowPoint> Of(WorldDefinition world, double streetSpacing = 36)
+        /// <summary>With the studio asset bounds, current-v9's modelled town lamps (StudioPropLayout.TownStreetPlacements) glow as strings too.</summary>
+        public static List<LanternGlowPoint> Of(WorldDefinition world, double streetSpacing = 36, IReadOnlyDictionary<string, StudioAssetBounds> assets = null)
         {
             var output = new List<LanternGlowPoint>();
             foreach (var b in world.Buildings)
@@ -38,6 +39,8 @@ namespace Yunshan.Core
             }
             foreach (var list in new[] { LanternStrings.Of(world), LanternStrings.Terrace(world) })
                 foreach (var s in list) foreach (var l in s.Lanterns) output.Add(new LanternGlowPoint { X = l.X, Y = l.Y, Z = l.Z, Kind = "string" });
+            if (assets != null) foreach (var lamp in StudioPropLayout.TownStreetPlacements(world, assets)) if (lamp.Asset == StudioPropLayout.TownLampAsset)
+                { var l = StudioPropLayout.TownLampLightOf(lamp); output.Add(new LanternGlowPoint { X = l.X, Y = l.Y, Z = l.Z, Kind = "string" }); }
             return output;
         }
 

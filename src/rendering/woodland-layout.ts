@@ -16,6 +16,9 @@ export const SLOPE_GARDEN_SPACING = 12, SLOPE_GARDEN_MAX = 7000;
 /** current-v9 town gardens: open ground between TOWN_GARDEN_NEAR and TOWN_GARDEN_FAR m from a market building
  * (nearer is the town's paving) is planted even where it is flat. */
 export const TOWN_GARDEN_NEAR = 11, TOWN_GARDEN_FAR = 40;
+/** current-v9: ground within TOWN_PAVING_MARGIN m of a market building is the town's flagstone paving
+ * (the gardens' trees stand in it as court trees). Display only. */
+export const TOWN_PAVING_MARGIN = 24;
 /** Species index (0–8, as the original woodland) → studio tree model. */
 export const WOODLAND_SPECIES_ASSETS = ['ENV-057', 'ENV-056', 'ENV-050', 'ENV-054', 'ENV-054', 'ENV-055', 'ENV-055', 'ENV-050', 'ENV-050'] as const;
 export const WOODLAND_SHRUB_ASSET = 'ENV-060';

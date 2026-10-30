@@ -15,6 +15,8 @@ namespace Yunshan.Core
         public const double SlopeGardenSpacing = 12; public const int SlopeGardenMax = 7000;
         /// <summary>current-v9 town gardens: open ground this far from a market building (nearer is paving) is planted even where flat.</summary>
         public const double TownGardenNear = 11, TownGardenFar = 40;
+        /// <summary>current-v9: ground within this many metres of a market building is the town's flagstone paving (terrain.ts).</summary>
+        public const double TownPavingMargin = 24;
         public static readonly string[] SpeciesAssets = { "ENV-057", "ENV-056", "ENV-050", "ENV-054", "ENV-054", "ENV-055", "ENV-055", "ENV-050", "ENV-050" };
         public const string ShrubAsset = "ENV-060";
         public static readonly Dictionary<string, double> AssetHeights = new Dictionary<string, double> { ["ENV-050"] = 16, ["ENV-054"] = 14, ["ENV-055"] = 14, ["ENV-056"] = 8.4, ["ENV-057"] = 10, ["ENV-060"] = 1.8 };

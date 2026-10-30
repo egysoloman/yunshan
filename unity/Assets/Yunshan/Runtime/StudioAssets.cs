@@ -81,7 +81,7 @@ namespace Yunshan.Runtime
                     var template = new GameObject($"{entry.id} {entry.name}");
                     template.transform.SetParent(templateRoot, false);
                     if (!await gltf.InstantiateMainSceneAsync(template.transform)) throw new InvalidOperationException("glTF instantiate failed");
-                    templates[entry.id] = template; Loaded.Add(entry.id); CollectEmission(template);
+                    templates[entry.id] = template; Loaded.Add(entry.id); CollectEmission(template, entry.id);
                 }
                 catch (Exception error) { Failed.Add(entry.id); Debug.LogWarning($"云山：{entry.id} 加载失败，保留程序几何：{error.Message}"); }
             }
@@ -95,12 +95,19 @@ namespace Yunshan.Runtime
         readonly List<(Material material, string property, Color authored)> emissive = new List<(Material, string, Color)>();
         float lastFactor = -1;
 
-        void CollectEmission(GameObject template)
+        /// <summary>The town lamp's glass (ENV-104, material 景观灯罩玻璃) has no authored glow: it is lit
+        /// warm as a lamp, as the web TOWN_LAMP_GLASS (#ffc27a × 1.6), and scaled like authored glow.</summary>
+        static readonly Color TownLampGlass = new Color(1f, .7608f, .4784f) * 1.6f;
+
+        void CollectEmission(GameObject template, string id)
         {
             foreach (var renderer in template.GetComponentsInChildren<Renderer>(true))
                 foreach (var material in renderer.sharedMaterials)
                 {
                     if (material == null) continue;
+                    if (id == StudioPropLayout.TownLampAsset && material.name.StartsWith("景观灯罩玻璃"))
+                        foreach (var property in new[] { "emissiveFactor", "_EmissionColor" })
+                            if (material.HasProperty(property)) { material.EnableKeyword("_EMISSION"); material.SetColor(property, TownLampGlass); break; }
                     foreach (var property in new[] { "emissiveFactor", "_EmissionColor" })
                         if (material.HasProperty(property)) { var color = material.GetColor(property); if (color.maxColorComponent > 0) emissive.Add((material, property, color)); break; }
                 }

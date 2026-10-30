@@ -117,6 +117,9 @@ namespace Yunshan.Runtime
                 var deckRoot = new GameObject("体素工坊轨床与桥面").transform; deckRoot.SetParent(transform, false);
                 foreach (var d in decks) studio.Place(d.Asset, deckRoot, d.Position, d.Yaw, 1, d.Pitch);
                 foreach (var d in details) studio.Place(d.Asset, deckRoot, d.Position, d.Yaw, 1);
+                // current-v9 town streets: stone lamps and shop-door goods (display only).
+                var townRoot = new GameObject("体素工坊街灯与货箱").transform; townRoot.SetParent(transform, false);
+                foreach (var d in await Task.Run(() => StudioPropLayout.TownStreetPlacements(world, studio.Bounds).Where(p => studio.Has(p.Asset)).ToList())) studio.Place(d.Asset, townRoot, d.Position, d.Yaw, 1);
 
                 status = "楼宇远景……";
                 var farRoot = new GameObject("楼宇远景").transform; farRoot.SetParent(transform, false);
@@ -154,7 +157,7 @@ namespace Yunshan.Runtime
                 if (signFont == null) signFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
                 stationSigns = new StationSignPool(stationRoot, world, signFont);
                 doorwayGlow = new DoorwayGlowView(stationRoot, world);
-                lanternGlow = new LanternGlowView(stationRoot, world);
+                lanternGlow = new LanternGlowView(stationRoot, world, studio?.Bounds);
                 rain = new RainView(stationRoot);
                 _ = new DistrictBannerView(stationRoot, world, signFont);
                 districtTags = new DistrictTagView(stationRoot, world, signFont);

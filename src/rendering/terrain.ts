@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { Quality, Vec3, WorldDefinition } from '../types';
 import { getWaterfallPath, terrainHeight } from '../world';
-import { riverDressing, woodlandLayout, type WoodlandShrub, type WoodlandTree } from './woodland-layout';
+import { riverDressing, TOWN_PAVING_MARGIN, woodlandLayout, type WoodlandShrub, type WoodlandTree } from './woodland-layout';
 import { terraceMasonry, MASONRY_ALPINE, MASONRY_COLOR, COPING_COLOR, COPING_DEPTH, COPING_LIP, COPING_RISE, COPING_WIDTH } from './terrace-masonry';
 import { isDenseMarketLayout } from '../street-layouts';
 
@@ -125,7 +125,7 @@ export function buildLandscape(world: WorldDefinition): {
   const indexItem = <T>(map: Map<string, T[]>, item: T, ax: number, az: number, bx: number, bz: number, margin: number) => {
     for (let x = Math.floor((Math.min(ax, bx) - margin) / TILE); x <= Math.floor((Math.max(ax, bx) + margin) / TILE); x++) for (let z = Math.floor((Math.min(az, bz) - margin) / TILE); z <= Math.floor((Math.max(az, bz) + margin) / TILE); z++) { const key = `${x}:${z}`, list = map.get(key) ?? []; list.push(item); map.set(key, list); }
   };
-  for (const b of world.buildings) indexItem(buildings, b, b.position.x - b.width / 2, b.position.z - b.depth / 2, b.position.x + b.width / 2, b.position.z + b.depth / 2, 12);
+  for (const b of world.buildings) indexItem(buildings, b, b.position.x - b.width / 2, b.position.z - b.depth / 2, b.position.x + b.width / 2, b.position.z + b.depth / 2, Math.max(12, TOWN_PAVING_MARGIN));
   const roadList: Segment[] = [];
   for (const edge of world.edges) if (['road', 'bridge', 'lightRail'].includes(edge.mode)) for (let i = 1; i < edge.points.length; i++) {
     const segment = { a: edge.points[i - 1], b: edge.points[i], width: edge.id.includes('airport-runway-strip') ? 22 : 5, cutting: edge.mode === 'road' || edge.mode === 'bridge' && edge.from !== 'core-lift-top', bridge: edge.mode === 'bridge' };
@@ -159,12 +159,12 @@ export function buildLandscape(world: WorldDefinition): {
     color.lerp(palette.gravel.clone().lerp(palette.wet, .32 + field * .08), Math.max(wetness, plunge));
     return color.multiplyScalar(.96 + broad * .06);
   }
-  // current-v9: the dense market town's ground (within 11 m of a market building) is flagstone paving.
+  // current-v9: the dense market town's ground (within TOWN_PAVING_MARGIN of a market building) is flagstone paving.
   const paving = new THREE.Color('#a29d8d'), denseTown = isDenseMarketLayout((world as WorldDefinition & { layoutVersion?: string }).layoutVersion);
   function paved(x: number, z: number, y: number) {
     if (!denseTown || y >= MASONRY_ALPINE) return false;
     const r = riverAt(x, z); if (r.distance < r.width + 4) return false;
-    if ((buildings.get(bucket(x, z)) ?? []).some(b => b.districtId === 'market' && Math.abs(x - b.position.x) < b.width / 2 + 11 && Math.abs(z - b.position.z) < b.depth / 2 + 11)) return true;
+    if ((buildings.get(bucket(x, z)) ?? []).some(b => b.districtId === 'market' && Math.abs(x - b.position.x) < b.width / 2 + TOWN_PAVING_MARGIN && Math.abs(z - b.position.z) < b.depth / 2 + TOWN_PAVING_MARGIN)) return true;
     return false;
   }
   function mesh(name: string, data: Surface, parent: THREE.Group) {

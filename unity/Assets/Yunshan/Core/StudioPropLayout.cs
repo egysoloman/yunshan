@@ -264,6 +264,76 @@ namespace Yunshan.Core
         }
 
 
+        /// <summary>Port of studioTownStreetPlacements (current-v9 only, display only): ENV-104 stone lamps outside
+        /// the market district's kerbs every LanternStrings.Span (nearest clear spot within TownLampShift m, TownLampApart m
+        /// from other lamps), and a LIFE-072 crate with a LIFE-071 box beside each shop door. A piece is left out when a
+        /// corner would lie in a building footprint (+0.2 m), on another paved deck or within 2.5 m of a door.</summary>
+        public const string TownLampAsset = "ENV-104", TownGoodsBase = "LIFE-072", TownGoodsTop = "LIFE-071";
+        public const double TownLampKerb = .4, TownLampApart = 6, TownGoodsAlong = 5.7, TownGoodsOut = .15; public const int TownLampShift = 8;
+        /// <summary>Centre of the lamp's glass box in model space (its glow point).</summary>
+        public static readonly double[] TownLampLight = { 2.2, 3.4, .6 };
+        public static Vec3 TownLampLightOf(StudioStaticPlacement p)
+        {
+            double c = JsMath.Cos(p.Yaw), s = JsMath.Sin(p.Yaw), x = TownLampLight[0], z = TownLampLight[2];
+            return new Vec3(p.Position.X + x * c + z * s, p.Position.Y + TownLampLight[1], p.Position.Z - x * s + z * c);
+        }
+        public static List<StudioStaticPlacement> TownStreetPlacements(WorldDefinition world, IReadOnlyDictionary<string, StudioAssetBounds> assets)
+        {
+            var result = new List<StudioStaticPlacement>();
+            if (!StreetLayouts.IsDenseMarketLayout(world.LayoutVersion)) return result;
+            var decks = NetworkStructures.PavedDecks(world); var nodes = world.Nodes.ToDictionary(n => n.Id);
+            bool Blocked(double x, double y, double z, string selfId) => NetworkStructures.InsidePavedDeck(new Vec3(x, y, z), decks, selfId) || world.Buildings.Any(b =>
+            {
+                double dx = x - b.Position.X, dz = z - b.Position.Z, reach = b.Width + b.Depth + 8;
+                if (dx * dx + dz * dz > reach * reach) return false;
+                double c = JsMath.Cos(b.Rotation), s = JsMath.Sin(b.Rotation), lx = dx * c - dz * s, lz = dx * s + dz * c, ddx = x - b.Door.X, ddz = z - b.Door.Z;
+                return Math.Abs(lx) < b.Width / 2 + .2 && Math.Abs(lz) < b.Depth / 2 + .2 || ddx * ddx + ddz * ddz < 2.5 * 2.5;
+            });
+            bool Stand(string assetId, StudioAssetBounds asset, string id, double x, double z, double yaw, string selfId, double lift = 0)
+            {
+                double hw = (asset.Max[0] - asset.Min[0]) / 2, hd = (asset.Max[2] - asset.Min[2]) / 2, c = JsMath.Cos(yaw), s = JsMath.Sin(yaw), y = World.TerrainHeight(world, x, z);
+                foreach (var (u, v) in new[] { (-hw, -hd), (hw, -hd), (hw, hd), (-hw, hd) }) if (Blocked(x + u * c + v * s, y, z - u * s + v * c, selfId)) return false;
+                double mx = (asset.Min[0] + asset.Max[0]) / 2, mz = (asset.Min[2] + asset.Max[2]) / 2;
+                result.Add(new StudioStaticPlacement { Asset = assetId, Id = id, Position = new Vec3(x - (mx * c + mz * s), y + lift - asset.Min[1], z - (-mx * s + mz * c)), Yaw = yaw });
+                return true;
+            }
+            var lamps = new List<(double X, double Z)>();
+            if (assets.TryGetValue(TownLampAsset, out var lamp))
+                foreach (var edge in world.Edges)
+                {
+                    if (edge.Mode != "road" || edge.Id.Contains("runway") || !nodes.TryGetValue(edge.From, out var from) || from.DistrictId != "market" || !nodes.TryGetValue(edge.To, out var to) || to.DistrictId != "market") continue;
+                    double offset = TransportGeometry.DeckWidth(edge) / 2 + TownLampKerb + (lamp.Max[2] - lamp.Min[2]) / 2, carry = 0;
+                    for (int i = 1; i < edge.Points.Count; i++)
+                    {
+                        Vec3 a = edge.Points[i - 1], b = edge.Points[i]; double len = JsMath.Hypot(b.X - a.X, b.Z - a.Z);
+                        if (len < 1e-6) continue;
+                        double nx = -(b.Z - a.Z) / len, nz = (b.X - a.X) / len;
+                        for (; carry <= len; carry += LanternStrings.Span) foreach (var side in new[] { 1, -1 })
+                            for (int k = 0; k <= 2 * TownLampShift; k++)
+                            {
+                                double along = carry + (k % 2 != 0 ? 1 : -1) * Math.Ceiling(k / 2.0); if (along < 0 || along > len) continue;
+                                double t = along / len, x = a.X + (b.X - a.X) * t + nx * offset * side, z = a.Z + (b.Z - a.Z) * t + nz * offset * side;
+                                if (lamps.Any(p => (p.X - x) * (p.X - x) + (p.Z - z) * (p.Z - z) < TownLampApart * TownLampApart)) continue;
+                                if (Stand(TownLampAsset, lamp, $"{edge.Id}:town-lamp:{i}:{JsMath.ToJsString(JsMath.Round(carry * 1000))}:{side}", x, z, JsMath.Atan2(-side * nx, -side * nz), edge.Id)) { lamps.Add((x, z)); break; }
+                            }
+                        carry -= len;
+                    }
+                }
+            if (assets.TryGetValue(TownGoodsBase, out var crate) && assets.TryGetValue(TownGoodsTop, out var box) && box.Max[0] - box.Min[0] <= crate.Max[0] - crate.Min[0] && box.Max[2] - box.Min[2] <= crate.Max[2] - crate.Min[2])
+                foreach (var b in world.Buildings)
+                {
+                    if (b.Kind != "market" || b.DistrictId != "market") continue;
+                    double c = JsMath.Cos(b.Rotation), s = JsMath.Sin(b.Rotation), dx = b.Door.X - b.Position.X, dz = b.Door.Z - b.Position.Z, lx = dx * c - dz * s, lz = dx * s + dz * c;
+                    bool onX = Math.Abs(Math.Abs(lx) - b.Width / 2) < Math.Abs(Math.Abs(lz) - b.Depth / 2); double ox = onX ? Math.Sign(lx) : 0, oz = onX ? 0 : Math.Sign(lz);
+                    double nwx = ox * c + oz * s, nwz = -ox * s + oz * c, twx = -nwz, twz = nwx, face = onX ? b.Width / 2 : b.Depth / 2;
+                    double wu = onX ? ox * face : lx, wv = onX ? lz : oz * face, wallX = b.Position.X + wu * c + wv * s, wallZ = b.Position.Z - wu * s + wv * c;
+                    double depth = crate.Max[2] - crate.Min[2], yaw = JsMath.Atan2(nwx, nwz); int side = DecorSeed(b.Id) % 2 != 0 ? 1 : -1;
+                    double x = wallX + nwx * (.2 + TownGoodsOut + depth / 2) + twx * TownGoodsAlong * side, z = wallZ + nwz * (.2 + TownGoodsOut + depth / 2) + twz * TownGoodsAlong * side;
+                    if (Stand(TownGoodsBase, crate, $"{b.Id}:door-goods:base", x, z, yaw, "")) Stand(TownGoodsTop, box, $"{b.Id}:door-goods:top", x, z, yaw, "", crate.Max[1] - crate.Min[1]);
+                }
+            return result;
+        }
+
         // Port of studioDecorPlacements (display-only décor in free room and courtyard corners).
         public sealed class DecorSet { public string Base; public string[] Tops; public string Above; public string[] Wear; }
         static DecorSet Set(string b, string[] tops = null, string above = null, string[] wear = null) => new DecorSet { Base = b, Tops = tops ?? new string[0], Above = above, Wear = wear ?? new string[0] };

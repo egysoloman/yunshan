@@ -3,13 +3,16 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Building, Vec3, WorldDefinition } from '../types';
 import { deckWidth } from '../transport-geometry';
 import { terrainHeight } from '../world';
-import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, STUDIO_DECOR, STUDIO_COURTYARD_DECOR, STUDIO_FACADE_ASSETS, FACADE_DOOR_SIDE, FACADE_WALL, studioBuildingPlacements, studioLandmarkPlacements, studioNetworkDetailPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
+import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, STUDIO_DECOR, STUDIO_COURTYARD_DECOR, STUDIO_FACADE_ASSETS, FACADE_DOOR_SIDE, FACADE_WALL, studioBuildingPlacements, studioLandmarkPlacements, studioNetworkDetailPlacements, studioStationPlacements, studioTownStreetPlacements, TOWN_STREET_LAMP, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
 
 /** Fraction of an authored emissive maximum shown for a supply and daylight. */
 export function studioEmissiveFactor(daylight: number, power: number): number {
   const p = Math.min(1, Math.max(0, power)), d = Math.min(1, Math.max(0, daylight));
   return p * (.35 + .65 * (1 - d));
 }
+
+/** The town lamp's glass (material 景观灯罩玻璃 of ENV-104) glows warm after dusk; display only. */
+export const TOWN_LAMP_GLASS = { material: '景观灯罩玻璃', emissive: '#ffc27a', intensity: 1.6 } as const;
 
 interface AssetDraw { asset: StudioAsset; meshes: { mesh: THREE.InstancedMesh; bake: THREE.Matrix4 }[]; loaded: boolean }
 
@@ -36,7 +39,7 @@ export class StudioPropPool {
     for (const building of world.buildings) this.buildings.set(building.id, building);
     // Deck tiles are drawn everywhere (they replace the network's deck boxes); the rest by distance.
     const tiles = studioDeckTilePlacements(world, deckWidth);
-    this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world), ...tiles, ...studioNetworkDetailPlacements(world, deckWidth, (x, z) => terrainHeight(world, x, z))];
+    this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world), ...tiles, ...studioNetworkDetailPlacements(world, deckWidth, (x, z) => terrainHeight(world, x, z)), ...studioTownStreetPlacements(world, deckWidth, (x, z) => terrainHeight(world, x, z))];
     for (const tile of tiles) this.permanentCount.set(tile.asset, (this.permanentCount.get(tile.asset) ?? 0) + 1);
     // Woodland models belong to WoodlandModelPool; this pool loads only what it places.
     const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...Object.values(STUDIO_TABLETOP) as string[], ...this.statics.map(p => p.asset),
@@ -66,6 +69,8 @@ export class StudioPropPool {
           meshes.push({ mesh, bake: object.matrixWorld.clone() });
         });
         if (!meshes.length) throw new Error('no meshes');
+        // The town lamp's glass has no authored glow: it is lit as a lamp (warm, scaled like authored glow below).
+        if (draw.asset.id === TOWN_STREET_LAMP.asset) for (const { mesh } of meshes) for (const material of [mesh.material].flat()) if (material instanceof THREE.MeshStandardMaterial && material.name === TOWN_LAMP_GLASS.material) { material.emissive.set(TOWN_LAMP_GLASS.emissive); material.emissiveIntensity = TOWN_LAMP_GLASS.intensity; }
         // Authored glow is a maximum; setLighting scales it by real supply.
         for (const { mesh } of meshes) for (const material of [mesh.material].flat()) if (material instanceof THREE.MeshStandardMaterial && material.emissiveIntensity > 0 && !material.emissive.equals(new THREE.Color(0, 0, 0))) material.userData.authoredEmissive = material.emissiveIntensity;
         this.applyLighting(meshes.map(m => m.mesh));

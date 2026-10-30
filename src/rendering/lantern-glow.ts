@@ -1,5 +1,8 @@
 import type { WorldDefinition } from '../types';
 import { lanternStrings, terraceLanternStrings } from './lantern-strings';
+import { studioTownStreetPlacements, townLampLight, TOWN_STREET_LAMP } from './studio-prop-layout';
+import { deckWidth } from '../transport-geometry';
+import { terrainHeight } from '../world';
 
 /** R1 W5 (docs/设计/美术与渲染改造方案.md §2.5, S6): display-only far glow of
  * lanterns. Near the camera the modelled lanterns are visible; at drone
@@ -35,5 +38,7 @@ export function lanternGlows(world: WorldDefinition, streetSpacing = 36): Lanter
     }
   }
   for (const string of [...lanternStrings(world), ...terraceLanternStrings(world)]) for (const lantern of string.lanterns) out.push({ ...lantern, kind: 'string' });
+  // current-v9 town lamps are modelled too (studioTownStreetPlacements): their glass glows like a string lantern.
+  for (const lamp of studioTownStreetPlacements(world, deckWidth, (x, z) => terrainHeight(world, x, z))) if (lamp.asset === TOWN_STREET_LAMP.asset) out.push({ ...townLampLight(lamp), kind: 'string' });
   return out;
 }
