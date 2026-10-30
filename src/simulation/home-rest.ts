@@ -10,7 +10,8 @@ export const HOME_REST_FUN_PER_MINUTE = 12 / HOME_REST_MINUTES;
 export const HOME_REST_HISTORY_LIMIT = 64;
 export interface HomeRestPoint {
   id: string; bedId: string; buildingId: string; floor: number; fixtureId: string;
-  side: 'x-minus' | 'x-plus' | 'z-minus' | 'z-plus'; position: Vec3;
+  /** 'mat': a sleeping mat on the floor (home-mats.ts, NPCs of declared cities only). */
+  side: 'x-minus' | 'x-plus' | 'z-minus' | 'z-plus' | 'mat'; position: Vec3;
 }
 export interface HomeRestSession {
   id: string; buildingId: string; bedId: string; floor: number; pointId: string; point: Vec3;
