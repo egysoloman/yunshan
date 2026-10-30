@@ -16,6 +16,8 @@ export interface RoadworksAccounting {
   activate(version?: 1 | 2): void;
   isCanonicalRoadworkPresence(event: object): boolean;
   travelCost(citizenId: string, nodeId: string, point: Vec3): number;
+  /** repair-route-v1: walking cost between two network nodes (0 when the policy is not declared). */
+  carryCost(fromNodeId: string, toNodeId: string): number;
   takePublicEscrow(request: RoadBudgetEscrowRequest): boolean;
   returnPublicEscrow(request: RoadBudgetEscrowRequest): number;
   accrueTax(amount: number): void;
@@ -126,9 +128,11 @@ function acceptWorker(sim: Simulation, job: RoadRepairJob, accounting: Roadworks
       const quote = sim.quoteSupply(shop.id, MATERIALS), gross = quote.unitPrice;
       if (quote.quantity < MATERIALS || gross + REQUIRED_MINUTES * rate > job.escrow + EPS || sim.shopFunds(shop) + gross * (1 - sim.state.taxRate) > 1e9) continue;
       const node = [...sim.worldDefinition.nodes].sort((a,b) => distance(a.position, site.door) - distance(b.position, site.door) || a.id.localeCompare(b.id))[0];
+      // repair-route-v1 adds the carry leg (0 otherwise), so worker and counter are chosen by the whole trip.
+      const carry = accounting.carryCost(node.id, job.worksiteNodeId); if (!finite(carry)) continue;
       const points = supplierPoints(site);
       for (const point of points.filter(point => point.purpose === 'sale' && canAccessFloor(site, point.floor, identity(actor)))) {
-        const cost = accounting.travelCost(actor.id, node.id, point.position);
+        const cost = accounting.travelCost(actor.id, node.id, point.position) + carry;
         if (!finite(cost) || !footClear(sim, point.position) || !sim.isAtBuildingFunctionPoint(site, point.position, 'sale', identity(actor))) continue;
         if (!best || cost < best.cost) best = { actor, shopId: shop.id, nodeId: node.id, point: copy(point.position), cost, rate };
       }
