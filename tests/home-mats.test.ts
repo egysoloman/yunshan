@@ -6,9 +6,10 @@ import { HOME_MATS_POLICY, homeMatPointAt, homeMats, MAT_SPACING, validateHomeMa
 import { homeRestPointAt, homeRestPoints } from '../src/simulation/home-rest';
 import { floorPlanSupport } from '../src/architecture-floor-plan';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
+import type { Player } from '../src/types';
 
 test('a home offers mats on free room floor, up to its capacity less its beds, apart from beds and each other', () => {
-  const world = createProductWorld(), resident = { role: 'resident', identities: ['resident'] };
+  const world = createProductWorld(), resident: Pick<Player, 'role' | 'identities'> = { role: 'merchant', identities: ['merchant'] };
   const town = world.buildings.filter(b => b.kind === 'home' && b.districtId === 'market');
   assert.ok(town.length > 10);
   for (const home of town) {
