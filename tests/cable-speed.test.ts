@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { townLaneDoorEdge } from '../src/simulation/town-lanes';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
 import { CABLE_SPEED_METRES, CABLE_SPEED_POLICY, validateCableSpeedPolicy } from '../src/simulation/cable-speed';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
@@ -10,8 +11,9 @@ test('a declared city creates its cable cars at the new pace; an undeclared one 
   assert.ok(cable(current).length >= 2);
   assert.ok(cable(current).every(v => v.speed === CABLE_SPEED_METRES));
   assert.ok(cable(archived).every(v => v.speed === 6), 'old cities keep 6 m per game minute');
-  // Nothing else in the fleet changes.
-  assert.deepEqual(current.state.vehicles.filter(v => v.kind !== 'cable').map(v => [v.id, v.speed]), archived.state.vehicles.filter(v => v.kind !== 'cable').map(v => [v.id, v.speed]));
+  // Nothing else in the fleet changes (town-lanes-v1 separately leaves out the market town's door carts).
+  const lanes = new Set(world.edges.filter(e => townLaneDoorEdge(world, e)).map(e => e.id));
+  assert.deepEqual(current.state.vehicles.filter(v => v.kind !== 'cable').map(v => [v.id, v.speed]), archived.state.vehicles.filter(v => v.kind !== 'cable' && !lanes.has(v.edgeId)).map(v => [v.id, v.speed]));
 });
 
 test('the policy is declared in the save, reads back exactly, and is refused when half missing', () => {
