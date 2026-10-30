@@ -159,7 +159,7 @@ namespace Yunshan.Runtime
                     direction = Math.Atan2(b.X - a.X, b.Z - a.Z) + (v.Direction < 0 ? Math.PI : 0);
                 }
                 bool flight = v.Kind == "flight", train = v.Kind == "maglev" || v.Kind == "lightRail", boat = v.Kind == "ferry";
-                // Web vehicle-shapes.ts: a cable cabin hangs from the 8.6 m haul rope on a grip arm.
+                // Web vehicle-shapes.ts: a cable cabin hangs from the haul rope on a grip arm (cable-rope.ts in street layouts).
                 bool cable = v.Kind == "cable";
                 double length = flight ? 17 : train ? 16 : boat ? 11 : cable ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = cable ? 4.6 : 0;
                 if (!NearCamera.VehicleClears(camera, p, direction, length, width, lift)) continue;
@@ -183,7 +183,13 @@ namespace Yunshan.Runtime
                 }
                 bodies.Add(Space.ToUnity(p.X, p.Y + 1.1 + lift, p.Z), rotation, new Vector3((float)width, flight ? .8f : 1.5f, (float)length), Space.Hex(flight ? "#d5c7aa" : train ? "#d0b985" : "#a77851"));
                 bodies.Add(Space.ToUnity(p.X, p.Y + 2.1 + lift, p.Z), rotation, new Vector3((float)(flight ? 3 : width * .85), flight ? 1.8f : .8f, (float)(length * .68)), Space.Hex("#517f82"));
-                if (cable) { double roof = 2.1 + lift + .4, rope = 8.6; bodies.Add(Space.ToUnity(p.X, p.Y + (roof + rope) / 2, p.Z), rotation, new Vector3(.25f, (float)(rope - roof), .25f), Space.Hex("#3f6f73")); }
+                if (cable)
+                {
+                    // Street layouts: the arm reaches the rope hung above the cabin (Core/CableRope); otherwise the fixed 8.6 m rope.
+                    double roof = 2.1 + lift + .4, rope = 8.6; var hung = CableRope.HeightAt(world, v.EdgeId, p);
+                    var arm = hung.HasValue ? CableRope.GripArm(roof, p.Y, hung.Value) : ((roof + rope) / 2, rope - roof);
+                    bodies.Add(Space.ToUnity(p.X, p.Y + arm.Item1, p.Z), rotation, new Vector3(.25f, (float)arm.Item2, .25f), Space.Hex("#3f6f73"));
+                }
                 else bodies.Add(Space.ToUnity(p.X, p.Y + .6 + lift, p.Z), rotation, new Vector3((float)(width + .25), .2f, (float)(length * .85)), Space.Hex("#3f6f73"));
             }
         }

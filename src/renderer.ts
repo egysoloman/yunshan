@@ -6,6 +6,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { mixHex, timeOfDayGrade } from './rendering/time-of-day-grade';
 import { cloudBanks } from './rendering/cloud-banks';
 import { LANTERN_GLOW_SHADER, lanternGlows } from './rendering/lantern-glow';
+import { cableGripArm, cableRopeHeightAt } from './rendering/cable-rope';
 import { groundPools } from './rendering/ground-glow';
 import { lanternStrings, terraceLanternStrings } from './rendering/lantern-strings';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
@@ -1316,7 +1317,9 @@ export class CityRenderer implements CityRendererAPI {
       // A truck's cab is opaque; other vehicles keep the glass head.
       if (shape.load && this.cabs) { this.put(this.cabs, cabs++, cab.x, p.y + head.y, cab.z, head.width, head.height, head.length, direction, head.color); this.put(pool.head, n, cab.x, p.y + head.y, cab.z, 0, 0, 0, direction); }
       else this.put(pool.head, n, cab.x, p.y + head.y, cab.z, head.width, head.height, head.length, direction, head.color);
-      this.put(pool.trim, n, p.x, p.y + trim.y, p.z, trim.width, trim.height, trim.length, direction); counts.set(vehicle.kind, n + 1);
+      // A cable cabin's grip arm reaches the rope hung above it (cable-rope.ts; street layouts).
+      const rope = vehicle.kind === 'cable' ? cableRopeHeightAt(this.world, vehicle.edgeId, p) : null, arm = rope === null ? trim : cableGripArm(trim, p.y, rope);
+      this.put(pool.trim, n, p.x, p.y + arm.y, p.z, trim.width, arm.height, trim.length, direction); counts.set(vehicle.kind, n + 1);
       if (shape.load && vehicle.cargo > 0 && this.loads) for (const crate of loadCrates(shape.load)) if (loads < this.loads.instanceMatrix.count) { const bed = along(crate); this.put(this.loads, loads++, bed.x, p.y + crate.y, bed.z, crate.width, crate.height, crate.length, direction, crate.color); }
     }
     if (this.wheels) { this.wheels.count = wheels; this.wheels.instanceMatrix.needsUpdate = true; }

@@ -1,5 +1,6 @@
 import type { NetworkEdge, Vec3, WorldDefinition } from '../types';
 import { samplePolyline, terrainHeight } from '../world';
+import { cableRopeLine } from './cable-rope';
 import { deckWidth, GUARDRAIL_THICKNESS, guardrailOffset, guardrailSpans, hasGuardrailAt, pavedStreet } from '../transport-geometry';
 import { isStreetLayout } from '../street-layouts';
 
@@ -78,11 +79,14 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
         sink.box('stone', p.x, p.y - .28, p.z, width, .5, width, paved ? PAVING : '#555f61', yaw);
       }
       let supportRemainder = 0, towerRemainder = 0;
+      // Street layouts hang the rope from the ends and towers with a sag (cable-rope.ts); others keep it along the path.
+      const rope = edge.mode === 'cable' ? cableRopeLine(world, edge.id) : null;
+      if (rope) for (let i = 1; i < rope.length; i++) { sink.segment('wood', rope[i - 1], rope[i], .45, .45, 0); sink.segment('cyan', rope[i - 1], rope[i], .15, .15, -.5); }
       for (let i = 1; i < edge.points.length; i++) {
         const a = edge.points[i - 1], b = edge.points[i];
         if (edge.mode === 'ferry') continue;
         if (edge.mode === 'cable') {
-          sink.segment('wood', a, b, .45, .45, 9); sink.segment('cyan', a, b, .15, .15, 8.5);
+          if (!rope) { sink.segment('wood', a, b, .45, .45, 9); sink.segment('cyan', a, b, .15, .15, 8.5); }
           // current-v8 ropeways stand on lattice towers every CABLE_TOWER_SPACING m where the rope runs above the ground, as the concept's cable car.
           if (anyAngleStreets) {
             const length = Math.hypot(b.x - a.x, b.z - a.z), yaw = Math.atan2(b.x - a.x, b.z - a.z);

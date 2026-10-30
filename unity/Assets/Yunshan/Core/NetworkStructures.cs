@@ -94,13 +94,16 @@ namespace Yunshan.Core
                     sink.Box("stone", p.X, p.Y - .28, p.Z, width, .5, width, paved ? Paving : "#555f61", yaw);
                 }
                 double supportRemainder = 0, towerRemainder = 0;
+                // Street layouts hang the rope from the ends and towers with a sag (CableRope); others keep it along the path.
+                var rope = edge.Mode == "cable" ? CableRope.Line(world, edge.Id) : null;
+                if (rope != null) for (int i = 1; i < rope.Count; i++) { sink.Segment("wood", rope[i - 1], rope[i], .45, .45, 0); sink.Segment("cyan", rope[i - 1], rope[i], .15, .15, -.5); }
                 for (int i = 1; i < edge.Points.Count; i++)
                 {
                     Vec3 a = edge.Points[i - 1], b = edge.Points[i];
                     if (edge.Mode == "ferry") continue;
                     if (edge.Mode == "cable")
                     {
-                        sink.Segment("wood", a, b, .45, .45, 9); sink.Segment("cyan", a, b, .15, .15, 8.5);
+                        if (rope == null) { sink.Segment("wood", a, b, .45, .45, 9); sink.Segment("cyan", a, b, .15, .15, 8.5); }
                         // current-v8 ropeway towers (network-structures.ts).
                         if (anyAngleStreets)
                         {
