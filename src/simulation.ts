@@ -208,6 +208,8 @@ export class Simulation implements SimulationAPI {
   private readonly loadHooks: (() => void)[] = [];
   private readonly commandHandlers: ((command: Command) => CommandResult | null)[] = [];
   private readonly baselineCitizenIds = new Set<string>();
+  /** The generated fleet's door carts on the market town lanes, whether or not this city left them out (town-lanes-v1). */
+  private readonly townLaneCartIds = new Set<string>();
   private readonly initialCivicProfessions: CivicInitialProfession[] = [];
   private readonly legacyRiderArrivalAt = new WeakMap<object, number>();
   private readonly citizenRoadMovementRejected = new WeakSet<Citizen>();
@@ -306,14 +308,14 @@ export class Simulation implements SimulationAPI {
     const fleetPlan = world.fleetPlan ? new Map(world.fleetPlan.map(row => [row.edgeId, row])) : null;
     for (const e of world.edges) {
       if (fleetPlan && e.mode === 'road' && !fleetPlan.has(e.id)) continue;
-      // town-lanes-v1: the dense market town's shop door links keep no cart.
-      if (this.runtime.townLanesPolicyId === TOWN_LANES_POLICY && townLaneDoorEdge(world, e)) continue;
       if (!(fleetPlan && e.mode === 'road') && (e.mode === 'bridge' || e.mode === 'road' && e.length < 80)) continue;
       const stationRoad = fleetPlan && e.mode === 'road' ? fleetPlan.get(e.id)!.stationRoad : e.mode === 'road' && world.nodes.find(n => n.id === e.from)?.station && world.nodes.find(n => n.id === e.to)?.station;
       if (!fleetPlan && e.mode === 'road' && !stationRoad) { const destination = world.buildings.find(b => `${b.id}-door` === e.from || `${b.id}-door` === e.to); if (!destination || !['market', 'workshop', 'farm', 'dock'].includes(destination.kind)) continue; }
-      const count = stationRoad ? 2 : 1;
+      const count = stationRoad ? 2 : 1, townLane = townLaneDoorEdge(world, e);
       for (let i = 0; i < count; i++) {
         const progress = i / count, id = `vehicle-${e.id}-${i}`;
+        // town-lanes-v1: the dense market town's shop door links keep no cart (the ids are kept for save validation).
+        if (townLane) { this.townLaneCartIds.add(id); if (this.runtime.townLanesPolicyId === TOWN_LANES_POLICY) continue; }
         // These capacities belong to the trusted generated fleet, independently
         // of whether an imported instance currently carries any stock.
         const cargoCapacity = e.mode === 'road' && i === 1 ? 28 : e.mode === 'flight' ? 60 : 0;
@@ -3090,7 +3092,10 @@ export class Simulation implements SimulationAPI {
       for (const id of [...Object.keys(registered ?? {}), ...Object.keys(migrants ?? {})]) { ensure(/^resident-[1-9][0-9]*$/.test(id), 'registered resident identity'); expectedCitizenIds.add(id); }
       const citizens = array(s.citizens, 1024, 'citizens'); ensure(citizens.length === expectedCitizenIds.size, 'citizen count'); unique(citizens, 'duplicate citizens');
       for (const c of citizens) { ensure(expectedCitizenIds.has(c.id) && districtIds.has(c.districtId), 'citizen identity'); ensure(this.buildings.has(c.homeId) && this.buildings.has(c.workId), 'citizen building'); vec(c.position, 'citizen position'); string(c.name, 'citizen name', 80); string(c.role, 'citizen role', 60); string(c.state, 'citizen state', 40); if (c.skills !== undefined) { ensure(c.skills && typeof c.skills === 'object' && Object.keys(c.skills).length <= 32, 'citizen skills'); for (const value of Object.values(c.skills)) number(value, 0, 100, 'citizen skill'); } if (c.education !== undefined) number(c.education, 0, 10000, 'citizen education'); for (const tag of array(c.socialIdentities ?? [], 32, 'social identities')) string(tag, 'social identity', 100); for (const tag of array(c.historyTags ?? [], 32, 'history tags')) string(tag, 'history tag', 100); ensure(c.destinationId === null || this.buildings.has(c.destinationId), 'destination'); money(c.money, 'citizen money'); needs(c.needs, 'citizen needs'); ensure(['active', 'regional', 'statistical'].includes(c.tier), 'citizen tier'); if (c.route !== undefined) for (const point of array(c.route, 1024, 'route')) vec(point, 'route position'); if (c.routeIndex !== undefined) number(c.routeIndex, 0, c.route?.length ?? 0, 'routeIndex', true); ensure(c.partnerId == null || c.partnerId === 'player' || expectedCitizenIds.has(c.partnerId), 'citizen partner'); }
-      const expectedVehicleIds = new Set(this.state.vehicles.map(v => v.id)); const vehicles = array(s.vehicles, 2048, 'vehicles'); ensure(vehicles.length === expectedVehicleIds.size, 'vehicle count'); unique(vehicles, 'duplicate vehicles');
+      const expectedVehicleIds = new Set(this.state.vehicles.map(v => v.id));
+      // The generated fleet less the town lane carts when the save declares town-lanes-v1, however this reader was built.
+      for (const id of this.townLaneCartIds) if (r.townLanesPolicyId === TOWN_LANES_POLICY) expectedVehicleIds.delete(id); else expectedVehicleIds.add(id);
+      const vehicles = array(s.vehicles, 2048, 'vehicles'); ensure(vehicles.length === expectedVehicleIds.size, 'vehicle count'); unique(vehicles, 'duplicate vehicles');
       for (const v of vehicles) { ensure(expectedVehicleIds.has(v.id), 'vehicle identity'); const edge = this.edges.get(v.edgeId); ensure(edge && edge.mode === v.kind, 'vehicle edge'); vec(v.position, 'vehicle position'); number(v.progress, 0, 1, 'progress'); ensure(v.direction === 1 || v.direction === -1, 'direction'); number(v.speed, 0, 2000, 'vehicle speed'); string(v.state, 'vehicle state', 40); number(v.passengers, 0, 5000, 'passengers', true); number(v.cargo, 0, 10000, 'cargo'); number(v.nextDeparture, -10000, 1e12, 'departure'); }
       const shops = array(s.shops, 512, 'shops'); ensure(shops.length === this.state.shops.length, 'shop count'); unique(shops, 'duplicate shops');
       const shopIds = new Set(this.state.shops.map(shop => shop.id)); for (const shop of shops) { ensure(shopIds.has(shop.id) && this.buildings.has(shop.buildingId) && districtIds.has(shop.districtId), 'shop identity'); number(shop.inventory, 0, 10000, 'inventory'); number(shop.price, 0, 1e5, 'price'); money(shop.revenue, 'revenue'); number(shop.profit, -1e12, 1e12, 'profit'); number(shop.customers, 0, 100000, 'customers'); number(shop.employees, 0, 10000, 'employees', true); ensure(typeof shop.open === 'boolean', 'shop open'); }
