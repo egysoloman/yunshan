@@ -35,11 +35,16 @@ function segmentHits(a: Vec3, z: Vec3, r: Rect): boolean {
 /** Interprets only identified, marked stair legs. The saved route remains the
  * original bounded reference route; actual flat travel and finite vertical
  * climbs have their own metre budget. No epsilon can complete unpaid travel. */
+/** Cell size (m) of describe's nearby-building grid. */
+const NEAR_CELL = 64;
+
 export class NpcStairMotion {
   private readonly cache = new WeakMap<Vec3[], Map<number, CachedLeg>>();
   private readonly world: WorldDefinition;
   private readonly memberIndex = new WeakMap<Building, number>();
   private readonly counters = { routes: 0, materializations: 0, cacheHits: 0, geometryChecks: 0, staleLegs: 0, buildingScans: 0 };
+  /** Building centres by NEAR_CELL m cell for describe's first (reach) test, rebuilt when the building list changes. */
+  private nearGrid: { collection: Building[]; length: number; cells: Map<string, number[]>; maxReach: number } | null = null;
 
   /** Sample length for validating and walking physical legs (see npc-motion-coarse.ts). */
   private readonly step: () => number;
@@ -176,7 +181,8 @@ export class NpcStairMotion {
     }
 
     const witnesses: Witness[] = [], length = Math.hypot(to.x - from.x, to.z - from.z);
-    for (const b of this.world.buildings) {
+    // Only buildings that can pass the reach test below, in world order (the same scan, without the far ones).
+    for (const b of this.nearBuildings(from, length)) {
       this.counters.buildingScans++;
       const margin = Math.max(b.width, b.depth) / 2 + 3;
       // Every point of the leg's local bounding box lies within the leg's length
@@ -217,6 +223,30 @@ export class NpcStairMotion {
     }
     const result: NpcStairDescription = { kind: 'legacy', bodies: witnesses.filter(witness => witness.building.floorPlanProfile === 'v4-program-bodies-02').map(witness => ({ building: witness.building, floors: witness.floors })) };
     entries.set(index, { from: { ...from }, to: { ...to }, result, witnesses, collection: this.world.buildings, collectionLength: this.world.buildings.length }); return result;
+  }
+
+  /** The buildings whose reach (as in describe: half-diagonal of the margin square, plus a metre) plus `length`
+   * can include `from`, in world order. Every building left out fails describe's reach test there. */
+  private nearBuildings(from: Vec3, length: number): Building[] {
+    const buildings = this.world.buildings;
+    if (!Number.isFinite(length) || !Number.isFinite(from.x) || !Number.isFinite(from.z)) return buildings;
+    let grid = this.nearGrid;
+    if (!grid || grid.collection !== buildings || grid.length !== buildings.length) {
+      const cells = new Map<string, number[]>(); let maxReach = 0;
+      buildings.forEach((b, i) => {
+        const reach = (Math.max(b.width, b.depth) / 2 + 3) * Math.SQRT2 + 1;
+        if (!Number.isFinite(reach) || !Number.isFinite(b.position.x) || !Number.isFinite(b.position.z)) { maxReach = Infinity; return; }
+        maxReach = Math.max(maxReach, reach);
+        const key = `${Math.floor(b.position.x / NEAR_CELL)}:${Math.floor(b.position.z / NEAR_CELL)}`, list = cells.get(key); if (list) list.push(i); else cells.set(key, [i]);
+      });
+      grid = this.nearGrid = { collection: buildings, length: buildings.length, cells, maxReach };
+    }
+    // A building without a finite reach or position is never skipped by describe: scan everything.
+    if (!Number.isFinite(grid.maxReach)) return buildings;
+    const radius = grid.maxReach + length + 1, indices: number[] = [];
+    for (let cx = Math.floor((from.x - radius) / NEAR_CELL); cx <= Math.floor((from.x + radius) / NEAR_CELL); cx++)
+      for (let cz = Math.floor((from.z - radius) / NEAR_CELL); cz <= Math.floor((from.z + radius) / NEAR_CELL); cz++) { const list = grid.cells.get(`${cx}:${cz}`); if (list) indices.push(...list); }
+    return indices.sort((a, b) => a - b).map(i => buildings[i]);
   }
 
   private materialize(b: Building, floors: number[], route: Vec3[], index: number): NpcStairLeg | null {
