@@ -1475,24 +1475,25 @@ export class Simulation implements SimulationAPI {
     this.cacheRoute(key, points); return points;
   }
   private availableHomeRestPoints(citizen: Citizen, home: Building) {
-    const beds = this.freeHomeRestPoints(citizen, home, Array.from({ length: home.floors }, (_, floor) => homeRestPoints(home, floor)).flat());
-    // home-mats-v1: a home with no free bed offers its mats (up to its capacity).
-    return beds.length || this.runtime.homeMatsPolicyId !== HOME_MATS_POLICY ? beds : this.freeHomeRestPoints(citizen, home, homeMats(home));
-  }
-  private freeHomeRestPoints(citizen: Citizen, home: Building, candidates: ReturnType<typeof homeRestPoints>) {
     const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
-    const points = candidates
-      .filter(point => Array.from({ length: point.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(home, floor, person)));
-    const occupiedBeds = new Set<string>();
+    // A point is usable when every floor up to its own is open to the person (computed once per floor).
+    const reachable: boolean[] = []; for (let floor = 0, open = true; floor < home.floors; floor++) reachable.push(open = open && canAccessFloor(home, floor, person));
+    // Where the home's other living residents are already headed to rest (the last point of their route).
+    const targets: Vec3[] = [];
     for (const other of this.state.citizens) {
       if (other.id === citizen.id || other.destinationId !== home.id || this.runtime.activities[other.id] !== 'rest'
         || this.state.extension?.actorProfiles[other.id]?.alive === false) continue;
-      const target = other.route?.at(-1); if (!target) continue;
-      const point = points.find(point => distance(point.position, target) < 1e-8);
-      if (point) occupiedBeds.add(point.bedId);
+      const target = other.route?.at(-1); if (target) targets.push(target);
     }
-    return points.filter(point => !homeRestPointBlockedByVoxels(point.position, this.state.voxels)
-      && !homeRestBedOccupied(this.state, point.bedId) && !occupiedBeds.has(point.bedId));
+    const free = (candidates: ReturnType<typeof homeRestPoints>) => {
+      const points = candidates.filter(point => reachable[point.floor] === true), occupiedBeds = new Set<string>();
+      for (const target of targets) { const point = points.find(point => distance(point.position, target) < 1e-8); if (point) occupiedBeds.add(point.bedId); }
+      return points.filter(point => !homeRestPointBlockedByVoxels(point.position, this.state.voxels)
+        && !homeRestBedOccupied(this.state, point.bedId) && !occupiedBeds.has(point.bedId));
+    };
+    const beds = free(Array.from({ length: home.floors }, (_, floor) => homeRestPoints(home, floor)).flat());
+    // home-mats-v1: a home with no free bed offers its mats (up to its capacity).
+    return beds.length || this.runtime.homeMatsPolicyId !== HOME_MATS_POLICY ? beds : free(homeMats(home));
   }
   private setDestination(citizen: Citizen, destination: Building, rebuild = false) {
     // Old native saves can contain a never-started, blocked exterior intent.
