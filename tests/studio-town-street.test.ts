@@ -6,7 +6,8 @@ import { cachedWorld } from '../src/persistence/world-cache';
 import { deckWidth } from '../src/transport-geometry';
 import { insidePavedDeck, pavedDecks } from '../src/rendering/network-structures';
 import { lanternGlows } from '../src/rendering/lantern-glow';
-import { STUDIO_ASSETS, studioTownStreetPlacements, townLampLight, TOWN_DOOR_GOODS, TOWN_STREET_LAMP } from '../src/rendering/studio-prop-layout';
+import { STUDIO_ASSETS, studioTownStreetPlacements, townLampLight, TOWN_COURT, TOWN_DOOR_GOODS, TOWN_STREET_LAMP } from '../src/rendering/studio-prop-layout';
+import { woodlandLayout } from '../src/rendering/woodland-layout';
 
 const v9 = cachedWorld(20261001, 'current-v9'), ground = (x: number, z: number) => terrainHeight(v9, x, z);
 const placements = studioTownStreetPlacements(v9, deckWidth, ground), assets = new Map(STUDIO_ASSETS.map(a => [a.id, a]));
@@ -34,7 +35,9 @@ test('every piece stands on the ground clear of buildings, doors, other paved de
     assert.ok(Number.isFinite(p.position.x + p.position.y + p.position.z + p.yaw), p.id);
     const top = p.id.endsWith(':top'), feet = corners(p);
     for (const q of feet) {
-      if (!top) assert.ok(Math.abs(q.y - ground((feet[0].x + feet[2].x) / 2, (feet[0].z + feet[2].z) / 2)) < 1e-9, `${p.id} stands on the ground`);
+      // Lamps and crates stand on the ground at their centre; court furniture on the highest point of its footprint.
+      const cx = (feet[0].x + feet[2].x) / 2, cz = (feet[0].z + feet[2].z) / 2, base = p.id.includes(':town-court:') ? Math.max(ground(cx, cz), ...feet.map(f => ground(f.x, f.z))) : ground(cx, cz);
+      if (!top) assert.ok(Math.abs(q.y - base) < 1e-9, `${p.id} stands on the ground`);
       for (const b of v9.buildings) {
         const dx = q.x - b.position.x, dz = q.z - b.position.z, c = Math.cos(b.rotation), s = Math.sin(b.rotation);
         assert.ok(!(Math.abs(dx * c - dz * s) < b.width / 2 + .2 && Math.abs(dx * s + dz * c) < b.depth / 2 + .2), `${p.id} inside ${b.id}`);
@@ -54,6 +57,18 @@ test('every piece stands on the ground clear of buildings, doors, other paved de
   for (const top of placements.filter(p => p.id.endsWith(':door-goods:top'))) {
     const base = placements.find(p => p.id === top.id.replace(':top', ':base'))!, b = assets.get(TOWN_DOOR_GOODS.base)!.boundsM;
     assert.ok(Math.abs(corners(top)[0].y - (base.position.y + b.max[1])) < 1e-9);
+  }
+});
+
+test('court furniture fills the town paving on level ground, away from every tree and shrub of the woodland', () => {
+  const courts = placements.filter(p => p.id.includes(':town-court:'));
+  assert.ok(courts.length > 60, `${courts.length} court pieces`);
+  assert.deepEqual([...new Set(courts.map(p => p.asset))].sort(), [...TOWN_COURT.assets].sort());
+  const { trees, shrubs } = woodlandLayout(v9), plants = [...trees, ...shrubs];
+  for (const p of courts) {
+    const f = corners(p), cx = (f[0].x + f[2].x) / 2, cz = (f[0].z + f[2].z) / 2, heights = [ground(cx, cz), ...f.map(q => ground(q.x, q.z))];
+    assert.ok(Math.max(...heights) - Math.min(...heights) <= TOWN_COURT.step + 1e-9, `${p.id}: at most one paving step under it`);
+    assert.ok(plants.every(t => Math.hypot(t.x - cx, t.z - cz) >= 2), `${p.id} stands clear of the woodland`);
   }
 });
 

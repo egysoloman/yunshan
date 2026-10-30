@@ -64,6 +64,19 @@ export function createGroundClearance(world: WorldDefinition) {
 
 /** Woodland grows in overlapping stands along the actual neighbourhood edge
  * and the mountain shoulder (the original stand and sampling rules). */
+/** Every spot where the slope-garden loop below may plant in one district (its jittered SLOPE_GARDEN_SPACING grid,
+ * before any other test): a superset of that district's garden trees and shrubs, cheap to compute. */
+export function slopeGardenSpots(world: WorldDefinition, districtId: string): { x: number; z: number }[] {
+  const district = world.districts.find(d => d.id === districtId); if (!district) return [];
+  const span = Math.floor(district.radius / SLOPE_GARDEN_SPACING), spots: { x: number; z: number }[] = [];
+  for (let gx = -span; gx <= span; gx++) for (let gz = -span; gz <= span; gz++) {
+    if (Math.hypot(gx, gz) > span) continue;
+    const ox = district.center.x + gx * SLOPE_GARDEN_SPACING, oz = district.center.z + gz * SLOPE_GARDEN_SPACING;
+    spots.push({ x: quantize(ox + (woodlandHash(ox, oz, world.seed + 7) - .5) * 8), z: quantize(oz + (woodlandHash(oz, ox, world.seed + 7) - .5) * 8) });
+  }
+  return spots;
+}
+
 export function woodlandLayout(world: WorldDefinition): { trees: WoodlandTree[]; shrubs: WoodlandShrub[]; stands: number } {
   const clear = createGroundClearance(world), surface = (x: number, z: number) => quantize(terrainHeight(world, x, z, true));
   const stands = world.districts.filter(district => !['airport', 'starport'].includes(district.kind)).flatMap((district, index) => Array.from({ length: 8 }, (_, side) => {

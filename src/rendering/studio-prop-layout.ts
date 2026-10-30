@@ -5,6 +5,7 @@ import { contains, getBuildingBody, getFloorPlanFixtures, getFloorPlanSlabRegion
 import manifest from './studio-assets.json';
 import { LANTERN_SPAN } from './lantern-strings';
 import { isDenseMarketLayout } from '../street-layouts';
+import { createGroundClearance, slopeGardenSpots, TOWN_PAVING_MARGIN, woodlandHash } from './woodland-layout';
 
 /** One imported voxel-studio GLB. Bounds are measured from the file at import. */
 export interface StudioAsset {
@@ -270,7 +271,8 @@ export function studioNetworkDetailPlacements(world: DetailWorld, deckWidth: (ed
  * front toward the carriageway; beside each shop door a crate (LIFE-072) with
  * a goods box on it (LIFE-071) stands against the facade. A piece is left out
  * when any corner of it would lie inside a building footprint (+0.2 m), on
- * another paved street's deck, or within 2.5 m of a door. */
+ * another paved street's deck, or within 2.5 m of a door; court furniture
+ * (TOWN_COURT) fills the level paving beside the market buildings. */
 /** `light` is the centre of the lamp's glass box (景观灯罩玻璃) in the model's own space, where its glow is drawn. */
 export const TOWN_STREET_LAMP = { asset: 'ENV-104', kerb: .4, shift: 8, apart: 6, light: [2.2, 3.4, .6] } as const;
 /** World position of a town lamp placement's light. */
@@ -279,6 +281,12 @@ export function townLampLight(p: StudioStaticPlacement) {
   return { x: p.position.x + x * c + z * s, y: p.position.y + y, z: p.position.z - x * s + z * c };
 }
 export const TOWN_DOOR_GOODS = { base: 'LIFE-072', top: 'LIFE-071', along: 5.7, out: .15 } as const;
+/** Court furniture on the town's paving: a TOWN_COURT.spacing m grid, kept where the ground is level (rise under
+ * `level` m within 6 m, the footprint flat), `near` m to the paving's TOWN_PAVING_MARGIN from a market building,
+ * at most one paving `step` under its footprint (it stands on the highest point), clear of roads and buildings by `clear` m, of lamps by `lampGap` m and of every spot the town gardens may plant
+ * (slopeGardenSpots) by `treeGap` m. A flowering shrub, bench or clipped bonsai tree by hash, its long side along the nearest
+ * building face. */
+export const TOWN_COURT = { spacing: 9, near: 3, clear: 1.5, lampGap: 4, treeGap: 3, level: 1.4, step: .21, assets: ['ENV-061', 'ENV-098', 'ENV-134'] } as const;
 type TownWorld = { layoutVersion?: string; buildings: readonly Building[]; nodes: readonly { id: string; districtId: string }[]; edges: readonly { id: string; mode: string; from: string; to: string; points: readonly { x: number; y: number; z: number }[] }[] };
 export function studioTownStreetPlacements(world: TownWorld, deckWidth: (edge: any) => number, groundHeight: (x: number, z: number) => number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
   if (!isDenseMarketLayout(world.layoutVersion)) return [];
@@ -319,6 +327,31 @@ export function studioTownStreetPlacements(world: TownWorld, deckWidth: (edge: a
         }
       }
       carry -= len;
+    }
+  }
+  // Court furniture (TOWN_COURT) on the level paving near the market buildings.
+  const markets = world.buildings.filter(b => b.districtId === 'market'), clear = createGroundClearance(world as unknown as WorldDefinition), far = TOWN_PAVING_MARGIN;
+  const gardens = slopeGardenSpots(world as unknown as WorldDefinition, 'market');
+  const court = TOWN_COURT.assets.map(id => assets.get(id));
+  if (markets.length && court.every(Boolean)) {
+    const gapOf = (x: number, z: number) => markets.reduce((best, b) => { const g = Math.max(Math.abs(x - b.position.x) - b.width / 2, Math.abs(z - b.position.z) - b.depth / 2); return g < best.gap ? { gap: g, b } : best; }, { gap: Infinity, b: markets[0] });
+    const x0 = Math.min(...markets.map(b => b.position.x - b.width / 2)) - far, x1 = Math.max(...markets.map(b => b.position.x + b.width / 2)) + far;
+    const z0 = Math.min(...markets.map(b => b.position.z - b.depth / 2)) - far, z1 = Math.max(...markets.map(b => b.position.z + b.depth / 2)) + far;
+    for (let gx = Math.ceil(x0 / TOWN_COURT.spacing); gx * TOWN_COURT.spacing <= x1; gx++) for (let gz = Math.ceil(z0 / TOWN_COURT.spacing); gz * TOWN_COURT.spacing <= z1; gz++) {
+      const x = gx * TOWN_COURT.spacing, z = gz * TOWN_COURT.spacing, near = gapOf(x, z);
+      if (near.gap < TOWN_COURT.near || near.gap > far || !clear(x, z, TOWN_COURT.clear)) continue;
+      if (gardens.some(p => (p.x - x) * (p.x - x) + (p.z - z) * (p.z - z) < TOWN_COURT.treeGap * TOWN_COURT.treeGap)) continue;
+      if (lamps.some(p => (p.x - x) * (p.x - x) + (p.z - z) * (p.z - z) < TOWN_COURT.lampGap * TOWN_COURT.lampGap)) continue;
+      const y = groundHeight(x, z);
+      if ([[6, 0], [-6, 0], [0, 6], [0, -6]].some(([dx, dz]) => Math.abs(groundHeight(x + dx, z + dz) - y) >= TOWN_COURT.level)) continue;
+      const asset = court[Math.min(court.length - 1, Math.floor(woodlandHash(x, z, 31) * court.length))]!;
+      // Long side (model X) along the nearest building face: beside its x-sides the face runs along z.
+      const besideX = Math.abs(x - near.b.position.x) - near.b.width / 2 > Math.abs(z - near.b.position.z) - near.b.depth / 2, yaw = besideX ? Math.PI / 2 : 0;
+      const { min, max } = asset.boundsM, hw = (max[0] - min[0]) / 2, hd = (max[2] - min[2]) / 2, c = Math.cos(yaw), sn = Math.sin(yaw);
+      // At most one 0.2 m paving step under it: it stands on the highest point of its footprint.
+      const heights = [y, ...[[-hw, -hd], [hw, -hd], [hw, hd], [-hw, hd]].map(([u, v]) => groundHeight(x + u * c + v * sn, z - u * sn + v * c))];
+      if (Math.max(...heights) - Math.min(...heights) > TOWN_COURT.step) continue;
+      stand(asset, `${near.b.id}:town-court:${gx}:${gz}`, x, z, yaw, '', Math.max(...heights) - y);
     }
   }
   const base = assets.get(TOWN_DOOR_GOODS.base), top = assets.get(TOWN_DOOR_GOODS.top);

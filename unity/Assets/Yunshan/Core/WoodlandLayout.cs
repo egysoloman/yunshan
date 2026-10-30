@@ -33,6 +33,20 @@ namespace Yunshan.Core
         static string Bucket(double x, double z) => $"{JsMath.ToJsString(System.Math.Floor(x / Tile))}:{JsMath.ToJsString(System.Math.Floor(z / Tile))}";
 
         /// <summary>Off building footprints, roads, the waterfall path, the river and the plunge pool.</summary>
+        /// <summary>Port of slopeGardenSpots: every jittered slope-garden grid spot of one district (a superset of its garden plants).</summary>
+        public static List<(double X, double Z)> SlopeGardenSpots(WorldDefinition world, string districtId)
+        {
+            var spots = new List<(double X, double Z)>(); var district = world.Districts.FirstOrDefault(d => d.Id == districtId); if (district == null) return spots;
+            int span = (int)System.Math.Floor(district.Radius / SlopeGardenSpacing);
+            for (int gx = -span; gx <= span; gx++) for (int gz = -span; gz <= span; gz++)
+            {
+                if (JsMath.Hypot(gx, gz) > span) continue;
+                double ox = district.Center.X + gx * SlopeGardenSpacing, oz = district.Center.Z + gz * SlopeGardenSpacing;
+                spots.Add((Quantize(ox + (Hash(ox, oz, world.Seed + 7) - .5) * 8), Quantize(oz + (Hash(oz, ox, world.Seed + 7) - .5) * 8)));
+            }
+            return spots;
+        }
+
         public static System.Func<double, double, double, bool> GroundClearance(WorldDefinition world)
         {
             var buildings = new Dictionary<string, List<Building>>(); var roads = new Dictionary<string, List<Segment>>();

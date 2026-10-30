@@ -270,6 +270,9 @@ namespace Yunshan.Core
         /// corner would lie in a building footprint (+0.2 m), on another paved deck or within 2.5 m of a door.</summary>
         public const string TownLampAsset = "ENV-104", TownGoodsBase = "LIFE-072", TownGoodsTop = "LIFE-071";
         public const double TownLampKerb = .4, TownLampApart = 6, TownGoodsAlong = 5.7, TownGoodsOut = .15; public const int TownLampShift = 8;
+        /// <summary>Court furniture (TOWN_COURT): grid spacing, nearest gap to a market building, clearances, level and step limits, assets.</summary>
+        public const double TownCourtSpacing = 9, TownCourtNear = 3, TownCourtClear = 1.5, TownCourtLampGap = 4, TownCourtTreeGap = 3, TownCourtLevel = 1.4, TownCourtStep = .21;
+        public static readonly string[] TownCourtAssets = { "ENV-061", "ENV-098", "ENV-134" };
         /// <summary>Centre of the lamp's glass box in model space (its glow point).</summary>
         public static readonly double[] TownLampLight = { 2.2, 3.4, .6 };
         public static Vec3 TownLampLightOf(StudioStaticPlacement p)
@@ -319,6 +322,29 @@ namespace Yunshan.Core
                         carry -= len;
                     }
                 }
+            // Court furniture on the level paving near the market buildings (TOWN_COURT).
+            var markets = world.Buildings.Where(b => b.DistrictId == "market").ToList(); var clear = WoodlandLayout.GroundClearance(world); double far = WoodlandLayout.TownPavingMargin;
+            var gardens = WoodlandLayout.SlopeGardenSpots(world, "market"); var court = TownCourtAssets.Select(id => assets.TryGetValue(id, out var a) ? a : null).ToArray();
+            if (markets.Count > 0 && court.All(a => a != null))
+            {
+                (double Gap, Building B) GapOf(double x, double z) { var best = (Gap: double.PositiveInfinity, B: markets[0]); foreach (var b in markets) { double g = Math.Max(Math.Abs(x - b.Position.X) - b.Width / 2, Math.Abs(z - b.Position.Z) - b.Depth / 2); if (g < best.Gap) best = (g, b); } return best; }
+                double x0 = markets.Min(b => b.Position.X - b.Width / 2) - far, x1 = markets.Max(b => b.Position.X + b.Width / 2) + far, z0 = markets.Min(b => b.Position.Z - b.Depth / 2) - far, z1 = markets.Max(b => b.Position.Z + b.Depth / 2) + far;
+                for (double gx = Math.Ceiling(x0 / TownCourtSpacing); gx * TownCourtSpacing <= x1; gx++) for (double gz = Math.Ceiling(z0 / TownCourtSpacing); gz * TownCourtSpacing <= z1; gz++)
+                {
+                    double x = gx * TownCourtSpacing, z = gz * TownCourtSpacing; var near = GapOf(x, z);
+                    if (near.Gap < TownCourtNear || near.Gap > far || !clear(x, z, TownCourtClear)) continue;
+                    if (gardens.Any(p => (p.X - x) * (p.X - x) + (p.Z - z) * (p.Z - z) < TownCourtTreeGap * TownCourtTreeGap)) continue;
+                    if (lamps.Any(p => (p.X - x) * (p.X - x) + (p.Z - z) * (p.Z - z) < TownCourtLampGap * TownCourtLampGap)) continue;
+                    double y = World.TerrainHeight(world, x, z);
+                    if (new[] { (6.0, 0.0), (-6.0, 0.0), (0.0, 6.0), (0.0, -6.0) }.Any(d => Math.Abs(World.TerrainHeight(world, x + d.Item1, z + d.Item2) - y) >= TownCourtLevel)) continue;
+                    int index = (int)Math.Min(court.Length - 1, Math.Floor(WoodlandLayout.Hash(x, z, 31) * court.Length)); var asset = court[index];
+                    bool besideX = Math.Abs(x - near.B.Position.X) - near.B.Width / 2 > Math.Abs(z - near.B.Position.Z) - near.B.Depth / 2; double yaw = besideX ? Math.PI / 2 : 0;
+                    double hw = (asset.Max[0] - asset.Min[0]) / 2, hd = (asset.Max[2] - asset.Min[2]) / 2, c = JsMath.Cos(yaw), sn = JsMath.Sin(yaw);
+                    var heights = new List<double> { y }; foreach (var (u, v) in new[] { (-hw, -hd), (hw, -hd), (hw, hd), (-hw, hd) }) heights.Add(World.TerrainHeight(world, x + u * c + v * sn, z - u * sn + v * c));
+                    if (heights.Max() - heights.Min() > TownCourtStep) continue;
+                    Stand(TownCourtAssets[index], asset, $"{near.B.Id}:town-court:{JsMath.ToJsString(gx)}:{JsMath.ToJsString(gz)}", x, z, yaw, "", heights.Max() - y);
+                }
+            }
             if (assets.TryGetValue(TownGoodsBase, out var crate) && assets.TryGetValue(TownGoodsTop, out var box) && box.Max[0] - box.Min[0] <= crate.Max[0] - crate.Min[0] && box.Max[2] - box.Min[2] <= crate.Max[2] - crate.Min[2])
                 foreach (var b in world.Buildings)
                 {
