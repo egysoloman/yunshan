@@ -1,33 +1,48 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { Simulation } from '../src/simulation';
+import type { Citizen, Shop } from '../src/types';
 import { createArchivedProductCity, createCurrentProductCity, createProductWorld, CURRENT_PRODUCT_OPTIONS } from '../src/product-city';
-import { UNDERPAID_MOVE_POLICY, validateUnderpaidMovePolicy } from '../src/simulation/underpaid-move';
+import { UNDERPAID_HOUR, UNDERPAID_MOVE_POLICY, validateUnderpaidMovePolicy } from '../src/simulation/underpaid-move';
 import { assembleSave, partitionSave } from '../src/persistence/partition';
 
-test('a declared city lets the poor, unpromised staff of a profitable but thin shop take a funded job elsewhere', () => {
+test('at 11:00 a poor shop worker without a half-day promise takes a funded job elsewhere only with the rule', () => {
   const world = createProductWorld(), { underpaidMovePolicyId: _omit, ...withoutRule } = CURRENT_PRODUCT_OPTIONS;
-  const counts: number[] = [];
+  const outcome: { moved: number; stayed: number }[] = [];
   for (const declared of [true, false]) {
     const sim = declared ? createCurrentProductCity(world) : new Simulation(world, withoutRule);
     assert.equal(sim.underpaidMovePolicyId, declared ? UNDERPAID_MOVE_POLICY : undefined);
     sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
-    // Controlled: profitable shops whose cash funds a day's wage but not a half-day for every one of their staff.
-    const thin = sim.state.shops.filter(shop => sim.state.citizens.filter(c => c.workId === shop.buildingId && c.id !== shop.ownerId && c.role !== '学生').length >= 3).slice(0, 12);
-    const staff = new Map(thin.flatMap(shop => sim.state.citizens.filter(c => c.workId === shop.buildingId && c.id !== shop.ownerId && c.role !== '学生').map(c => [c.id, shop.buildingId] as const)));
-    for (const shop of thin) { shop.cash = 120; shop.profit = 50; }
-    for (const c of sim.state.citizens) if (staff.has(c.id)) c.money = 20;
-    // Held there (as in audit v9g, where such shops kept a median 246): v6 never applies, the owner can promise little.
-    for (let tick = 0; tick < 600; tick++) { for (const shop of thin) { shop.cash = Math.max(shop.cash ?? 0, 150); shop.profit = Math.max(shop.profit, 50); } sim.step(.25); }
-    const moved = sim.state.citizens.filter(c => staff.has(c.id) && c.workId !== staff.get(c.id) && sim.state.shops.some(shop => shop.buildingId === c.workId));
-    counts.push(moved.length);
+    while (sim.state.hour < UNDERPAID_HOUR) sim.step(.25);
+    // The declared city saves and reads back before the test forges worker and shop state below.
     if (declared) {
       const saved = sim.exportSave(), reader = createCurrentProductCity(world), read = reader.importSave(saved);
       assert.ok(read.ok, read.message); assert.equal(reader.exportSave(), saved);
       assert.equal(assembleSave(partitionSave(saved, world)), saved);
     }
+    const internal = sim as unknown as { considerShopMove(c: Citizen): void; runtime: { decisionAt: Record<string, number>; privateLabor?: { shifts: Record<string, { assignments: { citizenId: string; minutesCap: number }[] }> } } };
+    // Staff (not owners, not students) of shops not running a loss (loss-shop-move-v1 lets those go anyway); their shops are then given a full day of free funds,
+    // so without the rule the shop's books keep them.
+    const staff = sim.state.citizens.filter(c => c.role !== '学生' && sim.state.shops.some(shop => shop.buildingId === c.workId && shop.ownerId !== c.id && shop.profit >= 0)).slice(0, 20);
+    assert.ok(staff.length >= 10, 'a real city has shop staff at 11:00');
+    for (const shop of sim.state.shops.filter(s => staff.some(c => c.workId === s.buildingId))) {
+      const company = sim.state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === shop.buildingId);
+      if (company) company.capital += 1000; else shop.cash = (shop.cash ?? 0) + 1000;
+    }
+    let moved = 0;
+    for (const c of staff) {
+      const from = c.workId, shop = sim.state.shops.find(s => s.buildingId === from)!;
+      // Same worker state in both cities: poor, fed, rested, due a decision and with no half-day promise today.
+      c.money = 20; c.needs.hunger = 80; c.needs.fatigue = 80; delete internal.runtime.decisionAt[c.id];
+      const plan = internal.runtime.privateLabor?.shifts[shop.id]; if (plan) plan.assignments = plan.assignments.filter(a => a.citizenId !== c.id);
+      internal.considerShopMove(c);
+      if (c.workId !== from) { moved++; assert.ok(sim.state.shops.some(s => s.buildingId === c.workId), 'the new job is at a shop'); }
+    }
+    outcome.push({ moved, stayed: staff.length - moved });
   }
-  assert.ok(counts[0] > counts[1], `${counts[0]} moved with the rule, ${counts[1]} without`);
+  // audit v9h, 14 days: poor residents 176 -> 162, poor shop staff 100 -> 89.
+  assert.ok(outcome[0].moved > 0, `with the rule ${outcome[0].moved} of ${outcome[0].moved + outcome[0].stayed} moved`);
+  assert.equal(outcome[1].moved, 0, 'without the rule a shop that can fund a day keeps its staff');
 });
 
 test('the policy is declared in the save and refused when half missing', () => {
