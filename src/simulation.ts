@@ -80,6 +80,8 @@ const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFi
 const streetBrowse = (runtime: { mealRoutePolicyId?: MealRoutePolicy; activities: Record<string, string> }, citizen: Citizen, destination: Building) => browsesOnStreet(runtime.mealRoutePolicyId) && destination.kind === 'market'
   && (runtime.activities?.[citizen.id] === 'social' || eatsOnStreet(runtime.mealRoutePolicyId) && runtime.activities?.[citizen.id] === 'eat');
 const hash = (value: string) => { let h = 2166136261; for (let i = 0; i < value.length; i++) h = Math.imul(h ^ value.charCodeAt(i), 16777619); return h >>> 0; };
+/** Cell size of the interior lookup's building grid (buildingsWithinReach). */
+const REACH_CELL = 64;
 const canonicalNpcWages = new WeakMap<object, { simulation: Simulation; state: SimState; tick: number; at: number }>();
 /** Only immutable actual native attendance notifications certify paid work.
  * Consumers that change an asset can require this city's current state/frame;
@@ -210,6 +212,8 @@ export class Simulation implements SimulationAPI {
   private readonly baselineCitizenIds = new Set<string>();
   /** The generated fleet's door carts on the market town lanes, whether or not this city left them out (town-lanes-v1). */
   private readonly townLaneCartIds = new Set<string>();
+  /** Building centres by REACH_CELL m cell for the interior lookup, rebuilt when the building list changes. */
+  private reachGrid: { collection: Building[]; length: number; cells: Map<string, number[]>; maxReach: number } | null = null;
   private readonly initialCivicProfessions: CivicInitialProfession[] = [];
   private readonly legacyRiderArrivalAt = new WeakMap<object, number>();
   private readonly citizenRoadMovementRejected = new WeakSet<Citizen>();
@@ -1352,7 +1356,7 @@ export class Simulation implements SimulationAPI {
   private walkingAnchors(citizen: Citizen): { node: string; cost: number; points: Vec3[] }[] {
     const permittedExit = roadExitRoute(this.world, this.state, citizen.id, citizen.position);
     if (permittedExit) return [{ node: permittedExit.exitNodeId, cost: permittedExit.points.slice(1).reduce((n, p, i) => n + distance(permittedExit.points[i], p), 0), points: permittedExit.points.map(copy) }];
-    const interior = this.world.buildings.find(b => b.floorPlanProfile === FLOOR_PLAN_PROFILE ? !!this.floorPlanPresence(b, citizen.position) : this.isNearBuilding(b, citizen.position, 0));
+    const interior = this.buildingsWithinReach(citizen.position).find(b => b.floorPlanProfile === FLOOR_PLAN_PROFILE ? !!this.floorPlanPresence(b, citizen.position) : this.isNearBuilding(b, citizen.position, 0));
     if (interior) {
       if (interior.floorPlanProfile === FLOOR_PLAN_PROFILE) {
         const presence = this.floorPlanPresence(interior, citizen.position)!;
@@ -2680,6 +2684,29 @@ export class Simulation implements SimulationAPI {
     let width = building.width, depth = building.depth;
     for (const footprint of building.floorFootprints ?? []) { if (footprint && footprint.width > width) width = footprint.width; if (footprint && footprint.depth > depth) depth = footprint.depth; }
     return Math.hypot(width, depth) + 24;
+  }
+  /** The buildings, in world order, whose reach (buildingReach, or its door if farther) contains the position:
+   * every building that floorPlanPresence or isNearBuilding with doorRadius 0 can answer for. Others are skipped. */
+  private buildingsWithinReach(position: Vec3): Building[] {
+    const buildings = this.world.buildings;
+    if (!Number.isFinite(position.x) || !Number.isFinite(position.z)) return buildings;
+    let grid = this.reachGrid;
+    if (!grid || grid.collection !== buildings || grid.length !== buildings.length) {
+      const cells = new Map<string, number[]>(); let maxReach = 0;
+      buildings.forEach((b, i) => {
+        const reach = Math.max(this.buildingReach(b), Math.hypot(b.door.x - b.position.x, b.door.z - b.position.z)) + 1;
+        if (!Number.isFinite(reach) || !Number.isFinite(b.position.x) || !Number.isFinite(b.position.z)) { maxReach = Infinity; return; }
+        maxReach = Math.max(maxReach, reach);
+        const key = `${Math.floor(b.position.x / REACH_CELL)}:${Math.floor(b.position.z / REACH_CELL)}`, list = cells.get(key); if (list) list.push(i); else cells.set(key, [i]);
+      });
+      grid = this.reachGrid = { collection: buildings, length: buildings.length, cells, maxReach };
+    }
+    // A building without a finite reach or position is never skipped: scan everything.
+    if (!Number.isFinite(grid.maxReach)) return buildings;
+    const radius = grid.maxReach, indices: number[] = [];
+    for (let cx = Math.floor((position.x - radius) / REACH_CELL); cx <= Math.floor((position.x + radius) / REACH_CELL); cx++)
+      for (let cz = Math.floor((position.z - radius) / REACH_CELL); cz <= Math.floor((position.z + radius) / REACH_CELL); cz++) { const list = grid.cells.get(`${cx}:${cz}`); if (list) indices.push(...list); }
+    return indices.sort((a, b) => a - b).map(i => buildings[i]);
   }
   isNearBuilding(building: Building, position: Vec3 = this.state.player.position, doorRadius = 32): boolean {
     if (!this.couldBeNearBuilding(building, position, doorRadius)) return false;
