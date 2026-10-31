@@ -145,7 +145,11 @@ namespace Yunshan.Runtime
                     var first = plans[i]; int end = i + 1;
                     while (end < plans.Count && SameRects(first.Interior, plans[end].Interior)) end++;
                     double top = plans[end - 1].CeilingY;
-                    foreach (var r in ArchitectureFloorPlan.RectangleCover(first.Interior)) builder.LocalBox(frame, r.X0, first.Y, r.Z0, r.X1, top, r.Z1, first.Floor < 0 ? plinth : wall);
+                    foreach (var r in ArchitectureFloorPlan.RectangleCover(first.Interior))
+                    {
+                        builder.LocalBox(frame, r.X0, first.Y, r.Z0, r.X1, top, r.Z1, first.Floor < 0 ? plinth : wall);
+                        if (TimberFinish(b) && first.Floor >= 0) FarTimberFrame(builder, frame, r, plans, i, end, first.Y, top);
+                    }
                     i = end;
                 }
                 var roofs = ArchitectureFloorPlan.GetFloorPlanRoofRegions(body);
@@ -154,6 +158,27 @@ namespace Yunshan.Runtime
             }
             else LegacyBuilding(builder, b, wall, roof);
             return builder.Build(b.Name + " · 远景");
+        }
+
+        /// <summary>As FAR_TIMBER_FRAME in architecture-bodies.ts: corner posts, studs at most Bay apart and a beam at
+        /// every upper floor line, so a timber-finish envelope keeps its frame from afar.</summary>
+        const double FarPost = .4, FarStud = .25, FarBay = 6, FarProud = .06, FarBeam = .3;
+        static void FarTimberFrame(GameMeshBuilder builder, Matrix4x4 frame, CoreRect r, IReadOnlyList<FloorPlan> plans, int start, int end, double bottom, double top)
+        {
+            Color timber = Space.Hex("#4b2f1e"); double width = r.X1 - r.X0, depth = r.Z1 - r.Z0, p = FarPost / 2, s = FarStud / 2, o = FarProud;
+            foreach (var x in new[] { r.X0, r.X1 }) foreach (var z in new[] { r.Z0, r.Z1 }) builder.LocalBox(frame, x - p, bottom, z - p, x + p, top, z + p, timber);
+            int across = (int)Math.Ceiling(width / FarBay), along = (int)Math.Ceiling(depth / FarBay);
+            for (int k = 1; k < across; k++) foreach (var z in new[] { r.Z0, r.Z1 }) { double x = r.X0 + width * k / across; builder.LocalBox(frame, x - s, bottom, z - o, x + s, top, z + o, timber); }
+            for (int k = 1; k < along; k++) foreach (var x in new[] { r.X0, r.X1 }) { double z = r.Z0 + depth * k / along; builder.LocalBox(frame, x - o, bottom, z - s, x + o, top, z + s, timber); }
+            // A beam at each upper floor line; the ground line sits on the plinth.
+            for (int k = plans[start].Floor == 0 ? start + 1 : start; k < end; k++)
+            {
+                double y = plans[k].Y;
+                builder.LocalBox(frame, r.X0 - o, y, r.Z0 - o, r.X1 + o, y + FarBeam, r.Z0 + o, timber);
+                builder.LocalBox(frame, r.X0 - o, y, r.Z1 - o, r.X1 + o, y + FarBeam, r.Z1 + o, timber);
+                builder.LocalBox(frame, r.X0 - o, y, r.Z0, r.X0 + o, y + FarBeam, r.Z1, timber);
+                builder.LocalBox(frame, r.X1 - o, y, r.Z0, r.X1 + o, y + FarBeam, r.Z1, timber);
+            }
         }
 
         static bool SameRects(List<CoreRect> a, List<CoreRect> b) => a.Count == b.Count && a.Zip(b, (x, y) => x.X0 == y.X0 && x.X1 == y.X1 && x.Z0 == y.Z0 && x.Z1 == y.Z1).All(s => s);

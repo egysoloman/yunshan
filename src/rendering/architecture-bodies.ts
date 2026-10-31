@@ -123,6 +123,9 @@ export function programRoofPart(region: RoofRegion, timberFinish = false): Progr
     ...(region.kind === 'gable' ? { template: programRoofTemplate(region.gableAxis!) } : {}) };
 }
 
+/** Far-LOD timber frame of timber-finish bodies (homes, shops, low banks): corner post width, how far a beam stands
+ * proud of the wall, stud width and the widest bay between studs, beam height, and the near model's dark timber colour. */
+export const FAR_TIMBER_FRAME = { post: .4, stud: .25, bay: 6, proud: .06, beam: .3, color: '#4b2f1e' } as const;
 /** Null preserves every original emitter for all four historical layouts and
  * the landmark/pavilion. New bodies use the provider's rooms, holes, doors,
  * windows and exposed roofs; the far silhouette retains those same courts. */
@@ -156,6 +159,23 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
         box(first.floor < 0 ? 'stone' : 'wall', (r.x0 + r.x1) / 2, (first.y + top) / 2, (r.z0 + r.z1) / 2,
           width, top - first.y, depth, first.floor < 0 ? '#939487' : wallColor, first.floor, 'body', false,
           first.floor < 0 ? undefined : [Math.max(2, Math.floor(width / 4.8)), end - i + .03, Math.min(.2, (commercial ? 3.6 : 1.6) / width), Math.min(.2, (commercial ? 3.6 : 1.6) / depth)]);
+        // A timber-finish envelope keeps its frame from afar: dark corner posts, studs and floor-line beams.
+        if (timberFinish && first.floor >= 0) {
+          const { post, proud, beam } = FAR_TIMBER_FRAME, color = FAR_TIMBER_FRAME.color;
+          for (const x of [r.x0, r.x1]) for (const z of [r.z0, r.z1]) box('wood', x, (first.y + top) / 2, z, post, top - first.y, post, color, first.floor, 'body');
+          // Studs at most FAR_TIMBER_FRAME.bay apart along each side, so a blank end wall still reads as framed.
+          const across = Math.ceil(width / FAR_TIMBER_FRAME.bay), along = Math.ceil(depth / FAR_TIMBER_FRAME.bay);
+          for (let k = 1; k < across; k++) for (const z of [r.z0, r.z1]) box('wood', r.x0 + width * k / across, (first.y + top) / 2, z, FAR_TIMBER_FRAME.stud, top - first.y, proud * 2, color, first.floor, 'body');
+          for (let k = 1; k < along; k++) for (const x of [r.x0, r.x1]) box('wood', x, (first.y + top) / 2, r.z0 + depth * k / along, proud * 2, top - first.y, FAR_TIMBER_FRAME.stud, color, first.floor, 'body');
+          // A beam at each upper floor line; the ground line sits on the plinth.
+          for (let k = first.floor === 0 ? i + 1 : i; k < end; k++) {
+            const y = body.floorPlans[k].y + beam / 2;
+            box('wood', (r.x0 + r.x1) / 2, y, r.z0, width + proud * 2, beam, proud * 2, color, body.floorPlans[k].floor, 'body');
+            box('wood', (r.x0 + r.x1) / 2, y, r.z1, width + proud * 2, beam, proud * 2, color, body.floorPlans[k].floor, 'body');
+            box('wood', r.x0, y, (r.z0 + r.z1) / 2, proud * 2, beam, depth, color, body.floorPlans[k].floor, 'body');
+            box('wood', r.x1, y, (r.z0 + r.z1) / 2, proud * 2, beam, depth, color, body.floorPlans[k].floor, 'body');
+          }
+        }
       }
       i = end;
     }
