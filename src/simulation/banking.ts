@@ -1,8 +1,9 @@
+import { BANK_ACTION_NAMES } from './player-names';
 import type { Simulation } from '../simulation';
 import { shopLifecyclePendingEstateAssets } from './shop_lifecycle';
 import { canAccessFloor } from '../access';
 import { getBuildingBody } from '../architecture-floor-plan';
-import type { CommandResult, Role, SimState } from '../types';
+import type { Citizen, CommandResult, Role, SimState } from '../types';
 
 export interface BankAccount { deposits: number; loanPrincipal: number; loanInterest: number; interestDue: number; closed: boolean }
 export interface BankReceipt { id: string; tick: number; at: number; actorId: string; kind: string; amount: number; cashBefore: number; cashAfter: number; principal: number; interest: number; counterpartyId?: string }
@@ -73,8 +74,8 @@ export function installBanking(simulation: Simulation): void {
       stats: { deposited: 0, withdrawn: 0, loaned: 0, repaid: 0, loanInterestPaid: 0, depositInterestCredited: 0, losses: 0 } };
   };
   state().banking = initialize(); projectPlayer(state());
-  const atBank = (id: string, targetId?: string) => {
-    const s = state(), actor = actorOf(s, id);
+  const atBank = (id: string, targetId?: string, known?: ReturnType<typeof actorOf>) => {
+    const s = state(), actor = known === undefined ? actorOf(s, id) : known;
     if (!actor || !s.extension!.actorProfiles[id]?.alive) return undefined;
     return sites.find(site => {
       if (targetId && targetId !== site.id || !simulation.isNearBuilding(site, actor.position)) return false;
@@ -125,12 +126,14 @@ export function installBanking(simulation: Simulation): void {
       return result;
     }
     simulation.emitEvent({ type: 'bank-transaction', citizenId: 'player', amount, districtId: site.districtId });
-    return { ok: true, message: `${site.name}办理完成：${command.type} ${amount.toFixed(1)}云币，账户和现金池已实际结算。` };
+    return { ok: true, message: `${site.name}办理完成：${BANK_ACTION_NAMES[command.type] ?? '业务'} ${amount.toFixed(1)}云币，账户和现金池已实际结算。` };
   });
   simulation.onPhase('people', () => {
     const s = state(), bank = s.banking!, now = clock(s);
+    // The first resident of each id, as actorOf's find would give it, without a scan per resident.
+    const first = new Map<string, Citizen>(); for (const person of s.citizens) if (!first.has(person.id)) first.set(person.id, person);
     for (const citizen of s.citizens) {
-      if (now < (bank.nextVisitAt[citizen.id] ?? 0) || !atBank(citizen.id)) continue;
+      if (now < (bank.nextVisitAt[citizen.id] ?? 0) || !atBank(citizen.id, undefined, first.get(citizen.id))) continue;
       const account = bank.accounts[citizen.id] ??= emptyAccount();
       if (account.closed) continue;
       if (citizen.money < 80 && account.deposits > 0 && bank.cash > 0) withdraw(s, citizen.id, Math.min(120 - citizen.money, account.deposits, bank.cash));

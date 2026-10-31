@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Compiles the engine-free simulation core that Unity also compiles from
+       unity/Assets/Yunshan/Core. Unity 6 supports C# 9 on .NET Standard 2.1. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Yunshan.Core</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../unity/Assets/Yunshan/Core/**/*.cs" />
+  </ItemGroup>
+</Project>

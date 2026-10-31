@@ -1,0 +1,310 @@
+diff --git a/src/product-city.ts b/src/product-city.ts
+index d48ea7b..e800f78 100644
+--- a/src/product-city.ts
++++ b/src/product-city.ts
+@@ -4,8 +4,8 @@ import type { WorldDefinition } from './types';
+ import { CONTINUOUS_REFERENCE_COLLISION_POLICY } from './simulation/reference-collision';
+ import { ROAD_FOOD_PICKUP_POLICY } from './simulation/freight-access';
+ import { NEARBY_MEAL_ROUTE_POLICY } from './simulation/meal-route';
+-import { STAFFED_FARM_YIELD_POLICY } from './simulation/farm-yield';
+-import { DEMAND_FOOD_FREIGHT_POLICY } from './simulation/freight-delivery';
++import { STAFFED_FARM_YIELD_POLICY_V2 } from './simulation/farm-yield';
++import { DEMAND_FOOD_FREIGHT_POLICY_V2 } from './simulation/freight-delivery';
+ import { upgradeServiceMaterialScheduling } from './host/upgrade-service-material-scheduling';
+ 
+ export const PRODUCT_CITY_LAYOUT = 'current-v6' as const;
+@@ -28,7 +28,7 @@ export function createArchivedProductCity(world: WorldDefinition): Simulation {
+ /** New cities select continuous ordinary reference legs; imports retain their
+  * existing history, motion and collision contracts. */
+ export function createCurrentProductCity(world: WorldDefinition): Simulation {
+-  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: NEARBY_MEAL_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY });
++  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', referenceCollisionPolicyId: CONTINUOUS_REFERENCE_COLLISION_POLICY, mealRoutePolicyId: NEARBY_MEAL_ROUTE_POLICY, freightPickupPolicyId: ROAD_FOOD_PICKUP_POLICY, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V2, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V2 });
+ }
+ 
+ /** Fresh city-life recipe for both graphical and headless hosts. The policy's
+diff --git a/src/simulation.ts b/src/simulation.ts
+index abd9e3e..f3758db 100644
+--- a/src/simulation.ts
++++ b/src/simulation.ts
+@@ -7,8 +7,8 @@ import { createCivicHistory, freezeCivicHistory } from './simulation/civic-histo
+ import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
+ import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
+ import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
+-import { laborMinutesPerUnit, STAFFED_FARM_YIELD_POLICY, type FarmYieldPolicy } from './simulation/farm-yield';
+-import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
++import { FARM_YIELD_POLICIES, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
++import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY_V2, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
+ import { parseSaveWithinResources } from './persistence/save-resource';
+ import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
+ import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetState } from './simulation/supplemental-budget';
+@@ -174,8 +174,8 @@ export class Simulation implements SimulationAPI {
+       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+       || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+-      || options.farmYieldPolicyId !== undefined && (options.farmYieldPolicyId !== STAFFED_FARM_YIELD_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+-      || options.foodFreightPolicyId !== undefined && (options.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
++      || options.farmYieldPolicyId !== undefined && (!FARM_YIELD_POLICIES.includes(options.farmYieldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
++      || options.foodFreightPolicyId !== undefined && (!FOOD_FREIGHT_POLICIES.includes(options.foodFreightPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
+     validatePowerGridDefinition(world);
+     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
+@@ -1031,7 +1031,7 @@ export class Simulation implements SimulationAPI {
+             vehicle.cargo = Math.min(producer.inventory, freightCarrier.cargoCapacity); producer.inventory -= vehicle.cargo;
+             (this.runtime.cargoSources ??= {})[vehicle.id] = producer.id;
+             this.bus.emit({ type: 'cargo-loaded', vehicleId: vehicle.id, nodeId, shopId: producer.id, districtId: producer.districtId, amount: vehicle.cargo, quantity: vehicle.cargo });
+-          }
++          } else this.relayFoodFreight(vehicle, nodeId, node.districtId, freightCarrier.cargoCapacity);
+         }
+         if (vehicle.kind === 'flight') this.bus.emit({ type: 'flight' });
+         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
+@@ -1242,9 +1242,25 @@ export class Simulation implements SimulationAPI {
+     for (const vehicle of this.state.vehicles) { const bound = this.runtime.cargoDestinations?.[vehicle.id]; const row = bound ? rows.get(bound) : undefined; if (row && vehicle.cargo > 0) row.stock += vehicle.cargo; }
+     return [...rows.values()];
+   }
++  /** demand-food-freight-v2 relay: an empty carrier in a district that is not
++   * short takes the oldest waiting lot there (its owner is kept as the cargo
++   * source) and is bound to the short district at once. Nothing is created. */
++  private relayFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string, capacity: number): void {
++    if (this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY_V2 || vehicle.cargo > 0 || (this.runtime.freight[districtId] ?? 0) < 1) return;
++    const demand = this.foodFreightDemand(); if (!districtSupplied(demand, districtId)) return;
++    const destination = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, demand); if (!destination || destination === districtId) return;
++    const lots = this.runtime.freightLots ??= {}, deliveries = lots[districtId] ??= [{ shopId: null, quantity: this.runtime.freight[districtId] }];
++    const lot = deliveries[0]; if (!lot || lot.quantity < 1) return;
++    const quantity = Math.min(Math.floor(lot.quantity), capacity); if (quantity < 1) return;
++    lot.quantity -= quantity; if (lot.quantity < 1e-7) deliveries.shift();
++    this.runtime.freight[districtId] = Math.max(0, this.runtime.freight[districtId] - quantity);
++    vehicle.cargo = quantity;
++    if (lot.shopId) (this.runtime.cargoSources ??= {})[vehicle.id] = lot.shopId; else if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id];
++    (this.runtime.cargoDestinations ??= {})[vehicle.id] = destination;
++  }
+   /** True while a declared carrier keeps its food for a district further on. */
+   private holdFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string): boolean {
+-    if (this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY || !this.freightCarriers.has(vehicle.id)) return false;
++    if (!this.runtime.foodFreightPolicyId || !this.freightCarriers.has(vehicle.id)) return false;
+     const destinations = this.runtime.cargoDestinations ??= {}, bound = destinations[vehicle.id];
+     if (bound) return bound !== districtId && this.freightHops.hops(vehicle.kind, bound).has(nodeId);
+     const chosen = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, this.foodFreightDemand());
+@@ -1424,7 +1440,7 @@ export class Simulation implements SimulationAPI {
+   private foodShortageHiringOffer(shop: Shop, applicant: Citizen, salary: number): boolean {
+     const site = this.buildings.get(shop.buildingId)!, ownerId = this.shopOwnerId(shop), owner = ownerId === 'player' ? this.state.player : this.state.citizens.find(c => c.id === ownerId);
+     const profile = ownerId ? this.state.extension?.actorProfiles[ownerId] : undefined;
+-    if (!['farm', 'dock'].includes(site.kind) || shop.inventory >= 120 || !shopLifecycleAllowsNewPayroll(this.state, shop.id) || !this.foodHiringApplicantAvailable(applicant)
++    if (!['farm', 'dock'].includes(site.kind) || shop.inventory >= producerStockCap(this.runtime.farmYieldPolicyId, site.kind) || !shopLifecycleAllowsNewPayroll(this.state, shop.id) || !this.foodHiringApplicantAvailable(applicant)
+       || this.shopFunds(shop) - this.shopProtectedFunds(shop) - 20 * 8 / 24 < salary || !owner || !profile?.alive || profile.age < 18 || profile.health < 45
+       || owner.needs.hunger < 40 || owner.needs.fatigue < 35 || homeRestPointBlockedByVoxels(owner.position, this.state.voxels)
+       || !this.isNearBuilding(site, owner.position, 2) || !this.isAtBuildingFunctionPoint(site, owner.position, 'work', ownerId === 'player' ? this.state.player : { role: this.citizenIdentity(owner as Citizen), identities: [this.citizenIdentity(owner as Citizen)] })
+@@ -1951,7 +1967,7 @@ export class Simulation implements SimulationAPI {
+       }
+       if (shop.open && ['farm', 'workshop', 'dock'].includes(building.kind)) {
+         const technology = this.state.extension?.technologies.find(t => t.sector === (building.kind === 'farm' ? 'agriculture' : 'manufacturing'))?.level ?? 0;
+-        const produced = Math.min(Math.max(0, 120 - shop.inventory), productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) * (this.state.powerGrid ? 1 : siteEnergy) * (1 + technology * .12));
++        const produced = Math.min(Math.max(0, producerStockCap(this.runtime.farmYieldPolicyId, building.kind) - shop.inventory), productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) * (this.state.powerGrid ? 1 : siteEnergy) * (1 + technology * .12));
+         shop.inventory = clamp(shop.inventory + produced, 0, 10000);
+         if (produced > 0) this.bus.emit({ type: 'production', shopId: shop.id, districtId: shop.districtId, amount: produced, minutes: this.state.powerGrid ? productiveLabor : labor });
+       }
+@@ -2699,7 +2715,7 @@ export class Simulation implements SimulationAPI {
+       }
+       if (r.publicSupply !== undefined) number(r.publicSupply, 0, 1, 'public supply fulfillment'); if (r.operationUnitPrice !== undefined) number(r.operationUnitPrice, 4, 1e12, 'observed public material unit price');
+       if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
+-      if (r.cargoDestinations !== undefined) { ensure(r.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY && r.cargoDestinations && typeof r.cargoDestinations === 'object' && !Array.isArray(r.cargoDestinations), 'freight destinations declared'); for (const [id, districtId] of Object.entries(r.cargoDestinations)) ensure(this.freightCarriers.has(id) && districtIds.has(districtId as string) && (s.vehicles.find((v: Vehicle) => v.id === id)?.cargo ?? 0) > 0, 'freight destination reference'); }
++      if (r.cargoDestinations !== undefined) { ensure(FOOD_FREIGHT_POLICIES.includes(r.foodFreightPolicyId) && r.cargoDestinations && typeof r.cargoDestinations === 'object' && !Array.isArray(r.cargoDestinations), 'freight destinations declared'); for (const [id, districtId] of Object.entries(r.cargoDestinations)) ensure(this.freightCarriers.has(id) && districtIds.has(districtId as string) && (s.vehicles.find((v: Vehicle) => v.id === id)?.cargo ?? 0) > 0, 'freight destination reference'); }
+       if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }
+       for (const id of array(r.playerBusinesses, 512, 'businesses')) ensure(shopIds.has(id), 'business id'); ensure(new Set(r.playerBusinesses).size === r.playerBusinesses.length, 'duplicate businesses');
+       for (const shop of shops) if (shop.lifecycleVersion === 1) ensure(r.playerBusinesses.includes(shop.id) === (shop.ownerId === 'player' && !s.extension?.companies.some((company: { buildingId: string; shopBindingReleasedAt?: number }) => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)), 'managed business mirror must reflect actual operating owner');
+diff --git a/src/simulation/farm-yield.ts b/src/simulation/farm-yield.ts
+index e69093b..fe003f2 100644
+--- a/src/simulation/farm-yield.ts
++++ b/src/simulation/farm-yield.ts
+@@ -1,7 +1,10 @@
+ import type { BuildingKind } from '../types';
+ 
+ export const STAFFED_FARM_YIELD_POLICY = 'staffed-farm-yield-v1' as const;
+-export type FarmYieldPolicy = typeof STAFFED_FARM_YIELD_POLICY;
++/** v2 (balance, user-authorised 2026-10-08): 4 minutes per unit and a 240-unit producer store. */
++export const STAFFED_FARM_YIELD_POLICY_V2 = 'staffed-farm-yield-v2' as const;
++export type FarmYieldPolicy = typeof STAFFED_FARM_YIELD_POLICY | typeof STAFFED_FARM_YIELD_POLICY_V2;
++export const FARM_YIELD_POLICIES: readonly FarmYieldPolicy[] = [STAFFED_FARM_YIELD_POLICY, STAFFED_FARM_YIELD_POLICY_V2];
+ 
+ /** Original rule: every producer turns 30 attended, powered labour minutes into one unit. */
+ export const LEGACY_LABOR_MINUTES_PER_UNIT = 30;
+@@ -12,9 +15,22 @@ export const LEGACY_LABOR_MINUTES_PER_UNIT = 30;
+  * unit per 6 attended minutes. Workshops, wages, prices, hours, power,
+  * inventory caps and the movement of every actor are unchanged. */
+ export const STAFFED_FOOD_LABOR_MINUTES_PER_UNIT = 6;
++/** v2 balance: the third audit (food freight routing) still ended with
++ * starving outer districts, and the user authorised raising farm and fishery
++ * output: 4 attended minutes per unit, and farms and docks may hold 240 units
++ * (the original store is 120) so a carrier visit finds a full load. */
++export const STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2 = 4;
++export const LEGACY_PRODUCER_STOCK_CAP = 120;
++export const STAFFED_FOOD_PRODUCER_STOCK_CAP_V2 = 240;
++const food = (kind: BuildingKind) => kind === 'farm' || kind === 'dock';
+ 
+ export function laborMinutesPerUnit(policy: FarmYieldPolicy | undefined, kind: BuildingKind): number {
+-  return policy === STAFFED_FARM_YIELD_POLICY && (kind === 'farm' || kind === 'dock') ? STAFFED_FOOD_LABOR_MINUTES_PER_UNIT : LEGACY_LABOR_MINUTES_PER_UNIT;
++  if (!food(kind)) return LEGACY_LABOR_MINUTES_PER_UNIT;
++  return policy === STAFFED_FARM_YIELD_POLICY_V2 ? STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2 : policy === STAFFED_FARM_YIELD_POLICY ? STAFFED_FOOD_LABOR_MINUTES_PER_UNIT : LEGACY_LABOR_MINUTES_PER_UNIT;
++}
++/** Production and food hiring stop at this producer stock. */
++export function producerStockCap(policy: FarmYieldPolicy | undefined, kind: BuildingKind): number {
++  return policy === STAFFED_FARM_YIELD_POLICY_V2 && food(kind) ? STAFFED_FOOD_PRODUCER_STOCK_CAP_V2 : LEGACY_PRODUCER_STOCK_CAP;
+ }
+ 
+ /** The envelope and runtime declare the same explicit new-city policy. */
+@@ -22,7 +38,7 @@ export function validateFarmYieldPolicy(data: Record<string, any>): void {
+   const envelope = Object.hasOwn(data, 'farmYieldPolicyId');
+   const runtime = !!data.runtime && Object.hasOwn(data.runtime, 'farmYieldPolicyId');
+   if (!envelope && !runtime) return;
+-  if (!envelope || !runtime || data.farmYieldPolicyId !== STAFFED_FARM_YIELD_POLICY
+-    || data.runtime.farmYieldPolicyId !== STAFFED_FARM_YIELD_POLICY
++  if (!envelope || !runtime || !FARM_YIELD_POLICIES.includes(data.farmYieldPolicyId)
++    || data.runtime.farmYieldPolicyId !== data.farmYieldPolicyId
+     || data.version !== 4 || data.motionVersion !== 2 || data.runtime.npcMotionVersion !== 2) throw new Error('无效存档字段：farm yield policy pair。');
+ }
+diff --git a/src/simulation/freight-delivery.ts b/src/simulation/freight-delivery.ts
+index 2d4cb46..44a81e6 100644
+--- a/src/simulation/freight-delivery.ts
++++ b/src/simulation/freight-delivery.ts
+@@ -1,7 +1,11 @@
+ import type { NetworkEdge, Vehicle, WorldDefinition } from '../types';
+ 
+ export const DEMAND_FOOD_FREIGHT_POLICY = 'demand-food-freight-v1' as const;
+-export type FoodFreightPolicy = typeof DEMAND_FOOD_FREIGHT_POLICY;
++/** v2 adds relay: an empty declared carrier at a junction of a district that
++ * is not short loads that district's waiting freight for a short district. */
++export const DEMAND_FOOD_FREIGHT_POLICY_V2 = 'demand-food-freight-v2' as const;
++export type FoodFreightPolicy = typeof DEMAND_FOOD_FREIGHT_POLICY | typeof DEMAND_FOOD_FREIGHT_POLICY_V2;
++export const FOOD_FREIGHT_POLICIES: readonly FoodFreightPolicy[] = [DEMAND_FOOD_FREIGHT_POLICY, DEMAND_FOOD_FREIGHT_POLICY_V2];
+ 
+ /** Markets buy freight only while below this stock (Simulation shop batch). */
+ export const MARKET_FREIGHT_INTAKE_LIMIT = 36;
+@@ -24,8 +28,8 @@ export function validateFoodFreightPolicy(data: Record<string, any>): void {
+   const envelope = Object.hasOwn(data, 'foodFreightPolicyId');
+   const runtime = !!data.runtime && Object.hasOwn(data.runtime, 'foodFreightPolicyId');
+   if (!envelope && !runtime) return;
+-  if (!envelope || !runtime || data.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY
+-    || data.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY
++  if (!envelope || !runtime || !FOOD_FREIGHT_POLICIES.includes(data.foodFreightPolicyId)
++    || data.runtime.foodFreightPolicyId !== data.foodFreightPolicyId
+     || data.version !== 4 || data.motionVersion !== 2 || data.runtime.npcMotionVersion !== 2) throw new Error('无效存档字段：food freight policy pair。');
+ }
+ 
+@@ -55,6 +59,12 @@ export class FreightHops {
+   }
+ }
+ 
++/** True when a district's markets are at or above the intake line (or it has none). */
++export function districtSupplied(demand: readonly FreightDemand[], districtId: string): boolean {
++  const row = demand.find(r => r.districtId === districtId);
++  return !row || row.markets <= 0 || row.stock / row.markets >= MARKET_FREIGHT_INTAKE_LIMIT;
++}
++
+ /** The reachable district with the least food per market below the intake
+  * limit; ties go to the lower district id. Null when no district is short. */
+ export function chooseFreightDestination(hops: FreightHops, mode: Vehicle['kind'], nodeId: string, demand: readonly FreightDemand[]): string | null {
+diff --git a/tests/farm-yield-policy.test.ts b/tests/farm-yield-policy.test.ts
+index 21f660e..fa8d0ba 100644
+--- a/tests/farm-yield-policy.test.ts
++++ b/tests/farm-yield-policy.test.ts
+@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
+ import test from 'node:test';
+ import { Simulation } from '../src/simulation';
+ import { createArchivedProductCity, createCurrentProductCity } from '../src/product-city';
+-import { LEGACY_LABOR_MINUTES_PER_UNIT, laborMinutesPerUnit, STAFFED_FARM_YIELD_POLICY, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT, validateFarmYieldPolicy } from '../src/simulation/farm-yield';
++import { LEGACY_LABOR_MINUTES_PER_UNIT, LEGACY_PRODUCER_STOCK_CAP, laborMinutesPerUnit, producerStockCap, STAFFED_FARM_YIELD_POLICY, STAFFED_FARM_YIELD_POLICY_V2, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT, STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2, STAFFED_FOOD_PRODUCER_STOCK_CAP_V2, validateFarmYieldPolicy } from '../src/simulation/farm-yield';
+ import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
+ import { assembleSave, partitionSave } from '../src/persistence/partition';
+ import { civicFixtureWorld } from './civic-staffing-fixture';
+@@ -11,6 +11,8 @@ test('farm yield policy keeps absence and requires a matched explicit v4 native-
+   for (const version of [1, 2, 3, 4]) validateFarmYieldPolicy({ version, runtime: {} });
+   const declared = { version: 4, motionVersion: 2, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY, runtime: { npcMotionVersion: 2, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY } };
+   validateFarmYieldPolicy(declared);
++  validateFarmYieldPolicy({ ...declared, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V2, runtime: { ...declared.runtime, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V2 } });
++  assert.throws(() => validateFarmYieldPolicy({ ...declared, farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY_V2 }), /farm yield policy pair/, 'envelope and runtime must name the same version');
+   assert.equal(hasCityRulesetDeclaration(declared), true);
+   assert.equal(hasCityRulesetDeclaration({ version: 1, state: {}, runtime: { farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY } }), true);
+   for (const body of [{ ...declared, farmYieldPolicyId: undefined }, { ...declared, farmYieldPolicyId: 'invented' }, { ...declared, version: 3 }, { ...declared, motionVersion: 1 },
+@@ -23,13 +25,17 @@ test('only food producers of a declared city change yield; workshops and legacy
+   assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY, 'farm'), STAFFED_FOOD_LABOR_MINUTES_PER_UNIT);
+   assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY, 'dock'), STAFFED_FOOD_LABOR_MINUTES_PER_UNIT);
+   assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY, 'workshop'), LEGACY_LABOR_MINUTES_PER_UNIT);
++  assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY_V2, 'dock'), STAFFED_FOOD_LABOR_MINUTES_PER_UNIT_V2);
++  assert.equal(laborMinutesPerUnit(STAFFED_FARM_YIELD_POLICY_V2, 'workshop'), LEGACY_LABOR_MINUTES_PER_UNIT);
++  assert.equal(producerStockCap(STAFFED_FARM_YIELD_POLICY_V2, 'farm'), STAFFED_FOOD_PRODUCER_STOCK_CAP_V2);
++  for (const [policy, kind] of [[STAFFED_FARM_YIELD_POLICY, 'farm'], [undefined, 'dock'], [STAFFED_FARM_YIELD_POLICY_V2, 'workshop']] as const) assert.equal(producerStockCap(policy, kind), LEGACY_PRODUCER_STOCK_CAP);
+   assert.throws(() => new Simulation(civicFixtureWorld(), { rulesetId: 'civic-local-v1', farmYieldPolicyId: STAFFED_FARM_YIELD_POLICY }), /不支持的显式城市规则版本/);
+ });
+ 
+ test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
+   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
+-  assert.equal(city.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY);
+-  assert.equal(doc.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY); assert.equal(doc.runtime.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY);
++  assert.equal(city.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V2);
++  assert.equal(doc.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V2); assert.equal(doc.runtime.farmYieldPolicyId, STAFFED_FARM_YIELD_POLICY_V2);
+   assert.equal(assembleSave(partitionSave(saved, world)), saved);
+   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
+   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
+diff --git a/tests/food-freight-policy.test.ts b/tests/food-freight-policy.test.ts
+index 71d204b..8911a60 100644
+--- a/tests/food-freight-policy.test.ts
++++ b/tests/food-freight-policy.test.ts
+@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
+ import test from 'node:test';
+ import { Simulation } from '../src/simulation';
+ import { createArchivedProductCity, createCurrentProductCity, createProductWorld } from '../src/product-city';
+-import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY, FreightHops, MARKET_FREIGHT_INTAKE_LIMIT, validateFoodFreightPolicy } from '../src/simulation/freight-delivery';
++import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY, DEMAND_FOOD_FREIGHT_POLICY_V2, districtSupplied, FreightHops, MARKET_FREIGHT_INTAKE_LIMIT, validateFoodFreightPolicy } from '../src/simulation/freight-delivery';
+ import { hasCityRulesetDeclaration } from '../src/simulation/city-ruleset';
+ import { assembleSave, partitionSave } from '../src/persistence/partition';
+ import { civicFixtureWorld } from './civic-staffing-fixture';
+@@ -12,6 +12,8 @@ test('food freight policy keeps absence and requires a matched explicit v4 nativ
+   for (const version of [1, 2, 3, 4]) validateFoodFreightPolicy({ version, runtime: {} });
+   const declared = { version: 4, motionVersion: 2, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY, runtime: { npcMotionVersion: 2, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY } };
+   validateFoodFreightPolicy(declared);
++  validateFoodFreightPolicy({ ...declared, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V2, runtime: { ...declared.runtime, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V2 } });
++  assert.throws(() => validateFoodFreightPolicy({ ...declared, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY_V2 }), /food freight policy pair/);
+   assert.equal(hasCityRulesetDeclaration(declared), true);
+   for (const body of [{ ...declared, foodFreightPolicyId: undefined }, { ...declared, foodFreightPolicyId: 'invented' }, { ...declared, version: 3 }, { ...declared, motionVersion: 1 },
+     { ...declared, runtime: {} }, { ...declared, runtime: { npcMotionVersion: 1, foodFreightPolicyId: DEMAND_FOOD_FREIGHT_POLICY } }])
+@@ -27,13 +29,16 @@ test('the destination is the reachable district with least food per market below
+   assert.equal(chooseFreightDestination(hops, 'road', node.id, [{ districtId: 'east', markets: 2, stock: 10 }, { districtId: 'west', markets: 1, stock: 6 }]), 'east');
+   assert.equal(chooseFreightDestination(hops, 'road', node.id, [{ districtId: 'west', markets: 1, stock: 5 }, { districtId: 'east', markets: 2, stock: 10 }]), 'east', 'ties go to the lower district id');
+   assert.equal(chooseFreightDestination(hops, 'road', node.id, [{ districtId: 'east', markets: 0, stock: 0 }]), null, 'a district without markets is never a destination');
++  assert.equal(districtSupplied([{ districtId: 'east', markets: 2, stock: 10 }], 'east'), false);
++  assert.equal(districtSupplied([{ districtId: 'east', markets: 2, stock: 2 * full }], 'east'), true);
++  assert.equal(districtSupplied([], 'starport'), true, 'a district without markets has nothing to be short of');
+   assert.equal(hops.hops('road', 'east').get(world.nodes.find(n => n.districtId === 'east' && hops.hops('road', 'east').has(n.id))!.id), 0);
+ });
+ 
+ test('a new product city declares the policy and keeps it through save, partitions and import; an archive does not acquire it', () => {
+   const world = civicFixtureWorld(), city = createCurrentProductCity(world), saved = city.exportSave(), doc = JSON.parse(saved);
+-  assert.equal(city.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY);
+-  assert.equal(doc.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY); assert.equal(doc.runtime.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY);
++  assert.equal(city.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V2);
++  assert.equal(doc.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V2); assert.equal(doc.runtime.foodFreightPolicyId, DEMAND_FOOD_FREIGHT_POLICY_V2);
+   assert.equal(assembleSave(partitionSave(saved, world)), saved);
+   const reader = createCurrentProductCity(world); assert.equal(reader.importSave(saved).ok, true); assert.equal(reader.exportSave(), saved);
+   for (let tick = 0; tick < 12; tick++) { city.step(.25); reader.step(.25); assert.equal(reader.exportSave(), city.exportSave()); }
+@@ -66,3 +71,22 @@ test('declared carriers route food to a short district and release it only there
+   assert(east > 28 * 10, `east received routed freight (${east})`);
+   assert(Object.values(internals.runtime.cargoDestinations).every(d => d === 'east'));
+ });
++
++test('v2 relay loads freight waiting in a supplied district for a short one, keeping its owner and total', () => {
++  const world = createProductWorld(), sim = createCurrentProductCity(world);
++  sim.command({ type: 'speed', value: 8 }); sim.setFocus(world.spawn, 'walk');
++  const internals = sim as unknown as { foodFreightDemand: () => { districtId: string; markets: number; stock: number }[]; runtime: { freight: Record<string, number>; freightLots: Record<string, { shopId: string | null; quantity: number }[]>; cargoDestinations: Record<string, string>; cargoSources: Record<string, string> } };
++  const real = internals.foodFreightDemand.bind(sim);
++  internals.foodFreightDemand = () => real().map(row => row.districtId === 'east' ? { ...row, stock: 0 } : { ...row, stock: Math.max(row.stock, MARKET_FREIGHT_INTAKE_LIMIT * row.markets) });
++  const total = () => Object.values(internals.runtime.freight).reduce((a, b) => a + b, 0) + sim.state.vehicles.reduce((a, v) => a + v.cargo, 0);
++  // Run until carriers have dropped unbound initial cargo somewhere, then watch relays.
++  let relayed = 0;
++  for (let tick = 0; tick < 120; tick++) {
++    const empty = new Set(sim.state.vehicles.filter(v => v.cargo === 0).map(v => v.id)), before = total();
++    sim.step(.25);
++    for (const vehicle of sim.state.vehicles) if (empty.has(vehicle.id) && vehicle.cargo > 0 && internals.runtime.cargoDestinations[vehicle.id] === 'east') relayed++;
++    assert(total() <= before + 1e-6 + sim.state.shops.filter(s => world.buildings.find(b => b.id === s.buildingId)!.kind !== 'market').length * 1000, 'relay moves stock, it creates none');
++    for (const lots of Object.values(internals.runtime.freightLots)) for (const lot of lots) assert(lot.quantity >= -1e-9);
++  }
++  assert(relayed > 0, 'empty carriers picked up loads bound for east');
++});

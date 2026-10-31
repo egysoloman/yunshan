@@ -174,10 +174,15 @@ test('explicit upgrade of an actual legacy1 city keeps its original motion contr
   }
 });
 
-test('explicit product world keeps validated v6 default and optional v7 restores known v6 cities and restores known v6 v3 through selector and source bridge unchanged', () => {
+test('the product world is the dense-market current-v9, the compatibility default stays v6, and known v6 and v8 cities restore through selector and source bridge unchanged', () => {
   assert.equal(CURRENT_CITY_LAYOUT, 'current-v6');
   const productWorld = createProductWorld(); assert.equal((productWorld as any).layoutVersion, PRODUCT_CITY_LAYOUT);
-  assert.equal(selectSavedWorld(undefined, PRODUCT_CITY_LAYOUT).layout, 'current-v6');
+  assert.equal(PRODUCT_CITY_LAYOUT, 'current-v9');
+  assert.equal(selectSavedWorld(undefined, PRODUCT_CITY_LAYOUT).layout, 'current-v9');
+  // A city started on current-v8 keeps its own world after the product moved on.
+  const v8 = createWorld(20261001, 'current-v8'), v8Raw = createProductCity(v8).exportSave(), v8Selected = selectSavedWorld(v8Raw, PRODUCT_CITY_LAYOUT);
+  assert.equal(v8Selected.layout, 'current-v8'); assert.equal(savedWorldFingerprint(v8Selected.world), savedWorldFingerprint(v8));
+  assert.notEqual(savedWorldFingerprint(createProductWorld()), savedWorldFingerprint(v8), 'v9 has its own world identity');
   assert.equal(selectSavedWorld().layout, 'current-v6');
   assert.equal(selectSavedWorld(undefined, 'current-v7').layout, 'current-v7');
   const world = createWorld(20261001, 'current-v6'), city = createProductCity(world), raw = city.exportSave();

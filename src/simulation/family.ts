@@ -86,7 +86,10 @@ export interface FamilyState {
   nextEstateSaleId: number;
   formalLearningVersion?: 1 | 2;
   formalLearning?: Record<string, FormalLearningRecord>;
+  /** Adults who arrived from outside the city (declared migration policy). */
+  migrants?: Record<string, FamilyMigrant>;
 }
+export interface FamilyMigrant { arrivedAt: number; arrivalAge: number; homeId: string; workId: string; savings: number }
 type FamilySimState = SimState & { family?: FamilyState };
 type ProvisionedCitizen = Citizen & { food?: number };
 const clamp = (value: number, min = 0, max = 100) => Math.max(min, Math.min(max, value));
@@ -224,11 +227,13 @@ export function installFamily(simulation: Simulation): void {
   };
   const homePossible = (ids: [string, string], homeId: string) => {
     const home = buildings.get(homeId); if (!home || home.kind !== 'home' || isCloseKin(state(), ids[0], ids[1])) return false;
-    const count = state().citizens.filter(person => alive(person.id) && person.homeId === home.id).length + Number(alive('player') && state().player.homeId === home.id);
-    if (count + ids.filter(id => actor(id)?.homeId !== home.id).length > home.capacity) return false;
+    // Every condition is a pure check; the cheap personal ones run before the city-wide resident count.
+    if (!ids.every(id => { const person = actor(id); return !!person && alive(id) && profile(id).age >= 18 && person.money >= 120 && (id === 'player' || simulation.buildingTravelDistance(home.id, (person as Citizen).workId) <= 500); })) return false;
     // Infants cannot independently travel; keep their established home until escorted travel exists.
     if (Object.entries(family().children).some(([id, child]) => alive(id) && profile(id).age < 6 && child.parentIds.some(parentId => ids.includes(parentId)) && actor(id)!.homeId !== home.id)) return false;
-    return ids.every(id => { const person = actor(id); return !!person && alive(id) && profile(id).age >= 18 && person.money >= 120 && (id === 'player' || simulation.buildingTravelDistance(home.id, (person as Citizen).workId) <= 500); });
+    let count = Number(alive('player') && state().player.homeId === home.id);
+    for (const person of state().citizens) if (person.homeId === home.id && alive(person.id)) count++;
+    return count + ids.filter(id => actor(id)?.homeId !== home.id).length <= home.capacity;
   };
   const moveTogether = (ids: [string, string], homeId: string): boolean => {
     const home = buildings.get(homeId);
@@ -260,12 +265,14 @@ export function installFamily(simulation: Simulation): void {
     if (now() >= f.nextBondAt - 1e-7 && f.bonds.length < 64) {
       f.nextBondAt = now() + 60;
       const singles = state().citizens.filter(person => !person.partnerId && alive(person.id) && profile(person.id).age >= 18 && profile(person.id).age <= 45 && profile(person.id).mood >= 65 && profile(person.id).stress <= 35 && person.needs.social >= 50);
+      // Courting actors: exactly those in an unmarried bond whose actors all live; new bonds join it below.
+      const courting = new Set(f.bonds.filter(bond => bond.stage !== 'married' && bond.actorIds.every(alive)).flatMap(bond => bond.actorIds));
+      const involved = (id: string) => courting.has(id);
       for (const first of singles) {
-        const involved = (id: string) => f.bonds.some(bond => bond.stage !== 'married' && bond.actorIds.every(alive) && bond.actorIds.includes(id));
         if (involved(first.id)) continue;
         const second = singles.find(person => person.id !== first.id && !involved(person.id) && !isCloseKin(state(), first.id, person.id) && Math.abs(profile(first.id).age - profile(person.id).age) <= 15 && distance(first.position, person.position) <= 12);
         if (!second) continue;
-        f.bonds.push({ actorIds: [first.id, second.id], stage: 'courtship', startedAt: now(), since: now(), sharedMinutes: 0, affection: [45, 45], trust: [35, 35], consent: [true, true] });
+        f.bonds.push({ actorIds: [first.id, second.id], stage: 'courtship', startedAt: now(), since: now(), sharedMinutes: 0, affection: [45, 45], trust: [35, 35], consent: [true, true] }); courting.add(first.id); courting.add(second.id);
         if (f.bonds.length >= 64) break;
       }
     }
@@ -624,7 +631,17 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
     const seen = new Set([id]), visit = (ancestor: string) => { ensure(!seen.has(ancestor), '谱系循环'); if (!children[ancestor]) return; seen.add(ancestor); for (const parent of children[ancestor].parentIds) visit(parent); seen.delete(ancestor); };
     for (const parent of parents) visit(parent);
   }
-  ensure(candidate.citizens.filter(person => person.id.startsWith('resident-')).every(person => children[person.id]), '新增人口必须出生登记');
+  const migrants = f.migrants === undefined ? {} : dict(f.migrants, 1024, '迁入登记');
+  if (f.migrants !== undefined) ensure(f.version === 2, '旧家庭版本不能夹带迁入登记');
+  for (const [id, migrant] of Object.entries(migrants)) {
+    ensure(/^resident-[1-9][0-9]*$/.test(id) && Number(id.slice(9)) < f.nextResidentId && ids.has(id) && !children[id] && object(migrant), '迁入居民登记');
+    num(migrant.arrivedAt, 0, f.lastUpdate, '迁入时间'); num(migrant.arrivalAge, 18, 60, '迁入年龄'); num(migrant.savings, 0, 1e6, '迁入积蓄');
+    ensure(sites.get(migrant.homeId)?.kind === 'home' && sites.has(migrant.workId), '迁入住所与岗位');
+    const life = candidate.extension!.actorProfiles[id], diedAt = f.estates?.[id]?.settledAt;
+    const lifeClock = life?.alive === false && finite(diedAt) ? diedAt : f.lastUpdate;
+    ensure(!!life && Math.abs(life.age - migrant.arrivalAge - (lifeClock - migrant.arrivedAt) / GAME_YEAR) <= .00002, '迁入居民年龄必须来自迁入年龄与实际时间');
+  }
+  ensure(candidate.citizens.filter(person => person.id.startsWith('resident-')).every(person => children[person.id] || migrants[person.id]), '新增人口必须出生或迁入登记');
   const pregnancyIds = new Set<string>(), pregnantParents = new Set<string>();
   for (const pregnancy of array(f.pregnancies, 128, '孕育')) {
     ensure(object(pregnancy) && /^pregnancy-[1-9][0-9]*$/.test(pregnancy.id) && Number(pregnancy.id.slice(10)) < f.nextPregnancyId && !pregnancyIds.has(pregnancy.id), '孕育标识'); pregnancyIds.add(pregnancy.id);
@@ -647,7 +664,7 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
     if (estate.bankSettlement !== undefined) { ensure(object(estate.bankSettlement) && typeof estate.bankSettlement.closed === 'boolean', '银行清算回执'); for (const key of ['debtPaid', 'depositClaimsTransferred', 'unpaidLoss']) num(estate.bankSettlement[key], 0, 1e12, '真实债务与存款权益清算'); ensure(['settled', 'awaitingExecutor'].includes(estate.status) && (estate.bankSettlement.closed || estate.status === 'awaitingExecutor'), '银行未结清前保留执行人待办'); }
     if (estate.businesses !== undefined) for (const [shopId, heirId] of Object.entries(dict(estate.businesses, candidate.shops.length, '经营权继承回执'))) ensure(candidate.shops.some(shop => shop.id === shopId) && heirs.includes(heirId), '实际经营权与法定继承人');
   }
-  if (f.version === 1) { ensure([f.bonds, f.households, f.movePlans, f.ceremonies, f.careGuardians, f.estateSales, f.nextHouseholdId, f.nextCeremonyId, f.nextBondAt, f.nextEstateSaleId, f.formalLearningVersion, f.formalLearning].every(value => value === undefined), '旧家庭版本不能夹带未校验字段'); return; }
+  if (f.version === 1) { ensure([f.bonds, f.households, f.movePlans, f.ceremonies, f.careGuardians, f.estateSales, f.nextHouseholdId, f.nextCeremonyId, f.nextBondAt, f.nextEstateSaleId, f.formalLearningVersion, f.formalLearning, f.migrants].every(value => value === undefined), '旧家庭版本不能夹带未校验字段'); return; }
   ensure(f.formalLearningVersion === undefined ? f.formalLearning === undefined : [1, 2].includes(f.formalLearningVersion) && object(f.formalLearning), '正式授课版本与收据正文必须同时存在');
   if (f.formalLearningVersion === 2) ensure(!!candidate.familyEducation && Object.values(f.formalLearning!).some(record => record.tuitionPages?.flat().length), '正式家庭版本二须至少一份真实学费资格及原托管模块');
   if (f.formalLearning !== undefined) ensure(Object.keys(f.formalLearning).length > 0, '正式授课正文保留至少一份真实资格来源');

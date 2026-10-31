@@ -396,12 +396,22 @@ function canChooseEconomicSuspension(simulation: Simulation, shop: Shop, citizen
 }
 
 /** Ordinary people choice uses the same route/need/identity scoring as every other facility. This function is read-only. */
+/** World buildings by id (the first of any repeated id, as Array.find), rebuilt when the list or its length changes. */
+const siteIndex = new WeakMap<Building[], { length: number; byId: Map<string, Building> }>();
+function siteById(buildings: Building[], id: string): Building | undefined {
+  let index = siteIndex.get(buildings);
+  if (!index || index.length !== buildings.length) {
+    const byId = new Map<string, Building>(); for (const b of buildings) if (!byId.has(b.id)) byId.set(b.id, b);
+    siteIndex.set(buildings, index = { length: buildings.length, byId });
+  }
+  return index.byId.get(id);
+}
 export function shopLifecycleOpportunities(simulation: Simulation, citizen: Citizen): { destination: Building; activity: 'shopLifecycle'; score: number }[] {
   const state = simulation.state, profile = state.extension?.actorProfiles[citizen.id], at = clock(state), result: { destination: Building; activity: 'shopLifecycle'; score: number }[] = [];
   if (!profile?.alive || profile.age < 18 || profile.health < 45 || profile.mood < 55 || profile.stress > 55 || citizen.needs.hunger < 50 || citizen.needs.fatigue < 45 || state.hour < 7 || state.hour >= 17) return result;
   for (const shop of state.shops) {
     if (!privateMarket(state, simulation.worldDefinition, shop)) continue;
-    const title = titleOf(state, shop.id), site = simulation.worldDefinition.buildings.find(site => site.id === shop.buildingId)!;
+    const title = titleOf(state, shop.id), site = siteById(simulation.worldDefinition.buildings, shop.buildingId)!;
     if (operatorId(state, shop) === citizen.id && (title?.state === 'suspended' || title?.state === 'reopening')) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
     if (canChooseEconomicSuspension(simulation, shop, citizen.id)) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
     if (!eligible(state, citizen.id) || state.shops.some(other => other.ownerId === citizen.id && other.id !== shop.id)) continue;
