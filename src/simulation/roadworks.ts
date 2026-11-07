@@ -8,6 +8,7 @@ import { homeRestPointBlockedByVoxels } from './home-rest';
 import { claimActorActivityMinutes } from './activity-minutes';
 import { roadRepairDemand, residentRoadRepairRequester } from './road-demands';
 import { validateJointActorActivityCapacity, type ActorActivityClaim } from './activity-capacity';
+import { MUNICIPAL_REPAIR_DELAY, MUNICIPAL_REPAIR_POLICY } from './municipal-repair';
 
 const EPS = 1e-7, REQUIRED_MINUTES = 60, MATERIALS = 1, PLAYER_FUNDS = 100, MAX_JOBS = 128, MAX_LABOR_RECEIPTS = 256, MAX_MODULE_BYTES = 768 * 1024, NEW_ORDER_BYTES = 512 * 1024;
 export interface RoadBudgetEscrowRequest { budgetId: string; siteId: string; purpose: 'road-repair'; amount: number }
@@ -15,6 +16,8 @@ export interface RoadworksAccounting {
   activate(version?: 1 | 2): void;
   isCanonicalRoadworkPresence(event: object): boolean;
   travelCost(citizenId: string, nodeId: string, point: Vec3): number;
+  /** repair-route-v1: walking cost between two network nodes (0 when the policy is not declared). */
+  carryCost(fromNodeId: string, toNodeId: string): number;
   takePublicEscrow(request: RoadBudgetEscrowRequest): boolean;
   returnPublicEscrow(request: RoadBudgetEscrowRequest): number;
   accrueTax(amount: number): void;
@@ -49,7 +52,7 @@ export interface RoadRepairJob {
   budgetId: string | null; approvalSiteId: string | null; approvedAt: number | null; approvedBy: string[]; authorizedCap: number;
   completedAt: number | null; cancelledAt: number | null;
 }
-export interface RoadworksState { replacementVersion?: 1; replacementActivatedAt?: number; replacementFirstJobId?: string; version: 1; activatedAt: number; nextId: number; jobs: RoadRepairJob[]; stock: RoadMaterialLot[]; capacityHistory: ActorActivityClaim[] }
+export interface RoadworksState { replacementVersion?: 1; replacementActivatedAt?: number; replacementFirstJobId?: string; municipalVersion?: 1; municipalActivatedAt?: number; version: 1; activatedAt: number; nextId: number; jobs: RoadRepairJob[]; stock: RoadMaterialLot[]; capacityHistory: ActorActivityClaim[] }
 type State = SimState & { roadworks?: RoadworksState };
 interface Presence { citizenId?: string; laborJobId?: string; nodeId?: string; activityWindowStartAt?: number; activityWindowEndAt?: number; activityObservedTick?: number; activityObservedClock?: number; activityPosition?: Vec3 }
 const body = (state: SimState) => (state as State).roadworks;
@@ -125,9 +128,11 @@ function acceptWorker(sim: Simulation, job: RoadRepairJob, accounting: Roadworks
       const quote = sim.quoteSupply(shop.id, MATERIALS), gross = quote.unitPrice;
       if (quote.quantity < MATERIALS || gross + REQUIRED_MINUTES * rate > job.escrow + EPS || sim.shopFunds(shop) + gross * (1 - sim.state.taxRate) > 1e9) continue;
       const node = [...sim.worldDefinition.nodes].sort((a,b) => distance(a.position, site.door) - distance(b.position, site.door) || a.id.localeCompare(b.id))[0];
+      // repair-route-v1 adds the carry leg (0 otherwise), so worker and counter are chosen by the whole trip.
+      const carry = accounting.carryCost(node.id, job.worksiteNodeId); if (!finite(carry)) continue;
       const points = supplierPoints(site);
       for (const point of points.filter(point => point.purpose === 'sale' && canAccessFloor(site, point.floor, identity(actor)))) {
-        const cost = accounting.travelCost(actor.id, node.id, point.position);
+        const cost = accounting.travelCost(actor.id, node.id, point.position) + carry;
         if (!finite(cost) || !footClear(sim, point.position) || !sim.isAtBuildingFunctionPoint(site, point.position, 'sale', identity(actor))) continue;
         if (!best || cost < best.cost) best = { actor, shopId: shop.id, nodeId: node.id, point: copy(point.position), cost, rate };
       }
@@ -288,20 +293,21 @@ function canCoalesce(receipt: RoadLaborReceipt | undefined, actorId: string, rat
   return !!receipt && receipt.actorId === actorId && receipt.ratePerMinute === rate && receipt.taxRate === tax && receipt.nodeId === nodeId
     && distance(receipt.point, point) < EPS && receipt.endAt === startAt;
 }
-function create(sim: Simulation, edgeId: string | undefined, payerId: 'player' | 'public', accounting: RoadworksAccounting, residentDemandId?: string): CommandResult {
+function create(sim: Simulation, edgeId: string | undefined, payerId: 'player' | 'public', accounting: RoadworksAccounting, residentDemandId?: string, municipal = false): CommandResult {
   const closure = edgeId && roadClosure(sim.state, edgeId), state = sim.state;
   if (!closure || closure.reopenedAt !== null) return { ok: false, message: '该现有道路没有待修的真实关闭记录。' };
   const demand = residentDemandId ? roadRepairDemand(state, residentDemandId) : null;
   const resident = demand && state.citizens.find(actor => actor.id === demand.actorId);
   if (residentDemandId && (!demand || !resident || payerId !== 'public' || demand.closureId !== closure.id || demand.edgeId !== edgeId || demand.resolvedAt !== null || demand.repairId !== null || !state.extension?.actorProfiles[resident.id]?.alive)) return { ok: false, message: '没有该具名、真实受阻且尚未关联维修的居民需求。' };
-  if (!demand && (distance(state.player.position, closure.worksite) > 2 || state.player.vehicleId || state.aviation?.activeAircraftId || !footClear(sim, state.player.position))) return { ok: false, message: '请到关闭道路安全端现场提出维修，不能遥控或穿过闭段。' };
-  if (!demand && payerId === 'public' && !['official', 'council', 'mayor'].some(role => sim.hasIdentity(role as Role))) return { ok: false, message: '公共维修申请须由实际具备公共身份者提交，支出仍须合法审批。' };
+  if (municipal && (payerId !== 'public' || residentDemandId)) return { ok: false, message: '市政维修只开公共订单。' };
+  if (!demand && !municipal && (distance(state.player.position, closure.worksite) > 2 || state.player.vehicleId || state.aviation?.activeAircraftId || !footClear(sim, state.player.position))) return { ok: false, message: '请到关闭道路安全端现场提出维修，不能遥控或穿过闭段。' };
+  if (!demand && !municipal && payerId === 'public' && !['official', 'council', 'mayor'].some(role => sim.hasIdentity(role as Role))) return { ok: false, message: '公共维修申请须由实际具备公共身份者提交，支出仍须合法审批。' };
   const current = body(state);
   if (moduleBytes(state) > NEW_ORDER_BYTES || new TextEncoder().encode(sim.exportSave()).length > 7 * 1024 * 1024) return { ok: false, message: '保存空间已接近保护上限；既有钱料和工资凭据保留，暂不接受新单。' };
   if (current && (current.jobs.length >= MAX_JOBS || current.jobs.some(job => !ended(job) && job.closureId === closure.id))) return { ok: false, message: '原在办/退款或128受保护档案仍保留，不能重复开单。' };
-  if (!demand && !state.extension!.actorProfiles.player.alive || payerId === 'player' && state.player.money < PLAYER_FUNDS) return { ok: false, message: '存活申请者和真实100文托管余额不足。' };
+  if (!demand && !municipal && !state.extension!.actorProfiles.player.alive || payerId === 'player' && state.player.money < PLAYER_FUNDS) return { ok: false, message: '存活申请者和真实100文托管余额不足。' };
   const works = activate(sim, accounting), now = clock(state), job: RoadRepairJob = {
-    id: 'road-repair-' + works.nextId++, closureId: closure.id, edgeId: closure.edgeId, requestedBy: resident?.id ?? 'player', payerId,
+    id: 'road-repair-' + works.nextId++, closureId: closure.id, edgeId: closure.edgeId, requestedBy: resident?.id ?? (municipal ? 'city' : 'player'), payerId,
     worksiteNodeId: closure.worksiteNodeId, worksite: copy(closure.worksite), startedAt: now, lastObservedAt: now,
     status: payerId === 'public' ? 'awaitingBudget' : 'awaitingWorker', reason: '等待有限材料经费、合法审批及真实居民自愿履约。', workerId: null, acceptedAt: null, ratePerMinute: 0, contract: null,
     supplierShopId: null, supplierNodeId: null, supplierPoint: null, requiredMinutes: 60, workedMinutes: 0, contributions: {}, laborReceipts: [],
@@ -309,7 +315,8 @@ function create(sim: Simulation, edgeId: string | undefined, payerId: 'player' |
     receipts: [], receivedUnits: 0, reservedUnits: 0, consumedUnits: 0, budgetId: null, approvalSiteId: null, approvedAt: null, approvedBy: [], authorizedCap: 0, completedAt: null, cancelledAt: null,
   };
   if (payerId === 'player') { state.player.money -= PLAYER_FUNDS; ledger(sim, 'player', -PLAYER_FUNDS, '道路维修真实托管划入', closure.districtId); }
-  if (demand) {
+  if (municipal) { works.municipalVersion ??= 1; works.municipalActivatedAt ??= now; }
+  if (demand || municipal) {
     works.replacementVersion ??= 1; works.replacementActivatedAt ??= now; works.replacementFirstJobId ??= job.id;
     accounting.activate(2);
     job.replacement = { version: 1, activeActorId: null, contracts: [], pendingPickup: null, pickups: [] };
@@ -332,6 +339,16 @@ export function requestResidentRoadRepair(sim: Simulation, demandId: string, acc
   return result.ok ? body(sim.state)!.jobs.at(-1)!.id : null;
 }
 
+/** municipal-repair.ts: the city files a public order for each closure that has stood its delay unasked. */
+function fileMunicipalRepairs(sim: Simulation, accounting: RoadworksAccounting): void {
+  const state = sim.state, now = clock(state), jobs = body(state)?.jobs ?? [];
+  for (const closure of state.roadNetwork?.closures ?? []) {
+    if (closure.reopenedAt !== null || now - closure.occurredAt < MUNICIPAL_REPAIR_DELAY - EPS) continue;
+    // One open order per closure; a city order that ended unfinished is filed again only after another delay.
+    if (jobs.some(job => job.closureId === closure.id && (!ended(job) || job.requestedBy === 'city' && now - job.startedAt < MUNICIPAL_REPAIR_DELAY))) continue;
+    create(sim, closure.edgeId, 'public', accounting, undefined, true);
+  }
+}
 export function installRoadworks(sim: Simulation, accounting: RoadworksAccounting): RoadworksController {
   let observedState = sim.state, phaseTick = -1, phaseClock = -1, phaseMinutes = 0;
   const seen = new WeakSet<object>();
@@ -406,6 +423,7 @@ export function installRoadworks(sim: Simulation, accounting: RoadworksAccountin
     }
   });
   sim.onPhase('politics', state => {
+    if (sim.municipalRepairPolicyId === MUNICIPAL_REPAIR_POLICY) fileMunicipalRepairs(sim, accounting);
     for (const job of body(state)?.jobs ?? []) {
       if (ended(job) || job.cancelledAt !== null || job.status === 'refundPending') continue;
       if (job.payerId === 'public' && !job.budgetId) {
@@ -510,7 +528,8 @@ export function validateRoadworksState(candidate: SimState, world: WorldDefiniti
   const vector = (p: Vec3, field: string): void => { object(p, ['x','y','z'], field); for (const n of [p.x,p.y,p.z]) num(n,-1e5,1e5,field); };
   const array = <T>(a: T[], max: number, field: string): T[] => { ensure(Array.isArray(a) && a.length <= max, field); return a; };
   const now = clock(state), actors = new Map(state.citizens.map(actor => [actor.id, actor]));
-  object(works, ['version','activatedAt','nextId','jobs','stock','capacityHistory', ...(works.replacementVersion === undefined ? [] : ['replacementVersion','replacementActivatedAt','replacementFirstJobId'])], '模块结构');
+  object(works, ['version','activatedAt','nextId','jobs','stock','capacityHistory', ...(works.replacementVersion === undefined ? [] : ['replacementVersion','replacementActivatedAt','replacementFirstJobId']), ...(works.municipalVersion === undefined ? [] : ['municipalVersion','municipalActivatedAt'])], '模块结构');
+  if(works.municipalVersion!==undefined){ensure(works.municipalVersion===1,'市政维修版本');num(works.municipalActivatedAt,works.activatedAt,now,'市政维修激活');}
   if(works.replacementVersion!==undefined){ensure(works.replacementVersion===1,'替补版本');num(works.replacementActivatedAt,works.activatedAt,now,'替补真实激活');}
   ensure(works.version === 1, '版本'); ensure(moduleBytes(state) <= MAX_MODULE_BYTES, '道路模块保存容量'); num(works.activatedAt,0,now,'激活时间'); num(works.nextId,1,MAX_JOBS+1,'下个身份',true);
   const jobs = array(works.jobs, MAX_JOBS, '任务数量'), seen = new Set<string>();
@@ -523,7 +542,7 @@ export function validateRoadworksState(candidate: SimState, world: WorldDefiniti
     const closure = roadClosureById(state,job.closureId), edge = world.edges.find(edge=>edge.id===job.edgeId);
     ensure(closure && edge && closure.edgeId===edge.id && ['road','bridge'].includes(edge.mode), '真实关闭与现有道路引用');
     ensure(job.worksiteNodeId===closure!.worksiteNodeId && distance(job.worksite,closure!.worksite)<EPS, '原安全端工地'); vector(job.worksite,'工地坐标');
-    ensure(['player','public'].includes(job.payerId) && (job.requestedBy==='player' || job.payerId==='public' && actors.has(job.requestedBy) && residentRoadRepairRequester(state,job.id,job.requestedBy,job.closureId)), '原请求与付款主体/具名受阻需求');
+    ensure(['player','public'].includes(job.payerId) && (job.requestedBy==='player' || job.payerId==='public' && (job.requestedBy==='city' ? works.municipalVersion===1 && job.startedAt>=works.municipalActivatedAt! && !!job.replacement : actors.has(job.requestedBy) && residentRoadRepairRequester(state,job.id,job.requestedBy,job.closureId))), '原请求与付款主体/具名受阻需求');
     ensure(['awaitingBudget','awaitingSupply','awaitingWorker','carrying','working','paused','refundPending','completed','cancelled'].includes(job.status) && typeof job.reason==='string' && job.reason.length<=1000, '状态');
     num(job.startedAt,Math.max(works.activatedAt,closure!.occurredAt),now,'下单时间'); num(job.lastObservedAt,job.startedAt,now,'观察时间');
     const stop = job.completedAt ?? job.cancelledAt ?? now;

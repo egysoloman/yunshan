@@ -86,7 +86,8 @@ try {
     const { world, simulation, controller, actions, getView } = window.__YUNSHAN__;
     actions.command({ type: 'setTime', value: 12 });
     const building = world.buildings.find(b => b.kind === 'market');
-    simulation.state.player.position = { ...building.door, z: building.door.z + 2 };
+    // Two metres out of the door, whichever way the building faces (current-v8 turns half its lots).
+    simulation.state.player.position = { ...building.door, x: building.door.x + 2 * Math.round(Math.sin(building.rotation)), z: building.door.z + 2 * Math.round(Math.cos(building.rotation)) };
     controller.setMode('walk', simulation.state.player.position);
     actions.interact();
     return { id: building.id, inside: getView().inside, nearbyId: getView().nearbyBuilding?.id, money: simulation.state.player.money };
@@ -328,7 +329,9 @@ try {
   assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'jet');
   aviationStage = 'military original sixty-second native return and exit';
   await page.keyboard.press('KeyE');
-  await page.waitForFunction(id => window.__YUNSHAN__.simulation.state.aviation.aircraft.find(c => c.id === id)?.status === 'parked', jetFixture.id, { timeout: 60_000 });
+  // The return is a real flight back to the pad; its wall-clock time depends on the frame rate, and
+  // software WebGL once needed more than 60 s (2026-10-16). The parked state is still required.
+  await page.waitForFunction(id => window.__YUNSHAN__.simulation.state.aviation.aircraft.find(c => c.id === id)?.status === 'parked', jetFixture.id, { timeout: 180_000 });
   await page.keyboard.press('KeyE');
   assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'walk');
   check('military identity, actual keyboard VTOL flight, passenger position, safe return and exit', { metres: Math.hypot(jetStart.x - jetEnd.position.x, jetStart.z - jetEnd.position.z), battery: jetEnd.battery });
@@ -364,7 +367,7 @@ try {
   await page.waitForFunction(start => window.__YUNSHAN__.controller.position.y - start.y > 30, droneFixture.position, { timeout: 30_000 });
   await page.keyboard.up('KeyR');
   await page.keyboard.press('KeyE');
-  await page.waitForFunction(id => window.__YUNSHAN__.simulation.state.aviation.aircraft.find(c => c.id === id)?.status === 'parked', droneFixture.id, { timeout: 60_000 });
+  await page.waitForFunction(id => window.__YUNSHAN__.simulation.state.aviation.aircraft.find(c => c.id === id)?.status === 'parked', droneFixture.id, { timeout: 180_000 });
   await page.keyboard.press('KeyE');
   await page.evaluate(id => window.__YUNSHAN__.actions.command({ type: 'returnAircraft', targetId: id }), droneFixture.id);
   assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'walk');

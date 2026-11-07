@@ -89,8 +89,11 @@ const positive = (value: unknown): value is number => uint(value) && value > 0;
 const clock = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0;
 const sha = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const byteLength = (value: string) => encoder.encode(value).length;
+/** One compiled identity pattern per kind (non-global, so test keeps no state between calls). */
+const recordPatterns = new Map<CivicHistoryKind, RegExp>();
 function recordNumber(id: unknown, kind: CivicHistoryKind): number {
-  need(typeof id === 'string' && new RegExp(`^civic-${kind}-[1-9][0-9]*$`).test(id), `${kind} record identity`);
+  let pattern = recordPatterns.get(kind); if (!pattern) recordPatterns.set(kind, pattern = new RegExp(`^civic-${kind}-[1-9][0-9]*$`));
+  need(typeof id === 'string' && pattern.test(id), `${kind} record identity`);
   const number = Number(id.slice(`civic-${kind}-`.length));
   need(positive(number), `${kind} safe record identity`);
   return number;
@@ -484,13 +487,14 @@ export function civicHistoryView(state: { civicStaffing?: CivicStaffingState; ci
     last?.sealedAt ?? history.origin.createdAt, last?.sealedTick ?? history.origin.createdTick);
   const merged = emptyRecords();
   for (let i = 0; i < collections.length; i++) {
-    const name = collections[i], kind = kinds[i], seen = new Set<string>();
+    const name = collections[i], kind = kinds[i], seen = new Set<string>(), numbers = new Map<unknown, number>();
     for (const record of [...civic[name], ...cold[name]]) {
-      recordNumber(record.id, kind);
+      // Validated once here; the sort below compares the same numbers it would recompute.
+      numbers.set(record, recordNumber(record.id, kind));
       need(!seen.has(record.id), 'hot/cold duplicate record'); seen.add(record.id);
       (merged[name] as unknown[]).push(record);
     }
-    merged[name].sort((a, b) => recordNumber(a.id, kind) - recordNumber(b.id, kind));
+    merged[name].sort((a, b) => numbers.get(a)! - numbers.get(b)!);
   }
   return merged;
 }

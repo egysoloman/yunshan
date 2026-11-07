@@ -71,7 +71,11 @@ try {
   await page.waitForFunction(() => window.__YUNSHAN__?.simulation.state.tick >= 1, null, { timeout: 120_000 });
   const welcome = page.locator('[data-action="dismiss-welcome"]');
   if (await welcome.isVisible()) { await welcome.focus(); await page.keyboard.press('Enter'); }
-  if (spatial) {
+  // The bridge and road-crossing scenarios check repairs in the current-v6 street grid; the
+  // street-first current-v8 world has no such bridge segment, so they record a skip there.
+  const legacyGrid = await page.evaluate(() => !!window.__YUNSHAN__.world.edges.find(edge => edge.id === 'bridge-river-dock-river-station')?.points.some(point => point.z === 1040));
+  if (spatial && !legacyGrid) skipped.push({ check: 'bridge and road-crossing walks', reason: 'These scenarios check repaired current-v6 bridge and crossing geometry; the loaded world has no such segment.' });
+  if (spatial && legacyGrid) {
   const bridge = await page.evaluate(() => {
     const d = window.__YUNSHAN__, edge = d.world.edges.find(edge => edge.id === 'bridge-river-dock-river-station');
     d.actions.command({ type: 'pause', value: 1 }); d.actions.command({ type: 'setTime', value: 12 });
@@ -133,7 +137,9 @@ try {
   check('normal W input walks the same body back through both actual side openings at the original walking speed', { before: returnBefore, after: returned, metres: returnMetres, wallSeconds: (Date.now() - returnStarted) / 1000 });
   }
 
-  await page.evaluate(() => { const d = window.__YUNSHAN__; d.actions.command({ type: 'pause', value: 1 }); d.actions.command({ type: 'setTime', value: 12 }); d.actions.setQuality('balanced'); d.actions.setSetting('renderDistance', 5700); });
+  // Near residents are drawn by the studio character models at balanced/high quality (the face pool then skips them);
+  // low quality keeps every near resident in the appearance pool whose face this scenario checks.
+  await page.evaluate(() => { const d = window.__YUNSHAN__; d.actions.command({ type: 'pause', value: 1 }); d.actions.command({ type: 'setTime', value: 12 }); d.actions.setQuality('low'); d.actions.setSetting('renderDistance', 5700); });
   const actualAges = await page.evaluate(() => window.__YUNSHAN__.simulation.state.citizens.map(citizen => { const profile = window.__YUNSHAN__.simulation.state.extension.actorProfiles[citizen.id]; return { id: citizen.id, age: profile.age, alive: profile.alive, tier: citizen.tier }; }));
   const hasChild = actualAges.some(profile => profile.alive && profile.tier !== 'statistical' && profile.age >= 6 && profile.age < 18);
   if (!hasChild) skipped.push({ check: 'actual child near appearance', reason: 'No actual renderable 6–17-year-old resident exists in this city snapshot; no age or citizen state was changed.', minActualAge: Math.min(...actualAges.filter(profile => profile.alive).map(profile => profile.age)) });
@@ -174,7 +180,7 @@ try {
     check(`actual ${group} resident has a near face and clothes, with a stable paused pose in two shared draws`, { person, front, capture, poseSHA256: hash(JSON.stringify(posed)) });
   }
   assert.deepEqual(await sourceHashes(), hashes); assert.equal(hash(await readFile(`dist${buildEntry}`)), buildHash); assert.equal(errors.length, 0, errors.join('\n'));
-  await writeFile(`${directory}/results.json`, JSON.stringify({ status: skipped.length ? 'passed-with-unavailable-child-fixture' : 'passed', scope: 'Linux Chromium SwiftShader; diagnostic initial placement only, real W movement and real citizen data; no normal journey or macOS performance claim', spatial, buildEntry, buildHash, sourceHashes: hashes, checks: results.length, results, skipped, errors }, null, 2));
+  await writeFile(`${directory}/results.json`, JSON.stringify({ status: skipped.length ? 'passed-with-skips' : 'passed', scope: 'Linux Chromium SwiftShader; diagnostic initial placement only, real W movement and real citizen data; no normal journey or macOS performance claim', spatial, buildEntry, buildHash, sourceHashes: hashes, checks: results.length, results, skipped, errors }, null, 2));
 } catch (error) {
   console.error(error); await page?.screenshot({ path: `${directory}/failure.png`, timeout: 120_000 }).catch(() => {});
   await writeFile(`${directory}/results.json`, JSON.stringify({ status: 'failed', buildEntry, buildHash, sourceHashes: hashes, checks: results.length, results, errors, error: String(error), preview: output }, null, 2)); process.exitCode = 1;

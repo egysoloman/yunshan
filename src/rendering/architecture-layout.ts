@@ -11,10 +11,14 @@ export interface RoofProfile {
 
 /** A shallow eave turns upward into the steeper tiled roof. Profiles are
  * normalized for instancing; footprint and height come from real buildings. */
+/** How far an eave corner curls up, as a share of the roof's rise. */
+export const ROOF_CORNER_LIFT = .32;
 export function roofHeightAt(form: RoofProfile['form'], x: number, z: number) {
   const radius = form === 'gable' ? Math.abs(x * 2) : Math.max(Math.abs(z * 2), Math.max(0, (Math.abs(x * 2) - .46) / .54));
   const slope = Math.max(0, Math.min(1, (radius - .12) / .88));
-  return 1 - Math.pow(slope, .67) + .04 * Math.pow(slope, 8);
+  // 翼角: the eave corners curl up, as the eaves of the reference town's roofs do.
+  const edge = (v: number) => { const t = Math.max(0, Math.min(1, (Math.abs(v * 2) - .62) / .38)); return t * t * (3 - 2 * t); };
+  return 1 - Math.pow(slope, .67) + .04 * Math.pow(slope, 8) + ROOF_CORNER_LIFT * edge(x) * edge(z);
 }
 
 export function createRoofGeometry(form: RoofProfile['form'], simple = false, hole?: RoofProfile['innerHole']) {

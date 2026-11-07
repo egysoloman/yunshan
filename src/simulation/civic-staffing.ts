@@ -99,6 +99,19 @@ const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.
 const same = (a: number, b: number) => Math.abs(a - b) <= EPS;
 const officialRole = (role: string): role is CivicOriginalOfficial['baseRole'] => role === '官员' || role === 'official';
 
+/** First citizen / building with an id, as Array.find, through an index rebuilt when the list or its length changes. */
+const personIndex = new WeakMap<Citizen[], { length: number; byId: Map<string, Citizen> }>();
+function personById(state: SimState, id: string): Citizen | undefined {
+  const list = state.citizens; let index = personIndex.get(list);
+  if (!index || index.length !== list.length) { const byId = new Map<string, Citizen>(); for (const c of list) if (!byId.has(c.id)) byId.set(c.id, c); personIndex.set(list, index = { length: list.length, byId }); }
+  return index.byId.get(id);
+}
+const siteIndex = new WeakMap<Building[], { length: number; byId: Map<string, Building> }>();
+function siteById(sim: Simulation, id: string): Building | undefined {
+  const list = sim.worldDefinition.buildings; let index = siteIndex.get(list);
+  if (!index || index.length !== list.length) { const byId = new Map<string, Building>(); for (const b of list) if (!byId.has(b.id)) byId.set(b.id, b); siteIndex.set(list, index = { length: list.length, byId }); }
+  return index.byId.get(id);
+}
 export function createCivicStaffingState(enablement: CivicEnablement, originalOfficials: CivicOriginalOfficial[]): CivicStaffingState {
   return { version: 1, enablement: structuredClone(enablement), originalOfficials: structuredClone(originalOfficials),
     nextProofId: 1, retiredProofCount: 0, nextApplicationId: 1, nextPollId: 1, nextTermId: 1, proofs: [], applications: [], polls: [], terms: [] };
@@ -142,7 +155,7 @@ function districtSeats(state: SimState, districtId: string, at: number): number 
   return civicHistoryView(state).terms.filter(term => term.districtId === districtId && term.startsAt <= at && at < term.endsAt && (term.endedAt === null || at < term.endedAt)).length ?? 0;
 }
 export function civicCouncilSourceProof(state: SimState, actorId: string, at = clock(state)): CivicCouncilSourceProof | null {
-  const civic = body(state), person = state.citizens.find(person => person.id === actorId);
+  const civic = body(state), person = personById(state, actorId);
   if (!civic || !person || !same(at, clock(state)) || !state.extension?.actorProfiles[actorId]?.alive || !originalAtCurrentJob(state, person)) return null;
   const term = civic.terms.find(term => term.actorId === actorId && term.startsAt <= at && at < term.endsAt && (term.endedAt === null || at < term.endedAt));
   return term ? { version: 1, kind: 'local-council-term', ruleId: CIVIC_RULESET, enablementId: civic.enablement.id,
@@ -186,7 +199,7 @@ export function civicStaffingOpportunities(sim: Simulation, person: Citizen): { 
     && person.money >= CIVIC_REGISTRATION_FEE + CIVIC_LIVING_RESERVE) {
     const application = civic.applications.find(application => application.actorId === person.id && !application.receipt && application.cancelledAt === null);
     if (application || readyProof(state, person)) {
-      const site = sim.worldDefinition.buildings.find(site => site.id === source.workId);
+      const site = siteById(sim, source.workId);
       if (site?.kind === 'hall' && canAccessFloor(site, 0, { role: 'traveler', identities: ['traveler'] })) result.push({ destination: site, activity: 'civicRegister', score: 83 + (profile.mood - 55) * .1 });
     }
   }
@@ -194,7 +207,7 @@ export function civicStaffingOpportunities(sim: Simulation, person: Citizen): { 
   // rather than pulling the last doctor or teacher from paid daytime duty.
   const poll = state.hour >= 17.5 && state.hour < 20 ? uncastPoll(state, person) : undefined;
   if (poll) {
-    const site = sim.worldDefinition.buildings.find(site => site.id === poll.officeId);
+    const site = siteById(sim, poll.officeId);
     if (site && sim.buildingTravelDistance(person.homeId, site.id) <= 500) result.push({ destination: site, activity: 'civicVote', score: 76 + (profile.mood - 55) * .1 });
   }
   return result;
@@ -212,7 +225,7 @@ function observePaid(sim: Simulation, event: Parameters<Parameters<Simulation['o
     || !finite(event.ratePerMinute) || event.ratePerMinute <= 0 || !finite(event.creditedWorkStartAt) || !finite(event.creditedWorkEndAt)
     || !same(event.creditedWorkEndAt - event.creditedWorkStartAt, event.minutes) || !same(event.minutes * event.ratePerMinute, event.amount)
     || event.creditedWorkEndAt > frame.clock + EPS) return;
-  const person = state.citizens.find(person => person.id === event.citizenId), site = sim.worldDefinition.buildings.find(site => site.id === event.siteId);
+  const person = personById(state, event.citizenId), site = siteById(sim, event.siteId);
   if (!person || !site || person.workId !== site.id) return;
   const floor = Math.floor((person.position.y - site.position.y + .01) / (site.height / site.floors));
   const point = workPoint(sim, site, person) ?? { floor, pointId: `native:${floor}:work`, position: copy(person.position) };
@@ -271,7 +284,7 @@ function consumeArrivals(sim: Simulation): void {
   if (!civic || !frame || frame.state !== state || frame.tick !== state.tick) return;
   const stationUsed = new Map<string, { startAt: number; endAt: number }[]>();
   for (const presence of [...frame.arrivals].sort((a, b) => a.activityWindowStartAt - b.activityWindowStartAt || queueTie(a.citizenId, frame.tick) - queueTie(b.citizenId, frame.tick))) {
-    const person = state.citizens.find(person => person.id === presence.citizenId), site = sim.worldDefinition.buildings.find(site => site.id === presence.siteId);
+    const person = personById(state, presence.citizenId), site = siteById(sim, presence.siteId);
     if (!person || !site || !able(state, person) || state.energy < 25 || presence.activityObservedTick !== frame.tick || !same(presence.activityObservedClock, frame.clock)
       || !same(presence.activityWindowEndAt, frame.clock) || !finite(presence.activityWindowStartAt) || presence.activityWindowStartAt >= presence.activityWindowEndAt
       || distance(person.position, presence.activityPosition) > EPS || !sim.isNearBuilding(site, person.position, 2)
@@ -324,10 +337,10 @@ function consumeArrivals(sim: Simulation): void {
   }
 }
 function registrationWitnesses(sim: Simulation, frame: Frame, application: CivicApplication): CivicWitness[] {
-  const site = sim.worldDefinition.buildings.find(site => site.id === application.officeId)!;
+  const site = siteById(sim, application.officeId)!;
   const witnesses: CivicWitness[] = [];
   for (const [actorId, rows] of frame.paid) {
-    const person = sim.state.citizens.find(person => person.id === actorId);
+    const person = personById(sim.state, actorId);
     if (!person || actorId === application.actorId || !originalAtCurrentJob(sim.state, person) || person.workId !== site.id || person.state !== 'working' || !able(sim.state, person)) continue;
     const point = workPoint(sim, site, person), paid = rows.find(row => row.siteId === site.id && row.startAt < frame.clock && same(row.endAt, frame.clock));
     if (point && paid) {
@@ -343,7 +356,7 @@ function completeRegistrations(sim: Simulation): void {
   if (!frame || !civic || frame.state !== state || frame.tick !== state.tick || state.hour < 8 || state.hour >= 17 || state.energy < 25) return;
   for (const application of civic.applications.filter(application => !application.receipt && application.cancelledAt === null && application.workedMinutes >= 1 - EPS)
     .sort((a, b) => a.windows.at(-1)!.endAt - b.windows.at(-1)!.endAt || queueTie(a.actorId, frame.tick) - queueTie(b.actorId, frame.tick))) {
-    const person = state.citizens.find(person => person.id === application.actorId)!, source = originalAtCurrentJob(state, person);
+    const person = personById(state, application.actorId)!, source = originalAtCurrentJob(state, person);
     const present = frame.arrivals.some(presence => presence.citizenId === person.id && presence.siteId === application.officeId && presence.purpose === 'civicRegister');
     if (!source || !able(state, person) || !present || person.money < CIVIC_REGISTRATION_FEE + CIVIC_LIVING_RESERVE
       || openPoll(state, application.districtId) || hasLiveTerm(state, person.id, frame.clock) || districtSeats(state, application.districtId, frame.clock) >= CIVIC_DISTRICT_SEATS
@@ -374,7 +387,7 @@ function closeUnavailable(state: SimState): void {
   const at = clock(state);
   for (const application of civic.applications) {
     if (application.receipt || application.cancelledAt !== null) continue;
-    const person = state.citizens.find(person => person.id === application.actorId)!, source = original(state, person.id)!;
+    const person = personById(state, application.actorId)!, source = original(state, person.id)!;
     const reason: CivicApplication['cancellationReason'] = !state.extension!.actorProfiles[person.id]?.alive ? 'death'
       : person.role !== source.baseRole || person.workId !== source.workId ? 'profession-changed'
       : person.districtId !== source.districtId ? 'residency-changed'
@@ -383,7 +396,7 @@ function closeUnavailable(state: SimState): void {
   }
   for (const term of civic.terms) {
     if (term.endedAt !== null) continue;
-    const person = state.citizens.find(person => person.id === term.actorId)!;
+    const person = personById(state, term.actorId)!;
     const reason: CivicTerm['endedReason'] = at >= term.endsAt ? 'expired' : !state.extension!.actorProfiles[person.id]?.alive ? 'death'
       : person.role !== term.baseRole || person.workId !== term.officeId ? 'profession-changed'
       : person.districtId !== term.districtId ? 'residency-changed' : '';
@@ -393,7 +406,7 @@ function closeUnavailable(state: SimState): void {
     if (poll.result !== 'open') continue;
     for (const eligible of poll.eligible) {
       if (poll.withdrawals.some(row => row.actorId === eligible.actorId) || poll.ballots.some(ballot => ballot.actorId === eligible.actorId && ballot.completedAt !== null)) continue;
-      const person = state.citizens.find(person => person.id === eligible.actorId)!;
+      const person = personById(state, eligible.actorId)!;
       const reason: CivicWithdrawal['reason'] | '' = !state.extension!.actorProfiles[person.id]?.alive ? 'death' : person.districtId !== eligible.districtId ? 'residency-changed' : '';
       if (reason) poll.withdrawals.push({ actorId: person.id, at, tick: state.tick, reason });
     }
@@ -407,7 +420,7 @@ function countPolls(sim: Simulation): void {
     const cast = poll.ballots.filter(ballot => ballot.completedAt !== null), eligible = poll.eligible.length - poll.withdrawals.length;
     const support = cast.filter(ballot => ballot.choice === 'support').length, retain = cast.length - support;
     poll.count = { eligible, quorum: Math.max(3, Math.ceil(eligible / 2)), turnout: cast.length, support, retain }; poll.countedAt = at;
-    const person = state.citizens.find(person => person.id === poll.candidateId)!;
+    const person = personById(state, poll.candidateId)!;
     if (!state.extension!.actorProfiles[person.id]?.alive || !originalAtCurrentJob(state, person)) poll.result = 'candidate-unavailable';
     else if (cast.length < poll.count.quorum) poll.result = 'no-quorum';
     else if (support <= retain) poll.result = 'defeated';
@@ -653,7 +666,7 @@ export function validateCivicStaffing(state: SimState, world: WorldDefinition): 
     }
     // Core citizen IDs existing at opening are retained; later real children
     // may join only through their already-validated family birth source.
-    for (const person of state.citizens) if (!censusIds.has(person.id)) need((state.family?.children[person.id]?.bornAt ?? -1) > poll.openedAt, 'cannot omit existing census citizen');
+    for (const person of state.citizens) if (!censusIds.has(person.id)) need((state.family?.children[person.id]?.bornAt ?? state.family?.migrants?.[person.id]?.arrivedAt ?? -1) > poll.openedAt, 'cannot omit existing census citizen');
     const eligible = rows<CivicEligibleVoter>(poll.eligible, 896, 'frozen adult local voters');
     const derived = census.filter(resident => resident.aliveAtOpening && resident.ageAtOpening >= 18 && resident.districtId === poll.districtId);
     need(eligible.length === derived.length && eligible.every((resident, index) => {

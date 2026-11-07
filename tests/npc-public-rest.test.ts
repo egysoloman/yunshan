@@ -13,7 +13,8 @@ interface Choice { destination: Building; activity: string }
 interface Facade {
   state: { hour: number; shops: never[]; relationships: never[]; extension: { actorProfiles: Record<string, LifeProfile> } };
   world: { buildings: Building[]; edges: NetworkEdge[] }; buildings: Map<string, Building>; runtime: { activities: Record<string, string> };
-  availableHomeRestPoints: () => HomeRestPoint[];
+  /** The real method returns the free points, or with anyFree only whether there is one. */
+  availableHomeRestPoints: (citizen?: Citizen, home?: Building, anyFree?: boolean) => HomeRestPoint[] | boolean;
   walkingAnchors: () => { node: string; cost: number; points: Vec3[] }[];
   walkingTree: () => { costs: Map<string, number> };
   buildingNode: (building: Building) => { id: string };
@@ -44,7 +45,7 @@ function fixture(options: { bedAvailable?: boolean; publicWalkable?: boolean; ni
   const facade: Facade = {
     state: { hour: night ? 0 : 12, shops: [], relationships: [], extension: { actorProfiles: { [actor.id]: clone(native.actorProfile) } } },
     world: { buildings: [home, publicRest], edges: [] }, buildings: new Map([home, work, publicRest].map(building => [building.id, building])),
-    runtime: { activities: { [actor.id]: 'rest' } }, availableHomeRestPoints: () => bedAvailable ? [point] : [],
+    runtime: { activities: { [actor.id]: 'rest' } }, availableHomeRestPoints: (_citizen, _home, anyFree) => anyFree ? bedAvailable : bedAvailable ? [point] : [],
     walkingAnchors: () => [{ node: 'fixture-origin', cost: 0, points: [actor.position] }],
     walkingTree: () => ({ costs: new Map([[node(home).id, 100], [node(publicRest).id, publicWalkable ? 200 : Infinity]]) }),
     buildingNode: node, isEmployed: () => false, citizenIdentity: () => 'traveler',

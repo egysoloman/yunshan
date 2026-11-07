@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createWorld } from '../src/world';
 import { getBuildingBody, wallPanels, type WallPanel } from '../src/architecture-floor-plan';
-import { buildProgramArchitecture, partitionProgramWallFinish, PROGRAM_WALL_FINISH_PANEL_BUDGET, type ProgramArchitecturePart } from '../src/rendering/architecture-bodies';
+import { buildProgramArchitecture, partitionProgramWallFinish, PROGRAM_WALL_FINISH_MAX_BAYS, PROGRAM_WALL_FINISH_PANEL_BUDGET, type ProgramArchitecturePart } from '../src/rendering/architecture-bodies';
 
 const volume = (r: { x0: number; x1: number; z0: number; z1: number }, low: number, high: number) => (r.x1 - r.x0) * (r.z1 - r.z0) * (high - low);
 const bounds = (part: ProgramArchitecturePart) => ({ x0: part.position.x - part.size.x / 2, x1: part.position.x + part.size.x / 2,
@@ -21,6 +21,7 @@ test('timber finishes partition the same opaque wall volume without overlap or p
     const rect = alongX ? { x0: -4.8, x1: -4.8 + span, z0: -2.2, z1: -1.8 } : { x0: 1.8, x1: 2.2, z0: -4.8, z1: -4.8 + span };
     const panel: WallPanel = { rect, bottom: .8, top: .8 + height, kind: 'solid' }, pieces = partitionProgramWallFinish(panel, panel.bottom, panel.top);
     assert.ok(Math.abs(pieces.reduce((sum, p) => sum + volume(p.rect, p.bottom, p.top), 0) - volume(rect, panel.bottom, panel.top)) < 1e-7);
+    assert.ok(pieces.filter(p => p.material === 'wood' && p.top - p.bottom > .2 + 1e-7).length <= PROGRAM_WALL_FINISH_MAX_BAYS + 1, 'posts stay within the bay cap');
     for (const piece of pieces) {
       assert.ok(piece.rect.x0 >= rect.x0 - 1e-8 && piece.rect.x1 <= rect.x1 + 1e-8 && piece.rect.z0 >= rect.z0 - 1e-8 && piece.rect.z1 <= rect.z1 + 1e-8 && piece.bottom >= panel.bottom - 1e-8 && piece.top <= panel.top + 1e-8);
       assert.ok(volume(piece.rect, piece.bottom, piece.top) > 0);
@@ -83,9 +84,12 @@ test('the explicit wall finish cap holds for every native target building', () =
   let capped = 0, checked = 0;
   for (const building of world.buildings.filter(b => b.kind === 'home' || b.kind === 'market')) {
     if (!getBuildingBody(building)) continue;
-    const count = buildProgramArchitecture(building, 'near')!.filter(p => p.purpose === 'wall' && p.material === 'wood').length;
-    assert.ok(count <= PROGRAM_WALL_FINISH_PANEL_BUDGET * 3, `${building.id}: actual timber instance count exceeded its per-building cap`);
-    if (count === PROGRAM_WALL_FINISH_PANEL_BUDGET * 3) capped++;
+    const walls = buildProgramArchitecture(building, 'near')!.filter(p => p.purpose === 'wall' && p.material === 'wood');
+    // Per finished panel: one head beam, at most MAX_BAYS + 1 posts and (boarded shops) MAX_BAYS infill boards.
+    assert.ok(walls.length <= PROGRAM_WALL_FINISH_PANEL_BUDGET * (2 + PROGRAM_WALL_FINISH_MAX_BAYS * 2), `${building.id}: actual timber instance count exceeded its per-building cap`);
+    // A building with more finishable panels than the budget exercises the cap.
+    const body = getBuildingBody(building)!, eligible = body.floorPlans.filter(p => p.floor >= 0).flatMap(p => wallPanels(p)).filter(p => p.kind === 'solid' && Math.max(p.rect.x1 - p.rect.x0, p.rect.z1 - p.rect.z0) >= .8 - 1e-7).length;
+    if (eligible > PROGRAM_WALL_FINISH_PANEL_BUDGET) capped++;
     checked++;
   }
   assert.ok(checked > 250, 'the native target set was actually generated');

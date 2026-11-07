@@ -1,4 +1,21 @@
 import { installPowerGrid, gridBuildingSupplyRatio, gridVehicleSupplyRatio, gridPoweredWorkMinutes, validatePowerGridDefinition } from './simulation/power-grid';
+import { PLAYER_YIELD_POLICIES, yieldStop, yieldsToPlayer, type PlayerYieldPolicy } from './simulation/player-yield';
+import { CABLE_SPEED_POLICIES, cableSpeed, type CableSpeedPolicy } from './simulation/cable-speed';
+import { CLOSURE_TRAFFIC_POLICIES, closureTestsVehicle, type ClosureTrafficPolicy } from './simulation/closure-traffic';
+import { MUNICIPAL_REPAIR_POLICIES, type MunicipalRepairPolicy } from './simulation/municipal-repair';
+import { REPAIR_ROUTE_POLICIES, REPAIR_ROUTE_POLICY, type RepairRoutePolicy } from './simulation/repair-route';
+import { TOWN_LANES_POLICIES, TOWN_LANES_POLICY, townLaneDoorEdge, type TownLanesPolicy } from './simulation/town-lanes';
+import { MIGRATION_PACE, MIGRATION_PACE_POLICIES, MIGRATION_PACE_POLICY, type MigrationPacePolicy } from './simulation/migration-pace';
+import { LOSS_OWNER_EXIT_POLICIES, LOSS_OWNER_EXIT_POLICY, type LossOwnerExitPolicy } from './simulation/loss-owner-exit';
+import { HOME_MATS_POLICIES, HOME_MATS_POLICY, homeMatPointAt, homeMatsView, type HomeMatsPolicy } from './simulation/home-mats';
+import { UNDERPAID_HOUR, UNDERPAID_MOVE_POLICIES, UNDERPAID_MOVE_POLICY, type UnderpaidMovePolicy } from './simulation/underpaid-move';
+import { JUNCTION_DWELL, JUNCTION_DWELL_POLICIES, JUNCTION_DWELL_POLICY, type JunctionDwellPolicy } from './simulation/junction-dwell';
+import { TINY_LEG_POLICIES, TINY_LEG_POLICY, tinyLeg, type TinyLegPolicy } from './simulation/tiny-leg';
+import { LOSS_SHOP_MOVE_POLICIES, LOSS_SHOP_MOVE_POLICY, type LossShopMovePolicy } from './simulation/loss-shop-move';
+import { STUDENT_DORM_POLICIES, dormHomes, type StudentDormPolicy } from './simulation/student-dorm';
+import { COMPANY_DIVIDEND_POLICIES, COMPANY_DIVIDEND_POLICY, shareholderParts, type CompanyDividendPolicy } from './simulation/company-dividend';
+import { ARRIVAL_HOMES_POLICIES, arrivalHomes, type ArrivalHomesPolicy } from './simulation/arrival-homes';
+import { BOARDING_HOLD_METRES, BOARDING_HOLD_MINUTES, BOARDING_HOLD_POLICIES, holdsForPlayer, type BoardingHoldPolicy } from './simulation/boarding-hold';
 import { runScheduledServiceProcurement } from './simulation/service-material-scheduling';
 import { giftContactReason } from './simulation/gift-contact';
 import { createBudgetAuthorityState, installBudgetAuthority, isSupplementalPurpose, authorizeCivicSupplementalBudget as authorizeNaturalSupplementalBudget, validateBudgetAuthority, type BudgetAuthorization, type LegacyBudgetAuthorization } from './simulation/budget-authority';
@@ -6,14 +23,20 @@ import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, va
 import { createCivicHistory, freezeCivicHistory } from './simulation/civic-history';
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
-import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
+import { BROWSE_MAX, BROWSE_MIN, browsesOnStreet, eatsOnStreet, shortStallMeal, stallLinger, routeShortOfDoor, chooseNearestTiedMeal, eveningBonus, lunchBonus, MEAL_ROUTE_POLICIES, nearestMealPolicy, type MealRoutePolicy } from './simulation/meal-route';
+import { FARM_INPUT_ORDER_TARGET, FARM_INPUT_REORDER, FARM_YIELD_POLICIES, farmInputsUsed, foodOutputWithInputs, laborMinutesPerUnit, producerStockCap, type FarmYieldPolicy } from './simulation/farm-yield';
+import { NPC_MOTION_COARSE_POLICY, NPC_MOTION_POLICIES, physicalStep, type NpcMotionPolicy } from './simulation/npc-motion-coarse';
+import { allocateExports, cityMaterialSurplus, EXPORT_UNITS_PER_HOUR, FOOD_EXPORT_LINE, FOREIGN_TRADE_POLICIES, FOREIGN_TRADE_POLICY_V2, MATERIAL_EXPORT_LINE, WORLD_FOOD_PRICE, WORLD_MATERIAL_PRICE, type ForeignTradePolicy, type ForeignTradeState } from './simulation/foreign-trade';
+import { BANK_ACTION_NAMES, RELATION_NAMES, SOCIAL_ACTION_NAMES } from './simulation/player-names';
+import { admitsMigrants, ARRIVAL_RADIUS, ARRIVAL_SLOTS, settlesArrivalQuarter, closeFiscalDay, councilTaxRate, MIGRANT_SAVINGS, MIGRANTS_PER_DAY, MIGRATION_CAP, dividendWaitsForPayroll, privateWageBase, profitTaxSplit, sharesProfitWithStaff, shopStaffMayMove, staffProfitShare, studentBursaries, STUDY_GRANT_CEILING, studyGrant, RELIEF_MEALS, reliefPayments, PUBLIC_FINANCE_POLICIES, type FiscalDay, type PublicFinancePolicy } from './simulation/public-finance';
+import { chooseFreightDestination, leastStockedDistrict, DEMAND_FOOD_FREIGHT_POLICY_V2, DEMAND_FOOD_FREIGHT_POLICY_V3, districtSupplied, FOOD_FREIGHT_POLICIES, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
 import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetState } from './simulation/supplemental-budget';
 import { NpcStairMotion, type NpcStairCursor } from './simulation/npc-stair-motion';
 import { archivePoliceSupplies, consumePoliceSupply, createPoliceSupplies, policeSupplyReady, recordPolicePurchase, validatePoliceSupplies, type PoliceSupplies } from './simulation/police-supplies';
 import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
-import { FLOOR_PLAN_PROFILE, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, blocksFloorPlanMovement, blocksFloorPlanReferenceMovement, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
+import { FLOOR_PLAN_PROFILE, pureSegmentBlocker, withFixedFloorPlans, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, blocksFloorPlanMovement, blocksFloorPlanReferenceMovement, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
 import { blocksMarketCounter, marketCounters } from './site-fixtures';
 import { installExtensions, researchTaskActorIds, isCanonicalDisaster, isCanonicalResearchCompletion } from './simulation/extensions';
 import { installPower, powerBinding, powerHasCapacityRoom, powerRepairPoint, powerTaskActorIds, validateLegacyEnergyContract, validatePowerBudgetCrossReferences, type LegacyEnergyContract } from './simulation/power';
@@ -34,13 +57,13 @@ import { installBanking } from './simulation/banking';
 import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
 import { installPlayerLabor, type PlayerLaborEmployer, type PlayerLaborJob } from './simulation/player-labor';
-import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPoints, installHomeRest } from './simulation/home-rest';
+import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPointsView, installHomeRest, voxelEscapeAllowed, type HomeRestPoint } from './simulation/home-rest';
 import { validatePublicDisinfectionBudgetCrossReferences } from './simulation/hygiene-public';
 import { installHygiene, hygieneNeedsContinuousPeople } from './simulation/hygiene';
 import { installPathology } from './simulation/pathology';
 import { savedWorldFingerprint } from './persistence/world-layout';
 import { decodeCitizenRoutes, encodeCitizenRoutes } from './persistence/route-encoding';
-import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relationship, Role, Shop, SimState, SimulationAPI, Vec3, Vehicle, ViewMode, WorldDefinition, Building, BuildingFunctionPoint } from './types';
+import type { Company, Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relationship, Role, Shop, SimState, SimulationAPI, Vec3, Vehicle, ViewMode, WorldDefinition, Building, BuildingFunctionPoint } from './types';
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
@@ -50,9 +73,15 @@ const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'marr
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
 const clamp = (n: number, min = 0, max = 100) => Math.max(min, Math.min(max, n));
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+const sameVec = (a: Vec3, b: Vec3 | undefined) => !!b && a.x === b.x && a.y === b.y && a.z === b.z;
 const copy = (p: Vec3): Vec3 => ({ x: p.x, y: p.y, z: p.z });
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
+/** v4 street browsing: an evening social outing to a market. */
+const streetBrowse = (runtime: { mealRoutePolicyId?: MealRoutePolicy; activities: Record<string, string> }, citizen: Citizen, destination: Building) => browsesOnStreet(runtime.mealRoutePolicyId) && destination.kind === 'market'
+  && (runtime.activities?.[citizen.id] === 'social' || eatsOnStreet(runtime.mealRoutePolicyId) && runtime.activities?.[citizen.id] === 'eat');
 const hash = (value: string) => { let h = 2166136261; for (let i = 0; i < value.length; i++) h = Math.imul(h ^ value.charCodeAt(i), 16777619); return h >>> 0; };
+/** Cell size of the interior lookup's building grid (buildingsWithinReach). */
+const REACH_CELL = 64;
 const canonicalNpcWages = new WeakMap<object, { simulation: Simulation; state: SimState; tick: number; at: number }>();
 /** Only immutable actual native attendance notifications certify paid work.
  * Consumers that change an asset can require this city's current state/frame;
@@ -77,6 +106,8 @@ class EventBus {
   private handlers = new Map<string, ((event: Event) => void)[]>();
   on(type: string, handler: (event: Event) => void) { const list = this.handlers.get(type) ?? []; list.push(handler); this.handlers.set(type, list); }
   emit(event: Event) { for (const handler of this.handlers.get(event.type) ?? []) handler(event); }
+  /** The live handler list emit walks, for a tick resumed between handlers (Simulation.stepSliced). */
+  listeners(type: string): readonly ((event: Event) => void)[] { return this.handlers.get(type) ?? []; }
 }
 export interface PublicPurchaseRequest { supplierShopIds?: string[]; requestedGross: number; requestedQuantity?: number; districtId?: string; siteId?: string; purpose?: string; procurementId?: string; budgetId?: string; reserveCash?: number; eventType?: string }
 export interface PublicPurchaseReceipt { reason?: 'budget' | 'supply' | 'authorization'; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; gross: number; net: number; unitPrice: number }[] }
@@ -110,6 +141,37 @@ interface Runtime {
   referenceCollisionPolicyId?: ReferenceCollisionPolicy;
   mealRoutePolicyId?: MealRoutePolicy;
   freightPickupPolicyId?: FreightPickupPolicy;
+  farmYieldPolicyId?: FarmYieldPolicy;
+  foodFreightPolicyId?: FoodFreightPolicy;
+  /** staffed-farm-yield-v3: workshop inputs held by each food producer. */
+  farmInputs?: Record<string, number>;
+  publicFinancePolicyId?: PublicFinancePolicy;
+  foreignTradePolicyId?: ForeignTradePolicy;
+  npcMotionPolicyId?: NpcMotionPolicy;
+  boardingHoldPolicyId?: BoardingHoldPolicy;
+  playerYieldPolicyId?: PlayerYieldPolicy;
+  cableSpeedPolicyId?: CableSpeedPolicy;
+  closureTrafficPolicyId?: ClosureTrafficPolicy;
+  municipalRepairPolicyId?: MunicipalRepairPolicy;
+  companyDividendPolicyId?: CompanyDividendPolicy;
+  studentDormPolicyId?: StudentDormPolicy;
+  lossShopMovePolicyId?: LossShopMovePolicy;
+  tinyLegPolicyId?: TinyLegPolicy;
+  junctionDwellPolicyId?: JunctionDwellPolicy;
+  underpaidMovePolicyId?: UnderpaidMovePolicy;
+  repairRoutePolicyId?: RepairRoutePolicy;
+  homeMatsPolicyId?: HomeMatsPolicy;
+  lossOwnerExitPolicyId?: LossOwnerExitPolicy;
+  migrationPacePolicyId?: MigrationPacePolicy;
+  townLanesPolicyId?: TownLanesPolicy;
+  arrivalHomesPolicyId?: ArrivalHomesPolicy;
+  /** Vehicles holding this stop for the player (boarding-hold.ts), cleared when they move off. */
+  boardingHolds?: Record<string, true>;
+  foreignTrade?: ForeignTradeState;
+  /** Council budget rule: the open fiscal day and its smoothed predecessors. */
+  fiscalDay?: FiscalDay;
+  /** Declared food freight: destination district of each loaded carrier. */
+  cargoDestinations?: Record<string, string>;
   serviceMaterialSchedulingVersion?: 1;
   npcStairCursors?: Record<string, NpcStairCursor>;
   attendance: Record<string, number>;
@@ -134,6 +196,7 @@ export class Simulation implements SimulationAPI {
   private readonly buildings: Map<string, Building>;
   private readonly edges: Map<string, NetworkEdge>;
   private readonly freightCarriers = new Map<string, { kind: Vehicle['kind']; cargoCapacity: number }>();
+  private freightHopsCache: FreightHops | null = null;
   private readonly fingerprint: string;
   private readonly neighbors = new Map<string, { node: string; edge: NetworkEdge }[]>();
   private readonly routeCache = new Map<string, Vec3[]>();
@@ -147,12 +210,17 @@ export class Simulation implements SimulationAPI {
   private readonly loadHooks: (() => void)[] = [];
   private readonly commandHandlers: ((command: Command) => CommandResult | null)[] = [];
   private readonly baselineCitizenIds = new Set<string>();
+  /** The generated fleet's door carts on the market town lanes, whether or not this city left them out (town-lanes-v1). */
+  private readonly townLaneCartIds = new Set<string>();
+  /** Building centres by REACH_CELL m cell for the interior lookup, rebuilt when the building list changes. */
+  private reachGrid: { collection: Building[]; length: number; cells: Map<string, number[]>; maxReach: number } | null = null;
   private readonly initialCivicProfessions: CivicInitialProfession[] = [];
   private readonly legacyRiderArrivalAt = new WeakMap<object, number>();
   private readonly citizenRoadMovementRejected = new WeakSet<Citizen>();
   private readonly npcStairMotion: NpcStairMotion;
   private readonly npcCursorRoutes = new WeakMap<NpcStairCursor, Vec3[]>();
   private readonly citizenArrivalMinutes = new WeakMap<Citizen, number>();
+  private readonly counterBlockers = new WeakMap<Building, ((a: Vec3, b: Vec3) => boolean) | undefined>();
   private minutes = .25;
   private employment = new Set<string>();
   private accrualIndexSource?: WageAccrual[];
@@ -162,22 +230,44 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId', 'publicFinancePolicyId', 'foreignTradePolicyId', 'npcMotionPolicyId', 'boardingHoldPolicyId', 'playerYieldPolicyId', 'cableSpeedPolicyId', 'closureTrafficPolicyId', 'arrivalHomesPolicyId', 'municipalRepairPolicyId', 'companyDividendPolicyId', 'studentDormPolicyId', 'lossShopMovePolicyId', 'tinyLegPolicyId', 'junctionDwellPolicyId', 'underpaidMovePolicyId', 'repairRoutePolicyId', 'homeMatsPolicyId', 'lossOwnerExitPolicyId', 'migrationPacePolicyId', 'townLanesPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.mealRoutePolicyId !== undefined && (!MEAL_ROUTE_POLICIES.includes(options.mealRoutePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.farmYieldPolicyId !== undefined && (!FARM_YIELD_POLICIES.includes(options.farmYieldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.foodFreightPolicyId !== undefined && (!FOOD_FREIGHT_POLICIES.includes(options.foodFreightPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.publicFinancePolicyId !== undefined && (!PUBLIC_FINANCE_POLICIES.includes(options.publicFinancePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.foreignTradePolicyId !== undefined && (!FOREIGN_TRADE_POLICIES.includes(options.foreignTradePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.npcMotionPolicyId !== undefined && (!NPC_MOTION_POLICIES.includes(options.npcMotionPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.boardingHoldPolicyId !== undefined && (!BOARDING_HOLD_POLICIES.includes(options.boardingHoldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.playerYieldPolicyId !== undefined && (!PLAYER_YIELD_POLICIES.includes(options.playerYieldPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.cableSpeedPolicyId !== undefined && (!CABLE_SPEED_POLICIES.includes(options.cableSpeedPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.closureTrafficPolicyId !== undefined && (!CLOSURE_TRAFFIC_POLICIES.includes(options.closureTrafficPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.arrivalHomesPolicyId !== undefined && (!ARRIVAL_HOMES_POLICIES.includes(options.arrivalHomesPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.municipalRepairPolicyId !== undefined && (!MUNICIPAL_REPAIR_POLICIES.includes(options.municipalRepairPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.companyDividendPolicyId !== undefined && (!COMPANY_DIVIDEND_POLICIES.includes(options.companyDividendPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.studentDormPolicyId !== undefined && (!STUDENT_DORM_POLICIES.includes(options.studentDormPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.lossShopMovePolicyId !== undefined && (!LOSS_SHOP_MOVE_POLICIES.includes(options.lossShopMovePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.tinyLegPolicyId !== undefined && (!TINY_LEG_POLICIES.includes(options.tinyLegPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.junctionDwellPolicyId !== undefined && (!JUNCTION_DWELL_POLICIES.includes(options.junctionDwellPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.underpaidMovePolicyId !== undefined && (!UNDERPAID_MOVE_POLICIES.includes(options.underpaidMovePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.repairRoutePolicyId !== undefined && (!REPAIR_ROUTE_POLICIES.includes(options.repairRoutePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.homeMatsPolicyId !== undefined && (!HOME_MATS_POLICIES.includes(options.homeMatsPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.lossOwnerExitPolicyId !== undefined && (!LOSS_OWNER_EXIT_POLICIES.includes(options.lossOwnerExitPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.migrationPacePolicyId !== undefined && (!MIGRATION_PACE_POLICIES.includes(options.migrationPacePolicyId) || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.townLanesPolicyId !== undefined && (!TOWN_LANES_POLICIES.includes(options.townLanesPolicyId) || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
     this.edges = new Map(world.edges.map(e => [e.id, e]));
-    this.npcStairMotion = new NpcStairMotion(world);
+    this.npcStairMotion = new NpcStairMotion(world, () => physicalStep(this.runtime.npcMotionPolicyId, this.state.voxels.length));
     for (const node of world.nodes) this.nodeAt.set(this.pointKey(node.position), node.id);
     for (const building of world.buildings) this.doorNodes.set(building.id, this.nearestNode(building.door));
     this.fingerprint = savedWorldFingerprint(world);
     for (const e of world.edges) { this.addNeighbor(e.from, e.to, e); this.addNeighbor(e.to, e.from, e); }
     this.runtime = { rng: (world.seed >>> 0) || 1, accumulator: 0, weatherAt: 9 * 60, crimeAt: 8 * 60 + 40, payrollAt: 17 * 60, commerceAt: 8 * 60, financeAt: 8 * 60, socialAt: 8 * 60, eventId: 0, crimeId: 0, focus: copy(world.spawn), mode: 'drone', detail: 1, workAt: -10000, studyAt: -10000, wages: [], accountingVersion: 2, wageAccruals: [], wageArrears: [], taxes: 0, freight: {}, playerBusinesses: [], investment: 0, campaign: null, signalOverrides: {}, constructionId: 0, energyBoostUntil: 0, operatingCost: 0, restAt: -10000, relationshipAt: {}, lastInvestmentAt: -10000, riders: {}, links: [], impressions: {}, districtRelationMeans: {}, decisionAt: {}, activities: {}, attendance: {}, customers: {}, driving: { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 }, dispatches: {}, relationshipClock: 480, hostileAt: {} };
     this.state = { version: 1, seed: world.seed, tick: 0, day: 0, hour: 8, paused: false, speed: 1, weather: '晴', visibility: 1, energy: 98, treasury: 80000, taxRate: .08, policeBudget: .3, support: 58, bankBalance: 0, loan: 0, gdp: 0, lastSystemOrder: [], districts: world.districts.map(d => ({ id: d.id, energy: 98, safety: 84, employment: .94, prosperity: 68, pollution: 8, tier: 'statistical', residents: d.population, crimeCount: 0 })), citizens: [], vehicles: [], shops: [], player: { position: copy(world.spawn), role: 'traveler', identities: ['traveler'], money: 600, reputation: 0, needs: { hunger: 85, fatigue: 90, social: 70, fun: 70 }, inventory: { block: 32 }, homeId: null, education: 0, experience: 0, partnerId: null, vehicleId: null }, relationships: [], crimes: [], events: [], metrics: { trades: 0, commutes: 0, crimesResolved: 0, freight: 0, flights: 0 }, voxels: [] };
-    this.initializeCitizens();
+    this.initializeCitizens(options?.arrivalHomesPolicyId, options?.studentDormPolicyId);
     for (const actor of this.state.citizens) this.initialCivicProfessions.push({ id: actor.id, role: actor.role, workId: actor.workId, districtId: actor.districtId, education: actor.education });
     // Fresh journeys explicitly opt into physical stair travel. A loaded v1
     // runtime replaces these fields and retains its original movement contract.
@@ -185,6 +275,28 @@ export class Simulation implements SimulationAPI {
     if (options?.referenceCollisionPolicyId) this.runtime.referenceCollisionPolicyId = options.referenceCollisionPolicyId;
     if (options?.mealRoutePolicyId) this.runtime.mealRoutePolicyId = options.mealRoutePolicyId;
     if (options?.freightPickupPolicyId) this.runtime.freightPickupPolicyId = options.freightPickupPolicyId;
+    if (options?.farmYieldPolicyId) { this.runtime.farmYieldPolicyId = options.farmYieldPolicyId; if (farmInputsUsed(options.farmYieldPolicyId)) this.runtime.farmInputs = {}; }
+    if (options?.foodFreightPolicyId) { this.runtime.foodFreightPolicyId = options.foodFreightPolicyId; this.runtime.cargoDestinations = {}; }
+    if (options?.npcMotionPolicyId) this.runtime.npcMotionPolicyId = options.npcMotionPolicyId;
+    if (options?.boardingHoldPolicyId) this.runtime.boardingHoldPolicyId = options.boardingHoldPolicyId;
+    if (options?.playerYieldPolicyId) this.runtime.playerYieldPolicyId = options.playerYieldPolicyId;
+    if (options?.cableSpeedPolicyId) this.runtime.cableSpeedPolicyId = options.cableSpeedPolicyId;
+    if (options?.closureTrafficPolicyId) this.runtime.closureTrafficPolicyId = options.closureTrafficPolicyId;
+    if (options?.municipalRepairPolicyId) this.runtime.municipalRepairPolicyId = options.municipalRepairPolicyId;
+    if (options?.companyDividendPolicyId) this.runtime.companyDividendPolicyId = options.companyDividendPolicyId;
+    if (options?.studentDormPolicyId) this.runtime.studentDormPolicyId = options.studentDormPolicyId;
+    if (options?.lossShopMovePolicyId) this.runtime.lossShopMovePolicyId = options.lossShopMovePolicyId;
+    if (options?.tinyLegPolicyId) this.runtime.tinyLegPolicyId = options.tinyLegPolicyId;
+    if (options?.junctionDwellPolicyId) this.runtime.junctionDwellPolicyId = options.junctionDwellPolicyId;
+    if (options?.underpaidMovePolicyId) this.runtime.underpaidMovePolicyId = options.underpaidMovePolicyId;
+    if (options?.repairRoutePolicyId) this.runtime.repairRoutePolicyId = options.repairRoutePolicyId;
+    if (options?.homeMatsPolicyId) this.runtime.homeMatsPolicyId = options.homeMatsPolicyId;
+    if (options?.lossOwnerExitPolicyId) this.runtime.lossOwnerExitPolicyId = options.lossOwnerExitPolicyId;
+    if (options?.migrationPacePolicyId) this.runtime.migrationPacePolicyId = options.migrationPacePolicyId;
+    if (options?.townLanesPolicyId) this.runtime.townLanesPolicyId = options.townLanesPolicyId;
+    if (options?.arrivalHomesPolicyId) this.runtime.arrivalHomesPolicyId = options.arrivalHomesPolicyId;
+    if (options?.foreignTradePolicyId) { this.runtime.foreignTradePolicyId = options.foreignTradePolicyId; this.runtime.foreignTrade = { enabled: true, exportedUnits: 0, exportGross: 0 }; }
+    if (options?.publicFinancePolicyId) { this.runtime.publicFinancePolicyId = options.publicFinancePolicyId; this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net: 0, base: 0 }; }
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
     this.runtime.customers = {};
     this.runtime.driving = { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 };
@@ -196,18 +308,23 @@ export class Simulation implements SimulationAPI {
     // A civic laboratory can occupy a workshop-shaped building, but its public
     // payroll and research resources must not become a fictitious retail shop.
     for (const b of world.buildings.filter(b => !b.facility && ['market', 'workshop', 'farm', 'dock'].includes(b.kind))) this.state.shops.push({ id: `shop-${b.id}`, buildingId: b.id, districtId: b.districtId, inventory: b.kind === 'farm' ? 160 : 90, price: b.kind === 'market' ? 12 : 8, revenue: 0, profit: 0, customers: 0, open: true, employees: this.workforce.get(b.id)?.length ?? 0 });
+    // A recipe's explicit road fleet replaces the length rule for its roads only.
+    const fleetPlan = world.fleetPlan ? new Map(world.fleetPlan.map(row => [row.edgeId, row])) : null;
     for (const e of world.edges) {
-      if (e.mode === 'bridge' || e.mode === 'road' && e.length < 80) continue;
-      const stationRoad = e.mode === 'road' && world.nodes.find(n => n.id === e.from)?.station && world.nodes.find(n => n.id === e.to)?.station;
-      if (e.mode === 'road' && !stationRoad) { const destination = world.buildings.find(b => `${b.id}-door` === e.from || `${b.id}-door` === e.to); if (!destination || !['market', 'workshop', 'farm', 'dock'].includes(destination.kind)) continue; }
-      const count = stationRoad ? 2 : 1;
+      if (fleetPlan && e.mode === 'road' && !fleetPlan.has(e.id)) continue;
+      if (!(fleetPlan && e.mode === 'road') && (e.mode === 'bridge' || e.mode === 'road' && e.length < 80)) continue;
+      const stationRoad = fleetPlan && e.mode === 'road' ? fleetPlan.get(e.id)!.stationRoad : e.mode === 'road' && world.nodes.find(n => n.id === e.from)?.station && world.nodes.find(n => n.id === e.to)?.station;
+      if (!fleetPlan && e.mode === 'road' && !stationRoad) { const destination = world.buildings.find(b => `${b.id}-door` === e.from || `${b.id}-door` === e.to); if (!destination || !['market', 'workshop', 'farm', 'dock'].includes(destination.kind)) continue; }
+      const count = stationRoad ? 2 : 1, townLane = townLaneDoorEdge(world, e);
       for (let i = 0; i < count; i++) {
         const progress = i / count, id = `vehicle-${e.id}-${i}`;
+        // town-lanes-v1: the dense market town's shop door links keep no cart (the ids are kept for save validation).
+        if (townLane) { this.townLaneCartIds.add(id); if (this.runtime.townLanesPolicyId === TOWN_LANES_POLICY) continue; }
         // These capacities belong to the trusted generated fleet, independently
         // of whether an imported instance currently carries any stock.
         const cargoCapacity = e.mode === 'road' && i === 1 ? 28 : e.mode === 'flight' ? 60 : 0;
         if (cargoCapacity > 0) this.freightCarriers.set(id, { kind: e.mode, cargoCapacity });
-        this.state.vehicles.push({ id, kind: e.mode, position: this.pointOn(e, progress), edgeId: e.id, progress, direction: i % 2 === 0 ? 1 : -1, speed: this.speedFor(e.mode), state: 'waiting', passengers: 0, cargo: cargoCapacity, nextDeparture: 8 * 60 + (e.mode === 'flight' ? 20 : i * 3) });
+        this.state.vehicles.push({ id, kind: e.mode, position: this.pointOn(e, progress), edgeId: e.id, progress, direction: i % 2 === 0 ? 1 : -1, speed: e.mode === 'cable' ? cableSpeed(this.runtime.cableSpeedPolicyId, this.speedFor(e.mode)) : this.speedFor(e.mode), state: 'waiting', passengers: 0, cargo: cargoCapacity, nextDeparture: 8 * 60 + (e.mode === 'flight' ? 20 : i * 3) });
       }
     }
     this.connectSystems();
@@ -247,6 +364,8 @@ export class Simulation implements SimulationAPI {
     installRoadNetwork(this, { isCanonicalDisaster, activate: () => { this.runtime.roadNetworkVersion = 1; } });
     const roadworks = installRoadworks(this, { isCanonicalRoadworkPresence, activate: (version = 1) => { this.runtime.roadworksVersion = version; },
       travelCost: (citizenId, nodeId, point) => this.roadworkTravelCost(citizenId, nodeId, point),
+      // repair-route-v1: the carry leg, from a counter's nearest node to the worksite node over the open walking network.
+      carryCost: (fromNodeId, toNodeId) => this.runtime.repairRoutePolicyId === REPAIR_ROUTE_POLICY ? this.walkingTree(fromNodeId).costs.get(toNodeId) ?? Infinity : 0,
       takePublicEscrow: request => this.takeRoadworkPublicEscrow(request), returnPublicEscrow: request => this.returnRoadworkPublicEscrow(request), accrueTax: amount => { if (finite(amount) && amount >= 0) this.runtime.taxes += amount; } });
     installRoadDemands(this, { isCanonicalRoadBlock, activate: () => { this.runtime.roadDemandsVersion = 1; }, requestRepair: demandId => roadworks.requestResidentDemand(demandId) });
     this.resetRoadRouting();
@@ -275,20 +394,25 @@ export class Simulation implements SimulationAPI {
   private addNeighbor(from: string, node: string, edge: NetworkEdge) { const list = this.neighbors.get(from) ?? []; list.push({ node, edge }); this.neighbors.set(from, list); }
   private random() { let x = this.runtime.rng; x ^= x << 13; x ^= x >>> 17; x ^= x << 5; this.runtime.rng = x >>> 0; return this.runtime.rng / 4294967296; }
   private get now() { return this.state.day * 1440 + this.state.hour * 60; }
-  private initializeCitizens() {
+  private initializeCitizens(arrivalHomesPolicyId?: ArrivalHomesPolicy, studentDormPolicyId?: StudentDormPolicy) {
     const count = Math.max(384, Math.min(896, this.world.districts.length * 56));
     const namesA = ['沈', '云', '林', '白', '苏', '陆', '江', '顾', '温', '叶', '程', '许'];
     const namesB = ['溪', '岚', '青', '舟', '遥', '宁', '竹', '澄', '川', '月', '星', '禾'];
     const homes = this.world.buildings.filter(b => b.kind === 'home');
+    // A declared city houses the arrival district's residents near the arrival (arrival-homes.ts).
+    const arrival = arrivalHomesPolicyId ? arrivalHomes(homes, this.world.spawn) : null;
     const schools = this.world.buildings.filter(b => b.kind === 'school');
+    // A declared city houses its students near the schools (student-dorm.ts).
+    const dorms = studentDormPolicyId ? dormHomes(homes, schools) : [];
+    let dormIndex = 0;
     const workplaces = this.world.buildings.filter(b => ['market', 'workshop', 'farm', 'bank', 'hall', 'police', 'school', 'clinic', 'station', 'airport', 'starport', 'dock', 'core'].includes(b.kind));
     let sharedCommutes = initialCommuteCache.get(this.world);
     if (!sharedCommutes || sharedCommutes.fingerprint !== this.fingerprint) { sharedCommutes = { fingerprint: this.fingerprint, homes: new Map() }; initialCommuteCache.set(this.world, sharedCommutes); }
     for (let i = 0; i < count; i++) {
       const district = this.world.districts[i % this.world.districts.length];
       const student = Math.floor(i / this.world.districts.length) % 11 === 0;
-      const districtHomes = homes.filter(b => b.districtId === district.id);
-      const home = (districtHomes.length ? districtHomes : homes.length ? homes : this.world.buildings)[Math.floor(i / this.world.districts.length) % Math.max(1, districtHomes.length || homes.length || this.world.buildings.length)];
+      const districtHomes = arrival?.districtId === district.id ? arrival.homes : homes.filter(b => b.districtId === district.id);
+      const home = student && dorms.length ? dorms[dormIndex++ % dorms.length] : (districtHomes.length ? districtHomes : homes.length ? homes : this.world.buildings)[Math.floor(i / this.world.districts.length) % Math.max(1, districtHomes.length || homes.length || this.world.buildings.length)];
       const districtJobs = workplaces.filter(b => b.districtId === district.id);
       const availableJobs = districtJobs.length ? districtJobs : workplaces.length ? workplaces : this.world.buildings;
       const homeNode = this.buildingNode(home); let costs = sharedCommutes.homes.get(homeNode.id);
@@ -409,7 +533,7 @@ export class Simulation implements SimulationAPI {
       if (!plan || plan.day !== day) plan = labor.shifts[shop.id] = { day, shopId: shop.id, assignments: [], reviews: [] };
       if (plan.reviews.length >= 150) continue;
       // Amendments use newly received cash and keep every earlier rate/minute.
-      for (const citizen of roster) if (!plan.assignments.some(item => item.citizenId === citizen.id)) plan.assignments.push({ citizenId: citizen.id, ratePerMinute: (this.runtime.wageAccruals ?? []).find(item => item.citizenId === citizen.id && item.shopId === shop.id)?.ratePerMinute ?? 32 * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100) / 480, minutesCap: 0, workedMinutes: 0 });
+      for (const citizen of roster) if (!plan.assignments.some(item => item.citizenId === citizen.id)) plan.assignments.push({ citizenId: citizen.id, ratePerMinute: (this.runtime.wageAccruals ?? []).find(item => item.citizenId === citizen.id && item.shopId === shop.id)?.ratePerMinute ?? privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100) / 480, minutesCap: 0, workedMinutes: 0 });
       const earnedDebt = this.shopPayrollDebt(shop), priorCommitment = this.shopCommittedPayroll(shop), operatingReserve = 20 * 8 / 24 + shopLifecycleReservedFunds(this.state, shop.id), cash = this.shopFunds(shop);
       const available = Math.max(0, cash - earnedDebt - priorCommitment - operatingReserve);
       const remaining = plan.assignments.filter(item => roster.some(c => c.id === item.citizenId) && item.minutesCap < 480);
@@ -804,7 +928,7 @@ export class Simulation implements SimulationAPI {
     for (const d of this.world.districts) this.runtime.districtRelationMeans[d.id] = 30;
   }
   private connectSystems() {
-    for (const phase of ORDER) this.bus.on(`system:${phase}`, () => this[phase]());
+    for (const phase of ORDER) { const core = () => this[phase](); this.phaseCore.set(phase, core); this.bus.on(`system:${phase}`, core); }
     const refreshRoadRoutes = (event: Event) => {
       // Capture the original ordinary journey before the old pure revision
       // overwrites it. Only actual failed replans submit a named request.
@@ -856,29 +980,97 @@ export class Simulation implements SimulationAPI {
       }
     });
   }
+  /** Each phase's own system handler (connectSystems), told apart from extension handlers. */
+  private readonly phaseCore = new Map<string, (event: Event) => void>();
+  /** Where an unfinished tick of stepSliced stopped: phase, handler within it, and the people phase's resident. */
+  private slice: { minutes: number; phase: number; handler: number; started: boolean; people: { ctx: ReturnType<Simulation['peopleSetup']>; i: number } | null } | null = null;
+  /** A tick of stepSliced is under way: the state is part-way through a tick. */
+  get tickOpen(): boolean { return this.slice !== null; }
+  /** The city is behind: another tick is already due beyond the one under way. Spreading ticks further would
+   * slow the city below real time on a slow frame rate, so the caller's budget should let them run now. */
+  get tickBehind(): boolean { return this.runtime.accumulator + 1e-10 >= TICK_SECONDS; }
+  /** A slice is running: the handlers and residents of the open tick are being executed right now. */
+  private slicing = false;
+  /** Runs the rest of an unfinished tick at once. Every entry point that changes or reads the whole state calls
+   * it first, so a command, save or focus change never lands inside a tick, as with step(). A call made by the
+   * tick itself (roadworks' save-size check runs inside the tick) sees the state part-way through it, also as
+   * with step(), and must not re-enter the slice that is running. */
+  finishTick(): void { if (this.slice && !this.slicing) this.runSlice(() => true); }
+  /** step() spread over calls: the same ticks, phases, handlers and residents in the same order, but it stops
+   * between handlers and between residents of the people phase whenever `more()` says so, and a later call
+   * carries on from there. Between calls nothing may change the state except through the entry points that
+   * finish the tick first; with that, every tick ends exactly as step() would end it. `beforeTick` runs just
+   * before each new tick starts, where a caller applies its inputs. */
+  stepSliced(realSeconds: number, more: () => boolean, beforeTick?: () => void): void {
+    if (!finite(realSeconds) || realSeconds < 0 || realSeconds > 120) return;
+    if (!this.slice) { if (this.state.paused) return; this.runtime.accumulator += realSeconds; }
+    else this.runtime.accumulator += realSeconds;
+    for (;;) {
+      if (!this.slice) {
+        if (this.state.paused || this.runtime.accumulator + 1e-10 < TICK_SECONDS) return;
+        // The caller's inputs (the player's walk, focus, controls) reach the city just before a tick starts.
+        beforeTick?.();
+        if (this.state.paused) return;
+        this.runtime.accumulator = Math.max(0, this.runtime.accumulator - TICK_SECONDS);
+        this.minutes = .25 * this.state.speed;
+        this.state.lastSystemOrder = [];
+        this.slice = { minutes: this.minutes, phase: 0, handler: 0, started: false, people: null };
+      }
+      if (!this.runSlice(more) || !more()) return;
+    }
+  }
+  /** Carries the open tick forward; true once it has ended. */
+  private runSlice(more: () => boolean): boolean {
+    const slice = this.slice!; this.minutes = slice.minutes;
+    let done = false;
+    this.slicing = true;
+    try { this.npcStairMotion.withinTick(() => withFixedFloorPlans(() => {
+      for (; slice.phase < ORDER.length; slice.phase++, slice.handler = 0, slice.started = false) {
+        const phase = ORDER[slice.phase], type = `system:${phase}`, event = { type, minutes: this.minutes };
+        if (!slice.started) { this.state.lastSystemOrder.push(phase); slice.started = true; }
+        const handlers = this.bus.listeners(type), core = this.phaseCore.get(phase);
+        for (; slice.handler < handlers.length; slice.handler++) {
+          const handler = handlers[slice.handler];
+          if (phase === 'people' && handler === core) {
+            const people = slice.people ??= { ctx: this.peopleSetup(), i: 0 };
+            while (people.i < this.state.citizens.length) { this.personStep(people.i, people.ctx); people.i++; if (!more()) return; }
+            this.peopleFinish(people.ctx); slice.people = null;
+          } else handler(event);
+          if (!more()) { slice.handler++; if (slice.handler >= handlers.length) { slice.phase++; slice.handler = 0; slice.started = false; } return; }
+        }
+      }
+      this.pruneNpcStairCursors(); done = true;
+    })); } finally { this.slicing = false; }
+    if (done) this.slice = null;
+    return done;
+  }
   step(realSeconds: number) {
+    this.finishTick();
     if (!finite(realSeconds) || realSeconds < 0 || realSeconds > 120 || this.state.paused) return;
     this.runtime.accumulator += realSeconds;
     while (this.runtime.accumulator + 1e-10 >= TICK_SECONDS) {
       this.runtime.accumulator = Math.max(0, this.runtime.accumulator - TICK_SECONDS);
       this.minutes = .25 * this.state.speed;
       this.state.lastSystemOrder = [];
-      for (const phase of ORDER) { this.state.lastSystemOrder.push(phase); this.bus.emit({ type: `system:${phase}`, minutes: this.minutes }); }
-      this.pruneNpcStairCursors();
+      this.npcStairMotion.withinTick(() => withFixedFloorPlans(() => {
+        for (const phase of ORDER) { this.state.lastSystemOrder.push(phase); this.bus.emit({ type: `system:${phase}`, minutes: this.minutes }); }
+        this.pruneNpcStairCursors();
+      }));
     }
   }
   setFocus(position: Vec3, mode: ViewMode) {
+    this.finishTick();
     if (!this.validPosition(position) || !['walk', 'drone', 'jet'].includes(mode)) return;
     this.runtime.focus = copy(position); this.runtime.mode = mode;
     if (mode === 'walk' && !this.state.player.vehicleId) this.state.player.position = copy(position);
     this.updateTiers();
   }
-  setDetail(value: number) { if (finite(value)) this.runtime.detail = clamp(value, .5, 2); }
+  setDetail(value: number) { this.finishTick(); if (finite(value)) this.runtime.detail = clamp(value, .5, 2); }
   get worldDefinition(): WorldDefinition { return this.world; }
   appendNotice(type: string, text: string, districtId?: string): number { return this.notice(type, text, districtId); }
   nextRandom(): number { return this.random(); }
   isDriving(vehicleId?: string): boolean { return !!this.state.player.vehicleId && this.runtime.driving.vehicleId === this.state.player.vehicleId && (vehicleId === undefined || vehicleId === this.state.player.vehicleId); }
-  driveInput(throttle: number, turn: number, brake: boolean): void { if (!this.isDriving() || !finite(throttle) || !finite(turn) || typeof brake !== 'boolean') return; this.runtime.driving.throttle = clamp(throttle, -1, 1); this.runtime.driving.turn = clamp(turn, -1, 1); this.runtime.driving.brake = brake; }
+  driveInput(throttle: number, turn: number, brake: boolean): void { this.finishTick(); if (!this.isDriving() || !finite(throttle) || !finite(turn) || typeof brake !== 'boolean') return; this.runtime.driving.throttle = clamp(throttle, -1, 1); this.runtime.driving.turn = clamp(turn, -1, 1); this.runtime.driving.brake = brake; }
   hasIdentity(role: Role): boolean { return this.state.player.role === role || (this.state.player.identities ?? []).includes(role); }
   private addIdentity(role: Role) { const p = this.state.player; p.identities = [...new Set([...(p.identities ?? ['traveler']), p.role, role])]; p.role = role; }
   onPhase(phase: typeof ORDER[number], handler: (state: SimState, minutes: number) => void) { this.bus.on(`system:${phase}`, () => handler(this.state, this.minutes)); }
@@ -967,7 +1159,12 @@ export class Simulation implements SimulationAPI {
       if (energy < .18 && vehicle.kind !== 'bridge') { vehicle.state = 'noPower'; continue; }
       if (vehicle.kind === 'flight' && (vehicle.progress === 0 || vehicle.progress === 1) && (this.state.hour < 6 || this.state.hour >= 23 || this.state.visibility < .6)) { vehicle.state = 'grounded'; continue; }
       const manual = this.isDriving(vehicle.id);
+      // A stop holds once for the player walking up to board (boarding-hold.ts, declared new cities).
+      if (!manual && holdsForPlayer(this.runtime.boardingHoldPolicyId) && this.now + 1e-7 >= vehicle.nextDeparture && (vehicle.state === 'waiting' || vehicle.state === 'boarding')
+        && (vehicle.progress === 0 || vehicle.progress === 1) && !this.runtime.boardingHolds?.[vehicle.id] && !this.state.player.vehicleId && !this.state.aviation?.activeAircraftId
+        && distance(this.state.player.position, vehicle.position) <= BOARDING_HOLD_METRES) { (this.runtime.boardingHolds ??= {})[vehicle.id] = true; vehicle.nextDeparture = this.now + BOARDING_HOLD_MINUTES; }
       if (!manual && this.now + 1e-7 < vehicle.nextDeparture) { vehicle.state = vehicle.state === 'redLight' ? 'redLight' : 'waiting'; continue; }
+      if (this.runtime.boardingHolds?.[vehicle.id]) { delete this.runtime.boardingHolds[vehicle.id]; if (!Object.keys(this.runtime.boardingHolds).length) delete this.runtime.boardingHolds; }
       if (manual) { const control = this.runtime.driving; const acceleration = control.brake ? -14 : control.throttle >= 0 ? control.throttle * 6 - .65 : control.throttle * 9 - .65; control.speed = clamp(control.speed + acceleration * TICK_SECONDS * this.state.speed, 0, vehicle.kind === 'flight' ? 180 : 38); if (control.speed < .01) { control.speed = 0; vehicle.state = 'parked'; continue; } }
       vehicle.state = 'moving';
       const congestion = vehicle.kind === 'road' ? .8 + (this.state.hour >= 7 && this.state.hour < 9 || this.state.hour >= 17 && this.state.hour < 19 ? -.22 : .1) : 1;
@@ -982,7 +1179,8 @@ export class Simulation implements SimulationAPI {
         }
         if (Math.abs(nextProgress - oldProgress) < 1e-9) { vehicle.state = 'congested'; if (manual) this.runtime.driving.speed = 0; }
       }
-      if (!roadMovementAllowed(this.world, this.state, roadActor, vehicle.position, this.pointOn(edge, nextProgress))) { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
+      // A declared city tests only a vehicle whose own edge is closed (closure-traffic.ts).
+      if (closureTestsVehicle(this.runtime.closureTrafficPolicyId, isRoadOpen(this.state, edge.id)) && !roadMovementAllowed(this.world, this.state, roadActor, vehicle.position, this.pointOn(edge, nextProgress))) { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
       vehicle.progress = nextProgress;
       vehicle.position = this.pointOn(edge, vehicle.progress);
       if (vehicle.kind === 'road') { const front = this.pointOn(edge, Math.min(1, vehicle.progress + .001)), back = this.pointOn(edge, Math.max(0, vehicle.progress - .001)); const dx = front.x - back.x, dz = front.z - back.z, length = Math.hypot(dx, dz); if (length > .001) { vehicle.position.x -= dz / length * vehicle.direction * 1.3; vehicle.position.z += dx / length * vehicle.direction * 1.3; } }
@@ -999,7 +1197,7 @@ export class Simulation implements SimulationAPI {
           const green = this.state.signals?.[nodeId] ?? ((Math.floor((this.now + 1e-7) / 48) + offset) % 2);
           if (green !== (vehicle.direction > 0 ? 1 : 0)) { vehicle.state = 'redLight'; vehicle.nextDeparture = this.now + 2; if (manual) this.runtime.driving.speed = 0; continue; }
         }
-        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; }
+        if (vehicle.cargo > 0 && !this.holdFoodFreight(vehicle, nodeId, node.districtId)) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; if (this.runtime.cargoDestinations) delete this.runtime.cargoDestinations[vehicle.id]; }
         const freightCarrier = this.freightCarriers.get(vehicle.id);
         const activePassengers = Object.values(this.runtime.riders).filter(rider => rider.vehicleId === vehicle.id && !rider.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
         // Empty road carriers retain their existing ten-seat passenger use.
@@ -1017,19 +1215,31 @@ export class Simulation implements SimulationAPI {
             vehicle.cargo = Math.min(producer.inventory, freightCarrier.cargoCapacity); producer.inventory -= vehicle.cargo;
             (this.runtime.cargoSources ??= {})[vehicle.id] = producer.id;
             this.bus.emit({ type: 'cargo-loaded', vehicleId: vehicle.id, nodeId, shopId: producer.id, districtId: producer.districtId, amount: vehicle.cargo, quantity: vehicle.cargo });
-          }
+          } else this.relayFoodFreight(vehicle, nodeId, node.districtId, freightCarrier.cargoCapacity);
         }
         if (vehicle.kind === 'flight') this.bus.emit({ type: 'flight' });
         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
         // The departure graph excludes every closed leg, including a reverse.
         candidates = candidates.filter(n => isRoadOpen(this.state, n.edge.id));
-        if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
+        const freightBound = vehicle.cargo > 0 ? this.runtime.cargoDestinations?.[vehicle.id] : undefined;
+        if (freightBound && !manual && candidates.length) {
+          // A declared food carrier takes the open leg whose far end is fewest hops from its destination district.
+          const hops = this.freightHops.hops(vehicle.kind, freightBound), far = (c: { edge: NetworkEdge }) => hops.get(c.edge.from === nodeId ? c.edge.to : c.edge.from) ?? Infinity;
+          const best = Math.min(...candidates.map(far)); if (finite(best)) candidates = candidates.filter(c => far(c) === best);
+        } else if (vehicle.cargo === 0 && !manual && freightCarrier?.kind === vehicle.kind && this.runtime.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY_V3 && candidates.length && this.pickupTargets(freightCarrier.cargoCapacity).length) {
+          // An empty v3 carrier takes the open leg whose far end is fewest hops from a producer door holding a full load.
+          const doors = this.pickupTargets(freightCarrier.cargoCapacity).map(id => this.freightHops.toNode(vehicle.kind, id));
+          const far = (c: { edge: NetworkEdge }) => { const end = c.edge.from === nodeId ? c.edge.to : c.edge.from; return Math.min(...doors.map(h => h.get(end) ?? Infinity)); };
+          const best = Math.min(...candidates.map(far)); if (finite(best)) candidates = candidates.filter(c => far(c) === best);
+        } else if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
         if (candidates.length && ['road', 'lightRail', 'maglev', 'ferry'].includes(vehicle.kind)) { const chosen = manual ? this.chooseTurn(edge, vehicle.direction, nodeId, candidates) : candidates[Math.floor(this.random() * candidates.length)]; vehicle.edgeId = chosen.edge.id; vehicle.direction = chosen.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1; }
         else if (isRoadOpen(this.state, edge.id)) vehicle.direction *= -1;
         else { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
         vehicle.state = 'boarding';
         const maintenance = Object.entries(this.state.culture?.transportMaintenance ?? {}).some(([siteId, item]) => item.maintainedUntil > (this.state.extension?.lastUpdate ?? this.now) && item.units >= 4 && this.state.culture?.orders.some(order => order.id === item.orderId && order.state === 'fulfilled') && this.buildings.get(siteId)?.kind === 'station' && distance(this.buildings.get(siteId)!.door, node.position) <= 40);
-        const dwell = manual ? 2 : vehicle.kind === 'flight' ? 75 : vehicle.kind === 'road' ? 8 : this.state.hour >= 22 || this.state.hour < 6 ? 48 : 16;
+        // junction-dwell-v1: a road vehicle only pauses at a plain junction (neither a station nor a door).
+        const plainJunction = this.runtime.junctionDwellPolicyId === JUNCTION_DWELL_POLICY && vehicle.kind === 'road' && !node.station && !node.id.endsWith('-door');
+        const dwell = manual ? 2 : vehicle.kind === 'flight' ? 75 : vehicle.kind === 'road' ? plainJunction ? JUNCTION_DWELL : 8 : this.state.hour >= 22 || this.state.hour < 6 ? 48 : 16;
         vehicle.nextDeparture = this.now + dwell - (!manual && vehicle.kind !== 'flight' && maintenance ? .5 : 0);
       }
     }
@@ -1146,7 +1356,7 @@ export class Simulation implements SimulationAPI {
   private walkingAnchors(citizen: Citizen): { node: string; cost: number; points: Vec3[] }[] {
     const permittedExit = roadExitRoute(this.world, this.state, citizen.id, citizen.position);
     if (permittedExit) return [{ node: permittedExit.exitNodeId, cost: permittedExit.points.slice(1).reduce((n, p, i) => n + distance(permittedExit.points[i], p), 0), points: permittedExit.points.map(copy) }];
-    const interior = this.world.buildings.find(b => b.floorPlanProfile === FLOOR_PLAN_PROFILE ? !!this.floorPlanPresence(b, citizen.position) : this.isNearBuilding(b, citizen.position, 0));
+    const interior = this.buildingsWithinReach(citizen.position).find(b => b.floorPlanProfile === FLOOR_PLAN_PROFILE ? !!this.floorPlanPresence(b, citizen.position) : this.isNearBuilding(b, citizen.position, 0));
     if (interior) {
       if (interior.floorPlanProfile === FLOOR_PLAN_PROFILE) {
         const presence = this.floorPlanPresence(interior, citizen.position)!;
@@ -1169,9 +1379,11 @@ export class Simulation implements SimulationAPI {
       // A discarded doorway prefix may have hidden the actor's occupied street
       // segment. Match the actual 3D layer, then keep each real polyline tail.
       // No body projection, nearest-door guess or straight endpoint shortcut.
-      for (const edge of this.world.edges) {
-        if (!['road', 'bridge'].includes(edge.mode) || !isRoadOpen(this.state, edge.id)) continue;
-        for (let i = 1; i < edge.points.length; i++) {
+      // Only segments whose box holds the actor can hold it; they come in world order (streetSegmentsAt).
+      for (const [edgeIndex, i] of this.streetSegmentsAt(citizen.position)) {
+        const edge = this.world.edges[edgeIndex];
+        if (!isRoadOpen(this.state, edge.id)) continue;
+        {
           const a = edge.points[i - 1], b = edge.points[i], dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z;
           const squared = dx * dx + dy * dy + dz * dz;
           const t = squared ? Math.max(0, Math.min(1, ((citizen.position.x - a.x) * dx + (citizen.position.y - a.y) * dy + (citizen.position.z - a.z) * dz) / squared)) : 0;
@@ -1190,6 +1402,28 @@ export class Simulation implements SimulationAPI {
     }
     const node = this.nearestNode(citizen.position), points = [copy(citizen.position), copy(node.position)];
     return this.walkingPrefixAllowed(citizen, points) ? [{ node: node.id, cost: distance(citizen.position, node.position), points }] : [];
+  }
+  /** Road and bridge segments as [edge index, segment index], bucketed by the cells their XZ box (widened by
+   * 1e-6) covers; each cell lists them in world order. A point within 1e-7 of a segment lies in its box, so
+   * the cell of a point holds every segment that can hold the point. */
+  private streetSegments?: { edges: NetworkEdge[]; count: number; cells: Map<string, [number, number][]> };
+  private streetSegmentsAt(position: Vec3): readonly [number, number][] {
+    const size = 16, cell = (x: number, z: number) => `${x},${z}`;
+    if (this.streetSegments?.edges !== this.world.edges || this.streetSegments.count !== this.world.edges.length) {
+      const cells = new Map<string, [number, number][]>();
+      this.world.edges.forEach((edge, index) => {
+        if (!['road', 'bridge'].includes(edge.mode)) return;
+        for (let i = 1; i < edge.points.length; i++) {
+          const a = edge.points[i - 1], b = edge.points[i];
+          for (let x = Math.floor((Math.min(a.x, b.x) - 1e-6) / size); x <= Math.floor((Math.max(a.x, b.x) + 1e-6) / size); x++)
+            for (let z = Math.floor((Math.min(a.z, b.z) - 1e-6) / size); z <= Math.floor((Math.max(a.z, b.z) + 1e-6) / size); z++) {
+              const key = cell(x, z), list = cells.get(key); if (list) list.push([index, i]); else cells.set(key, [[index, i]]);
+            }
+        }
+      });
+      this.streetSegments = { edges: this.world.edges, count: this.world.edges.length, cells };
+    }
+    return this.streetSegments.cells.get(cell(Math.floor(position.x / size), Math.floor(position.z / size))) ?? [];
   }
   private routeFromCitizen(citizen: Citizen, destination: Building, anchors = this.walkingAnchors(citizen)): Vec3[] {
     const target = this.buildingNode(destination);
@@ -1211,6 +1445,47 @@ export class Simulation implements SimulationAPI {
       freightLots: this.runtime.freightLots ?? {}, cargoSources: this.runtime.cargoSources ?? {},
     });
   }
+  private get freightHops(): FreightHops { return this.freightHopsCache ??= new FreightHops(this.world); }
+  /** Food per market by district, counting freight waiting there and cargo already bound there. */
+  private foodFreightDemand(): FreightDemand[] {
+    const rows = new Map<string, FreightDemand>();
+    for (const shop of this.state.shops) {
+      if (this.buildings.get(shop.buildingId)?.kind !== 'market' || this.shopCommodity(shop) !== 'food') continue;
+      const row = rows.get(shop.districtId) ?? { districtId: shop.districtId, markets: 0, stock: this.runtime.freight[shop.districtId] ?? 0 };
+      row.markets++; row.stock += shop.inventory; rows.set(shop.districtId, row);
+    }
+    for (const vehicle of this.state.vehicles) { const bound = this.runtime.cargoDestinations?.[vehicle.id]; const row = bound ? rows.get(bound) : undefined; if (row && vehicle.cargo > 0) row.stock += vehicle.cargo; }
+    return [...rows.values()];
+  }
+  /** demand-food-freight-v2 relay: an empty carrier in a district that is not
+   * short takes the oldest waiting lot there (its owner is kept as the cargo
+   * source) and is bound to the short district at once. Nothing is created. */
+  private relayFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string, capacity: number): void {
+    if (this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY_V2 && this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY_V3 || vehicle.cargo > 0 || (this.runtime.freight[districtId] ?? 0) < 1) return;
+    const demand = this.foodFreightDemand(); if (!districtSupplied(demand, districtId)) return;
+    const destination = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, demand); if (!destination || destination === districtId) return;
+    const lots = this.runtime.freightLots ??= {}, deliveries = lots[districtId] ??= [{ shopId: null, quantity: this.runtime.freight[districtId] }];
+    const lot = deliveries[0]; if (!lot || lot.quantity < 1) return;
+    const quantity = Math.min(Math.floor(lot.quantity), capacity); if (quantity < 1) return;
+    lot.quantity -= quantity; if (lot.quantity < 1e-7) deliveries.shift();
+    this.runtime.freight[districtId] = Math.max(0, this.runtime.freight[districtId] - quantity);
+    vehicle.cargo = quantity;
+    if (lot.shopId) (this.runtime.cargoSources ??= {})[vehicle.id] = lot.shopId; else if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id];
+    (this.runtime.cargoDestinations ??= {})[vehicle.id] = destination;
+  }
+  /** Door nodes of food producers holding at least one full load. */
+  private pickupTargets(capacity: number): string[] {
+    return this.state.shops.filter(shop => { const site = this.buildings.get(shop.buildingId); return !!site && !site.facility && ['farm', 'dock'].includes(site.kind) && shop.inventory >= capacity; }).map(shop => `${shop.buildingId}-door`);
+  }
+  /** True while a declared carrier keeps its food for a district further on. */
+  private holdFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string): boolean {
+    if (!this.runtime.foodFreightPolicyId || !this.freightCarriers.has(vehicle.id)) return false;
+    const destinations = this.runtime.cargoDestinations ??= {}, bound = destinations[vehicle.id];
+    if (bound) return bound !== districtId && this.freightHops.hops(vehicle.kind, bound).has(nodeId);
+    const demand = this.foodFreightDemand(), chosen = this.runtime.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY_V3 ? leastStockedDistrict(this.freightHops, vehicle.kind, nodeId, demand) : chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, demand);
+    if (!chosen || chosen === districtId) return false;
+    destinations[vehicle.id] = chosen; return true;
+  }
   private walkingDistance(citizen: Citizen, destination: Building): number { const target = this.buildingNode(destination); return Math.min(...this.walkingAnchors(citizen).map(a => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity))); }
   private route(from: Building, to: Building): Vec3[] {
     this.ensureRoadRouting();
@@ -1219,20 +1494,30 @@ export class Simulation implements SimulationAPI {
     const points = network.length ? [copy(from.door), ...network, copy(to.door)] : [];
     this.cacheRoute(key, points); return points;
   }
-  private availableHomeRestPoints(citizen: Citizen, home: Building) {
+  private availableHomeRestPoints(citizen: Citizen, home: Building): HomeRestPoint[];
+  private availableHomeRestPoints(citizen: Citizen, home: Building, anyFree: true): boolean;
+  /** Free sleeping places at home for this resident (copies), or with anyFree only whether there is one. */
+  private availableHomeRestPoints(citizen: Citizen, home: Building, anyFree = false): HomeRestPoint[] | boolean {
     const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
-    const points = Array.from({ length: home.floors }, (_, floor) => homeRestPoints(home, floor)).flat()
-      .filter(point => Array.from({ length: point.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(home, floor, person)));
-    const occupiedBeds = new Set<string>();
+    // A point is usable when every floor up to its own is open to the person (computed once per floor).
+    const reachable: boolean[] = []; for (let floor = 0, open = true; floor < home.floors; floor++) reachable.push(open = open && canAccessFloor(home, floor, person));
+    // Where the home's other living residents are already headed to rest (the last point of their route).
+    const targets: Vec3[] = [];
     for (const other of this.state.citizens) {
       if (other.id === citizen.id || other.destinationId !== home.id || this.runtime.activities[other.id] !== 'rest'
         || this.state.extension?.actorProfiles[other.id]?.alive === false) continue;
-      const target = other.route?.at(-1); if (!target) continue;
-      const point = points.find(point => distance(point.position, target) < 1e-8);
-      if (point) occupiedBeds.add(point.bedId);
+      const target = other.route?.at(-1); if (target) targets.push(target);
     }
-    return points.filter(point => !homeRestPointBlockedByVoxels(point.position, this.state.voxels)
-      && !homeRestBedOccupied(this.state, point.bedId) && !occupiedBeds.has(point.bedId));
+    const free = (candidates: readonly HomeRestPoint[]) => {
+      const points = candidates.filter(point => reachable[point.floor] === true), occupiedBeds = new Set<string>();
+      for (const target of targets) { const point = points.find(point => distance(point.position, target) < 1e-8); if (point) occupiedBeds.add(point.bedId); }
+      return points.filter(point => !homeRestPointBlockedByVoxels(point.position, this.state.voxels)
+        && !homeRestBedOccupied(this.state, point.bedId) && !occupiedBeds.has(point.bedId));
+    };
+    const beds: HomeRestPoint[] = []; for (let floor = 0; floor < home.floors; floor++) beds.push(...homeRestPointsView(home, floor));
+    // home-mats-v1: a home with no free bed offers its mats (up to its capacity).
+    let result = free(beds); if (!result.length && this.runtime.homeMatsPolicyId === HOME_MATS_POLICY) result = free(homeMatsView(home));
+    return anyFree ? result.length > 0 : result.map(point => ({ ...point, position: { ...point.position } }));
   }
   private setDestination(citizen: Citizen, destination: Building, rebuild = false) {
     // Old native saves can contain a never-started, blocked exterior intent.
@@ -1241,8 +1526,22 @@ export class Simulation implements SimulationAPI {
       && this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route ?? [], citizen.routeIndex ?? 0, citizen.position)) rebuild = true;
     this.citizenRoadRevisions.set(citizen, this.ensureRoadRouting());
     if (!rebuild && citizen.destinationId === destination.id && destination.floorPlanProfile !== FLOOR_PLAN_PROFILE) return;
+    if (streetBrowse(this.runtime, citizen, destination) && !this.floorPlanPresence(destination, citizen.position)) {
+      // v5 keeps a street route already bound for this market's stall, as the counter
+      // branch keeps its route: replanning mid-street turned walkers back to a node behind them.
+      const kept = citizen.route?.at(-1);
+      if (eatsOnStreet(this.runtime.mealRoutePolicyId) && !rebuild && citizen.destinationId === destination.id && kept && citizen.state === 'moving'
+        && !this.floorPlanPresence(destination, kept) && distance(kept, destination.door) <= BROWSE_MAX + 1e-6) return;
+      // v4: the evening outing ends on the street before the market door, on its own walking route.
+      const outside = this.routeFromCitizen(citizen, destination);
+      const route = outside.length > 1 ? routeShortOfDoor(outside, BROWSE_MIN + hash(`${citizen.id}:${destination.id}`) % (BROWSE_MAX - BROWSE_MIN + 1)) : outside;
+      citizen.destinationId = destination.id; citizen.routeIndex = 1;
+      if (outside.length > 1 && (route.length < 2 || distance(citizen.position, route.at(-1)!) < .5)) { citizen.route = [copy(citizen.position)]; citizen.state = 'moving'; return; }
+      citizen.route = outside.length > 1 ? route : [copy(citizen.position)];
+      citizen.state = outside.length > 1 ? 'moving' : this.world.edges.some(edge => !isRoadOpen(this.state, edge.id)) ? 'roadWaiting' : 'unreachable'; return;
+    }
     if (destination.floorPlanProfile === FLOOR_PLAN_PROFILE) {
-      const action = this.runtime.activities[citizen.id], purpose = this.activityPointPurpose(action);
+      const action = this.runtime.activities[citizen.id], purpose = this.activityPointPurpose(action, destination);
       const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
       const restPoints = destination.kind === 'home' && action === 'rest' ? this.availableHomeRestPoints(citizen, destination) : null;
       const availablePoints: BuildingFunctionPoint[] = restPoints
@@ -1384,7 +1683,7 @@ export class Simulation implements SimulationAPI {
   private foodShortageHiringOffer(shop: Shop, applicant: Citizen, salary: number): boolean {
     const site = this.buildings.get(shop.buildingId)!, ownerId = this.shopOwnerId(shop), owner = ownerId === 'player' ? this.state.player : this.state.citizens.find(c => c.id === ownerId);
     const profile = ownerId ? this.state.extension?.actorProfiles[ownerId] : undefined;
-    if (!['farm', 'dock'].includes(site.kind) || shop.inventory >= 120 || !shopLifecycleAllowsNewPayroll(this.state, shop.id) || !this.foodHiringApplicantAvailable(applicant)
+    if (!['farm', 'dock'].includes(site.kind) || shop.inventory >= producerStockCap(this.runtime.farmYieldPolicyId, site.kind) || !shopLifecycleAllowsNewPayroll(this.state, shop.id) || !this.foodHiringApplicantAvailable(applicant)
       || this.shopFunds(shop) - this.shopProtectedFunds(shop) - 20 * 8 / 24 < salary || !owner || !profile?.alive || profile.age < 18 || profile.health < 45
       || owner.needs.hunger < 40 || owner.needs.fatigue < 35 || homeRestPointBlockedByVoxels(owner.position, this.state.voxels)
       || !this.isNearBuilding(site, owner.position, 2) || !this.isAtBuildingFunctionPoint(site, owner.position, 'work', ownerId === 'player' ? this.state.player : { role: this.citizenIdentity(owner as Citizen), identities: [this.citizenIdentity(owner as Citizen)] })
@@ -1399,9 +1698,38 @@ export class Simulation implements SimulationAPI {
     if (!plan || plan.day !== day) {
       const roster = this.privateRoster(shop, plan);
       plan = labor.shifts[shop.id] = { day, shopId: shop.id, assignments: roster.map(person => ({ citizenId: person.id,
-        ratePerMinute: (this.runtime.wageAccruals ?? []).find(item => item.citizenId === person.id && item.shopId === shop.id)?.ratePerMinute ?? 32 * (.7 + this.state.districts.find(d => d.id === person.districtId)!.prosperity / 100) / 480, minutesCap: 0, workedMinutes: 0 })), reviews: [] };
+        ratePerMinute: (this.runtime.wageAccruals ?? []).find(item => item.citizenId === person.id && item.shopId === shop.id)?.ratePerMinute ?? privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === person.districtId)!.prosperity / 100) / 480, minutesCap: 0, workedMinutes: 0 })), reviews: [] };
     }
     return plan;
+  }
+  /** v6: a poor worker of a shop that cannot fund a day's wage takes a funded offer elsewhere. */
+  private considerShopMove(citizen: Citizen): void {
+    if (!shopStaffMayMove(this.runtime.publicFinancePolicyId) || citizen.money >= STUDY_GRANT_CEILING || this.state.hour < 8 || this.state.hour >= 17 || citizen.needs.hunger < 45 || citizen.needs.fatigue < 40 || (this.runtime.decisionAt[citizen.id] ?? 0) > this.now) return;
+    const current = this.state.shops.find(shop => shop.buildingId === citizen.workId);
+    // loss-owner-exit-v1: a poor owner of a losing shop with no other staff may also go (the shop stays open and theirs).
+    const ownerExit = this.runtime.lossOwnerExitPolicyId === LOSS_OWNER_EXIT_POLICY && !!current && current.profit < 0 && (this.workforce.get(current.buildingId) ?? []).every(other => other === citizen);
+    if (!current || this.shopOwnerId(current) === citizen.id && !ownerExit || citizen.role === '学生') return;
+    const dailySalary = privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
+    // loss-shop-move-v1: a losing shop lets its poor staff go even while it can still fund a day.
+    // underpaid-move-v1: from UNDERPAID_HOUR a worker still without a half-day promise may go, whatever the shop's books.
+    const underpaid = this.runtime.underpaidMovePolicyId === UNDERPAID_MOVE_POLICY && this.state.hour >= UNDERPAID_HOUR;
+    if (this.shopFunds(current) - this.shopProtectedFunds(current) >= dailySalary && !(this.runtime.lossShopMovePolicyId === LOSS_SHOP_MOVE_POLICY && current.profit < 0) && !underpaid) return;
+    const day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440), today = this.runtime.privateLabor?.shifts[current.id];
+    // A substantial promise for today (half a day or more) keeps the worker; a few funded minutes do not.
+    if (today?.day === day && today.assignments.some(item => item.citizenId === citizen.id && item.minutesCap >= 240)) return;
+    // Wages already earned there stay payable after the move (accruals are keyed by worker and workplace).
+    const offers = this.state.shops.filter(shop => shop !== current && shop.open && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && tradeSignals(this, shop.id).sold > 0).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)) || a.id.localeCompare(b.id));
+    const offer = offers[0]; if (!offer) return;
+    const plan = this.preparePrivateAcceptance(offer, day);
+    if (!plan.assignments.some(item => item.citizenId === citizen.id)) {
+      const firstUnpromised = plan.assignments.findIndex(item => item.minutesCap === 0);
+      plan.assignments.splice(firstUnpromised < 0 ? plan.assignments.length : firstUnpromised, 0, { citizenId: citizen.id, ratePerMinute: dailySalary / 480, minutesCap: 0, workedMinutes: 0 });
+    }
+    // A funded promise stays in today's plan (it balances the owner's signed funding and lapses at day end); only an unfunded name is dropped.
+    if (today?.day === day) today.assignments = today.assignments.filter(item => item.citizenId !== citizen.id || item.minutesCap > 0);
+    current.employees = Math.max(0, current.employees - 1); offer.employees++; citizen.workId = offer.buildingId; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
+    this.refreshWorkforce();
+    citizen.historyTags = [...new Set([...(citizen.historyTags ?? []), '离开无力支薪店铺另就现金岗位'])];
   }
   private considerPrivateOpportunity(citizen: Citizen): void {
     const labor = this.runtime.publicLabor;
@@ -1411,8 +1739,9 @@ export class Simulation implements SimulationAPI {
     if (currentShop) return;
     // Qualified officials stay available to review budgets at their real office.
     if (['official', 'council', 'mayor'].includes(this.citizenIdentity(citizen)) || !this.foodHiringApplicantAvailable(citizen)) return;
-    const dailySalary = 32 * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
-    const offers = this.state.shops.filter(shop => shop.open && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && (tradeSignals(this, shop.id).sold > 0 || this.foodShortageHiringOffer(shop, citizen, dailySalary))).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)));
+    const dailySalary = privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === citizen.districtId)!.prosperity / 100);
+    // Shops are closed at the night close: a hiring shop is one that may operate and pay new staff, and sold recently.
+    const offers = this.state.shops.filter(shop => shopLifecycleAllowsOperation(this.state, shop.id) && shopLifecycleAllowsNewPayroll(this.state, shop.id) && !this.shopInsolvent(shop) && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && this.shopFunds(shop) - this.shopProtectedFunds(shop) >= dailySalary && this.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500 && (tradeSignals(this, shop.id).sold > 0 || this.foodShortageHiringOffer(shop, citizen, dailySalary))).sort((a, b) => this.shopFunds(b) - this.shopProtectedFunds(b) - (this.shopFunds(a) - this.shopProtectedFunds(a)));
     const offer = offers[0]; if (!offer) return;
     const time = this.state.extension?.lastUpdate ?? this.now, day = Math.floor(time / 1440);
     const plan = this.preparePrivateAcceptance(offer, day);
@@ -1431,7 +1760,7 @@ export class Simulation implements SimulationAPI {
   private chooseFacility(citizen: Citizen): { destination: Building; activity: string } {
     const hour = this.state.hour, night = hour >= 22 || hour < 6, shift = hour >= 7.5 && hour < 17.5;
     const home = this.buildings.get(citizen.homeId)!, work = this.buildings.get(citizen.workId)!;
-    const homeBedAvailable = home.floorPlanProfile !== FLOOR_PLAN_PROFILE || this.availableHomeRestPoints(citizen, home).length > 0;
+    const homeBedAvailable = home.floorPlanProfile !== FLOOR_PLAN_PROFILE || this.availableHomeRestPoints(citizen, home, true);
     const anchors = this.walkingAnchors(citizen);
     const candidates: { destination: Building; activity: string; score: number; travel: number }[] = [];
     const add = (b: Building, activity: string, score: number) => { const target = this.buildingNode(b); const travel = Math.min(...anchors.map(a => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity))); if (finite(travel)) candidates.push({ destination: b, activity, score: score - Math.min(150, travel / 12), travel }); };
@@ -1451,7 +1780,7 @@ export class Simulation implements SimulationAPI {
       const relation = this.state.relationships.find(r => r.npcId === citizen.id); if (relation && this.hostilityRank(relation) >= 2 && this.playerOwnsShop(shop)) continue;
       const building = this.buildings.get(shop.buildingId)!;
       if (distance(citizen.position, building.door) > 1200 && building.districtId !== citizen.districtId) continue;
-      add(building, 'eat', (100 - citizen.needs.hunger) * 1.15 + (citizen.needs.hunger < 30 ? 260 : 0) + (hour >= 18 && hour < 19 ? 12 : 0) - (night ? 50 : 0));
+      add(building, 'eat', (100 - citizen.needs.hunger) * 1.15 + (citizen.needs.hunger < 30 ? 260 : 0) + (hour >= 18 && hour < 19 ? 12 : 0) - (night ? 50 : 0) + lunchBonus(this.runtime.mealRoutePolicyId, hour, citizen.needs.hunger));
     }
     const profile = this.state.extension?.actorProfiles[citizen.id];
     if (hour >= 17 && hour < 22 && citizen.needs.hunger >= 40 && citizen.needs.fatigue >= 35) for (const plan of this.state.family?.movePlans ?? []) {
@@ -1476,11 +1805,14 @@ export class Simulation implements SimulationAPI {
       const child = this.state.family?.children[citizen.id];
       if (building.kind === 'school' && child && child.schoolId !== building.id) continue;
       if (building.kind === 'school' && hour >= 7 && hour < 19) add(building, 'study', Math.max(0, 4 - (citizen.education ?? 0)) * 8 + (citizen.role === '学生' && shift ? 55 : 0) + (citizen.skills?.learning ?? 20) * .2);
-      if (['pavilion', 'hall', 'dock'].includes(building.kind)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 - (night ? 60 : 0));
+      const evening = eveningBonus(this.runtime.mealRoutePolicyId, hour, citizen.needs.hunger, citizen.needs.fatigue);
+      if (['pavilion', 'hall', 'dock'].includes(building.kind)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 - (night ? 60 : 0) + evening);
+      // v3 evening stroll past the district's open market counters (no purchase).
+      if (evening && building.kind === 'market' && this.state.shops.some(shop => shop.buildingId === building.id && shop.open)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 + evening);
       if (['pavilion', 'station', 'clinic'].includes(building.kind) && (citizen.needs.fatigue < 25 || night && !homeBedAvailable)) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
     }
     candidates.sort((a, b) => b.score - a.score);
-    const chosen = this.runtime.mealRoutePolicyId === NEARBY_MEAL_ROUTE_POLICY ? chooseNearestTiedMeal(candidates) : candidates[0];
+    const chosen = nearestMealPolicy(this.runtime.mealRoutePolicyId) ? chooseNearestTiedMeal(candidates) : candidates[0];
     return chosen ? { destination: chosen.destination, activity: chosen.activity } : { destination: home, activity: 'rest' };
   }
   private routeToRoadwork(citizen: Citizen, task: NonNullable<ReturnType<typeof roadworkTask>>): Vec3[] {
@@ -1573,7 +1905,7 @@ export class Simulation implements SimulationAPI {
     if (this.runtime.npcMotionVersion === 2) this.runtime.npcStairCursors = this.savedNpcStairCursors();
   }
   private citizenPhysicalSegmentAllowed(citizen: Citizen, from: Vec3, to: Vec3, building?: Building, floor?: number): boolean {
-    if (homeRestPointBlockedByVoxels(to, this.state.voxels)) return false;
+    if (homeRestPointBlockedByVoxels(to, this.state.voxels) && !voxelEscapeAllowed(from, to, this.state.voxels)) return false;
     if (building && floor !== undefined) {
       const role = this.citizenIdentity(citizen);
       const identity = { role, identities: [role] };
@@ -1621,6 +1953,8 @@ export class Simulation implements SimulationAPI {
     while (index < route.length) {
       citizen.routeIndex = index;
       const existing = cursors[citizen.id]; if (existing && !this.nativeCursorMatches(citizen, existing)) delete cursors[citizen.id];
+      // tiny-leg-skip-v1: a leg a rounding error long is already walked (the stair model reads it as blocked).
+      if (this.runtime.tinyLegPolicyId === TINY_LEG_POLICY && !existing && index > 0 && tinyLeg(route[index - 1], route[index]) && sameVec(citizen.position, route[index - 1])) { citizen.position = copy(route[index]); index++; continue; }
       const description = this.npcStairMotion.describe(route, index);
       if (description.kind === 'blocked') return wait(false);
       if (description.kind === 'physical') {
@@ -1654,6 +1988,8 @@ export class Simulation implements SimulationAPI {
       const proposed = t === 1 ? copy(next) : { x: citizen.position.x + (next.x - citizen.position.x) * t, y: citizen.position.y + (next.y - citizen.position.y) * t, z: citizen.position.z + (next.z - citizen.position.z) * t };
       if (!roadMovementAllowed(this.world, this.state, citizen.id, citizen.position, proposed)) return wait(true);
       if (!this.citizenReferenceSegmentAllowed(citizen, citizen.position, proposed, description.bodies ?? [])) return wait(false);
+      // A declared new city: the resident waits this step rather than walk into the player (player-yield.ts).
+      if (yieldsToPlayer(this.runtime.playerYieldPolicyId, this.yieldPlayerPosition(), citizen.position, proposed)) { citizen.position = yieldStop(this.state.player.position, citizen.position, proposed); break; }
       citizen.position = proposed;
       if (amount > 0 && citizen.state === 'physicalWaiting' && this.runtime.referenceCollisionPolicyId === CONTINUOUS_REFERENCE_COLLISION_POLICY) citizen.state = 'moving';
       movement = Math.max(0, movement - amount); if (t === 1) index++;
@@ -1664,158 +2000,192 @@ export class Simulation implements SimulationAPI {
     return arrived;
   }
   private people() {
+    const ctx = this.peopleSetup();
+    for (let i = 0; i < this.state.citizens.length; i++) this.personStep(i, ctx);
+    this.peopleFinish(ctx);
+  }
+  /** The people phase in three parts (setup, one resident, finish) so a tick can be resumed between
+   * residents; run back to back they are the same loop as before. */
+  private peopleSetup() {
     this.refreshWorkforce();
     this.reviewPrivateShifts();
     const hour = this.state.hour;
     const pendingMinutes = this.runtime.peopleElapsed ??= {};
     const researchActors = researchTaskActorIds(this.state), powerActors = powerTaskActorIds(this.state), clinicalActors = clinicalTaskActorIds(this.state), familyLearners = familyEducationTaskActorIds(this.state);
-    for (let i = 0; i < this.state.citizens.length; i++) {
-      const citizen = this.state.citizens[i];
-      // At most seven persisted new research jobs request fine task processing.
-      // Preserve tier, ordinary actors' frequency, pending needs and real wages.
-      const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
-      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
-      if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
-      // Accumulate actual ticks while a tier defers this actor. Multiplying by
-      // the actor's current tier would lose or duplicate time after a tier or
-      // speed change, and would credit time before a new actor existed.
-      const elapsed = (pendingMinutes[citizen.id] ?? 0) + this.minutes;
-      if ((this.state.tick + i) % frequency) { pendingMinutes[citizen.id] = elapsed; continue; }
-      delete pendingMinutes[citizen.id];
-      citizen.needs.hunger = clamp(citizen.needs.hunger - elapsed * .05);
-      if (citizen.needs.hunger < 48 && (citizen.food ?? 0) >= 1) { citizen.food!--; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); this.bus.emit({ type: 'stored-meal', citizenId: citizen.id, amount: 1 }); }
-      citizen.needs.fatigue = clamp(citizen.needs.fatigue - elapsed * .035);
-      citizen.needs.social = clamp(citizen.needs.social - elapsed * .015);
-      citizen.needs.fun = clamp(citizen.needs.fun - elapsed * .02);
-      if ((this.state.extension?.actorProfiles[citizen.id]?.age ?? 20) < 6) { citizen.state = 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * .12); continue; }
-      this.refreshCitizenRoadRoute(citizen);
-      const dispatch = this.runtime.dispatches[citizen.id];
-      if (dispatch) {
-        const crime = this.state.crimes.find(c => c.id === dispatch.crimeId);
-        const health = this.state.extension?.actorProfiles[citizen.id]?.health ?? 100;
-        if (!crime || crime.status !== 'responding' || this.policeWorkAllowance(citizen) <= 0 || citizen.needs.hunger < 20 || citizen.needs.fatigue < 15 || health < 35) {
-          if (crime?.status === 'responding') { crime.status = 'open'; crime.responseAt = 0; this.bus.emit({ type: 'police-response-withdrawn', citizenId: citizen.id, crimeId: crime.id, districtId: crime.districtId, quantity: this.runtime.policeSupplies?.kits[crime.id]?.receivedUnits ?? 0, purpose: this.policeWorkAllowance(citizen) <= 0 ? 'work-allowance' : 'needs' }); this.notice('dispatch', `${citizen.name}因补给或健康需要退出响应，事件等待有行动能力的巡警接替。`, crime.districtId); }
-          delete this.runtime.dispatches[citizen.id]; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
+    return { hour, pendingMinutes, researchActors, powerActors, clinicalActors, familyLearners };
+  }
+  private personStep(i: number, ctx: ReturnType<Simulation['peopleSetup']>) {
+    const { hour, pendingMinutes, researchActors, powerActors, clinicalActors, familyLearners } = ctx;
+    const citizen = this.state.citizens[i];
+    // At most seven persisted new research jobs request fine task processing.
+    // Preserve tier, ordinary actors' frequency, pending needs and real wages.
+    const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
+    const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+    if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } return; }
+    // Accumulate actual ticks while a tier defers this actor. Multiplying by
+    // the actor's current tier would lose or duplicate time after a tier or
+    // speed change, and would credit time before a new actor existed.
+    const elapsed = (pendingMinutes[citizen.id] ?? 0) + this.minutes;
+    if ((this.state.tick + i) % frequency) { pendingMinutes[citizen.id] = elapsed; return; }
+    delete pendingMinutes[citizen.id];
+    citizen.needs.hunger = clamp(citizen.needs.hunger - elapsed * .05);
+    if (citizen.needs.hunger < 48 && (citizen.food ?? 0) >= 1) { citizen.food!--; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); this.bus.emit({ type: 'stored-meal', citizenId: citizen.id, amount: 1 }); }
+    citizen.needs.fatigue = clamp(citizen.needs.fatigue - elapsed * .035);
+    citizen.needs.social = clamp(citizen.needs.social - elapsed * .015);
+    citizen.needs.fun = clamp(citizen.needs.fun - elapsed * .02);
+    if ((this.state.extension?.actorProfiles[citizen.id]?.age ?? 20) < 6) { citizen.state = 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * .12); return; }
+    this.refreshCitizenRoadRoute(citizen);
+    const dispatch = this.runtime.dispatches[citizen.id];
+    if (dispatch) {
+      const crime = this.state.crimes.find(c => c.id === dispatch.crimeId);
+      const health = this.state.extension?.actorProfiles[citizen.id]?.health ?? 100;
+      if (!crime || crime.status !== 'responding' || this.policeWorkAllowance(citizen) <= 0 || citizen.needs.hunger < 20 || citizen.needs.fatigue < 15 || health < 35) {
+        if (crime?.status === 'responding') { crime.status = 'open'; crime.responseAt = 0; this.bus.emit({ type: 'police-response-withdrawn', citizenId: citizen.id, crimeId: crime.id, districtId: crime.districtId, quantity: this.runtime.policeSupplies?.kits[crime.id]?.receivedUnits ?? 0, purpose: this.policeWorkAllowance(citizen) <= 0 ? 'work-allowance' : 'needs' }); this.notice('dispatch', `${citizen.name}因补给或健康需要退出响应，事件等待有行动能力的巡警接替。`, crime.districtId); }
+        delete this.runtime.dispatches[citizen.id]; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
+      }
+      else {
+        if (citizen.state === 'roadWaiting') return;
+        citizen.state = 'responding'; const arrived = this.moveCitizen(citizen, elapsed), atCrime = arrived && distance(citizen.position, crime.position) <= 3;
+        if (arrived && !atCrime) {
+          // An old imported or shortened route ending at a facility/exit is
+          // not evidence that the officer reached the actual incident.
+          const destination = citizen.destinationId && this.buildings.get(citizen.destinationId);
+          if (destination) this.rebuildDispatchRoute(citizen, crime, destination); else this.roadRouteWaiting(citizen);
         }
-        else {
-          if (citizen.state === 'roadWaiting') continue;
-          citizen.state = 'responding'; const arrived = this.moveCitizen(citizen, elapsed), atCrime = arrived && distance(citizen.position, crime.position) <= 3;
-          if (arrived && !atCrime) {
-            // An old imported or shortened route ending at a facility/exit is
-            // not evidence that the officer reached the actual incident.
-            const destination = citizen.destinationId && this.buildings.get(citizen.destinationId);
-            if (destination) this.rebuildDispatchRoute(citizen, crime, destination); else this.roadRouteWaiting(citizen);
-          }
-          if (String(citizen.state) !== 'roadWaiting' && !this.citizenRoadMovementRejected.has(citizen) && (!arrived || atCrime)) this.registerAttendance(citizen, elapsed);
-          if (atCrime) { citizen.state = 'investigating'; this.bus.emit({ type: 'officer-arrived', citizenId: citizen.id, crimeId: crime.id }); }
-          continue;
-        }
+        if (String(citizen.state) !== 'roadWaiting' && !this.citizenRoadMovementRejected.has(citizen) && (!arrived || atCrime)) this.registerAttendance(citizen, elapsed);
+        if (atCrime) { citizen.state = 'investigating'; this.bus.emit({ type: 'officer-arrived', citizenId: citizen.id, crimeId: crime.id }); }
+        return;
       }
-      if (!roadTask && citizen.state !== 'roadWaiting') this.considerPrivateOpportunity(citizen);
-      const home = this.buildings.get(citizen.homeId)!; const work = this.buildings.get(citizen.workId)!;
-      let availableMinutes = elapsed;
-      const riding = this.runtime.riders[citizen.id];
-      if (riding) {
-        const vehicle = this.state.vehicles.find(v => v.id === riding.vehicleId)!;
-        const stop = this.world.nodes.find(n => n.id === riding.stopNodeId)!;
-        citizen.position = copy(riding.arrived ? stop.position : vehicle.position); citizen.state = 'riding';
-        // Traffic records arrival at its discrete endpoint observation. Deferred
-        // ride minutes still decay needs, but cannot be reused for walking or
-        // onsite recovery. An unobserved legacy arrival starts from this phase.
-        if (!riding.arrived) continue;
-        availableMinutes = Math.min(elapsed, Math.max(0, (this.state.extension?.lastUpdate ?? this.now) - (riding.arrivedAt ?? (this.state.extension?.lastUpdate ?? this.now))));
-        delete this.runtime.riders[citizen.id];
-        citizen.position = copy(stop.position); citizen.route = []; citizen.routeIndex = 0;
-        const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId);
-        if (ongoing) this.setDestination(citizen, ongoing, true);
-      }
-      if (roadTask) { this.advanceRoadworker(citizen, roadTask, availableMinutes); continue; }
-      if (citizen.state.startsWith('roadWork') || citizen.state === 'roadPickup') {
-        const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId); if (ongoing) this.setDestination(citizen, ongoing, true);
-      }
-      let destination: Building;
-      const sleeping = hour >= 22 || hour < 6;
-      const shift = hour >= 7.5 && hour < 17.5;
-
-      const previousActivity = this.runtime.activities[citizen.id];
-      const previousShop = this.state.shops.find(s => s.buildingId === citizen.destinationId);
-      const treatment = this.state.clinical?.orders.find(order => order.patientId === citizen.id && ['awaitingSupply', 'awaitingDoctor', 'inTreatment'].includes(order.state));
-      const committedTreatment = treatment && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25;
-      if (committedTreatment) this.runtime.activities[citizen.id] = 'heal';
-      const reconsiderCivic = this.effectiveRuleset === 'civic-local-v1' && previousActivity === 'work' && civicStaffingOpportunities(this, citizen).length > 0;
-      const reconsiderMeal = this.runtime.mealRoutePolicyId === NEARBY_MEAL_ROUTE_POLICY && previousActivity === 'eat' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
-      const committedNeed = !!citizen.destinationId && (citizen.state === 'roadWaiting' || !reconsiderMeal && previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || !reconsiderCivic && previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
-      if (committedTreatment) destination = this.buildings.get(treatment.siteId)!;
-      else if (!committedNeed && (reconsiderCivic || !citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
-        const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
-      } else destination = this.buildings.get(citizen.destinationId!)!;
-      this.setDestination(citizen, destination);
-      if (citizen.state === 'roadWaiting') continue;
-      if (citizen.state === 'unreachable') { citizen.destinationId = null; continue; }
-      if (distance(citizen.position, destination.door) > 200) {
-        const walkingSpeed = this.state.weather === '雨' ? 3.1 : 4.2;
-        const walkingTime = this.walkingDistance(citizen, destination) / walkingSpeed;
-        const transit = this.state.vehicles.find(v => {
-          if (!isRoadOpen(this.state, v.edgeId) || v.state === 'roadClosed' || v.state === 'moving' || v.kind === 'flight' || citizen.money < 4 || v.passengers >= this.passengerCapacity(v) || distance(v.position, citizen.position) > 40) return false;
-          const edge = this.edges.get(v.edgeId)!; const end = this.world.nodes.find(n => n.id === (v.direction > 0 ? edge.to : edge.from))!;
-          const target = this.buildingNode(destination), remainingWalk = (this.walkingTree(end.id).costs.get(target.id) ?? Infinity) + distance(target.position, destination.door);
-          const rideTime = Math.max(0, v.nextDeparture - this.now) + edge.length * (v.direction > 0 ? 1 - v.progress : v.progress) / Math.max(1, v.speed * this.state.energy / 100);
-          return rideTime + remainingWalk / walkingSpeed + 15 < walkingTime;
-        });
-        if (transit) { const edge = this.edges.get(transit.edgeId)!; citizen.money -= 4; this.bus.emit({ type: 'transit-fare', amount: 4, citizenId: citizen.id, vehicleId: transit.id, districtId: citizen.districtId }); this.runtime.riders[citizen.id] = { vehicleId: transit.id, stopNodeId: transit.direction > 0 ? edge.to : edge.from }; transit.passengers++; citizen.state = 'riding'; citizen.position = copy(transit.position); this.bus.emit({ type: 'commute', citizenId: citizen.id }); continue; }
-      }
-      let arrivedElapsed = availableMinutes;
-      if ((citizen.routeIndex ?? 0) < (citizen.route?.length ?? 0)) {
-        let remainingDistance = 0, point = citizen.position;
-        for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remainingDistance += distance(point, next); point = next; }
-        if (!this.moveCitizen(citizen, availableMinutes)) continue;
-        arrivedElapsed = this.runtime.npcMotionVersion === 2 ? this.citizenArrivalMinutes.get(citizen) ?? 0 : Math.max(0, availableMinutes - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
-      }
-      const activity = this.runtime.activities[citizen.id];
-      const person = { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] };
-      const atActivityPoint = destination.kind === 'home' && activity === 'rest'
-        ? !!homeRestPointAt(destination, citizen.position, person) && !homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)
-        : this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity), person);
-      if (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !atActivityPoint) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
-      // A clinic observer receives only a real completed walking/arrival leg.
-      // This optional source event changes no movement, needs or attendance.
-      if (destination.kind === 'clinic' && arrivedElapsed > 0) {
-        const observedClock = this.state.extension!.lastUpdate;
-        this.bus.emit({ type: 'clinical-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: this.activityPointPurpose(activity), activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: copy(citizen.position) });
-      }
-      if (destination.id === home.id || activity === 'rest') {
-        citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .08);
-      } else if (activity === 'work') {
-        if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor && publicEmploymentSite(this.runtime.publicLabor,citizen.id) || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; continue; }
-        if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
-      } else if (activity === 'civicRegister' || activity === 'civicVote') {
-        citizen.state = 'attendingCivic';
-        if (this.effectiveRuleset === 'civic-local-v1' && arrivedElapsed > 0) {
-          const observedClock = this.state.extension!.lastUpdate;
-          const event: Event = Object.freeze({ type: 'civic-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: activity, minutes: this.minutes, activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: Object.freeze(copy(citizen.position)) });
-          canonicalCivicPresence.add(event); this.bus.emit(event);
-        }
-      } else if (activity === 'shopLifecycle') {
-        citizen.state = 'reviewingBusiness';
-        this.bus.emit({ type: 'shop-lifecycle-arrived', citizenId: citizen.id, shopId: this.state.shops.find(shop => shop.buildingId === destination.id)?.id });
-      } else if (activity === 'businessReview') {
-        citizen.state = 'reviewingBusiness';
-      } else if (activity === 'study') {
-        citizen.state = 'studying'; if (citizen.skills) citizen.skills.learning = clamp(citizen.skills.learning + arrivedElapsed * .003); citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .02); recordSchoolSelfStudy(this, citizen, destination, arrivedElapsed); observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
-      } else if (activity === 'budgetReview') {
-        citizen.state = 'reviewingBudget';
-      } else if (activity === 'service') {
-        citizen.state = 'attendingService'; observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
-      } else if (activity === 'social') {
-        citizen.state = 'socializing'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .12); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .09);
-      } else if (activity === 'heal') {
-        citizen.state = 'healing'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * .03);
-      } else if (activity === 'eat') {
-        citizen.state = 'shopping';
-        this.bus.emit({ type: 'customer', citizenId: citizen.id, shopId: this.state.shops.find(s => s.buildingId === destination.id)?.id });
-      }
-      if (destination.kind === 'school') observePublicEducationArrival(this, citizen, destination, arrivedElapsed);
     }
+    if (!roadTask && citizen.state !== 'roadWaiting') { this.considerPrivateOpportunity(citizen); this.considerShopMove(citizen); }
+    const home = this.buildings.get(citizen.homeId)!; const work = this.buildings.get(citizen.workId)!;
+    let availableMinutes = elapsed;
+    const riding = this.runtime.riders[citizen.id];
+    if (riding) {
+      const vehicle = this.state.vehicles.find(v => v.id === riding.vehicleId)!;
+      const stop = this.world.nodes.find(n => n.id === riding.stopNodeId)!;
+      citizen.position = copy(riding.arrived ? stop.position : vehicle.position); citizen.state = 'riding';
+      // Traffic records arrival at its discrete endpoint observation. Deferred
+      // ride minutes still decay needs, but cannot be reused for walking or
+      // onsite recovery. An unobserved legacy arrival starts from this phase.
+      if (!riding.arrived) return;
+      availableMinutes = Math.min(elapsed, Math.max(0, (this.state.extension?.lastUpdate ?? this.now) - (riding.arrivedAt ?? (this.state.extension?.lastUpdate ?? this.now))));
+      delete this.runtime.riders[citizen.id];
+      citizen.position = copy(stop.position); citizen.route = []; citizen.routeIndex = 0;
+      const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId);
+      if (ongoing) this.setDestination(citizen, ongoing, true);
+    }
+    if (roadTask) { this.advanceRoadworker(citizen, roadTask, availableMinutes); return; }
+    if (citizen.state.startsWith('roadWork') || citizen.state === 'roadPickup') {
+      const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId); if (ongoing) this.setDestination(citizen, ongoing, true);
+    }
+    let destination: Building;
+    const sleeping = hour >= 22 || hour < 6;
+    const shift = hour >= 7.5 && hour < 17.5;
+
+    const previousActivity = this.runtime.activities[citizen.id];
+    const previousShop = this.state.shops.find(s => s.buildingId === citizen.destinationId);
+    const treatment = this.state.clinical?.orders.find(order => order.patientId === citizen.id && ['awaitingSupply', 'awaitingDoctor', 'inTreatment'].includes(order.state));
+    const committedTreatment = treatment && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25;
+    if (committedTreatment) this.runtime.activities[citizen.id] = 'heal';
+    const reconsiderCivic = this.effectiveRuleset === 'civic-local-v1' && previousActivity === 'work' && civicStaffingOpportunities(this, citizen).length > 0;
+    const reconsiderMeal = nearestMealPolicy(this.runtime.mealRoutePolicyId) && previousActivity === 'eat' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
+    // npc-motion-coarse-v1 cities: a resident still blocked (physicalWaiting)
+    // at a decision point re-plans from where they stand instead of waiting
+    // on the same blocked leg forever (a 14-day audit lost a resident so).
+    const blockedReplan = this.runtime.npcMotionPolicyId === NPC_MOTION_COARSE_POLICY && citizen.state === 'physicalWaiting' && this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0);
+    // npc-motion-coarse-v1: a resident part-way up or down a stair flight
+    // finishes it before choosing anew; a route re-planned from mid-flight
+    // can start on a leg the stair planner rejects (found in a 14-day audit).
+    const midFlight = this.runtime.npcMotionPolicyId === NPC_MOTION_COARSE_POLICY && !!citizen.destinationId && !!this.runtime.npcStairCursors?.[citizen.id] && citizen.state !== 'physicalWaiting';
+    const committedNeed = midFlight || !!citizen.destinationId && (citizen.state === 'roadWaiting' || !reconsiderMeal && previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || !reconsiderCivic && previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
+    if (committedTreatment) destination = this.buildings.get(treatment.siteId)!;
+    else if (!committedNeed && (reconsiderCivic || !citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
+      const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
+    } else destination = this.buildings.get(citizen.destinationId!)!;
+    const held = blockedReplan ? { route: citizen.route, routeIndex: citizen.routeIndex, state: citizen.state, destinationId: citizen.destinationId } : null;
+    if (blockedReplan && (this.runtime.decisionAt[citizen.id] ?? 0) <= this.now + 1e-7) this.runtime.decisionAt[citizen.id] = this.now + 25;
+    // A resident mid-flight keeps the exact route and cursor it is following.
+    if (!midFlight) this.setDestination(citizen, destination, blockedReplan);
+    // A re-plan that is itself blocked at once is dropped: the resident keeps
+    // the previous leg and stair cursor, a state the save reader accepts.
+    // A kept re-plan releases a stair cursor that no longer matches its route.
+    if (held && citizen.route !== held.route) {
+      const blocked = !!citizen.route && (citizen.routeIndex ?? 0) < citizen.route.length && this.npcStairMotion.describe(citizen.route, citizen.routeIndex ?? 0).kind === 'blocked'
+        && !this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex ?? 0, citizen.position);
+      if (blocked) Object.assign(citizen, held);
+      else { const cursor = this.runtime.npcStairCursors?.[citizen.id]; if (cursor && !this.nativeCursorMatches(citizen, cursor)) delete this.runtime.npcStairCursors![citizen.id]; }
+    }
+    if (citizen.state === 'roadWaiting') return;
+    if (citizen.state === 'unreachable') { citizen.destinationId = null; return; }
+    if (distance(citizen.position, destination.door) > 200) {
+      const walkingSpeed = this.state.weather === '雨' ? 3.1 : 4.2;
+      const walkingTime = this.walkingDistance(citizen, destination) / walkingSpeed;
+      const transit = this.state.vehicles.find(v => {
+        if (!isRoadOpen(this.state, v.edgeId) || v.state === 'roadClosed' || v.state === 'moving' || v.kind === 'flight' || citizen.money < 4 || v.passengers >= this.passengerCapacity(v) || distance(v.position, citizen.position) > 40) return false;
+        const edge = this.edges.get(v.edgeId)!; const end = this.world.nodes.find(n => n.id === (v.direction > 0 ? edge.to : edge.from))!;
+        const target = this.buildingNode(destination), remainingWalk = (this.walkingTree(end.id).costs.get(target.id) ?? Infinity) + distance(target.position, destination.door);
+        const rideTime = Math.max(0, v.nextDeparture - this.now) + edge.length * (v.direction > 0 ? 1 - v.progress : v.progress) / Math.max(1, v.speed * this.state.energy / 100);
+        return rideTime + remainingWalk / walkingSpeed + 15 < walkingTime;
+      });
+      if (transit) { const edge = this.edges.get(transit.edgeId)!; citizen.money -= 4; this.bus.emit({ type: 'transit-fare', amount: 4, citizenId: citizen.id, vehicleId: transit.id, districtId: citizen.districtId }); this.runtime.riders[citizen.id] = { vehicleId: transit.id, stopNodeId: transit.direction > 0 ? edge.to : edge.from }; transit.passengers++; citizen.state = 'riding'; citizen.position = copy(transit.position); this.bus.emit({ type: 'commute', citizenId: citizen.id }); return; }
+    }
+    let arrivedElapsed = availableMinutes;
+    if ((citizen.routeIndex ?? 0) < (citizen.route?.length ?? 0)) {
+      let remainingDistance = 0, point = citizen.position;
+      for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remainingDistance += distance(point, next); point = next; }
+      if (!this.moveCitizen(citizen, availableMinutes)) return;
+      arrivedElapsed = this.runtime.npcMotionVersion === 2 ? this.citizenArrivalMinutes.get(citizen) ?? 0 : Math.max(0, availableMinutes - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
+    }
+    const activity = this.runtime.activities[citizen.id];
+    const person = { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] };
+    const atActivityPoint = destination.kind === 'home' && activity === 'rest'
+      ? !!(homeRestPointAt(destination, citizen.position, person) || this.runtime.homeMatsPolicyId === HOME_MATS_POLICY && homeMatPointAt(destination, citizen.position, person)) && !homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)
+      : this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity, destination), person);
+    const browsing = streetBrowse(this.runtime, citizen, destination) && !this.floorPlanPresence(destination, citizen.position) && distance(citizen.position, destination.door) <= BROWSE_MAX + 1;
+    if (!browsing && (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !atActivityPoint)) { citizen.state = 'unreachable'; citizen.destinationId = null; return; }
+    // A clinic observer receives only a real completed walking/arrival leg.
+    // This optional source event changes no movement, needs or attendance.
+    if (destination.kind === 'clinic' && arrivedElapsed > 0) {
+      const observedClock = this.state.extension!.lastUpdate;
+      this.bus.emit({ type: 'clinical-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: this.activityPointPurpose(activity), activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: copy(citizen.position) });
+    }
+    if (destination.id === home.id || activity === 'rest') {
+      citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .08);
+    } else if (activity === 'work') {
+      if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor && publicEmploymentSite(this.runtime.publicLabor,citizen.id) || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; return; }
+      if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
+    } else if (activity === 'civicRegister' || activity === 'civicVote') {
+      citizen.state = 'attendingCivic';
+      if (this.effectiveRuleset === 'civic-local-v1' && arrivedElapsed > 0) {
+        const observedClock = this.state.extension!.lastUpdate;
+        const event: Event = Object.freeze({ type: 'civic-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: activity, minutes: this.minutes, activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: Object.freeze(copy(citizen.position)) });
+        canonicalCivicPresence.add(event); this.bus.emit(event);
+      }
+    } else if (activity === 'shopLifecycle') {
+      citizen.state = 'reviewingBusiness';
+      this.bus.emit({ type: 'shop-lifecycle-arrived', citizenId: citizen.id, shopId: this.state.shops.find(shop => shop.buildingId === destination.id)?.id });
+    } else if (activity === 'businessReview') {
+      citizen.state = 'reviewingBusiness';
+    } else if (activity === 'study') {
+      citizen.state = 'studying'; if (citizen.skills) citizen.skills.learning = clamp(citizen.skills.learning + arrivedElapsed * .003);
+      if (citizen.role === '学生' && destination.kind === 'school') this.payStudyGrant(citizen, arrivedElapsed); citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .02); recordSchoolSelfStudy(this, citizen, destination, arrivedElapsed); observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
+    } else if (activity === 'budgetReview') {
+      citizen.state = 'reviewingBudget';
+    } else if (activity === 'service') {
+      citizen.state = 'attendingService'; observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
+    } else if (activity === 'social') {
+      citizen.state = 'socializing'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .12); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .09);
+    } else if (activity === 'heal') {
+      citizen.state = 'healing'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * .03);
+    } else if (activity === 'eat') {
+      citizen.state = 'shopping';
+      this.bus.emit({ type: 'customer', citizenId: citizen.id, shopId: this.state.shops.find(s => s.buildingId === destination.id)?.id });
+    }
+    if (destination.kind === 'school') observePublicEducationArrival(this, citizen, destination, arrivedElapsed);
+  }
+  private peopleFinish(ctx: ReturnType<Simulation['peopleSetup']>) {
+    const { hour } = ctx;
     const player = this.state.player; player.needs.hunger = clamp(player.needs.hunger - this.minutes * .035); player.needs.fatigue = clamp(player.needs.fatigue - this.minutes * .018); player.needs.social = clamp(player.needs.social - this.minutes * .012); player.needs.fun = clamp(player.needs.fun - this.minutes * .009);
     if (this.now + 1e-7 >= this.runtime.payrollAt) {
       // Earned labour remains payable even after a job change, closure or death.
@@ -1841,8 +2211,10 @@ export class Simulation implements SimulationAPI {
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) continue;
       const relation = this.state.relationships.find(r => r.npcId === citizen.id); if (relation && this.hostilityRank(relation) >= 2 && this.playerOwnsShop(shop)) continue;
       if (this.shopCommodity(shop) !== 'food' || citizen.destinationId !== building.id || citizen.state !== 'shopping' || citizen.needs.hunger > 78 || citizen.money < shop.price || shop.inventory < 1) continue;
-      if (distance(citizen.position, building.position) > Math.max(building.width, building.depth) / 2 + 3) continue;
-      if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+      // v5: a market meal is bought at the street stall in front of the door.
+      const atStall = eatsOnStreet(this.runtime.mealRoutePolicyId) && building.kind === 'market' && !this.floorPlanPresence(building, citizen.position) && distance(citizen.position, building.door) <= BROWSE_MAX + 1;
+      if (!atStall && distance(citizen.position, building.position) > Math.max(building.width, building.depth) / 2 + 3) continue;
+      if (building.floorPlanProfile === FLOOR_PLAN_PROFILE && !atStall) {
         const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
         if (!this.isAtBuildingFunctionPoint(building, citizen.position, 'sale', person)
           || homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)) continue;
@@ -1865,6 +2237,8 @@ export class Simulation implements SimulationAPI {
       // Consume only the successful request. Failed requests retain the same
       // between-batch retry and end-of-batch clearing policy as before.
       delete this.runtime.customers[citizenId];
+      // v6: a stall meal ends within STALL_LINGER minutes; the resident then decides again.
+      if (atStall && shortStallMeal(this.runtime.mealRoutePolicyId)) this.runtime.decisionAt[citizen.id] = Math.min(this.runtime.decisionAt[citizen.id] ?? Infinity, this.now + stallLinger(this.runtime.mealRoutePolicyId, this.isEmployed(citizen), this.state.hour));
       this.bus.emit({ type: 'sale', amount: cost, citizenId: citizen.id, shopId: shop.id, districtId: shop.districtId, quantity });
     }
   }
@@ -1909,9 +2283,14 @@ export class Simulation implements SimulationAPI {
         }
         this.runtime.freight[shop.districtId] = Math.max(0, cargo - received);
       }
+      if (shop.open && ['farm', 'dock'].includes(building.kind) && farmInputsUsed(this.runtime.farmYieldPolicyId)) this.buyFarmInputs(shop);
       if (shop.open && ['farm', 'workshop', 'dock'].includes(building.kind)) {
         const technology = this.state.extension?.technologies.find(t => t.sector === (building.kind === 'farm' ? 'agriculture' : 'manufacturing'))?.level ?? 0;
-        const produced = Math.min(Math.max(0, 120 - shop.inventory), productiveLabor / 30 * (this.state.powerGrid ? 1 : siteEnergy) * (1 + technology * .12));
+        const room = Math.max(0, producerStockCap(this.runtime.farmYieldPolicyId, building.kind) - shop.inventory), potential = (this.state.powerGrid ? productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) : productiveLabor / laborMinutesPerUnit(this.runtime.farmYieldPolicyId, building.kind) * district.energy / 100) * (1 + technology * .12);
+        const inputs = farmInputsUsed(this.runtime.farmYieldPolicyId) && ['farm', 'dock'].includes(building.kind) ? this.runtime.farmInputs ??= {} : undefined;
+        const output = inputs ? foodOutputWithInputs(potential, inputs[shop.id] ?? 0, room) : { units: Math.min(room, potential), inputsUsed: 0 };
+        const produced = output.units;
+        if (inputs && output.inputsUsed > 0) inputs[shop.id] = Math.max(0, (inputs[shop.id] ?? 0) - output.inputsUsed);
         shop.inventory = clamp(shop.inventory + produced, 0, 10000);
         if (produced > 0) this.bus.emit({ type: 'production', shopId: shop.id, districtId: shop.districtId, amount: produced, minutes: this.state.powerGrid ? productiveLabor : labor });
       }
@@ -1984,23 +2363,59 @@ export class Simulation implements SimulationAPI {
     for (const wage of pending.values()) { const citizen = this.state.citizens.find(c => c.id === wage.citizenId); if (!citizen) continue; const employer = wage.shopId ? this.state.shops.find(s => s.id === wage.shopId)! : null; const amount = Math.min(employer ? wage.amount * privateRatios.get(employer.id)! : wage.amount * publicRatio, Math.max(0, 1e9 - citizen.money) / (1 - this.state.taxRate)); if (employer) { this.transferShopFunds(employer, -amount); } else this.state.treasury -= amount; const tax = amount * this.state.taxRate; citizen.money = clamp(citizen.money + amount - tax, 0, 1e9); this.runtime.taxes += tax; const unpaid = wage.amount - amount; if (unpaid > 1e-8) arrears.push({ ...wage, amount: unpaid }); if (amount > 0) this.bus.emit({ type: 'wage-paid', citizenId: citizen.id, shopId: employer?.id, districtId: citizen.districtId, amount, requestedAmount: wage.amount }); }
     this.runtime.wageArrears = arrears;
     this.runtime.wages.length = 0;
+    if (this.runtime.fiscalDay) this.runtime.fiscalDay.tax += this.runtime.taxes;
     this.state.treasury = clamp(this.state.treasury + this.runtime.taxes, 0, 1e12); this.runtime.taxes = 0;
     if (this.now + 1e-7 >= this.runtime.financeAt) {
       const hours = Math.max(1, (this.now - this.runtime.financeAt + 60) / 60); this.runtime.financeAt = this.now + 60;
+      this.exportSurplus(hours);
       if (!this.state.banking) {
       this.state.bankBalance = clamp(this.state.bankBalance * (1 + .000015 * hours), 0, 1e9);
       this.state.loan = clamp(this.state.loan * (1 + .00008 * hours), 0, 1e9);
       if (this.runtime.investment > 0) { const prosperity = this.state.districts.reduce((n, d) => n + d.prosperity, 0) / this.state.districts.length; this.state.player.money = clamp(this.state.player.money + this.runtime.investment * .0008 * (prosperity - 35) / 30 * hours, 0, 1e9); }
       }
-      for (const shop of this.state.shops) if (!this.state.extension?.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId) && shop.profit > 0 && this.shopPayrollDebt(shop) <= 1e-8) {
+      const staffOf = new Map<string, Citizen[]>();
+      if (sharesProfitWithStaff(this.runtime.publicFinancePolicyId)) for (const c of this.state.citizens) if (c.workId && c.role !== '学生' && this.state.extension?.actorProfiles[c.id]?.alive !== false) { const list = staffOf.get(c.workId) ?? []; list.push(c); staffOf.set(c.workId, list); }
+      for (const shop of this.state.shops) if (shop.profit > 0 && (!dividendWaitsForPayroll(this.runtime.publicFinancePolicyId) || this.shopPayrollDebt(shop) <= 1e-8)) {
+        const company = this.state.extension?.companies.find(item => item.shopBindingReleasedAt === undefined && item.buildingId === shop.buildingId);
+        if (company) {
+          // company-dividend-v1: a company shop pays the same dividend from company capital, to its shareholders.
+          if (this.runtime.companyDividendPolicyId === COMPANY_DIVIDEND_POLICY) this.payCompanyDividend(shop, company, hours, staffOf);
+          continue;
+        }
         const recipient = shop.ownerId === 'player' ? this.state.player : this.state.citizens.find(c => c.id === shop.ownerId);
         if (this.state.extension?.actorProfiles[shop.ownerId ?? '']?.alive === false) continue;
         if (!recipient) continue;
-        const reserve = Math.max(64 + shop.employees * 32, this.shopProtectedFunds(shop)), dividend = Math.min(Math.max(0, 1e9 - recipient.money), Math.max(0, this.shopFunds(shop) - reserve) * Math.min(1, .03 * hours));
-        this.transferShopFunds(shop, -dividend); recipient.money = clamp(recipient.money + dividend, 0, 1e9);
-        if (dividend > 0) this.bus.emit({ type: 'business-dividend', citizenId: 'id' in recipient ? recipient.id : 'player', shopId: shop.id, districtId: shop.districtId, amount: dividend });
+        const reserve = Math.max(64 + shop.employees * 32, this.shopProtectedFunds(shop)), distributable = Math.max(0, this.shopFunds(shop) - reserve) * Math.min(1, .03 * hours);
+        const split = profitTaxSplit(this.runtime.publicFinancePolicyId, distributable), dividend = Math.min(Math.max(0, 1e9 - recipient.money), split.dividend), tax = Math.min(split.tax, Math.max(0, 1e12 - this.state.treasury));
+        // v4: the shop's own staff share the dividend (their coins come out of the owner's part).
+        const staff = (staffOf.get(shop.buildingId) ?? []).filter(c => c !== recipient), share = staffProfitShare(this.runtime.publicFinancePolicyId, dividend, staff.length);
+        this.transferShopFunds(shop, -(dividend + tax)); recipient.money = clamp(recipient.money + share.owner, 0, 1e9);
+        for (const worker of staff) { worker.money += share.each; this.bus.emit({ type: 'business-dividend', citizenId: worker.id, shopId: shop.id, districtId: shop.districtId, amount: share.each }); }
+        if (tax > 0) { this.state.treasury += tax; this.bus.emit({ type: 'profit-tax', shopId: shop.id, districtId: shop.districtId, amount: tax }); }
+        if (share.owner > 0) this.bus.emit({ type: 'business-dividend', citizenId: 'id' in recipient ? recipient.id : 'player', shopId: shop.id, districtId: shop.districtId, amount: share.owner });
       }
     }
+  }
+  /** company-dividend-v1: the shop dividend rule applied to a company's capital. Shares still with the exchange keep
+   * their part in the company; the holders' part is taxed and shared with the staff exactly as an owner's would be. */
+  private payCompanyDividend(shop: Shop, company: Company, hours: number, staffOf: Map<string, Citizen[]>): void {
+    const alive = (id: string) => id === 'player' || this.state.extension?.actorProfiles[id]?.alive !== false && this.state.citizens.some(c => c.id === id);
+    const holders = shareholderParts(company.shareholders, company.shares, 1, alive); if (!holders.length) return;
+    const held = holders.reduce((sum, h) => sum + h.amount, 0);
+    const reserve = Math.max(64 + shop.employees * 32, this.shopProtectedFunds(shop)), distributable = Math.max(0, this.shopFunds(shop) - reserve) * Math.min(1, .03 * hours) * held;
+    const split = profitTaxSplit(this.runtime.publicFinancePolicyId, distributable), tax = Math.min(split.tax, Math.max(0, 1e12 - this.state.treasury));
+    const person = (id: string) => id === 'player' ? this.state.player : this.state.citizens.find(c => c.id === id)!;
+    const staff = (staffOf.get(shop.buildingId) ?? []).filter(c => !holders.some(h => h.id === c.id)), share = staffProfitShare(this.runtime.publicFinancePolicyId, split.dividend, staff.length);
+    let paid = 0;
+    for (const holder of holders) {
+      const recipient = person(holder.id), amount = Math.min(Math.max(0, 1e9 - recipient.money), share.owner * holder.amount / held);
+      if (!(amount > 0)) continue;
+      recipient.money = clamp(recipient.money + amount, 0, 1e9); paid += amount;
+      this.bus.emit({ type: 'business-dividend', citizenId: holder.id, shopId: shop.id, districtId: shop.districtId, amount });
+    }
+    for (const worker of staff) { worker.money += share.each; paid += share.each; this.bus.emit({ type: 'business-dividend', citizenId: worker.id, shopId: shop.id, districtId: shop.districtId, amount: share.each }); }
+    this.transferShopFunds(shop, -(paid + tax));
+    if (tax > 0) { this.state.treasury += tax; this.bus.emit({ type: 'profit-tax', shopId: shop.id, districtId: shop.districtId, amount: tax }); }
   }
   policeSupplyCoverage() {
     const stock = this.runtime.policeSupplies;
@@ -2079,10 +2494,143 @@ export class Simulation implements SimulationAPI {
     if (this.state.crimes.length > 120) this.state.crimes = this.state.crimes.filter(c => c.status !== 'resolved').concat(this.state.crimes.filter(c => c.status === 'resolved').slice(-60));
     if (this.runtime.policeSupplies) archivePoliceSupplies(this.runtime.policeSupplies, this.state.crimes);
   }
+  /** staffed-farm-yield-v3: a staffed food producer below its reorder line buys
+   * workshop materials as inputs with its own spendable cash, nearest district
+   * first, as a taxed wholesale; nothing is created. */
+  private buyFarmInputs(shop: Shop): void {
+    const inputs = this.runtime.farmInputs ??= {};
+    if ((inputs[shop.id] ?? 0) >= FARM_INPUT_REORDER || !(this.workforce.get(shop.buildingId)?.length)) return;
+    const suppliers = this.state.shops.filter(s => this.shopCommodity(s) === 'materials' && s.inventory >= 1 && !this.buildings.get(s.buildingId)?.facility)
+      .sort((a, b) => Number(b.districtId === shop.districtId) - Number(a.districtId === shop.districtId) || b.inventory - a.inventory || a.id.localeCompare(b.id));
+    for (const supplier of suppliers) {
+      const want = Math.floor(FARM_INPUT_ORDER_TARGET - (inputs[shop.id] ?? 0)); if (want < 1) break;
+      const quote = this.quoteSupply(supplier.id, want);
+      const quantity = Math.min(Math.floor(quote.quantity), want, Math.floor(Math.max(0, this.shopFunds(shop) - this.shopProtectedFunds(shop)) / quote.unitPrice), Math.floor(Math.max(0, 1e9 - this.shopFunds(supplier)) / quote.unitPrice));
+      if (quantity < 1) break;
+      const payment = quantity * quote.unitPrice, net = payment * (1 - this.state.taxRate);
+      supplier.inventory -= quantity; inputs[shop.id] = (inputs[shop.id] ?? 0) + quantity;
+      this.transferShopFunds(shop, -payment); this.transferShopFunds(supplier, net);
+      shop.profit -= payment; supplier.revenue += payment; supplier.profit += net;
+      this.bus.emit({ type: 'wholesale', shopId: supplier.id, districtId: supplier.districtId, amount: payment, quantity, unitPrice: quote.unitPrice, purpose: 'farm-inputs' });
+    }
+  }
+  /** foreign-trade-v1: the hour's cargo flights sell surplus to outside buyers. */
+  private exportSurplus(hours: number): void {
+    const trade = this.runtime.foreignTrade; if (!trade?.enabled) return;
+    const demand = this.foodFreightDemand(), foodSurplus = demand.every(row => districtSupplied(demand, row.districtId));
+    const offers = this.state.shops.flatMap(shop => {
+      const kind = this.buildings.get(shop.buildingId)?.kind;
+      if (kind === 'workshop' && !this.buildings.get(shop.buildingId)?.facility) return [{ shopId: shop.id, surplus: shop.inventory - MATERIAL_EXPORT_LINE, price: WORLD_MATERIAL_PRICE }];
+      if ((kind === 'farm' || kind === 'dock') && foodSurplus) return [{ shopId: shop.id, surplus: shop.inventory - FOOD_EXPORT_LINE, price: WORLD_FOOD_PRICE }];
+      return [];
+    });
+    // foreign-trade-v2: materials leave only from the city-wide surplus.
+    const materialSites = offers.filter(offer => this.shopCommodity(this.state.shops.find(s => s.id === offer.shopId)!) === 'materials');
+    let materialRoom = this.runtime.foreignTradePolicyId === FOREIGN_TRADE_POLICY_V2 ? cityMaterialSurplus(materialSites.map(offer => offer.surplus + MATERIAL_EXPORT_LINE)) : Infinity;
+    for (const sale of allocateExports(offers, EXPORT_UNITS_PER_HOUR * Math.min(hours, 24))) {
+      if (materialRoom !== Infinity && materialSites.some(offer => offer.shopId === sale.shopId)) { sale.quantity = Math.min(sale.quantity, Math.floor(materialRoom)); if (sale.quantity < 1) continue; materialRoom -= sale.quantity; }
+      const shop = this.state.shops.find(s => s.id === sale.shopId)!, gross = sale.quantity * sale.price, net = gross * (1 - this.state.taxRate);
+      if (this.shopFunds(shop) + net > 1e9) continue;
+      shop.inventory -= sale.quantity; this.transferShopFunds(shop, net); this.runtime.taxes += gross - net;
+      shop.revenue += gross; shop.profit += net; trade.exportedUnits += sale.quantity; trade.exportGross += gross;
+      this.bus.emit({ type: 'foreign-export', shopId: shop.id, districtId: shop.districtId, amount: gross, quantity: sale.quantity, unitPrice: sale.price });
+    }
+  }
+  /** v5: a student's grant for minutes studied at school, from available public cash (one budget read per tick). */
+  private studyBudget?: { at: number; available: number };
+  private payStudyGrant(citizen: Citizen, minutes: number): void {
+    const policy = this.runtime.publicFinancePolicyId; if (!studyGrant(policy, minutes, Infinity, citizen.money)) return;
+    if (this.studyBudget?.at !== this.now) this.studyBudget = { at: this.now, available: this.publicBudgetSnapshot().available };
+    const amount = studyGrant(policy, minutes, this.studyBudget.available, citizen.money); if (amount <= 1e-9) return;
+    this.studyBudget.available -= amount; this.state.treasury -= amount; citizen.money += amount;
+    this.bus.emit({ type: 'study-grant', citizenId: citizen.id, districtId: citizen.districtId, amount });
+  }
+  /** v7: adults from outside the city take funded shop jobs with room at a home within 500 m. */
+  private admitMigrants(): void {
+    const f = this.state.family, e = this.state.extension;
+    if (!admitsMigrants(this.runtime.publicFinancePolicyId) || !f || f.version !== 2 || !e) return;
+    const profiles = e.actorProfiles, at = e.lastUpdate, day = Math.floor(at / 1440);
+    const living = this.state.citizens.filter(c => profiles[c.id]?.alive !== false), occupants = new Map<string, number>();
+    for (const c of living) occupants.set(c.homeId, (occupants.get(c.homeId) ?? 0) + 1);
+    const homes = this.world.buildings.filter(b => b.kind === 'home' && b.capacity > 0);
+    const salary = (districtId: string) => privateWageBase(this.runtime.publicFinancePolicyId) * (.7 + this.state.districts.find(d => d.id === districtId)!.prosperity / 100);
+    const spare = (shop: Shop) => this.shopFunds(shop) - this.shopProtectedFunds(shop);
+    // Shops are closed at the night close: a hiring shop is one that may operate and pay new staff, and sold recently.
+    const offers = this.state.shops.filter(shop => shopLifecycleAllowsOperation(this.state, shop.id) && shopLifecycleAllowsNewPayroll(this.state, shop.id) && !this.shopInsolvent(shop) && shop.employees < Math.min(100, this.buildings.get(shop.buildingId)!.capacity) && tradeSignals(this, shop.id).sold > 0 && spare(shop) >= salary(this.buildings.get(shop.buildingId)!.districtId))
+      .sort((a, b) => spare(b) - spare(a) || a.id.localeCompare(b.id));
+    // v8 arrival quarter: shops and homes near the city entrance come first.
+    const quarter = settlesArrivalQuarter(this.runtime.publicFinancePolicyId), spawn = this.world.spawn;
+    const nearEntrance = (b: Building) => quarter && Math.hypot(b.door.x - spawn.x, b.door.z - spawn.z) <= ARRIVAL_RADIUS ? 1 : 0;
+    if (quarter) offers.sort((a, b) => nearEntrance(this.buildings.get(b.buildingId)!) - nearEntrance(this.buildings.get(a.buildingId)!));
+    let admitted = 0, alive = living.length;
+    // v8: a shop near the entrance may hire up to ARRIVAL_SLOTS migrants a day (round robin).
+    const near = offers.filter(shop => nearEntrance(this.buildings.get(shop.buildingId)!));
+    // Without the quarter no shop is near, so the order is v7's.
+    for (const shop of [...Array.from({ length: ARRIVAL_SLOTS }, () => near).flat(), ...offers.slice(near.length)]) {
+      // migration-pace-v1: a declared city admits up to MIGRATION_PACE a day.
+      if (admitted >= (this.runtime.migrationPacePolicyId === MIGRATION_PACE_POLICY ? MIGRATION_PACE : MIGRANTS_PER_DAY) || alive >= MIGRATION_CAP || this.state.citizens.length + f.pregnancies.length >= 1024) break;
+      const fill = (home: Building) => (occupants.get(home.id) ?? 0) / home.capacity;
+      const home = homes.filter(h => (occupants.get(h.id) ?? 0) < h.capacity && this.buildingTravelDistance(h.id, shop.buildingId) <= 500)
+        .sort((a, b) => nearEntrance(b) - nearEntrance(a) || fill(a) - fill(b) || this.buildingTravelDistance(a.id, shop.buildingId) - this.buildingTravelDistance(b.id, shop.buildingId) || a.id.localeCompare(b.id))[0];
+      const work = this.buildings.get(shop.buildingId)!, wage = home && salary(home.districtId);
+      // v8: the spare cash funds a day's wage for every migrant the shop already employs, and this one.
+      const employed = quarter ? this.state.citizens.filter(c => f.migrants?.[c.id] && c.workId === shop.buildingId && profiles[c.id]?.alive !== false).length : 0;
+      if (!home || spare(shop) < wage! * (1 + employed)) continue;
+      const n = f.nextResidentId++, id = `resident-${n}`, arrivalAge = 20 + n * 7 % 21;
+      const name = `${'沈云林白苏陆江顾温叶程许'[n % 12]}${'溪岚青舟遥宁竹澄川月星禾'[n * 5 % 12]}${'安和远新来歌晴望山岳帆乐'[n * 7 % 12]}`;
+      const role = ({ market: '商人', workshop: '工人', farm: '农民' } as Record<string, string>)[work.kind] ?? '工人';
+      const citizen = { id, name, districtId: home.districtId, homeId: home.id, workId: work.id, role, position: copy(home.door), state: 'atHome', destinationId: null, money: MIGRANT_SAVINGS, food: 0,
+        needs: { hunger: 80, fatigue: 80, social: 60, fun: 60 }, tier: this.state.districts.find(d => d.id === home.districtId)?.tier ?? 'statistical', route: [], routeIndex: 0, partnerId: null,
+        skills: { craft: 30, learning: 20, social: 30 }, education: 1, socialIdentities: ['newcomer'], historyTags: ['山外迁入'] } as Citizen;
+      this.state.citizens.push(citizen);
+      profiles[id] = { age: arrivalAge, health: 85, mood: 70, stress: 20, alive: true, skill: 30, family: [], historyTags: ['山外迁入'] };
+      (f.migrants ??= {})[id] = { arrivedAt: at, arrivalAge, homeId: home.id, workId: work.id, savings: MIGRANT_SAVINGS };
+      e.publicLedger.push({ tick: this.state.tick, actorId: id, amount: MIGRANT_SAVINGS, purpose: '山外迁入自带积蓄', districtId: home.districtId, account: 'household' });
+      if (e.publicLedger.length > 512) e.publicLedger.splice(0, e.publicLedger.length - 512);
+      const plan = this.preparePrivateAcceptance(shop, day);
+      if (!plan.assignments.some(item => item.citizenId === id)) {
+        const firstUnpromised = plan.assignments.findIndex(item => item.minutesCap === 0);
+        plan.assignments.splice(firstUnpromised < 0 ? plan.assignments.length : firstUnpromised, 0, { citizenId: id, ratePerMinute: wage! / 480, minutesCap: 0, workedMinutes: 0 });
+      }
+      shop.employees++; this.state.districts.find(d => d.id === home.districtId)!.residents++;
+      occupants.set(home.id, (occupants.get(home.id) ?? 0) + 1); admitted++; alive++;
+      this.notice('family', `${name}从山外迁来云山，住进${home.name}，在${work.name}找到了工作。`, home.districtId);
+      this.bus.emit({ type: 'resident-arrived', citizenId: id, districtId: home.districtId, amount: MIGRANT_SAVINGS });
+    }
+    if (admitted) this.refreshWorkforce();
+  }
+  private payPublicRelief(): void {
+    const profiles = this.state.extension?.actorProfiles, students = this.state.citizens.filter(c => c.role === '学生' && profiles?.[c.id]?.alive !== false);
+    for (const payment of studentBursaries(this.runtime.publicFinancePolicyId, students.map(c => ({ id: c.id, money: c.money })), students.length ? this.publicBudgetSnapshot().available : 0)) {
+      const citizen = this.state.citizens.find(c => c.id === payment.id)!;
+      this.state.treasury -= payment.amount; citizen.money += payment.amount;
+      this.bus.emit({ type: 'study-grant', citizenId: citizen.id, districtId: citizen.districtId, amount: payment.amount });
+    }
+    const prices = this.state.shops.filter(shop => this.shopCommodity(shop) === 'food' && shop.inventory >= 1).map(shop => shop.price);
+    if (!prices.length) return;
+    const floor = RELIEF_MEALS * Math.min(...prices);
+    const claims = this.state.citizens.filter(c => profiles?.[c.id]?.alive !== false && c.money < floor).map(c => ({ id: c.id, money: c.money }));
+    for (const payment of reliefPayments(claims, floor, this.publicBudgetSnapshot().available)) {
+      const citizen = this.state.citizens.find(c => c.id === payment.id)!;
+      this.state.treasury -= payment.amount; citizen.money += payment.amount;
+      this.bus.emit({ type: 'public-relief', citizenId: citizen.id, districtId: citizen.districtId, amount: payment.amount });
+    }
+  }
   private politics() {
     this.reviewPublicShifts();
     const pending = this.state.policyPending;
     if (pending && this.now + 1e-7 >= pending.applyAt) { this.state.taxRate = pending.taxRate; this.state.policeBudget = pending.policeBudget; delete this.state.policyPending; this.notice('policy', '议会通过的税率与警务预算已生效，财政和治安将逐步反馈。'); }
+    const fiscal = this.runtime.fiscalDay;
+    if (fiscal && this.state.day !== fiscal.day) {
+      const { net, base } = closeFiscalDay(fiscal, this.state.taxRate, this.state.treasury);
+      this.runtime.fiscalDay = { day: this.state.day, treasury: this.state.treasury, tax: 0, net, base };
+      this.payPublicRelief();
+      this.admitMigrants();
+      const rate = councilTaxRate(this.state.taxRate, net, base, this.state.treasury);
+      if (rate !== this.state.taxRate && !this.hasIdentity('mayor') && !this.state.policyPending) {
+        this.notice('policy', `议会按上日公共收支${net < 0 ? '赤字' : '盈余'}${Math.abs(net).toFixed(0)}文，将营业税率由${(this.state.taxRate * 100).toFixed(1)}%调整为${(rate * 100).toFixed(1)}%。`); this.state.taxRate = rate;
+      }
+    }
     const campaign = this.runtime.campaign;
     if (campaign && this.now + 1e-7 >= campaign.countAt) { this.runtime.campaign = null; if (campaign.votes >= 62) { this.addIdentity('mayor'); this.state.player.reputation += 12; this.notice('election', `计票完成：支持率${campaign.votes.toFixed(1)}%，你当选云山市长。`); } else this.notice('election', `计票完成：支持率${campaign.votes.toFixed(1)}%，请继续服务社区后再参选。`); }
   }
@@ -2121,8 +2669,47 @@ export class Simulation implements SimulationAPI {
     if (this.state.events.length > 100) this.state.events.splice(0, this.state.events.length - 100);
   }
   private notice(type: string, text: string, districtId?: string) { this.state.events.push({ id: ++this.runtime.eventId, tick: this.state.tick, type, text, ...(districtId ? { districtId } : {}) }); if (this.state.events.length > 100) this.state.events.shift(); return this.runtime.eventId; }
-  isNearBuilding(building: Building, position: Vec3 = this.state.player.position, doorRadius = 32): boolean {
+  /** False only where isNearBuilding is certainly false: an invalid position, or one beyond both the door's
+   * radius and the building's reach. A cheap first filter for callers scanning many people. */
+  couldBeNearBuilding(building: Building, position: Vec3, doorRadius = 32): boolean {
     if (!this.validPosition(position)) return false;
+    // Every true answer of isNearBuilding is either within doorRadius of the door or
+    // inside the floorPlanPresence reach (largest footprint diagonal + 24m),
+    // which also contains every legacy floor rectangle; anything beyond both is false.
+    const cx = position.x - building.position.x, cz = position.z - building.position.z, reach = this.buildingReach(building);
+    return !(cx * cx + cz * cz > reach * reach && distance(position, building.door) > doorRadius);
+  }
+  /** Horizontal radius around a building's centre beyond which only its door can still be near (couldBeNearBuilding). */
+  buildingReach(building: Building): number {
+    let width = building.width, depth = building.depth;
+    for (const footprint of building.floorFootprints ?? []) { if (footprint && footprint.width > width) width = footprint.width; if (footprint && footprint.depth > depth) depth = footprint.depth; }
+    return Math.hypot(width, depth) + 24;
+  }
+  /** The buildings, in world order, whose reach (buildingReach, or its door if farther) contains the position:
+   * every building that floorPlanPresence or isNearBuilding with doorRadius 0 can answer for. Others are skipped. */
+  private buildingsWithinReach(position: Vec3): Building[] {
+    const buildings = this.world.buildings;
+    if (!Number.isFinite(position.x) || !Number.isFinite(position.z)) return buildings;
+    let grid = this.reachGrid;
+    if (!grid || grid.collection !== buildings || grid.length !== buildings.length) {
+      const cells = new Map<string, number[]>(); let maxReach = 0;
+      buildings.forEach((b, i) => {
+        const reach = Math.max(this.buildingReach(b), Math.hypot(b.door.x - b.position.x, b.door.z - b.position.z)) + 1;
+        if (!Number.isFinite(reach) || !Number.isFinite(b.position.x) || !Number.isFinite(b.position.z)) { maxReach = Infinity; return; }
+        maxReach = Math.max(maxReach, reach);
+        const key = `${Math.floor(b.position.x / REACH_CELL)}:${Math.floor(b.position.z / REACH_CELL)}`, list = cells.get(key); if (list) list.push(i); else cells.set(key, [i]);
+      });
+      grid = this.reachGrid = { collection: buildings, length: buildings.length, cells, maxReach };
+    }
+    // A building without a finite reach or position is never skipped: scan everything.
+    if (!Number.isFinite(grid.maxReach)) return buildings;
+    const radius = grid.maxReach, indices: number[] = [];
+    for (let cx = Math.floor((position.x - radius) / REACH_CELL); cx <= Math.floor((position.x + radius) / REACH_CELL); cx++)
+      for (let cz = Math.floor((position.z - radius) / REACH_CELL); cz <= Math.floor((position.z + radius) / REACH_CELL); cz++) { const list = grid.cells.get(`${cx}:${cz}`); if (list) indices.push(...list); }
+    return indices.sort((a, b) => a - b).map(i => buildings[i]);
+  }
+  isNearBuilding(building: Building, position: Vec3 = this.state.player.position, doorRadius = 32): boolean {
+    if (!this.couldBeNearBuilding(building, position, doorRadius)) return false;
     if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) {
       const presence = this.floorPlanPresence(building, position);
       if (presence) return presence.kind === 'room' || presence.kind === 'stairs';
@@ -2142,6 +2729,12 @@ export class Simulation implements SimulationAPI {
     return Math.abs(x) <= dimensions.width / 2 && Math.abs(z) <= dimensions.depth / 2 && position.y >= building.position.y - floorHeight * (building.basements ?? 0) - .5 && position.y <= building.position.y + building.height + .5;
   }
   private floorPlanPresence(building: Building, position: Vec3) {
+    // Every slab, stair and fixture rectangle lies inside the site's own
+    // footprint, so a body beyond the whole diagonal has no support there.
+    let width = building.width, depth = building.depth;
+    for (const footprint of building.floorFootprints ?? []) { if (footprint && footprint.width > width) width = footprint.width; if (footprint && footprint.depth > depth) depth = footprint.depth; }
+    const dx = position.x - building.position.x, dz = position.z - building.position.z, reach = Math.hypot(width, depth) + 24;
+    if (dx * dx + dz * dz > reach * reach) return null;
     const floor = Math.round((position.y - building.position.y - .6) / (building.height / building.floors));
     for (const candidate of [floor, floor - 1, floor + 1]) {
       const support = floorPlanSupport(building, candidate, position);
@@ -2152,7 +2745,9 @@ export class Simulation implements SimulationAPI {
   private buildingFunctionPoints(building: Building): BuildingFunctionPoint[] {
     return building.functionPoints ?? Array.from({ length: building.floors }, (_, floor) => getBuildingUsePoints(building, floor)).flat();
   }
-  private activityPointPurpose(activity: string | undefined): BuildingFunctionPoint['purpose'] {
+  private activityPointPurpose(activity: string | undefined, destination?: Building): BuildingFunctionPoint['purpose'] {
+    // A v3 evening stroll at a market browses at its counter (no purchase).
+    if (activity === 'social' && destination?.kind === 'market') return 'sale';
     return activity === 'eat' ? 'sale' : ['work', 'businessReview', 'budgetReview', 'shopLifecycle'].includes(activity ?? '') ? 'work' : 'service';
   }
   /** A v4 facility is used at its real point on a legally accessible floor.
@@ -2162,13 +2757,19 @@ export class Simulation implements SimulationAPI {
     const presence = this.floorPlanPresence(building, position);
     return !!presence && (presence.kind === 'room' || presence.kind === 'stairs') && this.buildingFunctionPoints(building).some(point => point.floor === presence.floor && (!purpose || point.purpose === purpose) && canAccessFloor(building, point.floor, person) && distance(position, point.position) <= radius);
   }
+  /** Market counters are fixed world geometry, so one pure guard per site. */
+  private counterBlocker(building: Building): ((a: Vec3, b: Vec3) => boolean) | undefined {
+    if (this.counterBlockers.has(building)) return this.counterBlockers.get(building);
+    const counters = marketCounters(this.world, building);
+    const blocker = counters.length ? pureSegmentBlocker((a: Vec3, b: Vec3) => blocksMarketCounter(counters, a, b, .35, 1.72)) : undefined;
+    this.counterBlockers.set(building, blocker); return blocker;
+  }
   private floorPlanRoute(building: Building, fromFloor: number, toFloor: number, from: Vec3, to: Vec3): Vec3[] | null {
     this.ensureRoadRouting();
     const key = `floor:${building.id}:${fromFloor}>${toFloor}:${this.pointKey(from)}>${this.pointKey(to)}`;
     const cached = this.state.voxels.length === 0 ? this.routeCache.get(key) : undefined;
     if (cached && (this.runtime.npcMotionVersion !== 2 || cached[0]?.x === from.x && cached[0]?.y === from.y && cached[0]?.z === from.z)) return cached.map(copy);
-    const counters = marketCounters(this.world, building);
-    const route = findBuildingFloorPlanRoute(building, fromFloor, toFloor, from, to, .35, counters.length ? (a, b) => blocksMarketCounter(counters, a, b, .35, 1.72) : undefined);
+    const route = findBuildingFloorPlanRoute(building, fromFloor, toFloor, from, to, .35, this.counterBlocker(building));
     // Native opening phases bind to the actual body's exact origin. A local
     // coordinate round trip can lose one ULP without changing the geometry;
     // keep the original bits instead of adding a free connector or moving it.
@@ -2224,6 +2825,7 @@ export class Simulation implements SimulationAPI {
     this.bus.emit({ type: 'relationship-change', citizenId: relation.npcId, amount: impact });
   }
   command(command: Command): CommandResult {
+    this.finishTick();
     const fail = (message: string): CommandResult => ({ ok: false, message });
     const success = (message: string): CommandResult => { this.notice(command.type, message); return { ok: true, message }; };
     if (!command || typeof command !== 'object' || typeof command.type !== 'string') return fail('无法识别操作。');
@@ -2285,7 +2887,7 @@ export class Simulation implements SimulationAPI {
       if (command.type === 'loan') { const credit = 300 + p.reputation * 20 + p.experience * 30; if (this.state.loan + amount > credit) return fail(`贷款超过信用额度${credit.toFixed(0)}。`); this.state.loan += amount; p.money += amount; }
       if (command.type === 'repay') { if (amount > this.state.loan || amount > p.money) return fail('偿还金额超过贷款或现金。'); this.state.loan -= amount; p.money -= amount; p.reputation += .2; }
       if (command.type === 'invest') { if (p.money < amount) return fail('投资现金不足。'); p.money -= amount; this.runtime.investment += amount; p.inventory.investment = this.runtime.investment; }
-      return success(`${building.name}已办理${command.type}，金额${amount.toFixed(1)}云币。`);
+      return success(`${building.name}已办理${BANK_ACTION_NAMES[command.type] ?? '业务'}，金额${amount.toFixed(1)}云币。`);
     }
     if (command.type === 'business') {
       const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock'], 'work'); if (!building) return fail('请到商业设施入口洽谈经营。'); if (!this.hasIdentity('merchant')) return fail('取得商人经营资格后可承包店铺。');
@@ -2308,6 +2910,12 @@ export class Simulation implements SimulationAPI {
     if (command.type === 'election') {
       const hall = this.buildingNear(command.targetId, ['hall', 'core']); if (!hall) return fail('请到议事堂登记参选。'); if (this.hasIdentity('mayor') || this.runtime.campaign) return fail('已当选或正在等待计票。'); if (p.education < 2 || p.experience < 4 || p.reputation < 8) return fail('候选资格：教育2、经验4、声望8。'); if (p.money < 120) return fail('竞选登记需要120云币。');
       const affection = this.state.relationships.length ? this.state.relationships.reduce((n, r) => n + r.affection, 0) / this.state.relationships.length : 0; this.receivePublicFee(120, '市长竞选登记费', hall.districtId); this.runtime.campaign = { countAt: this.now + 120, votes: clamp(this.state.support + p.reputation * .7 + affection * .1) }; return success('已登记竞选，两小时后公布真实民意计票结果。');
+    }
+    if (command.type === 'foreignTrade') {
+      const trade = this.runtime.foreignTrade; if (!trade) return fail('本城未设立对外贸易。');
+      if (!this.hasIdentity('mayor')) return fail('仅当选市长可开关对外贸易。');
+      trade.enabled = command.value === 1; this.notice('policy', trade.enabled ? '市长开放对外贸易：货运航班每小时出口剩余物料与粮食。' : '市长关闭对外贸易。');
+      return success(trade.enabled ? '已开放对外贸易。' : '已关闭对外贸易。');
     }
     if (command.type === 'policy') {
       if (!this.hasIdentity('mayor')) return fail('仅当选市长可提交政策。'); if (!this.buildingNear(command.targetId, ['hall', 'core'])) return fail('请到议事堂提交政策。'); const taxRate = command.taxRate ?? this.state.taxRate, policeBudget = command.policeBudget ?? this.state.policeBudget;
@@ -2384,7 +2992,7 @@ export class Simulation implements SimulationAPI {
         const canRepair = hostileRank <= 2 || hostileRank === 3 && (relation.reconciliations ?? 0) >= 2 || hostileRank >= 4 && elapsedConflict >= 1440 - 1e-7 && (relation.reconciliations ?? 0) >= 2 && relation.affection > -60 && relation.trust > -50;
         this.updateHostility(relation, canRepair); p.reputation += .4;
       }
-      return success(`${citizen.name}记住了这次${command.type}，关系：${relation.type}，好感${relation.affection.toFixed(0)}。`);
+      return success(`与${citizen.name}${SOCIAL_ACTION_NAMES[command.type] ?? '交往'}。${citizen.name}记住了这次相处，你们现在是${RELATION_NAMES[relation.type] ?? relation.type}，好感 ${relation.affection.toFixed(0)}。`);
     }
     if (command.type === 'ride' || command.type === 'drive') {
       const vehicle = this.state.vehicles.find(v => v.id === command.targetId); if (!vehicle || distance(p.position, vehicle.position) > 35) return fail('请到车辆或站点附近上车。'); if (p.vehicleId) return fail('请先离开当前载具。'); if (!isRoadOpen(this.state, vehicle.edgeId) || vehicle.state === 'roadClosed') return fail('此路段已关闭，请等候真实改道或修复后上车。'); if (vehicle.state === 'moving') return fail('请等车辆进站停稳后上车。');
@@ -2421,14 +3029,38 @@ export class Simulation implements SimulationAPI {
   get referenceCollisionPolicyId(): ReferenceCollisionPolicy | 'legacy' { return this.runtime.referenceCollisionPolicyId ?? 'legacy'; }
   get mealRoutePolicyId(): MealRoutePolicy | 'legacy' { return this.runtime.mealRoutePolicyId ?? 'legacy'; }
   get freightPickupPolicyId(): FreightPickupPolicy | 'legacy' { return this.runtime.freightPickupPolicyId ?? 'legacy'; }
+  get farmYieldPolicyId(): FarmYieldPolicy | 'legacy' { return this.runtime.farmYieldPolicyId ?? 'legacy'; }
+  get foodFreightPolicyId(): FoodFreightPolicy | 'legacy' { return this.runtime.foodFreightPolicyId ?? 'legacy'; }
+  get publicFinancePolicyId(): PublicFinancePolicy | 'legacy' { return this.runtime.publicFinancePolicyId ?? 'legacy'; }
+  get foreignTradePolicyId(): ForeignTradePolicy | 'legacy' { return this.runtime.foreignTradePolicyId ?? 'legacy'; }
+  get npcMotionPolicyId(): NpcMotionPolicy | 'legacy' { return this.runtime.npcMotionPolicyId ?? 'legacy'; }
+  get boardingHoldPolicyId(): BoardingHoldPolicy | 'legacy' { return this.runtime.boardingHoldPolicyId ?? 'legacy'; }
+  get playerYieldPolicyId(): PlayerYieldPolicy | 'legacy' { return this.runtime.playerYieldPolicyId ?? 'legacy'; }
+  get cableSpeedPolicyId(): CableSpeedPolicy | undefined { return this.runtime.cableSpeedPolicyId; }
+  get closureTrafficPolicyId(): ClosureTrafficPolicy | undefined { return this.runtime.closureTrafficPolicyId; }
+  get municipalRepairPolicyId(): MunicipalRepairPolicy | undefined { return this.runtime.municipalRepairPolicyId; }
+  get companyDividendPolicyId(): CompanyDividendPolicy | undefined { return this.runtime.companyDividendPolicyId; }
+  get studentDormPolicyId(): StudentDormPolicy | undefined { return this.runtime.studentDormPolicyId; }
+  get lossShopMovePolicyId(): LossShopMovePolicy | undefined { return this.runtime.lossShopMovePolicyId; }
+  get tinyLegPolicyId(): TinyLegPolicy | undefined { return this.runtime.tinyLegPolicyId; }
+  get junctionDwellPolicyId(): JunctionDwellPolicy | undefined { return this.runtime.junctionDwellPolicyId; }
+  get underpaidMovePolicyId(): UnderpaidMovePolicy | undefined { return this.runtime.underpaidMovePolicyId; }
+  get repairRoutePolicyId(): RepairRoutePolicy | undefined { return this.runtime.repairRoutePolicyId; }
+  get homeMatsPolicyId(): HomeMatsPolicy | undefined { return this.runtime.homeMatsPolicyId; }
+  get lossOwnerExitPolicyId(): LossOwnerExitPolicy | undefined { return this.runtime.lossOwnerExitPolicyId; }
+  get migrationPacePolicyId(): MigrationPacePolicy | undefined { return this.runtime.migrationPacePolicyId; }
+  get townLanesPolicyId(): TownLanesPolicy | undefined { return this.runtime.townLanesPolicyId; }
+  /** The player's body on foot, or null when riding, flying or viewing from the air (player-yield.ts). */
+  private yieldPlayerPosition(): Vec3 | null { return this.state.player.vehicleId || this.state.aviation?.activeAircraftId || (this.runtime.mode ?? 'walk') !== 'walk' ? null : this.state.player.position; }
   exportSave(): string {
+    this.finishTick();
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), ...(this.runtime.publicFinancePolicyId ? { publicFinancePolicyId: this.runtime.publicFinancePolicyId } : {}), ...(this.runtime.foreignTradePolicyId ? { foreignTradePolicyId: this.runtime.foreignTradePolicyId } : {}), ...(this.runtime.npcMotionPolicyId ? { npcMotionPolicyId: this.runtime.npcMotionPolicyId } : {}), ...(this.runtime.boardingHoldPolicyId ? { boardingHoldPolicyId: this.runtime.boardingHoldPolicyId } : {}), ...(this.runtime.playerYieldPolicyId ? { playerYieldPolicyId: this.runtime.playerYieldPolicyId } : {}), ...(this.runtime.cableSpeedPolicyId ? { cableSpeedPolicyId: this.runtime.cableSpeedPolicyId } : {}), ...(this.runtime.closureTrafficPolicyId ? { closureTrafficPolicyId: this.runtime.closureTrafficPolicyId } : {}), ...(this.runtime.arrivalHomesPolicyId ? { arrivalHomesPolicyId: this.runtime.arrivalHomesPolicyId } : {}), ...(this.runtime.municipalRepairPolicyId ? { municipalRepairPolicyId: this.runtime.municipalRepairPolicyId } : {}), ...(this.runtime.companyDividendPolicyId ? { companyDividendPolicyId: this.runtime.companyDividendPolicyId } : {}), ...(this.runtime.studentDormPolicyId ? { studentDormPolicyId: this.runtime.studentDormPolicyId } : {}), ...(this.runtime.lossShopMovePolicyId ? { lossShopMovePolicyId: this.runtime.lossShopMovePolicyId } : {}), ...(this.runtime.tinyLegPolicyId ? { tinyLegPolicyId: this.runtime.tinyLegPolicyId } : {}), ...(this.runtime.junctionDwellPolicyId ? { junctionDwellPolicyId: this.runtime.junctionDwellPolicyId } : {}), ...(this.runtime.underpaidMovePolicyId ? { underpaidMovePolicyId: this.runtime.underpaidMovePolicyId } : {}), ...(this.runtime.repairRoutePolicyId ? { repairRoutePolicyId: this.runtime.repairRoutePolicyId } : {}), ...(this.runtime.homeMatsPolicyId ? { homeMatsPolicyId: this.runtime.homeMatsPolicyId } : {}), ...(this.runtime.lossOwnerExitPolicyId ? { lossOwnerExitPolicyId: this.runtime.lossOwnerExitPolicyId } : {}), ...(this.runtime.migrationPacePolicyId ? { migrationPacePolicyId: this.runtime.migrationPacePolicyId } : {}), ...(this.runtime.townLanesPolicyId ? { townLanesPolicyId: this.runtime.townLanesPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }
-  importSave(json: string): CommandResult { return this.readSave(json, false); }
+  importSave(json: string): CommandResult { this.finishTick(); return this.readSave(json, false); }
   private readSave(json: string, validateOnly: boolean): CommandResult {
     try {
       const data = parseSaveWithinResources(json);
@@ -2482,10 +3114,15 @@ export class Simulation implements SimulationAPI {
       const registered = s.family?.children;
       if (registered !== undefined) ensure(registered && typeof registered === 'object' && !Array.isArray(registered), 'birth registration');
       const expectedCitizenIds = new Set(this.baselineCitizenIds);
-      for (const id of Object.keys(registered ?? {})) { ensure(/^resident-[1-9][0-9]*$/.test(id), 'registered resident identity'); expectedCitizenIds.add(id); }
+      const migrants = s.family?.migrants;
+      if (migrants !== undefined) ensure(migrants && typeof migrants === 'object' && !Array.isArray(migrants) && admitsMigrants(r.publicFinancePolicyId), 'migrant registration');
+      for (const id of [...Object.keys(registered ?? {}), ...Object.keys(migrants ?? {})]) { ensure(/^resident-[1-9][0-9]*$/.test(id), 'registered resident identity'); expectedCitizenIds.add(id); }
       const citizens = array(s.citizens, 1024, 'citizens'); ensure(citizens.length === expectedCitizenIds.size, 'citizen count'); unique(citizens, 'duplicate citizens');
       for (const c of citizens) { ensure(expectedCitizenIds.has(c.id) && districtIds.has(c.districtId), 'citizen identity'); ensure(this.buildings.has(c.homeId) && this.buildings.has(c.workId), 'citizen building'); vec(c.position, 'citizen position'); string(c.name, 'citizen name', 80); string(c.role, 'citizen role', 60); string(c.state, 'citizen state', 40); if (c.skills !== undefined) { ensure(c.skills && typeof c.skills === 'object' && Object.keys(c.skills).length <= 32, 'citizen skills'); for (const value of Object.values(c.skills)) number(value, 0, 100, 'citizen skill'); } if (c.education !== undefined) number(c.education, 0, 10000, 'citizen education'); for (const tag of array(c.socialIdentities ?? [], 32, 'social identities')) string(tag, 'social identity', 100); for (const tag of array(c.historyTags ?? [], 32, 'history tags')) string(tag, 'history tag', 100); ensure(c.destinationId === null || this.buildings.has(c.destinationId), 'destination'); money(c.money, 'citizen money'); needs(c.needs, 'citizen needs'); ensure(['active', 'regional', 'statistical'].includes(c.tier), 'citizen tier'); if (c.route !== undefined) for (const point of array(c.route, 1024, 'route')) vec(point, 'route position'); if (c.routeIndex !== undefined) number(c.routeIndex, 0, c.route?.length ?? 0, 'routeIndex', true); ensure(c.partnerId == null || c.partnerId === 'player' || expectedCitizenIds.has(c.partnerId), 'citizen partner'); }
-      const expectedVehicleIds = new Set(this.state.vehicles.map(v => v.id)); const vehicles = array(s.vehicles, 2048, 'vehicles'); ensure(vehicles.length === expectedVehicleIds.size, 'vehicle count'); unique(vehicles, 'duplicate vehicles');
+      const expectedVehicleIds = new Set(this.state.vehicles.map(v => v.id));
+      // The generated fleet less the town lane carts when the save declares town-lanes-v1, however this reader was built.
+      for (const id of this.townLaneCartIds) if (r.townLanesPolicyId === TOWN_LANES_POLICY) expectedVehicleIds.delete(id); else expectedVehicleIds.add(id);
+      const vehicles = array(s.vehicles, 2048, 'vehicles'); ensure(vehicles.length === expectedVehicleIds.size, 'vehicle count'); unique(vehicles, 'duplicate vehicles');
       for (const v of vehicles) { ensure(expectedVehicleIds.has(v.id), 'vehicle identity'); const edge = this.edges.get(v.edgeId); ensure(edge && edge.mode === v.kind, 'vehicle edge'); vec(v.position, 'vehicle position'); number(v.progress, 0, 1, 'progress'); ensure(v.direction === 1 || v.direction === -1, 'direction'); number(v.speed, 0, 2000, 'vehicle speed'); string(v.state, 'vehicle state', 40); number(v.passengers, 0, 5000, 'passengers', true); number(v.cargo, 0, 10000, 'cargo'); number(v.nextDeparture, -10000, 1e12, 'departure'); }
       const shops = array(s.shops, 512, 'shops'); ensure(shops.length === this.state.shops.length, 'shop count'); unique(shops, 'duplicate shops');
       const shopIds = new Set(this.state.shops.map(shop => shop.id)); for (const shop of shops) { ensure(shopIds.has(shop.id) && this.buildings.has(shop.buildingId) && districtIds.has(shop.districtId), 'shop identity'); number(shop.inventory, 0, 10000, 'inventory'); number(shop.price, 0, 1e5, 'price'); money(shop.revenue, 'revenue'); number(shop.profit, -1e12, 1e12, 'profit'); number(shop.customers, 0, 100000, 'customers'); number(shop.employees, 0, 10000, 'employees', true); ensure(typeof shop.open === 'boolean', 'shop open'); }
@@ -2645,6 +3282,9 @@ export class Simulation implements SimulationAPI {
       }
       if (r.publicSupply !== undefined) number(r.publicSupply, 0, 1, 'public supply fulfillment'); if (r.operationUnitPrice !== undefined) number(r.operationUnitPrice, 4, 1e12, 'observed public material unit price');
       if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
+      if (r.farmInputs !== undefined) { ensure(FARM_YIELD_POLICIES.includes(r.farmYieldPolicyId) && farmInputsUsed(r.farmYieldPolicyId) && r.farmInputs && typeof r.farmInputs === 'object' && !Array.isArray(r.farmInputs), 'farm inputs declared'); for (const [id, units] of Object.entries(r.farmInputs)) { ensure(shopIds.has(id), 'farm input owner'); number(units, 0, 100000, 'farm input units'); } }
+      if (r.fiscalDay !== undefined) { ensure(PUBLIC_FINANCE_POLICIES.includes(r.publicFinancePolicyId) && r.fiscalDay && typeof r.fiscalDay === 'object' && Object.keys(r.fiscalDay).sort().join() === 'base,day,net,tax,treasury', 'fiscal day declared'); number(r.fiscalDay.day, 0, 1e8, 'fiscal day', true); money(r.fiscalDay.treasury, 'fiscal day treasury'); number(r.fiscalDay.tax, 0, 1e12, 'fiscal day tax'); number(r.fiscalDay.net, -1e12, 1e12, 'fiscal day net'); number(r.fiscalDay.base, 0, 1e15, 'fiscal day base'); }
+      if (r.cargoDestinations !== undefined) { ensure(FOOD_FREIGHT_POLICIES.includes(r.foodFreightPolicyId) && r.cargoDestinations && typeof r.cargoDestinations === 'object' && !Array.isArray(r.cargoDestinations), 'freight destinations declared'); for (const [id, districtId] of Object.entries(r.cargoDestinations)) ensure(this.freightCarriers.has(id) && districtIds.has(districtId as string) && (s.vehicles.find((v: Vehicle) => v.id === id)?.cargo ?? 0) > 0, 'freight destination reference'); }
       if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }
       for (const id of array(r.playerBusinesses, 512, 'businesses')) ensure(shopIds.has(id), 'business id'); ensure(new Set(r.playerBusinesses).size === r.playerBusinesses.length, 'duplicate businesses');
       for (const shop of shops) if (shop.lifecycleVersion === 1) ensure(r.playerBusinesses.includes(shop.id) === (shop.ownerId === 'player' && !s.extension?.companies.some((company: { buildingId: string; shopBindingReleasedAt?: number }) => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)), 'managed business mirror must reflect actual operating owner');
@@ -2688,7 +3328,15 @@ export class Simulation implements SimulationAPI {
         for (const citizen of s.citizens as Citizen[]) {
           if (s.extension?.actorProfiles[citizen.id]?.alive === false || r.riders[citizen.id] || !citizen.route || !citizen.routeIndex || citizen.routeIndex >= citizen.route.length || r.npcStairCursors[citizen.id]) continue;
           const description = this.npcStairMotion.describe(citizen.route, citizen.routeIndex);
-          ensure(description.kind !== 'blocked' || this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex, citizen.position), 'native route geometry');
+          // A live resident who walked a real leg and then met a blocked one waits at the blocked
+          // leg's start (moveCitizenPhysical wait) until its re-plan; a save taken in that window holds
+          // exactly this state. A pending intent (first leg) keeps the exterior-door rule below.
+          const walked = citizen.routeIndex >= 2 && !sameVec(citizen.route[citizen.routeIndex - 2], citizen.route[citizen.routeIndex - 1])
+            && this.npcStairMotion.describe(citizen.route, citizen.routeIndex - 1).kind !== 'blocked';
+          // A resident whose very first leg is a rounding error long (tiny-leg.ts) waits at its start the same way
+          // (2026-10-29: a 2e-15 m first leg inside a home reads as blocked; audit v9e's final save held one).
+          const waitingAtBlockedLeg = citizen.state === 'physicalWaiting' && (walked || citizen.routeIndex === 1 && tinyLeg(citizen.route[0], citizen.route[1])) && sameVec(citizen.position, citizen.route[citizen.routeIndex - 1]);
+          ensure(description.kind !== 'blocked' || waitingAtBlockedLeg || this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex, citizen.position), 'native route geometry');
           if (description.kind === 'physical') this.npcStairMotion.validate(citizen.route, this.npcStairMotion.opening(citizen.route, citizen.routeIndex)!, citizen.position);
         }
       }

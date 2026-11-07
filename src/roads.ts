@@ -179,9 +179,30 @@ function onOpenBranch(world: WorldDefinition, s: Pick<SimState,'roadNetwork'>, e
 }
 /** Swept .2m admission guard. Physical deck height and static geometry remain
  * unchanged; only the captured actor may move monotonically to its exit. */
+const edgeIndexes = new WeakMap<NetworkEdge[],{ count: number; index: Map<string,NetworkEdge> }>();
+function edgeById(world: WorldDefinition, id: string): NetworkEdge | undefined {
+  let cached = edgeIndexes.get(world.edges);
+  if (!cached || cached.count !== world.edges.length) { const index = new Map<string,NetworkEdge>(); for (const e of world.edges) if (!index.has(e.id)) index.set(e.id, e); cached = { count: world.edges.length, index }; edgeIndexes.set(world.edges, cached); }
+  return cached.index.get(id);
+}
+const edgeBoxes = new WeakMap<NetworkEdge,{ x0: number; x1: number; z0: number; z1: number }>();
+function edgeBox(e: NetworkEdge) {
+  let box = edgeBoxes.get(e);
+  if (!box) { box = { x0: Math.min(...e.points.map(p => p.x)), x1: Math.max(...e.points.map(p => p.x)), z0: Math.min(...e.points.map(p => p.z)), z1: Math.max(...e.points.map(p => p.z)) }; edgeBoxes.set(e, box); }
+  return box;
+}
+/** A projection lies on the polyline, so its horizontal distance is at least
+ * the distance to the edge's box: a step whose box stays beyond the deck's
+ * reach can neither touch the closed edge nor need its permit. */
+function farFromEdge(e: NetworkEdge, from: Vec3, to: Vec3): boolean {
+  const box = edgeBox(e), reach = width(e) + BODY + 1;
+  return Math.max(from.x, to.x) < box.x0 - reach || Math.min(from.x, to.x) > box.x1 + reach || Math.max(from.z, to.z) < box.z0 - reach || Math.min(from.z, to.z) > box.z1 + reach;
+}
 export function roadMovementAllowed(world: WorldDefinition, s: Pick<SimState, 'roadNetwork'>, id: string, from: Vec3, to: Vec3): boolean {
-  for (const c of s.roadNetwork?.closures.filter(c => c.reopenedAt === null) ?? []) {
-    const edge = world.edges.find(e => e.id === c.edgeId); if (!edge) return false;
+  for (const c of s.roadNetwork?.closures ?? []) {
+    if (c.reopenedAt !== null) continue;
+    const edge = edgeById(world, c.edgeId); if (!edge) return false;
+    if (farFromEdge(edge, from, to)) continue;
     const pieces = Math.max(1,Math.ceil(distance(from,to) / .2)); let intersects = false;
     for (let i = 0; i <= pieces; i++) { const p = { x: from.x + (to.x-from.x)*i/pieces, y: from.y + (to.y-from.y)*i/pieces, z: from.z + (to.z-from.z)*i/pieces }, q = project(edge,p);
       if (q && q.along > BODY && q.along < q.length - BODY && q.horizontal <= width(edge) + BODY && q.height <= GRADE && !atEndpoint(world,edge,p) && !onOpenBranch(world,s,edge,p,q)) { intersects = true; break; } }

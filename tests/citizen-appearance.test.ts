@@ -44,8 +44,11 @@ test('elapsed render time and paused simulation never invent walking displacemen
     pool.update(s,eye,99999,1900);assert.deepEqual(matrices(pool),initial);assert.equal(JSON.stringify(s),original);
     s.paused=true;pool.update(s,eye,100000,1900);assert.deepEqual(matrices(pool),initial);
     s.paused=false;s.citizens[0].position.z+=.5;pool.update(s,eye,100001,1900);const walked=matrices(pool);assert.notDeepEqual(walked,initial);
-    pool.update(s,eye,100002,1900);assert.deepEqual(matrices(pool),walked,'no further real move means no extra stride');
-    s.citizens[0].state='riding';pool.update(s,eye,100003,1900);assert.notDeepEqual(matrices(pool),walked,'actual passengers have seated legs');
+    pool.update(s,eye,100001.2,1900);assert.deepEqual(matrices(pool),walked,'no further real move means no extra stride');
+    // Still 'moving' but not moved for STRIDE_STILL_SECONDS (waiting for the player): it stands rather than freeze mid-stride.
+    pool.update(s,eye,100002,1900);const standing=matrices(pool);assert.notDeepEqual(standing,walked,'a resident that stopped stands');
+    pool.update(s,eye,100003,1900);assert.deepEqual(matrices(pool),standing,'and keeps standing without moving');
+    s.citizens[0].state='riding';pool.update(s,eye,100004,1900);assert.notDeepEqual(matrices(pool),standing,'actual passengers have seated legs');
   }finally{pool.dispose();}assert.equal(scene.children.length,0);
 });
 

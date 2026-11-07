@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Compile-only check of unity/Assets/Yunshan/Editor against Unity engine
+       reference assemblies and signature stubs of the UnityEditor members it
+       uses. Not a substitute for compiling inside Unity 6. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../unity/Assets/Yunshan/Editor/**/*.cs" />
+    <Compile Include="UnityEditorStub.cs" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" PrivateAssets="all" />
+    <ProjectReference Include="../Yunshan.Core/Yunshan.Core.csproj" />
+    <ProjectReference Include="../Yunshan.UnityCheck/Yunshan.UnityCheck.csproj" />
+  </ItemGroup>
+</Project>

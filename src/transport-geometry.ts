@@ -1,6 +1,12 @@
 import { terrainHeight } from './world';
 import type { NetworkEdge, Vec3, WorldDefinition } from './types';
+import { isStreetLayout } from './street-layouts';
 
+/** current-v8 terrace streets and shop door paths are paved in stone, like
+ * the concept's stair streets (display only: the deck is the same road). */
+export function pavedStreet(world: object, edge: { id: string; mode: string; from: string; to: string }): boolean {
+  return isStreetLayout((world as { layoutVersion?: string }).layoutVersion) && edge.mode === 'road' && (edge.id.includes('-terrace-') || edge.from.endsWith('-door') || edge.to.endsWith('-door'));
+}
 export function deckWidth(edge: NetworkEdge): number {
   if (edge.id.includes('airport-runway-strip')) return 44;
   if (edge.mode === 'bridge') return 9;
